@@ -8,3 +8,16 @@ https://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266
 )
 
 Testing editing the note from my iPad.
+
+I'm going to try to publish generate HTML (and an RSS feed) using some hopefully simple JavaScript I can write in the Scriptable app.
+
+I need to give Scriptable the ability to read and write files in this git repo and I'm able to do that in Scriptable's in-app settings by creating a file bookmark. I added one for the top-level directory of this repo and named it "memalign.github.io".
+
+Ok, that's working well and I seem to have the primitives I need to be able to read files and write output files.
+
+Is it possible to add the script code itself to the github repo?
+
+Ah, I think I can have the script copy its own contents over from iCloud documents directory to the github repo.
+
+Ok, I have a crude verson of this working.
+
