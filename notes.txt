@@ -21,3 +21,33 @@ Ah, I think I can have the script copy its own contents over from iCloud documen
 
 Ok, I have a crude verson of this working.
 
+
+12/26/19
+
+Task list:
+
+- Need a test entry 
+
+- Need to convert entries in the entries subdirectory into standalone html pages
+
+- Need a stylesheet that can apply to all pages
+
+- Need a landing index.html page that links to all entries and might show the most recent few?
+
+- Need to flesh out the format of an entry (date, optional image(s), title, html filename, etc)
+
+- Entry HTML pages should specify the right opengraph values, such as image link
+
+- Need to generate an RSS feed
+
+
+Some thoughts on entry format:
+- Filename like #####-post-name.txt
+- The file should start with "Title: " and "Date: MM/DD/YYYY"
+- Entry text follows
+
+I could make an Entry class for parsing these. It can have methods for outputting an HTML file, the RSS content, etc. I think I'll want to sort them based on the number the filename starts with.
+
+I think it would be good to put generated post html files into a "p" subdirectory so the root of the repo doesn't get too messy.
+
+
