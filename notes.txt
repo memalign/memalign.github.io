@@ -1,0 +1,10 @@
+12/25/19
+
+I created a user page in github!
+
+I found that I have to publish from the master branch and the root directory of the memalign.github.io project. I also found that an index.html file with just plaintext contents wouldn't get served for https://memalign.github.io
+(I figured this out by googling and finding:
+https://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266
+)
+
+
