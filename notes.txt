@@ -7,4 +7,4 @@ I found that I have to publish from the master branch and the root directory of 
 https://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266
 )
 
-
+Testing editing the note from my iPad.
