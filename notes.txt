@@ -62,7 +62,7 @@ Task list:
 
 [x] - Need to flesh out the format of an entry (date, optional image(s), title, html filename, etc)
 
-- Entry HTML pages should specify the right opengraph values, such as image link
+[x] - Entry HTML pages should specify the right opengraph values, such as image link
 
 - Need to generate an RSS feed
 
@@ -84,3 +84,24 @@ I need a stylesheet to prevent the image from being a weird size relative to the
 
 Ok, I pulled together a quick stylesheet based on something I'm using in a utility app for reading news feeds.
 
+
+Trying to work on opengraph next. Here's the documentation:
+https://ogp.me
+
+I think I should have these entries:
+<meta property="og:title" content="The Rock" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
+<meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
+
+These go between <head> and </head>
+
+
+
+Task list:
+
+- Need to generate an RSS feed
+
+- Need to refine stylesheet so the site doesn't look so plain
+
+- Write unit tests for the backlog labelled with TODOs
