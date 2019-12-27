@@ -127,3 +127,5 @@ Task list:
 
 - Write unit tests for the backlog labelled with TODOs
 
+[x] - Add og description
+

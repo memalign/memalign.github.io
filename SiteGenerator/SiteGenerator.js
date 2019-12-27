@@ -60,8 +60,19 @@ class HTMLDocument {
     return "/m/shiba.jpg"
   }
   
+  ogDescription() {
+    return null
+  }
+  
   htmlDocumentPrefix() {
     let ogImage = "<meta property=\"og:image\" content=\"" + this.ogImage() + "\" />";
+    
+    let ogDesc = ""
+    let desc = this.ogDescription()
+    if (desc) {
+      ogDesc = "<meta property=\"og:description\" content=\""+desc+"\" />"
+    }
+    
     
     let str =
 `<!DOCTYPE html>
@@ -76,6 +87,7 @@ class HTMLDocument {
 <meta property="og:type" content="website" />
 <meta property="og:url" content="${this.fullURL()}" />
 ${ogImage}
+${ogDesc}
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -132,6 +144,21 @@ class Index extends HTMLDocument {
       }
     }
     
+    return result
+  }
+  
+  // TODO: unit test this: no entry desc, first entry desc, second entry desc
+  ogDescription() {
+    let result = null
+    
+    for (let i = 0; i < this.entriesOnIndex && i < this.entries.count; ++i) {
+      let entry = this.entries[i]
+      let entryDesc = entry.ogDescription()
+      if (entryDesc) {
+        result = entryDesc
+        break
+      }
+    }
     return result
   }
   
@@ -243,6 +270,24 @@ class Entry extends HTMLDocument {
     if (imageURL) {
       result = imageURL
     }
+    return result
+  }
+  
+  // TODO: unit test with contents containing fewer than N words, exactly N words, truncated result ending with .
+  ogDescription() {
+    let result = this.contents
+    result = result.replace(/\[Image:([^\]]+)\]/g, "")
+    result = result.replace(/^\n+/, "")
+    let origResult = result
+    result = result.split(/[\s\n]+/).slice(0, 30).join(" ")
+    
+    if (origResult != result) {
+      if (result.endsWith(".")) {
+        result += " "
+      }
+      result += "…"
+    }
+    
     return result
   }
   
