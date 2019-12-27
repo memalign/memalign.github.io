@@ -1,3 +1,116 @@
+body {
+  background: white;
+  color: black;
+  font-size: 11pt;
+  margin: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+  color : #666;
+  margin: 0;
+}
+
+img {
+  border: 0;
+}
+
+pre,
+code,
+a code {
+  color: #060;
+}
+
+h2 a,
+h3 a {
+  color : #666;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: #3b5998;
+}
+
+table {
+  border-collapse: collapse;
+  border: 0;
+}
+
+td {
+  border: 0;
+  padding: 0;
+}
+
+#body {
+  margin: auto;
+  max-width: 850px;
+}
+
+#header {
+  margin-bottom: 15px;
+}
+
+#postdate {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color : #666;
+}
+
+#content,
+#footer {
+  margin-left: 31px;
+  margin-right: 31px;
+}
+
+#content p,
+#content li,
+#footer {
+  line-height: 16pt;
+}
+
+#content pre {
+  line-height: 14pt;
+  margin: 17pt;
+  padding-left: 1em;
+  border-left: 1px solid #ccc;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
+#content p {
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+#content td,
+#content th {
+  padding: 5px;
+}
+
+#content td {
+  border-top: 1px solid #DDD;
+}
+
+#content th {
+  color: #666;
+  text-align: left;
+}
+
+
 @media all and (orientation:portrait) {
 
 img, video, audio { max-width: 90%; max-height: 400px; height: auto; width: auto; display: block; margin: 0 auto; border-radius: 3px; }
