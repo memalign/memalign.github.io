@@ -45,14 +45,32 @@ function copyCurrentScriptToRepo() {
 }
 
 
-// HTMLDocument class
+// HTMLDocument abstract class
 
 class HTMLDocument {
+  baseURL() {
+    return "https://memalign.github.io"
+  }
+  
+  fullURL() {
+    return this.baseURL() + "/" + this.relativeURL();
+  }
+  
+  ogImage() {
+    return "/m/shiba.jpg"
+  }
+  
   htmlDocumentPrefix() {
+    let ogImage = "<meta property=\"og:image\" content=\"" + this.ogImage() + "\" />";
+    
     let str =
 `<html>
 <head>
 <title>${this.title}</title>
+<meta property="og:title" content="${this.title}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="${this.fullURL()}" />
+${ogImage}
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -87,9 +105,27 @@ class Index extends HTMLDocument {
     this.entriesOnIndex = 5
   }
   
-  // e.g. "p/this-website.html"
-  urlForEntry(entry) {
-    return htmlPostsSubdirectory() + "/" + entry.htmlFilename();
+  // TODO: Unit test this: no entry with image, first entry with image, second entry with image, entry off the front page with image
+  ogImage() {
+    let result = super.ogImage()
+    
+    this.sortEntries()
+    
+    for (let i = 0; i < this.entriesOnIndex; ++i) {
+      let entry = this.entries[i]
+      let entryImageURL = entry.imageURL()
+      if (entryImageURL) {
+        result = entryImageURL
+        break
+      }
+    }
+    
+    return result
+  }
+  
+  sortEntries() {
+    // Sort entries by postNumber, highest (newest) to lowest (oldest)
+    this.entries.sort(function (a, b) { return b.postNumber - a.postNumber })
   }
   
   // TODO: unit test a valid file being generated
@@ -101,17 +137,15 @@ class Index extends HTMLDocument {
     
     // TODO: unit test that entries are written in the right order; links to every entry but only entriesOnIndex full posts
 
-    // Sort entries by postNumber, highest (newest) to lowest (oldest)
-    this.entries.sort(function (a, b) { return b.postNumber - a.postNumber })
-    
-    
+    this.sortEntries()
+        
     
     // Links to every post
     
     str += "<b>All posts:</b><br />\n"
     
     for (let entry of this.entries) {
-      str += "<a href='" + this.urlForEntry(entry) + "'>" + entry.title + "</a><br />\n"
+      str += "<a href='" + entry.relativeURL() + "'>" + entry.title + "</a><br />\n"
     }
     
     str += "\n"
@@ -121,7 +155,7 @@ class Index extends HTMLDocument {
     let c = 0
     for (let entry of this.entries) {
       if (c < this.entriesOnIndex) {
-        str += entry.htmlBody(this.urlForEntry(entry))
+        str += entry.htmlBody(entry.relativeURL())
         str += "\n"
       } else {
         if (c == this.entriesOnIndex) {
@@ -140,6 +174,11 @@ class Index extends HTMLDocument {
   
   htmlFilename() {
     return "index.html"
+  }
+  
+  // Relative to the website root
+  relativeURL() {  
+    return this.htmlFilename()
   }
 }
 
@@ -175,6 +214,26 @@ class Entry extends HTMLDocument {
     return FileManager.local().readString(this.filename)
   }
   
+  // TODO: unit test one specified image, two specified images, zero specified images
+  imageURL() {
+    let result = null
+    let matches = this.contents.match(/\[Image:([^\]]+)\]/)
+    if (matches) {
+      result = matches[1]
+    }
+    return result
+  }
+
+  // TODO: unit test one specified image, two specified images, zero specified images  
+  ogImage() {
+    let result = super.ogImage()
+    let imageURL = this.imageURL()
+    if (imageURL) {
+      result = imageURL
+    }
+    return result
+  }
+  
   // TODO: Unit test this
   toHTML() {
     let str = this.htmlDocumentPrefix()
@@ -191,7 +250,7 @@ class Entry extends HTMLDocument {
     
     return str
   }
-  
+    
   // TODO: unit test this; with and without titleURL
   htmlBody(titleURL) {
     let str = ""
@@ -221,6 +280,13 @@ class Entry extends HTMLDocument {
   // e.g. "this-website.html"
   htmlFilename() {
     return this.postLinkName + ".html"
+  }
+  
+  // TODO: unit test this
+  // Relative to the website root
+  // e.g. "p/this-website.html"
+  relativeURL() {
+    return htmlPostsSubdirectory() + "/" + this.htmlFilename()
   }
 }
 
