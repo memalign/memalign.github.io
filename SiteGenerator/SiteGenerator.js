@@ -5,11 +5,142 @@
 const UNIT_TEST = false
 
 
+// Utilities
+
+function currentScriptFilename() {
+  return Script.name() + ".js"
+}
+
+function currentScriptPath() {
+  return FileManager.iCloud().documentsDirectory() + "/" + currentScriptFilename()
+}
+
+function repoPath() {
+  return FileManager.local().bookmarkedPath("memalign.github.io")
+}
+
+function entriesPath() {
+  return repoPath() + "/entries"
+}
+
+function htmlPostsSubdirectory() {
+  return "p"
+}
+
+function htmlPostsPath() {
+  return repoPath() + "/" + htmlPostsSubdirectory()
+}
+
+function repoSiteGeneratorPath() {
+   return repoPath() + "/SiteGenerator"
+}
+
+function copyCurrentScriptToRepo() {
+  let fm = FileManager.local()
+  let destPath = repoSiteGeneratorPath() + "/" + currentScriptFilename()
+  if (fm.fileExists(destPath)) {
+    fm.remove(destPath)
+  }
+  fm.copy(currentScriptPath(), destPath)
+}
+
+
+// HTMLDocument class
+
+class HTMLDocument {
+  htmlDocumentPrefix() {
+    let str =
+`<html>
+<head>
+<title>${this.title}</title>
+</head>
+<body>
+`
+    
+    return str
+  }
+  
+  htmlDocumentSuffix() {
+    return "\n</body>\n</html>";
+  }
+  
+  // TODO: unit test this
+  writeHTMLDocument(directory) {
+    let filename = directory + "/" + this.htmlFilename()
+    FileManager.local().writeString(filename, this.toHTML())
+    console.log("Wrote html document " + filename)
+  }
+}
+
+
+// Index class
+
+class Index extends HTMLDocument {
+  constructor(entries) {
+    super()
+    
+    this.entries = entries
+    this.title = "memalign.github.io"
+    
+    this.entriesOnIndex = 5
+  }
+  
+  toHTML() {
+    let str = ""
+    str += this.htmlDocumentPrefix()
+
+    str += "<h1>" + this.title + "</h1>\n";
+    
+    // TODO: unit test that entries are written in the right order; links to every entry but only entriesOnIndex full posts
+
+    // Sort entries by postNumber, highest (newest) to lowest (oldest)
+    this.entries.sort(function (a, b) { return b.postNumber - a.postNumber })
+    
+    
+    
+    // Links to every post
+    
+    str += "<b>All posts:</b><br />\n"
+    
+    for (let entry of this.entries) {
+      str += "<a href='" + htmlPostsSubdirectory() + "/" + entry.htmlFilename() + "'>" + entry.title + "</a>\n"
+    }
+    
+    str += "\n"
+     
+     
+    // Include the most recent this.entriesOnIndex posts
+    let c = 0
+    for (let entry of this.entries) {
+      str += entry.htmlBody()
+      str += "\n"
+      
+      c++
+      if (c >= this.entriesOnIndex) {
+        break
+      }
+    }
+
+    // TODO: write links to subsequent posts? "Want to keep reading?"
+
+    
+    str += this.htmlDocumentSuffix()
+    
+    return str
+  }
+  
+  htmlFilename() {
+    return "index.html"
+  }
+}
+
+
 // Entry class
 
-class Entry {
+class Entry extends HTMLDocument {
    constructor(filename, fileContents /* optional */) {
-  
+    super()
+    
     this.filename = filename
     
     if (/DRAFT-(.+).txt/.test(filename)) {
@@ -35,25 +166,18 @@ class Entry {
     return FileManager.local().readString(this.filename)
   }
   
-  htmlDocumentPrefix() {
-    let str =
-`<html>
-<head>
-<title>${this.title}</title>
-</head>
-<body>
-`
+  // TODO: Unit test this
+  toHTML() {
+    let str = this.htmlDocumentPrefix()
+    str += this.htmlBody()    
+    str += this.htmlDocumentSuffix()
     
     return str
   }
   
-  htmlDocumentSuffix() {
-    return "\n</body>\n</html>";
-  }
-  
-  // TODO: Unit test this
-  toHTML() {
-    let str = this.htmlDocumentPrefix()
+  // TODO: unit test this
+  htmlBody() {
+    let str = ""
     str += "<h2>"+this.title+"</h2>\n";
     str += "Posted on " + this.dateString + "<br /><br />\n"
     
@@ -61,55 +185,16 @@ class Entry {
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
     
     str += htmlContents
-    
-    str += this.htmlDocumentSuffix()
-    
     return str
   }
   
   // TODO: unit test this
-  writeHTMLDocument(directory) {
-    let filename = directory + "/" + this.postLinkName + ".html"
-    FileManager.local().writeString(filename, this.toHTML())
-    console.log("Wrote html document " + filename)
+  // e.g. "this-website.html"
+  htmlFilename() {
+    return this.postLinkName + ".html"
   }
 }
 
-
-// Utilities
-
-function currentScriptFilename() {
-  return Script.name() + ".js"
-}
-
-function currentScriptPath() {
-  return FileManager.iCloud().documentsDirectory() + "/" + currentScriptFilename()
-}
-
-function repoPath() {
-  return FileManager.local().bookmarkedPath("memalign.github.io")
-}
-
-function entriesPath() {
-  return repoPath() + "/entries"
-}
-
-function htmlPostsPath() {
-  return repoPath() + "/p"
-}
-
-function repoSiteGeneratorPath() {
-   return repoPath() + "/SiteGenerator"
-}
-
-function copyCurrentScriptToRepo() {
-  let fm = FileManager.local()
-  let destPath = repoSiteGeneratorPath() + "/" + currentScriptFilename()
-  if (fm.fileExists(destPath)) {
-    fm.remove(destPath)
-  }
-  fm.copy(currentScriptPath(), destPath)
-}
 
 
 // runScript
@@ -120,6 +205,8 @@ function runScript() {
   console.log("=> done")
   
   let fm = FileManager.local()
+
+  let index = new Index([])
 
   let entryFilenames = fm.listContents(entriesPath())
   for (entryFilename of entryFilenames) {
@@ -134,11 +221,11 @@ function runScript() {
     entry.writeHTMLDocument(htmlPostsPath())
     
     console.log("===")
+    
+    index.entries.push(entry)
   }
-
-        
-//  let outputPath = repoPath() + "/output.txt"      
-//  fm.writeString(outputPath, "test")          
+  
+  index.writeHTMLDocument(repoPath())
 }
 
 if (!UNIT_TEST) {
