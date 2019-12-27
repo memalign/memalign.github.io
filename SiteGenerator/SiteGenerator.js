@@ -338,7 +338,6 @@ ${this.title}
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
     
-    // TODO: unit test [Image:/path/img.jpg] rewriting
     // TODO: unit test post date string with a starting image, without a starting image
 
     let postDateStr = "<div id='postdate'>Posted on " + this.dateString + "</div>\n"
@@ -358,13 +357,11 @@ ${this.title}
     return str
   }
   
-  // TODO: unit test this
   // e.g. "this-website.html"
   htmlFilename() {
     return this.postLinkName + ".html"
   }
   
-  // TODO: unit test this
   // Relative to the website root
   // e.g. "p/this-website.html"
   relativeURL() {
@@ -438,6 +435,8 @@ class UnitTests {
     assertTrue(entry.postNumber == 1, "postNumber")
     assertTrue(entry.dateString == "12/26/19", "dateString")
     assertTrue(entry.contents == "test text", "contents")
+    assertTrue(entry.htmlFilename() == "some-title.html", "Entry.htmlFilename")
+    assertTrue(entry.relativeURL() == "p/some-title.html", "Entry.relativeURL")
   }
   
   test_imageURL_noImages() {
@@ -454,6 +453,15 @@ class UnitTests {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
     assertTrue(entry.imageURL() == "/m/test.jpg", "two imageURLs")
   }
+
+  test_htmlBody_imageRewriting() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>"), "Has img tag")
+    assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
+  }
+
 
 
 
