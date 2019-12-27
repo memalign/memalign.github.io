@@ -64,8 +64,13 @@ class HTMLDocument {
     let ogImage = "<meta property=\"og:image\" content=\"" + this.ogImage() + "\" />";
     
     let str =
-`<html>
+`<!DOCTYPE html>
+<html>
 <head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 <title>${this.title}</title>
 <meta property="og:title" content="${this.title}" />
 <meta property="og:type" content="website" />
@@ -75,13 +80,20 @@ ${ogImage}
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
 <body>
+<div id="body">
 `
     
     return str
   }
   
-  htmlDocumentSuffix() {
-    return "\n</body>\n</html>";
+  htmlDocumentSuffix() {  
+    let str =
+`
+</div>
+</body>
+</html>
+`
+    return str
   }
   
   // TODO: unit test this
@@ -111,7 +123,7 @@ class Index extends HTMLDocument {
     
     this.sortEntries()
     
-    for (let i = 0; i < this.entriesOnIndex; ++i) {
+    for (let i = 0; i < this.entriesOnIndex && i < this.entries.count; ++i) {
       let entry = this.entries[i]
       let entryImageURL = entry.imageURL()
       if (entryImageURL) {
@@ -133,7 +145,7 @@ class Index extends HTMLDocument {
     let str = ""
     str += this.htmlDocumentPrefix()
 
-    str += "<h1>" + this.title + "</h1>\n";
+    str += "<div id='header'><h1>" + this.title + "</h1></div>\n";
     
     // TODO: unit test that entries are written in the right order; links to every entry but only entriesOnIndex full posts
 
@@ -235,6 +247,7 @@ class Entry extends HTMLDocument {
   }
   
   // TODO: Unit test this
+  // TODO: Unit test with an image at the very beginning, at the very end, no image
   toHTML() {
     let str = this.htmlDocumentPrefix()
     str += this.htmlBody()    
@@ -254,23 +267,48 @@ class Entry extends HTMLDocument {
   // TODO: unit test this; with and without titleURL
   htmlBody(titleURL) {
     let str = ""
-    
-    str += "<h2>"
-    if (titleURL) {
-      str += "<a href='" + titleURL + "'>" + this.title + "</a>"
+
+    // If there's no title url, this post is on its own page    
+    if (!titleURL) {
+      str +=
+`
+<div id='header'>
+<h1>
+${this.title}
+</h1>
+</div>
+`
     } else {
-      str += this.title
+      str +=
+`
+<div id='header'>
+<h2>
+<a href='${titleURL}'>${this.title}</a>
+</h2>
+</div>
+`
     }
-    str += "</h2>\n"
-          
-    str += "Posted on " + this.dateString + "<br /><br />\n"
+    
     
     let htmlContents = this.contents
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
     
     // TODO: unit test [Image:/path/img.jpg] rewriting
+    // TODO: unit test post date string with a starting image, without a starting image
+
+    let postDateStr = "<div id='postdate'>Posted on " + this.dateString + "</div>\n"
     
+    // If the post starts with an image, put the "Posted on" string after the image so it's not too isolated from the post text
+    // Note that this doesn't intelligently handle consecutive images at the top of a post
+    if (htmlContents.startsWith("<img")) {
+      htmlContents = htmlContents.replace("</img>", "</img>\n"+postDateStr)
+    } else {
+      str += postDateStr
+    }
+    
+    // Remove any linebreaks after </div> to fully control margins with CSS
+    htmlContents = htmlContents.replace(/<\/div>(\n*<br \/>)*/g, "</div>")
     
     str += htmlContents
     return str
