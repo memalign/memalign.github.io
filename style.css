@@ -1,6 +1,6 @@
 @media all and (orientation:portrait) {
 
-img, video, audio { max-width: 90%; height: auto; display: block; margin: 0 auto; }
+img, video, audio { max-width: 90%; max-height: 400px; height: auto; width: auto; display: block; margin: 0 auto; }
 
 body, p, li { font: -apple-system-body; font-size:17.000000px + 1.0vw); font-weight: normal; }
 
@@ -15,7 +15,7 @@ h3, h4 { font: -apple-system-headine; font-size:20.000000px + 1.0vw); font-weigh
 
 @media all and (orientation:landscape) {
 
-img, video, audio { max-width: 65%; height: auto; display: block; margin: 0 auto; }
+img, video, audio { max-width: 65%; max-height: 400px; height: auto; width: auto; display: block; margin: 0 auto; }
 
 body, p, li { font: -apple-system-body; font-size:8.500000px + 1.0vw); font-weight: normal; }
 
