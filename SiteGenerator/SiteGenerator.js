@@ -33,7 +33,46 @@ class Entry {
   
   fileContents() {
     return FileManager.local().readString(this.filename)
-  }  
+  }
+  
+  htmlDocumentPrefix() {
+    let str =
+`<html>
+<head>
+<title>${this.title}</title>
+</head>
+<body>
+`
+    
+    return str
+  }
+  
+  htmlDocumentSuffix() {
+    return "\n</body>\n</html>";
+  }
+  
+  // TODO: Unit test this
+  toHTML() {
+    let str = this.htmlDocumentPrefix()
+    str += "<h2>"+this.title+"</h2>\n";
+    str += "Posted on " + this.dateString + "<br /><br />\n"
+    
+    let htmlContents = this.contents
+    htmlContents = htmlContents.replace(/\n/g, "<br />\n")
+    
+    str += htmlContents
+    
+    str += this.htmlDocumentSuffix()
+    
+    return str
+  }
+  
+  // TODO: unit test this
+  writeHTMLDocument(directory) {
+    let filename = directory + "/" + this.postLinkName + ".html"
+    FileManager.local().writeString(filename, this.toHTML())
+    console.log("Wrote html document " + filename)
+  }
 }
 
 
@@ -53,6 +92,10 @@ function repoPath() {
 
 function entriesPath() {
   return repoPath() + "/entries"
+}
+
+function htmlPostsPath() {
+  return repoPath() + "/p"
 }
 
 function repoSiteGeneratorPath() {
@@ -86,7 +129,10 @@ function runScript() {
       continue
     }
     console.log("=== Post #" + entry.postNumber + " (" + entry.postLinkName + ") ===")
-    console.log(entry.fileContents())
+    console.log(entry.toHTML())
+    
+    entry.writeHTMLDocument(htmlPostsPath())
+    
     console.log("===")
   }
 
