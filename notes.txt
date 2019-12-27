@@ -103,5 +103,16 @@ Task list:
 - Need to generate an RSS feed
 
 - Need to refine stylesheet so the site doesn't look so plain
+    - Take a look at daringfireball, ogp.me for things to try
 
 - Write unit tests for the backlog labelled with TODOs
+
+[x] - Favicon
+
+[x] - Show images with rounded corners
+
+
+Here's a random thought: I could eventually render notes.txt into a nicer format if I ever want to share it.
+
+I made a favicon and followed the instructions here:
+https://favicon.io/favicon-converter/
