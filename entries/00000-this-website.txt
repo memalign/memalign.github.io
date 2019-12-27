@@ -1,6 +1,8 @@
 Title: Welcome
 Date: 12/26/2019
 
+[Image:/m/shiba.jpg]
+
 Welcome to memalign.github.io!
 
 I made this website so I have a place to post ideas and projects.
