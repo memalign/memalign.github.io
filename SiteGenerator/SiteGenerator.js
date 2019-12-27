@@ -85,6 +85,12 @@ class Index extends HTMLDocument {
     this.entriesOnIndex = 5
   }
   
+  // e.g. "p/this-website.html"
+  urlForEntry(entry) {
+    return htmlPostsSubdirectory() + "/" + entry.htmlFilename();
+  }
+  
+  // TODO: unit test a valid file being generated
   toHTML() {
     let str = ""
     str += this.htmlDocumentPrefix()
@@ -103,7 +109,7 @@ class Index extends HTMLDocument {
     str += "<b>All posts:</b><br />\n"
     
     for (let entry of this.entries) {
-      str += "<a href='" + htmlPostsSubdirectory() + "/" + entry.htmlFilename() + "'>" + entry.title + "</a>\n"
+      str += "<a href='" + this.urlForEntry(entry) + "'>" + entry.title + "</a><br />\n"
     }
     
     str += "\n"
@@ -112,17 +118,18 @@ class Index extends HTMLDocument {
     // Include the most recent this.entriesOnIndex posts
     let c = 0
     for (let entry of this.entries) {
-      str += entry.htmlBody()
-      str += "\n"
-      
-      c++
-      if (c >= this.entriesOnIndex) {
-        break
+      if (c < this.entriesOnIndex) {
+        str += entry.htmlBody(this.urlForEntry(entry))
+        str += "\n"
+      } else {
+        if (c == this.entriesOnIndex) {
+          str += "<br /><br />\nMore:<br />\n"
+        }
+        str += "<a href='" + this.urlForEntry(entry) + "'>" + entry.title + "</a><br />\n"        
       }
+            
+      c++
     }
-
-    // TODO: write links to subsequent posts? "Want to keep reading?"
-
     
     str += this.htmlDocumentSuffix()
     
@@ -175,10 +182,26 @@ class Entry extends HTMLDocument {
     return str
   }
   
-  // TODO: unit test this
-  htmlBody() {
+  htmlDocumentPrefix() {
+    let str = super.htmlDocumentPrefix()
+    
+    str += "<a href='/index.html'>Home</a>"
+    
+    return str
+  }
+  
+  // TODO: unit test this; with and without titleURL
+  htmlBody(titleURL) {
     let str = ""
-    str += "<h2>"+this.title+"</h2>\n";
+    
+    str += "<h2>"
+    if (titleURL) {
+      str += "<a href='" + titleURL + "'>" + this.title + "</a>"
+    } else {
+      str += this.title
+    }
+    str += "</h2>\n"
+          
     str += "Posted on " + this.dateString + "<br /><br />\n"
     
     let htmlContents = this.contents
