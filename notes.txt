@@ -28,11 +28,11 @@ Task list:
 
 [x] - Need a test entry 
 
-- Need to convert entries in the entries subdirectory into standalone html pages
+[x] - Need to convert entries in the entries subdirectory into standalone html pages
 
 - Need a stylesheet that can apply to all pages
 
-- Need a landing index.html page that links to all entries and might show the most recent few? Probably an Index class; should have the title of a post link to the standalone page for it
+[x] - Need a landing index.html page that links to all entries and might show the most recent few? Probably an Index class; should have the title of a post link to the standalone page for it
 
 - Need to flesh out the format of an entry (date, optional image(s), title, html filename, etc)
 
@@ -52,4 +52,35 @@ I could make an Entry class for parsing these. It can have methods for outputtin
 
 I think it would be good to put generated post html files into a "p" subdirectory so the root of the repo doesn't get too messy.
 
+
+
+
+
+Task list:
+
+[x] - Need a stylesheet that can apply to all pages
+
+[x] - Need to flesh out the format of an entry (date, optional image(s), title, html filename, etc)
+
+- Entry HTML pages should specify the right opengraph values, such as image link
+
+- Need to generate an RSS feed
+
+[x] - For images, I need to figure out how to strip location and any other sensitive EXIF metadata
+
+- Need to refine stylesheet so the site doesn't look so plain
+
+
+I'll figure out images next.
+
+Here's a website that talks about removing EXIF data from an image using the Shortcuts app:
+https://thenextweb.com/basics/2019/06/27/how-to-remove-metadata-from-your-photos-on-ios/
+
+That appears to work ^_^
+
+I'm using a simple [Image:/path/img.jpg] syntax in the posts themselves.
+
+I need a stylesheet to prevent the image from being a weird size relative to the text.
+
+Ok, I pulled together a quick stylesheet based on something I'm using in a utility app for reading news feeds.
 

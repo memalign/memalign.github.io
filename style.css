@@ -1,0 +1,28 @@
+@media all and (orientation:portrait) {
+
+img, video, audio { max-width: 90%; height: auto; display: block; margin: 0 auto; }
+
+body, p, li { font: -apple-system-body; font-size:17.000000px + 1.0vw); font-weight: normal; }
+
+h1 { font: -apple-system-headine; font-size:28.000000px + 1.0vw); font-weight: bold; }
+
+h2 { font: -apple-system-headine; font-size:22.000000px + 1.0vw); font-weight: bold; }
+
+h3, h4 { font: -apple-system-headine; font-size:20.000000px + 1.0vw); font-weight: bold; }
+
+}
+
+
+@media all and (orientation:landscape) {
+
+img, video, audio { max-width: 65%; height: auto; display: block; margin: 0 auto; }
+
+body, p, li { font: -apple-system-body; font-size:8.500000px + 1.0vw); font-weight: normal; }
+
+h1 { font: -apple-system-headine; font-size:14.000000px + 1.0vw); font-weight: bold; }
+
+h2 { font: -apple-system-headine; font-size:11.000000px + 1.0vw); font-weight: bold; }
+
+h3, h4 { font: -apple-system-headine; font-size:10.000000px + 1.0vw); font-weight: bold; }
+
+}

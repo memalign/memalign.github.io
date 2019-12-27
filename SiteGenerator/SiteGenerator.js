@@ -53,6 +53,8 @@ class HTMLDocument {
 `<html>
 <head>
 <title>${this.title}</title>
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
 <body>
 `
@@ -206,6 +208,10 @@ class Entry extends HTMLDocument {
     
     let htmlContents = this.contents
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
+    htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
+    
+    // TODO: unit test [Image:/path/img.jpg] rewriting
+    
     
     str += htmlContents
     return str
