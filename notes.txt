@@ -26,19 +26,21 @@ Ok, I have a crude verson of this working.
 
 Task list:
 
-- Need a test entry 
+[x] - Need a test entry 
 
 - Need to convert entries in the entries subdirectory into standalone html pages
 
 - Need a stylesheet that can apply to all pages
 
-- Need a landing index.html page that links to all entries and might show the most recent few?
+- Need a landing index.html page that links to all entries and might show the most recent few? Probably an Index class
 
 - Need to flesh out the format of an entry (date, optional image(s), title, html filename, etc)
 
 - Entry HTML pages should specify the right opengraph values, such as image link
 
 - Need to generate an RSS feed
+
+- For images, I need to figure out how to strip location and any other sensitive EXIF metadata
 
 
 Some thoughts on entry format:

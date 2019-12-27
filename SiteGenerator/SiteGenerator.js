@@ -111,17 +111,28 @@ function assertTrue(condition, str) {
 }
 
 class UnitTests {
-  //TODO: Add unit tests for parsing a draft Entry, a non-draft Entry
-  
-  test_1() {
-    console.log("1")
-    assertTrue(true, "1 is true")
+
+// Entry class
+    
+  test_draftEntry() {
+    let entry = new Entry("/path/DRAFT-some-title.txt", "test text")
+    
+    assertTrue(entry.isDraft, "Entry is draft")
   }
   
-  test_2() {
-    console.log("2")
+  test_regularEntry() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")  
+    assertTrue(!entry.isDraft, "Entry isn't draft")
+    assertTrue(entry.title == "This title", "entry title")
+    assertTrue(entry.postLinkName == "some-title", "postLinkName")
+    assertTrue(entry.postNumber == 1, "postNumber")
+    assertTrue(entry.dateString == "12/26/19", "dateString")
+    assertTrue(entry.contents == "test text", "contents")
   } 
 
+
+
+// Unit test harness
             
   run() {
     let methods = Object.getOwnPropertyNames(Object.getPrototypeOf(this))
