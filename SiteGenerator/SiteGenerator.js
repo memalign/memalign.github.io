@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -253,7 +253,6 @@ class Entry extends HTMLDocument {
     return FileManager.local().readString(this.filename)
   }
   
-  // TODO: unit test one specified image, two specified images, zero specified images
   imageURL() {
     let result = null
     let matches = this.contents.match(/\[Image:([^\]]+)\]/)
@@ -377,11 +376,7 @@ ${this.title}
 
 // runScript
 
-function runScript() {
-  console.log("=> Backing up script")
-  copyCurrentScriptToRepo()
-  console.log("=> done")
-  
+function runScript() {  
   let fm = FileManager.local()
 
   let index = new Index([])
@@ -405,6 +400,10 @@ function runScript() {
   
   index.writeHTMLDocument(repoPath())
 }
+
+console.log("=> Backing up script")
+copyCurrentScriptToRepo()
+console.log("=> done")
 
 if (!UNIT_TEST) {
   runScript()
@@ -439,7 +438,22 @@ class UnitTests {
     assertTrue(entry.postNumber == 1, "postNumber")
     assertTrue(entry.dateString == "12/26/19", "dateString")
     assertTrue(entry.contents == "test text", "contents")
-  } 
+  }
+  
+  test_imageURL_noImages() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")  
+    assertTrue(entry.imageURL() == null, "no imageURL")
+  }
+  
+  test_imageURL_oneImage() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\ntest text")  
+    assertTrue(entry.imageURL() == "/m/test.jpg", "one imageURL")
+  }
+
+  test_imageURL_twoImages() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
+    assertTrue(entry.imageURL() == "/m/test.jpg", "two imageURLs")
+  }
 
 
 
@@ -448,13 +462,16 @@ class UnitTests {
   run() {
     let methods = Object.getOwnPropertyNames(Object.getPrototypeOf(this))
     
+    let passCount = 0
     for (let method of methods) {
       if (method.startsWith("test")) {
         console.log("=== Invoking " + method + " ===")
         this[method]();
+        passCount++
         console.log("======")
       }
     }
+    console.log(passCount + " tests passed successfully!")
   }
 }
 
