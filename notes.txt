@@ -102,8 +102,8 @@ Task list:
 
 - Need to generate an RSS feed
 
-- Need to refine stylesheet so the site doesn't look so plain
-    - Take a look at daringfireball, ogp.me for things to try
+[x] - Need to refine stylesheet so the site doesn't look so plain
+[x]     - Take a look at daringfireball, ogp.me for things to try
 
 - Write unit tests for the backlog labelled with TODOs
 
@@ -116,3 +116,14 @@ Here's a random thought: I could eventually render notes.txt into a nicer format
 
 I made a favicon and followed the instructions here:
 https://favicon.io/favicon-converter/
+
+
+
+12/27/19
+
+Task list:
+
+- Need to generate an RSS feed
+
+- Write unit tests for the backlog labelled with TODOs
+
