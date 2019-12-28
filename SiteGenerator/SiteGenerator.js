@@ -91,6 +91,7 @@ class HTMLDocument {
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
 <title>${this.title}</title>
 <meta property="og:title" content="${this.title}" />
 <meta property="og:type" content="website" />
@@ -374,6 +375,12 @@ ${this.title}
     return htmlPostsSubdirectory() + "/" + this.htmlFilename()
   }
   
+  // e.g. "https://memalign.github.io/p/"
+  // TODO: unit test this
+  fullBaseURL() {
+    return this.baseURL() + "/" + htmlPostsSubdirectory() + "/"
+  }
+  
   // e.g. "2019-12-24T14:00:00-08:00
   // TODO: unit test this
   dateRFC3339() {
@@ -386,23 +393,33 @@ ${this.title}
 }
 
 
-// JSONFeed class
-// This class generates a JSON feed as described by https://jsonfeed.org/version/1
+// Feed abstract class
 
-class JSONFeed {
+class Feed {
   constructor(index) {
     this.index = index
-
     this.entriesInFeed = 40
-  }
-  
-  feedFilename() {
-    return "feed.json"
   }
   
   // e.g. "https://memalign.github.io/feed.json"
   feedURL() {
     return this.index.baseURL() + "/" + this.feedFilename()
+  }
+  
+  // TODO: unit test this
+  writeFeedFile(directory) {
+    let filename = directory + "/" + this.feedFilename()
+    FileManager.local().writeString(filename, this.toText())
+    console.log("Wrote feed " + filename)
+  }
+}
+
+// JSONFeed class
+// This class generates a JSON feed as described by https://jsonfeed.org/version/1
+
+class JSONFeed extends Feed {
+  feedFilename() {
+    return "feed.json"
   }
   
   // TODO: Unit test that this escapes double quotes, replaces newlines with "\n"
@@ -414,7 +431,6 @@ class JSONFeed {
   
   // TODO: unit test: with image, without image; just an image; unit test that the image becomes a full HTTP url
   entryToItem(entry) {
-// TODO: add image URL
     let imageStr = ""
     let imageURL = entry.imageURL()
 
@@ -440,7 +456,7 @@ class JSONFeed {
   }
   
   // TODO: unit test: generating a feed, enforcing entriesInFeed limit
-  toJSON() {
+  toText() {
     let jsonHeader = `{
    "version" : "https://jsonfeed.org/version/1",
    "title" : "${this.index.title}",
@@ -468,12 +484,63 @@ class JSONFeed {
     
     return jsonHeader + items + jsonFooter
   }
+}
+
+// AtomFeed class
+// This class generates an Atom feed as described by http://www.w3.org/2005/Atom and https://tools.ietf.org/html/rfc4287
+
+class AtomFeed extends Feed {
+  feedFilename() {
+    return "feed.xml"
+  }
   
-  // TODO: unit test this
-  writeFeedFile(directory) {
-    let filename = directory + "/" + this.feedFilename()
-    FileManager.local().writeString(filename, this.toJSON())
-    console.log("Wrote feed json " + filename)
+  // TODO: unit test
+  entryToItem(entry) {
+    let str = `<entry>
+<title>${entry.title}</title>
+<link rel="alternate" type="text/html" href="${entry.fullURL()}" />
+<link rel="related" type="text/html" href="${entry.fullURL()}" />
+<id>${entry.fullURL()}</id>
+<published>${entry.dateRFC3339()}</published>
+<author>
+<name>memalign</name>
+<uri>${this.index.fullURL()}</uri>
+</author>
+<content type="html" xml:base="${entry.fullBaseURL()}" xml:lang="en"><![CDATA[
+${entry.htmlBody(entry.fullURL())}
+]]>
+</content>
+</entry>
+`        
+    return str
+  }
+  
+  // TODO: unit test: generating a feed, enforcing entriesInFeed limit
+  toText() {
+    this.index.sortEntries()
+    let lastUpdated = this.index.entries[0].dateRFC3339()
+    let updatedYear = lastUpdated.substring(0, 4)
+    
+    let atomHeader = `<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>${this.index.title}</title>
+<subtitle>By memalign</subtitle>
+<link rel="alternate" type="text/html" href="${this.index.fullURL()}" />
+<link rel="self" type="application/atom+xml" href="${this.feedURL()}" />
+<id>${this.feedURL()}</id>
+<updated>${lastUpdated}</updated>
+<rights>Copyright © ${updatedYear}, memalign</rights>
+<icon>${this.index.baseURL()}/apple-touch-icon.png</icon>
+<logo>${this.index.baseURL()}/apple-touch-icon.png</logo>
+`
+
+    let entryStrs = this.index.entries.slice(0, this.entriesInFeed+1).map(x => this.entryToItem(x))
+
+    let items = entryStrs.join(",\n")
+
+    let atomFooter = "</feed><!-- THE END -->\n"
+    
+    return atomHeader + items + atomFooter
   }
 }
 
@@ -506,6 +573,9 @@ function runScript() {
   
   let jsonFeed = new JSONFeed(index)
   jsonFeed.writeFeedFile(repoPath())
+  
+  let atomFeed = new AtomFeed(index)
+  atomFeed.writeFeedFile(repoPath())
 }
 
 console.log("=> Backing up script")
@@ -635,6 +705,7 @@ class UnitTests {
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
 <title>memalign.github.io</title>
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
@@ -755,6 +826,7 @@ More posts:<br />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
 <title>This title</title>
 <meta property="og:title" content="This title" />
 <meta property="og:type" content="website" />
@@ -798,6 +870,7 @@ test text
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
 <title>This title</title>
 <meta property="og:title" content="This title" />
 <meta property="og:type" content="website" />

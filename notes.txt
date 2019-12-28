@@ -167,3 +167,7 @@ I'm not sure that's a lot better unless I find that I need to do more complex ch
 
 
 Ok, I've got the json feed generating!
+
+I confirmed that Feedly correctly sees and parses the feed!
+
+Ok, I've got the atom feed generating!
