@@ -263,7 +263,6 @@ class Entry extends HTMLDocument {
     return result
   }
 
-  // TODO: unit test one specified image, two specified images, zero specified images  
   ogImage() {
     let result = super.ogImage()
     let imageURL = this.imageURL()
@@ -273,7 +272,6 @@ class Entry extends HTMLDocument {
     return result
   }
   
-  // TODO: unit test with contents containing fewer than N words, exactly N words, truncated result ending with .
   ogDescription() {
     let result = this.contents
     result = result.replace(/\[Image:([^\]]+)\]/g, "")
@@ -590,7 +588,42 @@ test text
     // This behavior isn't good. I'm writing this test to document the existing limitation. We probably want the postdate to follow all leading images in a post instead.
     assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>\n<div id='postdate'>Posted on 12/26/19</div>\n<img src=\"/m/test2.jpg\"></img>"), "Date follows first image")
   }
+  
+  test_ogDescription() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    
+    let entryWithLinebreak = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\none two three four five six seven eight nine ten eleven twelve thirteen.\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
 
+    let entryWithImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+
+
+    let expectation = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty…"
+    
+    assertTrue(entry.ogDescription() == expectation, "Description truncated in correct place")
+    assertTrue(entryWithLinebreak.ogDescription() == expectation, "Entry with linebreak truncated in correct place")
+    assertTrue(entryWithImage.ogDescription() == expectation, "Description truncated in correct place")
+    
+    let entrySentence = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty. thirtyone")
+
+    let expectation2 = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty. …"
+    assertTrue(entrySentence.ogDescription() == expectation2, "Description ending with period gets correct ellipses behavior")
+    
+    let entryFits = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty")
+    
+    let expectationFits = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty"
+    assertTrue(entryFits.ogDescription() == expectationFits, "Whole entry fits")
+  }
+  
+  test_Entry_ogImage() {
+    let entryNoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")
+    assertTrue(entryNoImages.ogImage() == "/m/shiba.jpg", "default ogImage")
+    
+    let entryOneImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\ntest text")
+    assertTrue(entryOneImage.ogImage() == "/m/test.jpg", "picks image")
+
+    let entryTwoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")
+    assertTrue(entryTwoImages.ogImage() == "/m/test.jpg", "picks first image")
+  }
 
 // Unit test harness
             
