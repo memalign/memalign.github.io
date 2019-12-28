@@ -2,10 +2,18 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = true
+const UNIT_TEST = false
 
 
 // Utilities
+
+function uuidv4() {
+  // From https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
 
 function currentScriptFilename() {
   return Script.name() + ".js"
@@ -108,8 +116,7 @@ ${ogDesc}
 `
     return str
   }
-  
-  // TODO: unit test this
+
   writeHTMLDocument(directory) {
     let filename = directory + "/" + this.htmlFilename()
     FileManager.local().writeString(filename, this.toHTML())
@@ -418,6 +425,38 @@ function assertTrue(condition, str) {
 }
 
 class UnitTests {
+
+
+// HTMLDocument class
+
+  test_HTMLDocument_writeHTMLDocument() {
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")
+    
+    let fm = FileManager.local()
+    let tempDir = fm.temporaryDirectory() + "/" + uuidv4()
+    fm.createDirectory(tempDir)
+    
+    let entryFilename = tempDir + "/" + entry1.htmlFilename()
+
+    assertTrue(!fm.fileExists(entryFilename), "file doesn't exist")    
+    
+    entry1.writeHTMLDocument(tempDir)
+
+    assertTrue(fm.fileExists(entryFilename), "file exists")
+    
+    let fileContents = fm.readString(entryFilename)
+    
+    assertTrue(fileContents == entry1.toHTML(), "contents match")
+    
+    
+    // Clean up
+    fm.remove(entryFilename)
+    fm.remove(tempDir)
+    
+    assertTrue(!fm.fileExists(entryFilename), "file doesn't exist")    
+    assertTrue(!fm.fileExists(tempDir), "dir doesn't exist")
+  }
+
 
 // Index class
 
