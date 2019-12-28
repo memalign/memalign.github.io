@@ -168,14 +168,12 @@ class Index extends HTMLDocument {
     this.entries.sort(function (a, b) { return b.postNumber - a.postNumber })
   }
   
-  // TODO: unit test a valid file being generated
   toHTML() {
     let str = ""
     str += this.htmlDocumentPrefix()
 
     str += "<div id='header'><h1>" + this.title + "</h1></div>\n";
-    
-    // TODO: unit test that entries are written in the right order; links to every entry but only entriesOnIndex full posts
+
 
     this.sortEntries()
         
@@ -199,9 +197,9 @@ class Index extends HTMLDocument {
         str += "\n"
       } else {
         if (c == this.entriesOnIndex) {
-          str += "<br /><br />\nMore:<br />\n"
+          str += "<br /><br />\nMore posts:<br />\n"
         }
-        str += "<a href='" + this.urlForEntry(entry) + "'>" + entry.title + "</a><br />\n"        
+        str += "<a href='" + entry.relativeURL() + "'>" + entry.title + "</a><br />\n"        
       }
             
       c++
@@ -478,6 +476,69 @@ class UnitTests {
     assertTrue(index.ogImage() == "/m/shiba.jpg", "default image")
   }
 
+  test_Index_toHTML() {
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/19\ntext2 text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/19\n[Image:/m/test3.jpg]\ntext3 text3")
+    
+    let index = new Index([entry2, entry1, entry3])  
+    
+    index.entriesOnIndex = 2
+    
+    console.log(index.toHTML())
+    
+    let expectation = `<!DOCTYPE html>
+<html>
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<title>memalign.github.io</title>
+<meta property="og:title" content="memalign.github.io" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/index.html" />
+<meta property="og:image" content="/m/test3.jpg" />
+<meta property="og:description" content="text3 text3" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<div id='header'><h1>memalign.github.io</h1></div>
+<b>All posts:</b><br />
+<a href='p/some-title3.html'>This title3</a><br />
+<a href='p/some-title2.html'>This title2</a><br />
+<a href='p/some-title.html'>This title</a><br />
+
+
+<div id='header'>
+<h2>
+<a href='p/some-title3.html'>This title3</a>
+</h2>
+</div>
+<img src="/m/test3.jpg"></img>
+<div id='postdate'>Posted on 12/28/19</div>
+text3 text3
+
+<div id='header'>
+<h2>
+<a href='p/some-title2.html'>This title2</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 12/27/19</div>
+text2 text2
+<br /><br />
+More posts:<br />
+<a href='p/some-title.html'>This title</a><br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>
+`
+    assertTrue(index.toHTML() == expectation, "index html")
+  }
 
 
 // Entry class
