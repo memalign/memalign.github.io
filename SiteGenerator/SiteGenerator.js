@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = true
+const UNIT_TEST = false
 
 
 // Utilities
@@ -102,6 +102,7 @@ ${ogDesc}
     let str =
 `
 </div>
+<div id="footer"></div>
 </body>
 </html>
 `
