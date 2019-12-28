@@ -73,12 +73,12 @@ class HTMLDocument {
   }
   
   htmlDocumentPrefix() {
-    let ogImage = "<meta property=\"og:image\" content=\"" + this.ogImage() + "\" />";
+    let ogImage = "\n<meta property=\"og:image\" content=\"" + this.ogImage() + "\" />";
     
     let ogDesc = ""
     let desc = this.ogDescription()
     if (desc && desc.length) {
-      ogDesc = "<meta property=\"og:description\" content=\""+desc+"\" />"
+      ogDesc = "\n<meta property=\"og:description\" content=\""+desc+"\" />"
     }
     
     
@@ -90,12 +90,11 @@ class HTMLDocument {
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
 <title>${this.title}</title>
 <meta property="og:title" content="${this.title}" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="${this.fullURL()}" />
-${ogImage}
-${ogDesc}
+<meta property="og:url" content="${this.fullURL()}" />${ogImage}${ogDesc}
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -374,8 +373,109 @@ ${this.title}
   relativeURL() {
     return htmlPostsSubdirectory() + "/" + this.htmlFilename()
   }
+  
+  // e.g. "2019-12-24T14:00:00-08:00
+  // TODO: unit test this
+  dateRFC3339() {
+    let matches = this.dateString.match(/(\d+)\/(\d+)\/(\d+)/)
+    let month = matches[1]
+    let day = matches[2]
+    let year = matches[3]
+    return year + "-" + month + "-" + day + "T00:00:00-08:00"
+  }
 }
 
+
+// JSONFeed class
+// This class generates a JSON feed as described by https://jsonfeed.org/version/1
+
+class JSONFeed {
+  constructor(index) {
+    this.index = index
+
+    this.entriesInFeed = 40
+  }
+  
+  feedFilename() {
+    return "feed.json"
+  }
+  
+  // e.g. "https://memalign.github.io/feed.json"
+  feedURL() {
+    return this.index.baseURL() + "/" + this.feedFilename()
+  }
+  
+  // TODO: Unit test that this escapes double quotes, replaces newlines with "\n"
+  escapeContent(content) {
+    content = content.replace(/"/g, "\\\"")
+    content = content.replace(/\n/g, "\\n")
+    return content
+  }
+  
+  // TODO: unit test: with image, without image; just an image; unit test that the image becomes a full HTTP url
+  entryToItem(entry) {
+// TODO: add image URL
+    let imageStr = ""
+    let imageURL = entry.imageURL()
+
+    if (imageURL) {
+      if (imageURL.startsWith("/")) {
+        imageURL = this.index.baseURL() + imageURL
+      }
+      imageStr = "\n         \"image\" : \""+imageURL+"\","
+    }
+
+    let str = `    {
+         "title" : "${entry.title}",
+         "date_published" : "${entry.dateRFC3339()}",
+         "id" : "${entry.fullURL()}",
+         "url" : "${entry.fullURL()}",${imageStr}
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "${this.escapeContent(entry.htmlBody(entry.fullURL()))}"
+    }`
+        
+    return str
+  }
+  
+  // TODO: unit test: generating a feed, enforcing entriesInFeed limit
+  toJSON() {
+    let jsonHeader = `{
+   "version" : "https://jsonfeed.org/version/1",
+   "title" : "${this.index.title}",
+   "home_page_url" : "${this.index.fullURL()}",
+   "feed_url" : "${this.feedURL()}",
+   "author" : {
+      "url" : "https://twitter.com/memalign",
+      "name" : "memalign"
+   },
+   "icon" : "${this.index.baseURL()}/apple-touch-icon.png",
+   "favicon" : "${this.index.baseURL()}/favicon.ico",
+`
+
+    let items = "   \"items\" : [\n"
+    
+    this.index.sortEntries()
+    
+    let entryStrs = this.index.entries.slice(0, this.entriesInFeed+1).map(x => this.entryToItem(x))
+
+    items += entryStrs.join(",\n")
+    
+    items += "\n  ]\n"
+
+    let jsonFooter = "}\n"
+    
+    return jsonHeader + items + jsonFooter
+  }
+  
+  // TODO: unit test this
+  writeFeedFile(directory) {
+    let filename = directory + "/" + this.feedFilename()
+    FileManager.local().writeString(filename, this.toJSON())
+    console.log("Wrote feed json " + filename)
+  }
+}
 
 
 // runScript
@@ -403,6 +503,9 @@ function runScript() {
   }
   
   index.writeHTMLDocument(repoPath())
+  
+  let jsonFeed = new JSONFeed(index)
+  jsonFeed.writeFeedFile(repoPath())
 }
 
 console.log("=> Backing up script")
@@ -524,8 +627,6 @@ class UnitTests {
     
     index.entriesOnIndex = 2
     
-    console.log(index.toHTML())
-    
     let expectation = `<!DOCTYPE html>
 <html>
 <head>
@@ -533,6 +634,7 @@ class UnitTests {
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
 <title>memalign.github.io</title>
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
@@ -652,6 +754,7 @@ More posts:<br />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
 <title>This title</title>
 <meta property="og:title" content="This title" />
 <meta property="og:type" content="website" />
@@ -694,6 +797,7 @@ test text
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
 <title>This title</title>
 <meta property="og:title" content="This title" />
 <meta property="og:type" content="website" />

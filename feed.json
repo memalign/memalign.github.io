@@ -1,0 +1,25 @@
+{
+   "version" : "https://jsonfeed.org/version/1",
+   "title" : "memalign.github.io",
+   "home_page_url" : "https://memalign.github.io/index.html",
+   "feed_url" : "https://memalign.github.io/feed.json",
+   "author" : {
+      "url" : "https://twitter.com/memalign",
+      "name" : "memalign"
+   },
+   "icon" : "https://memalign.github.io/apple-touch-icon.png",
+   "favicon" : "https://memalign.github.io/favicon.ico",
+   "items" : [
+    {
+         "title" : "Welcome",
+         "date_published" : "2019-12-26T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/this-website.html",
+         "url" : "https://memalign.github.io/p/this-website.html",
+         "image" : "https://memalign.github.io/m/shiba.jpg",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\n<div id='header'>\n<h2>\n<a href='https://memalign.github.io/p/this-website.html'>Welcome</a>\n</h2>\n</div>\n<img src=\"/m/shiba.jpg\"></img>\n<div id='postdate'>Posted on 12/26/2019</div>\nWelcome to memalign.github.io!<br />\n<br />\nI made this website so I have a place to post ideas and projects.<br />\n<br />\nI'm creating my own website instead of posting on Facebook or Twitter with the hope that it'll be more durable and discoverable long-term.<br />\n<br />\nI also hope that this website will be simpler than maintaining some kind of blog.<br />\n<br />\n<br />\nAbout me:<br />\n- I live in California. I moved here for a software engineering job after graduating college<br />\n- I'm married to a beautiful and intelligent woman who works as an attorney<br />\n- We have a Shiba Inu who brings us a lot of joy<br />\n"
+    }
+  ]
+}
