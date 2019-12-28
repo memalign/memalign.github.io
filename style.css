@@ -62,6 +62,15 @@ td {
   margin-bottom: 15px;
 }
 
+#allposts {
+
+}
+
+#feeds {
+  float: right;
+  text-align: right;
+}
+
 #postdate {
   margin-top: 15px;
   margin-bottom: 15px;
