@@ -125,7 +125,14 @@ Task list:
 
 - Need to generate an RSS feed
 
-- Write unit tests for the backlog labelled with TODOs
+[x] - Write unit tests for the backlog labelled with TODOs
 
 [x] - Add og description
+
+
+Here's a page that talks about generating UUIDs in JavaScript:
+https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+
+I couldn't use the newer implementation because Scriptable didn't understand the "crypto" variable.
+
 
