@@ -69,7 +69,7 @@ class HTMLDocument {
     
     let ogDesc = ""
     let desc = this.ogDescription()
-    if (desc) {
+    if (desc && desc.length) {
       ogDesc = "<meta property=\"og:description\" content=\""+desc+"\" />"
     }
     
@@ -130,13 +130,12 @@ class Index extends HTMLDocument {
     this.entriesOnIndex = 5
   }
   
-  // TODO: Unit test this: no entry with image, first entry with image, second entry with image, entry off the front page with image
   ogImage() {
     let result = super.ogImage()
     
     this.sortEntries()
     
-    for (let i = 0; i < this.entriesOnIndex && i < this.entries.count; ++i) {
+    for (let i = 0; i < this.entriesOnIndex && i < this.entries.length; ++i) {
       let entry = this.entries[i]
       let entryImageURL = entry.imageURL()
       if (entryImageURL) {
@@ -148,14 +147,15 @@ class Index extends HTMLDocument {
     return result
   }
   
-  // TODO: unit test this: no entry desc, first entry desc, second entry desc
   ogDescription() {
     let result = null
     
-    for (let i = 0; i < this.entriesOnIndex && i < this.entries.count; ++i) {
+    this.sortEntries()
+    
+    for (let i = 0; i < this.entriesOnIndex && i < this.entries.length; ++i) {
       let entry = this.entries[i]
       let entryDesc = entry.ogDescription()
-      if (entryDesc) {
+      if (entryDesc && entryDesc.length) {
         result = entryDesc
         break
       }
@@ -256,6 +256,10 @@ class Entry extends HTMLDocument {
   
   imageURL() {
     let result = null
+    if (!this.contents) {
+      return result
+    }
+    
     let matches = this.contents.match(/\[Image:([^\]]+)\]/)
     if (matches) {
       result = matches[1]
@@ -274,6 +278,9 @@ class Entry extends HTMLDocument {
   
   ogDescription() {
     let result = this.contents
+    if (!result) {
+      return null
+    }
     result = result.replace(/\[Image:([^\]]+)\]/g, "")
     result = result.replace(/^\n+/, "")
     let origResult = result
@@ -413,6 +420,65 @@ function assertTrue(condition, str) {
 }
 
 class UnitTests {
+
+// Index class
+
+  test_Index_sortEntries() {
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/19\ntest text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/19\ntest text3")
+    
+    let index = new Index([entry2, entry1, entry3])
+    index.sortEntries()  
+    assertTrue(index.entries.map(x => x.postNumber), [3, 2, 1])
+  }
+
+  test_Index_ogDescription() {
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/19\ntest text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/19\ntest text3")
+    
+    let index = new Index([entry2, entry1, entry3])
+    
+    assertTrue(index.ogDescription() == "test text3", "most recent description")
+    
+    // Most recent lacks description
+    entry3.contents = null
+    assertTrue(index.ogDescription() == "test text2", "second description")
+    
+    // Next best has an empty description
+    entry2.contents = "[Image:/m/test.jpg]"  
+    assertTrue(entry2.ogDescription() == "", "only image yields empty desc")
+    assertTrue(index.ogDescription() == "test text", "first description")
+    
+    // If only two entries fit on the Index page, we won't have a description
+    index.entriesOnIndex = 2
+    assertTrue(index.ogDescription() == null, "no desc")
+  }
+  
+  test_Index_ogImage() {
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test1.jpg]")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/19\n[Image:/m/test2.jpg]")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/19\n[Image:/m/test3.jpg]")
+    
+    let index = new Index([entry2, entry1, entry3])
+    
+    assertTrue(index.ogImage() == "/m/test3.jpg", "most recent post image")
+    
+    entry3.contents = null
+    
+    assertTrue(index.ogImage() == "/m/test2.jpg", "second post image")
+    
+    entry2.contents = "just text"
+    
+    assertTrue(index.ogImage() == "/m/test1.jpg", "first post image")
+    
+    index.entriesOnIndex = 2
+    
+    assertTrue(index.ogImage() == "/m/shiba.jpg", "default image")
+  }
+
+
 
 // Entry class
     
@@ -612,6 +678,9 @@ test text
     
     let expectationFits = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty"
     assertTrue(entryFits.ogDescription() == expectationFits, "Whole entry fits")
+    
+    let entryJustImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]")
+    assertTrue(entryJustImage.ogDescription() == "", "empty desc")
   }
   
   test_Entry_ogImage() {
