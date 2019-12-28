@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -291,8 +291,6 @@ class Entry extends HTMLDocument {
     return result
   }
   
-  // TODO: Unit test this
-  // TODO: Unit test with an image at the very beginning, at the very end, no image
   toHTML() {
     let str = this.htmlDocumentPrefix()
     str += this.htmlBody()    
@@ -308,8 +306,8 @@ class Entry extends HTMLDocument {
     
     return str
   }
-    
-  // TODO: unit test this; with and without titleURL
+
+
   htmlBody(titleURL) {
     let str = ""
 
@@ -338,8 +336,6 @@ ${this.title}
     let htmlContents = this.contents
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
-    
-    // TODO: unit test post date string with a starting image, without a starting image
 
     let postDateStr = "<div id='postdate'>Posted on " + this.dateString + "</div>\n"
     
@@ -463,7 +459,137 @@ class UnitTests {
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
   }
 
+  test_htmlBody_title_withTitleURL() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\ntest text")  
+    let htmlBody = entry.htmlBody("p/some-title.html")
+    
+    assertTrue(htmlBody.includes("<div id='header'>\n<h2>\n<a href='p/some-title.html'>This title</a>"), "Has title URL")
+  }
 
+  test_htmlBody_title_withoutTitleURL() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<div id='header'>\n<h1>\nThis title\n</h1>"), "Has h1 title")
+  }
+  
+  test_htmlBody_startsWithImage() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>\n<div id='postdate'>Posted on 12/26/19</div>"), "Date follows image")
+    
+    let toHTML = entry.toHTML()
+    
+    let expectation = `<!DOCTYPE html>
+<html>
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<title>This title</title>
+<meta property="og:title" content="This title" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/some-title.html" />
+<meta property="og:image" content="/m/test.jpg" />
+<meta property="og:description" content="test text" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+This title
+</h1>
+</div>
+<img src="/m/test.jpg"></img>
+<div id='postdate'>Posted on 12/26/19</div>
+test text
+</div>
+<div id="footer"></div>
+</body>
+</html>
+`
+    assertTrue(toHTML == expectation, "toHTML matches expectation")
+  }
+
+  test_htmlBody_startsWithText() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\nTest text\n[Image:/m/test.jpg]\nmore text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<div id='postdate'>Posted on 12/26/19</div>\nTest text<br />\n<img src=\"/m/test.jpg\"></img>"), "Date precedes text")
+    
+    let toHTML = entry.toHTML()
+    let expectation = `<!DOCTYPE html>
+<html>
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<title>This title</title>
+<meta property="og:title" content="This title" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/some-title.html" />
+<meta property="og:image" content="/m/test.jpg" />
+<meta property="og:description" content="Test text more text…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+This title
+</h1>
+</div>
+<div id='postdate'>Posted on 12/26/19</div>
+Test text<br />
+<img src="/m/test.jpg"></img><br />
+more text
+</div>
+<div id="footer"></div>
+</body>
+</html>
+`
+    assertTrue(toHTML == expectation, "toHTML equals expectation")
+  }
+  
+  test_toHTML_noImages() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")
+    let entry2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n\ntest text")
+    
+    assertTrue(entry.toHTML() == entry2.toHTML(), "Preceding newlines ignored")  
+
+    let expectation = `<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+This title
+</h1>
+</div>
+<div id='postdate'>Posted on 12/26/19</div>
+test text
+</div>
+<div id="footer"></div>
+</body>
+</html>
+`
+    assertTrue(entry.toHTML().endsWith(expectation), "no-image entry has correct html")
+  }
+    
+  test_htmlBody_startsWithTwoImages() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    // This behavior isn't good. I'm writing this test to document the existing limitation. We probably want the postdate to follow all leading images in a post instead.
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>\n<div id='postdate'>Posted on 12/26/19</div>\n<img src=\"/m/test2.jpg\"></img>"), "Date follows first image")
+  }
 
 
 // Unit test harness
@@ -477,7 +603,6 @@ class UnitTests {
         console.log("=== Invoking " + method + " ===")
         this[method]();
         passCount++
-        console.log("======")
       }
     }
     console.log(passCount + " tests passed successfully!")
