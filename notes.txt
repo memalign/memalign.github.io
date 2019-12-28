@@ -171,3 +171,14 @@ Ok, I've got the json feed generating!
 I confirmed that Feedly correctly sees and parses the feed!
 
 Ok, I've got the atom feed generating!
+
+
+
+Task list:
+
+- Need to confirm that the XML feed looks ok in Feedly
+
+- Need to add direct links ("RSS | JSON feed") to these feeds on the website
+
+- Implement the TODO unit test backlog
+
