@@ -72,6 +72,14 @@ class HTMLDocument {
     return null
   }
   
+  jsonFeedURL() {
+    return "/feed.json"
+  }
+  
+  atomFeedURL() {
+    return "/feed.xml"
+  }
+  
   htmlDocumentPrefix() {
     let ogImage = "\n<meta property=\"og:image\" content=\"" + this.ogImage() + "\" />";
     
@@ -90,8 +98,8 @@ class HTMLDocument {
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="alternate" type="application/json" href="/feed.json" />
-<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<link rel="alternate" type="application/json" href="${this.jsonFeedURL()}" />
+<link rel="alternate" type="application/atom+xml" href="${this.atomFeedURL()}" />
 <title>${this.title}</title>
 <meta property="og:title" content="${this.title}" />
 <meta property="og:type" content="website" />
@@ -185,16 +193,25 @@ class Index extends HTMLDocument {
     this.sortEntries()
         
     
+    // Links to feeds
+    str += "<div id='feeds'>\n"
+    str += "<a href='"+this.atomFeedURL()+"'>RSS</a>"
+    str += " | "
+    str += "<a href='"+this.jsonFeedURL()+"'>JSON Feed</a>"
+    str += "\n</div>"
+
+    
     // Links to every post
     
+    str += "<div id='allposts'>\n"
     str += "<b>All posts:</b><br />\n"
     
     for (let entry of this.entries) {
       str += "<a href='" + entry.relativeURL() + "'>" + entry.title + "</a><br />\n"
     }
     
-    str += "\n"
-     
+    str += "</div>\n"
+             
      
     // Include the most recent this.entriesOnIndex posts
     let c = 0
