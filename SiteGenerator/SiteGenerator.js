@@ -735,11 +735,14 @@ class UnitTests {
 <body>
 <div id="body">
 <div id='header'><h1>memalign.github.io</h1></div>
+<div id='feeds'>
+<a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
+</div><div id='allposts'>
 <b>All posts:</b><br />
 <a href='p/some-title3.html'>This title3</a><br />
 <a href='p/some-title2.html'>This title2</a><br />
 <a href='p/some-title.html'>This title</a><br />
-
+</div>
 
 <div id='header'>
 <h2>
