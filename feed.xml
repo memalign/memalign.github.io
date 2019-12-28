@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>memalign.github.io</title>
+<subtitle>By memalign</subtitle>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
+<link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
+<id>https://memalign.github.io/feed.xml</id>
+<updated>2019-12-26T00:00:00-08:00</updated>
+<rights>Copyright © 2019, memalign</rights>
+<icon>https://memalign.github.io/apple-touch-icon.png</icon>
+<logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Welcome</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/this-website.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/this-website.html" />
+<id>https://memalign.github.io/p/this-website.html</id>
+<published>2019-12-26T00:00:00-08:00</published>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/this-website.html'>Welcome</a>
+</h2>
+</div>
+<img src="/m/shiba.jpg"></img>
+<div id='postdate'>Posted on 12/26/2019</div>
+Welcome to memalign.github.io!<br />
+<br />
+I made this website so I have a place to post ideas and projects.<br />
+<br />
+I'm creating my own website instead of posting on Facebook or Twitter with the hope that it'll be more durable and discoverable long-term.<br />
+<br />
+I also hope that this website will be simpler than maintaining some kind of blog.<br />
+<br />
+<br />
+About me:<br />
+- I live in California. I moved here for a software engineering job after graduating college<br />
+- I'm married to a beautiful and intelligent woman who works as an attorney<br />
+- We have a Shiba Inu who brings us a lot of joy<br />
+
+]]>
+</content>
+</entry>
+</feed><!-- THE END -->
