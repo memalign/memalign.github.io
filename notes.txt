@@ -136,3 +136,34 @@ https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
 I couldn't use the newer implementation because Scriptable didn't understand the "crypto" variable.
 
 
+12/28/19
+
+Task list:
+
+- Need to generate an RSS feed, add user-visible links to "RSS | JSON feed" to the website
+
+
+I see that DaringFireball specifies two feeds in its index.html:
+	<link rel="alternate"  type="application/atom+xml"     href="/feeds/main" />
+	<link rel="alternate"  type="application/json"         href="/feeds/json" />
+	
+It's annoying to have to generate two feeds...
+
+He currently publishes the most recent 48 entries spanning 11/13/19 - /12/27/19.
+
+Here's documentation about json feeds:
+https://jsonfeed.org/version/1
+
+It looks like DaringFireball doesn't include 'image's for items (which I want to do).
+
+
+Similar to how I have an Index class, I'll probably have a JSONFeed class and an AtomFeed class which are created with the list of entries.
+
+I have the JSON feed almost done being generated though I see now that I could've probably done this with less manual string manipulation:
+https://stackoverflow.com/questions/24559625/javascript-escape-double-quotes
+
+I'm not sure that's a lot better unless I find that I need to do more complex character escaping.
+
+
+
+Ok, I've got the json feed generating!
