@@ -182,5 +182,7 @@ Task list:
 
 [NTBF: abandoning this for now] - See if I can get the feed to open in Apple News like DaringFireball does
 
-- Implement the TODO unit test backlog
+[x] - Implement the TODO unit test backlog
+
+All done for now!
 
