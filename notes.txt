@@ -180,7 +180,7 @@ Task list:
 
 [x] - Need to add direct links ("RSS | JSON feed") to these feeds on the website
 
-- See if I can get the feed to open in Apple News like DaringFireball does
+[NTBF: abandoning this for now] - See if I can get the feed to open in Apple News like DaringFireball does
 
 - Implement the TODO unit test backlog
 
