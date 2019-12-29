@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -439,7 +439,6 @@ class JSONFeed extends Feed {
     return "feed.json"
   }
   
-  // TODO: Unit test that this escapes double quotes, replaces newlines with "\n"
   escapeContent(content) {
     content = content.replace(/"/g, "\\\"")
     content = content.replace(/\n/g, "\\n")
@@ -472,7 +471,6 @@ class JSONFeed extends Feed {
     return str
   }
   
-  // TODO: unit test: generating a feed, enforcing entriesInFeed limit
   toText() {
     let jsonHeader = `{
    "version" : "https://jsonfeed.org/version/1",
@@ -491,7 +489,7 @@ class JSONFeed extends Feed {
     
     this.index.sortEntries()
     
-    let entryStrs = this.index.entries.slice(0, this.entriesInFeed+1).map(x => this.entryToItem(x))
+    let entryStrs = this.index.entries.slice(0, this.entriesInFeed).map(x => this.entryToItem(x))
 
     items += entryStrs.join(",\n")
     
@@ -511,7 +509,6 @@ class AtomFeed extends Feed {
     return "feed.xml"
   }
   
-  // TODO: unit test
   entryToItem(entry) {
     let str = `<entry>
 <title>${entry.title}</title>
@@ -551,7 +548,7 @@ ${entry.htmlBody(entry.fullURL())}
 <logo>${this.index.baseURL()}/apple-touch-icon.png</logo>
 `
 
-    let entryStrs = this.index.entries.slice(0, this.entriesInFeed+1).map(x => this.entryToItem(x))
+    let entryStrs = this.index.entries.slice(0, this.entriesInFeed).map(x => this.entryToItem(x))
 
     let items = entryStrs.join(",\n")
 
@@ -990,6 +987,74 @@ test text
     let entryTwoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")
     assertTrue(entryTwoImages.ogImage() == "/m/test.jpg", "picks first image")
   }
+
+  
+  
+// JSONFeed class
+
+  test_JSONFeed_escapeContent() {
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test1.jpg]\ntext1 text1")
+    
+    let index = new Index([entry1])
+    
+    let jsonFeed = new JSONFeed(index)
+    
+    let escapedContent = jsonFeed.escapeContent('<a href="test.html">Test<br />\n</a>')
+    
+    assertTrue(escapedContent == "<a href=\\\"test.html\\\">Test<br />\\n</a>", "Escaped content")
+  }
+
+  test_JSONFeed_toText() {
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/19\ntext2 text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/19\n[Image:/m/test3.jpg]\ntext3 text3")
+    
+    let index = new Index([entry2, entry1, entry3])
+    
+    let jsonFeed = new JSONFeed(index)
+    jsonFeed.entriesInFeed = 2
+    
+    let expectation = `{
+   "version" : "https://jsonfeed.org/version/1",
+   "title" : "memalign.github.io",
+   "home_page_url" : "https://memalign.github.io/index.html",
+   "feed_url" : "https://memalign.github.io/feed.json",
+   "author" : {
+      "url" : "https://twitter.com/memalign",
+      "name" : "memalign"
+   },
+   "icon" : "https://memalign.github.io/apple-touch-icon.png",
+   "favicon" : "https://memalign.github.io/favicon.ico",
+   "items" : [
+    {
+         "title" : "This title3",
+         "date_published" : "19-12-28T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/some-title3.html",
+         "url" : "https://memalign.github.io/p/some-title3.html",
+         "image" : "https://memalign.github.io/m/test3.jpg",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\"></img>\\n<div id='postdate'>Posted on 12/28/19</div>\\ntext3 text3"
+    },
+    {
+         "title" : "This title2",
+         "date_published" : "19-12-27T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/some-title2.html",
+         "url" : "https://memalign.github.io/p/some-title2.html",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title2.html'>This title2</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/27/19</div>\\ntext2 text2"
+    }
+  ]
+}
+`
+    assertTrue(jsonFeed.toText() == expectation, "json expectation")
+  }
+
+
+
 
 // Unit test harness
             
