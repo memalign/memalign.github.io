@@ -20,12 +20,6 @@ img {
   border: 0;
 }
 
-pre,
-code,
-a code {
-  color: #060;
-}
-
 h2 a,
 h3 a {
   color : #666;
@@ -74,7 +68,7 @@ td {
 #postdate {
   margin-top: 15px;
   margin-bottom: 15px;
-  color : #666;
+  color: #666;
 }
 
 #content,
@@ -89,11 +83,13 @@ td {
   line-height: 16pt;
 }
 
-#content pre {
-  line-height: 14pt;
-  margin: 17pt;
-  padding-left: 1em;
-  border-left: 1px solid #ccc;
+#code {
+  font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #EEE;
+  padding: 5px;
+  border-radius: 3px;
 }
 
 #footer {
