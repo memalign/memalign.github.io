@@ -238,3 +238,9 @@ For now, I found that using a regular div with this CSS is what I want:
 (This is very similar styling to what stackoverflow uses)
 
 Now, I need to add support for [Code][/Code] (or something similar) in my SiteGenerator. I need to make sure there are no leading linebreaks after the opening <div id='code'> to avoid an undesired empty line at the top of the code.
+
+
+Task list:
+
+- Support [Code] tag
+- Support [Link] tag
