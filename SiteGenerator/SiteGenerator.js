@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = true
+const UNIT_TEST = false
 
 
 // Utilities
@@ -217,6 +217,11 @@ class Index extends HTMLDocument {
     let c = 0
     for (let entry of this.entries) {
       if (c < this.entriesOnIndex) {
+        if (c > 0) {
+          // Add a visual separator between posts
+          str += "<hr />\n"
+        }
+        
         str += entry.htmlBody(entry.relativeURL())
         str += "\n"
       } else {
@@ -308,7 +313,15 @@ class Entry extends HTMLDocument {
     if (!result) {
       return null
     }
+    
+
+    // Strip tags for this simple page summary
     result = result.replace(/\[Image:([^\]]+)\]/g, "")
+    result = result.replace(/\[\/?Code\]/g, "")
+    result = result.replace(/\[Link:([^\]]+)\]/g, "")
+    result = result.replace(/\[\/Link\]/g, "")
+    
+    
     result = result.replace(/^\n+/, "")
     let origResult = result
     result = result.split(/[\s\n]+/).slice(0, 30).join(" ")
@@ -366,8 +379,23 @@ ${this.title}
     
     
     let htmlContents = this.contents
-    htmlContents = htmlContents.replace(/\n/g, "<br />\n")
+
+    // [Image] support
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
+    
+    // [Code] support
+    htmlContents = htmlContents.replace(/\[Code\]\n*/g, "<div id='code'>")
+    htmlContents = htmlContents.replace(/\n*\[\/Code\]/g, "</div>")
+    
+    // [Link] support
+    htmlContents = htmlContents.replace(/\[Link:([^\]]+)\]/g, '<a href="$1">')
+    htmlContents = htmlContents.replace(/\[\/Link\]/g, '</a>')
+
+    htmlContents = htmlContents.replace(/\n/g, "<br />\n")
+
+    
+//TODO: unit test [Code] and [Link] in ogDescription and htmlBody; for code: try with preceding and following line breaks
+    
 
     let postDateStr = "<div id='postdate'>Posted on " + this.dateString + "</div>\n"
     

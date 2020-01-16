@@ -3,9 +3,9 @@
 I created a user page in github!
 
 I found that I have to publish from the master branch and the root directory of the memalign.github.io project. I also found that an index.html file with just plaintext contents wouldn't get served for https://memalign.github.io
-(I figured this out by googling and finding:
-https://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266
-)
+
+( I figured this out by googling and finding:
+https://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266 )
 
 Testing editing the note from my iPad.
 
@@ -242,5 +242,22 @@ Now, I need to add support for [Code][/Code] (or something similar) in my SiteGe
 
 Task list:
 
-- Support [Code] tag
-- Support [Link] tag
+[x] - Support [Code] tag
+[x] - Support [Link] tag
+
+I hit a complication for the [Code] tag:
+My site generator replaces all line breaks with "<br />\n". 
+
+With pre-wrap behavior, I end up with double line breaks in the rendered HTML. I want the HTML to be readable so I want to keep the "\n"s. The site generator is doing simple regex string replacements so I can't easily leave out the <br />s just in [Code] blocks. I found that I can style br to not be displayed using CSS.
+
+https://stackoverflow.com/questions/17588953/how-to-disable-br-tags-inside-div-by-css/17589039
+https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
+
+
+Task list:
+
+[x] - Add a separator of some kind between entries on the home page
+- Implement unit tests for Code and Link
+
+Info to style separator:
+https://stackoverflow.com/questions/14821087/horizontal-line-and-right-way-to-code-it-in-html-css
