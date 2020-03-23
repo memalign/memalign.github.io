@@ -1,0 +1,5 @@
+- Backing everything up on SSDs, storing them in a fireproof folder, using rsync
+- JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
+- This cool website:
+    - https://helderman.github.io/htpataic/htpataic01.html
+    - (and its older version) http://home.hccnet.nl/r.helderman/adventures/htpataic01.html
