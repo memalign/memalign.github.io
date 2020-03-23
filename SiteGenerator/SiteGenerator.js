@@ -319,6 +319,7 @@ class Entry extends HTMLDocument {
     result = result.replace(/\[Image:([^\]]+)\]/g, "")
     result = result.replace(/\[\/?Code\]/g, "")
     result = result.replace(/\[Link:([^\]]+)\]/g, "")
+    result = result.replace(/\[Link\]([^\[]+)/g, '$1')
     result = result.replace(/\[\/Link\]/g, "")
     
     
@@ -389,12 +390,13 @@ ${this.title}
     
     // [Link] support
     htmlContents = htmlContents.replace(/\[Link:([^\]]+)\]/g, '<a href="$1">')
+    htmlContents = htmlContents.replace(/\[Link\]([^\[]+)/g, '<a href="$1">$1')
     htmlContents = htmlContents.replace(/\[\/Link\]/g, '</a>')
 
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
 
     
-//TODO: unit test [Code] and [Link] in ogDescription and htmlBody; for code: try with preceding and following line breaks
+//TODO: unit test [Code] in ogDescription and htmlBody; Try with preceding and following line breaks
     
 
     let postDateStr = "<div id='postdate'>Posted on " + this.dateString + "</div>\n"
@@ -777,6 +779,7 @@ class UnitTests {
 <img src="/m/test3.jpg"></img>
 <div id='postdate'>Posted on 12/28/2019</div>
 text3 text3
+<hr />
 
 <div id='header'>
 <h2>
@@ -794,6 +797,7 @@ More posts:<br />
 </body>
 </html>
 `
+
     assertTrue(index.toHTML() == expectation, "index html")
   }
 
@@ -849,6 +853,24 @@ More posts:<br />
     
     assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>"), "Has img tag")
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
+  }
+
+  test_htmlBody_linkRewriting() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<a href=\"/m/test.jpg\">here</a>"), "Has a href tag")
+    assertTrue(!htmlBody.includes("[Link"), "Lacks link brackets")
+    assertTrue(!htmlBody.includes("Link]"), "Lacks closing link brackets")
+  }
+
+  test_htmlBody_linkRewriting_noInnerText() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link]/m/test.jpg[/Link]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<a href=\"/m/test.jpg\">/m/test.jpg</a>"), "Has a href tag")
+    assertTrue(!htmlBody.includes("[Link"), "Lacks link brackets")
+    assertTrue(!htmlBody.includes("Link]"), "Lacks closing link brackets")
   }
 
   test_htmlBody_title_withTitleURL() {
@@ -1013,6 +1035,17 @@ test text
     
     let entryJustImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]")
     assertTrue(entryJustImage.ogDescription() == "", "empty desc")
+    
+    
+    let entryWithLink1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    
+    let expectationLink1 = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
+    assertTrue(entryWithLink1.ogDescription() == expectationLink1, "ogDescription link1")
+
+    let entryWithLink2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link]/m/test.jpg[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    
+    let expectationLink2 = "/m/test.jpg one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
+    assertTrue(entryWithLink2.ogDescription() == expectationLink2, "ogDescription link2")
   }
   
   test_Entry_ogImage() {
