@@ -1,0 +1,56 @@
+Title: RSS and Feedly
+Date: 3/22/2020
+
+[Image:/m/feedly.jpg]
+
+I like to read news feeds to learn, find entertainment, and stay up-to-date on various topics.
+
+RSS feeds and Atom feeds are a great way to subscribe to news feeds. I used to use Google Reader and, after that service shut down, I moved to Feedly.
+
+Feedly is really cool! Especially for developers.
+
+Over winter break in 2019, I decided to build an app for myself to read news feeds (mainly so I could write smart filters to remove uninteresting entries). I did some cursory research into Feedly's developer support and I was pleasantly surprised by how easy the Feedly API is to adopt! Even though every website's RSS or Atom feed can have weird quirks, Feedly solves all of those problems for us. It's straightforward and quick to use the Feedly API to build a simple RSS reader.
+
+
+Here's how I adopted the Feedly API (and how you can too):
+
+1. Become a Feedly user. Create an account using their website or app.
+
+2. Subscribe to some RSS feeds using their app
+
+3. Decide to build a custom news reader app to read these feeds
+
+4. Look at their developer documentation with an eye toward ease of adoption and whether all needed functionality exists
+    - Documentation is found here: [Link]https://developer.feedly.com/[/Link]
+
+5. Note the primitives needed to build an app:
+    - Get a list of news feeds with unread entries: [Link]https://developer.feedly.com/v3/markers/[/Link]
+    - Get information about a feed (I use this to get its icon): [Link]https://developer.feedly.com/v3/collections/[/Link]
+    - Get a list of news entries (including their content) for a given feed: [Link]https://developer.feedly.com/v3/streams/[/Link]
+
+6. Get access to their API. It's easy to start prototyping for your own use with a developer access token: [Link]https://developer.feedly.com/v3/developer/[/Link]
+    - Your developer access token can then be included in HTTP requests instead of a real OAuth token.
+
+7. Use [Link:https://en.wikipedia.org/wiki/CURL]curl[/Link] to quickly prove that the developer access token works and the APIs return expected results
+    - Here's an example command:
+[Code]
+curl -H 'Authorization: OAuth YOUR_DEV_TOKEN' https://cloud.feedly.com/v3/markers/counts
+[/Code]
+
+8. Think about how to organize your code into classes. Some useful classes might be: FeedlyDataSource, NewsFeed, NewsEntry.
+
+9. Use your platform's built-in APIs for making HTTP requests, parsing JSON, displaying a list of NewsEntrys to the user.
+
+10. As you build your app, add unit tests for parsing responses. One tip: save some curl results to files and inject those files into tests so your tests can work offline. Save to file like this:
+[Code]
+curl -H 'Authorization: OAuth YOUR_DEV_TOKEN' https://cloud.feedly.com/v3/markers/counts > /path/to/test_data_files/markersCountsResponse.txt
+[/Code]
+
+
+If you need any help, please @ me on [Link:http://twitter.com/memalign]Twitter[/Link].
+
+
+Bonus:
+
+- You can subscribe to YouTube channels in Feedly
+- I like to subscribe to HackerNews in Feedly instead of reading it on the website: [Link]https://news.ycombinator.com/rss[/Link]

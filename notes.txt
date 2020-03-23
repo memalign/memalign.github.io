@@ -261,3 +261,11 @@ Task list:
 
 Info to style separator:
 https://stackoverflow.com/questions/14821087/horizontal-line-and-right-way-to-code-it-in-html-css
+
+
+3/22/20
+
+Task list:
+
+- Implement unit tests for Code
+[x] - Unit test both types of Link at the beginning of the post: impact on ogDescription
