@@ -1,0 +1,36 @@
+Title: How to Program a Text Adventure
+Date: 3/25/2020
+
+[Image:/m/text-adventure.jpg]
+
+Text adventures, also known as [Link:https://en.wikipedia.org/wiki/Interactive_fiction]interactive fiction[/Link], are fun text-only computer games that give me a lot of nostalgia.
+
+I recently read a cool website that shows how to incrementally write your own text adventure:
+
+[Link]https://helderman.github.io/htpataic/htpataic01.html[/Link]
+
+(An older version can be found here: [Link]http://home.hccnet.nl/r.helderman/adventures/htpataic01.html[/Link])
+
+
+I like this website because:
+
+- It's written simply and clearly
+
+- It exposes the reader to a bunch of useful concepts in a practical context
+    - Text adventures
+    - C programming
+    - Simple data structures
+    - Text parsing
+    - AWK and Domain-specific languages
+    - make files
+    - Generating a graph using Graphviz
+    - Automated testing
+
+- It serves as a launching point for learning these topics in depth
+
+- It demonstrates how to incrementally build a more complicated program from a simple one that works
+
+- The subject is fun
+
+
+This tutorial can serve as a great example for other types of online textbooks.
