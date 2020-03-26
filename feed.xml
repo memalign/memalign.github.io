@@ -5,10 +5,64 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2020-3-22T00:00:00-08:00</updated>
+<updated>2020-3-25T00:00:00-08:00</updated>
 <rights>Copyright © 2020, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>How to Program a Text Adventure</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/text-adventure.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/text-adventure.html" />
+<id>https://memalign.github.io/p/text-adventure.html</id>
+<published>2020-3-25T00:00:00-08:00</published>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/text-adventure.html'>How to Program a Text Adventure</a>
+</h2>
+</div>
+<img src="/m/text-adventure.jpg"></img>
+<div id='postdate'>Posted on 3/25/2020</div>
+Text adventures, also known as <a href="https://en.wikipedia.org/wiki/Interactive_fiction">interactive fiction</a>, are fun text-only computer games that give me a lot of nostalgia.<br />
+<br />
+I recently read a cool website that shows how to incrementally write your own text adventure:<br />
+<br />
+<a href="https://helderman.github.io/htpataic/htpataic01.html">https://helderman.github.io/htpataic/htpataic01.html</a><br />
+<br />
+(An older version can be found here: <a href="http://home.hccnet.nl/r.helderman/adventures/htpataic01.html">http://home.hccnet.nl/r.helderman/adventures/htpataic01.html</a>)<br />
+<br />
+<br />
+I like this website because:<br />
+<br />
+- It's written simply and clearly<br />
+<br />
+- It exposes the reader to a bunch of useful concepts in a practical context<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Text adventures<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- C programming<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Simple data structures<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Text parsing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- AWK and Domain-specific languages<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- make files<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Generating a graph using Graphviz<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Automated testing<br />
+<br />
+- It serves as a launching point for learning these topics in depth<br />
+<br />
+- It demonstrates how to incrementally build a more complicated program from a simple one that works<br />
+<br />
+- The subject is fun<br />
+<br />
+<br />
+This tutorial can serve as a great example for other types of online textbooks.
+]]>
+</content>
+</entry>
+,
 <entry>
 <title>RSS and Feedly</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/feedly.html" />
@@ -46,18 +100,18 @@ Here's how I adopted the Feedly API (and how you can too):<br />
 3. Decide to build a custom news reader app to read these feeds<br />
 <br />
 4. Look at their developer documentation with an eye toward ease of adoption and whether all needed functionality exists<br />
-    - Documentation is found here: <a href="https://developer.feedly.com/">https://developer.feedly.com/</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Documentation is found here: <a href="https://developer.feedly.com/">https://developer.feedly.com/</a><br />
 <br />
 5. Note the primitives needed to build an app:<br />
-    - Get a list of news feeds with unread entries: <a href="https://developer.feedly.com/v3/markers/">https://developer.feedly.com/v3/markers/</a><br />
-    - Get information about a feed (I use this to get its icon): <a href="https://developer.feedly.com/v3/collections/">https://developer.feedly.com/v3/collections/</a><br />
-    - Get a list of news entries (including their content) for a given feed: <a href="https://developer.feedly.com/v3/streams/">https://developer.feedly.com/v3/streams/</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Get a list of news feeds with unread entries: <a href="https://developer.feedly.com/v3/markers/">https://developer.feedly.com/v3/markers/</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Get information about a feed (I use this to get its icon): <a href="https://developer.feedly.com/v3/collections/">https://developer.feedly.com/v3/collections/</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Get a list of news entries (including their content) for a given feed: <a href="https://developer.feedly.com/v3/streams/">https://developer.feedly.com/v3/streams/</a><br />
 <br />
 6. Get access to their API. It's easy to start prototyping for your own use with a developer access token: <a href="https://developer.feedly.com/v3/developer/">https://developer.feedly.com/v3/developer/</a><br />
-    - Your developer access token can then be included in HTTP requests instead of a real OAuth token.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Your developer access token can then be included in HTTP requests instead of a real OAuth token.<br />
 <br />
 7. Use <a href="https://en.wikipedia.org/wiki/CURL">curl</a> to quickly prove that the developer access token works and the APIs return expected results<br />
-    - Here's an example command:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Here's an example command:<br />
 <div id='code'>curl -H 'Authorization: OAuth YOUR_DEV_TOKEN' https://cloud.feedly.com/v3/markers/counts</div>
 8. Think about how to organize your code into classes. Some useful classes might be: FeedlyDataSource, NewsFeed, NewsEntry.<br />
 <br />

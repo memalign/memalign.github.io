@@ -44,18 +44,18 @@ Here's how I adopted the Feedly API (and how you can too):<br />
 3. Decide to build a custom news reader app to read these feeds<br />
 <br />
 4. Look at their developer documentation with an eye toward ease of adoption and whether all needed functionality exists<br />
-    - Documentation is found here: <a href="https://developer.feedly.com/">https://developer.feedly.com/</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Documentation is found here: <a href="https://developer.feedly.com/">https://developer.feedly.com/</a><br />
 <br />
 5. Note the primitives needed to build an app:<br />
-    - Get a list of news feeds with unread entries: <a href="https://developer.feedly.com/v3/markers/">https://developer.feedly.com/v3/markers/</a><br />
-    - Get information about a feed (I use this to get its icon): <a href="https://developer.feedly.com/v3/collections/">https://developer.feedly.com/v3/collections/</a><br />
-    - Get a list of news entries (including their content) for a given feed: <a href="https://developer.feedly.com/v3/streams/">https://developer.feedly.com/v3/streams/</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Get a list of news feeds with unread entries: <a href="https://developer.feedly.com/v3/markers/">https://developer.feedly.com/v3/markers/</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Get information about a feed (I use this to get its icon): <a href="https://developer.feedly.com/v3/collections/">https://developer.feedly.com/v3/collections/</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Get a list of news entries (including their content) for a given feed: <a href="https://developer.feedly.com/v3/streams/">https://developer.feedly.com/v3/streams/</a><br />
 <br />
 6. Get access to their API. It's easy to start prototyping for your own use with a developer access token: <a href="https://developer.feedly.com/v3/developer/">https://developer.feedly.com/v3/developer/</a><br />
-    - Your developer access token can then be included in HTTP requests instead of a real OAuth token.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Your developer access token can then be included in HTTP requests instead of a real OAuth token.<br />
 <br />
 7. Use <a href="https://en.wikipedia.org/wiki/CURL">curl</a> to quickly prove that the developer access token works and the APIs return expected results<br />
-    - Here's an example command:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Here's an example command:<br />
 <div id='code'>curl -H 'Authorization: OAuth YOUR_DEV_TOKEN' https://cloud.feedly.com/v3/markers/counts</div>
 8. Think about how to organize your code into classes. Some useful classes might be: FeedlyDataSource, NewsFeed, NewsEntry.<br />
 <br />

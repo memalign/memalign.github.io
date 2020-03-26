@@ -392,6 +392,9 @@ ${this.title}
     htmlContents = htmlContents.replace(/\[Link:([^\]]+)\]/g, '<a href="$1">')
     htmlContents = htmlContents.replace(/\[Link\]([^\[]+)/g, '<a href="$1">$1')
     htmlContents = htmlContents.replace(/\[\/Link\]/g, '</a>')
+    
+    // Indentation support
+    htmlContents = htmlContents.replace(/^( +)/gm, (match) => '&nbsp;'.repeat(match.length))
 
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
 
@@ -1007,6 +1010,13 @@ test text
     
     // This behavior isn't good. I'm writing this test to document the existing limitation. We probably want the postdate to follow all leading images in a post instead.
     assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>\n<div id='postdate'>Posted on 12/26/2019</div>\n<img src=\"/m/test2.jpg\"></img>"), "Date follows first image")
+  }
+  
+  test_htmlBody_indentation() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text\n one\n  two\n   three\n    - Four")
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("test text<br />\n&nbsp;one<br />\n&nbsp;&nbsp;two<br />\n&nbsp;&nbsp;&nbsp;three<br />\n&nbsp;&nbsp;&nbsp;&nbsp;- Four"), "indentation")
   }
   
   test_ogDescription() {
