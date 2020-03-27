@@ -1,0 +1,14 @@
+Title: Personal Projects
+Date: 3/26/2020
+
+[Image:/m/sitegenerator.jpg]
+
+I used to get in my own head about personal projects.
+
+I didn't want to waste time working on something that wouldn't have a big impact on other people or wouldn't make money.
+
+I eventually worked on a tool for myself, mostly just for fun, and I realized that my hobbies don't need to be productive or impactful. An enjoyable hobby is a fulfilling part of life.
+
+This website is a hobby that I think will be fun yet not impactful. Maybe somebody will see a post some day and think, "that's neat". That's more than enough for me :)
+
+(Programming the [Link:https://github.com/memalign/memalign.github.io/blob/master/SiteGenerator/SiteGenerator.js]site generator[/Link] has already been lots of fun)

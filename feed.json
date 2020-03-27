@@ -11,6 +11,17 @@
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
     {
+         "title" : "Personal Projects",
+         "date_published" : "2020-3-26T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/personal-projects.html",
+         "url" : "https://memalign.github.io/p/personal-projects.html",
+         "image" : "https://memalign.github.io/m/sitegenerator.jpg",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\n<div id='header'>\n<h2>\n<a href='https://memalign.github.io/p/personal-projects.html'>Personal Projects</a>\n</h2>\n</div>\n<img src=\"/m/sitegenerator.jpg\"></img>\n<div id='postdate'>Posted on 3/26/2020</div>\nI used to get in my own head about personal projects.<br />\n<br />\nI didn't want to waste time working on something that wouldn't have a big impact on other people or wouldn't make money.<br />\n<br />\nI eventually worked on a tool for myself, mostly just for fun, and I realized that my hobbies don't need to be productive or impactful. An enjoyable hobby is a fulfilling part of life.<br />\n<br />\nThis website is a hobby that I think will be fun yet not impactful. Maybe somebody will see a post some day and think, \"that's neat\". That's more than enough for me :)<br />\n<br />\n(Programming the <a href=\"https://github.com/memalign/memalign.github.io/blob/master/SiteGenerator/SiteGenerator.js\">site generator</a> has already been lots of fun)"
+    },
+    {
          "title" : "How to Program a Text Adventure",
          "date_published" : "2020-3-25T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/text-adventure.html",
