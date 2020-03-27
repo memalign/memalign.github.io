@@ -9,7 +9,7 @@ I recently read a cool website that shows how to incrementally write your own te
 
 [Link]https://helderman.github.io/htpataic/htpataic01.html[/Link]
 
-(An older version can be found here: [Link]http://home.hccnet.nl/r.helderman/adventures/htpataic01.html[/Link])
+(An older version can be found [Link:http://home.hccnet.nl/r.helderman/adventures/htpataic01.html]here[/Link])
 
 
 I like this website because:
