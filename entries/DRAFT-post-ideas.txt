@@ -2,3 +2,4 @@
 - JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
 - Vision framework
 - Download articles and books into your brain with TTS
+- notes.txt

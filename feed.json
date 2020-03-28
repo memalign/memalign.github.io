@@ -11,6 +11,17 @@
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
     {
+         "title" : "Source Control",
+         "date_published" : "2020-3-27T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/source-control.html",
+         "url" : "https://memalign.github.io/p/source-control.html",
+         "image" : "https://memalign.github.io/m/2560px-Git-logo-black.svg.png",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\n<div id='header'>\n<h2>\n<a href='https://memalign.github.io/p/source-control.html'>Source Control</a>\n</h2>\n</div>\n<img src=\"/m/2560px-Git-logo-black.svg.png\"></img>\n<div id='postdate'>Posted on 3/27/2020</div>\nIt's smart to have backups of important information. The best way to have backups for programming projects is <a href=\"https://en.wikipedia.org/wiki/Version_control\">source control</a>.<br />\n<br />\nI've used source control (<a href=\"https://en.wikipedia.org/wiki/Git\">git</a>, specifically) for personal programming projects, professional software development, journals, and websites. It works well for anything text-based.<br />\n<br />\nSource control is super useful because it tracks incremental history of changes. That makes it easy to hone in on when a change (good or bad) was made with some context of why. That's useful when tracking down a nasty bug! It's also useful when researching why specific design decisions were made.<br />\n<br />\n<br />\nSome helpful options to get started with source control:<br />\n<br />\n- Use <a href=\"https://github.com\">https://github.com</a> to create and host repositories for free<br />\n<br />\n- Another free option is <a href=\"https://bitbucket.org/product\">Bitbucket</a><br />\n<br />\n- Create your own local git repository that lives directly on your computer. Learn more <a href=\"https://git-scm.com/book/en/v2/Appendix-C%3A-Git-Commands-Getting-and-Creating-Projects\">here</a>.<br />\n<br />\n<br />\nBecause code can often be reused, I recommend using git for nearly all the code you ever write. It's even useful to have a git repository that's just for small utilities or toying around. Use a local git repository if you want to keep it private.<br />\n<br />\nYou can find my own public GitHub repositories <a href=\"https://github.com/memalign/\">here</a>."
+    },
+    {
          "title" : "Personal Projects",
          "date_published" : "2020-3-26T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/personal-projects.html",

@@ -1,0 +1,24 @@
+Title: Source Control
+Date: 3/27/2020
+
+[Image:/m/2560px-Git-logo-black.svg.png]
+
+It's smart to have backups of important information. The best way to have backups for programming projects is [Link:https://en.wikipedia.org/wiki/Version_control]source control[/Link].
+
+I've used source control ([Link:https://en.wikipedia.org/wiki/Git]git[/Link], specifically) for personal programming projects, professional software development, journals, and websites. It works well for anything text-based.
+
+Source control is super useful because it tracks incremental history of changes. That makes it easy to hone in on when a change (good or bad) was made with some context of why. That's useful when tracking down a nasty bug! It's also useful when researching why specific design decisions were made.
+
+
+Some helpful options to get started with source control:
+
+- Use [Link]https://github.com[/Link] to create and host repositories for free
+
+- Another free option is [Link:https://bitbucket.org/product]Bitbucket[/Link]
+
+- Create your own local git repository that lives directly on your computer. Learn more [Link:https://git-scm.com/book/en/v2/Appendix-C%3A-Git-Commands-Getting-and-Creating-Projects]here[/Link].
+
+
+Because code can often be reused, I recommend using git for nearly all the code you ever write. It's even useful to have a git repository that's just for small utilities or toying around. Use a local git repository if you want to keep it private.
+
+You can find my own public GitHub repositories [Link:https://github.com/memalign/]here[/Link].
