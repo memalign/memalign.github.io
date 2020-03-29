@@ -5,10 +5,605 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2020-3-27T00:00:00-08:00</updated>
+<updated>2020-3-28T00:00:00-08:00</updated>
 <rights>Copyright © 2020, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Download Text Into Your Brain</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/tts-download-into-brain.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/tts-download-into-brain.html" />
+<id>https://memalign.github.io/p/tts-download-into-brain.html</id>
+<published>2020-3-28T00:00:00-08:00</published>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/tts-download-into-brain.html'>Download Text Into Your Brain</a>
+</h2>
+</div>
+<img src="/m/matrix-kung-fu.jpg"></img>
+<div id='postdate'>Posted on 3/28/2020</div>
+In the internet age, there's so much interesting information to absorb: academic papers, blog posts, articles, books, reddit posts, text messages, emails, etc.<br />
+<br />
+A lot of this content is in text form so I'm reading all the time.<br />
+<br />
+A while ago, I discovered that the iPhone has a built-in <a href="https://en.wikipedia.org/wiki/Speech_synthesis">text-to-speech (TTS)</a> accessibility feature that can speak text the user highlights. At the time of writing, you can turn this on in Settings->Accessibility->Spoken Content->Speak Selection. This will cause a Speak button to appear when you select text. You can crank up the speed of the speech too.<br />
+<br />
+I started using this feature to listen to paragraphs while doing things that occupy eyes and hands: driving, washing dishes, exercising. I quickly got used to listening to this sped up Siri voice.<br />
+<br />
+I was blown away by how much more quickly I could read this way. When I'm reading with my eyes, I'll often get temporarily stuck trying to understand specific wording or fine details. I realized that this is unnecessarily slowing me down. When listening, I'm forced to keep a quick and steady pace. For wording I would've gotten stuck on, I either figure it out from context or move on.<br />
+<br />
+Using this technique feels like downloading information directly into your brain.<br />
+<br />
+Manually selecting text can become onerous so I've built some tools that help me more easily read websites and eBooks this way.<br />
+<br />
+I'm using a combination of the <a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts app</a> and the <a href="https://apps.apple.com/us/app/scriptable/id1405459188">Scriptable app</a>.<br />
+<br />
+The Shortcuts app provides easy ways to access system functionality, including speaking text and getting text from a website.<br />
+<br />
+Scriptable lets the user write programs in JavaScript that call into iOS APIs and make use of Shortcuts.<br />
+<br />
+<br />
+To use these yourself:<br />
+<br />
+1. Install the apps<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://apps.apple.com/us/app/scriptable/id1405459188">Scriptable</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+2. Install/recreate these Shortcuts:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://www.icloud.com/shortcuts/992821652da741e2a3993a2dce37f4b2">Get Website Text</a><br />
+<img src="/m/get-website-text.png"></img><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://www.icloud.com/shortcuts/a3f88b742ada4a9f835e8a734bdfb907">SpeakText</a><br />
+<img src="/m/speaktext.png"></img><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://www.icloud.com/shortcuts/80a6e542803448329e110094bfee2146">Dictate</a><br />
+<img src="/m/dictate.png"></img><br />
+<br />
+3. In Scriptable, create a new script called Speak Web Content. Paste in this code:<br />
+<br />
+<div id='code'>// Made by @memalign - 1/1/19<br />
+// Copyright 2019<br />
+// Run from a share sheet to speak shared text<br />
+// I call over to a shortcut because the Speech support in Scriptable doesn&#039;t let me configure the speaking speed<br />
+// Needs to be run in the app (instead of in the extension) so x-callback-url works<br />
+<br />
+<br />
+// let urls = [ &quot;https://support.apple.com/guide/shortcuts/use-x-callback-url-apdcd7f20a6f/ios&quot; ]<br />
+let urls = args.urls<br />
+<br />
+<br />
+for (url of urls) {<br />
+&nbsp;&nbsp;console.log(url)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;// Without this alert, Scriptable got confused and would abort when the callback URL returned focus to Scriptable from Shortcuts<br />
+&nbsp;&nbsp;let alert = new Alert()<br />
+&nbsp;&nbsp;alert.title = &quot;Speak Web Content&quot;<br />
+&nbsp;&nbsp;alert.message = &quot;Speak content for &quot; + url + &quot; ?&quot;<br />
+&nbsp;&nbsp;alert.addAction(&quot;Speak it!&quot;)<br />
+&nbsp;&nbsp;alert.addAction(&quot;Cancel&quot;)<br />
+&nbsp;&nbsp;if (await alert.present() == 1) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;// Get Website Text: https://www.icloud.com/shortcuts/992821652da741e2a3993a2dce37f4b2<br />
+&nbsp;&nbsp;let callbackURL = new CallbackURL(&quot;shortcuts://x-callback-url/run-shortcut&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;name&quot;, &quot;Get Website Text&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;input&quot;, &quot;text&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;text&quot;, url)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;console.log(&quot;callbackurl: &quot; + callbackURL.getURL())<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let result = await callbackURL.open()<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;console.log(&quot;result: &quot; + result.result)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;await showWebViewWithText(result.result)<br />
+&nbsp;&nbsp;<br />
+}<br />
+<br />
+<br />
+async function showWebViewWithText(text) {<br />
+&nbsp;&nbsp;let webView = new WebView()<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let html = &quot;&lt;table&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let lines = text.split(&quot;\n&quot;)<br />
+&nbsp;&nbsp;let count = 0<br />
+&nbsp;&nbsp;for (line of lines) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;tr&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;td&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;input type=&#039;checkbox&#039; id=&#039;line&quot;+count+&quot;&#039; value=&#039;&quot;+htmlEncode(line)+&quot;&#039; checked&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;td&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;input type=&#039;button&#039; value=&#039;uncheck above&#039; onclick=&#039;uncheckAbove(&quot;+count+&quot;)&#039;&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;br /&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;input type=&#039;button&#039; value=&#039;uncheck below&#039; onclick=&#039;uncheckBelow(&quot;+count+&quot;)&#039;&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;td&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += htmlEncode(line)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;/tr&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;count++<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;/table&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += `<br />
+&nbsp;&nbsp;&lt;script&gt;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;document.body.style.zoom = 4.0<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;function uncheckAbove(index) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for (let i = 0; i &lt;= index; i++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&quot;line&quot;+i).checked = false;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;function uncheckBelow(index) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for (let i = index; i &lt; ${count}; i++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&quot;line&quot;+i).checked = false;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;function getSelectedText() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let text = &quot;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for (let i = 0; i &lt; ${count}; i++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let checkbox = document.getElementById(&quot;line&quot;+i)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (checkbox.checked) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text += &quot;\\n&quot; + checkbox.value<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return text<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&lt;/script&gt;<br />
+&nbsp;&nbsp;`<br />
+&nbsp;&nbsp;<br />
+<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;await webView.loadHTML(html)<br />
+&nbsp;&nbsp;await webView.present()<br />
+&nbsp;&nbsp;let selectedText = await webView.evaluateJavaScript(&quot;getSelectedText()&quot;)<br />
+&nbsp;&nbsp;console.log(&quot;selected text:\n&quot; + selectedText)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;speakText(selectedText)<br />
+}<br />
+<br />
+<br />
+function speakText(text) {<br />
+&nbsp;&nbsp;// SpeakText: https://www.icloud.com/shortcuts/a3f88b742ada4a9f835e8a734bdfb907<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let callbackURL = new CallbackURL(&quot;shortcuts://x-callback-url/run-shortcut&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;name&quot;, &quot;SpeakText&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;input&quot;, &quot;text&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;text&quot;, text)<br />
+&nbsp;&nbsp;console.log(&quot;callbackurl: &quot; + callbackURL.getURL())<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;callbackURL.open()<br />
+}<br />
+<br />
+// HTML encoding utilities<br />
+// Main logic from https://ourcodeworld.com/articles/read/188/encode-and-decode-html-entities-using-pure-javascript<br />
+<br />
+function htmlEncode(str) {<br />
+&nbsp;&nbsp;var buf = [];<br />
+			<br />
+&nbsp;&nbsp;for (var i=str.length-1;i&gt;=0;i--) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;buf.unshift([&#039;&amp;#&#039;, str[i].charCodeAt(), &#039;;&#039;].join(&#039;&#039;));<br />
+&nbsp;&nbsp;}<br />
+			<br />
+&nbsp;&nbsp;return buf.join(&#039;&#039;);<br />
+}<br />
+<br />
+function htmlDecode(str) {<br />
+&nbsp;&nbsp;return str.replace(/&amp;#(\d+);/g, function(match, dec) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return String.fromCharCode(dec);<br />
+&nbsp;&nbsp;});<br />
+}</div>
+4. Configure the script settings:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Always Run in App = on<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Share Sheet Inputs = URLs<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+5. To use this script:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- View a website in Safari<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Tap the Share button<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Tap "Run Script"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Tap "Speak Web Content"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Accept prompts asking for permission<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Uncheck any text that you don't want the script to read. Usually an article is in the middle of a webpage so it's useful to uncheck the top portion and bottom portion of a webpage which include menus, ads, user comments, or related article links.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Tap Close<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- The content will now be spoken!<br />
+<br />
+6. In Scriptable, create a new script called Read eBook. Paste in this code:<br />
+<br />
+<div id='code'>// Made by @memalign - 1/1/19<br />
+// Copyright 2019<br />
+<br />
+// First, convert eBook to text using http://www.convertfiles.com/convert/ebook/EPUB-to-TXT.html<br />
+// Then, using Files, save the result to Scriptable&#039;s space<br />
+<br />
+<br />
+let fm = FileManager.iCloud()<br />
+<br />
+let fullBookPath = fm.documentsDirectory() + &quot;/your-book-filename.txt&quot;<br />
+<br />
+<br />
+// File format:<br />
+// currentLineNumber\n   - integer, offset into full book<br />
+let inProgressPath = fullBookPath + &quot;.inProgress.txt&quot;<br />
+<br />
+fm.downloadFileFromiCloud(inProgressPath)<br />
+if (!fm.fileExists(inProgressPath)) {<br />
+&nbsp;&nbsp;console.log(&quot;Creating in progress copy&quot;)<br />
+&nbsp;&nbsp;fm.writeString(inProgressPath, &quot;0\n&quot;)<br />
+}<br />
+<br />
+<br />
+let lines = fm.readString(fullBookPath).split(&quot;\n&quot;)<br />
+let lineOffset = 0<br />
+<br />
+let fullBookLineCount = lines.length<br />
+<br />
+const DEFAULT_APPROX_WORDS_PER_CHUNK = 1200<br />
+<br />
+let wordsPerChunk = DEFAULT_APPROX_WORDS_PER_CHUNK<br />
+<br />
+let handsFreeMode = false<br />
+<br />
+do {<br />
+<br />
+&nbsp;&nbsp;let progress = fm.readString(inProgressPath)<br />
+&nbsp;&nbsp;if (!progress) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lineOffset = parseInt((progress.split(&quot;\n&quot;))[0])<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;// Pick enough lines to have enough words<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let lineCount = findNumLinesToAchieveWordCount(lines, lineOffset, wordsPerChunk)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;console.log(&quot;Showing chunk of &quot; + lineCount + &quot; lines with &quot; + (lines.length-lineCount) + &quot; remaining&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let chunkStr = stringForNumLines(lines, lineOffset, lineCount)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;// console.log(chunkStr)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let action = &quot;read&quot;<br />
+<br />
+<br />
+&nbsp;&nbsp;if (handsFreeMode) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let voiceCommand = await getDictatedText()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let shouldStop = voiceCommand.match(/stop/i)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (shouldStop) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action = &quot;stop&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let actionAndWPC = await showWebViewWithText(chunkStr, lineOffset, fullBookLineCount, wordsPerChunk)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;action = actionAndWPC[0]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;wordsPerChunk = actionAndWPC[1]<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;if (action === &quot;stop&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;if (action === &quot;start over&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let alert = new Alert()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;alert.title = &quot;Start Over&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;alert.message = &quot;Are you sure you want to forget all progress? This cannot be undone.&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;alert.addDestructiveAction(&quot;Start Over&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;alert.addAction(&quot;Cancel&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (await alert.present() == 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(&quot;Starting over!&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fm.remove(inProgressPath)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;if (action === &quot;hands free&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;action = &quot;read&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;handsFreeMode = true<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;if (action === &quot;read&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;await speakText(chunkStr)<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;if (action === &quot;previous&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lineOffset -= findNumLinesToGoBack(lines, lineOffset, wordsPerChunk)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lineCount = 0<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;updateInProgressFile(lineOffset+lineCount, fullBookLineCount, inProgressPath)<br />
+<br />
+} while (true)<br />
+<br />
+<br />
+<br />
+function updateInProgressFile(newLineOffset, fullBookLineCount, inProgressPath) {<br />
+&nbsp;&nbsp;if (newLineOffset &gt;= fullBookLineCount) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(&quot;No more lines remain!&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;fm.remove(inProgressPath)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;// Write to a temp file<br />
+&nbsp;&nbsp;let tempFile = fm.documentsDirectory() + &quot;/temp-book.txt&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;fm.writeString(tempFile, newLineOffset+&quot;\n&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;console.log(&quot;Replacing &quot; + inProgressPath)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;// Move the temp file to final path<br />
+&nbsp;&nbsp;fm.remove(inProgressPath) // seems to be required since move errors if the destination file exists (contradicting the docs)<br />
+&nbsp;&nbsp;fm.move(tempFile, inProgressPath)<br />
+}<br />
+<br />
+async function showWebViewWithText(text, lineOffset, totalLineCount, wordsPerChunk) {<br />
+&nbsp;&nbsp;let webView = new WebView()<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let html = &quot;&lt;html&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;body&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += `<br />
+&nbsp;&nbsp;&lt;script&gt;<br />
+&nbsp;&nbsp;document.body.style.zoom = 4.0<br />
+&nbsp;&nbsp;&lt;/script&gt;<br />
+&nbsp;&nbsp;`<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;center&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;table&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;tr&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;td&gt;&lt;input type=&#039;button&#039; value=&#039;stop&#039; onclick=&#039;setAction(\&quot;stop\&quot;)&#039;&gt;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;td&gt;&lt;input type=&#039;button&#039; value=&#039;skip&#039; onclick=&#039;setAction(\&quot;skip\&quot;)&#039;&gt;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;td&gt;&lt;input type=&#039;button&#039; value=&#039;read&#039; onclick=&#039;setAction(\&quot;read\&quot;)&#039;&gt;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;td&gt;&lt;input type=&#039;button&#039; value=&#039;hands free&#039; onclick=&#039;setAction(\&quot;hands free\&quot;)&#039;&gt;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;/tr&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;/table&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;table&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;tr&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;td&gt;&lt;input type=&#039;text&#039; size=&#039;5&#039; style=&#039;text-align:center;&#039; id=&#039;desiredAction&#039; value=&#039;read&#039;&gt;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;td&gt;&lt;input type=&#039;text&#039; size=&#039;5&#039; style=&#039;text-align:center;&#039; id=&#039;wordsPerChunk&#039; value=&#039;&quot;+wordsPerChunk+&quot;&#039;&gt; words&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;/tr&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;/table&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;br /&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let linesRead = lineOffset<br />
+&nbsp;&nbsp;html += &quot;Progress: &quot; + linesRead + &quot;/&quot; + totalLineCount + &quot; = &quot; + (100*linesRead/totalLineCount).toFixed(1) + &quot;%&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;/center&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;table&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let lines = text.split(&quot;\n&quot;)<br />
+&nbsp;&nbsp;let count = 0<br />
+&nbsp;&nbsp;for (line of lines) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;tr&gt;&quot;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;td&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += htmlEncode(line)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;/tr&gt;&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;count++<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;/table&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;br /&gt;&lt;br /&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;center&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;table&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;tr&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;td&gt;&lt;input type=&#039;button&#039; value=&#039;previous&#039; onclick=&#039;setAction(\&quot;previous\&quot;)&#039;&gt;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;td&gt;&lt;input type=&#039;button&#039; value=&#039;start over&#039; onclick=&#039;setAction(\&quot;start over\&quot;)&#039;&gt;&lt;/td&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;/tr&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;/table&gt;&quot;<br />
+&nbsp;&nbsp;html += &quot;&lt;/center&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += `<br />
+&nbsp;&nbsp;&lt;script&gt;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;function setAction(str) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&quot;desiredAction&quot;).value = str<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;function getDesiredAction() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let actionInput = document.getElementById(&quot;desiredAction&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return actionInput.value<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;function getWordsPerChunk() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let wpcInput = document.getElementById(&quot;wordsPerChunk&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return wpcInput.value<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&lt;/script&gt;<br />
+&nbsp;&nbsp;`<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &quot;&lt;/body&gt;&lt;/html&gt;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;await webView.loadHTML(html)<br />
+&nbsp;&nbsp;await webView.present()<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let selectedAction = await webView.evaluateJavaScript(&quot;getDesiredAction()&quot;)<br />
+&nbsp;&nbsp;console.log(&quot;action:\n&quot; + selectedAction)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let wpc = await webView.evaluateJavaScript(&quot;getWordsPerChunk()&quot;)<br />
+&nbsp;&nbsp;console.log(&quot;wpc: &quot; + wpc)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return [selectedAction, wpc]<br />
+}<br />
+<br />
+<br />
+<br />
+function stringForNumLines(lines, lineOffset, numLines) {<br />
+&nbsp;&nbsp;let str = &quot;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;for (let i = 0; i &lt; numLines; i++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;str += &quot;\n&quot; + lines[i+lineOffset];<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return str<br />
+}<br />
+<br />
+<br />
+function findNumLinesToAchieveWordCount(lines, lineOffset, desiredWordCount) {<br />
+&nbsp;&nbsp;let lineCount = 0<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let accumWC = 0<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;for (let i = lineOffset; i &lt; lines.length; i++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let line = lines[i]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let lineWC = line.split(&quot; &quot;).length<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Don&#039;t far exceed word count<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (i &gt; 0 &amp;&amp; lineWC &gt; 2*desiredWordCount) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lineCount++<br />
+&nbsp;&nbsp;&nbsp;&nbsp;accumWC += lineWC<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (accumWC &gt;= desiredWordCount) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return lineCount<br />
+}<br />
+<br />
+<br />
+// Instead of making a custom reversed version of findNumLinesToAchieveWordCount, this is a more complex method that should work with any future implementation of that method<br />
+function findNumLinesToGoBack(lines, lineOffset, wordsPerChunk) {<br />
+&nbsp;&nbsp;let numToGoBack = 0<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;for (numToGoBack = 0; numToGoBack &lt;= lineOffset; numToGoBack++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let numLinesWeWouldPick = findNumLinesToAchieveWordCount(lines, lineOffset-numToGoBack, wordsPerChunk)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// if our offset were lineOffset-numToGoBack<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// we would show numLinesWeWouldPick lines<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// if (lineOffset-numToGoBack) + numLinesWeWouldPick is equal to our current offset then that&#039;s the previous offset we had<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// if that sum is less than our current offset then it would be going back too far<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let testOffset = (lineOffset-numToGoBack) + numLinesWeWouldPick<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (testOffset &lt;= lineOffset) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;console.log(&quot;Going back by &quot; + numToGoBack + &quot; lines&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return numToGoBack<br />
+}<br />
+<br />
+<br />
+// I call over to a shortcut because the Speech support in Scriptable doesn&#039;t let me configure the speaking speed<br />
+// https://www.icloud.com/shortcuts/a3f88b742ada4a9f835e8a734bdfb907<br />
+async function speakText(text) {<br />
+&nbsp;&nbsp;let callbackURL = new CallbackURL(&quot;shortcuts://x-callback-url/run-shortcut&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;name&quot;, &quot;SpeakText&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;input&quot;, &quot;text&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;text&quot;, text)<br />
+&nbsp;&nbsp;console.log(&quot;callbackurl: &quot; + callbackURL.getURL())<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let result = await callbackURL.open()<br />
+&nbsp;&nbsp;console.log(&quot;speakText result: &quot; + result)<br />
+}<br />
+<br />
+// I call over to a shortcut because the Dictation support in Scriptable requires touch interaction<br />
+// https://www.icloud.com/shortcuts/80a6e542803448329e110094bfee2146<br />
+async function getDictatedText() {<br />
+&nbsp;&nbsp;let callbackURL = new CallbackURL(&quot;shortcuts://x-callback-url/run-shortcut&quot;)<br />
+&nbsp;&nbsp;callbackURL.addParameter(&quot;name&quot;, &quot;Dictate&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;console.log(&quot;callbackurl: &quot; + callbackURL.getURL())<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let result = await callbackURL.open()<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;console.log(&quot;dictated text: &quot; + result.result)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return result.result<br />
+}<br />
+<br />
+<br />
+// HTML encoding utilities<br />
+// Main logic from https://ourcodeworld.com/articles/read/188/encode-and-decode-html-entities-using-pure-javascript<br />
+<br />
+function htmlEncode(str) {<br />
+&nbsp;&nbsp;var buf = [];<br />
+			<br />
+&nbsp;&nbsp;for (var i=str.length-1;i&gt;=0;i--) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;buf.unshift([&#039;&amp;#&#039;, str[i].charCodeAt(), &#039;;&#039;].join(&#039;&#039;));<br />
+&nbsp;&nbsp;}<br />
+			<br />
+&nbsp;&nbsp;return buf.join(&#039;&#039;);<br />
+}<br />
+<br />
+function htmlDecode(str) {<br />
+&nbsp;&nbsp;return str.replace(/&amp;#(\d+);/g, function(match, dec) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return String.fromCharCode(dec);<br />
+&nbsp;&nbsp;});<br />
+}</div>
+7. You'll need to save a long text file (using a converted eBook works great) into Scriptable's directory using the Files app. Then, you'll need to replace "your-book-filename.txt" with the appropriate filename.<br />
+<br />
+8. Run the script<br />
+<br />
+9. Tap a mode (stop, skip, read, hands free) or keep the default (read) and then tap Close<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- stop: stop the script<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- skip: skip this page without reading it aloud<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- read: read this page, advance to the next one, and reprompt<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- hands free: read this page, then give the user a chance to say "continue" or "stop". If the user says "continue" the next page will automatically be read aloud. If the user says "stop", the script will stop running. This is especially useful when driving or washing dishes!<br />
+<br />
+<br />
+Hopefully somebody will find these tools useful or inspiring!<br />
+
+]]>
+</content>
+</entry>
+,
 <entry>
 <title>Source Control</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/source-control.html" />
@@ -186,13 +781,13 @@ Here's how I adopted the Feedly API (and how you can too):<br />
 <br />
 7. Use <a href="https://en.wikipedia.org/wiki/CURL">curl</a> to quickly prove that the developer access token works and the APIs return expected results<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Here's an example command:<br />
-<div id='code'>curl -H 'Authorization: OAuth YOUR_DEV_TOKEN' https://cloud.feedly.com/v3/markers/counts</div>
+<div id='code'>curl -H &#039;Authorization: OAuth YOUR_DEV_TOKEN&#039; https://cloud.feedly.com/v3/markers/counts</div>
 8. Think about how to organize your code into classes. Some useful classes might be: FeedlyDataSource, NewsFeed, NewsEntry.<br />
 <br />
 9. Use your platform's built-in APIs for making HTTP requests, parsing JSON, displaying a list of NewsEntrys to the user.<br />
 <br />
 10. As you build your app, add unit tests for parsing responses. One tip: save some curl results to files and inject those files into tests so your tests can work offline. Save to file like this:<br />
-<div id='code'>curl -H 'Authorization: OAuth YOUR_DEV_TOKEN' https://cloud.feedly.com/v3/markers/counts > /path/to/test_data_files/markersCountsResponse.txt</div>
+<div id='code'>curl -H &#039;Authorization: OAuth YOUR_DEV_TOKEN&#039; https://cloud.feedly.com/v3/markers/counts &gt; /path/to/test_data_files/markersCountsResponse.txt</div>
 If you need any help, please @ me on <a href="http://twitter.com/memalign">Twitter</a>.<br />
 <br />
 <br />

@@ -379,14 +379,36 @@ ${this.title}
     }
     
     
-    let htmlContents = this.contents
+    var htmlContents = this.contents
+
+    // [Code] support
+    
+    // Escape HTML code
+    var htmlContentsWithEscapedCode = ""
+    var lineBreak = ""
+    var inCodeBlock = false
+    for (let line of htmlContents.split("\n")) {  
+      if (inCodeBlock) {
+        htmlContentsWithEscapedCode += lineBreak + this.escapeHTML(line)
+      } else {
+        htmlContentsWithEscapedCode += lineBreak + line
+      }
+      lineBreak = "\n"
+        
+      if (line.includes("[Code]")) {
+        inCodeBlock = true
+      } else if (line.includes("[/Code]")) {
+        inCodeBlock = false
+      }
+    }
+    
+    htmlContents = htmlContentsWithEscapedCode
+    
+    htmlContents = htmlContents.replace(/\[Code\]\n*/g, "<div id='code'>")
+    htmlContents = htmlContents.replace(/\n*\[\/Code\]/g, "</div>")
 
     // [Image] support
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
-    
-    // [Code] support
-    htmlContents = htmlContents.replace(/\[Code\]\n*/g, "<div id='code'>")
-    htmlContents = htmlContents.replace(/\n*\[\/Code\]/g, "</div>")
     
     // [Link] support
     htmlContents = htmlContents.replace(/\[Link:([^\]]+)\]/g, '<a href="$1">')
@@ -399,7 +421,7 @@ ${this.title}
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
 
     
-//TODO: unit test [Code] in ogDescription and htmlBody; Try with preceding and following line breaks
+//TODO: unit test [Code] in ogDescription and htmlBody; Try with preceding and following line breaks; unit test with html code contained
     
 
     let postDateStr = "<div id='postdate'>Posted on " + this.dateString + "</div>\n"
@@ -433,6 +455,16 @@ ${this.title}
   // e.g. "https://memalign.github.io/p/"
   fullBaseURL() {
     return this.baseURL() + "/" + htmlPostsSubdirectory() + "/"
+  }
+  
+  // https://stackoverflow.com/questions/6234773/can-i-escape-html-special-chars-in-javascript
+  escapeHTML(line) {
+    return line
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
   }
   
   // e.g. "2019-12-24T14:00:00-08:00

@@ -1,0 +1,582 @@
+Title: Download Text Into Your Brain
+Date: 3/28/2020
+
+[Image:/m/matrix-kung-fu.jpg]
+
+In the internet age, there's so much interesting information to absorb: academic papers, blog posts, articles, books, reddit posts, text messages, emails, etc.
+
+A lot of this content is in text form so I'm reading all the time.
+
+A while ago, I discovered that the iPhone has a built-in [Link:https://en.wikipedia.org/wiki/Speech_synthesis]text-to-speech (TTS)[/Link] accessibility feature that can speak text the user highlights. At the time of writing, you can turn this on in Settings->Accessibility->Spoken Content->Speak Selection. This will cause a Speak button to appear when you select text. You can crank up the speed of the speech too.
+
+I started using this feature to listen to paragraphs while doing things that occupy eyes and hands: driving, washing dishes, exercising. I quickly got used to listening to this sped up Siri voice.
+
+I was blown away by how much more quickly I could read this way. When I'm reading with my eyes, I'll often get temporarily stuck trying to understand specific wording or fine details. I realized that this is unnecessarily slowing me down. When listening, I'm forced to keep a quick and steady pace. For wording I would've gotten stuck on, I either figure it out from context or move on.
+
+Using this technique feels like downloading information directly into your brain.
+
+Manually selecting text can become onerous so I've built some tools that help me more easily read websites and eBooks this way.
+
+I'm using a combination of the [Link:https://apps.apple.com/us/app/shortcuts/id1462947752]Shortcuts app[/Link] and the [Link:https://apps.apple.com/us/app/scriptable/id1405459188]Scriptable app[/Link].
+
+The Shortcuts app provides easy ways to access system functionality, including speaking text and getting text from a website.
+
+Scriptable lets the user write programs in JavaScript that call into iOS APIs and make use of Shortcuts.
+
+
+To use these yourself:
+
+1. Install the apps
+    - [Link:https://apps.apple.com/us/app/shortcuts/id1462947752]Shortcuts[/Link]
+    - [Link:https://apps.apple.com/us/app/scriptable/id1405459188]Scriptable[/Link]
+    
+2. Install/recreate these Shortcuts:
+    - [Link:https://www.icloud.com/shortcuts/992821652da741e2a3993a2dce37f4b2]Get Website Text[/Link]
+[Image:/m/get-website-text.png]
+    
+    - [Link:https://www.icloud.com/shortcuts/a3f88b742ada4a9f835e8a734bdfb907]SpeakText[/Link]
+[Image:/m/speaktext.png]
+    
+    - [Link:https://www.icloud.com/shortcuts/80a6e542803448329e110094bfee2146]Dictate[/Link]
+[Image:/m/dictate.png]
+
+3. In Scriptable, create a new script called Speak Web Content. Paste in this code:
+
+[Code]
+// Made by @memalign - 1/1/19
+// Copyright 2019
+// Run from a share sheet to speak shared text
+// I call over to a shortcut because the Speech support in Scriptable doesn't let me configure the speaking speed
+// Needs to be run in the app (instead of in the extension) so x-callback-url works
+
+
+// let urls = [ "https://support.apple.com/guide/shortcuts/use-x-callback-url-apdcd7f20a6f/ios" ]
+let urls = args.urls
+
+
+for (url of urls) {
+  console.log(url)
+  
+  
+  // Without this alert, Scriptable got confused and would abort when the callback URL returned focus to Scriptable from Shortcuts
+  let alert = new Alert()
+  alert.title = "Speak Web Content"
+  alert.message = "Speak content for " + url + " ?"
+  alert.addAction("Speak it!")
+  alert.addAction("Cancel")
+  if (await alert.present() == 1) {
+    break
+  }
+  
+  
+  // Get Website Text: https://www.icloud.com/shortcuts/992821652da741e2a3993a2dce37f4b2
+  let callbackURL = new CallbackURL("shortcuts://x-callback-url/run-shortcut")
+  callbackURL.addParameter("name", "Get Website Text")
+  callbackURL.addParameter("input", "text")
+  callbackURL.addParameter("text", url)
+  
+  
+  console.log("callbackurl: " + callbackURL.getURL())
+  
+  let result = await callbackURL.open()
+  
+  console.log("result: " + result.result)
+  
+  await showWebViewWithText(result.result)
+  
+}
+
+
+async function showWebViewWithText(text) {
+  let webView = new WebView()
+  
+  let html = "<table>"
+  
+  let lines = text.split("\n")
+  let count = 0
+  for (line of lines) {
+    html += "<tr>"
+    
+    html += "<td>"
+    html += "<input type='checkbox' id='line"+count+"' value='"+htmlEncode(line)+"' checked>"
+    html += "</td>"
+    
+    html += "<td>"
+    html += "<input type='button' value='uncheck above' onclick='uncheckAbove("+count+")'>"
+    html += "<br />"
+    html += "<input type='button' value='uncheck below' onclick='uncheckBelow("+count+")'>"
+    html += "</td>"
+    
+    
+    html += "<td>"
+    html += htmlEncode(line)
+    html += "</td>"
+    
+    html += "</tr>"
+    
+    count++
+  }
+  
+  html += "</table>"
+  
+  
+  html += `
+  <script>
+  
+  document.body.style.zoom = 4.0
+  
+  function uncheckAbove(index) {
+    for (let i = 0; i <= index; i++) {
+      document.getElementById("line"+i).checked = false;
+    }
+  }
+  
+  function uncheckBelow(index) {
+    for (let i = index; i < ${count}; i++) {
+      document.getElementById("line"+i).checked = false;
+    }
+  }
+  
+  function getSelectedText() {
+    let text = ""
+    
+    for (let i = 0; i < ${count}; i++) {
+      let checkbox = document.getElementById("line"+i)
+      
+      if (checkbox.checked) {
+        text += "\\n" + checkbox.value
+      }
+    }
+    
+    return text
+  }
+  
+  </script>
+  `
+  
+
+  
+  await webView.loadHTML(html)
+  await webView.present()
+  let selectedText = await webView.evaluateJavaScript("getSelectedText()")
+  console.log("selected text:\n" + selectedText)
+  
+  speakText(selectedText)
+}
+
+
+function speakText(text) {
+  // SpeakText: https://www.icloud.com/shortcuts/a3f88b742ada4a9f835e8a734bdfb907
+  
+  let callbackURL = new CallbackURL("shortcuts://x-callback-url/run-shortcut")
+  callbackURL.addParameter("name", "SpeakText")
+  callbackURL.addParameter("input", "text")
+  callbackURL.addParameter("text", text)
+  console.log("callbackurl: " + callbackURL.getURL())
+  
+  callbackURL.open()
+}
+
+// HTML encoding utilities
+// Main logic from https://ourcodeworld.com/articles/read/188/encode-and-decode-html-entities-using-pure-javascript
+
+function htmlEncode(str) {
+  var buf = [];
+			
+  for (var i=str.length-1;i>=0;i--) {
+    buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
+  }
+			
+  return buf.join('');
+}
+
+function htmlDecode(str) {
+  return str.replace(/&#(\d+);/g, function(match, dec) {
+    return String.fromCharCode(dec);
+  });
+}
+[/Code]
+
+4. Configure the script settings:
+    - Always Run in App = on
+    - Share Sheet Inputs = URLs
+    
+5. To use this script:
+    - View a website in Safari
+    - Tap the Share button
+    - Tap "Run Script"
+    - Tap "Speak Web Content"
+    - Accept prompts asking for permission
+    - Uncheck any text that you don't want the script to read. Usually an article is in the middle of a webpage so it's useful to uncheck the top portion and bottom portion of a webpage which include menus, ads, user comments, or related article links.
+    - Tap Close
+    - The content will now be spoken!
+
+6. In Scriptable, create a new script called Read eBook. Paste in this code:
+
+[Code]
+// Made by @memalign - 1/1/19
+// Copyright 2019
+
+// First, convert eBook to text using http://www.convertfiles.com/convert/ebook/EPUB-to-TXT.html
+// Then, using Files, save the result to Scriptable's space
+
+
+let fm = FileManager.iCloud()
+
+let fullBookPath = fm.documentsDirectory() + "/your-book-filename.txt"
+
+
+// File format:
+// currentLineNumber\n   - integer, offset into full book
+let inProgressPath = fullBookPath + ".inProgress.txt"
+
+fm.downloadFileFromiCloud(inProgressPath)
+if (!fm.fileExists(inProgressPath)) {
+  console.log("Creating in progress copy")
+  fm.writeString(inProgressPath, "0\n")
+}
+
+
+let lines = fm.readString(fullBookPath).split("\n")
+let lineOffset = 0
+
+let fullBookLineCount = lines.length
+
+const DEFAULT_APPROX_WORDS_PER_CHUNK = 1200
+
+let wordsPerChunk = DEFAULT_APPROX_WORDS_PER_CHUNK
+
+let handsFreeMode = false
+
+do {
+
+  let progress = fm.readString(inProgressPath)
+  if (!progress) {
+    break
+  } else {
+    lineOffset = parseInt((progress.split("\n"))[0])
+  }
+  
+  // Pick enough lines to have enough words
+  
+  let lineCount = findNumLinesToAchieveWordCount(lines, lineOffset, wordsPerChunk)
+  
+  console.log("Showing chunk of " + lineCount + " lines with " + (lines.length-lineCount) + " remaining")
+  
+  let chunkStr = stringForNumLines(lines, lineOffset, lineCount)
+  
+  // console.log(chunkStr)
+  
+  let action = "read"
+
+
+  if (handsFreeMode) {
+    let voiceCommand = await getDictatedText()
+    
+    let shouldStop = voiceCommand.match(/stop/i)
+    if (shouldStop) {
+      action = "stop"
+    }
+  } else {
+    let actionAndWPC = await showWebViewWithText(chunkStr, lineOffset, fullBookLineCount, wordsPerChunk)
+    
+    action = actionAndWPC[0]
+    wordsPerChunk = actionAndWPC[1]
+  }
+  
+  if (action === "stop") {
+    break
+  }
+  
+  if (action === "start over") {
+    let alert = new Alert()
+    alert.title = "Start Over"
+    alert.message = "Are you sure you want to forget all progress? This cannot be undone."
+    alert.addDestructiveAction("Start Over")
+    alert.addAction("Cancel")
+    if (await alert.present() == 0) {
+      console.log("Starting over!")
+      fm.remove(inProgressPath)
+    }
+    
+    break
+  }
+  
+  if (action === "hands free") {
+    action = "read"
+    handsFreeMode = true
+  }
+  
+  if (action === "read") {
+    await speakText(chunkStr)
+  }
+  
+  if (action === "previous") {
+    lineOffset -= findNumLinesToGoBack(lines, lineOffset, wordsPerChunk)
+  
+    lineCount = 0
+  }
+  
+  updateInProgressFile(lineOffset+lineCount, fullBookLineCount, inProgressPath)
+
+} while (true)
+
+
+
+function updateInProgressFile(newLineOffset, fullBookLineCount, inProgressPath) {
+  if (newLineOffset >= fullBookLineCount) {
+    console.log("No more lines remain!")
+    fm.remove(inProgressPath)
+    return
+  }
+  
+  
+  // Write to a temp file
+  let tempFile = fm.documentsDirectory() + "/temp-book.txt"
+  
+  fm.writeString(tempFile, newLineOffset+"\n")
+  
+  console.log("Replacing " + inProgressPath)
+  
+  // Move the temp file to final path
+  fm.remove(inProgressPath) // seems to be required since move errors if the destination file exists (contradicting the docs)
+  fm.move(tempFile, inProgressPath)
+}
+
+async function showWebViewWithText(text, lineOffset, totalLineCount, wordsPerChunk) {
+  let webView = new WebView()
+  
+  let html = "<html>"
+  html += "<body>"
+  
+  html += `
+  <script>
+  document.body.style.zoom = 4.0
+  </script>
+  `
+  
+  html += "<center>"
+  
+  html += "<table>"
+  
+  html += "<tr>"
+  html += "<td><input type='button' value='stop' onclick='setAction(\"stop\")'></td>"
+  html += "<td><input type='button' value='skip' onclick='setAction(\"skip\")'></td>"
+  html += "<td><input type='button' value='read' onclick='setAction(\"read\")'></td>"
+  html += "<td><input type='button' value='hands free' onclick='setAction(\"hands free\")'></td>"
+  html += "</tr>"
+  
+  html += "</table>"
+  
+  
+  html += "<table>"
+  html += "<tr>"
+  
+  html += "<td><input type='text' size='5' style='text-align:center;' id='desiredAction' value='read'></td>"
+  html += "<td><input type='text' size='5' style='text-align:center;' id='wordsPerChunk' value='"+wordsPerChunk+"'> words</td>"
+  
+  html += "</tr>"
+  html += "</table>"
+  
+  html += "<br />"
+  
+  let linesRead = lineOffset
+  html += "Progress: " + linesRead + "/" + totalLineCount + " = " + (100*linesRead/totalLineCount).toFixed(1) + "%"
+  
+  html += "</center>"
+  
+  html += "<table>"
+  
+  let lines = text.split("\n")
+  let count = 0
+  for (line of lines) {
+    html += "<tr>"
+
+    html += "<td>"
+    html += htmlEncode(line)
+    html += "</td>"
+    
+    html += "</tr>"
+    
+    count++
+  }
+  
+  html += "</table>"
+  
+  html += "<br /><br />"
+  
+  html += "<center>"
+  html += "<table>"
+  
+  html += "<tr>"
+  html += "<td><input type='button' value='previous' onclick='setAction(\"previous\")'></td>"
+  html += "<td><input type='button' value='start over' onclick='setAction(\"start over\")'></td>"
+  html += "</tr>"
+  
+  html += "</table>"
+  html += "</center>"
+  
+  
+  html += `
+  <script>
+  
+  function setAction(str) {
+    document.getElementById("desiredAction").value = str
+  }
+  
+  function getDesiredAction() {
+    let actionInput = document.getElementById("desiredAction")
+    
+    return actionInput.value
+  }
+  
+  function getWordsPerChunk() {
+    let wpcInput = document.getElementById("wordsPerChunk")
+    
+    return wpcInput.value
+  }
+  
+  </script>
+  `
+  
+  html += "</body></html>"
+  
+  await webView.loadHTML(html)
+  await webView.present()
+  
+  let selectedAction = await webView.evaluateJavaScript("getDesiredAction()")
+  console.log("action:\n" + selectedAction)
+  
+  let wpc = await webView.evaluateJavaScript("getWordsPerChunk()")
+  console.log("wpc: " + wpc)
+  
+  return [selectedAction, wpc]
+}
+
+
+
+function stringForNumLines(lines, lineOffset, numLines) {
+  let str = ""
+  
+  for (let i = 0; i < numLines; i++) {
+    str += "\n" + lines[i+lineOffset];
+  }
+  
+  return str
+}
+
+
+function findNumLinesToAchieveWordCount(lines, lineOffset, desiredWordCount) {
+  let lineCount = 0
+  
+  let accumWC = 0
+  
+  for (let i = lineOffset; i < lines.length; i++) {
+    
+    let line = lines[i]
+    let lineWC = line.split(" ").length
+    
+    // Don't far exceed word count
+    if (i > 0 && lineWC > 2*desiredWordCount) {
+      break
+    }
+    
+    lineCount++
+    accumWC += lineWC
+    
+    if (accumWC >= desiredWordCount) {
+      break
+    }
+  }
+  
+  return lineCount
+}
+
+
+// Instead of making a custom reversed version of findNumLinesToAchieveWordCount, this is a more complex method that should work with any future implementation of that method
+function findNumLinesToGoBack(lines, lineOffset, wordsPerChunk) {
+  let numToGoBack = 0
+  
+  for (numToGoBack = 0; numToGoBack <= lineOffset; numToGoBack++) {
+    let numLinesWeWouldPick = findNumLinesToAchieveWordCount(lines, lineOffset-numToGoBack, wordsPerChunk)
+    
+    // if our offset were lineOffset-numToGoBack
+    // we would show numLinesWeWouldPick lines
+    
+    // if (lineOffset-numToGoBack) + numLinesWeWouldPick is equal to our current offset then that's the previous offset we had
+    // if that sum is less than our current offset then it would be going back too far
+    
+    let testOffset = (lineOffset-numToGoBack) + numLinesWeWouldPick
+    
+    if (testOffset <= lineOffset) {
+      break
+    }
+  }
+  
+  console.log("Going back by " + numToGoBack + " lines")
+  
+  return numToGoBack
+}
+
+
+// I call over to a shortcut because the Speech support in Scriptable doesn't let me configure the speaking speed
+// https://www.icloud.com/shortcuts/a3f88b742ada4a9f835e8a734bdfb907
+async function speakText(text) {
+  let callbackURL = new CallbackURL("shortcuts://x-callback-url/run-shortcut")
+  callbackURL.addParameter("name", "SpeakText")
+  callbackURL.addParameter("input", "text")
+  callbackURL.addParameter("text", text)
+  console.log("callbackurl: " + callbackURL.getURL())
+  
+  let result = await callbackURL.open()
+  console.log("speakText result: " + result)
+}
+
+// I call over to a shortcut because the Dictation support in Scriptable requires touch interaction
+// https://www.icloud.com/shortcuts/80a6e542803448329e110094bfee2146
+async function getDictatedText() {
+  let callbackURL = new CallbackURL("shortcuts://x-callback-url/run-shortcut")
+  callbackURL.addParameter("name", "Dictate")
+  
+  console.log("callbackurl: " + callbackURL.getURL())
+  
+  let result = await callbackURL.open()
+  
+  console.log("dictated text: " + result.result)
+  
+  return result.result
+}
+
+
+// HTML encoding utilities
+// Main logic from https://ourcodeworld.com/articles/read/188/encode-and-decode-html-entities-using-pure-javascript
+
+function htmlEncode(str) {
+  var buf = [];
+			
+  for (var i=str.length-1;i>=0;i--) {
+    buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
+  }
+			
+  return buf.join('');
+}
+
+function htmlDecode(str) {
+  return str.replace(/&#(\d+);/g, function(match, dec) {
+    return String.fromCharCode(dec);
+  });
+}
+[/Code]
+
+7. You'll need to save a long text file (using a converted eBook works great) into Scriptable's directory using the Files app. Then, you'll need to replace "your-book-filename.txt" with the appropriate filename.
+
+8. Run the script
+
+9. Tap a mode (stop, skip, read, hands free) or keep the default (read) and then tap Close
+    - stop: stop the script
+    - skip: skip this page without reading it aloud
+    - read: read this page, advance to the next one, and reprompt
+    - hands free: read this page, then give the user a chance to say "continue" or "stop". If the user says "continue" the next page will automatically be read aloud. If the user says "stop", the script will stop running. This is especially useful when driving or washing dishes!
+
+
+Hopefully somebody will find these tools useful or inspiring!
