@@ -56,13 +56,13 @@ Here's how I adopted the Feedly API (and how you can too):<br />
 <br />
 7. Use <a href="https://en.wikipedia.org/wiki/CURL">curl</a> to quickly prove that the developer access token works and the APIs return expected results<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Here's an example command:<br />
-<div id='code'>curl -H 'Authorization: OAuth YOUR_DEV_TOKEN' https://cloud.feedly.com/v3/markers/counts</div>
+<div id='code'>curl -H &#039;Authorization: OAuth YOUR_DEV_TOKEN&#039; https://cloud.feedly.com/v3/markers/counts</div>
 8. Think about how to organize your code into classes. Some useful classes might be: FeedlyDataSource, NewsFeed, NewsEntry.<br />
 <br />
 9. Use your platform's built-in APIs for making HTTP requests, parsing JSON, displaying a list of NewsEntrys to the user.<br />
 <br />
 10. As you build your app, add unit tests for parsing responses. One tip: save some curl results to files and inject those files into tests so your tests can work offline. Save to file like this:<br />
-<div id='code'>curl -H 'Authorization: OAuth YOUR_DEV_TOKEN' https://cloud.feedly.com/v3/markers/counts > /path/to/test_data_files/markersCountsResponse.txt</div>
+<div id='code'>curl -H &#039;Authorization: OAuth YOUR_DEV_TOKEN&#039; https://cloud.feedly.com/v3/markers/counts &gt; /path/to/test_data_files/markersCountsResponse.txt</div>
 If you need any help, please @ me on <a href="http://twitter.com/memalign">Twitter</a>.<br />
 <br />
 <br />
