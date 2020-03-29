@@ -407,6 +407,7 @@ ${this.title}
     htmlContents = htmlContents.replace(/\[Code\]\n*/g, "<div id='code'>")
     htmlContents = htmlContents.replace(/\n*\[\/Code\]/g, "</div>")
 
+
     // [Image] support
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
     
@@ -420,9 +421,6 @@ ${this.title}
 
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
 
-    
-//TODO: unit test [Code] in ogDescription and htmlBody; Try with preceding and following line breaks; unit test with html code contained
-    
 
     let postDateStr = "<div id='postdate'>Posted on " + this.dateString + "</div>\n"
     
@@ -908,6 +906,48 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Link]"), "Lacks closing link brackets")
   }
 
+  test_htmlBody_code_oneliner() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some code[/Code]")
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<div id='code'>some code</div>"), "Has code div")
+    assertTrue(!htmlBody.includes("[Code"), "Lacks code brackets")
+    assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
+  }
+
+  test_htmlBody_code_oneliner_withHTML() {
+    // Right now HTML is only supported in multi-line code blocks
+    // This unit test documents this limitation
+    // When oneliner HTML support is added, this test needs to be modified
+    
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some <html> code[/Code]")
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<div id='code'>some <html> code</div>"), "Has code div")
+    // With real support, the assert will be:
+    // assertTrue(htmlBody.includes("<div id='code'>some &lt;html&gt; code</div>"), "Has code div")
+    assertTrue(!htmlBody.includes("[Code"), "Lacks code brackets")
+    assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
+  }
+
+  test_htmlBody_code_multiLine() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line two\n[/Code]\nafter code")
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("test text<br />\n<div id='code'>some code<br />\n&nbsp;&nbsp;line two</div>\nafter code"), "Has code div")
+    assertTrue(!htmlBody.includes("[Code"), "Lacks code brackets")
+    assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
+  }
+
+  test_htmlBody_code_multiLine_withHTML() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line <td> two\n[/Code]\nafter code")
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("test text<br />\n<div id='code'>some code<br />\n&nbsp;&nbsp;line &lt;td&gt; two</div>\nafter code"), "Has code div")
+    assertTrue(!htmlBody.includes("[Code"), "Lacks code brackets")
+    assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
+  }
+
   test_htmlBody_title_withTitleURL() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody("p/some-title.html")
@@ -1088,6 +1128,11 @@ test text
     
     let expectationLink2 = "/m/test.jpg one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithLink2.ogDescription() == expectationLink2, "ogDescription link2")
+    
+    let entryWithCode = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Code]here[/Code] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    
+    let expectationCode = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
+    assertTrue(entryWithCode.ogDescription() == expectationCode, "ogDescription code")
   }
   
   test_Entry_ogImage() {
