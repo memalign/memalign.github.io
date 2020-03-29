@@ -142,7 +142,7 @@ class Index extends HTMLDocument {
     this.entries = entries
     this.title = "memalign.github.io"
     
-    this.entriesOnIndex = 5
+    this.entriesOnIndex = 15
   }
   
   ogImage() {
@@ -226,7 +226,7 @@ class Index extends HTMLDocument {
         str += "\n"
       } else {
         if (c == this.entriesOnIndex) {
-          str += "<br /><br />\nMore posts:<br />\n"
+          str += "<hr />\nMore posts:<br />\n"
         }
         str += "<a href='" + entry.relativeURL() + "'>" + entry.title + "</a><br />\n"        
       }
@@ -821,7 +821,7 @@ text3 text3
 </div>
 <div id='postdate'>Posted on 12/27/2019</div>
 text2 text2
-<br /><br />
+<hr />
 More posts:<br />
 <a href='p/some-title.html'>This title</a><br />
 
