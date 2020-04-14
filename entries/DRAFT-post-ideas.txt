@@ -2,4 +2,3 @@
 - JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
 - SiteGenerator
 - Vision framework
-- notes.txt

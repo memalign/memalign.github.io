@@ -11,6 +11,17 @@
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
     {
+         "title" : "notes.txt",
+         "date_published" : "2020-4-13T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/notes-txt.html",
+         "url" : "https://memalign.github.io/p/notes-txt.html",
+         "image" : "https://memalign.github.io/m/ios-notes.png",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\n<div id='header'>\n<h2>\n<a href='https://memalign.github.io/p/notes-txt.html'>notes.txt</a>\n</h2>\n</div>\n<img src=\"/m/ios-notes.png\"></img>\n<div id='postdate'>Posted on 4/13/2020</div>\nAt a software engineering internship in 2006, my mentor told me that he kept a paper engineering journal that he put notes in every day as he worked on problems. He gave me one, too. I followed that habit during all of my internships.<br />\n<br />\nThen ~4 years later, I started working as a full-time software engineer. A few months into working, I stopped using a paper notebook. I think part of the reason is that I had a better tool: the bug tracker. Pretty much every assignment I got had a corresponding entry in a bug tracking database. I started keeping the notes of my investigations in bug reports directly so there would be a central and shared source of truth. A mentor at this job said \"some of the best engineers\" put frequent clear updates in their bugs.<br />\n<br />\nMy personal projects had always been note-free, though. Unfortunately, I didn't bring the same problem-solving-and-knowledge-capturing discipline to personal projects until ~2016. That's a whole decade after learning the value of an engineering journal at work!<br />\n<br />\nNow, even for informal personal projects, I keep a notes.txt file in the <a href=\"/p/source-control.html\">git repository</a>. <br />\n<br />\nHere's an excerpt from notes.txt for this website (which is a personal side-project of its own):<br />\n<br />\n<div id='code'>12/25/19<br />\n<br />\nI created a user page in github!<br />\n<br />\nI found that I have to publish from the master branch and the root directory of the memalign.github.io project. I also found that an index.html file with just plaintext contents wouldn&#039;t get served for https://memalign.github.io<br />\n<br />\n( I figured this out by googling and finding:<br />\nhttps://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266 )</div>\n(You can see the full notes.txt for the project <a href=\"/notes.txt\">here</a>.)<br />\n<br />\nI use notes.txt to capture:<br />\n<br />\n- Problems I'm running into<br />\n- Thoughts on what might be happening<br />\n- Potential solutions to explore<br />\n- The solution that worked<br />\n- Useful links and other research<br />\n- Useful commands<br />\n- The full steps required to do something novel (for example: getting a 3rd party open source library to build and install correctly)<br />\n- Features I want to add<br />\n- The bug list<br />\n&nbsp;&nbsp;&nbsp;&nbsp;- For a simple side-project a text bug list embedded in my notes is much easier than a full bug tracker"
+    },
+    {
          "title" : "Download Video Into Your Brain",
          "date_published" : "2020-4-5T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/speed-up-av.html",

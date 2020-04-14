@@ -1,0 +1,40 @@
+Title: notes.txt
+Date: 4/13/2020
+
+[Image:/m/ios-notes.png]
+
+At a software engineering internship in 2006, my mentor told me that he kept a paper engineering journal that he put notes in every day as he worked on problems. He gave me one, too. I followed that habit during all of my internships.
+
+Then ~4 years later, I started working as a full-time software engineer. A few months into working, I stopped using a paper notebook. I think part of the reason is that I had a better tool: the bug tracker. Pretty much every assignment I got had a corresponding entry in a bug tracking database. I started keeping the notes of my investigations in bug reports directly so there would be a central and shared source of truth. A mentor at this job said "some of the best engineers" put frequent clear updates in their bugs.
+
+My personal projects had always been note-free, though. Unfortunately, I didn't bring the same problem-solving-and-knowledge-capturing discipline to personal projects until ~2016. That's a whole decade after learning the value of an engineering journal at work!
+
+Now, even for informal personal projects, I keep a notes.txt file in the [Link:/p/source-control.html]git repository[/Link]. 
+
+Here's an excerpt from notes.txt for this website (which is a personal side-project of its own):
+
+[Code]
+12/25/19
+
+I created a user page in github!
+
+I found that I have to publish from the master branch and the root directory of the memalign.github.io project. I also found that an index.html file with just plaintext contents wouldn't get served for https://memalign.github.io
+
+( I figured this out by googling and finding:
+https://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266 )
+[/Code]
+
+(You can see the full notes.txt for the project [Link:/notes.txt]here[/Link].)
+
+I use notes.txt to capture:
+
+- Problems I'm running into
+- Thoughts on what might be happening
+- Potential solutions to explore
+- The solution that worked
+- Useful links and other research
+- Useful commands
+- The full steps required to do something novel (for example: getting a 3rd party open source library to build and install correctly)
+- Features I want to add
+- The bug list
+    - For a simple side-project a text bug list embedded in my notes is much easier than a full bug tracker
