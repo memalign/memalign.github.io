@@ -5,10 +5,543 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2020-4-19T00:00:00-08:00</updated>
+<updated>2020-5-8T00:00:00-08:00</updated>
 <rights>Copyright © 2020, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Create COVID-19 Graphs Using JavaScript</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/graph-js.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/graph-js.html" />
+<id>https://memalign.github.io/p/graph-js.html</id>
+<published>2020-5-8T00:00:00-08:00</published>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/graph-js.html'>Create COVID-19 Graphs Using JavaScript</a>
+</h2>
+</div>
+<img src="/m/graph-js.jpg"></img>
+<div id='postdate'>Posted on 5/8/2020</div>
+COVID-19 has loomed over us for many months. For weeks, I watched the spread using graphs on <a href="https://www.politico.com/interactives/2020/coronavirus-testing-by-state-chart-of-new-cases/">politico.com</a>.<br />
+<br />
+<img src="/m/politico-covid19.jpg"></img><br />
+<br />
+A few days went by without updates so I investigated recreating the graphs myself. Here’s my process:<br />
+<br />
+1. I noticed that the website links to its data source. Fortunately, it comes from an open website with a convenient API: <a href="https://covidtracking.com/api">https://covidtracking.com/api</a><br />
+<br />
+2. I knew I could use the <a href="https://apps.apple.com/us/app/scriptable/id1405459188">Scriptable app</a> on iOS to write some JavaScript to process and transform the data<br />
+<br />
+3. Scriptable can draw some native UI but it’s often too limited. Instead, I chose to generate some HTML it can display in a web view.<br />
+<br />
+4. I did some quick searches for simple ways to graph data on web pages. When I <a href="https://www.google.com/search?q=graph+data+html">searched</a>, one of the top hits was <a href="https://canvasjs.com">canvasJS</a>.<br />
+<br />
+5. I found a <a href="https://canvasjs.com/javascript-charts/null-data-chart/">sample</a> graph that looked similar to what I needed<br />
+<br />
+6. To quickly check that this would work, I created a quick script in Scriptable to generate the HTML and show a web view, pasting in their example:<br />
+<br />
+<div id='code'>let html = `<br />
+&lt;!DOCTYPE html&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;script&gt;<br />
+window.onload = function() {<br />
+<br />
+var chart = new CanvasJS.Chart(&quot;chartContainer&quot;, {<br />
+	animationEnabled: true,<br />
+	title: {<br />
+		text: &quot;Hourly Average CPU Utilization&quot;<br />
+	},<br />
+	axisX: {<br />
+		title: &quot;Time&quot;<br />
+	},<br />
+	axisY: {<br />
+		title: &quot;Percentage&quot;,<br />
+		suffix: &quot;%&quot;<br />
+	},<br />
+	data: [{<br />
+		type: &quot;line&quot;,<br />
+		name: &quot;CPU Utilization&quot;,<br />
+		connectNullData: true,<br />
+		//nullDataLineDashType: &quot;solid&quot;,<br />
+		xValueType: &quot;dateTime&quot;,<br />
+		xValueFormatString: &quot;DD MMM hh:mm TT&quot;,<br />
+		yValueFormatString: &quot;#,##0.##\&quot;%\&quot;&quot;,<br />
+		dataPoints: [<br />
+			{ x: 1501102673000, y: 22.836 },<br />
+			{ x: 1501106273000, y: 23.220 },<br />
+			{ x: 1501109873000, y: 23.594 },<br />
+			{ x: 1501113473000, y: 24.596 },<br />
+			{ x: 1501117073000, y: 31.947 },<br />
+			{ x: 1501120673000, y: 31.142 }<br />
+		]<br />
+	}]<br />
+});<br />
+chart.render();<br />
+<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div id=&quot;chartContainer&quot; style=&quot;height: 300px; width: 100%;&quot;&gt;&lt;/div&gt;<br />
+&lt;script src=&quot;https://canvasjs.com/assets/script/canvasjs.min.js&quot;&gt;&lt;/script&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+`<br />
+<br />
+let webView = new WebView()<br />
+<br />
+webView.loadHTML(html)<br />
+webView.present(true)</div>
+7. That worked! I then figured out how to request data from covidtracking.com — conveniently hosted in JSON format. I used console.log to sanity check the result.<br />
+<br />
+<div id='code'>let dailyDataRequest = new Request(&quot;https://covidtracking.com/api/v1/us/daily.json&quot;)<br />
+let dailyData = await dailyDataRequest.loadJSON()<br />
+<br />
+console.log(&quot;Row 0: &quot; + dailyData[0].positive)</div>
+8. From there, I parsed the data, transformed it, and added more charts. I included some charts that the original website didn’t have that I found interesting.<br />
+<br />
+<div id='code'>// Show graphs that match: https://www.politico.com/interactives/2020/coronavirus-testing-by-state-chart-of-new-cases/<br />
+// Data from: https://covidtracking.com/api<br />
+<br />
+// Examples the charts are based on:<br />
+// https://canvasjs.com/javascript-charts/null-data-chart/<br />
+// https://canvasjs.com/javascript-charts/multi-series-chart/<br />
+// https://canvasjs.com/javascript-charts/stacked-column-chart/<br />
+// https://canvasjs.com/javascript-charts/stacked-bar-chart/<br />
+// https://canvasjs.com/javascript-charts/stacked-bar-100-chart/<br />
+<br />
+let firstInterestingDate = 20200301<br />
+<br />
+function dataPointsFromDailyDataJSON(json, key) {<br />
+&nbsp;&nbsp;// { x: new Date(2017,6,24), y: 31 },<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;var result = &quot;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;for (let row of json) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let value = row[key]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let date = row[&quot;date&quot;]<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Data is uninteresting before March 1st: 20200301<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (date &lt; firstInterestingDate) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let match = (date+&quot;&quot;).match(/(\d{4})(\d{2})(\d{2})/)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let year = parseInt(match[1])<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let month = parseInt(match[2])<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let day = parseInt(match[3])<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;result += &quot;{ x: new Date(&quot;+year+&quot;,&quot;+(month-1)+&quot;,&quot;+day+&quot;), y: &quot; + value + &quot; },\n&quot;<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return result<br />
+}<br />
+<br />
+function deltaDataPointsFromDailyDataJSON(json, key) {<br />
+&nbsp;&nbsp;// { x: new Date(2017,6,24), y: 31 },<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;var result = &quot;&quot;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;// json is sorted newest to oldest so we need to iterate backwards<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;var index = json.length-1<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;var prevValue = json[index][key]<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;while (index &gt;= 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let row = json[index]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;index--<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let value = row[key]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let date = row[&quot;date&quot;]<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let delta = value - prevValue<br />
+&nbsp;&nbsp;&nbsp;&nbsp;prevValue = value<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Data is uninteresting before March 1st: 20200301<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (date &lt; firstInterestingDate) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let match = (date+&quot;&quot;).match(/(\d{4})(\d{2})(\d{2})/)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let year = parseInt(match[1])<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let month = parseInt(match[2])<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let day = parseInt(match[3])<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;result += &quot;{ x: new Date(&quot;+year+&quot;,&quot;+(month-1)+&quot;,&quot;+day+&quot;), y: &quot; + delta + &quot; },\n&quot;<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return result<br />
+}<br />
+<br />
+var chartCount = 0<br />
+<br />
+function chartTestsPositivesDeathsForState(json, state) {<br />
+&nbsp;&nbsp;// Filter the data to the correct state; null means US<br />
+&nbsp;&nbsp;let filteredJson = (state == null) ? json : json.filter(row =&gt; row[&quot;state&quot;] == state)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let currentTotalTests = filteredJson[0][&quot;totalTestResults&quot;]<br />
+&nbsp;&nbsp;let totalTestsDataPoints = dataPointsFromDailyDataJSON(filteredJson, &quot;totalTestResults&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let currentPositive = filteredJson[0][&quot;positive&quot;]<br />
+&nbsp;&nbsp;let positiveDataPoints = dataPointsFromDailyDataJSON(filteredJson, &quot;positive&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let currentDeath = filteredJson[0][&quot;death&quot;]<br />
+&nbsp;&nbsp;let deathsDataPoints = dataPointsFromDailyDataJSON(filteredJson, &quot;death&quot;)<br />
+<br />
+&nbsp;&nbsp;let chartName = &quot;chart&quot; + (state == null ? &quot;US&quot; : state) + chartCount++<br />
+<br />
+&nbsp;&nbsp;let chartJS = `<br />
+var ${chartName} = new CanvasJS.Chart(&quot;${chartName}&quot;, {<br />
+	animationEnabled: false,<br />
+	title:{<br />
+		text: &quot;Covid-19 in ${state == null ? &quot;the United States&quot; : state}&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize: 25,<br />
+	},<br />
+	axisX: {<br />
+		valueFormatString: &quot;MMM DD&quot;<br />
+	},<br />
+	axisY: {<br />
+		title: &quot;Count&quot;,<br />
+		includeZero: true,<br />
+	},<br />
+	legend:{<br />
+		cursor: &quot;pointer&quot;,<br />
+		fontSize: 16,<br />
+		itemclick: toggleDataSeries<br />
+	},<br />
+	toolTip:{<br />
+		shared: true<br />
+	},<br />
+	data: [{<br />
+		name: &quot;Total Tests (${currentTotalTests.toLocaleString()})&quot;,<br />
+		type: &quot;line&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lineColor: &quot;gray&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: &quot;gray&quot;,<br />
+		showInLegend: true,<br />
+		dataPoints: [<br />
+${totalTestsDataPoints}<br />
+		]<br />
+	},<br />
+	{<br />
+		name: &quot;Positive (${currentPositive.toLocaleString()})&quot;,<br />
+		type: &quot;line&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lineColor: &quot;orange&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: &quot;orange&quot;,<br />
+		showInLegend: true,<br />
+		dataPoints: [<br />
+${positiveDataPoints}<br />
+		]<br />
+	},<br />
+	{<br />
+		name: &quot;Deaths (${currentDeath.toLocaleString()})&quot;,<br />
+		type: &quot;line&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lineColor: &quot;red&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: &quot;red&quot;,<br />
+		showInLegend: true,<br />
+		dataPoints: [<br />
+${deathsDataPoints}<br />
+		]<br />
+	}]<br />
+});<br />
+${chartName}.render();<br />
+`<br />
+<br />
+&nbsp;&nbsp;return { chartJS: chartJS, chartName: chartName };<br />
+}<br />
+<br />
+<br />
+function chartDeltas(json, state) {<br />
+&nbsp;&nbsp;// Filter the data to the correct state; null means US<br />
+&nbsp;&nbsp;let filteredJson = (state == null) ? json : json.filter(row =&gt; row[&quot;state&quot;] == state)<br />
+<br />
+&nbsp;&nbsp;let currentTestsDeltaToday = filteredJson[0][&quot;totalTestResults&quot;] - filteredJson[1][&quot;totalTestResults&quot;]<br />
+&nbsp;&nbsp;let currentTestsDeltas = deltaDataPointsFromDailyDataJSON(filteredJson, &quot;totalTestResults&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let positiveDeltaToday = filteredJson[0][&quot;positive&quot;] - filteredJson[1][&quot;positive&quot;]<br />
+&nbsp;&nbsp;let positiveDeltas = deltaDataPointsFromDailyDataJSON(filteredJson, &quot;positive&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let deathsDeltaToday = filteredJson[0][&quot;death&quot;] - filteredJson[1][&quot;death&quot;]<br />
+&nbsp;&nbsp;let deathsDeltas = deltaDataPointsFromDailyDataJSON(filteredJson, &quot;death&quot;)<br />
+<br />
+&nbsp;&nbsp;let chartName = &quot;chartDeltas&quot; + (state == null ? &quot;US&quot; : state) + chartCount++<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let chartJS = `<br />
+var ${chartName} = new CanvasJS.Chart(&quot;${chartName}&quot;, {<br />
+	animationEnabled: false,<br />
+	title:{<br />
+		text: &quot;Day-over-Day Change${state == null ? &quot;&quot; : &quot; in &quot; + state}&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize: 25,<br />
+	},<br />
+	axisX: {<br />
+		valueFormatString: &quot;MMM DD&quot;<br />
+	},<br />
+	axisY: {<br />
+		title: &quot;Count&quot;,<br />
+		includeZero: true,<br />
+	},<br />
+	legend:{<br />
+		cursor: &quot;pointer&quot;,<br />
+		fontSize: 16,<br />
+		itemclick: toggleDataSeries<br />
+	},<br />
+	toolTip:{<br />
+		shared: true<br />
+	},<br />
+	data: [{<br />
+		name: &quot;Total Tests Δ (${currentTestsDeltaToday.toLocaleString()})&quot;,<br />
+		type: &quot;line&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lineColor: &quot;gray&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: &quot;gray&quot;,<br />
+		showInLegend: true,<br />
+		dataPoints: [<br />
+${currentTestsDeltas}<br />
+		]<br />
+	},<br />
+	{<br />
+		name: &quot;Positive Δ (${positiveDeltaToday.toLocaleString()})&quot;,<br />
+		type: &quot;line&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lineColor: &quot;orange&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: &quot;orange&quot;,<br />
+		showInLegend: true,<br />
+		dataPoints: [<br />
+${positiveDeltas}<br />
+		]<br />
+	},<br />
+	{<br />
+		name: &quot;Deaths Δ (${deathsDeltaToday.toLocaleString()})&quot;,<br />
+		type: &quot;line&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lineColor: &quot;red&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: &quot;red&quot;,<br />
+		showInLegend: true,<br />
+		dataPoints: [<br />
+${deathsDeltas}<br />
+		]<br />
+	}]<br />
+});<br />
+${chartName}.render();<br />
+`<br />
+<br />
+&nbsp;&nbsp;return { chartJS: chartJS, chartName: chartName };<br />
+}<br />
+<br />
+<br />
+function sortedStateNames(json) {<br />
+&nbsp;&nbsp;// For the entry with today&#039;s date, sort the state names from highest positive count to lowest<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let todaysDate = json[0].date<br />
+&nbsp;&nbsp;let todaysData = json.filter(row =&gt; row.date == todaysDate)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;todaysData.sort((a, b) =&gt; b.positive - a.positive)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return todaysData.map(row =&gt; row.state)<br />
+}<br />
+<br />
+<br />
+function statesTestsBarChart(json) {<br />
+&nbsp;&nbsp;let todaysDate = json[0].date<br />
+&nbsp;&nbsp;let todaysData = json.filter(row =&gt; row.date == todaysDate)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;todaysData.sort((a, b) =&gt; b.positive - a.positive)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let positiveDataPoints = todaysData.map(row =&gt; &quot;{ y: &quot;+row.positive+&quot;, label: &#039;&quot;+row.state+&quot;&#039; }&quot;)<br />
+&nbsp;&nbsp;let negativeDataPoints = todaysData.map(row =&gt; &quot;{ y: &quot;+(row.totalTestResults-row.positive)+&quot;, label: &#039;&quot;+row.state+&quot;&#039; }&quot;)<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let chartName = &quot;chartTestsBarChart&quot; + chartCount++<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;let chartJS = `<br />
+var ${chartName} = new CanvasJS.Chart(&quot;${chartName}&quot;, {<br />
+	animationEnabled: false,<br />
+	title:{<br />
+		text: &quot;State Testing&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize: 25,<br />
+	},<br />
+	axisX: {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: &quot;State&quot;,<br />
+		interval: 1,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labelFontSize: 12,<br />
+	},<br />
+	axisY:{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: &quot;Count&quot;,<br />
+	},<br />
+	data: [{<br />
+		type: &quot;stackedColumn&quot;,<br />
+		showInLegend: true,<br />
+		color: &quot;orange&quot;,<br />
+		name: &quot;Positive&quot;,<br />
+		dataPoints: [<br />
+${positiveDataPoints.join(&quot;,&quot;)}<br />
+		]<br />
+		},<br />
+		{        <br />
+			type: &quot;stackedColumn&quot;,<br />
+			showInLegend: true,<br />
+			name: &quot;Negative&quot;,<br />
+			color: &quot;gray&quot;,<br />
+			dataPoints: [<br />
+${negativeDataPoints.join(&quot;,&quot;)}  <br />
+			]<br />
+		},<br />
+	]<br />
+});<br />
+${chartName}.render();<br />
+`<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;return { chartJS: chartJS, chartName: chartName };<br />
+}<br />
+<br />
+<br />
+<br />
+var html = `<br />
+&lt;!DOCTYPE HTML&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;  <br />
+&lt;script&gt;<br />
+window.onload = function () {<br />
+`<br />
+<br />
+<br />
+var chartNames = []<br />
+<br />
+<br />
+<br />
+// https://covidtracking.com/api/v1/us/daily.json<br />
+<br />
+let dailyDataRequest = new Request(&quot;https://covidtracking.com/api/v1/us/daily.json&quot;)<br />
+let dailyData = await dailyDataRequest.loadJSON()<br />
+<br />
+<br />
+// US chart for tests given, positive tests, deaths<br />
+<br />
+let usChart = chartTestsPositivesDeathsForState(dailyData, null)<br />
+<br />
+html += usChart.chartJS<br />
+chartNames.push(usChart.chartName)<br />
+<br />
+<br />
+<br />
+// US Deltas<br />
+<br />
+let usDeltasChart = chartDeltas(dailyData, null)<br />
+html += usDeltasChart.chartJS<br />
+chartNames.push(usDeltasChart.chartName)<br />
+<br />
+<br />
+<br />
+// Per-state tests, positive, deaths charts sorted by most positive<br />
+// https://covidtracking.com/api/v1/states/daily.json<br />
+<br />
+let stateDataRequest = new Request(&quot;https://covidtracking.com/api/v1/states/daily.json&quot;)<br />
+let stateData = await stateDataRequest.loadJSON()<br />
+<br />
+<br />
+<br />
+// States tests stacked bar chart<br />
+<br />
+let testsBarChart = statesTestsBarChart(stateData)<br />
+html += testsBarChart.chartJS<br />
+chartNames.push(testsBarChart.chartName)<br />
+<br />
+<br />
+<br />
+// California<br />
+let caChart = chartTestsPositivesDeathsForState(stateData, &quot;CA&quot;)<br />
+<br />
+html += caChart.chartJS<br />
+chartNames.push(caChart.chartName)<br />
+<br />
+let caDeltasChart = chartDeltas(stateData, &quot;CA&quot;)<br />
+html += caDeltasChart.chartJS<br />
+chartNames.push(caDeltasChart.chartName)<br />
+<br />
+<br />
+<br />
+// Sorted state data<br />
+<br />
+let sortedStates = sortedStateNames(stateData)<br />
+<br />
+for (let state of sortedStates) {<br />
+&nbsp;&nbsp;let stateChart = chartTestsPositivesDeathsForState(stateData, state)<br />
+&nbsp;&nbsp;html += stateChart.chartJS<br />
+&nbsp;&nbsp;chartNames.push(stateChart.chartName)<br />
+}<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+html += `<br />
+function toggleDataSeries(e){<br />
+	if (typeof(e.dataSeries.visible) === &quot;undefined&quot; || e.dataSeries.visible) {<br />
+		e.dataSeries.visible = false;<br />
+	}<br />
+	else{<br />
+		e.dataSeries.visible = true;<br />
+	}<br />
+	chart.render();<br />
+}<br />
+<br />
+}<br />
+&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+`<br />
+<br />
+<br />
+var index = 0<br />
+for (let chartName of chartNames) {<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;var width = &quot;100%&quot; // US data, tests for all states<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;if (index &gt;= 5) { // sorted states<br />
+&nbsp;&nbsp;&nbsp;&nbsp;width = &quot;33%&quot;<br />
+&nbsp;&nbsp;} else if (index &gt;= 3) { // California<br />
+&nbsp;&nbsp;&nbsp;&nbsp;width = &quot;50%&quot;<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;html += &#039;&lt;div id=&quot;&#039;+chartName+&#039;&quot; style=&quot;height: 500px; width: &#039;+width+&#039;; display: inline-block;&quot;&gt;&lt;/div&gt;&#039;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;if (index == 1 || index == 2 || (index % 3) == 1) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;html += &quot;&lt;br /&gt;&lt;br /&gt;&quot;<br />
+&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;index++<br />
+}<br />
+<br />
+<br />
+html += `<br />
+&lt;script src=&quot;https://canvasjs.com/assets/script/canvasjs.min.js&quot;&gt;&lt;/script&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+`<br />
+<br />
+<br />
+<br />
+let webView = new WebView()<br />
+<br />
+webView.loadHTML(html)<br />
+webView.present(true)</div>
+Resources:<br />
+- <a href="/m/graph-js/canvasjs.min.js">Backup of the canvasJS library</a><br />
+- <a href="/m/graph-js/us-daily.json">Snapshot of US Daily data</a><br />
+- <a href="/m/graph-js/states-daily.json">Snapshot of States Daily data</a><br />
+
+]]>
+</content>
+</entry>
+,
 <entry>
 <title>Books</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/books.html" />
