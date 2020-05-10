@@ -5,7 +5,7 @@ Date: 5/9/2020
 
 As a followup to [Link:/p/graph-js.html]graphing in Scriptable[/Link], I took some time to convert the script into a live web dashboard.
 
-You can find the live dashboard [Link:/m/graph-js/covid19.html]here[/Link].
+You can find the live dashboard [Link:/m/graph-js/covid19.html?maxStates=24]here[/Link].
 
 
 The main ways the code needed to change:

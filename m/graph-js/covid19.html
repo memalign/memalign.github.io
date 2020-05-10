@@ -93,7 +93,19 @@ function constructChartsIfPossible() {
 
 	// Sorted state data
 	// Cap the number of states we will render; when using all of them we run out of memory and charts show up blank sometimes
-	let sortedStates = sortedStateNames(stateData).slice(0, 30)
+
+	var sortedStates = sortedStateNames(stateData)
+	
+	let userMax = 30
+	
+	let urlParams = new URLSearchParams(window.location.search)
+	let rawMaxStates = urlParams.get('maxStates')
+	if (rawMaxStates) {
+		userMax = parseInt(rawMaxStates)
+	}
+	
+	let maxStates = Math.min(userMax, sortedStates.length)
+	sortedStates = sortedStateNames(stateData).slice(0, maxStates)
 	
 	for (let state of sortedStates) {
 	  let stateChart = chartTestsPositivesDeathsForState(stateData, state)
