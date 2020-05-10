@@ -1,0 +1,439 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="canvasjs.min.js"></script>
+<script>
+
+// https://stackoverflow.com/questions/9838812/how-can-i-open-a-json-file-in-javascript-without-jquery
+// Usage:
+// loadJSON('my-file.json',
+//         function(data) { console.log(data); },
+//         function(xhr) { console.error(xhr); }
+// );
+function loadJSON(path, success, error)
+{
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if (success)
+                    success(JSON.parse(xhr.responseText));
+            } else {
+                if (error)
+                    error(xhr);
+            }
+        }
+    };
+    xhr.open("GET", path, true);
+    xhr.send();
+}
+
+var dailyData = null
+var stateData = null
+
+window.onload = function () {
+
+	// Request both data sets
+	// When we have both, construct the charts
+
+	loadJSON('https://covidtracking.com/api/v1/us/daily.json',
+		function(data) {
+			dailyData = data
+			constructChartsIfPossible()
+		},
+		function(xhr) { console.error(xhr); }
+	);
+	
+
+	loadJSON('https://covidtracking.com/api/v1/states/daily.json',
+		function(data) {
+			stateData = data
+			constructChartsIfPossible()
+		},
+		function(xhr) { console.error(xhr); }
+	);
+}
+
+let charts = []
+
+function constructChartsIfPossible() {
+	if (dailyData == null || stateData == null) {
+		return
+	}
+
+
+	// US chart for tests given, positive tests, deaths
+
+	let usChart = chartTestsPositivesDeathsForState(dailyData, null)
+	charts.push(usChart)
+
+
+	// US Deltas
+
+	let usDeltasChart = chartDeltas(dailyData, null)
+	charts.push(usDeltasChart)
+
+
+	// Per-state tests, positive, deaths charts sorted by most positive
+
+	// States tests stacked bar chart
+
+	let testsBarChart = statesTestsBarChart(stateData)
+	charts.push(testsBarChart)
+
+
+	// California
+	let caChart = chartTestsPositivesDeathsForState(stateData, "CA")
+	charts.push(caChart)
+
+	let caDeltasChart = chartDeltas(stateData, "CA")
+	charts.push(caDeltasChart)
+
+
+	// Sorted state data
+	// Cap the number of states we will render; when using all of them we run out of memory and charts show up blank sometimes
+	let sortedStates = sortedStateNames(stateData).slice(0, 30)
+	
+	for (let state of sortedStates) {
+	  let stateChart = chartTestsPositivesDeathsForState(stateData, state)
+	  charts.push(stateChart)
+	}
+
+	
+	dailyData = null
+	stateData = null
+
+	for (let chart of charts) {
+		chart.render()
+	}
+
+}
+
+var chartIndex = 0
+
+function appendChart(chartName) {
+	var width = "100%" // US data, tests for all states
+	  
+	if (chartIndex >= 5) { // sorted states
+		width = "33%"
+	} else if (chartIndex >= 3) { // California
+		width = "50%"
+	}
+
+    var elemDiv = document.createElement('div');
+    elemDiv.setAttribute("id", chartName);
+    elemDiv.style.cssText = "height: 500px; width: "+width+"; display: inline-block;";
+    document.body.appendChild(elemDiv)
+    
+	if (chartIndex == 1 || chartIndex == 2 || (chartIndex % 3) == 1) {
+		appendBr()
+		appendBr()
+	}
+    
+    chartIndex++
+}
+
+function appendBr() {
+	let elemBr = document.createElement('br')
+	document.body.appendChild(elemBr)
+}
+
+
+// Show graphs that match: https://www.politico.com/interactives/2020/coronavirus-testing-by-state-chart-of-new-cases/
+// Data from: https://covidtracking.com/api
+
+// Examples the charts are based on:
+// https://canvasjs.com/javascript-charts/null-data-chart/
+// https://canvasjs.com/javascript-charts/multi-series-chart/
+// https://canvasjs.com/javascript-charts/stacked-column-chart/
+// https://canvasjs.com/javascript-charts/stacked-bar-chart/
+// https://canvasjs.com/javascript-charts/stacked-bar-100-chart/
+
+let firstInterestingDate = 20200301
+
+function dataPointsFromDailyDataJSON(json, key) {
+  // { x: new Date(2017,6,24), y: 31 },
+  
+  var result = []
+  
+  for (let row of json) {
+    let value = row[key]
+    let date = row["date"]
+
+    // Data is uninteresting before March 1st: 20200301
+    if (date < firstInterestingDate) {
+      continue
+    }
+
+    let match = (date+"").match(/(\d{4})(\d{2})(\d{2})/)
+    let year = parseInt(match[1])
+    let month = parseInt(match[2])
+    let day = parseInt(match[3])
+    
+	result.push({ x: new Date(year, month-1, day), y: value })
+  }
+  
+  return result
+}
+
+function deltaDataPointsFromDailyDataJSON(json, key) {
+  // { x: new Date(2017,6,24), y: 31 },
+  
+  var result = []
+  
+  // json is sorted newest to oldest so we need to iterate backwards
+  
+  var index = json.length-1
+  
+  var prevValue = json[index][key]
+  
+  while (index >= 0) {
+    let row = json[index]
+    index--
+
+    let value = row[key]
+    let date = row["date"]
+
+    let delta = value - prevValue
+    prevValue = value
+
+    // Data is uninteresting before March 1st: 20200301
+    if (date < firstInterestingDate) {
+      continue
+    }
+
+    let match = (date+"").match(/(\d{4})(\d{2})(\d{2})/)
+    let year = parseInt(match[1])
+    let month = parseInt(match[2])
+    let day = parseInt(match[3])
+    
+    result.push({ x: new Date(year, month-1, day), y: delta })
+  }
+  
+  return result
+}
+
+var chartCount = 0
+
+function chartTestsPositivesDeathsForState(json, state) {
+  // Filter the data to the correct state; null means US
+  let filteredJson = (state == null) ? json : json.filter(row => row["state"] == state)
+  
+  
+  let currentTotalTests = filteredJson[0]["totalTestResults"]
+  let totalTestsDataPoints = dataPointsFromDailyDataJSON(filteredJson, "totalTestResults")
+  
+  let currentPositive = filteredJson[0]["positive"]
+  let positiveDataPoints = dataPointsFromDailyDataJSON(filteredJson, "positive")
+  
+  let currentDeath = filteredJson[0]["death"]
+  let deathsDataPoints = dataPointsFromDailyDataJSON(filteredJson, "death")
+
+  let chartName = "chart" + (state == null ? "US" : state) + chartCount++
+
+	appendChart(chartName)
+
+	var chart = new CanvasJS.Chart(chartName, {
+		animationEnabled: false,
+		title:{
+			text: "COVID-19 in " + (state == null ? "the United States" : state),
+	        fontSize: 25,
+		},
+		axisX: {
+			valueFormatString: "MMM DD"
+		},
+		axisY: {
+			title: "Count",
+			includeZero: true,
+		},
+		legend:{
+			cursor: "pointer",
+			fontSize: 16,
+			itemclick: toggleDataSeries
+		},
+		toolTip:{
+			shared: true
+		},
+		data: [{
+			name: "Total Tests ("+currentTotalTests.toLocaleString()+")",
+			type: "line",
+	        lineColor: "gray",
+	        color: "gray",
+			showInLegend: true,
+			dataPoints: totalTestsDataPoints,
+		},
+		{
+			name: "Positive ("+currentPositive.toLocaleString()+")",
+			type: "line",
+	        lineColor: "orange",
+	        color: "orange",
+			showInLegend: true,
+			dataPoints: positiveDataPoints,
+		},
+		{
+			name: "Deaths ("+currentDeath.toLocaleString()+")",
+			type: "line",
+	        lineColor: "red",
+	        color: "red",
+			showInLegend: true,
+			dataPoints: deathsDataPoints
+		}]
+	});
+
+
+  return chart
+}
+
+
+function chartDeltas(json, state) {
+  // Filter the data to the correct state; null means US
+  let filteredJson = (state == null) ? json : json.filter(row => row["state"] == state)
+
+  let currentTestsDeltaToday = filteredJson[0]["totalTestResults"] - filteredJson[1]["totalTestResults"]
+  let currentTestsDeltas = deltaDataPointsFromDailyDataJSON(filteredJson, "totalTestResults")
+  
+  let positiveDeltaToday = filteredJson[0]["positive"] - filteredJson[1]["positive"]
+  let positiveDeltas = deltaDataPointsFromDailyDataJSON(filteredJson, "positive")
+  
+  let deathsDeltaToday = filteredJson[0]["death"] - filteredJson[1]["death"]
+  let deathsDeltas = deltaDataPointsFromDailyDataJSON(filteredJson, "death")
+
+  let chartName = "chartDeltas" + (state == null ? "US" : state) + chartCount++
+
+	appendChart(chartName)
+
+	var chart = new CanvasJS.Chart(chartName, {
+		animationEnabled: false,
+		title:{
+			text: "Day-over-Day Change" + (state == null ? "" : " in " + state),
+	        fontSize: 25,
+		},
+		axisX: {
+			valueFormatString: "MMM DD"
+		},
+		axisY: {
+			title: "Count",
+			includeZero: true,
+		},
+		legend:{
+			cursor: "pointer",
+			fontSize: 16,
+			itemclick: toggleDataSeries
+		},
+		toolTip:{
+			shared: true
+		},
+		data: [{
+			name: "Total Tests Δ ("+currentTestsDeltaToday.toLocaleString()+")",
+			type: "line",
+	        lineColor: "gray",
+	        color: "gray",
+			showInLegend: true,
+			dataPoints: currentTestsDeltas,
+		},
+		{
+			name: "Positive Δ ("+positiveDeltaToday.toLocaleString()+")",
+			type: "line",
+	        lineColor: "orange",
+	        color: "orange",
+			showInLegend: true,
+			dataPoints: positiveDeltas,
+		},
+		{
+			name: "Deaths Δ ("+deathsDeltaToday.toLocaleString()+")",
+			type: "line",
+	        lineColor: "red",
+	        color: "red",
+			showInLegend: true,
+			dataPoints: deathsDeltas,
+		}]
+	});
+
+  return chart
+}
+
+
+function sortedStateNames(json) {
+  // For the entry with today's date, sort the state names from highest positive count to lowest
+  
+  let todaysDate = json[0].date
+  let todaysData = json.filter(row => row.date == todaysDate)
+  
+  todaysData.sort((a, b) => b.positive - a.positive)
+  
+  return todaysData.map(row => row.state)
+}
+
+
+function statesTestsBarChart(json) {
+  let todaysDate = json[0].date
+  let todaysData = json.filter(row => row.date == todaysDate)
+  
+  todaysData.sort((a, b) => b.positive - a.positive)
+  
+  let positiveDataPoints = todaysData.map(row => ({ y: row.positive, label: row.state }))
+  let negativeDataPoints = todaysData.map(row => ({ y: (row.totalTestResults-row.positive), label: row.state }))
+  
+  let chartName = "chartTestsBarChart" + chartCount++
+  
+	appendChart(chartName)
+  
+	var chart = new CanvasJS.Chart(chartName, {
+		animationEnabled: false,
+		title:{
+			text: "State Testing",
+	        fontSize: 25,
+		},
+		axisX: {
+	        title: "State",
+			interval: 1,
+	        labelFontSize: 12,
+		},
+		axisY:{
+	        title: "Count",
+		},
+		data: [{
+			type: "stackedColumn",
+			showInLegend: true,
+			color: "orange",
+			name: "Positive",
+			dataPoints: positiveDataPoints,
+			},
+			{        
+				type: "stackedColumn",
+				showInLegend: true,
+				name: "Negative",
+				color: "gray",
+				dataPoints: negativeDataPoints,
+			},
+		]
+	});
+
+  
+  return chart
+}
+
+
+function toggleDataSeries(e){
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+
+	for (let chart of charts) {
+		chart.render()
+	}
+}
+
+
+</script>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+</div>
+</body>
+</html>

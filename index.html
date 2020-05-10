@@ -12,7 +12,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
 <meta property="og:image" content="/m/graph-js.jpg" />
-<meta property="og:description" content="COVID-19 has loomed over us for many months. For weeks, I watched the spread using graphs on politico.com. A few days went by without updates so I investigated recreating the…" />
+<meta property="og:description" content="As a followup to graphing in Scriptable, I took some time to convert the script into a live web dashboard. You can find the live dashboard here. The main ways…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -23,6 +23,7 @@
 <a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
 </div><div id='allposts'>
 <b>All posts:</b><br />
+<a href='p/live-covid19.html'>Live COVID-19 Dashboard</a><br />
 <a href='p/graph-js.html'>Create COVID-19 Graphs Using JavaScript</a><br />
 <a href='p/books.html'>Books</a><br />
 <a href='p/notes-txt.html'>notes.txt</a><br />
@@ -34,6 +35,46 @@
 <a href='p/feedly.html'>RSS and Feedly</a><br />
 <a href='p/this-website.html'>Welcome</a><br />
 </div>
+
+<div id='header'>
+<h2>
+<a href='p/live-covid19.html'>Live COVID-19 Dashboard</a>
+</h2>
+</div>
+<img src="/m/graph-js.jpg"></img>
+<div id='postdate'>Posted on 5/9/2020</div>
+As a followup to <a href="/p/graph-js.html">graphing in Scriptable</a>, I took some time to convert the script into a live web dashboard.<br />
+<br />
+You can find the live dashboard <a href="/m/graph-js/covid19.html">here</a>.<br />
+<br />
+<br />
+The main ways the code needed to change:<br />
+<br />
+- Instead of loading data synchronously, it is now loaded asynchronously via XMLHttpRequest<br />
+<br />
+- The document body is constructed dynamically once data loads (instead of being generated and then loaded into a web view in its complete form)<br />
+<br />
+- canvasJS requires divs to be set up before charts are created. I needed to move div setup to happen inline instead of at the end of the script.<br />
+<br />
+- Instead of generating JavaScript in string form to setup the charts, I set them up directly<br />
+<br />
+&nbsp;&nbsp;Code like this:<br />
+<div id='code'>var result = &quot;&quot;<br />
+...<br />
+result += &quot;{ x: new Date(&quot;+year+&quot;,&quot;+(month-1)+&quot;,&quot;+day+&quot;), y: &quot; + value + &quot; },\n&quot;<br />
+...<br />
+return result</div>
+&nbsp;&nbsp;Became this:<br />
+<div id='code'>var result = []<br />
+...<br />
+result.push({ x: new Date(year, month-1, day), y: value })<br />
+...<br />
+return result</div>
+- I limit the number of total charts because the full page was consuming too much memory which caused canvasJS to render completely blank charts, charts where some lines were missing, etc.<br />
+<br />
+- I also fixed a bug so lines can be hidden by clicking them in the legend<br />
+
+<hr />
 
 <div id='header'>
 <h2>
@@ -58,7 +99,7 @@ A few days went by without updates so I investigated recreating the graphs mysel
 <br />
 5. I found a <a href="https://canvasjs.com/javascript-charts/null-data-chart/">sample</a> graph that looked similar to what I needed<br />
 <br />
-6. To quickly check that this would work, I created a quick script in Scriptable to generate the HTML and show a web view, pasting in their example:<br />
+6. To quickly check that this would work, I created a script in Scriptable to generate the HTML and show a web view, pasting in their example:<br />
 <br />
 <div id='code'>let html = `<br />
 &lt;!DOCTYPE html&gt;<br />

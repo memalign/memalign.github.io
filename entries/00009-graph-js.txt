@@ -19,7 +19,7 @@ A few days went by without updates so I investigated recreating the graphs mysel
 
 5. I found a [Link:https://canvasjs.com/javascript-charts/null-data-chart/]sample[/Link] graph that looked similar to what I needed
 
-6. To quickly check that this would work, I created a quick script in Scriptable to generate the HTML and show a web view, pasting in their example:
+6. To quickly check that this would work, I created a script in Scriptable to generate the HTML and show a web view, pasting in their example:
 
 [Code]
 let html = `

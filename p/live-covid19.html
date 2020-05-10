@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Live COVID-19 Dashboard</title>
+<meta property="og:title" content="Live COVID-19 Dashboard" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/live-covid19.html" />
+<meta property="og:image" content="/m/graph-js.jpg" />
+<meta property="og:description" content="As a followup to graphing in Scriptable, I took some time to convert the script into a live web dashboard. You can find the live dashboard here. The main ways…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+Live COVID-19 Dashboard
+</h1>
+</div>
+<img src="/m/graph-js.jpg"></img>
+<div id='postdate'>Posted on 5/9/2020</div>
+As a followup to <a href="/p/graph-js.html">graphing in Scriptable</a>, I took some time to convert the script into a live web dashboard.<br />
+<br />
+You can find the live dashboard <a href="/m/graph-js/covid19.html">here</a>.<br />
+<br />
+<br />
+The main ways the code needed to change:<br />
+<br />
+- Instead of loading data synchronously, it is now loaded asynchronously via XMLHttpRequest<br />
+<br />
+- The document body is constructed dynamically once data loads (instead of being generated and then loaded into a web view in its complete form)<br />
+<br />
+- canvasJS requires divs to be set up before charts are created. I needed to move div setup to happen inline instead of at the end of the script.<br />
+<br />
+- Instead of generating JavaScript in string form to setup the charts, I set them up directly<br />
+<br />
+&nbsp;&nbsp;Code like this:<br />
+<div id='code'>var result = &quot;&quot;<br />
+...<br />
+result += &quot;{ x: new Date(&quot;+year+&quot;,&quot;+(month-1)+&quot;,&quot;+day+&quot;), y: &quot; + value + &quot; },\n&quot;<br />
+...<br />
+return result</div>
+&nbsp;&nbsp;Became this:<br />
+<div id='code'>var result = []<br />
+...<br />
+result.push({ x: new Date(year, month-1, day), y: value })<br />
+...<br />
+return result</div>
+- I limit the number of total charts because the full page was consuming too much memory which caused canvasJS to render completely blank charts, charts where some lines were missing, etc.<br />
+<br />
+- I also fixed a bug so lines can be hidden by clicking them in the legend<br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+Title: Live COVID-19 Dashboard
+Date: 5/9/2020
+
+[Image:/m/graph-js.jpg]
+
+As a followup to [Link:/p/graph-js.html]graphing in Scriptable[/Link], I took some time to convert the script into a live web dashboard.
+
+You can find the live dashboard [Link:/m/graph-js/covid19.html]here[/Link].
+
+
+The main ways the code needed to change:
+
+- Instead of loading data synchronously, it is now loaded asynchronously via XMLHttpRequest
+
+- The document body is constructed dynamically once data loads (instead of being generated and then loaded into a web view in its complete form)
+
+- canvasJS requires divs to be set up before charts are created. I needed to move div setup to happen inline instead of at the end of the script.
+
+- Instead of generating JavaScript in string form to setup the charts, I set them up directly
+
+  Code like this:
+[Code]
+var result = ""
+...
+result += "{ x: new Date("+year+","+(month-1)+","+day+"), y: " + value + " },\n"
+...
+return result
+[/Code]
+
+  Became this:
+[Code]
+var result = []
+...
+result.push({ x: new Date(year, month-1, day), y: value })
+...
+return result
+[/Code]
+
+- I limit the number of total charts because the full page was consuming too much memory which caused canvasJS to render completely blank charts, charts where some lines were missing, etc.
+
+- I also fixed a bug so lines can be hidden by clicking them in the legend
