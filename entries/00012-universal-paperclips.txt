@@ -1,0 +1,699 @@
+Title: Universal Paperclips
+Date: 9/13/2020
+
+[Image:/m/universal-paperclips.png]
+
+[Link:https://www.decisionproblem.com/paperclips/index2.html]Universal Paperclips[/Link] ([Link:https://en.wikipedia.org/wiki/Universal_Paperclips]wikipedia article[/Link]) is an [Link:https://en.wikipedia.org/wiki/Incremental_game]incremental game[/Link] about an AI created to produce paperclips.
+
+When I first played it several years ago, I got sucked in for an entire day. Then I felt compelled to play it again the next day.
+
+
+Universal Paperclips drew me in for many reasons:
+
+- Its premise and user interface is simple. It's almost entirely text-based.
+
+- The game starts small and builds up levels of complexity, with the next goal being barely within reach
+
+- Optimizing ever-growing numbers of paperclips, dollars, and other resources is satisfying to my engineer-brain
+
+- AI as an existential threat to humanity is an interesting topic to explore
+
+
+The game popped up in one of my news feeds last week and I started to consider whether I could automate playing the whole game from beginning to end.
+
+Because it's a web-based game, it's easy to inspect the UI and inject code. Just open your web browser's JavaScript console to paste in code.
+
+Here's how to scrape the number of paperclips:
+[Code]
+parseInt(document.getElementById("clips").textContent.replace(/,/g, ''))
+[/Code]
+
+Though it's possible to inspect the global variables that power the game, I mostly stuck to scraping the user interface even though it's messier. Example messiness: I needed to strip commas from the number of paperclips so "1,000,000" would turn into 1000000.
+
+The project of automating playing the game mirrored playing the game itself. I incrementally refined my strategy and added complexity.
+
+To automate playing the game:
+
+- I created an event loop which runs every 10ms
+
+- I aimed to maintain a minimal amount of my own state. Every cycle, my script inspects the UI to determine relevant actions to take. I only need to keep state to count the number of elapsed cycles and to monitor whether a few game attributes stopped changing. By keeping minimal state, I was able to easily update my code running on the page mid-game and it could always pick up at the right place.
+
+- I initially started by calling button handler methods directly. I found that the game doesn't always check whether the relevant button should have been enabled so I later started injecting clicks to the buttons themselves.
+
+
+Opportunities for improvement:
+
+- The game sometimes glitches due to how quickly my event loop performs actions. It's possible to over-spend some resources which means my script is accidentally cheating. The script could be updated to perform actions more slowly (and one per cycle) or add its own resource checking to avoid over-spending.
+
+- My script is not playing with an optimal strategy to complete the game quickly. Though I based some of the strategy off of a speed run I found on [Link:https://www.youtube.com/watch?v=hDXoonknjS0]YouTube[/Link], there's a lot of opportunity to follow that strategy more closely.
+
+- I sprinkled some limits to prevent actions when they're not relevant (e.g. stop upgrading the investment engine after level 15). It would be helpful to document why these limits are needed. Some could be replaced with smarter logic.
+
+- Updating the script is time-consuming because a test cycle takes hours! Finding a way to reduce the test cycle to take less time than playing through the game in real-time could lead to a lot of other refinement.
+
+
+Here's a script which successfully automatically plays Universal Paperclips from beginning to end:
+
+[Code]
+// Open this page:
+// https://www.decisionproblem.com/paperclips/index2.html
+//
+// Open JavaScript console and paste this code in
+
+var dpCycles = 0
+
+function incrementCycles() {
+    dpCycles++
+    if (dpCycles % 1000 == 0) {
+        console.log("dpCycles: " + dpCycles)
+    }
+}
+
+
+var lastUnsoldClips = 0
+var cyclesWithoutSellingClips = 0
+var cyclesSinceLastDeposit = 0
+var lastUnusedClipsCount = 0
+var cyclesWithoutUnusedClipsCountChange = 0
+
+function performEventCycle() {
+    incrementCycles()
+   
+    // Examine game state
+    let clips = parseInt(document.getElementById("clips").textContent.replace(/,/g, ''))
+    let unsoldClips = parseInt(document.getElementById("unsoldClips").textContent.replace(/,/g, ''))
+    let funds = parseFloat(document.getElementById("funds").textContent.replace(/,/g, ''))
+    let pricePerClip = parseFloat(document.getElementById("margin").textContent.replace(/,/g, ''))
+    let wire = parseInt(document.getElementById("wire").textContent.replace(/,/g, ''))
+    let wireCost = parseInt(document.getElementById("wireCost").textContent.replace(/,/g, ''))
+    let canBuyWire = !document.getElementById("btnBuyWire").disabled
+
+    let marketingLevel = parseInt(document.getElementById("marketingLvl").textContent.replace(/,/g, ''))
+    let canIncreaseMarketingLevel = !document.getElementById("btnExpandMarketing").disabled
+
+    let autoClippers = parseInt(document.getElementById("clipmakerLevel2").textContent.replace(/,/g, ''))
+    let canMakeAutoClipper = !document.getElementById("btnMakeClipper").disabled 
+
+    let megaAutoClippers = parseInt(document.getElementById("megaClipperLevel").textContent.replace(/,/g, ''))
+    let canMakeMegaAutoClipper = !document.getElementById("btnMakeMegaClipper").disabled
+
+    let processors = parseInt(document.getElementById("processors").textContent)
+    let memory = parseInt(document.getElementById("memory").textContent)
+
+    let processorButton = document.getElementById("btnAddProc")
+    let canAddProcessor = processorButton && !processorButton.disabled
+    let memoryButton = document.getElementById("btnAddMem")
+    let canAddMemory = memoryButton && !memoryButton.disabled
+
+    let operations = parseInt(document.getElementById("operations").textContent.replace(/,/g, ''))
+
+    let hasQuantumComputing = document.getElementById("qComputing").style.display != "none"
+    let needsQuantumChip = document.getElementById("qCompDisplay").textContent == "Need Photonic Chips"
+
+
+    let investmentLevel = parseInt(document.getElementById("investmentLevel").textContent.replace(/,/g, ''))
+    let canInvest = document.getElementById("investmentEngine").style.display != "none"
+    let investmentTotal = parseInt(document.getElementById("portValue").textContent.replace(/,/g, ''))
+
+
+    var quantumChipValues = []
+    if (hasQuantumComputing) {
+        for (var i = 0; i < 10; i++) {
+            quantumChipValues.push(document.getElementById("qChip"+i).style.opacity)
+        }
+    }
+
+    if (lastUnsoldClips < unsoldClips) {
+        cyclesWithoutSellingClips++
+    } else {
+        cyclesWithoutSellingClips = 0
+    }
+    lastUnsoldClips = unsoldClips
+
+    
+    // Available research projects
+    let projButton_creativity = document.getElementById("projectButton3")
+    let projAvail_creativity = projButton_creativity && !projButton_creativity.disabled
+    let handler_creativity = function() { projButton_creativity.click() }
+
+    let businessButtonIDs = ["projectButton7", "projectButton26"]
+    let trustProjectButtonIDs = ["projectButton6", "projectButton13", "projectButton14", "projectButton15", "projectButton17", "projectButton19"]
+
+    let quantumProjectButtonIDs = ["projectButton50", "projectButton51"]
+
+    let postQuantumProjectButtonIDs = ["projectButton1", "projectButton4", "projectButton5", "projectButton8", "projectButton9", "projectButton10", "projectButton10b", "projectButton11", "projectButton12", "projectButton16", "projectButton18", "projectButton20", "projectButton21", "projectButton22", "projectButton23", "projectButton24", "projectButton25", "projectButton27", "projectButton28", "projectButton29", "projectButton30", "projectButton31", "projectButton34", "projectButton35", "projectButton41", "projectButton43", "projectButton44", "projectButton45", "projectButton46", "projectButton60", "projectButton61", "projectButton62", "projectButton63", "projectButton64", "projectButton65", "projectButton66", "projectButton70", "projectButton100", "projectButton101", "projectButton102", "projectButton110", "projectButton111", "projectButton112", "projectButton118", "projectButton119", "projectButton120", "projectButton121", "projectButton125", "projectButton126", "projectButton127", "projectButton128", "projectButton129", "projectButton130", "projectButton131", "projectButton132", "projectButton133", "projectButton134", "projectButton218"]
+
+    // comment out projectButton148 (Reject Drift's offer to Start Over in a New Universe) to try the alternate ending
+    let endGameProjectButtonIDs = [ "projectButton140", "projectButton141", "projectButton142", "projectButton143", "projectButton144", "projectButton145", "projectButton146", "projectButton148", "projectButton210", "projectButton211", "projectButton212", "projectButton213", "projectButton214", "projectButton215", "projectButton216" ]
+
+    let moneyProjectButtonIDs = ["projectButton37", "projectButton38", "projectButton40", "projectButton40b"]
+
+
+    // Button handler functions
+    let handler_makePaperclip = function() { clipClick(1) }
+    let handler_increaseMarketing = buyAds
+    let handler_buyWire = buyWire
+    let handler_makeAutoClipper = makeClipper
+    let handler_makeMegaAutoClipper = makeMegaClipper
+    let handler_raisePrice = raisePrice
+    let handler_lowerPrice = lowerPrice
+    let handler_addProcessor = addProc
+    let handler_addMemory = addMem
+    let handler_quantumCompute = qComp
+    let handler_deposit = investDeposit
+    let handler_withdraw = investWithdraw
+
+
+    // =========================
+    // Choose actions to perform
+    // =========================
+    
+    handler_makePaperclip()
+    if (wireCost < 19 && canBuyWire) {
+        handler_buyWire()
+    }
+
+    // If we're not selling any paperclips, reduce cost
+    if ((clips < 10000 && pricePerClip > 0.03) ||
+        (cyclesWithoutSellingClips > 200 && pricePerClip > 0.03) ||
+        (unsoldClips > 10000000 && pricePerClip > 0.01)) {
+        handler_lowerPrice()
+        cyclesWithoutSellingClips = 0
+    }
+
+    // In middle-game, if we're selling out fast, increase cost
+    if (clips > 500000 && unsoldClips < 1000 && pricePerClip < 8.00) {
+        handler_raisePrice()
+    }
+
+
+    // Autoclippers
+    if (clips > 1000000 && wire > 0 && canMakeAutoClipper && autoClippers < 75) {
+        handler_makeAutoClipper()
+    }
+
+    if (clips > 1000000 && wire > 0 && canMakeMegaAutoClipper && megaAutoClippers < 120) {
+        handler_makeMegaAutoClipper()
+    }
+
+
+    // Marketing
+    if (canIncreaseMarketingLevel && marketingLevel < 14) {
+        handler_increaseMarketing()
+    }
+
+    // Quantum Computing
+    if (hasQuantumComputing) {
+        var canCompute = true
+        for (let qVal of quantumChipValues) {
+            if (qVal < 0) {
+                canCompute = false
+                break
+            }
+        }
+
+        if (canCompute) {
+            handler_quantumCompute()
+        }
+    }
+
+    // Research projects
+    if (projAvail_creativity) {
+        handler_creativity()
+    }
+
+    for (let trustButtonID of trustProjectButtonIDs) {
+        let trustButton = document.getElementById(trustButtonID)
+        if (trustButton && !trustButton.disabled && trustButton.style.visibility == "visible") {
+            trustButton.click()
+        }
+    }
+
+    for (let businessButtonID of businessButtonIDs) {
+        let businessButton = document.getElementById(businessButtonID)
+        if (businessButton && !businessButton.disabled && businessButton.style.visibility == "visible") {
+            businessButton.click()
+        }
+    }
+
+    for (let buttonID of quantumProjectButtonIDs) {
+        let button = document.getElementById(buttonID)
+        if (button && !button.disabled && button.style.visibility == "visible") {
+            button.click()
+        }
+    }
+
+    if (operations > 0) {
+        if (hasQuantumComputing && !needsQuantumChip) {
+            for (let buttonID of postQuantumProjectButtonIDs) {
+                let button = document.getElementById(buttonID)
+                if (button && !button.disabled && button.style.visibility == "visible") {
+                    button.click()
+
+                    // Act on only one at a time; the game appears to let you overspend with fast clicks
+                    break
+                }
+            }
+        }
+    }
+
+    for (let buttonID of endGameProjectButtonIDs) {
+        let button = document.getElementById(buttonID)
+        if (button && !button.disabled && button.style.visibility == "visible") {
+            button.click()
+        }
+    }
+
+
+
+    // Strategic Modeling
+    let newTournamentButton = document.getElementById("btnNewTournament")
+    let runTournamentButton = document.getElementById("btnRunTournament")
+    let hasAutoTourney = document.getElementById("autoTourneyControl").style.display != "none"
+    let handler_newTournament = newTourney
+    let handler_runTournament = runTourney
+    if (operations > 50000 && newTournamentButton && !newTournamentButton.disabled && !hasAutoTourney) {
+        handler_newTournament()
+        let stratPickerElement = document.getElementById("stratPicker")
+        let hasBeatLastStrategy = Array.apply(null, document.getElementById("stratPicker").options).map(x => x.value).includes("7")
+        if (hasBeatLastStrategy) {
+            stratPickerElement.value = 7 // BEAT LAST
+        } else {
+            stratPickerElement.value = 0 // RANDOM
+        }
+
+        if (runTournamentButton && !runTournamentButton.disabled) {
+            handler_runTournament()
+        }
+    }
+
+
+    // Investments
+    // Perform these upgrades after handling research projects to avoid starving them
+    let upgradeInvestmentEngineButton = document.getElementById("btnImproveInvestments")
+    let handler_upgradeInvestmentEngine = function() { upgradeInvestmentEngineButton.click() }
+    if (investmentLevel < 15 && upgradeInvestmentEngineButton && !upgradeInvestmentEngineButton.disabled) {
+        handler_upgradeInvestmentEngine()
+    }
+
+    if (investmentLevel > 5 && unsoldClips > 10000000 && funds > 20000 && cyclesSinceLastDeposit > 50000) {
+        document.getElementById("investStrat").value = "hi"
+        handler_deposit()
+        cyclesSinceLastDeposit = 0
+    } else {
+        cyclesSinceLastDeposit++
+    }
+
+
+    // Money projects (e.g. Hostile Takeover)
+    // Check whether they are visible moneyProjectButtonIDs; check money in stock market; if > 15M; withdraw and perform project
+    for (let moneyButtonID of moneyProjectButtonIDs) {
+        let button = document.getElementById(moneyButtonID)
+        let buttonIsVisible = button && button.style.visibility == "visible"
+        let buttonIsDisabled = button && button.disabled
+
+        if (buttonIsVisible) {
+            if (buttonIsDisabled) {
+                if (investmentTotal > 15000000) {
+                    handler_withdraw()
+                }
+            }
+
+            // Button may have become enabled; check the button directly
+            if (!button.disabled) {
+                button.click()
+            }
+        }
+    }
+
+
+    // Drone and Solar Farm phase
+    let factoryCount = parseInt(document.getElementById("factoryLevelDisplay").textContent.replace(/,/g, ''))
+    let canMakeFactory = !document.getElementById("btnMakeFactory").disabled
+    let harvesterDroneCount = parseInt(document.getElementById("harvesterLevelDisplay").textContent.replace(/,/g, ''))
+    let canMakeHarvesterDrone = !document.getElementById("btnMakeHarvester").disabled
+    let canMakeHarvesterDrone1k = !document.getElementById("btnHarvesterx1000").disabled
+    let wireDroneCount = parseInt(document.getElementById("wireDroneLevelDisplay").textContent.replace(/,/g, ''))
+    let canMakeWireDrone = !document.getElementById("btnMakeWireDrone").disabled
+    let canMakeWireDrone1k = !document.getElementById("btnWireDronex1000").disabled
+    let solarFarmCount = parseInt(document.getElementById("farmLevel").textContent.replace(/,/g, ''))
+    let canMakeSolarFarm = !document.getElementById("btnMakeFarm").disabled
+    let batteryTowerCount = parseInt(document.getElementById("batteryLevel").textContent.replace(/,/g, ''))
+    let canMakeBatteryTower = !document.getElementById("btnMakeBattery").disabled
+    let hasAvailableMatter = parseFloat(document.getElementById("availableMatterDisplay").textContent.replace(/,/g, '')) > 0
+    let hasAcquiredMatter = parseFloat(document.getElementById("acquiredMatterDisplay").textContent.replace(/,/g, '')) > 0
+    let hasWire = parseFloat(document.getElementById("nanoWire").textContent.replace(/,/g, '')) > 0
+
+    // We can end up stuck with a small amount of clips that we can't spend (e.g. 528.1 thousand)
+    let unusedClipsCount = parseFloat(document.getElementById("unusedClipsDisplay").textContent.replace(/,/g, ''))
+    if (unusedClipsCount == lastUnusedClipsCount) {
+        cyclesWithoutUnusedClipsCountChange++
+    } else {
+        cyclesWithoutUnusedClipsCountChange = 0
+        lastUnusedClipsCount = unusedClipsCount
+    }
+    let hasUnusedClips = unusedClipsCount > 0 && (cyclesWithoutUnusedClipsCountChange < 1000)
+
+    let projButton_selfCorrectingSupplyChain = document.getElementById("projectButton102") 
+    let selfCorrectingSupplyChainVisible = projButton_selfCorrectingSupplyChain && projButton_selfCorrectingSupplyChain.style.visibility == "visible"
+
+    let handler_makeFactory = makeFactory
+    let handler_makeHarvesterDrone = function() { makeHarvester(1) }
+    let handler_makeHarvesterDrone1k = function() { makeHarvester(1000) }
+    let handler_makeWireDrone = function() { makeWireDrone(1) }
+    let handler_makeWireDrone1k = function() { makeWireDrone(1000) }
+    let handler_makeSolarFarm = function() { makeFarm(1) }
+    let handler_makeBatteryTower = function() { makeBattery(1) }
+
+    
+    if (factoryCount >= 59 && solarFarmCount > 3538 && selfCorrectingSupplyChainVisible) {
+        // Pause consuming clips so we can activate selfCorrectingSupplyChain
+    } else if (hasAvailableMatter || hasAcquiredMatter) {
+        // Based on a speed run: https://www.youtube.com/watch?v=hDXoonknjS0
+        // Values to achieve:
+        // [factory, harvester, wire, farm, battery]
+        let milestones = [
+            [1, 30, 30, 11, 1],
+            [6, 170, 180, 34, 11],
+            [6, 320, 370, 49, 11],
+            [8, 400, 490, 60, 21],
+            [9, 510, 610, 68, 21],
+            [10, 1000, 1400, 168, 21],
+            [15, 2000, 2800, 248, 121],
+            [20, 2500, 3300, 308, 121],
+            [50, 5500, 6600, 600, 121],
+            [57, 35500, 36000, 2208, 121],
+            [70, 77000, 77000, 5508, 1221],
+            [80, 87000, 87000, 7508, 1221],
+            [198, 377000, 404000, 29508, 1221],
+            [211, 1121000, 1133000, 50308, 1221],
+            [1000, 1133000, 1135000, 50308, 1221],
+        ]
+
+        let currVals = [factoryCount, harvesterDroneCount, wireDroneCount, solarFarmCount, batteryTowerCount]
+
+        for (let milestone of milestones) {
+            var done = false
+            for (let i = 0; i < currVals.length; i++) {
+                let delta = milestone[i] - currVals[i]
+                if (delta > 0) {
+                    if (i == 0 && canMakeFactory) {
+                        handler_makeFactory()
+                    } else if (i == 1 && canMakeHarvesterDrone) {
+                        if (hasAvailableMatter) {
+                            if (canMakeHarvesterDrone1k && delta >= 1000) {
+                                handler_makeHarvesterDrone1k()
+                            } else {
+                                handler_makeHarvesterDrone()
+                            }
+                        }
+                    } else if (i == 2 && canMakeWireDrone) {
+                        if (hasAcquiredMatter) {
+                            if (canMakeWireDrone1k && delta >= 1000) {
+                                handler_makeWireDrone1k()
+                            } else {
+                                handler_makeWireDrone()
+                            }
+                        }
+                    } else if (i == 3 && canMakeSolarFarm) {
+                        handler_makeSolarFarm()
+                    } else if (i == 4 && canMakeBatteryTower) {
+                        handler_makeBatteryTower()
+                    }
+
+                    // Don't break so we can increment evenly across the types that need it
+                    done = true
+                }
+            }
+
+            if (done) {
+                break
+            }
+        }
+    }
+
+
+    let hasSpaceExploration = document.getElementById("spaceDiv").style.display != "none"
+
+    // Swarm computing
+    let hasSwarmComputing = document.getElementById("swarmEngine").style.display != "none"
+
+    if (hasSwarmComputing) {
+        let totalDroneCount = harvesterDroneCount + wireDroneCount
+        let swarmComputingSlider = document.getElementById("slider")
+
+        var sliderValue = 0 // range is 0 to 200
+        if (hasSpaceExploration) {
+            sliderValue = processors > 1400 ? 0 : 150
+        } else {
+            // Heuristic for when we're still on Earth (prior to space exploration)
+            if (!hasAvailableMatter && !hasAcquiredMatter) {
+                sliderValue = 200
+            } else if (processors > 160) {
+                sliderValue = 0
+            } else if (totalDroneCount > 1000) {
+                sliderValue = 150
+            } else if (totalDroneCount > 700) {
+                sliderValue = 100
+            }
+        }
+
+        swarmComputingSlider.value = sliderValue
+
+
+        let entertainSwarmButton = document.getElementById("btnEntertainSwarm")
+        let swarmIsBored = document.getElementById("swarmStatus").textContent == "Bored"
+
+        let synchronizeSwarmButton = document.getElementById("btnSynchSwarm")
+        let swarmIsDisorganized = document.getElementById("swarmStatus").textContent == "Disorganized"
+
+        if (entertainSwarmButton && !entertainSwarmButton.disabled && swarmIsBored) {
+            entertainSwarmButton.click()
+        } else if (synchronizeSwarmButton && !synchronizeSwarmButton.disabled && swarmIsDisorganized) {
+            synchronizeSwarmButton.click()
+        }
+    }
+
+
+    // Reclaim clips from factories and drones
+    if (hasSwarmComputing && !hasSpaceExploration && !hasAvailableMatter && !hasAcquiredMatter && wire == 0) {
+        let handler_disassembleFactories = factoryReboot
+        let handler_disassembleHarvesterDrones = harvesterReboot
+        let handler_disassembleWireDrones = wireDroneReboot
+
+        if (factoryCount > 0) {
+            handler_disassembleFactories()
+        }
+
+        if (harvesterDroneCount > 0) {
+            handler_disassembleHarvesterDrones()
+        }
+
+        if (wireDroneCount > 0) {
+            handler_disassembleWireDrones()
+        }
+    }
+
+
+    // Space Exploration and Probes
+    if (hasSpaceExploration) {
+        let probesLaunched = parseInt(document.getElementById("probesLaunchedDisplay").textContent.replace(/,/g, ''))
+
+        let probeSpeed = parseInt(document.getElementById("probeSpeedDisplay").textContent.replace(/,/g, ''))
+        let probeExploration = parseInt(document.getElementById("probeNavDisplay").textContent.replace(/,/g, ''))
+        let probeReplication = parseInt(document.getElementById("probeRepDisplay").textContent.replace(/,/g, ''))
+        let probeHazardRemediation = parseInt(document.getElementById("probeHazDisplay").textContent.replace(/,/g, ''))
+        let probeFactoryProduction = parseInt(document.getElementById("probeFacDisplay").textContent.replace(/,/g, ''))
+        let probeHarvesterDroneProduction = parseInt(document.getElementById("probeHarvDisplay").textContent.replace(/,/g, ''))
+        let probeWireDroneProduction = parseInt(document.getElementById("probeWireDisplay").textContent.replace(/,/g, ''))
+
+
+        let increaseProbeTrustButton = document.getElementById("btnIncreaseProbeTrust") 
+
+        if (!increaseProbeTrustButton.disabled) {
+            increaseProbeTrustButton.click()
+        }
+
+        let increaseProbeMaxTrustButton = document.getElementById("btnIncreaseMaxTrust")
+        if (!increaseProbeMaxTrustButton.disabled) {
+            increaseProbeMaxTrustButton.click()
+        }
+
+
+        // Don't launch any probes until we have enough hazard remediation and replication for them to survive
+        let launchProbeButton = document.getElementById("btnMakeProbe")
+        if (!launchProbeButton.disabled && probesLaunched < 11000 && probeHazardRemediation >= 5 && probeReplication >= 7) {
+            launchProbeButton.click()
+        }
+
+
+        let needsToExplore = !hasAcquiredMatter && !hasUnusedClips && !hasWire
+        let lowerSpeedButton = document.getElementById("btnLowerProbeSpeed")
+        let raiseSpeedButton = document.getElementById("btnRaiseProbeSpeed")
+        let lowerExplorationButton = document.getElementById("btnLowerProbeNav")
+        let raiseExplorationButton = document.getElementById("btnRaiseProbeNav")
+
+        let lowerReplicationButton = document.getElementById("btnLowerProbeRep")
+        let raiseReplicationButton = document.getElementById("btnRaiseProbeRep")
+
+        // When we need to gather more matter, take from replication to explore with speed
+        if (needsToExplore) {
+            let needsSpeed = probeSpeed < 1
+            let needsExploration = probeExploration < 1
+
+            if (needsSpeed) {
+                if (raiseSpeedButton.disabled && !lowerReplicationButton.disabled) {
+                    lowerReplicationButton.click()
+                }
+
+                if (!raiseSpeedButton.disabled) {
+                    raiseSpeedButton.click()
+                }
+            }
+
+             if (needsExploration) {
+                if (raiseExplorationButton.disabled && !lowerReplicationButton.disabled) {
+                    lowerReplicationButton.click()
+                }
+
+                if (!raiseExplorationButton.disabled) {
+                    raiseExplorationButton.click()
+                }
+            }
+
+        } else {
+            // reduce exploration and speed so it goes back to replication
+            if (!lowerExplorationButton.disabled) {
+                lowerExplorationButton.click()
+            }
+
+            if (!lowerSpeedButton.disabled) {
+                lowerSpeedButton.click()
+            }
+        }
+
+
+        // If we're not exploring, divide our time between different responsibilities:
+        // each dpCycle is 10ms, 100 in a second, 1000 in 10 seconds;  if dpCycles % 10000:
+
+        if (!needsToExplore) {
+            let timeSlice = dpCycles % 10000
+
+            let buttonToProduce = null
+            if (timeSlice < 10 && probeFactoryProduction < 1) {
+                // Produce factories
+                buttonToProduce = document.getElementById("btnRaiseProbeFac")
+            } else if (timeSlice >= 10 && timeSlice < 2010 && probeWireDroneProduction < 1) {
+                // Produce wire drones
+                buttonToProduce = document.getElementById("btnRaiseProbeWire")
+            } else if (timeSlice >= 2010 && timeSlice < 4010 && probeHarvesterDroneProduction < 1) {
+                // Produce harvester drones
+                buttonToProduce = document.getElementById("btnRaiseProbeHarv")
+            }
+
+            if (buttonToProduce) {
+                if (buttonToProduce.disabled && !lowerReplicationButton.disabled) {
+                    lowerReplicationButton.click()
+                }
+
+                if (!buttonToProduce.disabled) {
+                    buttonToProduce.click()
+                }
+
+            } else {
+                // Lower relevant buttons to reclaim the probe trust for replication
+                let lowerButtonIDs = ["btnLowerProbeFac", "btnLowerProbeWire", "btnLowerProbeHarv"]
+                for (let lowerButtonID of lowerButtonIDs) {
+                    let lowerButton = document.getElementById(lowerButtonID)
+                    if (!lowerButton.disabled) {
+                        lowerButton.click()
+                    }
+                }
+            }
+
+
+            let hasProbeCombat = document.getElementById("combatButtonDiv").style.display != "none"
+            if (hasProbeCombat) {
+                let probeCombat = parseInt(document.getElementById("probeCombatDisplay").textContent.replace(/,/g, ''))
+
+                let probeCountText = document.getElementById("probesTotalDisplay").textContent // "2.2 billion "
+                let drifterCountText = document.getElementById("drifterCount").textContent
+
+                let numProbes = parseFloat(probeCountText)
+                let numDrifters = parseFloat(drifterCountText)
+
+                let probeOrderOfMagnitudeStr = probeCountText.replace(/[\d\s\.]+/, '').trim()
+                let drifterOrderOfMagnitudeStr = drifterCountText.replace(/[\d\s\.]+/, '').trim()
+
+                let needsToBattle = (probeOrderOfMagnitudeStr == drifterOrderOfMagnitudeStr) || numDrifters > 10
+
+                let combatRaiseButton = document.getElementById("btnRaiseProbeCombat")
+                let combatLowerButton = document.getElementById("btnLowerProbeCombat")
+                if (needsToBattle) {
+                    if (probeCombat < 6) {
+                        if (combatRaiseButton.disabled && !lowerReplicationButton.disabled) {
+                            lowerReplicationButton.click()
+                        }
+
+                        if (!combatRaiseButton.disabled) {
+                            combatRaiseButton.click()
+                        }
+                    }
+                } else {
+                    // Reduce combat to reclaim probe trust for replication
+                    if (!combatLowerButton.disabled) {
+                        combatLowerButton.click()
+                    }
+                }
+            }
+
+        }
+
+        let raiseHazardRemediationButton = document.getElementById("btnRaiseProbeHaz")
+        if (probeHazardRemediation < 5 && !raiseHazardRemediationButton.disabled) {
+            raiseHazardRemediationButton.click()
+        } else if (!raiseReplicationButton.disabled) {
+            // Spend any remaining probe trust on replication
+            raiseReplicationButton.click()
+        }
+    }
+
+
+    // Computational resources
+    // Some research projects consume trust. Update computational resources after research projects to avoid starving research.
+    if (canAddProcessor && processors < 6) {
+        handler_addProcessor()
+    } else if (canAddMemory && memory < 46) {
+        handler_addMemory()
+    } else if (canAddProcessor && processors < 25) {
+        handler_addProcessor()
+    } else if (canAddMemory && memory < 95) {
+        handler_addMemory()
+    } else if (canAddProcessor && processors < 113) {
+        handler_addProcessor()
+    } else if (canAddMemory && memory < 146) {
+        handler_addMemory()
+    } else if (canAddProcessor && processors < 1102) {
+        handler_addProcessor()
+    } else if (canAddMemory && memory < 503) {
+        handler_addMemory()
+    } else if (canAddProcessor) {
+        handler_addProcessor()
+    }
+}
+
+
+function runEventLoop() {
+    setTimeout(function() {
+        performEventCycle()
+        
+        if (!pauseAI) {
+            runEventLoop()
+        }
+    }, 10)
+}
+
+
+var pauseAI = 0
+runEventLoop()
+[/Code]

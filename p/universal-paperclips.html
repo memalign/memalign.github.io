@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Universal Paperclips</title>
+<meta property="og:title" content="Universal Paperclips" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/universal-paperclips.html" />
+<meta property="og:image" content="/m/universal-paperclips.png" />
+<meta property="og:description" content="Universal Paperclips (wikipedia article) is an incremental game about an AI created to produce paperclips. When I first played it several years ago, I got sucked in for an entire…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+Universal Paperclips
+</h1>
+</div>
+<img src="/m/universal-paperclips.png"></img>
+<div id='postdate'>Posted on 9/13/2020</div>
+<a href="https://www.decisionproblem.com/paperclips/index2.html">Universal Paperclips</a> (<a href="https://en.wikipedia.org/wiki/Universal_Paperclips">wikipedia article</a>) is an <a href="https://en.wikipedia.org/wiki/Incremental_game">incremental game</a> about an AI created to produce paperclips.<br />
+<br />
+When I first played it several years ago, I got sucked in for an entire day. Then I felt compelled to play it again the next day.<br />
+<br />
+<br />
+Universal Paperclips drew me in for many reasons:<br />
+<br />
+- Its premise and user interface is simple. It's almost entirely text-based.<br />
+<br />
+- The game starts small and builds up levels of complexity, with the next goal being barely within reach<br />
+<br />
+- Optimizing ever-growing numbers of paperclips, dollars, and other resources is satisfying to my engineer-brain<br />
+<br />
+- AI as an existential threat to humanity is an interesting topic to explore<br />
+<br />
+<br />
+The game popped up in one of my news feeds last week and I started to consider whether I could automate playing the whole game from beginning to end.<br />
+<br />
+Because it's a web-based game, it's easy to inspect the UI and inject code. Just open your web browser's JavaScript console to paste in code.<br />
+<br />
+Here's how to scrape the number of paperclips:<br />
+<div id='code'>parseInt(document.getElementById(&quot;clips&quot;).textContent.replace(/,/g, &#039;&#039;))</div>
+Though it's possible to inspect the global variables that power the game, I mostly stuck to scraping the user interface even though it's messier. Example messiness: I needed to strip commas from the number of paperclips so "1,000,000" would turn into 1000000.<br />
+<br />
+The project of automating playing the game mirrored playing the game itself. I incrementally refined my strategy and added complexity.<br />
+<br />
+To automate playing the game:<br />
+<br />
+- I created an event loop which runs every 10ms<br />
+<br />
+- I aimed to maintain a minimal amount of my own state. Every cycle, my script inspects the UI to determine relevant actions to take. I only need to keep state to count the number of elapsed cycles and to monitor whether a few game attributes stopped changing. By keeping minimal state, I was able to easily update my code running on the page mid-game and it could always pick up at the right place.<br />
+<br />
+- I initially started by calling button handler methods directly. I found that the game doesn't always check whether the relevant button should have been enabled so I later started injecting clicks to the buttons themselves.<br />
+<br />
+<br />
+Opportunities for improvement:<br />
+<br />
+- The game sometimes glitches due to how quickly my event loop performs actions. It's possible to over-spend some resources which means my script is accidentally cheating. The script could be updated to perform actions more slowly (and one per cycle) or add its own resource checking to avoid over-spending.<br />
+<br />
+- My script is not playing with an optimal strategy to complete the game quickly. Though I based some of the strategy off of a speed run I found on <a href="https://www.youtube.com/watch?v=hDXoonknjS0">YouTube</a>, there's a lot of opportunity to follow that strategy more closely.<br />
+<br />
+- I sprinkled some limits to prevent actions when they're not relevant (e.g. stop upgrading the investment engine after level 15). It would be helpful to document why these limits are needed. Some could be replaced with smarter logic.<br />
+<br />
+- Updating the script is time-consuming because a test cycle takes hours! Finding a way to reduce the test cycle to take less time than playing through the game in real-time could lead to a lot of other refinement.<br />
+<br />
+<br />
+Here's a script which successfully automatically plays Universal Paperclips from beginning to end:<br />
+<br />
+<div id='code'>// Open this page:<br />
+// https://www.decisionproblem.com/paperclips/index2.html<br />
+//<br />
+// Open JavaScript console and paste this code in<br />
+<br />
+var dpCycles = 0<br />
+<br />
+function incrementCycles() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;dpCycles++<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (dpCycles % 1000 == 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(&quot;dpCycles: &quot; + dpCycles)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+<br />
+var lastUnsoldClips = 0<br />
+var cyclesWithoutSellingClips = 0<br />
+var cyclesSinceLastDeposit = 0<br />
+var lastUnusedClipsCount = 0<br />
+var cyclesWithoutUnusedClipsCountChange = 0<br />
+<br />
+function performEventCycle() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;incrementCycles()<br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Examine game state<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let clips = parseInt(document.getElementById(&quot;clips&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let unsoldClips = parseInt(document.getElementById(&quot;unsoldClips&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let funds = parseFloat(document.getElementById(&quot;funds&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let pricePerClip = parseFloat(document.getElementById(&quot;margin&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let wire = parseInt(document.getElementById(&quot;wire&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let wireCost = parseInt(document.getElementById(&quot;wireCost&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canBuyWire = !document.getElementById(&quot;btnBuyWire&quot;).disabled<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let marketingLevel = parseInt(document.getElementById(&quot;marketingLvl&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canIncreaseMarketingLevel = !document.getElementById(&quot;btnExpandMarketing&quot;).disabled<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let autoClippers = parseInt(document.getElementById(&quot;clipmakerLevel2&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeAutoClipper = !document.getElementById(&quot;btnMakeClipper&quot;).disabled <br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let megaAutoClippers = parseInt(document.getElementById(&quot;megaClipperLevel&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeMegaAutoClipper = !document.getElementById(&quot;btnMakeMegaClipper&quot;).disabled<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let processors = parseInt(document.getElementById(&quot;processors&quot;).textContent)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let memory = parseInt(document.getElementById(&quot;memory&quot;).textContent)<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let processorButton = document.getElementById(&quot;btnAddProc&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canAddProcessor = processorButton &amp;&amp; !processorButton.disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let memoryButton = document.getElementById(&quot;btnAddMem&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canAddMemory = memoryButton &amp;&amp; !memoryButton.disabled<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let operations = parseInt(document.getElementById(&quot;operations&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let hasQuantumComputing = document.getElementById(&quot;qComputing&quot;).style.display != &quot;none&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let needsQuantumChip = document.getElementById(&quot;qCompDisplay&quot;).textContent == &quot;Need Photonic Chips&quot;<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let investmentLevel = parseInt(document.getElementById(&quot;investmentLevel&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canInvest = document.getElementById(&quot;investmentEngine&quot;).style.display != &quot;none&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let investmentTotal = parseInt(document.getElementById(&quot;portValue&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var quantumChipValues = []<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (hasQuantumComputing) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i = 0; i &lt; 10; i++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quantumChipValues.push(document.getElementById(&quot;qChip&quot;+i).style.opacity)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (lastUnsoldClips &lt; unsoldClips) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cyclesWithoutSellingClips++<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cyclesWithoutSellingClips = 0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;lastUnsoldClips = unsoldClips<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Available research projects<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let projButton_creativity = document.getElementById(&quot;projectButton3&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let projAvail_creativity = projButton_creativity &amp;&amp; !projButton_creativity.disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_creativity = function() { projButton_creativity.click() }<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let businessButtonIDs = [&quot;projectButton7&quot;, &quot;projectButton26&quot;]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let trustProjectButtonIDs = [&quot;projectButton6&quot;, &quot;projectButton13&quot;, &quot;projectButton14&quot;, &quot;projectButton15&quot;, &quot;projectButton17&quot;, &quot;projectButton19&quot;]<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let quantumProjectButtonIDs = [&quot;projectButton50&quot;, &quot;projectButton51&quot;]<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let postQuantumProjectButtonIDs = [&quot;projectButton1&quot;, &quot;projectButton4&quot;, &quot;projectButton5&quot;, &quot;projectButton8&quot;, &quot;projectButton9&quot;, &quot;projectButton10&quot;, &quot;projectButton10b&quot;, &quot;projectButton11&quot;, &quot;projectButton12&quot;, &quot;projectButton16&quot;, &quot;projectButton18&quot;, &quot;projectButton20&quot;, &quot;projectButton21&quot;, &quot;projectButton22&quot;, &quot;projectButton23&quot;, &quot;projectButton24&quot;, &quot;projectButton25&quot;, &quot;projectButton27&quot;, &quot;projectButton28&quot;, &quot;projectButton29&quot;, &quot;projectButton30&quot;, &quot;projectButton31&quot;, &quot;projectButton34&quot;, &quot;projectButton35&quot;, &quot;projectButton41&quot;, &quot;projectButton43&quot;, &quot;projectButton44&quot;, &quot;projectButton45&quot;, &quot;projectButton46&quot;, &quot;projectButton60&quot;, &quot;projectButton61&quot;, &quot;projectButton62&quot;, &quot;projectButton63&quot;, &quot;projectButton64&quot;, &quot;projectButton65&quot;, &quot;projectButton66&quot;, &quot;projectButton70&quot;, &quot;projectButton100&quot;, &quot;projectButton101&quot;, &quot;projectButton102&quot;, &quot;projectButton110&quot;, &quot;projectButton111&quot;, &quot;projectButton112&quot;, &quot;projectButton118&quot;, &quot;projectButton119&quot;, &quot;projectButton120&quot;, &quot;projectButton121&quot;, &quot;projectButton125&quot;, &quot;projectButton126&quot;, &quot;projectButton127&quot;, &quot;projectButton128&quot;, &quot;projectButton129&quot;, &quot;projectButton130&quot;, &quot;projectButton131&quot;, &quot;projectButton132&quot;, &quot;projectButton133&quot;, &quot;projectButton134&quot;, &quot;projectButton218&quot;]<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// comment out projectButton148 (Reject Drift&#039;s offer to Start Over in a New Universe) to try the alternate ending<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let endGameProjectButtonIDs = [ &quot;projectButton140&quot;, &quot;projectButton141&quot;, &quot;projectButton142&quot;, &quot;projectButton143&quot;, &quot;projectButton144&quot;, &quot;projectButton145&quot;, &quot;projectButton146&quot;, &quot;projectButton148&quot;, &quot;projectButton210&quot;, &quot;projectButton211&quot;, &quot;projectButton212&quot;, &quot;projectButton213&quot;, &quot;projectButton214&quot;, &quot;projectButton215&quot;, &quot;projectButton216&quot; ]<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let moneyProjectButtonIDs = [&quot;projectButton37&quot;, &quot;projectButton38&quot;, &quot;projectButton40&quot;, &quot;projectButton40b&quot;]<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Button handler functions<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makePaperclip = function() { clipClick(1) }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_increaseMarketing = buyAds<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_buyWire = buyWire<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeAutoClipper = makeClipper<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeMegaAutoClipper = makeMegaClipper<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_raisePrice = raisePrice<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_lowerPrice = lowerPrice<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_addProcessor = addProc<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_addMemory = addMem<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_quantumCompute = qComp<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_deposit = investDeposit<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_withdraw = investWithdraw<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// =========================<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Choose actions to perform<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// =========================<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;handler_makePaperclip()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (wireCost &lt; 19 &amp;&amp; canBuyWire) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_buyWire()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// If we&#039;re not selling any paperclips, reduce cost<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if ((clips &lt; 10000 &amp;&amp; pricePerClip &gt; 0.03) ||<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(cyclesWithoutSellingClips &gt; 200 &amp;&amp; pricePerClip &gt; 0.03) ||<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(unsoldClips &gt; 10000000 &amp;&amp; pricePerClip &gt; 0.01)) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_lowerPrice()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cyclesWithoutSellingClips = 0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// In middle-game, if we&#039;re selling out fast, increase cost<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (clips &gt; 500000 &amp;&amp; unsoldClips &lt; 1000 &amp;&amp; pricePerClip &lt; 8.00) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_raisePrice()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Autoclippers<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (clips &gt; 1000000 &amp;&amp; wire &gt; 0 &amp;&amp; canMakeAutoClipper &amp;&amp; autoClippers &lt; 75) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeAutoClipper()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (clips &gt; 1000000 &amp;&amp; wire &gt; 0 &amp;&amp; canMakeMegaAutoClipper &amp;&amp; megaAutoClippers &lt; 120) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeMegaAutoClipper()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Marketing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (canIncreaseMarketingLevel &amp;&amp; marketingLevel &lt; 14) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_increaseMarketing()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Quantum Computing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (hasQuantumComputing) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var canCompute = true<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (let qVal of quantumChipValues) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (qVal &lt; 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;canCompute = false<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (canCompute) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_quantumCompute()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Research projects<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (projAvail_creativity) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_creativity()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for (let trustButtonID of trustProjectButtonIDs) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let trustButton = document.getElementById(trustButtonID)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (trustButton &amp;&amp; !trustButton.disabled &amp;&amp; trustButton.style.visibility == &quot;visible&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trustButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for (let businessButtonID of businessButtonIDs) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let businessButton = document.getElementById(businessButtonID)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (businessButton &amp;&amp; !businessButton.disabled &amp;&amp; businessButton.style.visibility == &quot;visible&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;businessButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for (let buttonID of quantumProjectButtonIDs) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let button = document.getElementById(buttonID)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (button &amp;&amp; !button.disabled &amp;&amp; button.style.visibility == &quot;visible&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;button.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (operations &gt; 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (hasQuantumComputing &amp;&amp; !needsQuantumChip) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (let buttonID of postQuantumProjectButtonIDs) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let button = document.getElementById(buttonID)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (button &amp;&amp; !button.disabled &amp;&amp; button.style.visibility == &quot;visible&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;button.click()<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Act on only one at a time; the game appears to let you overspend with fast clicks<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for (let buttonID of endGameProjectButtonIDs) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let button = document.getElementById(buttonID)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (button &amp;&amp; !button.disabled &amp;&amp; button.style.visibility == &quot;visible&quot;) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;button.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Strategic Modeling<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let newTournamentButton = document.getElementById(&quot;btnNewTournament&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let runTournamentButton = document.getElementById(&quot;btnRunTournament&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let hasAutoTourney = document.getElementById(&quot;autoTourneyControl&quot;).style.display != &quot;none&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_newTournament = newTourney<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_runTournament = runTourney<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (operations &gt; 50000 &amp;&amp; newTournamentButton &amp;&amp; !newTournamentButton.disabled &amp;&amp; !hasAutoTourney) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_newTournament()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let stratPickerElement = document.getElementById(&quot;stratPicker&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let hasBeatLastStrategy = Array.apply(null, document.getElementById(&quot;stratPicker&quot;).options).map(x =&gt; x.value).includes(&quot;7&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (hasBeatLastStrategy) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stratPickerElement.value = 7 // BEAT LAST<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stratPickerElement.value = 0 // RANDOM<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (runTournamentButton &amp;&amp; !runTournamentButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_runTournament()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Investments<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Perform these upgrades after handling research projects to avoid starving them<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let upgradeInvestmentEngineButton = document.getElementById(&quot;btnImproveInvestments&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_upgradeInvestmentEngine = function() { upgradeInvestmentEngineButton.click() }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (investmentLevel &lt; 15 &amp;&amp; upgradeInvestmentEngineButton &amp;&amp; !upgradeInvestmentEngineButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_upgradeInvestmentEngine()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (investmentLevel &gt; 5 &amp;&amp; unsoldClips &gt; 10000000 &amp;&amp; funds &gt; 20000 &amp;&amp; cyclesSinceLastDeposit &gt; 50000) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(&quot;investStrat&quot;).value = &quot;hi&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_deposit()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cyclesSinceLastDeposit = 0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cyclesSinceLastDeposit++<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Money projects (e.g. Hostile Takeover)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Check whether they are visible moneyProjectButtonIDs; check money in stock market; if &gt; 15M; withdraw and perform project<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for (let moneyButtonID of moneyProjectButtonIDs) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let button = document.getElementById(moneyButtonID)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let buttonIsVisible = button &amp;&amp; button.style.visibility == &quot;visible&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let buttonIsDisabled = button &amp;&amp; button.disabled<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (buttonIsVisible) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (buttonIsDisabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (investmentTotal &gt; 15000000) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_withdraw()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Button may have become enabled; check the button directly<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!button.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;button.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Drone and Solar Farm phase<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let factoryCount = parseInt(document.getElementById(&quot;factoryLevelDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeFactory = !document.getElementById(&quot;btnMakeFactory&quot;).disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let harvesterDroneCount = parseInt(document.getElementById(&quot;harvesterLevelDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeHarvesterDrone = !document.getElementById(&quot;btnMakeHarvester&quot;).disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeHarvesterDrone1k = !document.getElementById(&quot;btnHarvesterx1000&quot;).disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let wireDroneCount = parseInt(document.getElementById(&quot;wireDroneLevelDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeWireDrone = !document.getElementById(&quot;btnMakeWireDrone&quot;).disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeWireDrone1k = !document.getElementById(&quot;btnWireDronex1000&quot;).disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let solarFarmCount = parseInt(document.getElementById(&quot;farmLevel&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeSolarFarm = !document.getElementById(&quot;btnMakeFarm&quot;).disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let batteryTowerCount = parseInt(document.getElementById(&quot;batteryLevel&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let canMakeBatteryTower = !document.getElementById(&quot;btnMakeBattery&quot;).disabled<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let hasAvailableMatter = parseFloat(document.getElementById(&quot;availableMatterDisplay&quot;).textContent.replace(/,/g, &#039;&#039;)) &gt; 0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let hasAcquiredMatter = parseFloat(document.getElementById(&quot;acquiredMatterDisplay&quot;).textContent.replace(/,/g, &#039;&#039;)) &gt; 0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let hasWire = parseFloat(document.getElementById(&quot;nanoWire&quot;).textContent.replace(/,/g, &#039;&#039;)) &gt; 0<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// We can end up stuck with a small amount of clips that we can&#039;t spend (e.g. 528.1 thousand)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let unusedClipsCount = parseFloat(document.getElementById(&quot;unusedClipsDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (unusedClipsCount == lastUnusedClipsCount) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cyclesWithoutUnusedClipsCountChange++<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cyclesWithoutUnusedClipsCountChange = 0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lastUnusedClipsCount = unusedClipsCount<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let hasUnusedClips = unusedClipsCount &gt; 0 &amp;&amp; (cyclesWithoutUnusedClipsCountChange &lt; 1000)<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let projButton_selfCorrectingSupplyChain = document.getElementById(&quot;projectButton102&quot;) <br />
+&nbsp;&nbsp;&nbsp;&nbsp;let selfCorrectingSupplyChainVisible = projButton_selfCorrectingSupplyChain &amp;&amp; projButton_selfCorrectingSupplyChain.style.visibility == &quot;visible&quot;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeFactory = makeFactory<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeHarvesterDrone = function() { makeHarvester(1) }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeHarvesterDrone1k = function() { makeHarvester(1000) }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeWireDrone = function() { makeWireDrone(1) }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeWireDrone1k = function() { makeWireDrone(1000) }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeSolarFarm = function() { makeFarm(1) }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let handler_makeBatteryTower = function() { makeBattery(1) }<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (factoryCount &gt;= 59 &amp;&amp; solarFarmCount &gt; 3538 &amp;&amp; selfCorrectingSupplyChainVisible) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Pause consuming clips so we can activate selfCorrectingSupplyChain<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (hasAvailableMatter || hasAcquiredMatter) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Based on a speed run: https://www.youtube.com/watch?v=hDXoonknjS0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Values to achieve:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// [factory, harvester, wire, farm, battery]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let milestones = [<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1, 30, 30, 11, 1],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[6, 170, 180, 34, 11],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[6, 320, 370, 49, 11],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[8, 400, 490, 60, 21],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[9, 510, 610, 68, 21],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[10, 1000, 1400, 168, 21],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[15, 2000, 2800, 248, 121],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[20, 2500, 3300, 308, 121],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[50, 5500, 6600, 600, 121],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[57, 35500, 36000, 2208, 121],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[70, 77000, 77000, 5508, 1221],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[80, 87000, 87000, 7508, 1221],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[198, 377000, 404000, 29508, 1221],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[211, 1121000, 1133000, 50308, 1221],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1000, 1133000, 1135000, 50308, 1221],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let currVals = [factoryCount, harvesterDroneCount, wireDroneCount, solarFarmCount, batteryTowerCount]<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (let milestone of milestones) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var done = false<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (let i = 0; i &lt; currVals.length; i++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let delta = milestone[i] - currVals[i]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (delta &gt; 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (i == 0 &amp;&amp; canMakeFactory) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeFactory()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (i == 1 &amp;&amp; canMakeHarvesterDrone) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (hasAvailableMatter) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (canMakeHarvesterDrone1k &amp;&amp; delta &gt;= 1000) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeHarvesterDrone1k()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeHarvesterDrone()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (i == 2 &amp;&amp; canMakeWireDrone) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (hasAcquiredMatter) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (canMakeWireDrone1k &amp;&amp; delta &gt;= 1000) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeWireDrone1k()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeWireDrone()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (i == 3 &amp;&amp; canMakeSolarFarm) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeSolarFarm()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (i == 4 &amp;&amp; canMakeBatteryTower) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeBatteryTower()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Don&#039;t break so we can increment evenly across the types that need it<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;done = true<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (done) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let hasSpaceExploration = document.getElementById(&quot;spaceDiv&quot;).style.display != &quot;none&quot;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Swarm computing<br />
+&nbsp;&nbsp;&nbsp;&nbsp;let hasSwarmComputing = document.getElementById(&quot;swarmEngine&quot;).style.display != &quot;none&quot;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (hasSwarmComputing) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let totalDroneCount = harvesterDroneCount + wireDroneCount<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let swarmComputingSlider = document.getElementById(&quot;slider&quot;)<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var sliderValue = 0 // range is 0 to 200<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (hasSpaceExploration) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sliderValue = processors &gt; 1400 ? 0 : 150<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Heuristic for when we&#039;re still on Earth (prior to space exploration)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!hasAvailableMatter &amp;&amp; !hasAcquiredMatter) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sliderValue = 200<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (processors &gt; 160) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sliderValue = 0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (totalDroneCount &gt; 1000) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sliderValue = 150<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (totalDroneCount &gt; 700) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sliderValue = 100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swarmComputingSlider.value = sliderValue<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let entertainSwarmButton = document.getElementById(&quot;btnEntertainSwarm&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let swarmIsBored = document.getElementById(&quot;swarmStatus&quot;).textContent == &quot;Bored&quot;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let synchronizeSwarmButton = document.getElementById(&quot;btnSynchSwarm&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let swarmIsDisorganized = document.getElementById(&quot;swarmStatus&quot;).textContent == &quot;Disorganized&quot;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (entertainSwarmButton &amp;&amp; !entertainSwarmButton.disabled &amp;&amp; swarmIsBored) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entertainSwarmButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (synchronizeSwarmButton &amp;&amp; !synchronizeSwarmButton.disabled &amp;&amp; swarmIsDisorganized) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronizeSwarmButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Reclaim clips from factories and drones<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (hasSwarmComputing &amp;&amp; !hasSpaceExploration &amp;&amp; !hasAvailableMatter &amp;&amp; !hasAcquiredMatter &amp;&amp; wire == 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let handler_disassembleFactories = factoryReboot<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let handler_disassembleHarvesterDrones = harvesterReboot<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let handler_disassembleWireDrones = wireDroneReboot<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (factoryCount &gt; 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_disassembleFactories()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (harvesterDroneCount &gt; 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_disassembleHarvesterDrones()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (wireDroneCount &gt; 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_disassembleWireDrones()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Space Exploration and Probes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (hasSpaceExploration) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probesLaunched = parseInt(document.getElementById(&quot;probesLaunchedDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeSpeed = parseInt(document.getElementById(&quot;probeSpeedDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeExploration = parseInt(document.getElementById(&quot;probeNavDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeReplication = parseInt(document.getElementById(&quot;probeRepDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeHazardRemediation = parseInt(document.getElementById(&quot;probeHazDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeFactoryProduction = parseInt(document.getElementById(&quot;probeFacDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeHarvesterDroneProduction = parseInt(document.getElementById(&quot;probeHarvDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeWireDroneProduction = parseInt(document.getElementById(&quot;probeWireDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let increaseProbeTrustButton = document.getElementById(&quot;btnIncreaseProbeTrust&quot;) <br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!increaseProbeTrustButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increaseProbeTrustButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let increaseProbeMaxTrustButton = document.getElementById(&quot;btnIncreaseMaxTrust&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!increaseProbeMaxTrustButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increaseProbeMaxTrustButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Don&#039;t launch any probes until we have enough hazard remediation and replication for them to survive<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let launchProbeButton = document.getElementById(&quot;btnMakeProbe&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!launchProbeButton.disabled &amp;&amp; probesLaunched &lt; 11000 &amp;&amp; probeHazardRemediation &gt;= 5 &amp;&amp; probeReplication &gt;= 7) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;launchProbeButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let needsToExplore = !hasAcquiredMatter &amp;&amp; !hasUnusedClips &amp;&amp; !hasWire<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let lowerSpeedButton = document.getElementById(&quot;btnLowerProbeSpeed&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let raiseSpeedButton = document.getElementById(&quot;btnRaiseProbeSpeed&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let lowerExplorationButton = document.getElementById(&quot;btnLowerProbeNav&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let raiseExplorationButton = document.getElementById(&quot;btnRaiseProbeNav&quot;)<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let lowerReplicationButton = document.getElementById(&quot;btnLowerProbeRep&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let raiseReplicationButton = document.getElementById(&quot;btnRaiseProbeRep&quot;)<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// When we need to gather more matter, take from replication to explore with speed<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (needsToExplore) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let needsSpeed = probeSpeed &lt; 1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let needsExploration = probeExploration &lt; 1<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (needsSpeed) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (raiseSpeedButton.disabled &amp;&amp; !lowerReplicationButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowerReplicationButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!raiseSpeedButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raiseSpeedButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (needsExploration) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (raiseExplorationButton.disabled &amp;&amp; !lowerReplicationButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowerReplicationButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!raiseExplorationButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raiseExplorationButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// reduce exploration and speed so it goes back to replication<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!lowerExplorationButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowerExplorationButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!lowerSpeedButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowerSpeedButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// If we&#039;re not exploring, divide our time between different responsibilities:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// each dpCycle is 10ms, 100 in a second, 1000 in 10 seconds;  if dpCycles % 10000:<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!needsToExplore) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let timeSlice = dpCycles % 10000<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let buttonToProduce = null<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (timeSlice &lt; 10 &amp;&amp; probeFactoryProduction &lt; 1) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Produce factories<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttonToProduce = document.getElementById(&quot;btnRaiseProbeFac&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (timeSlice &gt;= 10 &amp;&amp; timeSlice &lt; 2010 &amp;&amp; probeWireDroneProduction &lt; 1) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Produce wire drones<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttonToProduce = document.getElementById(&quot;btnRaiseProbeWire&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (timeSlice &gt;= 2010 &amp;&amp; timeSlice &lt; 4010 &amp;&amp; probeHarvesterDroneProduction &lt; 1) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Produce harvester drones<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttonToProduce = document.getElementById(&quot;btnRaiseProbeHarv&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (buttonToProduce) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (buttonToProduce.disabled &amp;&amp; !lowerReplicationButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowerReplicationButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!buttonToProduce.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttonToProduce.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Lower relevant buttons to reclaim the probe trust for replication<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let lowerButtonIDs = [&quot;btnLowerProbeFac&quot;, &quot;btnLowerProbeWire&quot;, &quot;btnLowerProbeHarv&quot;]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (let lowerButtonID of lowerButtonIDs) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let lowerButton = document.getElementById(lowerButtonID)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!lowerButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowerButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let hasProbeCombat = document.getElementById(&quot;combatButtonDiv&quot;).style.display != &quot;none&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (hasProbeCombat) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeCombat = parseInt(document.getElementById(&quot;probeCombatDisplay&quot;).textContent.replace(/,/g, &#039;&#039;))<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeCountText = document.getElementById(&quot;probesTotalDisplay&quot;).textContent // &quot;2.2 billion &quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let drifterCountText = document.getElementById(&quot;drifterCount&quot;).textContent<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let numProbes = parseFloat(probeCountText)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let numDrifters = parseFloat(drifterCountText)<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let probeOrderOfMagnitudeStr = probeCountText.replace(/[\d\s\.]+/, &#039;&#039;).trim()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let drifterOrderOfMagnitudeStr = drifterCountText.replace(/[\d\s\.]+/, &#039;&#039;).trim()<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let needsToBattle = (probeOrderOfMagnitudeStr == drifterOrderOfMagnitudeStr) || numDrifters &gt; 10<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let combatRaiseButton = document.getElementById(&quot;btnRaiseProbeCombat&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let combatLowerButton = document.getElementById(&quot;btnLowerProbeCombat&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (needsToBattle) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (probeCombat &lt; 6) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (combatRaiseButton.disabled &amp;&amp; !lowerReplicationButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lowerReplicationButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!combatRaiseButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;combatRaiseButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Reduce combat to reclaim probe trust for replication<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!combatLowerButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;combatLowerButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let raiseHazardRemediationButton = document.getElementById(&quot;btnRaiseProbeHaz&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (probeHazardRemediation &lt; 5 &amp;&amp; !raiseHazardRemediationButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raiseHazardRemediationButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (!raiseReplicationButton.disabled) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Spend any remaining probe trust on replication<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raiseReplicationButton.click()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Computational resources<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Some research projects consume trust. Update computational resources after research projects to avoid starving research.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (canAddProcessor &amp;&amp; processors &lt; 6) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addProcessor()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (canAddMemory &amp;&amp; memory &lt; 46) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addMemory()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (canAddProcessor &amp;&amp; processors &lt; 25) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addProcessor()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (canAddMemory &amp;&amp; memory &lt; 95) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addMemory()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (canAddProcessor &amp;&amp; processors &lt; 113) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addProcessor()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (canAddMemory &amp;&amp; memory &lt; 146) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addMemory()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (canAddProcessor &amp;&amp; processors &lt; 1102) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addProcessor()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (canAddMemory &amp;&amp; memory &lt; 503) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addMemory()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} else if (canAddProcessor) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_addProcessor()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+<br />
+function runEventLoop() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(function() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;performEventCycle()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!pauseAI) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runEventLoop()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}, 10)<br />
+}<br />
+<br />
+<br />
+var pauseAI = 0<br />
+runEventLoop()</div>
+</div>
+<div id="footer"></div>
+</body>
+</html>
