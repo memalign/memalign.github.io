@@ -64,18 +64,16 @@ var dpCycles = 0
 
 function incrementCycles() {
     dpCycles++
-    if (dpCycles % 1000 == 0) {
+    if (dpCycles % 10000 == 0) {
         console.log("dpCycles: " + dpCycles)
     }
 }
-
 
 var lastUnsoldClips = 0
 var cyclesWithoutSellingClips = 0
 var cyclesSinceLastDeposit = 0
 var lastUnusedClipsCount = 0
 var cyclesWithoutUnusedClipsCountChange = 0
-
 function performEventCycle() {
     incrementCycles()
    
@@ -175,7 +173,7 @@ function performEventCycle() {
 
     // If we're not selling any paperclips, reduce cost
     if ((clips < 10000 && pricePerClip > 0.03) ||
-        (cyclesWithoutSellingClips > 200 && pricePerClip > 0.03) ||
+        (cyclesWithoutSellingClips > 20 && pricePerClip > 0.03) ||
         (unsoldClips > 10000000 && pricePerClip > 0.01)) {
         handler_lowerPrice()
         cyclesWithoutSellingClips = 0
@@ -192,7 +190,10 @@ function performEventCycle() {
         handler_makeAutoClipper()
     }
 
-    if (clips > 1000000 && wire > 0 && canMakeMegaAutoClipper && megaAutoClippers < 120) {
+    if ((clips > 1000000 && wire > 0 && canMakeMegaAutoClipper && megaAutoClippers < 70) ||
+        (clips > 100000000 && wire > 0 && canMakeMegaAutoClipper && megaAutoClippers < 90) ||
+        (clips > 20000000000 && wire > 0 && canMakeMegaAutoClipper && megaAutoClippers < 120)
+    ) {
         handler_makeMegaAutoClipper()
     }
 
@@ -574,10 +575,10 @@ function performEventCycle() {
 
 
         // If we're not exploring, divide our time between different responsibilities:
-        // each dpCycle is 10ms, 100 in a second, 1000 in 10 seconds;  if dpCycles % 10000:
+        // each dpCycle is 1ms, 1000 in a second, 10000 in 10 seconds;  if dpCycles/10 % 10000:
 
         if (!needsToExplore) {
-            let timeSlice = dpCycles % 10000
+            let timeSlice = Math.floor(dpCycles/10) % 10000
 
             let buttonToProduce = null
             if (timeSlice < 10 && probeFactoryProduction < 1) {
@@ -682,7 +683,6 @@ function performEventCycle() {
     }
 }
 
-
 function runEventLoop() {
     setTimeout(function() {
         performEventCycle()
@@ -690,9 +690,8 @@ function runEventLoop() {
         if (!pauseAI) {
             runEventLoop()
         }
-    }, 10)
+    }, 1)
 }
-
 
 var pauseAI = 0
 runEventLoop()

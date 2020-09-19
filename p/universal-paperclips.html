@@ -83,18 +83,16 @@ var dpCycles = 0<br />
 <br />
 function incrementCycles() {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;dpCycles++<br />
-&nbsp;&nbsp;&nbsp;&nbsp;if (dpCycles % 1000 == 0) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if (dpCycles % 10000 == 0) {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(&quot;dpCycles: &quot; + dpCycles)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
 }<br />
-<br />
 <br />
 var lastUnsoldClips = 0<br />
 var cyclesWithoutSellingClips = 0<br />
 var cyclesSinceLastDeposit = 0<br />
 var lastUnusedClipsCount = 0<br />
 var cyclesWithoutUnusedClipsCountChange = 0<br />
-<br />
 function performEventCycle() {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;incrementCycles()<br />
 &nbsp;&nbsp;&nbsp;<br />
@@ -194,7 +192,7 @@ function performEventCycle() {<br />
 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;// If we&#039;re not selling any paperclips, reduce cost<br />
 &nbsp;&nbsp;&nbsp;&nbsp;if ((clips &lt; 10000 &amp;&amp; pricePerClip &gt; 0.03) ||<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(cyclesWithoutSellingClips &gt; 200 &amp;&amp; pricePerClip &gt; 0.03) ||<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(cyclesWithoutSellingClips &gt; 20 &amp;&amp; pricePerClip &gt; 0.03) ||<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(unsoldClips &gt; 10000000 &amp;&amp; pricePerClip &gt; 0.01)) {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_lowerPrice()<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cyclesWithoutSellingClips = 0<br />
@@ -211,7 +209,10 @@ function performEventCycle() {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeAutoClipper()<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
 <br />
-&nbsp;&nbsp;&nbsp;&nbsp;if (clips &gt; 1000000 &amp;&amp; wire &gt; 0 &amp;&amp; canMakeMegaAutoClipper &amp;&amp; megaAutoClippers &lt; 120) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if ((clips &gt; 1000000 &amp;&amp; wire &gt; 0 &amp;&amp; canMakeMegaAutoClipper &amp;&amp; megaAutoClippers &lt; 70) ||<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(clips &gt; 100000000 &amp;&amp; wire &gt; 0 &amp;&amp; canMakeMegaAutoClipper &amp;&amp; megaAutoClippers &lt; 90) ||<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(clips &gt; 20000000000 &amp;&amp; wire &gt; 0 &amp;&amp; canMakeMegaAutoClipper &amp;&amp; megaAutoClippers &lt; 120)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;) {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler_makeMegaAutoClipper()<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
 <br />
@@ -593,10 +594,10 @@ function performEventCycle() {<br />
 <br />
 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// If we&#039;re not exploring, divide our time between different responsibilities:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// each dpCycle is 10ms, 100 in a second, 1000 in 10 seconds;  if dpCycles % 10000:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// each dpCycle is 1ms, 1000 in a second, 10000 in 10 seconds;  if dpCycles/10 % 10000:<br />
 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!needsToExplore) {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let timeSlice = dpCycles % 10000<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let timeSlice = Math.floor(dpCycles/10) % 10000<br />
 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let buttonToProduce = null<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (timeSlice &lt; 10 &amp;&amp; probeFactoryProduction &lt; 1) {<br />
@@ -701,7 +702,6 @@ function performEventCycle() {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
 }<br />
 <br />
-<br />
 function runEventLoop() {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;setTimeout(function() {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;performEventCycle()<br />
@@ -709,9 +709,8 @@ function runEventLoop() {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!pauseAI) {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runEventLoop()<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}, 10)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}, 1)<br />
 }<br />
-<br />
 <br />
 var pauseAI = 0<br />
 runEventLoop()</div>
