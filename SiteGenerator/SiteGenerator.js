@@ -434,7 +434,7 @@ ${this.title}
     
     // The </img> tags helped us format the post but it's not valid HTML, remove them
     // https://stackoverflow.com/questions/14860492/how-to-close-img-tag-properly
-    htmlContents = htmlContents.replace("</img>", "")
+    htmlContents = htmlContents.replace(new RegExp('</img>', 'g'), "")
     
     // Remove any linebreaks after </div> to fully control margins with CSS
     htmlContents = htmlContents.replace(/<\/div>(\n*<br \/>)*/g, "</div>")
@@ -824,7 +824,7 @@ class UnitTests {
 <a href='p/some-title3.html'>This title3</a>
 </h2>
 </div>
-<img src="/m/test3.jpg"></img>
+<img src="/m/test3.jpg">
 <div id='postdate'>Posted on 12/28/2019</div>
 text3 text3
 <hr />
