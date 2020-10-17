@@ -281,3 +281,12 @@ https://stackoverflow.com/questions/19799006/unable-to-parse-tab-in-json-files
 I also realized that I wasn't escaping "\". jsonlint now sees this as valid. I need to check with the JSONFeed validator next:
 https://validator.jsonfeed.org/
 
+
+Task list:
+
+- Unit test escaping tabs and backslash in JSON feed
+- Unit test feed date format for single-digit day and month
+- Unit test removing </img> tag
+- Unit test Atom feed does not separate entries with a comma
+- Unit test Atom feed has 'updated' element
+- Fix RSS issues detected: https://validator.w3.org/feed/check.cgi?url=https%3A%2F%2Fmemalign.github.io%2Ffeed.xml

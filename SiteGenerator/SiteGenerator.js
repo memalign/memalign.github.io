@@ -432,6 +432,10 @@ ${this.title}
       str += postDateStr
     }
     
+    // The </img> tags helped us format the post but it's not valid HTML, remove them
+    // https://stackoverflow.com/questions/14860492/how-to-close-img-tag-properly
+    htmlContents = htmlContents.replace("</img>", "")
+    
     // Remove any linebreaks after </div> to fully control margins with CSS
     htmlContents = htmlContents.replace(/<\/div>(\n*<br \/>)*/g, "</div>")
     
@@ -590,6 +594,7 @@ class AtomFeed extends Feed {
 <link rel="related" type="text/html" href="${entry.fullURL()}" />
 <id>${entry.fullURL()}</id>
 <published>${entry.dateRFC3339()}</published>
+<updated>${entry.dateRFC3339()}</updated>
 <author>
 <name>memalign</name>
 <uri>${this.index.fullURL()}</uri>
@@ -623,7 +628,7 @@ ${entry.htmlBody(entry.fullURL())}
 
     let entryStrs = this.index.entries.slice(0, this.entriesInFeed).map(x => this.entryToItem(x))
 
-    let items = entryStrs.join(",\n")
+    let items = entryStrs.join("\n")
 
     let atomFooter = "</feed><!-- THE END -->\n"
     
