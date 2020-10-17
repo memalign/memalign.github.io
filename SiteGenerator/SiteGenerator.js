@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -899,7 +899,8 @@ More posts:<br />
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
-    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>"), "Has img tag")
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">"), "Has img tag")
+    assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
   }
 
@@ -981,8 +982,8 @@ More posts:<br />
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
-    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>\n<div id='postdate'>Posted on 12/26/2019</div>"), "Date follows image")
-    
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">\n<div id='postdate'>Posted on 12/26/2019</div>"), "Date follows image")
+    assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
     let toHTML = entry.toHTML()
     
     let expectation = `<!DOCTYPE html>
@@ -1011,7 +1012,7 @@ More posts:<br />
 This title
 </h1>
 </div>
-<img src="/m/test.jpg"></img>
+<img src="/m/test.jpg">
 <div id='postdate'>Posted on 12/26/2019</div>
 test text
 </div>
@@ -1026,7 +1027,8 @@ test text
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTest text\n[Image:/m/test.jpg]\nmore text")  
     let htmlBody = entry.htmlBody()
     
-    assertTrue(htmlBody.includes("<div id='postdate'>Posted on 12/26/2019</div>\nTest text<br />\n<img src=\"/m/test.jpg\"></img>"), "Date precedes text")
+    assertTrue(htmlBody.includes("<div id='postdate'>Posted on 12/26/2019</div>\nTest text<br />\n<img src=\"/m/test.jpg\">"), "Date precedes text")
+    assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
     
     let toHTML = entry.toHTML()
     let expectation = `<!DOCTYPE html>
@@ -1057,7 +1059,7 @@ This title
 </div>
 <div id='postdate'>Posted on 12/26/2019</div>
 Test text<br />
-<img src="/m/test.jpg"></img><br />
+<img src="/m/test.jpg"><br />
 more text
 </div>
 <div id="footer"></div>
@@ -1096,7 +1098,8 @@ test text
     let htmlBody = entry.htmlBody()
     
     // This behavior isn't good. I'm writing this test to document the existing limitation. We probably want the postdate to follow all leading images in a post instead.
-    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\"></img>\n<div id='postdate'>Posted on 12/26/2019</div>\n<img src=\"/m/test2.jpg\"></img>"), "Date follows first image")
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">\n<div id='postdate'>Posted on 12/26/2019</div>\n<img src=\"/m/test2.jpg\">"), "Date follows first image")
+    assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
   }
   
   test_htmlBody_indentation() {
@@ -1239,7 +1242,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\"></img>\\n<div id='postdate'>Posted on 12/26/2019</div>\\ntext1 text1"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019</div>\\ntext1 text1"
     }`
     
     assertTrue(jsonFeed.entryToItem(entryWithImage) == expectationWithImage, "json with image")
@@ -1265,7 +1268,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\"></img>\\n<div id='postdate'>Posted on 12/26/2019</div>\\n"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019</div>\\n"
     }`
     
     assertTrue(jsonFeed.entryToItem(entryJustImage) == expectationJustImage, "json just image")
@@ -1302,7 +1305,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\"></img>\\n<div id='postdate'>Posted on 12/28/2019</div>\\ntext3 text3"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\">\\n<div id='postdate'>Posted on 12/28/2019</div>\\ntext3 text3"
     },
     {
          "title" : "This title2",
@@ -1351,6 +1354,7 @@ test text
 <link rel="related" type="text/html" href="https://memalign.github.io/p/some-title3.html" />
 <id>https://memalign.github.io/p/some-title3.html</id>
 <published>2019-12-28T00:00:00-08:00</published>
+<updated>2019-12-28T00:00:00-08:00</updated>
 <author>
 <name>memalign</name>
 <uri>https://memalign.github.io/index.html</uri>
@@ -1362,19 +1366,20 @@ test text
 <a href='https://memalign.github.io/p/some-title3.html'>This title3</a>
 </h2>
 </div>
-<img src="/m/test3.jpg"></img>
+<img src="/m/test3.jpg">
 <div id='postdate'>Posted on 12/28/2019</div>
 text3 text3
 ]]>
 </content>
 </entry>
-,
+
 <entry>
 <title>This title2</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/some-title2.html" />
 <link rel="related" type="text/html" href="https://memalign.github.io/p/some-title2.html" />
 <id>https://memalign.github.io/p/some-title2.html</id>
 <published>2019-12-27T00:00:00-08:00</published>
+<updated>2019-12-27T00:00:00-08:00</updated>
 <author>
 <name>memalign</name>
 <uri>https://memalign.github.io/index.html</uri>
