@@ -269,3 +269,15 @@ Task list:
 
 [x] - Implement unit tests for Code
 [x] - Unit test both types of Link at the beginning of the post: impact on ogDescription
+
+
+10/17/20
+
+I noticed that my JSON and RSS feeds might be malformed.
+
+https://jsonlint.com points out errors and I tracked it down to using tab character inside of strings. It sounds like these need to be replaced with \t according to:
+https://stackoverflow.com/questions/19799006/unable-to-parse-tab-in-json-files
+
+I also realized that I wasn't escaping "\". jsonlint now sees this as valid. I need to check with the JSONFeed validator next:
+https://validator.jsonfeed.org/
+

@@ -505,8 +505,10 @@ class JSONFeed extends Feed {
   }
   
   escapeContent(content) {
+    content = content.replace(/\\/g, "\\\\")
     content = content.replace(/"/g, "\\\"")
     content = content.replace(/\n/g, "\\n")
+    content = content.replace(/\t/g, "\\t")
     return content
   }
   
