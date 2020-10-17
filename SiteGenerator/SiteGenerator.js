@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = true
+const UNIT_TEST = false
 
 
 // Utilities
@@ -1275,14 +1275,17 @@ test text
   }
 
   test_JSONFeed_toText() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\ntext2 text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
+    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\ntext4")
+    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\ntext5")
+
     
-    let index = new Index([entry2, entry1, entry3])
+    let index = new Index([entry2, entry1, entry3, entry4, entry5])
     
     let jsonFeed = new JSONFeed(index)
-    jsonFeed.entriesInFeed = 2
+    jsonFeed.entriesInFeed = 4
     
     let expectation = `{
    "version" : "https://jsonfeed.org/version/1",
@@ -1297,6 +1300,26 @@ test text
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
     {
+         "title" : "This title5",
+         "date_published" : "2020-01-11T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/some-title5.html",
+         "url" : "https://memalign.github.io/p/some-title5.html",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title5.html'>This title5</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/11/2020</div>\\ntext5"
+    },
+    {
+         "title" : "This title4",
+         "date_published" : "2020-01-01T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/some-title4.html",
+         "url" : "https://memalign.github.io/p/some-title4.html",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title4.html'>This title4</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/1/2020</div>\\ntext4"
+    },
+    {
          "title" : "This title3",
          "date_published" : "2019-12-28T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/some-title3.html",
@@ -1305,17 +1328,17 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\">\\n<div id='postdate'>Posted on 12/28/2019</div>\\ntext3 text3"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\">\\n<div id='postdate'>Posted on 12/28/2019</div>\\ntext3\\ttext3\\\\'"
     },
     {
          "title" : "This title2",
-         "date_published" : "2019-12-27T00:00:00-08:00",
+         "date_published" : "2019-12-02T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/some-title2.html",
          "url" : "https://memalign.github.io/p/some-title2.html",
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title2.html'>This title2</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/27/2019</div>\\ntext2 text2"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title2.html'>This title2</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/2/2019</div>\\ntext2 text2"
     }
   ]
 }
@@ -1328,14 +1351,16 @@ test text
 // AtomFeed class
 
   test_AtomFeed_toText() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\ntext2 text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
+    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\ntext4")
+    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\ntext5")
     
-    let index = new Index([entry2, entry1, entry3])
+    let index = new Index([entry2, entry1, entry3, entry4, entry5])
     
     let atomFeed = new AtomFeed(index)
-    atomFeed.entriesInFeed = 2
+    atomFeed.entriesInFeed = 4
     
     let expectation = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -1344,10 +1369,58 @@ test text
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2019-12-28T00:00:00-08:00</updated>
-<rights>Copyright © 2019, memalign</rights>
+<updated>2020-01-11T00:00:00-08:00</updated>
+<rights>Copyright © 2020, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>This title5</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/some-title5.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/some-title5.html" />
+<id>https://memalign.github.io/p/some-title5.html</id>
+<published>2020-01-11T00:00:00-08:00</published>
+<updated>2020-01-11T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/some-title5.html'>This title5</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 1/11/2020</div>
+text5
+]]>
+</content>
+</entry>
+
+<entry>
+<title>This title4</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/some-title4.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/some-title4.html" />
+<id>https://memalign.github.io/p/some-title4.html</id>
+<published>2020-01-01T00:00:00-08:00</published>
+<updated>2020-01-01T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/some-title4.html'>This title4</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 1/1/2020</div>
+text4
+]]>
+</content>
+</entry>
+
 <entry>
 <title>This title3</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/some-title3.html" />
@@ -1368,7 +1441,7 @@ test text
 </div>
 <img src="/m/test3.jpg">
 <div id='postdate'>Posted on 12/28/2019</div>
-text3 text3
+text3\ttext3\\'
 ]]>
 </content>
 </entry>
@@ -1378,8 +1451,8 @@ text3 text3
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/some-title2.html" />
 <link rel="related" type="text/html" href="https://memalign.github.io/p/some-title2.html" />
 <id>https://memalign.github.io/p/some-title2.html</id>
-<published>2019-12-27T00:00:00-08:00</published>
-<updated>2019-12-27T00:00:00-08:00</updated>
+<published>2019-12-02T00:00:00-08:00</published>
+<updated>2019-12-02T00:00:00-08:00</updated>
 <author>
 <name>memalign</name>
 <uri>https://memalign.github.io/index.html</uri>
@@ -1391,7 +1464,7 @@ text3 text3
 <a href='https://memalign.github.io/p/some-title2.html'>This title2</a>
 </h2>
 </div>
-<div id='postdate'>Posted on 12/27/2019</div>
+<div id='postdate'>Posted on 12/2/2019</div>
 text2 text2
 ]]>
 </content>

@@ -284,8 +284,8 @@ https://validator.jsonfeed.org/
 
 Task list:
 
-- Unit test escaping tabs and backslash in JSON feed
-- Unit test feed date format for single-digit day and month
+[x] - Unit test escaping tabs and backslash in JSON feed
+[x] - Unit test feed date format for single-digit day and month
 [x] - Unit test removing </img> tag
 [x] - Unit test Atom feed does not separate entries with a comma
 [x] - Unit test Atom feed has 'updated' element
