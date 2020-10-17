@@ -12,7 +12,7 @@
    "items" : [
     {
          "title" : "Universal Paperclips",
-         "date_published" : "2020-9-13T00:00:00-08:00",
+         "date_published" : "2020-09-13T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/universal-paperclips.html",
          "url" : "https://memalign.github.io/p/universal-paperclips.html",
          "image" : "https://memalign.github.io/m/universal-paperclips.png",
@@ -23,7 +23,7 @@
     },
     {
          "title" : "Fall Down the Rabbit Hole",
-         "date_published" : "2020-5-15T00:00:00-08:00",
+         "date_published" : "2020-05-15T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/rabbit-hole.html",
          "url" : "https://memalign.github.io/p/rabbit-hole.html",
          "image" : "https://memalign.github.io/m/whiterabbit.jpg",
@@ -34,7 +34,7 @@
     },
     {
          "title" : "Live COVID-19 Dashboard",
-         "date_published" : "2020-5-9T00:00:00-08:00",
+         "date_published" : "2020-05-09T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/live-covid19.html",
          "url" : "https://memalign.github.io/p/live-covid19.html",
          "image" : "https://memalign.github.io/m/graph-js.jpg",
@@ -45,7 +45,7 @@
     },
     {
          "title" : "Create COVID-19 Graphs Using JavaScript",
-         "date_published" : "2020-5-8T00:00:00-08:00",
+         "date_published" : "2020-05-08T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/graph-js.html",
          "url" : "https://memalign.github.io/p/graph-js.html",
          "image" : "https://memalign.github.io/m/graph-js.jpg",
@@ -56,7 +56,7 @@
     },
     {
          "title" : "Books",
-         "date_published" : "2020-4-19T00:00:00-08:00",
+         "date_published" : "2020-04-19T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/books.html",
          "url" : "https://memalign.github.io/p/books.html",
          "image" : "https://memalign.github.io/m/book.svg",
@@ -67,7 +67,7 @@
     },
     {
          "title" : "notes.txt",
-         "date_published" : "2020-4-13T00:00:00-08:00",
+         "date_published" : "2020-04-13T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/notes-txt.html",
          "url" : "https://memalign.github.io/p/notes-txt.html",
          "image" : "https://memalign.github.io/m/ios-notes.png",
@@ -78,7 +78,7 @@
     },
     {
          "title" : "Download Video Into Your Brain",
-         "date_published" : "2020-4-5T00:00:00-08:00",
+         "date_published" : "2020-04-05T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/speed-up-av.html",
          "url" : "https://memalign.github.io/p/speed-up-av.html",
          "image" : "https://memalign.github.io/m/westworld-pearl.jpg",
@@ -89,7 +89,7 @@
     },
     {
          "title" : "Download Text Into Your Brain",
-         "date_published" : "2020-3-28T00:00:00-08:00",
+         "date_published" : "2020-03-28T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/tts-download-into-brain.html",
          "url" : "https://memalign.github.io/p/tts-download-into-brain.html",
          "image" : "https://memalign.github.io/m/matrix-kung-fu.jpg",
@@ -100,7 +100,7 @@
     },
     {
          "title" : "Source Control",
-         "date_published" : "2020-3-27T00:00:00-08:00",
+         "date_published" : "2020-03-27T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/source-control.html",
          "url" : "https://memalign.github.io/p/source-control.html",
          "image" : "https://memalign.github.io/m/2560px-Git-logo-black.svg.png",
@@ -111,7 +111,7 @@
     },
     {
          "title" : "Personal Projects",
-         "date_published" : "2020-3-26T00:00:00-08:00",
+         "date_published" : "2020-03-26T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/personal-projects.html",
          "url" : "https://memalign.github.io/p/personal-projects.html",
          "image" : "https://memalign.github.io/m/sitegenerator.jpg",
@@ -122,7 +122,7 @@
     },
     {
          "title" : "How to Program a Text Adventure",
-         "date_published" : "2020-3-25T00:00:00-08:00",
+         "date_published" : "2020-03-25T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/text-adventure.html",
          "url" : "https://memalign.github.io/p/text-adventure.html",
          "image" : "https://memalign.github.io/m/text-adventure.jpg",
@@ -133,7 +133,7 @@
     },
     {
          "title" : "RSS and Feedly",
-         "date_published" : "2020-3-22T00:00:00-08:00",
+         "date_published" : "2020-03-22T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/feedly.html",
          "url" : "https://memalign.github.io/p/feedly.html",
          "image" : "https://memalign.github.io/m/feedly.jpg",

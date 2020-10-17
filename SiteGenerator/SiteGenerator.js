@@ -468,8 +468,16 @@ ${this.title}
   // e.g. "2019-12-24T14:00:00-08:00
   dateRFC3339() {
     let matches = this.dateString.match(/(\d+)\/(\d+)\/(\d+)/)
-    let month = matches[1]
-    let day = matches[2]
+    var month = matches[1]
+    if (month.length == 1) {
+      month = "0" + month
+    }
+    
+    var day = matches[2]
+    if (day.length == 1) {
+      day = "0" + day
+    }
+    
     let year = matches[3]
     return year + "-" + month + "-" + day + "T00:00:00-08:00"
   }
