@@ -1,0 +1,103 @@
+<!doctype>
+<html>
+<head>
+	
+	<!-- Meta -->
+	<title>Emoji Simulator! 😘</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<link rel="icon" type="image/png" href="favicon.png">
+
+	<!-- Styles -->
+	<link rel="stylesheet" type="text/css" href="styles/model.css">
+	<link rel="stylesheet" type="text/css" href="styles/perfect-scrollbar.min.css">
+
+	<!-- Schema.org markup for Google+ -->
+	<meta itemprop="name" content="Emoji Simulator! 😘">
+	<meta itemprop="description" content="A tool to make cellular automata, with emoji">
+	<meta itemprop="image" content="https://ncase.me/sim/thumb.png">
+
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@ncasenmare">
+	<meta name="twitter:title" content="Emoji Simulator! 😘">
+	<meta name="twitter:description" content="A tool to make cellular automata, with emoji">
+	<meta name="twitter:creator" content="@ncasenmare">
+	<meta name="twitter:image" content="https://ncase.me/sim/thumb.png">
+
+	<!-- Open Graph data -->
+	<meta property="og:title" content="Emoji Simulator! 😘">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://ncase.me/sim/">
+	<meta property="og:image" content="https://ncase.me/sim/thumb.png">
+	<meta property="og:description" content="A tool to make cellular automata, with emoji">
+
+</head>
+<body>
+
+	<!-- The grid. Inline CSS so grid can change, shuddup. -->
+	<style id="ui_style"></style>
+	<style id="grid_style"></style>
+	<div id="grid_container">
+		<div id="grid_bg"></div>
+		<div id="grid"></div>
+	</div>
+
+	<!-- Play/Pause/Reset/Step/Draw controls -->
+	<div id="play_container">
+		<div id="play_controls">
+			
+			<!-- New Board -->
+			<div class="control_button" id="play_reset">reset</div>
+			<div class="control_divider"></div>
+
+			<!-- Playback -->
+			<div class="control_button" id="play_pause">pause</div>
+			<div class="control_speed">
+				<input id="control_fps" type="range" min="1" max="60" step="1">
+				<br>
+				<div style="float:left;">slow</div>
+				<div style="float:right;">fast</div>
+			</div>
+			<div class="control_button" id="play_step">step</div>
+			<div class="control_divider"></div>
+
+			<!-- Drawing Shtuff -->
+			<div class="control_button" id="play_draw">draw <div></div></div>
+
+		</div>
+	</div>
+
+	<!-- The big honkin' editor -->
+	<div id="editor_container">
+		<div id="editor"></div>
+	</div>
+
+</body>
+</html>
+
+<!-- External Libraries -->
+<script src="scripts/libraries/rAF.js"></script>
+<script src="scripts/libraries/minpubsub.js"></script>
+<script src="scripts/libraries/reqwest.min.js"></script>
+<script src="scripts/libraries/perfect-scrollbar.min.js"></script>
+<script src="scripts/libraries/lz-string.min.js"></script>
+<!--script src="scripts/libraries/promise.js"></script-->
+<!--script src="scripts/libraries/stats.min.js"></script-->
+
+<!-- Engine -->
+<script src="scripts/engine/Actions.js"></script>
+<script src="scripts/engine/Agent.js"></script>
+<script src="scripts/engine/Grid.js"></script>
+<!--script src="scripts/engine/Graph.js"></script-->
+<script src="scripts/engine/Editor.js"></script>
+<script src="scripts/engine/Model.js"></script>
+<script src="scripts/engine/UI.js"></script>
+<script src="scripts/engine/Scroll.js"></script>
+<script src="scripts/engine/Save.js"></script>
+<script src="scripts/engine/Load.js"></script>
+
+<!-- Emoji Test -->
+<script src="scripts/emoji/platform.js"></script>
+<script src="scripts/emoji/emojiTest.js"></script>
+<script src="scripts/libraries/emojiFallback.js"></script>

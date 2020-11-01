@@ -5,10 +5,70 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2020-09-13T00:00:00-08:00</updated>
+<updated>2020-10-31T00:00:00-08:00</updated>
 <rights>Copyright © 2020, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Emoji Simulator</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/emoji-conway.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/emoji-conway.html" />
+<id>https://memalign.github.io/p/emoji-conway.html</id>
+<published>2020-10-31T00:00:00-08:00</published>
+<updated>2020-10-31T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/emoji-conway.html'>Emoji Simulator</a>
+</h2>
+</div>
+<img src="/m/glider.jpg">
+<div id='postdate'>Posted on 10/31/2020</div>
+The other night, I was trying to fall asleep but I couldn't clear my thoughts. I tried to focus on counting sheep: 🐑 1... 🐑 2... but then I wondered whether there's something better for an engineer to count. I started thinking about <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a> and began counting gliders.<br />
+<br />
+<div id='code'> o<br />
+&nbsp;&nbsp;o<br />
+ooo<br />
+<br />
+&nbsp;&nbsp;&nbsp;o o<br />
+&nbsp;&nbsp;&nbsp;&nbsp;oo<br />
+&nbsp;&nbsp;&nbsp;&nbsp;o<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o o<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oo<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oo<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oo<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ooo</div>
+Instead of calmly drifting to sleep, I kept <a href="/p/rabbit-hole.html">falling down the rabbit hole</a>.<br />
+<br />
+I remembered a cool website for making simulators with rules:<br />
+- Conway's Game of Life: <a href="https://ncase.me/sim/?s=conway">https://ncase.me/sim/?s=conway</a><br />
+- Other simulators: <a href="https://ncase.me/sim/">https://ncase.me/sim/</a><br />
+<br />
+(The author explicitly shared the source code <a href="https://github.com/ncase/sim">here</a>)<br />
+(And I made a backup <a href="/m/nicky-sim/?s=conway">here</a>)<br />
+<br />
+I noodled on that for a while and was inspired by the use of emoji as simple UI elements. It's an easy way to spice up a program/website. I also like how they generalized the rules to make tons of different simulators possible.<br />
+<br />
+I wondered if other people would find this site cool too. To get the idea out of my head for the night, I wrote down a reminder to revisit it in the morning and consider posting about it here.<br />
+<br />
+And, somehow, I eventually fell asleep.<br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Universal Paperclips</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/universal-paperclips.html" />

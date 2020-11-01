@@ -1,0 +1,43 @@
+Title: Emoji Simulator
+Date: 10/31/2020
+
+[Image:/m/glider.jpg]
+
+The other night, I was trying to fall asleep but I couldn't clear my thoughts. I tried to focus on counting sheep: 🐑 1... 🐑 2... but then I wondered whether there's something better for an engineer to count. I started thinking about [Link:https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life]Conway's Game of Life[/Link] and began counting gliders.
+
+[Code]
+ o
+  o
+ooo
+
+   o o
+    oo
+    o
+
+        o
+      o o
+       oo
+
+         o
+          oo
+         oo
+
+            o
+             o
+           ooo
+[/Code]
+
+Instead of calmly drifting to sleep, I kept [Link:/p/rabbit-hole.html]falling down the rabbit hole[/Link].
+
+I remembered a cool website for making simulators with rules:
+- Conway's Game of Life: [Link]https://ncase.me/sim/?s=conway[/Link]
+- Other simulators: [Link]https://ncase.me/sim/[/Link]
+
+(The author explicitly shared the source code [Link:https://github.com/ncase/sim]here[/Link])
+(And I made a backup [Link:/m/nicky-sim/?s=conway]here[/Link])
+
+I noodled on that for a while and was inspired by the use of emoji as simple UI elements. It's an easy way to spice up a program/website. I also like how they generalized the rules to make tons of different simulators possible.
+
+I wondered if other people would find this site cool too. To get the idea out of my head for the night, I wrote down a reminder to revisit it in the morning and consider posting about it here.
+
+And, somehow, I eventually fell asleep.
