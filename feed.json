@@ -11,6 +11,17 @@
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
     {
+         "title" : "Clamps",
+         "date_published" : "2020-11-02T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/clamps.html",
+         "url" : "https://memalign.github.io/p/clamps.html",
+         "image" : "https://memalign.github.io/m/clamps/clamps.jpg",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\n<div id='header'>\n<h2>\n<a href='https://memalign.github.io/p/clamps.html'>Clamps</a>\n</h2>\n</div>\n<img src=\"/m/clamps/clamps.jpg\">\n<div id='postdate'>Posted on 11/2/2020</div>\nMany years ago, I stumbled upon some cool personal websites made by software engineers back in the 1990s/early-2000s.<br />\n<br />\nI liked the websites because they shared interesting projects, essays, stories, and pictures. Some of them peppered in personality and humor unique to the author.<br />\n<br />\nIn a way, they inspired me to eventually make this website.<br />\n<br />\nA simple yet intruiging post was about clamps. You can find my backup of the page <a href=\"/m/clamps/index.html\">here</a>.<br />\n<br />\nIt's got some humor (including that poor Pillsbury doughboy) and it opened my eyes to how handy clamps can be around the home and office. (By the way, I also find binder clips and zip ties to be useful fasteners for quick projects/fixes!)<br />\n<br />\nThis is a glimpse into a more fun era of the web.<br />\n<br />\nThe author eventually took the website down and replaced it with a much more professional one. Normally I would give full attribution but since he removed all the content, I decided to scrub his full name and web address from this post and my backup of the page. I'm assuming he intentionally wants to have a less personal presence on the web. (Drew, if you want attribution or want me to remove this post, please let me know via GitHub.)<br />\n"
+    },
+    {
          "title" : "Emoji Simulator",
          "date_published" : "2020-10-31T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/emoji-conway.html",
