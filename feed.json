@@ -11,6 +11,17 @@
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
     {
+         "title" : "Coding Machines",
+         "date_published" : "2020-11-03T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/coding-machines.html",
+         "url" : "https://memalign.github.io/p/coding-machines.html",
+         "image" : "https://memalign.github.io/m/coding-machines/coding_machines.jpg",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\n<div id='header'>\n<h2>\n<a href='https://memalign.github.io/p/coding-machines.html'>Coding Machines</a>\n</h2>\n</div>\n<img src=\"/m/coding-machines/coding_machines.jpg\">\n<div id='postdate'>Posted on 11/3/2020</div>\nBack when I discovered the website about <a href=\"/p/clamps.html\">clamps</a>, I pored over that and similar personal websites (which sometimes linked me to even more interesting personal websites of their friends). I stumbled on a cool story about debugging, compilers, and viruses written by <a href=\"https://www.teamten.com/lawrence/\">Lawrence Kesteloot</a>.<br />\n<br />\nYou can check it out <a href=\"https://www.teamten.com/lawrence/writings/coding-machines/\">here</a>.<br />\n(My backup of the story is <a href=\"/m/coding-machines/index.html\">here</a>.)<br />\n"
+    },
+    {
          "title" : "Clamps",
          "date_published" : "2020-11-02T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/clamps.html",

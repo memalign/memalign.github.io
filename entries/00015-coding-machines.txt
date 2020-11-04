@@ -1,0 +1,9 @@
+Title: Coding Machines
+Date: 11/3/2020
+
+[Image:/m/coding-machines/coding_machines.jpg]
+
+Back when I discovered the website about [Link:/p/clamps.html]clamps[/Link], I pored over that and similar personal websites (which sometimes linked me to even more interesting personal websites of their friends). I stumbled on a cool story about debugging, compilers, and viruses written by [Link:https://www.teamten.com/lawrence/]Lawrence Kesteloot[/Link].
+
+You can check it out [Link:https://www.teamten.com/lawrence/writings/coding-machines/]here[/Link].
+(My backup of the story is [Link:/m/coding-machines/index.html]here[/Link].)

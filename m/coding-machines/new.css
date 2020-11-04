@@ -1,0 +1,442 @@
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap');
+
+body {
+    font-family: "EB Garamond", serif;
+    font-size: 22px;
+    background-color: white;
+    color: black;
+    line-height: 1.4;
+}
+
+h1 {
+    font-size: 300%;
+    margin-top: 4em;
+    margin-bottom: 1.5em;
+    line-height: 1.2;
+}
+
+@media (max-width: 700px) {
+    h1 {
+        font-size: 200%;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+}
+
+.indexPage h1 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+h2 {
+    font-size: 180%;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+p {
+    margin: 0.8em 0;
+}
+
+ul, ol {
+    margin-left: 2em;
+}
+
+sup, sub {
+    /* http://stackoverflow.com/a/572967/211234 */
+    font-size: .83em;
+
+    /* So it doesn't affect overall line height. */
+    line-height: 0.5em;
+}
+
+sup {
+    vertical-align: super;
+}
+
+sub {
+    vertical-align: sub;
+}
+
+tt {
+    font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    font-size: 85%;
+    background-color: #1b1f230d;
+    border-radius: 3px;
+    padding: 0.2em 0.4em;
+    margin: 0;
+}
+
+hr {
+    display: block;
+    width: 20%;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 2em auto;
+    padding: 0;
+}
+
+a, a:hover, a:visited {
+    color: blue;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p.date + p::first-line {
+    font-variant: small-caps;
+    text-transform: lowercase;
+}
+
+/*
+ Looks bad in Firefox. Also some articles have a one-line first
+ paragraph.
+p.date + p::first-letter {
+    font-size: 150px;
+    float: left;
+    line-height: 80px;
+    margin-top: 5px;
+    color: #333;
+}
+*/
+
+pre {
+    font-family: monospace;
+    font-size: 70%;
+    margin-left: 2em;
+    line-height: 1.2;
+}
+
+code {
+    font-family: monospace;
+    font-size: 80%;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 2em 2em;
+}
+
+p > img, p > iframe, div.flash object {
+    display: block;
+    margin: 2em auto;
+    /* No shadow, the OurGroceries writings entry has a built-in reflection. */
+    /* box-shadow: 0 0 40px rgba(0, 0, 0, 0.3); */
+}
+
+@media (max-width: 700px) {
+    p > img, video, iframe {
+        max-width: 100%;
+    }
+}
+
+img.cover {
+    margin-top: 0;
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    img.cover {
+        display: none;
+    }
+}
+
+@media (min-width: 701px) {
+    body.hasCover h1 {
+        color: white;
+    }
+
+    body.hasCover h1.titleLinesBlack {
+        color: black;
+    }
+
+    body.hasCover h1.titleLines1 {
+        margin-top: -130px;
+        margin-top: -2.06em;
+    }
+
+    body.hasCover h1.titleLines2 {
+        margin-top: -200px;
+        margin-top: -3.09em;
+    }
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.contents {
+    width: 94%;
+    max-width: 720px;
+    margin: 20px auto;
+}
+
+.date {
+    font-size: 80%;
+    color: #888;
+    /* font-variant: small-caps;
+    text-transform: lowercase; */
+}
+
+table th {
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+table td, table th {
+    padding-right: 1em;
+}
+
+.clearFix {
+    clear: both;
+}
+
+/* Link back up */
+.back {
+    text-align: center;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.gridList h2 {
+    font-size: 20pt;
+    height: 7ex;
+    position: relative;
+}
+
+/* Bottom-align H2 so they're close to the thumbnail. */
+.gridList h2 span {
+    display: block;
+    position: absolute;
+    bottom: 0;
+}
+
+.gridList a, .gridList a:hover, .gridList a:visited {
+    display: block;
+    width: 200px; /* 720px max-width for .content / 3 */
+    height: 600px;
+    float: left;
+    color: black;
+    text-decoration: none;
+    margin-right: 40px;
+}
+
+.gridList a p {
+    color: #888;
+}
+
+.gridList a:hover, .gridList a:hover p {
+    color: blue;
+}
+
+.gridList img {
+    display: block;
+    margin: 10px auto;
+}
+
+/* ----- Home page ----- */
+
+#homePage .contents {
+    max-width: 94%;
+}
+
+#homePage h1 {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#homePage table.homeMenu {
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 20px;
+}
+
+#homePage .homeMenu td {
+    vertical-align: top;
+    padding-right: 0;
+}
+
+#homePage .homeMenu td h2 {
+    margin: 0;
+}
+
+#homePage .homeMenu td a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    background-color: #AAA;
+    text-align: center;
+    width: 250px;
+    height: 250px;
+    padding-top: 20px;
+    border-radius: 5px;
+    transition: background-color .15s;
+}
+
+#homePage .homeMenu td a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+#homePage .homeMenu td a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: #822;
+}
+
+/* ----- Oscar ----- */
+
+#oscarPage #pdiLogo {
+    background-color: black;
+    padding: 20px;
+}
+
+#oscarPage video {
+    margin: 0 auto;
+    display: block;
+}
+
+/* ----- Project page ----- */
+
+#projectsPage h1 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#projectsPage h1 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1em;
+    margin-bottom: 0.5em;
+}
+
+#projectsPage .project {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 2em;
+    overflow: auto;
+}
+
+#projectsPage .project img.project-thumbnail {
+    margin: 0 0 1em 2em;
+    float: right;
+}
+
+@media (max-width: 700px) {
+    #projectsPage .project img.project-thumbnail {
+        float: none;
+        display: block;
+        margin: 0 auto 1em auto;
+    }
+}
+
+#projectsPage .project h2 {
+    margin-top: 0;
+}
+
+#projectsPage .project h2 .date {
+    white-space: nowrap;
+}
+
+/* ----- Design page ----- */
+
+#designPage .design-project img {
+    display: block;
+    max-width: 720px;
+}
+
+@media (max-width: 700px) {
+    #designPage .design-project img {
+        max-width: 100%;
+    }
+}
+
+#designPage .design-project {
+    margin-top: 3em;
+}
+
+#designPage .design-project p .date {
+    padding-right: 1em;
+}
+
+/* ----- Header ----- */
+
+.parentLinkHeader, .homeLinkHeader {
+    position: absolute;
+    text-indent: -5000px;
+    top: 15px;
+    width: 64px;
+    height: 64px;
+    background-color: red;
+    border-radius: 32px;
+}
+
+.homeLinkHeader {
+    left: 15px;
+    background: url("headshot-64x64.jpg") no-repeat;
+}
+
+.parentLinkHeader {
+    left: 95px;
+    background: url("icons/pipe-64x64.png") no-repeat, #ccc;
+}
+
+/* ----- Footer ----- */
+
+.footer {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.footer a {
+    margin-left: 20px;
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.footer a:first-child {
+    margin-left: 0;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+#checkboxesPage .example {
+    background-color: #eee;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    font-weight: 300;
+    line-height: 28px;
+    font-size: 12pt;
+    width: 380px;
+    margin: 2em auto;
+}
+
+#checkboxesPage .example p {
+    text-indent: 0;
+    padding-bottom: 0.5em;
+}
+
+#checkboxesPage .example div {
+    padding-left: 1em;
+}
+
+#checkboxesPage span.brokenlink {
+    color: #CC3333;
+}
+
+/* -------------------------------------------------------------------------------- */

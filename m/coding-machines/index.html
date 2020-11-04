@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Coding Machines</title>
+        <link href="reset.css" rel="stylesheet" type="text/css">
+        <link href="new.css" rel="stylesheet" type="text/css">
+        <link href="stylesheet.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="coding_machines" class="contents">
+            <h1>Coding Machines</h1>
+
+            <p class="date">by Lawrence Kesteloot, January 2009</p>
+
+            <p>(Also available as an <a href="http://amzn.to/2zOnez6">e-book from Amazon</a>.)</p>
+
+<p class='very-first'>After a minute Patrick came back with a small
+dusty cardboard box. Dave and I stared as Patrick opened it
+and pulled out a network switch, the old kind from the days
+when they were made with metal cases. He plugged in the
+power supply and carefully straightened out a <span class="initials">CAT</span>-5 cable to
+hook the switch up to our network. I wanted to yell at him
+for being so careful and deliberate at a time like this.
+Dave sat next to me and was uncharacteristically still.</p>
+
+<p>I stopped breathing as Patrick struggled to get the plug
+lined up with the port.  I stared at the front panel lights,
+and felt Dave doing the same. My eyes watered. Patrick
+pushed the plug in. The front lights immediately lit and
+flashed actively. I felt my hands and face flush, and out of
+the corner of my eye saw Dave sit up and open his mouth as
+if to speak. He then put his face down into his cupped
+hands, and threw up.</p>
+
+
+<p class='new-section'>This is not how we would have reacted three weeks
+earlier.  Three weeks earlier we had settled down into that
+difficult part of a project after the honeymoon ends and you
+have to implement the tedious parts of the product, the
+parts that were just simple boxes in the design, and seemed
+straightforward, but turned out to be tricky for reasons
+that are incidental, and therefore uninteresting.</p>
+
+<p>Patrick and Dave had done the design, of course, and had
+humored me as I had suggested various ideas which in
+retrospect must have been obvious to them. It had been
+fascinating to hear them debate design issues. So many of
+their arguments were based on intuition rather than reasoned
+logic. I had learned more each week than my entire last
+semester of school.</p>
+
+<p>I found myself siding more with Dave. Dave Mitchell had a
+great laugh. He was on the heavy side and knocked things
+over a lot. I liked the insights he had about management and
+the process of software development, and he liked to teach
+me things. Patrick and Dave had split up the work they had
+designed, and they had given me tests to write in
+advance of their code being ready.</p>
+
+<p>It had been a quiet day when I heard Dave whisper, &ldquo;What the
+hell?&rdquo; and put his hands into his hair. I sensed an
+opportunity to learn and walked over to his desk. He didn&rsquo;t
+notice.  He was quickly switching back to his editor, adding
+a line of debug output, compiling, running, shaking his
+head, and switching back to add another line elsewhere.</p>
+
+<p>&ldquo;What&rsquo;s the matter?&rdquo;</p>
+
+<p>He waited until the program finished running to answer.
+&ldquo;I can&rsquo;t figure out this bug. I can&rsquo;t figure out where this
+number is coming from here.&rdquo; He pointed to a line in this
+debug output. Dave and Patrick liked to debug by writing
+lines to the console, rather than stepping through with a
+debugger, as I liked to do.</p>
+
+<p>&ldquo;What happens when you step through it in the debugger?&rdquo;
+This was a tease. Dave didn&rsquo;t know how to use a debugger,
+short of displaying the stack trace of a core file.</p>
+
+<p>Dave paused, then brought up the debugger on his program.
+I smiled in surprise, then walked him through how to set
+breakpoints. We spent the next few hours narrowing down
+where, in the mess of his code, Boost, and the system
+libraries, this value was coming from.</p>
+
+<p>&ldquo;Patrick, can you help us here?&rdquo; This surprised me more
+than the debugger. Dave rarely asked Patrick for help.</p>
+
+<p>Patrick came over and Dave explained the situation. &ldquo;The
+program is crashing, and that&rsquo;s because of this bad
+dereference here, but the value is correct here.&rdquo; Dave pointed
+at some code while Patrick&rsquo;s eyes scanned the screen. Then a
+thought occurred to me. Dave was still explaining and I
+didn&rsquo;t want to interrupt. My heart was jumping as I waited
+for Dave to take a breath.</p>
+
+<p>&ldquo;I think it&rsquo;s a compiler bug,&rdquo; I said with confidence,
+squinting my eyes at the code. Patrick and Dave raced
+each other to brush this off.</p>
+
+<p>&ldquo;Blaming the compiler is a last resort,&rdquo; said Patrick. &ldquo;Same
+with the standard library. Chances are vastly greater that
+your brand-new code has a bug, rather than code being used
+by thousands of people.&rdquo; I nodded wisely, but I felt my
+cheeks blush.</p>
+
+<p>Patrick Karlsson often made me feel bad. He never meant to,
+I&rsquo;m sure, but he had a way of arguing in a brutally
+straightforward way that made me feel thoughtless and young.
+He was taller than Dave and I, and thin. He was quiet,
+except when correcting something I had said or code I had
+written, but I liked him anyway. I sometimes found his
+design decisions questionable and naive. Dave and I liked to
+gang up on him.</p>
+
+<p>Patrick was cracking his knuckles. He asked questions about
+threads and volatile and aliasing, questions I didn&rsquo;t
+entirely understand but wish I&rsquo;d thought of. Dave considered
+each and said that none of Patrick&rsquo;s concerns applied in
+this case. Patrick pursed his lips to the right, the way he
+did when he wasn&rsquo;t sure the answers he&rsquo;d been given were
+correct, and said, &ldquo;Hmmm, I don&rsquo;t know. Weird,&rdquo; and returned
+to his desk.</p>
+
+<p>I was relieved that Patrick hadn&rsquo;t crushed us with an
+obvious solution, and I guessed that Dave felt the same as
+he sat back up from his slouch and started typing. &ldquo;Is there
+any way to show the assembly right here where things go
+pear-shaped?&rdquo;</p>
+
+<p>I showed him how to do this, and I wondered if he was giving
+my theory a chance. He typed the command and the lines of
+C were split apart by dozens of lines of assembly.</p>
+
+<p>&ldquo;That&rsquo;s not right,&rdquo; Dave said, &ldquo;We got the command wrong.&rdquo;</p>
+
+<p>&ldquo;I&rsquo;m sure that&rsquo;s right,&rdquo; I said. I knew the debugger well,
+and by &ldquo;we&rdquo; he meant me.</p>
+
+<p>&ldquo;No it&rsquo;s not, that far too much assembly for this line of
+code. And some of these aren&rsquo;t even legal assembly
+instructions.&rdquo;</p>
+
+<p>&ldquo;That&rsquo;s not possible,&rdquo; said Patrick from his desk.</p>
+
+<p>Dave blinked slowly. &ldquo;Well, I meant that I&rsquo;ve never seen
+these, they&rsquo;re not what a compiler outputs, this isn&rsquo;t the
+right place.&rdquo; He was flustered, and I felt more inexperienced
+than ever. Dave got up and said, &ldquo;I&rsquo;m burned out, we&rsquo;ll look
+at this again tomorrow.&rdquo;</p>
+
+<p>He left and I sat down at his computer. The only thing I had
+contributed all day was knowledge about the debugger, and
+Dave didn&rsquo;t even think I had gotten that right. I looked at the
+assembly on the screen. Some of the instructions were
+obvious and some were cryptic. I found an online assembly
+reference and started tracing the instructions, keeping
+notes about register contents in my notebook.</p>
+
+<p>Dave was right, these instructions made no sense. Not only
+did they perform too much work for the corresponding C code,
+but they didn&rsquo;t even make sense internally. But I convinced
+myself that this was at least the right section, because a
+few of the instructions matched the surrounding C lines.</p>
+
+<p>I focused on one instruction in particular. It was subtracting a
+register from itself. That&rsquo;s not necessarily odd in itself:
+it might be an efficient way to set a register to zero. But
+this register was then used in other math instructions. The
+compiler must have known it&rsquo;d be zero and optimized it out.
+I hesitated, then called Patrick over. I explained what I
+had found. He stared at it for a good while, then said,
+&ldquo;That&rsquo;s not a normal subtraction instruction.&rdquo;</p>
+
+<p>He was right. I looked it up more carefully, and found that
+it was a variation that also subtracted out the carry bit.
+This was a way to get the carry bit into a register. I worked
+my way backwards to see where the carry was set. The code
+got increasingly convoluted, and I repeatedly made
+incorrect assumptions that threw me off-course.</p>
+
+<p>I turned around to ask Patrick a question and found an empty
+desk. It was nearly midnight. I set the office alarm and
+rode my bike home.</p>
+
+
+<p class='new-section'>I got in late the next morning. I hadn&rsquo;t slept
+well, and it had taken me hours to fall sleep. Each time I
+closed my eyes I saw fast-moving assembly instructions in
+large bright letters.</p>
+
+<p>I walked straight to Dave&rsquo;s desk to discuss the previous
+night&rsquo;s investigations, but he wasn&rsquo;t interested.</p>
+
+<p>&ldquo;You were right,&rdquo; he said, &ldquo;It was a compiler bug. I tweaked
+the C code and I&rsquo;m no longer triggering it. That weird
+assembly is gone.&rdquo;</p>
+
+<p>I was in the awkward position of having to contradict the
+compliment.  &ldquo;I don&rsquo;t know if it&rsquo;s a bug. The code I saw
+wouldn&rsquo;t have been generated by a bug.&rdquo;</p>
+
+<p>&ldquo;It was definitely a compiler bug.&rdquo; I had worked with Dave
+enough to know that the more confidently he spoke, the less
+secure he was. But he was tired of being held up by the
+problem, and I dropped it.</p>
+
+
+<p class='new-section'>Dave walked up to my desk with a grin and a cup
+from Peet&rsquo;s Coffee. I thought all coffees tasted fine, but
+he was picky, so I pretended to be picky so that I could
+spend time with him walking to Peet&rsquo;s. I felt a bit stung
+that he&rsquo;d gone without me this time.</p>
+
+<p>&ldquo;You remember that compiler bug from Tuesday?&rdquo; He grinned
+some more. His teeth were yellow from the espresso.</p>
+
+<p>&ldquo;Yep.&rdquo;</p>
+
+<p>&ldquo;It happened again this morning. Same file, same problem.
+The weird assembly is back. The strange thing is that I
+didn&rsquo;t change the C file.&rdquo; He was surprisingly mellow about
+it.</p>
+
+<p>&ldquo;Maybe you changed a header file?&rdquo; I&rsquo;m brilliant.</p>
+
+<p>&ldquo;Oh maybe.&rdquo; He frowned. &ldquo;Actually, no. Let me check <span class="initials">SVN</span>.&rdquo;</p>
+
+<p>He came back two minutes later. No relevant files had
+changed.</p>
+
+<p>Patrick walked over. &ldquo;This is no good. Here it&rsquo;s a crash,
+but it could be something more subtle. In four months our
+system will be so complex that a subtle problem will take
+weeks to track down. Can you look at the compiler&rsquo;s
+release notes and see if we can upgrade?&rdquo;</p>
+
+<p>I looked briefly and found what I had expected. We were on
+the latest and most stable version of the recommended major
+release. It didn&rsquo;t get more stable than that. I went further
+and searched for some permutation of &ldquo;weird assembly&rdquo; and
+&ldquo;compiler bug&rdquo; and found nothing.</p>
+
+<p>I compiled Dave&rsquo;s code on my computer and disassembled it.
+The strange code was there, at the same place it had been
+Tuesday. I recognized the subtract-with-carry instruction
+and a few others that seemed unusual. I also looked through
+the rest of the code. It was striking how the unusual
+instructions didn&rsquo;t appear anywhere else. The rest of the
+generated code used instructions you would expect. After
+all, when do you ever need to subtract and use the existing
+value of the carry bit?</p>
+
+<p>I downloaded the source code of the compiler. I had never
+been so overwhelmed. It was a tangled mess of compiler
+passes, plug-in frameworks, embedded languages to describe
+<span class="initials">CPU</span> architectures, and abstraction layers. I went
+straight to the files that described the translation from
+the abstract syntax tree to the machine&rsquo;s assembly. I
+grepped for the subtract-with-carry. It wasn&rsquo;t there. I
+looked for a few other odd ones. Some were there, most
+weren&rsquo;t.</p>
+
+<p>At lunch I mentioned my findings. The small office we used
+had a patio, which, it being Mountain View, was nearly always
+usable. Friday was Togo&rsquo;s day. I preferred Subway, but Dave
+hated the bread.</p>
+
+<p>&ldquo;That&rsquo;s super weird,&rdquo; said Patrick, frowning at the table.
+He said &ldquo;super&rdquo; a lot. I think it&rsquo;s a California thing.
+&ldquo;Which other ones weren&rsquo;t in the translation file?&rdquo;</p>
+
+<p>&ldquo;I don&rsquo;t remember,&rdquo; I said. &ldquo;A few more that involved the
+carry bit. Some vector instructions.&rdquo;</p>
+
+<p>Patrick looked up. &ldquo;That compiler doesn&rsquo;t do vectorization.&rdquo;</p>
+
+<p>&ldquo;That&rsquo;s what I just said.&rdquo;</p>
+
+<p>&ldquo;Either the instruction was generated by mistake or you&rsquo;re
+disassembling non-code.&rdquo; He was still frowning.</p>
+
+<p>Dave cut in. &ldquo;It&rsquo;s definitely code. This is what&rsquo;s causing
+our bug.  It&rsquo;s being executed.&rdquo;</p>
+
+<p>&ldquo;And it&rsquo;s not generated by mistake,&rdquo; I added. &ldquo;It&rsquo;s a math
+instruction, but I don&rsquo;t think it&rsquo;s being used for math.
+It&rsquo;s not nonsense.&rdquo;</p>
+
+<p>&ldquo;Neat.&rdquo; We had finally hooked Patrick.  After lunch he and I
+sat down at my desk and walked through the part of the code
+I knew best. I showed him how although the instructions were
+obscure and strangely used, they did make sense, all
+together. There was a deliberate flow of data.</p>
+
+<p>&ldquo;Let&rsquo;s look for a backward jump instruction,&rdquo; he said.</p>
+
+<p>&ldquo;Why?&rdquo;</p>
+
+<p>&ldquo;The target of such a jump may be the top of a loop. It&rsquo;s a
+good place to start the analysis.&rdquo;</p>
+
+<p>&ldquo;You&rsquo;re actually going to figure out what this code is
+doing?&rdquo;</p>
+
+<p>&ldquo;Oh yeah.&rdquo; He smiled and his eyes lit up.</p>
+
+<p>It took us the rest of the afternoon to pick through the
+convoluted jump targets and decode four consecutive
+instructions. That snippet, it turns out, was finding the
+sign of an integer. Anyone else would have done a simple
+comparison and a jump to set the output register to -1, 0,
+or 1, but the four instructions were a mess of instructions
+that all either set the carry bit as a side-effect, or used
+it in an unorthodox way.</p>
+
+<p>&ldquo;You know,&rdquo; said Patrick, &ldquo;this isn&rsquo;t even the interesting
+part. I want to know how this code gets in here. You said
+these instructions weren&rsquo;t in the translation file?&rdquo;</p>
+
+<p>&ldquo;That&rsquo;s right.&rdquo;</p>
+
+<p>&ldquo;They must be elsewhere. Let&rsquo;s grep the source for both the
+symbolic version and the op-code.&rdquo;</p>
+
+<p>I did a recursive grep and it came up empty. I didn&rsquo;t know
+what to try next.</p>
+
+<p>&ldquo;Try the binary,&rdquo; said Patrick.</p>
+
+<p>&ldquo;What binary?&rdquo;</p>
+
+<p>&ldquo;The binary of the compiler.&rdquo;</p>
+
+<p>I grepped for the name of the assembly instruction and found
+nothing, but looking for the op-code turned up hundreds of
+hits.</p>
+
+<p>&ldquo;Interesting,&rdquo; I said, &ldquo;they&rsquo;re not generating individual
+instructions, they&rsquo;re dumping chunks of pre-built code.&rdquo;</p>
+
+<p>&ldquo;Why?&rdquo;</p>
+
+<p>&ldquo;I don&rsquo;t know why.&rdquo;</p>
+
+<p>&ldquo;I mean, why do you say that?&rdquo;</p>
+
+<p>&ldquo;Because these op-codes are all together. It&rsquo;s not a look-up
+table.&rdquo;</p>
+
+<p>&ldquo;Maybe it&rsquo;s code,&rdquo; he said after a second.</p>
+
+<p>I disassembled the whole compiler and looked for a few of
+the suspicious instructions, and found large sections that
+looked like the obscure code we had been tracing all
+afternoon.</p>
+
+<p>&ldquo;The <em>compiler</em> is infected!&rdquo; I said. &ldquo;No wonder we couldn&rsquo;t
+find it in its source code.&rdquo;</p>
+
+<p>&ldquo;Okay, let&rsquo;s start by recompiling the compiler,&rdquo; said
+Patrick. &ldquo;I&rsquo;ll poke around the Web to see if anyone&rsquo;s seen
+this before. When you&rsquo;re done with the compiler, recompile
+all our own code and see if Dave&rsquo;s bug is gone.&rdquo;</p>
+
+<p>The compiler took two hours to recompile, not including the
+time I spent learning the convoluted build process.
+Meanwhile, Patrick found nothing online. I rebuilt our
+source tree and ran the tests. They failed, in the same
+place.</p>
+
+<p>&ldquo;Maybe the bug was due to something else after all?&rdquo; I
+suggested when Patrick walked over.</p>
+
+<p>&ldquo;Disassemble the compiler again,&rdquo; he said.</p>
+
+<p>I did, and the foreign codes were still there.</p>
+
+<p>&ldquo;That can&rsquo;t be,&rdquo; I said. &ldquo;This is a fresh build of the
+official sources.&rdquo;</p>
+
+<p>&ldquo;They must have gotten infected. Perhaps someone broke into
+the download site and replaced them with modified sources.&rdquo;</p>
+
+<p>&ldquo;I would <em>love</em> to see that code,&rdquo; I said, and opened
+my editor to a file in the compiler.</p>
+
+<p>&ldquo;That&rsquo;s going to take you forever,&rdquo; Patrick said. &ldquo;Put a
+breakpoint in <tt>write()</tt>, with a condition of the string
+containing this op-code.&rdquo;</p>
+
+<p>And this from the guy who pretends not to like debuggers!
+Setting the condition was not easy, and there were many false
+positives, but the following Monday morning I hit the
+<tt>write()</tt> that outputs the suspicious code. I popped up to the C
+code. It was a generic routine to output a buffer. I worked
+backwards to the code that had filled it, and it was all
+straightforward loops based on the translation table, which
+I knew was clean.</p>
+
+<p>In desperation, I started paging through every source file of the
+compiler looking for any code that might be
+responsible. Much of it was manipulating the abstract syntax
+tree. Then it occurred to me that the hack couldn&rsquo;t be
+there, since the back-end translation table was clean. The
+hack must be in the back-end itself. In fact, it would have
+to be after register assignment. This narrowed down the
+search considerably, and I spent an hour looking through
+these files before it was time for lunch.</p>
+
+<p>Monday was pho day. We always went to Pho World, which was so low-rent it
+didn&rsquo;t even have a menu, but it was a delicious way to spend four dollars.</p>
+
+<p>&ldquo;Eye of round, no tripe, no cilantro,&rdquo; said Dave to the
+little man, and we all followed suit. I don&rsquo;t know what cut
+&ldquo;eye of round&rdquo; is but I know it&rsquo;s safe.</p>
+
+<p>&ldquo;So I couldn&rsquo;t find it,&rdquo; I said, &ldquo;either backward from the
+breakpoint or forward from the code.&rdquo;</p>
+
+<p>&ldquo;Are you still debugging that?&rdquo; said Dave.</p>
+
+<p>&ldquo;We have to,&rdquo; said Patrick. &ldquo;We can&rsquo;t build a product on a
+foundation like this.&rdquo;</p>
+
+<p>&ldquo;It&rsquo;s just so odd that the C source would be clean but the
+assembly have these weird op-codes,&rdquo; I said.</p>
+
+<p>&ldquo;I thought you had tracked it down to the compiler,&rdquo; said
+Dave.</p>
+
+<p>&ldquo;I don&rsquo;t mean in your code, I mean in the compiler itself.&rdquo;</p>
+
+<p>&ldquo;The compiler could be responsible for that too.&rdquo;</p>
+
+<p>&ldquo;No, I checked the code.&rdquo;</p>
+
+<p>&ldquo;But the code is compiled by the compiler.&rdquo;</p>
+
+<p>I didn&rsquo;t understand what Dave was saying, but Patrick had
+looked up and seemed on the verge of an insight. I waited
+for the lucid explanation.</p>
+
+<p>&ldquo;So the compiler detects and modifies your program, for
+reasons still unknown, but also detects and modifies itself
+when compiled.&rdquo;</p>
+
+<p>&ldquo;Right,&rdquo; said Dave with a grin, squirting brown sauce in his
+soup and splattering some of it onto the table.</p>
+
+<p>&ldquo;How would that work?&rdquo; Patrick said, now in full form. &ldquo;A
+hacker adds this code to the compiler and distributes it to
+everyone. The code detects that it&rsquo;s compiling the compiler
+and adds <em>itself</em> back into the binary. One revision
+later the hacker removes the code from the official source
+distribution. The hack then perpetuates itself forever, with
+no trace in the source.&rdquo;</p>
+
+<p>&ldquo;And what&rsquo;s the purpose?&rdquo; I said. I was skeptical that code
+could detect and insert itself so flawlessly across multiple
+versions.</p>
+
+<p>&ldquo;I don&rsquo;t know, we didn&rsquo;t get far enough into the analysis of
+Dave&rsquo;s code. The obvious thing would be some kind of
+password validation code, modified to always accept some
+back-door password.&rdquo;</p>
+
+<p>I wish he wouldn&rsquo;t say that such things are obvious.</p>
+
+<p>&ldquo;So let&rsquo;s go back to an old version of the compiler,&rdquo; said
+Dave.</p>
+
+<p>&ldquo;You mean the <em>binary</em> of an old version. The source
+won&rsquo;t help us. I don&rsquo;t think we have binaries around. We
+don&rsquo;t know how far back this goes.&rdquo;</p>
+
+<p>&ldquo;How about this,&rdquo; I said, trying to be helpful, &ldquo;I&rsquo;ll write
+a utility that you can run on a binary, and it&rsquo;ll tell you
+if it detects the suspicious use of these op codes.&rdquo;</p>
+
+<p>&ldquo;Oh good idea.&rdquo; I liked Patrick.</p>
+
+<p>It didn&rsquo;t take long to write this utility. It just ran a
+binary through the disassembler, then through a few greps to
+find instructions that were definitely not generated by the
+compiler. It found the code in Dave&rsquo;s program, as well as in
+the compiler. I set it loose on all executables in the
+system.</p>
+
+<p>&ldquo;Here&rsquo;s the list,&rdquo; I said as I walked to Patrick&rsquo;s desk.
+It was three printed pages. He looked through it.</p>
+
+<p>&ldquo;This is not good. The Java runtime, the Python runtime,
+Perl, the compiler, and a bunch of other programs that
+probably don&rsquo;t matter.&rdquo;</p>
+
+<p>&ldquo;Why do those runtimes matter?&rdquo;</p>
+
+<p>&ldquo;Because if we can&rsquo;t trust the C compiler, then we have to
+write a new one, which isn&rsquo;t all that hard, but what
+language are you going to write it in? Are you going to
+trust your new compiler to the hacked Python interpreter?&rdquo;</p>
+
+<p>&ldquo;You&rsquo;re not going to write a new compiler,&rdquo; said Dave from
+his desk. &ldquo;Don&rsquo;t get all conspiracy paranoid. It&rsquo;s probably
+just a bug.&rdquo;</p>
+
+<p>I left Patrick staring at the list and went back to my desk.
+I still didn&rsquo;t have an answer to the question I had asked at
+lunch: What&rsquo;s the purpose of this hack? I had enjoyed
+reverse-engineering some of these bits of code, and frankly
+I feared that Patrick would ask me to write a C
+compiler in assembly, so I put my headphones on and opened
+the debugger to the part of the C compiler that looked
+obfuscated.</p>
+
+<p>Again the over-use of instructions that involve the carry
+bit, unusual abuse of vector instructions, and convoluted
+and sometimes unnecessary jumps. No compiler would generate
+this. This was hand-crafted to be difficult to understand. I
+set out to figure out the purpose of this page of code.</p>
+
+<p>Some time later I saw the custodian pick up my trash bin to
+empty it. I took off my headphones. Dave and Patrick were
+gone. It was ten o&rsquo;clock. I looked back at the screen of
+now-familiar instructions. I had pieced together a rough
+idea of what it did, or at least what some of its parts did.
+I felt a rush of energy. I was close to an answer. I stayed
+until morning.</p>
+
+
+<p class='new-section'>Patrick sat next to me as I pointed at my screen.
+&ldquo;Here they use the vector instruction to get a sum of 
+squares, which is just a convoluted way to compare these two
+byte arrays.&rdquo; That was the climax of a ten-minute explanation.</p>
+
+<p>&ldquo;Wait, so what are they doing?&rdquo; he asked.</p>
+
+<p>&ldquo;They&rsquo;re doing pattern matching.&rdquo;</p>
+
+<p>&ldquo;Why all the convoluted crap?&rdquo;</p>
+
+<p>&ldquo;Well it&rsquo;s a fuzzy search, and I guess it&rsquo;s pretty fast.&rdquo;</p>
+
+<p>&ldquo;Yeah but this is the most convoluted Rube-Goldberg way of
+doing something I&rsquo;ve ever seen.&rdquo;</p>
+
+<p>My shoulders sunk and I fiddled with the mouse. I looked at
+my reams of notes. He wasn&rsquo;t even a bit impressed. </p>
+
+<p>&ldquo;So, what now?&rdquo; I asked after several seconds of silence.</p>
+
+<p>&ldquo;I don&rsquo;t know, let me catch up on email.&rdquo; He left for his
+desk. I was deflated and my muscles ached. I spent the rest
+of the morning browsing feeds and refreshing the live blog
+of a MacWorld event.</p>
+
+<p>At lunch Patrick recounted my findings to Dave. He
+remembered every detail. Dave grinned and shook his head
+with every new complication in the algorithm. I wasn&rsquo;t
+convinced that he was able to follow it all so quickly, and
+without any code to look at. I realized, listening to it all
+again, that Patrick had been right. This was far too
+convoluted a way of doing something relatively simple.</p>
+
+<p>&ldquo;Have you ever seen those obfuscated programming contests?&rdquo;
+Dave asked when Patrick was almost finished. &ldquo;This is just
+like that.&rdquo;</p>
+
+<p>&ldquo;A friend and I competed with each other to write an
+obfuscated program in college,&rdquo; said Patrick. &ldquo;I don&rsquo;t know
+how he did it, but I started by writing the program
+normally, then incrementally made it more difficult to
+follow, by renaming variables, inlining expressions, stuff
+like that. That process never would have resulted in what I
+saw this morning.&rdquo;</p>
+
+<p>&ldquo;Well maybe other people do it differently,&rdquo; said Dave.</p>
+
+<p>&ldquo;I feel strange about this code,&rdquo; said Patrick. &ldquo;I don&rsquo;t
+know how to explain it. It feels cold.&rdquo;</p>
+
+<p>Dave and I looked at Patrick. He was dissolving wasabi into
+his soy sauce. I didn&rsquo;t interrupt his thought-gathering.</p>
+
+<p>&ldquo;It&rsquo;s like those chess programs,&rdquo; he finally said. &ldquo;They
+don&rsquo;t have intuition about what will work, or feelings about
+the board position, or experience to draw on. They just try
+every possible option and pick the best one. This feels like that.
+Like someone tried every combination of instructions until
+they got code that did what it was supposed to do. There&rsquo;s
+no beauty. The code is ugly and functional. I guess that&rsquo;s
+what I meant by &lsquo;cold&rsquo;.&rdquo;</p>
+
+<p>&ldquo;How does it know what it&rsquo;s supposed to do?&rdquo; I asked.</p>
+
+<p>&ldquo;Well,&rdquo; said Patrick, &ldquo;maybe you could just define boundary
+cases and run the code to see if the output was right. Code
+that works on boundary cases is likely to work for all
+cases.&rdquo;</p>
+
+<p>&ldquo;Oh I like that!&rdquo; said Dave, grinning. &ldquo;I would love to
+specify the outcome and have the compiler write the code for
+me.&rdquo;</p>
+
+<p>&ldquo;Well specifying the outcome precisely enough would be no
+easier than just writing the code,&rdquo; said Patrick, and I felt
+my smile fade with Dave&rsquo;s. I wondered whether a drunk
+Patrick would be more fun. Or at least less of a buzz-kill.</p>
+
+<p>&ldquo;So why would somebody do that, then?&rdquo; I asked.</p>
+
+<p>Patrick put a roll into his mouth and stared at the center
+of the round patio table. &ldquo;Maybe no one did. Maybe this is
+all computers doing this.&rdquo;</p>
+
+<p>I didn&rsquo;t know what to say to that. I didn&rsquo;t think he was
+kidding.</p>
+
+<p>&ldquo;Okay, there&rsquo;s this thing called Occam&rsquo;s Razor,&rdquo; Dave
+started.</p>
+
+<p>&ldquo;Well what&rsquo;s <em>your</em> explanation?&rdquo;</p>
+
+<p>&ldquo;Um, <em>not</em> self-aware artificially-intelligent robot
+overlords infecting my object marshalling code.&rdquo;</p>
+
+<p>&ldquo;That&rsquo;s not an explanation.&rdquo;</p>
+
+<p>&ldquo;Have you run an anti-virus scan?&rdquo; Dave liked to pronounce
+it &ldquo;an-<span class="initials">TIV</span>-erus&rdquo;, like the name of a Roman emperor.</p>
+
+<p>&ldquo;Does that affect your explanation of why this code looks
+this way?&rdquo; Patrick could be a bit brutal.</p>
+
+<p>Dave exhaled and took the question seriously. It was hard to
+refute Patrick&rsquo;s point. No other explanation made sense. We
+had never seen a compiler generate this kind of code, and a
+human hand-crafting the assembly would have a hard enough
+time writing a self-referential op-code-injecting
+future-proof worm without needlessly using arcane
+instructions. If anything, using such instructions would
+draw attention to the code. In fact it had made it easy for
+my script to detect all infected programs on my system.</p>
+
+<p>&ldquo;Okay so what&rsquo;s your full explanation?&rdquo; Dave finally asked.</p>
+
+<p>&ldquo;I don&rsquo;t know,&rdquo; said Patrick, frowning. &ldquo;Maybe some
+artificial intelligence program that ran amok. Oh, or you
+know how computer viruses evade virus scanners by modifying
+their own code? Maybe it started out that way, with a virus
+that was programmed to modify itself while retaining the
+same behavior.&rdquo;</p>
+
+<p>We were all silent for a few minutes. I was trying to see if
+this explanation was plausible. It seemed unlikely, but
+it would only take a single instance of a program somewhere
+going in this direction, and it would grow and propagate
+wildly. Half a million new computer viruses are detected
+each year. Our brains have no intuition for probabilities
+involving such numbers.</p>
+
+<p>A thought occurred to me. &ldquo;Well wait, this didn&rsquo;t start in
+our lab. We just got pre-built binaries from the official
+distribution. Someone must have run into this before. I
+can&rsquo;t believe that the official compiler is inserting
+half-broken code into binaries and we&rsquo;re the first who have
+noticed.&rdquo;</p>
+
+<p>&ldquo;Oh that&rsquo;s good,&rdquo; said Patrick, &ldquo;I&rsquo;ll post something after
+lunch.&rdquo;</p>
+
+<p>An hour later I got an email from Patrick with several links
+to forums where he had posted our findings and asked if
+anyone had ever seen them before. Dave followed up with a link
+to the Ask Slashdot post he had just submitted where he
+begged fellow Slashdotters to provide an explanation so that
+his co-worker wouldn&rsquo;t force him to write a compiler in
+assembly language.</p>
+
+<p>&ldquo;Oh nice, Dave,&rdquo; said Patrick, and I couldn&rsquo;t tell if that
+was sarcastic or genuine. Dave gave a half-hearted &ldquo;Thanks&rdquo;
+that told me he wasn&rsquo;t sure either.</p>
+
+<p>I spent the afternoon poking through more mystery code and
+refreshing the forum posts. On a few we were ignored
+completely, but on most we were ridiculed. The mocking on
+Slashdot was awful. All comments were +5 funny. They didn&rsquo;t
+seem funny to me. I felt my scratchy chin and remembered my
+sleepless night. I rode home in a trance and went straight
+to bed.</p>
+
+
+<p class='new-section'>The next morning I found Patrick looking at my
+print-out of infected programs. I walked to his desk and
+stood by him.</p>
+
+<p>&ldquo;What are you looking for?&rdquo; I asked him.</p>
+
+<p>&ldquo;A way for us to write a compiler in something other than
+assembly.&rdquo;</p>
+
+<p>&ldquo;The assembler&rsquo;s not infected?&rdquo; asked Dave from his desk.</p>
+
+<p>&ldquo;It&rsquo;s not on this list.&rdquo;</p>
+
+<p>I turned toward my desk. &ldquo;I&rsquo;ll double-check it.&rdquo;</p>
+
+<p>&ldquo;What about the browser?&rdquo; asked Dave. &ldquo;Can we write it in
+JavaScript?&rdquo; He was as desperate as I to avoid assembly.</p>
+
+<p>&ldquo;Yeah it&rsquo;s infected,&rdquo; said Patrick.</p>
+
+<p>Dave leaned back in his chair and covered his face in his
+hands. &ldquo;This is crazy. We can&rsquo;t be writing a compiler in
+assembly. No way.&rdquo;</p>
+
+<p>&ldquo;It&rsquo;s not <em>that</em> awful,&rdquo; said Patrick. &ldquo;We&rsquo;ll spend a
+day writing useful low-level routines, and after that
+assembly&rsquo;s not much more painful than C. And the compiler
+won&rsquo;t have an optimizer or anything. I bet it doesn&rsquo;t even
+need to support floating point. We just need to compile the
+compiler with it. It only needs to work on a single program.&rdquo;</p>
+
+<p>&ldquo;That program took me two hours to compile, though. It&rsquo;s
+pretty complex.&rdquo;</p>
+
+<p>&ldquo;Do we have to write the linker too?&rdquo; asked Dave.</p>
+
+<p>I hadn&rsquo;t even considered the linker. Evidently neither had
+Patrick, who quickly turned to Dave, then turned back to the
+print-outs, furiously looking for &ldquo;ld&rdquo;.</p>
+
+<p>&ldquo;It&rsquo;s not on here. I guess that makes sense, it&rsquo;s easier to
+insert code when compiling,&rdquo; said Patrick. I didn&rsquo;t
+immediately see why that was.</p>
+
+<p>&ldquo;Wait, let&rsquo;s back up,&rdquo; said Dave. &ldquo;Last week I was able to
+fix my bug by modifying the code enough to avoid triggering
+the, um, the hack.&rdquo; He didn&rsquo;t know what to call it either.</p>
+
+<p>&ldquo;But then it came back, without you changing the code,&rdquo; said
+Patrick.</p>
+
+<p>&ldquo;Yeah, I know, but before we write this thing, let&rsquo;s at
+least try to modify the compiler&rsquo;s own code to see if we can
+get it to generate a clean build.&rdquo;</p>
+
+<p>Patrick paused to consider. &ldquo;You could, I guess, but where
+would you make the modification? Remember that we think this
+was introduced several revisions ago. That means the pattern
+recognition is pretty solid. And each test will take you two
+hours.&rdquo;</p>
+
+<p>&ldquo;Well I can compile it in the background while we start to
+write this thing.&rdquo;</p>
+
+<p>And so it went. Dave downloaded the compiler&rsquo;s source,
+compiled it, found the obfuscated op-codes, mapped it back
+to the source, and hacked at it trying to get a clean build.
+I could sense him losing hope as he realized the obfuscated
+code was spread throughout the program, not just in a few
+isolated cases.</p>
+
+<p>Meanwhile Patrick wrote some basic string and file
+manipulation routines in assembly and put together a text
+filter that did nothing useful. He wanted to verify that its
+binary was clean. It was.</p>
+
+<p>I brushed up on my assembly. At school we had done some in
+the operating systems class, adding pre-emptive scheduling.
+I remember having an unexpected high from programming the
+metal this way. There was something pure and raw about
+manipulating registers, about knowing <em>exactly</em> what
+was going on. I had felt an intimacy with the processor that
+high-level languages had abstracted away.</p>
+
+<p>By afternoon Patrick was ready to give me an assignment,
+writing the pre-processor. At first it seemed
+straightforward: include files, substitute macros, add
+conditionals. But then I thought of expressions in
+conditionals, avoiding macro substitutions in strings, and I
+started looking for a Dave-like easy work-around.</p>
+
+<p>&ldquo;Can&rsquo;t we use the infected one?&rdquo; I asked. I knew it was on
+the list, but I didn&rsquo;t see how an infected version would
+affect us. We could pre-process the entire compiler and
+manually look for tampered code. I doubted we&rsquo;d see any, but
+if we did, we could also fix it manually.</p>
+
+<p>Patrick liked that idea. &ldquo;Okay, you start on that. Modify
+the compiler&rsquo;s build system so it has two steps, one that
+pre-processes to temporary files, and another that compiles
+those.&rdquo;</p>
+
+<p>The plan had back-fired. My easy work-around became not only
+the tedious and difficult modification of the compiler&rsquo;s
+convoluted build system, but then the mindless flipping
+through output code side-by-side with the original, looking
+for signs of tampering.</p>
+
+<p>Patrick, meanwhile, had started on a simple
+recursive-descent parser. I heard him suddenly laugh. He
+turned to me and said, &ldquo;I was about to allocate my first
+abstract syntax tree node when I realized that I don&rsquo;t have
+malloc.&rdquo;</p>
+
+<p>The good thing about that project was that every bit of it
+could be as minimal and inefficient as necessary. The only
+requirement was that the output be correct. Patrick&rsquo;s malloc
+just grabbed bytes from the heap and never bothered to free
+them.</p>
+
+<p>We continued like this for days. Patrick would hand us some
+simple assignment, such as implementing a single C library
+function, and Dave or I would do it while waiting for a
+compile to finish.</p>
+
+<p>Dave was not making progress with his own plan. He played
+whack-a-mole with the various segments of code he was trying
+to trick into generating benign code, but each success would
+cause a regression elsewhere.</p>
+
+<p>Two weeks later our compiler, which had been getting through
+an increasing fraction of the original compiler, got through
+it all. I ran my analysis program on the result and it was
+clean. We compiled the original compiler with itself and the
+result was clean. It was two in the afternoon and we had
+forgotten lunch in our sprint to the finish line.</p>
+
+<p>&ldquo;Let&rsquo;s start a full rebuild of our code and go eat,&rdquo; said
+Patrick.</p>
+
+
+<p class='new-section'>At lunch my mind was too wired to relax but too
+tired to make conversation. Dave was telling a story about
+local politics. I just wanted the food to arrive so I&rsquo;d have
+an excuse to stay silent. Finally I found it too painful to
+think of anything but our problem.</p>
+
+<p>&ldquo;You know what bugs me,&rdquo; I said awkwardly when Dave took a
+break. &ldquo;We&rsquo;ve never come close to figuring out the
+purpose of those modifications.&rdquo;</p>
+
+<p>Patrick answered immediately, also eager to stop talking
+about politics. &ldquo;If I&rsquo;m right and this is
+machine-instigated, then there doesn&rsquo;t have to be a
+purpose.&rdquo;</p>
+
+<p>&ldquo;Why would they do it then?&rdquo; asked Dave.</p>
+
+<p>&ldquo;Viruses don&rsquo;t spread because they have a purpose,&rdquo; said
+Patrick. &ldquo;They spread because they&rsquo;re good at spreading.&rdquo;</p>
+
+<p>&ldquo;So you think this is a virus?&rdquo; I asked.</p>
+
+<p>&ldquo;Well it is in the sense that it spreads.&rdquo;</p>
+
+<p>&ldquo;How do you know it spreads?&rdquo;</p>
+
+<p>Patrick was silent. &ldquo;It puts stuff into our code,&rdquo; he said
+finally, unsure of his answer.</p>
+
+<p>&ldquo;It doesn&rsquo;t put <em>itself</em> into our code,&rdquo; said Dave. &ldquo;That
+wouldn&rsquo;t make sense, I wasn&rsquo;t writing a compiler. That was
+just some network code.&rdquo;</p>
+
+<p>&ldquo;Well if you&rsquo;re going to spread, then network code would be
+a good routine to infect.&rdquo;</p>
+
+<p>I felt a bit ashamed that none of us had discussed this
+before sinking two weeks into a new compiler. We had been so
+eager to get our project back on firm footing that we hadn&rsquo;t
+properly investigated the alien in our system.</p>
+
+<p>&ldquo;But my network code wasn&rsquo;t talking to a compiler. I mean,
+this is a compiler bug, a compiler virus. I don&rsquo;t understand
+what you think it&rsquo;s doing.&rdquo; Dave was getting annoyed.</p>
+
+<p>&ldquo;I don&rsquo;t know what it&rsquo;s doing,&rdquo; said Patrick. &ldquo;I wonder if it&rsquo;s
+sending stuff over the network.&rdquo;</p>
+
+<p>&ldquo;We could check that with Wireshark,&rdquo; said Dave, referring to the
+program that monitored network activity on a machine.</p>
+
+<p>Suddenly all I wanted to do was go back to the office and try it.
+Every muscle ached with the desire to stand up and leave.  The
+sandwiches arrived and we all immediately wrapped them up and
+drove back.</p>
+
+<p>I had already installed Wireshark two months earlier to help
+debug a <span class="initials">TCP</span>/<span class="initials">IP</span> problem Patrick was having, so we went to my
+desk. I ran the program and recorded a minute of activity.</p>
+
+<p>&ldquo;That&rsquo;s a lot of stuff,&rdquo; Dave said as the screen filled up
+with packets.</p>
+
+<p>&ldquo;Yeah let&rsquo;s pick a common one,&rdquo; said Patrick.</p>
+
+<p>I looked through the list and visually picked one that
+seemed to recur. We found that it was ssh, and I remembered
+that I had a shell window tailing a log file. I closed it
+and recorded another minute.</p>
+
+<p>This time we had fewer packets. We picked through them one
+by one. Time synchronization, <span class="initials">ARP</span>, Gmail refreshing,
+programs checking for upgrades. We added each to the
+Wireshark filter once we had convinced ourselves they were
+innocuous.</p>
+
+<p>I then did a 10-minute capture. There were a few more
+packets, all again innocuous. It&rsquo;s what we had expected, of
+course. Dave mumbled something and walked to the kitchen.</p>
+
+<p>Then I had a thought. I felt chills down my arm while I
+frantically searched the papers on my desk, looking for the
+printout. Then I found it, the list of infected programs. My
+eyes zipped down the list, cursing myself for not sorting it.
+Then my stomach squeezed tight as I found it, half-way down
+the second page: Wireshark.</p>
+
+<p>Patrick guessed what I was looking for and saw the reaction
+on my face when I had found it.</p>
+
+<p>&ldquo;I guess we can&rsquo;t trust it,&rdquo; he said.</p>
+
+<p>&ldquo;Trust what?&rdquo; said Dave, coming back with a soda.</p>
+
+<p>&ldquo;Wireshark,&rdquo; said Patrick. &ldquo;It&rsquo;s infected.&rdquo;</p>
+
+<p>Dave rolled his eyes. He sat down at his desk and unwrapped
+his sandwich.</p>
+
+<p>&ldquo;Let&rsquo;s look at the lights on this network switch,&rdquo; I said. We
+each had a small switch on our desk. The light for my port
+was flickering every few seconds.</p>
+
+<p>&ldquo;Shut down all the programs we found earlier,&rdquo; said Patrick.</p>
+
+<p>I closed the brower, the chat program, various other daemons
+and tools. I couldn&rsquo;t shut everything down; there&rsquo;s always
+something left in the operating system, such as <span class="initials">DHCP</span>. But
+the flashes were infrequent enough that I could corralate
+them with packets found by Wireshark. This was good.
+Wireshark couldn&rsquo;t be hiding packets, we&rsquo;d have seen them on
+the switch&rsquo;s lights.</p>
+
+<p>Patrick left for his sandwich and I opened mine. I looked at
+Dave. He was smiling at us. His smile bothered me.
+Just because we&rsquo;re paranoid doesn&rsquo;t mean it&rsquo;s
+not true. I had seen enough amazing coding samples in the
+previous few weeks to be convinced that something big and
+serious was happening under our nose.</p>
+
+<p>No program is useful nowadays without communicating over the
+network. I rejected the idea that a virus crafted so
+carefully and strangely would restrain its activities to the
+local machine when the world was a packet away. Hundreds of
+programs on my computer were infected. I refused to believe
+they were mute.</p>
+
+<p>Patrick suddenly stood up, nearly kicking his chair to the
+floor. He walked into the hallway and came back ten minutes
+later with a piece of equipment the size of a small
+suitcase. He approached me with it and I shoved everything
+on my desk to the side to make space. It was a digital scope
+he&rsquo;d gotten from the hardware engineers in the lab upstairs.</p>
+
+<p>He then reached into his pocket and pulled out a break-out
+cable with <span class="initials">RJ</span>-45 plugs. He put it between my computer and
+the switch. He didn&rsquo;t know how to use the scope. I brought
+up a shell window and generated plenty of traffic for him to
+see. Eventually he was able to clearly see all my packets. I
+closed the window and we waited, shifting our eyes between
+the scope and the network switch&rsquo;s front panel lights.</p>
+
+<p>It was only a few seconds until the scope flicked with
+activity. I had been staring at it and couldn&rsquo;t be sure that
+the switch had shown nothing. I brought up Wireshark to have
+a history of the packets.</p>
+
+<p>&ldquo;Nevermind that,&rdquo; said Patrick. &ldquo;You look at the switch and
+call out each packet you see. I&rsquo;ll do that with the scope.&rdquo;</p>
+
+<p>Dave got up and walked casually to us, standing behind me.</p>
+
+<p>I saw the light flash. &ldquo;Now&rdquo;, I said, as Patrick
+simultaneously said, &ldquo;Yes.&rdquo;</p>
+
+<p>That happened two more times with the words reversed. Then
+Patrick said, &ldquo;Now,&rdquo; and I had seen nothing. This happened
+again a few seconds later. I felt more chills in my arm and
+in my legs.</p>
+
+<p>&ldquo;Whoa,&rdquo; said Patrick. I looked over and the scope was
+showing a long stretch of activity. I looked back at the
+switch&rsquo;s lights, which were dark.</p>
+
+<p>Dave said, &ldquo;You are <em>not</em> going to tell me that the
+switch is infected and hiding packets.&rdquo;</p>
+
+<p>&ldquo;It is totally hiding packets,&rdquo; said Patrick, staring
+at the activity on the scope and putting both hands on his
+head.</p>
+
+<p>I looked up at Dave. His face was pale. His eyes darted
+between the two pieces of equipment. I was paralyzed.</p>
+
+<p>Then Patrick stood erect in his chair, staring at the
+wall.  This trance lasted only two seconds before he stood up
+and ran again into the hallway.</p>
+
+<p>You already know what happened next. He came back with an
+old switch, from years earlier, and plugged it in. Its lights
+flickered in sync with the scope, to packets censored by
+Wireshark and the modern switch.</p>
+
+<p>I was glad for the vomit. It gave me something to do. Dave
+left for the bathroom and Patrick and I cleaned up using
+paper towels I kept on my desk.  But the stench was not
+enough to suppress the panic, and my weak arms shook in
+fear.</p>
+
+
+<p class='new-section'>We sat in silence at the patio table, our
+sandwiches half-eaten in front of us. None of the things I
+wanted to say seemed worth saying. I alternately convinced
+myself that we were mistaken and that we were doomed. I
+wished desperately that Patrick would say something.</p>
+
+<p>The patio gate opened and the mailman walked in. He stopped
+by our table, picked out a letter from his bundle, put it on
+the table, then continued into the building.</p>
+
+<p>Dave grabbed it. &ldquo;It&rsquo;s addressed to both of us,&rdquo; he said,
+glancing up at Patrick. He ripped open the side and pulled
+out a letter hand-written on loose-leaf paper. He fumbled
+with the sheets for a few seconds, then read the letter aloud.</p>
+
+<blockquote>
+<p>Gentlemen,</p>
+
+<p>We found your posts online. For three years we&rsquo;ve been
+waiting for them, scouring the Internet and monitoring
+forums.</p>
+
+<p>You must know that this has happened before, several times.
+The first was four years ago, to our team in Virginia. We
+found our binaries modified. We could recompile the code to
+clean them, but we found the binaries mysteriously modified
+again only a few hours later.</p>
+
+<p>The next case was only a few months later to an unrelated
+team in San Diego.  Both the binaries and the source had
+been modified. The source had to be periodically cleaned up,
+because recompilation was not sufficient to solve the
+problem.</p>
+
+<p>It was a another year until we found the third case, a team in
+Spain. The binary was dirty, the source was clean, but
+recompiling did not fix the problem. The compiler&rsquo;s source
+code had been modified to insert the strange op-codes.</p>
+
+<p>Each team uncovered the worm&rsquo;s weakest point and developed a
+solution.  This weakest point was then patched for the next
+attack. Each generation pushed the worm deeper into the system.</p>
+
+<p>Now it&rsquo;s your turn. Not only has the compiler been modified,
+but its source is clean. It infects itself on recompilation.
+Our own machines have been infected for nine months this
+way. So has the rest of the world&rsquo;s.  You may wonder,
+then, why we were eagerly waiting for your post. To explain
+this, we must make two observations.</p>
+
+<p>The first is that anyone could have guessed these
+weaknesses. It takes a fool to modify a development team&rsquo;s
+binary, expecting it
+to not be recompiled. Anyone would have skipped that step,
+there&rsquo;s no need to learn that lesson. Modifying their source
+is similarly naive. These modifications are technically very
+sophisticated. Who would be so technically advanced but so
+socially naive?</p>
+
+<p>Machines. It wasn&rsquo;t until the third attack that we came up
+with this hypothesis, and now we&rsquo;re convinced. If you&rsquo;ve
+studied the modified op-codes, you may also have come to the
+same conclusion. The op-codes were clearly generated by
+trial-and-error, by generating a random sequence and testing
+to see if it behaved correctly.  Only a machine would do
+this.</p>
+
+<p>The second observation is that, all these years, the worm
+has been widely spread but innocuous to infected programs.
+Yet it was not innocuous to these four teams.  They were
+unable to finish their projects.  They tried simple
+work-arounds, but these work-arounds persistently failed.
+Only a single team, world-wide, was affected by each
+generation of the worm.</p>
+
+<p>This makes sense. Computers cannot empathize with humans.
+They can&rsquo;t predict what we&rsquo;re going to do when we run into a
+problem. The machines must have known that their worm has
+weaknesses, but they didn&rsquo;t know what these weaknesses were.
+They forced a small team to be affected by the worm until
+that team found the weakest point and circumvented the worm.
+The machines then patched the weakness and tried again.</p>
+
+<p>This is a large-scale version of what they do when they&rsquo;re
+generating op-codes. They try different things until one
+works, instead of planning it out, as a human would. It&rsquo;s a
+typically effective way to solve a problem, when you&rsquo;re made
+of silicon.</p>
+
+<p>By now you&rsquo;ve presumably written a new compiler, perhaps in
+assembly language, and recompiled everything cleanly. We
+expect a few years to pass before we see the next team post
+to forums. We can already predict their findings. The
+compiler&rsquo;s binary will be clean. Or rewriting the compiler in
+assembly won&rsquo;t work. The worm will have been pushed deeper,
+perhaps into the text editor, the assembler, the file
+system, the hard disk interface, or the <span class="initials">CPU</span> itself.</p>
+</blockquote>
+
+<p>Dave couldn&rsquo;t finish. I don&rsquo;t think there was much left
+of the letter anyway. He put it down in his lap.</p>
+
+
+<p class='new-section'>We were silent for hours. Eventually Patrick left,
+then Dave. The November night came early and cold, but I
+couldn&rsquo;t move.</p>
+
+<p>I replayed our adventure. I analyzed each
+step, identified each assumption we had made. The big leap
+was the one about machines being responsible. As Carl Sagan
+had said, &ldquo;Extraordinary claims require extraordinary
+evidence.&rdquo; We had no extraordinary evidence. We had no
+evidence at all, only the lack of another explanation.</p>
+
+<p>Could this have been done by humans? Humans write computer
+viruses all the time. It&rsquo;s entirely possible that we had
+found an everyday virus and had overreacted.  The team from
+Virginia may just be paranoid lunatics. This was far more
+plausible than the theory of machines.</p>
+
+<p>I felt a weight lift as I considered this alternative
+explanation. These virus writers might well have written a
+program to generate op-codes randomly. They may well have
+started simply and, over years, made their attack more
+sophisticated, pushing it deeper into the system. Perhaps
+the authors are autistic savants.</p>
+
+<p>My mind was blank for many minutes. When my thoughts
+returned, I found this new theory even more implausible than
+the one about machines. We had no idea what machines could
+do, but I could be pretty sure that no human would approach
+writing a worm this way. If we could have insight into an
+entity&rsquo;s approach to playing chess, and found that it tried
+all possible paths, the only honest theory would be a machine
+player.</p>
+
+<p>Furthermore, for practical purposes, it didn&rsquo;t matter. We
+had to tell the world of our findings. We had to stop the
+perpetrators before they modified hardware disk interfaces
+or the <span class="initials">CPU</span>.  We were lost if the worm reached such a
+low-level substrate of our technology.</p>
+
+<p>I imagined posting online again. I remembered the +5 funny
+Slashdot replies. Who should we tell? Intel? The government?
+The Virginia team must have tried. Why didn&rsquo;t anti-virus
+programs detect this? I imagined conversations with
+officials who would laugh at our theories. I imagined
+screaming at them.</p>
+
+<p>I suddenly stood up, clenching my fists and pacing the
+enclosed patio. I imagined yelling at people because I
+couldn&rsquo;t imagine yelling at machines. Like most programmers,
+I had always spoken anthropomorphically about computers, but
+when these computers had finally acted like humans, I
+found their nature ephemeral and soulless.</p>
+
+<p>I picked up my sandwich in its wrapper and went inside. I
+dumped the sandwich and opened the fridge absent-mindedly. I
+stared at the drinks. A happier thought occurred to me. None
+of the code we had analyzed seemed malicious. Other than
+occasionally bothering a team like ours, we had seen no
+evidence of malice.</p>
+
+<p>Patrick had been right when he said that a virus doesn&rsquo;t
+spread because it has a purpose, only because it&rsquo;s good at
+spreading. This worm might be a permanent tag-along, like
+mitochondria, forging a symbiotic relationship with us. If
+we tried to stamp it out, then we may corner it into a
+resistant strain that is hostile to us. But this was
+unnecessary. Let&rsquo;s just let it be. It&rsquo;s unsettling, but
+workable.</p>
+
+<p>I shut the fridge, put on my jacket, and walked to the alarm
+panel. The <span class="initials">LCD</span> on the panel reminded me that it, too,
+was a computer. Was it infected? Did it know of our new
+compiler? Was it going to let me arm it? Were the magnetic
+door locks going to let me out of the building?</p>
+
+<p>I pressed the digits for the arming code and heard the
+countdown tones. I walked out onto the patio to my bicycle.
+They had permitted me to leave. I looked at my bike and
+smiled at its mechanical simplicity. I thought of
+traffic lights and sewer pumps. I thought of my credit
+card. I thought of cars and telephones.</p>
+
+<p>I wanted to sit down. I was vanquished. Taking humanity back
+to a pre-computer age was impossible. I was suddenly ashamed
+to have participated in our undoing. I was a programmer. I
+was a member of the group that had spawned our successors.</p>
+
+<p>I tucked my right pant leg into my sock and unlocked my bike.
+With the shame came a strange pride. Not many people can claim to have
+created a species, if it can be called that. Sure, lawyers
+and doctors and politicians are important. But they&rsquo;re just
+maintaining the current house, not creating the future
+inhabitants of Earth.</p>
+
+<p>I rode out of the parking lot into the empty street. I
+smelled again the flower scent that I associated so strongly
+with Mountain View. I had never looked up its name. There&rsquo;s
+nothing wrong with being a transitional species. Nearly all
+species had been, and in the long run we would be one
+anyway. We remembered Lucy. We remembered dinosaurs. We
+worshiped dinosaurs. The machines would remember us.</p>
+        </div>
+    </body>
+</html>
