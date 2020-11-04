@@ -1,0 +1,12 @@
+Title: Rebecca Meyer
+Date: 11/4/2020
+
+[Image:/m/meyerweb.png]
+
+Browsing interesting personal websites is often fun (as in [Link:/p/clamps.html]clamps[/Link] and [Link:/p/coding-machines.html]Coding Machines[/Link]). But sometimes it can break your heart.
+
+That's the case with [Link:https://meyerweb.com/ui/about.html]Eric Meyer[/Link]'s open grieving after losing a child. I found his website when I learned about [Link:https://meyerweb.com/eric/thoughts/2014/06/19/rebeccapurple/]rebeccapurple[/Link], a special color added to the CSS specification as a tribute to his daughter. As I read his family's experiences, I found myself crying and feeling an aching pain for these people I've never met.
+
+Eric shared his experiences as they happened. You can find them [Link:https://meyerweb.com/eric/thoughts/category/personal/rebecca/?order=asc]here[/Link]. His family's story is tragic and emotional and wonderfully written.
+
+(I normally try to keep a backup of external sites but I'm not grabbing one here. I want to be respectful of Eric and his family's potential future choices to remove their story.)

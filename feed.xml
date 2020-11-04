@@ -5,10 +5,42 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2020-11-03T00:00:00-08:00</updated>
+<updated>2020-11-04T00:00:00-08:00</updated>
 <rights>Copyright © 2020, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Rebecca Meyer</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/rebecca-meyer.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/rebecca-meyer.html" />
+<id>https://memalign.github.io/p/rebecca-meyer.html</id>
+<published>2020-11-04T00:00:00-08:00</published>
+<updated>2020-11-04T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/rebecca-meyer.html'>Rebecca Meyer</a>
+</h2>
+</div>
+<img src="/m/meyerweb.png">
+<div id='postdate'>Posted on 11/4/2020</div>
+Browsing interesting personal websites is often fun (as in <a href="/p/clamps.html">clamps</a> and <a href="/p/coding-machines.html">Coding Machines</a>). But sometimes it can break your heart.<br />
+<br />
+That's the case with <a href="https://meyerweb.com/ui/about.html">Eric Meyer</a>'s open grieving after losing a child. I found his website when I learned about <a href="https://meyerweb.com/eric/thoughts/2014/06/19/rebeccapurple/">rebeccapurple</a>, a special color added to the CSS specification as a tribute to his daughter. As I read his family's experiences, I found myself crying and feeling an aching pain for these people I've never met.<br />
+<br />
+Eric shared his experiences as they happened. You can find them <a href="https://meyerweb.com/eric/thoughts/category/personal/rebecca/?order=asc">here</a>. His family's story is tragic and emotional and wonderfully written.<br />
+<br />
+(I normally try to keep a backup of external sites but I'm not grabbing one here. I want to be respectful of Eric and his family's potential future choices to remove their story.)<br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Coding Machines</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/coding-machines.html" />

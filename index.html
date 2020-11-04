@@ -11,8 +11,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="/m/coding-machines/coding_machines.jpg" />
-<meta property="og:description" content="Back when I discovered the website about clamps, I pored over that and similar personal websites (which sometimes linked me to even more interesting personal websites of their friends). I…" />
+<meta property="og:image" content="/m/meyerweb.png" />
+<meta property="og:description" content="Browsing interesting personal websites is often fun (as in clamps and Coding Machines). But sometimes it can break your heart. That's the case with Eric Meyer's open grieving after losing…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -23,6 +23,7 @@
 <a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
 </div><div id='allposts'>
 <b>All posts:</b><br />
+<a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 <a href='p/coding-machines.html'>Coding Machines</a><br />
 <a href='p/clamps.html'>Clamps</a><br />
 <a href='p/emoji-conway.html'>Emoji Simulator</a><br />
@@ -40,6 +41,23 @@
 <a href='p/feedly.html'>RSS and Feedly</a><br />
 <a href='p/this-website.html'>Welcome</a><br />
 </div>
+
+<div id='header'>
+<h2>
+<a href='p/rebecca-meyer.html'>Rebecca Meyer</a>
+</h2>
+</div>
+<img src="/m/meyerweb.png">
+<div id='postdate'>Posted on 11/4/2020</div>
+Browsing interesting personal websites is often fun (as in <a href="/p/clamps.html">clamps</a> and <a href="/p/coding-machines.html">Coding Machines</a>). But sometimes it can break your heart.<br />
+<br />
+That's the case with <a href="https://meyerweb.com/ui/about.html">Eric Meyer</a>'s open grieving after losing a child. I found his website when I learned about <a href="https://meyerweb.com/eric/thoughts/2014/06/19/rebeccapurple/">rebeccapurple</a>, a special color added to the CSS specification as a tribute to his daughter. As I read his family's experiences, I found myself crying and feeling an aching pain for these people I've never met.<br />
+<br />
+Eric shared his experiences as they happened. You can find them <a href="https://meyerweb.com/eric/thoughts/category/personal/rebecca/?order=asc">here</a>. His family's story is tragic and emotional and wonderfully written.<br />
+<br />
+(I normally try to keep a backup of external sites but I'm not grabbing one here. I want to be respectful of Eric and his family's potential future choices to remove their story.)<br />
+
+<hr />
 
 <div id='header'>
 <h2>
@@ -2329,60 +2347,8 @@ I like this website because:<br />
 <br />
 This tutorial can serve as a great example for other types of online textbooks.
 <hr />
-
-<div id='header'>
-<h2>
-<a href='p/feedly.html'>RSS and Feedly</a>
-</h2>
-</div>
-<img src="/m/feedly.jpg">
-<div id='postdate'>Posted on 3/22/2020</div>
-I like to read news feeds to learn, find entertainment, and stay up-to-date on various topics.<br />
-<br />
-RSS feeds and Atom feeds are a great way to subscribe to news feeds. I used to use Google Reader and, after that service shut down, I moved to Feedly.<br />
-<br />
-Feedly is really cool! Especially for developers.<br />
-<br />
-Over winter break in 2019, I decided to build an app for myself to read news feeds (mainly so I could write smart filters to remove uninteresting entries). I did some cursory research into Feedly's developer support and I was pleasantly surprised by how easy the Feedly API is to adopt! Even though every website's RSS or Atom feed can have weird quirks, Feedly solves all of those problems for us. It's straightforward and quick to use the Feedly API to build a simple RSS reader.<br />
-<br />
-<br />
-Here's how I adopted the Feedly API (and how you can too):<br />
-<br />
-1. Become a Feedly user. Create an account using their website or app.<br />
-<br />
-2. Subscribe to some RSS feeds using their app<br />
-<br />
-3. Decide to build a custom news reader app to read these feeds<br />
-<br />
-4. Look at their developer documentation with an eye toward ease of adoption and whether all needed functionality exists<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Documentation is found here: <a href="https://developer.feedly.com/">https://developer.feedly.com/</a><br />
-<br />
-5. Note the primitives needed to build an app:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Get a list of news feeds with unread entries: <a href="https://developer.feedly.com/v3/markers/">https://developer.feedly.com/v3/markers/</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Get information about a feed (I use this to get its icon): <a href="https://developer.feedly.com/v3/collections/">https://developer.feedly.com/v3/collections/</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Get a list of news entries (including their content) for a given feed: <a href="https://developer.feedly.com/v3/streams/">https://developer.feedly.com/v3/streams/</a><br />
-<br />
-6. Get access to their API. It's easy to start prototyping for your own use with a developer access token: <a href="https://developer.feedly.com/v3/developer/">https://developer.feedly.com/v3/developer/</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Your developer access token can then be included in HTTP requests instead of a real OAuth token.<br />
-<br />
-7. Use <a href="https://en.wikipedia.org/wiki/CURL">curl</a> to quickly prove that the developer access token works and the APIs return expected results<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Here's an example command:<br />
-<div id='code'>curl -H &#039;Authorization: OAuth YOUR_DEV_TOKEN&#039; https://cloud.feedly.com/v3/markers/counts</div>
-8. Think about how to organize your code into classes. Some useful classes might be: FeedlyDataSource, NewsFeed, NewsEntry.<br />
-<br />
-9. Use your platform's built-in APIs for making HTTP requests, parsing JSON, displaying a list of NewsEntrys to the user.<br />
-<br />
-10. As you build your app, add unit tests for parsing responses. One tip: save some curl results to files and inject those files into tests so your tests can work offline. Save to file like this:<br />
-<div id='code'>curl -H &#039;Authorization: OAuth YOUR_DEV_TOKEN&#039; https://cloud.feedly.com/v3/markers/counts &gt; /path/to/test_data_files/markersCountsResponse.txt</div>
-If you need any help, please @ me on <a href="http://twitter.com/memalign">Twitter</a>.<br />
-<br />
-<br />
-Bonus:<br />
-<br />
-- You can subscribe to YouTube channels in Feedly<br />
-- I like to subscribe to HackerNews in Feedly instead of reading it on the website: <a href="https://news.ycombinator.com/rss">https://news.ycombinator.com/rss</a>
-<hr />
 More posts:<br />
+<a href='p/feedly.html'>RSS and Feedly</a><br />
 <a href='p/this-website.html'>Welcome</a><br />
 
 </div>
