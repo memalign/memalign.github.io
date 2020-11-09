@@ -20,6 +20,8 @@ function loadJSON(path, success, error)
                 if (success)
                     success(JSON.parse(xhr.responseText));
             } else {
+            		console.log("xhr.status: " + xhr.status + " error: " + error);
+            
                 if (error)
                     error(xhr);
             }
@@ -37,7 +39,7 @@ window.onload = function () {
 	// Request both data sets
 	// When we have both, construct the charts
 
-	loadJSON('https://covidtracking.com/api/v1/us/daily.json',
+	loadJSON('https://api.covidtracking.com/v1/us/daily.json',
 		function(data) {
 			dailyData = data
 			constructChartsIfPossible()
@@ -46,7 +48,7 @@ window.onload = function () {
 	);
 	
 
-	loadJSON('https://covidtracking.com/api/v1/states/daily.json',
+	loadJSON('https://api.covidtracking.com/v1/states/daily.json',
 		function(data) {
 			stateData = data
 			constructChartsIfPossible()
