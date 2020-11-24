@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="Utilities.js"></script>
+<script src="GameEngine.js"></script>
+<script src="GameSegments.js"></script>
+<script src="Map.js"></script>
+<script src="Memories.js"></script>
+<script src="TestUtils.js"></script>
+<script src="UnitTests.js"></script>
+
+<script>
+
+window.onload = function () {
+
+  let ut = new UnitTests()
+  
+  try {
+    ut.run()
+  } catch(err) {
+    throw err
+  } finally {
+    let outputDiv = document.getElementById("testOutput")
+    let content = document.createTextNode(MALog.logs.join("\n"))
+    outputDiv.appendChild(content)
+  }
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput"></div>
+</pre>
+</body>
+
+</html>
+ {
+    if (action.targets != null && action.targets()) {
+
+      for (let target of action.targets()) {
+        var targetStr = action.verbString(target)
+        
+        // $1[$2]$3
+        let match = targetStr.match(/([^\[]*)\[([^\]]+)\](.*)/)
+        if (match) {
+          let uuid = uuidv4()
+          actionsMap[uuid] = { action: action, actionStr: targetStr, target: target }
+        
+          targetStr = match[1] + `<a id='${uuid}'>` + match[2] + "</a>" + match[3]
+        }
+        
+        actionsStrings.push(targetStr)
+      }
+    } else {
+        var actionStr = action.verbString()
+        
+        // $1[$2]$3
+        let match = actionStr.match(/([^\[]*)\[([^\]]+)\](.*)/)
+        if (match) {
+          let uuid = uuidv4()
+          actionsMap[uuid] = { action: action, actionStr: actionStr }
+        
+          actionStr = match[1] + `<a id='${uuid}'>` + match[2] + "</a>" + match[3]
+          
+          actionsStrings.push(actionStr)
+        }
+    }
+  }
+
+
+  let actionsStr = actionsStrings.sort(MAUtils.actionsComparator).join("<br />")
+
+  let actionsDiv = document.getElementById("gameActions")
+  actionsDiv.innerHTML = actionsStr
+
+  for (let [actionUUID, actionDesc] of Object.entries(actionsMap)) {
+    let actionA = document.getElementById(actionUUID)
+    actionA.onclick = function () {
+      console.log("Action clicked " + actionDesc.actionStr)
+      
+      if (actionDesc.target) {
+        actionDesc.action.chosenTarget = actionDesc.target
+      }
+      
+      lastActionLogCount = gameState.log.logs.length
+      
+      gameEngine.performActionOnGameState(actionDesc.action, gameState)
+    }
+  }
+}
+
+function updateGameLogView(gameEngine, gameState) {
+  let seenLogDiv = document.getElementById("gameLogSeen")
+  let newLogDiv = document.getElementById("gameLogNew")
+  
+  let seenLogs = gameState.log.logs.slice(0, lastActionLogCount)
+  let newLogs = gameState.log.logs.slice(lastActionLogCount)
+  
+  
+  var seenContent = seenLogs.join("<br /><br />")
+  seenContent = seenContent.replace(/\n/g, "<br />")
+  seenLogDiv.innerHTML = seenContent
+  
+  if (seenLogs.length == 0) {
+    seenLogDiv.style.display = "none"
+  } else {
+    seenLogDiv.style.display = "block"
+  }
+  
+  
+  var newContent = newLogs.join("<br /><br />")
+  newContent = newContent.replace(/\n/g, "<br />")
+  newLogDiv.innerHTML = newContent
+
+  if (newLogs.length == 0) {
+    newLogDiv.style.display = "none"
+  } else {
+    newLogDiv.style.display = "block"
+  }
+  
+  
+  let mapDiv = document.getElementById("gameMap")
+  var mapContent = gameState.map.emojiMap(gameState.currentLocation).replace(/\n/g, "<br />")
+  mapDiv.innerHTML = mapContent
+  
+
+  updateActions(gameEngine, gameState)
+  
+  window.scrollTo(0, document.body.scrollHeight)
+}
+
+window.onload = function () {
+  // Instantiate the game
+  let gameState = new MAGameState()
+  let gameEngine = new MAGameEngine()
+  
+  gameEngine.didPerformActionCallback = function (gS) {
+    updateGameLogView(gameEngine, gS)
+  }
+    
+  gameEngine.setupNewGame(gameState)
+    
+  updateGameLogView(gameEngine, gameState)
+}
+
+</script>
+
+</head>
+
+<body>
+  <div id="body">
+    <div id="gameLogSeen"></div>
+    <div id="gameLogNew"></div>
+    <div id="grid">
+      <div id="gameActions"></div>
+      <div id="gameMap"></div>
+    </div>
+  </div>
+</body>
+
+</html>
