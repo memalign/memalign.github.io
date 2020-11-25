@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>Pac-Txt: About</title>
+    <style type="text/css">
+      body {
+          padding: 5px;
+          dtext-align: justify;
+      }
+      h3 {
+          margin: 0;
+      }
+      p {
+          margin: 7px 0 15px;
+      }
+      a { text-decoration: none; color: #088; }
+      a:HOVER { color: #0ff; }            
+      td { font-family: arial, sans-serif; font-size: 12px; margin: 0px; }
+      input { font-family: arial, sans-serif; font-size: 12px; margin: 0px; }
+      textarea { font-family: arial, sans-serif; font-size: 12px; margin: 0px; }
+    </style>
+    <script type="text/javascript">
+      function ChangeComments(focus, ta) {
+        if (focus) {
+          if (ta.value != "Immortalize your words within my guestbook.") { return false; }
+          ta.style.color = '#000';
+          ta.value = '';
+        } else {
+          var nonws = false;
+          for (var i = 0; i < ta.value.length; i++) {
+            if (ta.value.charAt(i) != ' ') {
+              nonws = true;
+              break;
+            }
+          }
+          if (!nonws) {
+            ta.style.color = '#888';
+            ta.value = "Immortalize your words within my guestbook.";
+          }
+        }
+      }
+    </script>
+  </head>
+  <body style="font-family: arial, sans-serif; font-size: 12px; margin: 0px;">
+    <h3>Getting Started</h3>
+    <p>If you are new to text-adventure gaming, no worries, just start typing. Try out something
+    simple first, like <i><b>look around</b></i> or <i><b>help</b></i>.</p>
+
+    <h3>Wth?! Why would anyone invest the time and effort to build such a useless game?</h3>
+    <p>Well, I had just got back from a party where the concept of a Pac-Man + Zork hybrid came up as a joke.
+    So, being 2am with a little <a href="http://xkcd.com/323/" target="_blank">alcohol</a> in my system, 
+    I thought it'd be funny to code it up (as far as I could before collapsing). So,
+    a couple hours later it was looking complete-ish (minus the ghosts' AIs and graphic assets). The next 
+    morning [read: afternoon] when I woke up, since I have an inability to realize sunk costs, I 
+    decided to throw some crappy AI in for the ghosts, put a few graphics on it 
+    (courtesy of <a href="http://www.fasticon.com">FastIcon.com</a>) and voila! A domain name purchase or
+    two later, and here we go.</p>
+
+    <h3>Marketing Potential</h3>
+    <p><i><b>"</b>Mixing the classic VIC-20<sup>*</sup> text-adventure games' style with the enthralling plot of Pac-Man 
+    for the ultimate in retro gaming action, we present <b>Pac-txt</b>.<b>"</b><br />
+    <sup><i>*No <b>sys 32592</b> or <b>"Press play on tape"</b> necessary.</i></sup>
+    </p>
+
+    <h3>Cheats</h3>
+    <p>Since you've gone through the <i>effort</i> of reading this far, we'll give you a few useful
+    cheats. Try out <i><b>debug</b></i>, <i><b>autolook</b></i> or <i><b>autonibble</b></i>.</p>
+<!--
+    <br /><br />
+
+    <b>Comments</b> <sup>(<a href="/read/">read comments</a>)</sup><br />
+    <form action="/post/" method="POST" enctype="multipart/form-data" style="margin-bottom: 0px;">
+      <table><tr><td>
+        <textarea onFocus="ChangeComments(true, this)" onBlur="ChangeComments(false, this)" name="comments" style="border:1px solid #aaa; color: #888; width: 330px; height: 30px">Immortalize your words within my guestbook.</textarea>
+      </td></tr><tr><td align="right">
+        <b>~</b>
+        <input style="border:1px solid #aaa; color: #000;" type="text" name="author" value="anonymous" size="20"/>
+        <input style="border:1px solid #aaa; color: #000;" type="submit" name="post" value="post" />
+      </td></tr></table>      
+    </form>    
+-->
+  </body>
+</html>

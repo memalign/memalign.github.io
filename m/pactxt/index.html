@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Pac-Txt: Pac-Man meets Zork</title>
+    <meta name="description" context="A text-based Pac-Man adventure game." />
+    <meta name="keywords" context="pac-man paku man text based rpg role playing adventure game" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <style type="text/css">
+      a { text-decoration: none; color: #088; }
+      a:HOVER { color: #0ff; }
+      td { font-family: arial, san-serif; font-size: 14px; }
+      body { background: #000; color: #aaa; }
+      b { color: #fff; }
+      div {
+        border: 1px solid white;
+        font-family: Courier, monospace;
+        font-size: 14px;
+        padding: 2px 0px 0px 2px;
+      }
+      input {
+        font-family: Courier, monospace;
+        font-size: 14px;
+        border: none;
+        background-color: black;
+        color: white;
+      }
+    </style>
+    <script type="text/javascript">
+      function ChangeFeedback(focus, ta) {
+        if (focus) {
+          if (ta.value != "C'mon! Leave some comments...") { return false; }
+          ta.style.color = '#000';
+          ta.value = '';
+        } else {
+          var nonws = false;
+          for (var i = 0; i < ta.value.length; i++) {
+            if (ta.value.charAt(i) != ' ') {
+              nonws = true;
+              break;
+            }
+          }
+          if (!nonws) {
+            ta.style.color = '#888';
+            ta.value = "C'mon! Leave some comments...";
+          }
+        }
+      }
+      
+      function submitComments() {
+        var ta = document.getElementById('comments');
+        var async = document.getElementById('async');
+        
+        alert(ta.value);
+      }
+    </script>
+  </head>
+  <body>
+    <table border="0" height="100%" width="100%"><tr><td align="center" valign="top">
+      <table border="0" style="background: #000 url(images/splash1.jpg) no-repeat; width: 270px; height: 340px;">
+        <tr><td style="height: 203px" align="center" valign="middle">
+          <iframe src="blank.html" style="width: 125px; height: 125px;" width="125" height="125" frameborder="0" style="overflow: hidden; border: none;" scrolling="no"></iframe>
+        </td></tr><tr><td style="height: 137px;">
+          &nbsp;
+        </td></tr>
+      </table>
+    </td><td align="center" style="width: 510px; height: 350px;" valign="top">    
+      <form action="#" onSubmit="handleAction(); return false;">
+        <table style="position: relative; z-index: 10"><tr><td align="center">
+          <img alt="Pac-Txt Banner" style="margin-bottom: 10px;" src="images/logo.gif" />
+        </td></tr><tr><td>
+          <div id="console" style="width: 500px; height: 300px; overflow: auto"></div>
+        </td></tr><tr><td>
+          <div style="width: 500px">
+            <input type="text" id="prompt" size="60" autocomplete="off" />
+          </div>
+        </td></tr><tr><td align="right" valign="top" style="font-size: 14px;">
+           Pac-Txt, &copy;2007 <a href="mailto:me@ricmoo.com">RicMoo</a>. Enjoyed this? Try my <a href="http://0x2121.com">comic</a> or my <a href="http://paperconsole.com">"book"</a>.
+        </td></tr></table>
+      </form>
+    </td><td align="center" valign="middle" rowspan="2">
+      <table border="0" style="background: #000 url(images/splash3.jpg) no-repeat; width: 220px; height: 395px;">
+        <tr><td style="height: 163px" align="center" valign="middle" colspan="2">
+          <iframe src="blank.html" style="width: 125px; height: 125px;" width="125" height="125" frameborder="0" style="overflow: hidden; border: none;" scrolling="no"></iframe>
+        </td></tr><tr><td colspan="2" style="height: 132px;">
+          &nbsp;
+        </td></tr><tr><td style="height: 95px; width: 155px;" align="center" valign="middle">
+          <a href="http://del.icio.us/post?url=http%3A%2F%2Fpac-txt.com&title=Pac-Txt%3A%20Pac-Man%20meets%20Zork&jump=close&v=4">
+            <img src="http://images.del.icio.us/static/img/delicious.small.gif" width="16" height="16" alt="del.icio.us" style="border: 0px" alt="Bookmark Pac-Txt on del.icio.us." />
+          </a>
+          <a href="http://www.stumbleupon.com/url/pac-txt.com/">
+            <img src="http://www.stumbleupon.com/images/stumbleit.gif" width="16" height="16" alt="StumbleUpon Pac-Txt" style="border: 0px" />
+          </a>
+        </td><td style="width: 67px;">
+          &nbsp;
+        </td></tr>
+      </table>
+    </td></tr><tr><td align="right" colspan="2" valign="top">
+      <table border="0" style="background: #000 url(images/splash2.jpg) no-repeat; width: 485px; height: 235px; position: relative; top: -90px; left: -200px; z-index: 1">
+        <tr><td style="height: 105px" align="center" valign="middle" colspan="2">          
+          &nbsp;
+        </td></tr><tr><td style="width: 130px;">
+          &nbsp;
+        </td><td style="width: 395px; height: 125px;" align="center" valign="middle">
+          <iframe frameborder="0" style="overflow: auto; border: hidden;" width="370" height="85" src="about.html"></iframe>
+        </td></tr>
+      </table>
+    </td></tr></table>
+
+
+
+    <div id="debug" style="display: none; height: 0px; width: 0px; border: 1px solid black;" />
+    <iframe name="async" id="async" width="100" height="100"></iframe>
+    
+    <script type="text/javascript">
+      
+      /**
+       * Pac-Txt
+       *   A text based version of the arcade classic.
+       *
+       *   Author: Richard Moore (me@ricmoo.com)
+       *   $Revision: #9 $
+       *
+       *   Released under the creative commons Attribution-Noncommercial 3.0 License.
+       *
+       *   Basically, you may use this however you want non-commercially, as long as you
+       *   credit http://pac-txt.com by RicMoo (including a link is appreciated but not
+       *   necessary. )
+       *
+       *   http://creativecommons.org/licenses/by-nc/3.0/
+       *
+       *   Icons by: FastIcon.com (http://www.fasticon.com)
+       */
+
+      // Useful dom elements we use a lot      
+      var console = document.getElementById("console");
+      var prompt = document.getElementById("prompt");
+      var debug = document.getElementById('debug');
+
+      // Set up focus
+      prompt.focus();
+      
+      var ATE = 0, SCORE = 0, SUGAR = -1, TIMER = 0, LIVES = 0;
+      
+      var AUTOLOOK = 0, AUTONIBBLE = 0, DEBUG = 0;
+      
+      // Game board and dimensions
+      var W = 28, H = 31, DOTS = -1;
+      var map = "OOOOOOOOOOOOOOOOOOOOOOOOOOOO" +
+                "O............OO............O" +
+                "O.OOOO.OOOOO.OO.OOOOO.OOOO.O" +
+                "O+OOOO.OOOOO.OO.OOOOO.OOOO+O" +
+                "O.OOOO.OOOOO.OO.OOOOO.OOOO.O" +
+                "O..........................O" +
+                "O.OOOO.OO.OOOOOOOO.OO.OOOO.O" +
+                "O.OOOO.OO.OOOOOOOO.OO.OOOO.O" +
+                "O......OO....OO....OO......O" +
+                "OOOOOO.OOOOO OO OOOOO.OOOOOO" +
+                "OOOOOO.OOOOO OO OOOOO.OOOOOO" +
+                "OOOOOO.OO          OO.OOOOOO" +
+                "OOOOOO.OO OOOOOOOO OO.OOOOOO" +
+                "OOOOOO.OO OOOOOOOO OO.OOOOOO" +
+                "      .   OOOOOOOO   .      " +
+                "OOOOOO.OO OOOOOOOO OO.OOOOOO" +
+                "OOOOOO.OO OOOOOOOO OO.OOOOOO" +
+                "OOOOOO.OO          OO.OOOOOO" +
+                "OOOOOO.OO OOOOOOOO OO.OOOOOO" +
+                "OOOOOO.OO OOOOOOOO OO.OOOOOO" +
+                "O............OO............O" +
+                "O.OOOO.OOOOO.OO.OOOOO.OOOO.O" +
+                "O.OOOO.OOOOO.OO.OOOOO.OOOO.O" +
+                "O+..OO................OO..+O" +
+                "OOO.OO.OO.OOOOOOOO.OO.OO.OOO" +
+                "OOO.OO.OO.OOOOOOOO.OO.OO.OOO" +
+                "O......OO....OO....OO......O" +
+                "O.OOOOOOOOOO.OO.OOOOOOOOOO.O" +
+                "O.OOOOOOOOOO.OO.OOOOOOOOOO.O" +
+                "O..........................O" +
+                "OOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+
+      // half and quarter height and width
+      var HW = W / 2, HH = H / 2, QW = W / 4, QH = H / 4;
+      
+      // PacMan data
+      var pacman = {
+        initX: 13, initY: 23, initD: 'W', x: -1, y: -1, d: null
+      }
+      
+      var OuchStrs = [ 'Ouch', 'Ow', 'Umph', 'Smack', 'Thud', 'Crunch' ];
+      
+      /**
+       *  random(upper)
+       *    Give me a random number in the interval [0, upper)
+       */       
+      function random(upper) {        
+        return Math.floor(Math.random() * upper);
+      }
+
+
+      /**
+       *  getValidDirections(spaces, ignoreBackwards)
+       *    Returns directions that are valid to move in, with the
+       *    optional ignoreBackwards, which if true omits backwards always
+       */
+      function getValidDirections(spaces, ignoreBackward) {      
+        var validDirs = new Array();
+        for (var dir in spaces) {
+          if (spaces[dir] != 'O' && (!ignoreBackward || dir != 'backward')) {
+            validDirs[validDirs.length] = dir;
+          }
+        }
+        return validDirs;
+      }
+
+      
+      /**
+       *  ghostHabits(ghost, target) {
+       *    The ghost AI function. Given a target, it will seek
+       *    out the target, taking any path which will result in
+       *    it becoming closer.
+       *    If in scatter mode, or if in blue mode, they will race
+       *    towards their corners, seeking refuge.
+       */
+      function ghostHabits(ghost, target) {
+      
+        // Adjust speed of ghost
+        if (ghost.state == 0) {
+          if (DOTS - ATE == 40 && ghost.changeSpeed) { ghost.speed = ghost.speed * 2; }
+          if ((ghost.offset + TIMER) % ghost.speed == 0) { return; }
+        }
+
+        var ignoreBackwards = true;
+        
+        // If we're in scatter mode, send each ghost to their corner
+        if (!getAttackMode()) {
+          target = { x: ghost.cornerX, y: ghost.cornerY };
+
+        // if we're in blue mode, run away, allowing changing direction
+        } else if (ghost.state == 1) {
+        
+          // This will make ghosts half as fast when blue
+          if (SUGAR % 2 == 0) { return; }
+          
+          target = { x: ghost.cornerX, y: ghost.cornerY };
+          
+          // Let them reverse direction if they wish, the first time
+          if (SUGAR > 48) { ignoreBackwards = false; }
+        
+        // We have been eaten. Time to go home to resurrect ourself
+        } else if (ghost.state == 2) {
+          target = { x: ghost.initX, y: 17 };
+          
+          // Home! And the ghost ignores speed, so it gets there fast
+          if (ghost.x == ghost.initX && ghost.y == 17) { ghost.state = 0; }
+        }        
+        
+        var poses = getPositions(ghost);
+        var spaces = getSpaces(poses);
+        var validDirs = getValidDirections(spaces, ignoreBackwards);
+        var chooseDir = 0;
+        
+        // Try finding a direction that is towards out target
+        var nx = target.x - ghost.x, ny = target.y - ghost.y;
+        if (nx != 0) { nx = nx / Math.abs(nx); }
+        if (ny != 0) { ny = ny / Math.abs(ny); }
+        for (var i = 1; i < validDirs.length; i++) {
+          var dir = compass[compass[ghost.d][validDirs[i].charAt(0)]];
+          if ((nx != 0 && nx == dir.x) || (ny != 0 && ny == dir.y)) {
+            chooseDir = i;
+          }
+        }
+        
+        // Update all the variables
+        var newDir = validDirs[chooseDir].charAt(0);
+        var newPose = poses[newDir];
+        ghost.x = newPose.x;
+        ghost.y = newPose.y;
+        ghost.d = newPose.d;      
+      }
+
+      
+      // Ghost data and functions
+      //  colour, tcolour - The colour name and html version of the ghost's colour
+      //  initX, initY, initD - The initial (x, y) and direction
+      //  x, y, d - The current (x, y) and direction
+      //  cornerX, cornerY - The "safe corner" to flee to
+      //  state - 0: normal, 1: blue mode, 2: resurrecting
+      //  initSpeed, speed - Every n ticks, skip a turn
+      var ghosts = new Array();
+      ghosts[0] = { // Blinky - Seek out pacman
+        colour: 'red', initX: 11, initY: 12, initD: 'N', x: -1, y: -1, d: null, cornerX:1, cornerY: 1,
+        tcolour: '#f00', state: 0, initSpeed: 4, speed: -1, changeSpeed: 1, offset: 0,
+        tick: function(ghost) { ghostHabits(ghost, pacman); }
+      }
+      ghosts[1] = { // Pinky - Will attempt to stay in the same quadrant as pacman
+        colour: 'pink', initX: 16, initY: 12, initD: 'N', x: -1, y: -1, d: null, cornerX: W - 1, cornerY: 1,
+        tcolour: '#f0f', state: 0, initSpeed: 4, speed: -1, changeSpeed: 0, offset: 1,
+        tick: function(ghost) { 
+          ghostHabits(ghost, { x: pacman.x - QW + random(HW), y: pacman.y - QH + random(HH) }); 
+        }
+      }
+      ghosts[2] = { // Inky - Randomly moves around
+        colour: 'cyan', initX: 12, initY: 16, initD: 'S', x: -1, y: -1, d: null, cornerX: 1, cornerY: H - 1,
+        tcolour: '#0ff', state: 0, initSpeed: 4, speed: -1, changeSpeed: 0, offset: 2,
+        tick: function(ghost) { ghostHabits(ghost, { x: random(W), y: random(H) }); }
+      }
+      ghosts[3] = { // Clyde - Try to mirror Inky in the line x = y 
+        colour: 'orange', initX: 15, initY: 16, initD: 'S', x: -1, y: -1, d: null, cornerX: W - 1, cornerY: H - 1,
+        tcolour: '#faa', state: 0, initSpeed: 4, speed: -1, changeSpeed: 0, offset: 3,
+        tick: function(ghost) { ghostHabits(ghost, { x: ghosts[2].y, y: ghosts[2].x } ); }
+      }
+      
+      // Mapping for cardinal directions to offsets and relative directions
+      var compass = { N: { x: 0, y: -1, f: 'N', b: 'S', l: 'W', r: 'E'}, 
+                      E: { x: 1, y: 0, f: 'E', b: 'W', l: 'N', r: 'S' }, 
+                      S: { x: 0, y: 1, f: 'S', b: 'N', l: 'E', r: 'W' }, 
+                      W: { x: -1, y: 0, f: 'W', b: 'E', l: 'S', r: 'N' } };
+
+      // Mapping for relative direction tokens to full name and opposite and
+      // mapping for getting relative direction from two cardinal directions.
+      var directions = {
+        f: { name: 'forward', opposite: 'backward' }, 
+        b: { name: 'backward', opposite: 'forward'}, 
+        l: { name: 'left', opposite: 'right' }, 
+        r: { name: 'right', opposite: 'left' },
+        N: { N: 'f', E: 'r', S: 'b', W: 'l' },
+        E: { N: 'l', E: 'f', S: 'r', W: 'b' },
+        S: { N: 'b', E: 'l', S: 'f', W: 'r' },
+        W: { N: 'r', E: 'b', S: 'l', W: 'f' }
+      }
+
+      
+      /**
+       *  board(x, y, value)
+       *    Sets and/or gets the value of th game board at (x, y)
+       *
+       *    If value is non-null, then the board's value is set, otherwise
+       *    the board is unmodified.
+       */
+      var gameboard = new Array();
+      function board(x, y, value) {
+        if (x < 0) { x += W; }
+        if (x >= W) { x -= W; }
+        if (value != null) {
+          gameboard[x + y * W] = value;
+          return value;
+        }
+        return gameboard[x + y * W]
+      }
+
+
+      /**
+       *  drawMap()
+       *    Draws a physical representation of the map for debugging
+       */
+      function drawMap(force) {
+        if (!DEBUG && !force) { return; }
+        for (var y = 0; y < H; y++) {
+          for (var x = 0; x < W; x++) {
+            var cell = document.getElementById("dbc_" + x + "_" + y);
+            if (!cell) {
+              cell = document.createElement('img');
+              debug.appendChild(cell);
+              cell.id = "dbc_" + x + "_" + y;
+              cell.width = 10;
+              cell.height = 10;
+              cell.style.position = "absolute";
+              cell.style.backgroundColor = "#000";              
+
+            }
+            cell.style.right = (W * 10 - x * 10) + "px";
+            cell.style.bottom = (H * 10 - y * 10) + "px";
+            
+            switch (board(x, y)) {
+              case 'O':
+                cell.src = "images/wall.gif";
+                break;
+              case '.':
+                cell.src = "images/dot.gif";
+                break;
+              case ' ':
+                cell.src = "images/blank.gif";
+                break;
+              case '+':
+                cell.src = "images/plus.gif";
+                break;
+              case '-':
+                cell.src = "images/minus.gif";
+                break;
+            }
+          }
+        }
+        for (var i = 0; i < ghosts.length; i++) {
+          var ghost = ghosts[i];
+          var cell = document.getElementById("dbc_" + ghost.x + "_" + ghost.y);
+          if (ghost.state == 1) {
+            cell.src = "images/ghost_grey.png";
+          } else if (ghost.state == 2) {
+            cell.src = "images/ghost_eyes.png";
+          } else {
+            cell.src = "images/ghost_" + ghost.colour + ".png";
+          }
+        }
+        var cell = document.getElementById("dbc_" + pacman.x + "_" + pacman.y);
+        cell.src = "images/pacman_" + pacman.d + ".gif";
+        
+      }
+
+      
+      /**
+       *  reset(full)
+       *    Resets the game board and character variables. 
+       *    full indicate all variables should be reset, otherwise 
+       *    just life loss is counted.
+       */      
+      function reset(full) {
+        if (full != null) {
+          DOTS = 0;
+          for (var y = 0; y < H; y++) {
+            for (var x = 0; x < W; x++) {
+              var ch = map.charAt(y * W + x);
+              if (ch == '.' || ch == '+') { DOTS++; }
+              board(x, y, ch);
+            }
+          }
+          ATE = 0;
+          SCORE = 0;
+          LIVES = 0;
+          for (var i = 0; i < ghosts.length; i++) {
+            var ghost = ghosts[i];
+            ghost.speed = ghost.initSpeed;
+          }
+
+        }
+        
+        for (var i = 0; i < ghosts.length; i++) {
+          var ghost = ghosts[i];
+          ghost.x = ghost.initX;
+          ghost.y = ghost.initY;
+          ghost.d = ghost.initD;
+          ghost.state = 0;
+        }
+        
+        pacman.x = pacman.initX;
+        pacman.y = pacman.initY;
+        pacman.d = pacman.initD;
+
+        SUGAR = -1;
+        TIMER = 0;
+      }
+
+      
+      /**
+       *  write(message, supress)
+       *    Sends a line of html text to the console.
+       *    If supress, then the extra carriage return is not sent
+       */
+      function write(message, supress) {
+        var span = document.createElement('span');
+        span.innerHTML = message;
+        console.appendChild(span);
+        if (supress) {
+          console.appendChild(document.createElement('br'));
+        } else {
+          console.appendChild(document.createElement('br'));
+          console.appendChild(document.createElement('br'));
+        }
+        console.scrollTop = console.scrollHeight;
+      }
+
+
+      /**
+       *  startsWith(str, prefix)
+       *    If either string is a prefix of the other, return true.
+       *    Any space will terminate the string.
+       */
+      function startsWith(str, prefix) {
+        if (str == '' || prefix == '') { return false; }
+        str = str.toLowerCase();
+        prefix = prefix.toLowerCase();
+        for (var i = 0; i < str.length; i++) {
+          if (i >= prefix.length) { break; }
+          if (str.charAt(i) == ' ' || prefix.charAt(i) == ' ') { return true; }
+          if (str.charAt(i) != prefix.charAt(i)) { return false; }
+        }
+        return true;
+      }
+
+
+      /**
+       *  getDirections(actor)
+       *    Return the offsets of each relative direction of the actor.
+       */
+      function getDirections(actor) {
+        var offsets = compass[actor.d];
+
+        var poses = {
+          f: { x: offsets.x, y: offsets.y, d: offsets.f },
+          b: { x: -offsets.x, y: -offsets.y, d: offsets.b },
+          r: { x: -offsets.y, y: offsets.x, d: offsets.r },
+          l: { x: offsets.y, y: -offsets.x, d: offsets.l }
+        }
+
+        return poses;
+      }
+
+
+      /**
+       *  getAttackMode()
+       *    returns true if the ghosts are in attack mode,
+       *    or false if in scatter mode
+       */
+      function getAttackMode() {
+        if (TIMER < 14) { return false; }
+        if (TIMER < 54) { return true; }
+        if (TIMER < 68) { return false; }
+        if (TIMER < 108) { return true; }
+        if (TIMER < 118) { return false; }
+        if (TIMER < 158) { return true; }
+        if (TIMER < 168) { return false; }
+        return true
+      }
+      
+      
+      /**
+       *  getPositions(actor, noteleport)
+       *    Return the absolute co-ordinates of each relative direction
+       *    of the actor. If noteleport, then normalizing is not performed
+       *    for transport via teleport.
+       */
+      function getPositions(actor, noteleport) {
+        var offsets = compass[actor.d];
+
+        var poses = {
+          f: { x: actor.x + offsets.x, y: actor.y + offsets.y, d: offsets.f },
+          b: { x: actor.x - offsets.x, y: actor.y - offsets.y, d: offsets.b },
+          r: { x: actor.x - offsets.y, y: actor.y + offsets.x, d: offsets.r },
+          l: { x: actor.x + offsets.y, y: actor.y - offsets.x, d: offsets.l }
+        }
+
+        if (noteleport == null) {
+          for (pose in poses) {
+            if (poses[pose].x < 0) { 
+              poses[pose].x = W - 1; 
+            } else if (poses[pose].x > W - 1) {
+              poses[pose].x = 0; 
+            }
+          }
+        }
+        
+        return poses;
+      }
+
+      /**
+       *  getSpaces(poses)
+       *    Return the board piece at each relative direction
+       *    of the position table.
+       */
+      function getSpaces(poses) {
+        var spaces = {
+          forward: board(poses.f.x, poses.f.y),
+          backward: board(poses.b.x, poses.b.y),
+          right: board(poses.r.x, poses.r.y),
+          left: board(poses.l.x, poses.l.y)
+        }
+        
+        return spaces;
+      }
+      
+
+      /**
+       *  personalize(direction)
+       *    Makes a string direction include the second person.
+       */
+      function personalize(direction) {
+        switch (direction) {
+          case "forward":
+            return "in <b>f</b>ront of you";
+          case "backward":
+            return "<b>b</b>ehind you";
+          case "left":
+            return "to your <b>l</b>eft";
+          case "right":
+            return "to your <b>r</b>ight";
+        }
+        return "*shrug*";
+      }
+
+      /**
+       *  highlight(str)
+       *    Bolds the first character
+       */      
+      function highlight(str) {
+        return "<b>" + str.charAt(0) + "</b>" + str.substring(1);
+      }
+         
+                
+      /**
+       *  lookAround()
+       *    Generate the string for the look command
+       */
+      function lookAround() {
+
+        // Get the board values in each relative direction
+        var poses = getPositions(pacman, true);
+        var spaces = getSpaces(poses);
+        
+        var validDirs = new Array();
+        var validDots = new Array();
+        var matched = true;
+        var orb = null;
+        
+        // Look around me for pathways and teleporters
+        for (var dir in spaces) {
+          var space = spaces[dir];
+
+          switch (space) {
+            case ' ': case '+':
+              matched = false;
+            case '.':      
+              validDirs[validDirs.length] = dir;
+          
+              if (space == '.') {
+                validDots[validDots.length] = dir;
+              } else if (space == '+') {
+                orb = dir;
+              }
+          }
+        }
+
+        var message = "You are ";
+        
+        // Determine the type of pathway (corridor, intersection or corner)
+        if (validDirs.length == 2) {
+          var ch = validDirs[0].charAt(0).toLowerCase();
+          if (directions[ch].opposite.charAt(0) == validDirs[1].charAt(0).toLowerCase()) {
+            message += "in a long corridor";
+          } else {
+            message += "in a corner";
+          }
+        } else {
+          message += "at an intersection";
+        }
+
+        // Determine if facing a wall
+        if (spaces.forward == 'O') {
+          message += " facing a wall. ";
+        } else {
+          message += ". "
+        }
+        
+        // List the valid directions
+        message += "You may go ";
+        if (validDirs.length == 4) {
+          message += "in <b>any</b> direction";
+        } else if (validDirs.length == 3) {
+          message += highlight(validDirs[0]) + ", " + 
+                     highlight(validDirs[1]) + " or " + 
+                     highlight(validDirs[2]);
+        } else {
+          message += highlight(validDirs[0]) + " or " + 
+                     highlight(validDirs[1]);
+        }
+        
+        // List the directions with dots (if any)
+        if (validDots.length == 0) {
+          message += ". ";
+        } else if (matched) {
+          message += " and there are glowing dots in <b>every</b> direction. ";
+        } else if (validDots.length == 1) {
+          message += " and there is a glowing dot " + validDots[0] + ". ";
+        } else if (validDots.length == 2) {
+          message += " and there are glowing dots " + 
+                     validDots[0] + " and " +
+                     validDots[1] + ". ";
+        } else if (validDots.length == 3) {
+          message += " and there are glowing dots " + 
+                     validDots[0] + ", " +
+                     validDots[1] + " and " +
+                     validDots[2] + ". ";
+        } else if (validDots.length == 4) {
+          message += " and there are glowing dots " + 
+                     validDots[0] + ", " +
+                     validDots[1] + ", " +
+                     validDots[2] + " and " +
+                     validDots[3] + ". ";
+        }
+        
+        // Inform of any orb
+        if (orb != null) {
+          message += "There is a large floating orb <b>" + orb + "</b>";
+        }
+
+        // Inform of any teleporter
+        if (pacman.y == 14) {
+          if (pacman.x > W / 2) {
+            var teleport = directions[directions[pacman.d].E].name
+          } else {
+            var teleport = directions[directions[pacman.d].W].name
+          }
+          if (pacman.x == 0 || pacman.x == W - 1) {
+            message += "You are standing on a large teleportation system " + personalize(teleport) + ". "
+          } else { 
+            message += "There is a large teleportation system down the corridor " + personalize(teleport) + ". ";
+          }
+        }
+        
+        // Inform if we are on a dot
+        if (board(pacman.x, pacman.y) == '.') {
+          message += "There is a glowing <b>dot</b> hovering near you. ";
+        }
+        
+        var seenGhosts = new Array();
+        var heardGhosts = 0;
+        var dir = directions[pacman.d];
+        for (var i = 0; i < ghosts.length; i++) {
+          var ghost = ghosts[i];
+          
+          // 'Look' around corners
+          if (ghost.x >= pacman.x - 2 && ghost.x <= pacman.x + 2 && 
+              ghost.y >= pacman.y - 2 && ghost.y <= pacman.y + 2 &&
+              ghost.x != pacman.x && ghost.y != pacman.y) {
+            heardGhosts++;   
+          }          
+          
+          // Look down corridors
+          if (ghost.x == pacman.x) {
+            for (var y = pacman.y - 1; y > 0; y--) { // look North
+              if (board(pacman.x, y) == 'O') { break; }
+              if (ghost.y == y) { seenGhosts[seenGhosts.length] = { d: dir.N, g: ghost }; }
+            }
+            for (var y = pacman.y + 1; y < H; y++) { // look South
+              if (board(pacman.x, y) == 'O') { break; }
+              if (ghost.y == y) { seenGhosts[seenGhosts.length] = { d: dir.S, g: ghost }; }
+            }
+          } else if (ghost.y == pacman.y) {
+            for (var x = pacman.x - 1; x > 0; x--) { // look West
+              if (board(x, pacman.y) == 'O') { break; }
+              if (ghost.x == x) { seenGhosts[seenGhosts.length] = { d: dir.W, g: ghost }; }
+            }
+            for (var x = pacman.x + 1; x < W; x++) { // look East
+              if (board(x, pacman.y) == 'O') { break; }
+              if (ghost.x == x) { seenGhosts[seenGhosts.length] = { d: dir.E, g: ghost }; }
+            }
+          }
+        }
+        
+        if (seenGhosts.length > 0 || heardGhosts > 0) {
+          if (seenGhosts.length > 0) {
+            message += "There is " 
+          }
+          for (var i = 0; i < seenGhosts.length; i++) {
+            if (seenGhosts[i].g.state == 1) {
+              message += 'a <b>frightened</b> ghost down the corridor ' + personalize(directions[seenGhosts[i].d].name);
+            } else if (seenGhosts[i].g.state == 2) {
+              message += 'a <b>fleeing</b> ghost down the corridor ' + personalize(directions[seenGhosts[i].d].name);
+            } else {
+              message += 'a <span style="color: ' + seenGhosts[i].g.tcolour + '">' + seenGhosts[i].g.colour + "</span> ghost down the corridor " + personalize(directions[seenGhosts[i].d].name);
+            }
+            if (i == seenGhosts.length - 2) {
+              message += " and ";
+            } else if (i < seenGhosts.length - 2) {
+              message += ", ";
+            }
+          }
+          
+          if (heardGhosts > 0) {
+            if (seenGhosts.length > 0) {
+              message += "and you ";
+            } else {
+              message += "You ";
+            }
+            message += "hear the faint howling of " + ((heardGhosts == 1) ? "a <b>ghost</b>": "<b>ghosts</b>") + " around the corner";
+          }
+          
+          message += ". ";
+        }
+        
+        // If there is a count-down timer, announce time left
+        if (SUGAR == 0) {
+          message += "The distant voice has just billowed 'Time up!'";
+        } else if (SUGAR > 0) { // Todo add more phrases
+          message += "The distant voice echos '" + SUGAR + " second" + ((SUGAR > 1) ? 's': '') + " remain'. ";
+        }
+        
+        return message;
+      }
+      
+      
+      /**
+       *  handleAction(supress)
+       *    Handle the action in prompt. If supress is true, failure states 
+       *    and action descriptors are not returned to the player (used to
+       *    change auto commands together)
+       */
+      function handleAction(supress) {
+        var action = prompt.value;
+        var change = false;
+        
+        // Eat - Check for dot, talley score, update board and set any timers
+        if (startsWith(action, "eat")) {
+          if (supress == null) { write("> eat", true); }
+          if (board(pacman.x, pacman.y) == '.') {
+            write("You have eaten " + ((ATE == 0) ? "the": "another") + " glowing dot!");
+            board(pacman.x, pacman.y, " ");
+            ATE++;
+            SCORE += 10;
+          } else if (board(pacman.x, pacman.y) == '+') {
+            write("You have eaten the large floating orb. You hear strange noises and a voice in the distance announcing '50 seconds remain'.");
+            board(pacman.x, pacman.y, " ");
+            ATE++;
+            SCORE += 50;
+            SUGAR = 50;
+            for (var i = 0; i < ghosts.length; i++) {
+              ghosts[i].state = 1;
+            }            
+          } else if (supress == null) {
+            write("You make a valiant effort to bite in the air, alas there is nothing there.");
+          }
+          
+          if (ATE == DOTS) {
+            write("<b>Congratulations!</b> You have eaten <b>ALL</b> the dots! A rather time consuming and tedious task.", true);
+            write("Your final score: " + SCORE + " points using " + LIVES + " live" + ((LIVES != 1) ? 's': '') + ".");
+            write("*\u00A0*\u00A0*\u00A0\u00A0G\u00A0A\u00A0M\u00A0E\u00A0\u00A0\u00A0O\u00A0V\u00A0E\u00A0R\u00A0\u00A0*\u00A0*\u00A0*");
+          }
+          
+        // Move - check, move and alter timers
+        } else if (startsWith(action, "forward") ||
+                   startsWith(action, "backward") ||
+                   startsWith(action, "left") ||
+                   startsWith(action, "right") ||
+                   (action.length > 5 && action.substring(0, 5) == 'turn' &&
+                     (startsWith(action.substring(5), 'left') ||
+                      startsWith(action.substring(5), 'right')))) {
+
+          if (action.substring(0, 4) == 'turn') {
+            action = action.substring(5);
+          }
+
+          var d = action.charAt(0).toLowerCase()
+
+          write("> " + directions[d].name, true);
+
+          var poses = getPositions(pacman, true);
+          var pose = poses[d];
+          var space = board(pose.x, pose.y);
+
+          switch (space) {
+            case '.': case '+': case ' ':
+
+              // Update pacman
+              pacman.x = pose.x;
+              pacman.y = pose.y;
+              pacman.d = compass[pacman.d][d];
+
+              if (pacman.x < 0) {
+                pacman.x = W - 1; 
+                write("You have been magically <b>teleported</b> to another area of the complex. ");
+              } else if (pacman.x > W - 1) { 
+                pacman.x = 0; 
+                write("You have been magically teleported to another area of the complex");
+              } else {
+                write("You have moved.");
+              }
+              
+              
+              // Update the correct timer
+              if (SUGAR >= 0) { 
+                SUGAR--;
+                
+                // Ghosts are no longer blue
+                if (SUGAR == -1) {                  
+                  for (var i = 0; i < ghosts.length; i++) { ghosts[i].state = 0; }
+                }
+              } else {
+                TIMER++;
+              }
+  
+              // Mark this pass as requiring updating
+              change = true;
+              break;
+            case 'O':
+              var ouch = OuchStrs[random(OuchStrs.length)];
+              write(ouch + "! You walked into a wall. ");
+              break;
+          }
+
+          // If we are to repeat this command, repeat it moving forward.
+          // Look if we are to do multiple steps
+          if (change) {
+            var params = new Array();
+            params = action.split(' ');
+            if (params.length == 2) {
+              var steps = parseInt(params[1]);
+              if (steps > 30) { steps = 9; }
+              if (steps > 1) {
+                prompt.value = "forward " + (steps - 1)
+                handleAction(true);
+              }
+            }
+          }
+          
+          
+        // Look
+        } else if (startsWith(action, "look")) {
+          if (supress == null) { write("> look", true); }
+          write(lookAround());
+        
+        // Score
+        } else if (startsWith(action, "score")) {
+          if (supress == null) { write("> score", true); }
+          write("Score: " + SCORE + " points (" + ATE + " of " + DOTS + " dots eaten) using " + LIVES + " live" + ((LIVES != 1) ? 's': '') + ".");
+        
+        // Where - Returns the state of the pacman for debugging
+        } else if (startsWith(action, "where")) {
+          write("> where", true);
+          write("Location: " + pacman.x + ", " + pacman.y + " (" + pacman.d + ") ");
+
+        // Itadakimasu - Removes all but the home position dot (You think *I'm* going to finish the game legit just to test??)
+        } else if (action.toLowerCase() == "itadakimasu!!") {
+          write("> Itadakimasu!!");
+          change = true;
+          for (var x = 0; x < W; x++) {
+            for (var y = 0; y < H; y++) {
+              if (x == 13 && y == 23) { continue; }
+              switch (board(x, y)) {
+                case '+':
+                  SCORE += 40;
+                case '.':
+                  ATE++;
+                  SCORE += 10;              
+                  board(x, y, ' ')
+              }
+            }
+          }
+          
+        // Help screen
+        } else if (startsWith(action, "help")) {
+          write("> help", true);
+          write("Commands:  (case-insensitive, short command in bold)", true);
+          write("\u00A0\u00A0<b>f</b>orward [<i>n</i>] - Move forward <i>n</i> steps", true);
+          write("\u00A0\u00A0<b>l</b>eft/<b>r</b>ight/<b>b</b>ackward [<i>n</i>] - Move that direction <i>n</i> steps", true);
+          write("\u00A0\u00A0<b>lo</b>ok - Look around", true);
+          write("\u00A0\u00A0<b>e</b>at - Eat current dot", true);
+          write("\u00A0\u00A0<b>s</b>core - Display current score", true);
+          write("\u00A0\u00A0<b>h</b>elp - This help screen");
+          
+        // Debug mode - Turn on the map overlay
+        } else if (action.toLowerCase() == "debug") {
+          write("> debug", true);
+          DEBUG ^= 1;
+          drawMap();
+          debug.style.display = (DEBUG) ? 'block': 'none';
+          write("Debug mode " + ((DEBUG) ? "on!": "off!"));
+          
+        // Autonibble - Automatically eat dots as we pass over them
+        } else if (action.toLowerCase() == "autonibble") {  // Ohhh! A secret! Congrats for reading the source :p
+          write("> autonibble", true);
+          AUTONIBBLE ^= 1;
+          write("Auto-Nibble mode " + ((AUTONIBBLE) ? "on!": "off!"));
+        
+        // Autolook - Automatically look after every move
+        } else if (action.toLowerCase() == "autolook") {  // Ohhh! Another secret! :p
+          write("> autolook", true);
+          AUTOLOOK ^= 1;
+          write("Auto-Look mode " + ((AUTOLOOK) ? "on!": "off!"));
+          
+        // Unknown command... Rant.
+        } else {
+          write("> " + action, true);        
+          
+          if (action == '') {
+            write("Sorry. I can't hear you.");
+
+          // Defend against 'Dumbass says huh?'
+          } else if (action.toLowerCase().indexOf('huh') >= 0) {
+            write("What?!");
+          } else {
+            write("Huh?!");
+          }
+        }
+        
+        // Reset the prompt
+        prompt.value = "";
+
+        // Process Ghost movement
+        if (change) {
+          for (var i = 0; i < ghosts.length; i++) {
+            var ghost = ghosts[i];
+            ghost.tick(ghost);
+          }
+
+          for (var i = 0; i < ghosts.length; i++) {
+            var ghost = ghosts[i];
+            var collide = false;
+            
+            // If we're adjacent to each other and facing away from each other,
+            // we just passed through each other, hence collided.
+            var offsets = compass[ghost.d];
+            var check = { x: ghost.x - offsets.x, y: ghost.y - offsets.y };
+            if (compass[ghost.d].b == pacman.d && pacman.x == check.x && pacman.y == check.y) { collide = true; }
+            if (pacman.x == ghost.x && pacman.y == ghost.y || collide) {
+              if (ghost.state == 1) {
+                write("You have <b>bitten</b> a ghost! It flees from you disoriented, stumbling around frantically trying to escape. ");
+                ghost.state = 2;
+                ghost.tick(ghost);
+                drawMap();
+                SCORE += 500;
+              } else if (ghost.state == 0) {
+                LIVES++;
+                write('You have been <b>attacked</b> by a <span style="color: ' + ghost.tcolour + '">' + ghost.colour + "</span> ghost! You pass out and awake minutes later back where you began.");
+                reset();
+              }
+              break;
+            }
+          }
+              
+          // Chain autonibble
+          if (AUTONIBBLE) {
+            prompt.value = "eat";
+            handleAction(true);
+          }
+
+          // Chain autolook
+          if (AUTOLOOK) {
+            prompt.value = "look";
+            handleAction(true);
+          }
+
+          if (supress == null) { drawMap(); }
+        }
+        
+      }
+
+
+      // Initialize console
+      write("Pac-Txt!", true);
+      write("--------", true);
+      write("You awaken in a large complex, slightly disoriented. Glowing dots hover mouth level near you in <b>every</b> direction. Off in the distance you hear the faint howling of what you can only imagine must be some sort of ghost or several ghosts.");
+      reset(true);
+
+      debug.style.display = (DEBUG) ? 'block': 'none';
+      drawMap(true);
+            
+    </script>
+  </body>
+</html>

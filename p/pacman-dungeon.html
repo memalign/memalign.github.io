@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Pac-Man Dungeon</title>
+<meta property="og:title" content="Pac-Man Dungeon" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/pacman-dungeon.html" />
+<meta property="og:image" content="/m/pacman.jpg" />
+<meta property="og:description" content=""You open your eyes and find yourself in dimly lit surroundings. You are shocked to find that your body has somehow become a smooth yellow sphere. You panic. Your giant…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+Pac-Man Dungeon
+</h1>
+</div>
+<img src="/m/pacman.jpg">
+<div id='postdate'>Posted on 11/24/2020</div>
+"You open your eyes and find yourself in dimly lit surroundings. You are shocked to find that your body has somehow become a smooth yellow sphere. You panic. Your giant wedge-shaped mouth gapes open as you gasp for air."<br />
+&nbsp;&nbsp;- <a href="/m/pacmandungeon/index.html">Pac-Man Dungeon</a><br />
+<br />
+Text adventure games have a special place in my heart. My first memorable run-in was with <a href="https://en.wikipedia.org/wiki/MUD">MUDs</a>. A friend in my summer school World History class showed me how to telnet into a MUD server one day when we were goofing around in the computer lab (instead of working on our assignment).<br />
+<br />
+Many years passed and I eventually played through a game that was super fun and blew my mind, <a href="https://en.wikipedia.org/wiki/Emily_Short">Emily Short</a>'s <a href="https://ifdb.tads.org/viewgame?id=aearuuxv83plclpl">Counterfeit Monkey</a>. (Her blog is <a href="https://emshort.blog">here</a>.) The game's word-manipulation puzzles opened my eyes to capabilities I didn't realize these games could have.<br />
+<br />
+On iPhones, iPads, and other devices that spend most of their time without a hardware keyboard, text-based games can be hard to play. In the back of my mind, I've been noodling on how to make these games more touch-friendly.<br />
+<br />
+One way to build a touch-friendly interactive story is to use a tool like <a href="https://twinery.org">Twine</a>, which lets users perform actions by choosing from a set of choices/hyperlinks.<br />
+<br />
+Text-based games can be fun programming projects (check out this previous post on <a href="/p/text-adventure.html">How to Program a Text Adventure</a>). Instead of using Twine, I decided to make a tiny game engine in JavaScript that I could then use to accomplish my long-held goal of writing my own text-based game.<br />
+<br />
+I've been working on a dungeon game for a few months and it's coming along nicely. And then, a few days ago, I got one of my favorite things as a hobbyist programmer: a sudden and powerful urge to take a quick detour on a tangentially related programming project. Following these impulses and bursts of passion have led to some of my most productive coding sessions over the years.<br />
+<br />
+Here's what kicked it off this time (another instance of <a href="/p/rabbit-hole.html">falling down the rabbit hole</a>):<br />
+<br />
+- I was already working on this game engine and its first game<br />
+&nbsp;&nbsp;- To be touch-friendly, all actions are listed as tappable-links<br />
+&nbsp;&nbsp;- To have some simple graphics, I use emoji. An idea I noted <a href="/p/emoji-conway.html">previously</a>.<br />
+<br />
+- I saw an article about <a href="http://www.pactxt.com">PacTxt</a> ("Pac-Man meets Zork")<br />
+&nbsp;&nbsp;- (In case that ever disappears, here's my <a href="/m/pactxt/index.html">backup</a>)<br />
+&nbsp;&nbsp;- Use the "debug" command to see a map<br />
+<br />
+- I thought it was a really funny idea and it in turn reminded me of a <a href="https://www.smbc-comics.com/comic/2012-09-16">comic</a> (<a href="/m/smbc-pacman.gif">backup</a>) I saw many years ago that frames Pac-Man as hyper-detailed horror<br />
+<br />
+- I find the comic really creative, funny, and interesting. And while the core idea of PacTxt is amusing, the implementation is not fun to play (it's long, tedious, repetitive). I wondered if my own spin on this could combine the two into something more fun.<br />
+<br />
+- I opened a pixel art app (one I wrote for fun earlier in the year on another programming spurt) and I sketched out a <a href="/m/pacmandungeon/Resources/map.png">dungeon map</a> for a Pac-Man level. The first maze I drew would be too big to be fun so I scoped it down to a mini version.<br />
+<br />
+- Then I created a new private git repo for this project (I always try to save my code in <a href="/p/source-control.html">source control</a> -- who knows when it'll come in handy in the future!)<br />
+<br />
+- I copied over the relevant game engine files, started a <a href="/p/notes-txt.html">notes.txt</a> journal for the project, and hacked it together<br />
+<br />
+- Even though this is a tiny tangential project, I ended up solving some problems I'll ultimately need to solve for the bigger dungeon game I'm working on: emoji weren't displaying correctly in Chrome, tweaks to the page layout, better sorting for game actions<br />
+<br />
+<br />
+You can play my Pac-Man Dungeon game <a href="/m/pacmandungeon/index.html">here</a>.<br />
+<br />
+<br />
+It's silly, it was fun to make, maybe somebody else will find it amusing, and maybe this will help somebody else to fall down the rabbit hole and come up with more creative ideas.<br />
+<br />
+Here are some quick ideas to extend this:<br />
+- Support a full set of levels (and maybe even have the game glitch out on level 256, just like the original Pac-Man)<br />
+- Support all the different fruit<br />
+- Support larger levels<br />
+- Let the user input an ASCII map that they can then play<br />
+- Support all the different ghosts with their specific chase and scatter behaviors<br />
+- Let the user write code to inspect the game and control Pac-Man to create their own AI to play and win<br />
+<br />
+<br />
+Other notes:<br />
+<br />
+- The game source source code can be found <a href="https://github.com/memalign/memalign.github.io/tree/master/m/pacmandungeon">here</a><br />
+- I wrote a simple <a href="https://github.com/memalign/memalign.github.io/blob/master/m/pacmandungeon/UnitTests.js">unit test harness</a>. Run the tests <a href="/m/pacmandungeon/unitTests.html">here</a>.<br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

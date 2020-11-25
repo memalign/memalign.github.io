@@ -1,0 +1,61 @@
+Title: Pac-Man Dungeon
+Date: 11/24/2020
+
+[Image:/m/pacman.jpg]
+
+"You open your eyes and find yourself in dimly lit surroundings. You are shocked to find that your body has somehow become a smooth yellow sphere. You panic. Your giant wedge-shaped mouth gapes open as you gasp for air."
+  - [Link:/m/pacmandungeon/index.html]Pac-Man Dungeon[/Link]
+
+Text adventure games have a special place in my heart. My first memorable run-in was with [Link:https://en.wikipedia.org/wiki/MUD]MUDs[/Link]. A friend in my summer school World History class showed me how to telnet into a MUD server one day when we were goofing around in the computer lab (instead of working on our assignment).
+
+Many years passed and I eventually played through a game that was super fun and blew my mind, [Link:https://en.wikipedia.org/wiki/Emily_Short]Emily Short[/Link]'s [Link:https://ifdb.tads.org/viewgame?id=aearuuxv83plclpl]Counterfeit Monkey[/Link]. (Her blog is [Link:https://emshort.blog]here[/Link].) The game's word-manipulation puzzles opened my eyes to capabilities I didn't realize these games could have.
+
+On iPhones, iPads, and other devices that spend most of their time without a hardware keyboard, text-based games can be hard to play. In the back of my mind, I've been noodling on how to make these games more touch-friendly.
+
+One way to build a touch-friendly interactive story is to use a tool like [Link:https://twinery.org]Twine[/Link], which lets users perform actions by choosing from a set of choices/hyperlinks.
+
+Text-based games can be fun programming projects (check out this previous post on [Link:/p/text-adventure.html]How to Program a Text Adventure[/Link]). Instead of using Twine, I decided to make a tiny game engine in JavaScript that I could then use to accomplish my long-held goal of writing my own text-based game.
+
+I've been working on a dungeon game for a few months and it's coming along nicely. And then, a few days ago, I got one of my favorite things as a hobbyist programmer: a sudden and powerful urge to take a quick detour on a tangentially related programming project. Following these impulses and bursts of passion have led to some of my most productive coding sessions over the years.
+
+Here's what kicked it off this time (another instance of [Link:/p/rabbit-hole.html]falling down the rabbit hole[/Link]):
+
+- I was already working on this game engine and its first game
+  - To be touch-friendly, all actions are listed as tappable-links
+  - To have some simple graphics, I use emoji. An idea I noted [Link:/p/emoji-conway.html]previously[/Link].
+
+- I saw an article about [Link:http://www.pactxt.com]PacTxt[/Link] ("Pac-Man meets Zork")
+  - (In case that ever disappears, here's my [Link:/m/pactxt/index.html]backup[/Link])
+  - Use the "debug" command to see a map
+
+- I thought it was a really funny idea and it in turn reminded me of a [Link:https://www.smbc-comics.com/comic/2012-09-16]comic[/Link] ([Link:/m/smbc-pacman.gif]backup[/Link]) I saw many years ago that frames Pac-Man as hyper-detailed horror
+
+- I find the comic really creative, funny, and interesting. And while the core idea of PacTxt is amusing, the implementation is not fun to play (it's long, tedious, repetitive). I wondered if my own spin on this could combine the two into something more fun.
+
+- I opened a pixel art app (one I wrote for fun earlier in the year on another programming spurt) and I sketched out a [Link:/m/pacmandungeon/Resources/map.png]dungeon map[/Link] for a Pac-Man level. The first maze I drew would be too big to be fun so I scoped it down to a mini version.
+
+- Then I created a new private git repo for this project (I always try to save my code in [Link:/p/source-control.html]source control[/Link] -- who knows when it'll come in handy in the future!)
+
+- I copied over the relevant game engine files, started a [Link:/p/notes-txt.html]notes.txt[/Link] journal for the project, and hacked it together
+
+- Even though this is a tiny tangential project, I ended up solving some problems I'll ultimately need to solve for the bigger dungeon game I'm working on: emoji weren't displaying correctly in Chrome, tweaks to the page layout, better sorting for game actions
+
+
+You can play my Pac-Man Dungeon game [Link:/m/pacmandungeon/index.html]here[/Link].
+
+
+It's silly, it was fun to make, maybe somebody else will find it amusing, and maybe this will help somebody else to fall down the rabbit hole and come up with more creative ideas.
+
+Here are some quick ideas to extend this:
+- Support a full set of levels (and maybe even have the game glitch out on level 256, just like the original Pac-Man)
+- Support all the different fruit
+- Support larger levels
+- Let the user input an ASCII map that they can then play
+- Support all the different ghosts with their specific chase and scatter behaviors
+- Let the user write code to inspect the game and control Pac-Man to create their own AI to play and win
+
+
+Other notes:
+
+- The game source source code can be found [Link:https://github.com/memalign/memalign.github.io/tree/master/m/pacmandungeon]here[/Link]
+- I wrote a simple [Link:https://github.com/memalign/memalign.github.io/blob/master/m/pacmandungeon/UnitTests.js]unit test harness[/Link]. Run the tests [Link:/m/pacmandungeon/unitTests.html]here[/Link].
