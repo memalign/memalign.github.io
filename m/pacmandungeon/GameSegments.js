@@ -222,7 +222,7 @@ class MAGameSegmentYourself extends MAGameSegment {
 
   performActionOnGameState(action, gameState) {
     if (action instanceof MAActionLook) {
-      gameState.log.log("You look grotesque: a limbless round yellow body, a flapping mouth dripping with drool betraying your insatiable hunger.")
+      gameState.log.log("You look grotesque: a round yellow body, a flapping mouth dripping with drool betraying your insatiable hunger.")
     }
   }
 

@@ -311,3 +311,19 @@ Some links:
   - Entered https://memalign.github.io
 4. This provides an html file to host at https://memalign.github.io/
 5. I copied that into the repo
+  - They note "To stay verified, don't remove the file, even after verification succeeds."
+6. I pushed, checked that it was accessible, and then tapped the Verify button
+7. That succeeded and it sent me to a management page: https://search.google.com/search-console?resource_id=https%3A%2F%2Fmemalign.github.io%2F
+
+The management page is empty for now but says it will update "in a day or so".
+
+Do I need a sitemap? Here's what Google has to say about it:
+https://developers.google.com/search/docs/advanced/sitemaps/overview?hl=en&visit_id=637419515500433379-603656771&rd=1
+
+It sounds like it might help because the site is new and has few external links to it. That said, I've intentionally made sure this site is well-linked internally and from the homepage.
+
+I'll wait a few days and see if Google picks up the whole website. If not, I can make a sitemap generator (using the example from xml-sitemaps.com as a starting point).
+
+This site suggests that a sitemap speeds up indexing time by almost 1 whole day:
+https://blog.hubspot.com/marketing/submit-website-google
+
