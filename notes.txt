@@ -295,3 +295,19 @@ Task list:
 11/24/20
 
 I found that Verdana breaks some emoji in Chrome. Removing that font from style.css.
+
+
+11/25/20
+
+I noticed that memalign.github.io doesn't show up on Google (I searched for: site:memalign.github.io and got no results). I did some very light research into how to get it there.
+
+Some links:
+- Tool for generating a sitemap: https://www.xml-sitemaps.com
+- Google's search console: https://search.google.com/search-console/welcome?utm_source=wmx&utm_medium=deprecation-pane&utm_content=home
+
+1. Go to Google's search console: https://search.google.com/search-console/welcome?utm_source=wmx&utm_medium=deprecation-pane&utm_content=home
+2. Enter memalign.github.io
+3. Since I don't own the DNS for github.io, I needed to select verify by "url prefix"
+  - Entered https://memalign.github.io
+4. This provides an html file to host at https://memalign.github.io/
+5. I copied that into the repo

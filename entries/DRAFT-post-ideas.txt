@@ -2,5 +2,7 @@
 - JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
 - SiteGenerator
 - Vision framework
+- Counterfeit Monkey
+- Andrew Myers' relplot: http://www.cs.cornell.edu/w8/~andru/relplot/
 
 - https://freeicons.io/
