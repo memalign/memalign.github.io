@@ -327,3 +327,7 @@ I'll wait a few days and see if Google picks up the whole website. If not, I can
 This site suggests that a sitemap speeds up indexing time by almost 1 whole day:
 https://blog.hubspot.com/marketing/submit-website-google
 
+
+11/27/20
+
+The site still doesn't show up on Google yet so I'll add a test sitemap.
