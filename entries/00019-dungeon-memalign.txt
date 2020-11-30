@@ -61,16 +61,47 @@ How I approached writing this game:
 
 - Then I worked through the whole test backlog. Though I often wrote tests as I added new logic, I also accumulated a big list of missing coverage for edge cases and some aspects of gameplay. I love projects where testing can be automated as unit tests and multi-layer "unit tests" (which are actually integration tests written using the unit test harness). More on testing below.
 
+- I played it a bunch and my wife played it too! I fixed any bugs we found.
+
+- And then the game was ready to share :)
+
+
+How the code is structured:
+
+- I use "MA" as a prefix on class names to create a simple namespace to avoid conflicts with global JavaScript APIs
+
+- Map.js
+  - Most of the code in this file is game-specific. When writing a new game, most of this code would be deleted and replaced.
+  - Defines the enemies (MAEnemy instances)
+  - Defines the rooms (MALocation instances)
+  - Defines the graph of room-to-room connections
+  - Enemies and rooms have properties and methods that the game engine calls to get the appearance, attacks, etc
+  - Has logic to generate an emoji representation of the map
+
+- GameEngine.js
+  - Most of the code in this file is foundational. This should require only small tweaks when it's used in a new game.
+  - Many foundational classes are in this file. They could be factored out into their own files.
+  - Notable classes:
+    - MAGameState: an instance of this class stores all of the current game's state. This instance is passed into game engine methods and modified as the game progresses. This object has a reference to the Map instance, the current location, the user's inventory, and storage used by MAGameSegment subclasses.
+    - MAGameEngine: this class is the entry point to all of the game logic. It contains some common methods that most games would need (such as a method to calculate the possible actions the user can take given the current game state). There are only two places in this class that contain game-specific logic: constructor and setupNewGame. The constructor instantiates a hard-coded list of MAGameSegment subclasses (more on these below). The setupNewGame method simply has the name of the game hard-coded.
+    - MANoun, MAScenery: classes used to represent items in the game map. These include some methods to guess the right indefinite article and in-sentence representation of the objects.
+    - MADirection, MALocation: used to represent map locations and the connections between them
+
+- Utilities.js
+  *** say some things
+
+- GameSegments.js
+  *** say some things
+
+- GameSegmentBattle.js
+  *** say some things
+
+- UnitTests.js
+  *** say some things
+  *** Unit tests: some are unit tests, some are integration tests; it was less effort in the short-term to cover a lot with integration tests
+
 
 ****Task list:
-
-
-- Talk a little about the structure of the source code:
-  - Map
-  - GameEngine
-  - GameSegments
-  - Unit tests: some are unit tests, some are integration tests; it was less effort in the short-term to cover a lot with integration tests
-
 
 - Ideas for other games or extensions
 
