@@ -16,7 +16,7 @@ One way to build a touch-friendly interactive story is to use a tool like [Link:
 
 Text-based games can be fun programming projects (check out this previous post on [Link:/p/text-adventure.html]How to Program a Text Adventure[/Link]). Instead of using Twine, I decided to make a tiny game engine in JavaScript that I could then use to accomplish my long-held goal of writing my own text-based game.
 
-I've been working on a dungeon game for a few months and it's coming along nicely. And then, a few days ago, I got one of my favorite things as a hobbyist programmer: a sudden and powerful urge to take a quick detour on a tangentially related programming project. Following these impulses and bursts of passion have led to some of my most productive coding sessions over the years.
+I've been working on a [Link:/p/dungeon-memalign.html]dungeon game[/Link] for a few months and it's coming along nicely. And then, a few days ago, I got one of my favorite things as a hobbyist programmer: a sudden and powerful urge to take a quick detour on a tangentially related programming project. Following these impulses and bursts of passion have led to some of my most productive coding sessions over the years.
 
 Here's what kicked it off this time (another instance of [Link:/p/rabbit-hole.html]falling down the rabbit hole[/Link]):
 
