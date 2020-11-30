@@ -1,0 +1,193 @@
+body {
+  color: black;
+  font-size: 11pt;
+  margin: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+  color : #666;
+  margin: 0;
+}
+
+img {
+  border: 0;
+}
+
+h2 a,
+h3 a {
+  color : #666;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: #3b5998;
+}
+
+table {
+  border-collapse: collapse;
+  border: 0;
+}
+
+td {
+  border: 0;
+  padding: 0;
+}
+
+#body {
+  margin: auto;
+  max-width: 850px;
+}
+
+#body hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 2em 0;
+    padding: 0;
+}
+
+#header {
+  margin-bottom: 15px;
+}
+
+#allposts {
+
+}
+
+#about {
+  float: right;
+  text-align: right;
+}
+
+#postdate {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+#content,
+#footer {
+  margin-left: 31px;
+  margin-right: 31px;
+}
+
+#content p,
+#content li,
+#footer {
+  line-height: 16pt;
+}
+
+#gameLogSeen {
+  padding: 8px;
+  border-radius: 3px;
+}
+
+#gameLogNew {
+  background: #ebf1fa;
+  padding: 8px;
+  border-radius: 3px;
+}
+
+#gameActions {
+  line-height: 25px;
+  font-size: 15pt;
+  padding: 8px;
+  border-radius: 3px;
+}
+
+#gameMap {
+  padding: 8px;
+  border-radius: 3px;
+  font-size: 8pt;
+  line-height: 15px;
+  text-align: center;
+}
+
+#code {
+  font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #EEE;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 1em;
+}
+
+#code br {
+  display: none;
+}
+
+#footer {
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
+
+#content p {
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+#content td,
+#content th {
+  padding: 5px;
+}
+
+#content td {
+  border-top: 1px solid #DDD;
+}
+
+#content th {
+  color: #666;
+  text-align: left;
+}
+
+
+@media all and (orientation:portrait) {
+
+img, video, audio { max-width: 90%; max-height: 400px; height: auto; width: auto; display: block; margin: 0 auto; border-radius: 3px; }
+
+body, p, li { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:17.000000px + 1.0vw); font-weight: normal; }
+
+h1 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:28.000000px + 1.0vw); font-weight: bold; }
+
+h2 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:22.000000px + 1.0vw); font-weight: bold; }
+
+h3, h4 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:20.000000px + 1.0vw); font-weight: bold; }
+
+}
+
+
+@media all and (orientation:landscape) {
+
+img, video, audio { max-width: 65%; max-height: 400px; height: auto; width: auto; display: block; margin: 0 auto; border-radius: 3px; }
+
+body, p, li { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:8.500000px + 1.0vw); font-weight: normal; }
+
+h1 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:14.000000px + 1.0vw); font-weight: bold; }
+
+h2 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:11.000000px + 1.0vw); font-weight: bold; }
+
+h3, h4 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:10.000000px + 1.0vw); font-weight: bold; }
+
+}
+
+/* For wide screens */
+@media only screen and (min-width: 400px) {
+#gameMap { text-align: right;}
+#grid { display: grid; grid-template-columns: 1fr 1fr; }
+}
+
