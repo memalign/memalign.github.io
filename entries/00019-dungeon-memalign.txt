@@ -66,11 +66,11 @@ How I approached writing this game:
 - And then the game was ready to share :)
 
 
-How the code is structured:
+How the [Link:https://github.com/memalign/memalign.github.io/tree/master/m/dungeon]code[/Link] is structured:
 
 - I use "MA" as a prefix on class names to create a simple namespace to avoid conflicts with global JavaScript APIs
 
-- Map.js
+- [Link:https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/Map.js]Map.js[/Link]
   - Most of the code in this file is game-specific. When writing a new game, most of this code would be deleted and replaced.
   - Defines the enemies (MAEnemy instances)
   - Defines the rooms (MALocation instances)
@@ -78,7 +78,7 @@ How the code is structured:
   - Enemies and rooms have properties and methods that the game engine calls to get the appearance, attacks, etc
   - Has logic to generate an emoji representation of the map
 
-- GameEngine.js
+- [Link:https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/GameEngine.js]GameEngine.js[/Link]
   - Most of the code in this file is foundational. This should require only small tweaks when it's used in a new game.
   - Many foundational classes are in this file. They could be factored out into their own files.
   - Notable classes:
@@ -87,22 +87,22 @@ How the code is structured:
     - MANoun, MAScenery: classes used to represent items in the game map. These include some methods to guess the right indefinite article and in-sentence representation of the objects.
     - MADirection, MALocation: used to represent map locations and the connections between them
 
-- Utilities.js
+- [Link:https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/Utilities.js]Utilities.js[/Link]
   - Methods used in many different parts of the codebase
   - One example: naturalLanguageStringForArray, accepts an array of MANoun objects and constructs a string like "a dog and a cat" or "a dog, a mouse, and some ants"
   - Another useful method: fakeRandomInt. All of the "randomness" in the game is actually deterministic so I can replay every action taken since the beginning of the game and always get the same result. I use this trick for easy saving/loading of game progress. It also impacts unit testing.
 
-- GameSegments.js
+- [Link:https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/GameSegments.js]GameSegments.js[/Link]
   - MAGameSegment is an abstract class that is subclassed to create game-specific GameSegments
   - A GameSegment is a way to organize game logic, such as locked doors & keys to unlock them, using potions to heal, etc
   - The GameEngine asks every GameSegment for actions the user can perform (e.g. "Use potion"). The GameSegment is then asked to perform the action that's chosen.
   - GameSegments also get callbacks when other parts of the game will perform or did perform an action in case they have reason to block it or react to it. For example, a GameSegment may want to block "Go north" if the door is locked.
   - Game mechanics and room-specific behaviors are implemented as GameSegments.
 
-- GameSegmentBattle.js
+- [Link:https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/GameSegmentBattle.js]GameSegmentBattle.js[/Link]
   - The battle mechanics of the game are complex enough that I put this game segment in its own file
 
-- UnitTests.js
+- [Link:https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/UnitTests.js]UnitTests.js[/Link]
   - This is a simple unit test harness and collection of tests of both foundational and game-specific pieces
   - Run the unit tests by visiting [Link:/m/dungeon/unitTests.html]unitTests.html[/Link]
   - Some of the tests are real "unit" tests

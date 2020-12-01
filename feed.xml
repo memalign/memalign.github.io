@@ -92,11 +92,11 @@ How I approached writing this game:<br />
 - And then the game was ready to share :)<br />
 <br />
 <br />
-How the code is structured:<br />
+How the <a href="https://github.com/memalign/memalign.github.io/tree/master/m/dungeon">code</a> is structured:<br />
 <br />
 - I use "MA" as a prefix on class names to create a simple namespace to avoid conflicts with global JavaScript APIs<br />
 <br />
-- Map.js<br />
+- <a href="https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/Map.js">Map.js</a><br />
 &nbsp;&nbsp;- Most of the code in this file is game-specific. When writing a new game, most of this code would be deleted and replaced.<br />
 &nbsp;&nbsp;- Defines the enemies (MAEnemy instances)<br />
 &nbsp;&nbsp;- Defines the rooms (MALocation instances)<br />
@@ -104,7 +104,7 @@ How the code is structured:<br />
 &nbsp;&nbsp;- Enemies and rooms have properties and methods that the game engine calls to get the appearance, attacks, etc<br />
 &nbsp;&nbsp;- Has logic to generate an emoji representation of the map<br />
 <br />
-- GameEngine.js<br />
+- <a href="https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/GameEngine.js">GameEngine.js</a><br />
 &nbsp;&nbsp;- Most of the code in this file is foundational. This should require only small tweaks when it's used in a new game.<br />
 &nbsp;&nbsp;- Many foundational classes are in this file. They could be factored out into their own files.<br />
 &nbsp;&nbsp;- Notable classes:<br />
@@ -113,22 +113,22 @@ How the code is structured:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- MANoun, MAScenery: classes used to represent items in the game map. These include some methods to guess the right indefinite article and in-sentence representation of the objects.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- MADirection, MALocation: used to represent map locations and the connections between them<br />
 <br />
-- Utilities.js<br />
+- <a href="https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/Utilities.js">Utilities.js</a><br />
 &nbsp;&nbsp;- Methods used in many different parts of the codebase<br />
 &nbsp;&nbsp;- One example: naturalLanguageStringForArray, accepts an array of MANoun objects and constructs a string like "a dog and a cat" or "a dog, a mouse, and some ants"<br />
 &nbsp;&nbsp;- Another useful method: fakeRandomInt. All of the "randomness" in the game is actually deterministic so I can replay every action taken since the beginning of the game and always get the same result. I use this trick for easy saving/loading of game progress. It also impacts unit testing.<br />
 <br />
-- GameSegments.js<br />
+- <a href="https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/GameSegments.js">GameSegments.js</a><br />
 &nbsp;&nbsp;- MAGameSegment is an abstract class that is subclassed to create game-specific GameSegments<br />
 &nbsp;&nbsp;- A GameSegment is a way to organize game logic, such as locked doors & keys to unlock them, using potions to heal, etc<br />
 &nbsp;&nbsp;- The GameEngine asks every GameSegment for actions the user can perform (e.g. "Use potion"). The GameSegment is then asked to perform the action that's chosen.<br />
 &nbsp;&nbsp;- GameSegments also get callbacks when other parts of the game will perform or did perform an action in case they have reason to block it or react to it. For example, a GameSegment may want to block "Go north" if the door is locked.<br />
 &nbsp;&nbsp;- Game mechanics and room-specific behaviors are implemented as GameSegments.<br />
 <br />
-- GameSegmentBattle.js<br />
+- <a href="https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/GameSegmentBattle.js">GameSegmentBattle.js</a><br />
 &nbsp;&nbsp;- The battle mechanics of the game are complex enough that I put this game segment in its own file<br />
 <br />
-- UnitTests.js<br />
+- <a href="https://github.com/memalign/memalign.github.io/tree/master/m/dungeon/UnitTests.js">UnitTests.js</a><br />
 &nbsp;&nbsp;- This is a simple unit test harness and collection of tests of both foundational and game-specific pieces<br />
 &nbsp;&nbsp;- Run the unit tests by visiting <a href="/m/dungeon/unitTests.html">unitTests.html</a><br />
 &nbsp;&nbsp;- Some of the tests are real "unit" tests<br />
