@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://memalign.github.io/sitemap.xml

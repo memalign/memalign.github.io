@@ -331,3 +331,8 @@ https://blog.hubspot.com/marketing/submit-website-google
 11/27/20
 
 The site still doesn't show up on Google yet so I'll add a test sitemap.
+
+
+12/1/20
+
+The site still doesn't show up. Adding a robots.txt file.
