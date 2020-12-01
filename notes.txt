@@ -336,3 +336,13 @@ The site still doesn't show up on Google yet so I'll add a test sitemap.
 12/1/20
 
 The site still doesn't show up. Adding a robots.txt file.
+
+I also loaded this URL in a browser to request that Google reindexes the sitemap:
+http://www.google.com/ping?sitemap=https://memalign.github.io/sitemap.xml
+
+(This is probably redundant because I added it in the Google search console site already)
+
+( I found this here: https://developers.google.com/search/docs/advanced/sitemaps/build-sitemap?visit_id=637424087405675301-1909987319&rd=1#addsitemap )
+
+This website says it can take up to 4 weeks for a site to get indexed:
+https://www.seomechanic.com/why-is-my-website-not-showing-in-google-search-results/
