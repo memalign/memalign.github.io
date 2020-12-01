@@ -32,7 +32,7 @@ How I approached writing this game:
 
 - I worked on the foundations: the game engine, the map, and how to structure game-specific logic. More details on this below.
 
-- As I started scoping out the story-specific work, I realized that writing such a sophisticated story and supporting the game mechanics would take more time than I have for a side project. I didn't want this project to draw on for more than a handful of months. If it took longer, I'd have a bigger and more interesting game but I might get bored of it and never finish. Or it would prevent me from developing other ideas I haven't thought of yet.
+- As I started scoping out the story-specific work, I realized that writing such a sophisticated story and supporting the game mechanics would take more time than I have for a side project. I didn't want this project to drag on for more than a handful of months. If it took longer, I'd have a bigger and more interesting game but I might get bored of it and never finish. Or it would prevent me from developing other ideas I haven't thought of yet.
 
 - I found a way to scope the story down so I could keep it interesting, fun, and achieve my goal of writing a text-based game in a timeframe I was willing to devote to it.
 
@@ -59,7 +59,7 @@ How I approached writing this game:
 
 - I added saving/loading/and starting over. I had a strategy in mind for how I would save game progress from the beginning of the project (because the tools available could change how I maintained game state). Knowing this would be played in a web browser meant I only had some tools available.
 
-- Then I worked through the whole test backlog. Though I often wrote tests as I added new logic, I also accumulated a big list of missing coverage for edge cases and some aspects of gameplay. I love projects where testing can be automated as unit tests and multi-layer "unit tests" (which are actually integration tests written using the unit test harness). More on testing below.
+- Then I worked through the whole test backlog. Though I often wrote tests as I added new logic, I also accumulated a big list of missing coverage for edge cases and some aspects of gameplay. I love projects where most testing can be automated as unit tests and multi-layer "unit tests" (which are actually integration tests written using the unit test harness). More on testing below.
 
 - I played it a bunch and my wife played it too! I fixed any bugs we found.
 
@@ -88,81 +88,31 @@ How the code is structured:
     - MADirection, MALocation: used to represent map locations and the connections between them
 
 - Utilities.js
-  *** say some things
+  - Methods used in many different parts of the codebase
+  - One example: naturalLanguageStringForArray, accepts an array of MANoun objects and constructs a string like "a dog and a cat" or "a dog, a mouse, and some ants"
+  - Another useful method: fakeRandomInt. All of the "randomness" in the game is actually deterministic so I can replay every action taken since the beginning of the game and always get the same result. I use this trick for easy saving/loading of game progress. It also impacts unit testing.
 
 - GameSegments.js
-  *** say some things
+  - MAGameSegment is an abstract class that is subclassed to create game-specific GameSegments
+  - A GameSegment is a way to organize game logic, such as locked doors & keys to unlock them, using potions to heal, etc
+  - The GameEngine asks every GameSegment for actions the user can perform (e.g. "Use potion"). The GameSegment is then asked to perform the action that's chosen.
+  - GameSegments also get callbacks when other parts of the game will perform or did perform an action in case they have reason to block it or react to it. For example, a GameSegment may want to block "Go north" if the door is locked.
+  - Game mechanics and room-specific behaviors are implemented as GameSegments.
 
 - GameSegmentBattle.js
-  *** say some things
+  - The battle mechanics of the game are complex enough that I put this game segment in its own file
 
 - UnitTests.js
-  *** say some things
-  *** Unit tests: some are unit tests, some are integration tests; it was less effort in the short-term to cover a lot with integration tests
+  - This is a simple unit test harness and collection of tests of both foundational and game-specific pieces
+  - Run the unit tests by visiting [Link:/m/dungeon/unitTests.html]unitTests.html[/Link]
+  - Some of the tests are real "unit" tests
+  - A lot of the test coverage comes from multi-layer tests which are more accurately called "integration" tests. I chose to get a lot of test coverage this way because it was less effort for me to write these instead of granular unit tests for everything.
+  - These integration tests essentially play the game and assert that the game ended up in the right state along the way. See "test_MAGameEngine_beatGame" for a full play-through (and spoilers!).
 
 
-****Task list:
+I'll close this post with some ideas to extend or reuse these pieces:
 
-- Ideas for other games or extensions
+- Create a game with a linear dungeon where enemies get stronger as you move deeper into it. If you die, you start over at the beginning but you get to keep your experience/attacks/equipment.
+- Create an "Emojimon" text-based RPG to collect and battle emoji (similar to Pokémon)
+- And one idea I executed on as soon as I had it: [Link:/p/pacman-dungeon.html]Pac-Man Dungeon[/Link]
 
-- Make sure post date is right
-
-
-
-
-"You open your eyes and find yourself in dimly lit surroundings. You are shocked to find that your body has somehow become a smooth yellow sphere. You panic. Your giant wedge-shaped mouth gapes open as you gasp for air."
-  - [Link:/m/pacmandungeon/index.html]Pac-Man Dungeon[/Link]
-
-Text adventure games have a special place in my heart. My first memorable run-in was with [Link:https://en.wikipedia.org/wiki/MUD]MUDs[/Link]. A friend in my summer school World History class showed me how to telnet into a MUD server one day when we were goofing around in the computer lab (instead of working on our assignment).
-
-Many years passed and I eventually played through a game that was super fun and blew my mind, [Link:https://en.wikipedia.org/wiki/Emily_Short]Emily Short[/Link]'s [Link:https://ifdb.tads.org/viewgame?id=aearuuxv83plclpl]Counterfeit Monkey[/Link]. (Her blog is [Link:https://emshort.blog]here[/Link].) The game's word-manipulation puzzles opened my eyes to capabilities I didn't realize these games could have.
-
-On iPhones, iPads, and other devices that spend most of their time without a hardware keyboard, text-based games can be hard to play. In the back of my mind, I've been noodling on how to make these games more touch-friendly.
-
-One way to build a touch-friendly interactive story is to use a tool like [Link:https://twinery.org]Twine[/Link], which lets users perform actions by choosing from a set of choices/hyperlinks.
-
-Text-based games can be fun programming projects (check out this previous post on [Link:/p/text-adventure.html]How to Program a Text Adventure[/Link]). Instead of using Twine, I decided to make a tiny game engine in JavaScript that I could then use to accomplish my long-held goal of writing my own text-based game.
-
-I've been working on a dungeon game for a few months and it's coming along nicely. And then, a few days ago, I got one of my favorite things as a hobbyist programmer: a sudden and powerful urge to take a quick detour on a tangentially related programming project. Following these impulses and bursts of passion have led to some of my most productive coding sessions over the years.
-
-Here's what kicked it off this time (another instance of [Link:/p/rabbit-hole.html]falling down the rabbit hole[/Link]):
-
-- I was already working on this game engine and its first game
-  - To be touch-friendly, all actions are listed as tappable-links
-  - To have some simple graphics, I use emoji. An idea I noted [Link:/p/emoji-conway.html]previously[/Link].
-
-- I saw an article about [Link:http://www.pactxt.com]PacTxt[/Link] ("Pac-Man meets Zork")
-  - (In case that ever disappears, here's my [Link:/m/pactxt/index.html]backup[/Link])
-  - Use the "debug" command to see a map
-
-- I thought it was a really funny idea and it in turn reminded me of a [Link:https://www.smbc-comics.com/comic/2012-09-16]comic[/Link] ([Link:/m/smbc-pacman.gif]backup[/Link]) I saw many years ago that frames Pac-Man as hyper-detailed horror
-
-- I find the comic really creative, funny, and interesting. And while the core idea of PacTxt is amusing, the implementation is not fun to play (it's long, tedious, repetitive). I wondered if my own spin on this could combine the two into something more fun.
-
-- I opened a pixel art app (one I wrote for fun earlier in the year on another programming spurt) and I sketched out a [Link:/m/pacmandungeon/Resources/map.png]dungeon map[/Link] for a Pac-Man level. The first maze I drew would be too big to be fun so I scoped it down to a mini version.
-
-- Then I created a new private git repo for this project (I always try to save my code in [Link:/p/source-control.html]source control[/Link] -- who knows when it'll come in handy in the future!)
-
-- I copied over the relevant game engine files, started a [Link:/p/notes-txt.html]notes.txt[/Link] journal for the project, and hacked it together
-
-- Even though this is a tiny tangential project, I ended up solving some problems I'll ultimately need to solve for the bigger dungeon game I'm working on: emoji weren't displaying correctly in Chrome, tweaks to the page layout, better sorting for game actions
-
-
-You can play my Pac-Man Dungeon game [Link:/m/pacmandungeon/index.html]here[/Link].
-
-
-It's silly, it was fun to make, maybe somebody else will find it amusing, and maybe this will help somebody else to fall down the rabbit hole and come up with more creative ideas.
-
-Here are some quick ideas to extend this:
-- Support a full set of levels (and maybe even have the game glitch out on level 256, just like the original Pac-Man)
-- Support all the different fruit
-- Support larger levels
-- Let the user input an ASCII map that they can then play
-- Support all the different ghosts with their specific chase and scatter behaviors
-- Let the user write code to inspect the game and control Pac-Man to create their own AI to play and win
-
-
-Other notes:
-
-- The game source source code can be found [Link:https://github.com/memalign/memalign.github.io/tree/master/m/pacmandungeon]here[/Link]
-- I wrote a simple [Link:https://github.com/memalign/memalign.github.io/blob/master/m/pacmandungeon/UnitTests.js]unit test harness[/Link]. Run the tests [Link:/m/pacmandungeon/unitTests.html]here[/Link].
