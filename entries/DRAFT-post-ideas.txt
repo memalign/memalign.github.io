@@ -6,3 +6,10 @@
 - Andrew Myers' relplot: http://www.cs.cornell.edu/w8/~andru/relplot/
 
 - https://freeicons.io/
+
+- Andrew Plotkin's interesting website, including his interactive fiction work
+    - https://eblong.com/zarf/sitemap.html
+    - The caves interface to the site map: https://eblong.com/zarf/cave/index.html
+    - It's inspiring to see so much interesting stuff shared like this
+
+- Expand on what I noted in 00020-product-reviews.txt about reading and writing outside of school (pressures of grades, learning how to think, pursuing things that are more interesting than the curriculum, etc)

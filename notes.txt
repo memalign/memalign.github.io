@@ -346,3 +346,10 @@ http://www.google.com/ping?sitemap=https://memalign.github.io/sitemap.xml
 
 This website says it can take up to 4 weeks for a site to get indexed:
 https://www.seomechanic.com/why-is-my-website-not-showing-in-google-search-results/
+
+
+12/8/20
+
+Google indexed the sitemap!
+I saw this info here:
+https://search.google.com/search-console/sitemaps?resource_id=https%3A%2F%2Fmemalign.github.io%2F
