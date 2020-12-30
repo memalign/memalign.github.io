@@ -1,0 +1,36 @@
+Title: Andrew Plotkin's Zarfhome
+Date: 12/30/2020
+
+[Image:/m/play-if-card.png]
+
+My interest in interactive fiction and simple-yet-vast personal websites intersected this week when I stumbled upon [Link:https://en.wikipedia.org/wiki/Andrew_Plotkin]Andrew Plotkin[/Link]'s [Link:https://eblong.com/zarf/home.html]homepage[/Link] (aka Zarfhome).
+
+(My previous adventures have led me to Drew's [Link:/p/clamps.html]clamps[/Link], Lawrence's [Link:/p/coding-machines.html]coding machines[/Link], and Eric Meyer's heartbreaking posts about his daughter [Link:/p/rebecca-meyer.html]Rebecca[/Link].)
+
+Andrew has done some really cool work over the years. His body of work includes foundational tools for [Link:https://eblong.com/zarf/glk/index.html]building[/Link]/[Link:https://eblong.com/zarf/blorb/index.html]packaging[/Link] interactive fiction games and an impressive library of [Link:https://eblong.com/zarf/if.html]interactive fiction games[/Link].
+
+Zarfhome's design aesthetic of black text, blue links, and a white background may not be enticing to everybody browsing the web these days. When I see a site like this, I'm drawn in. This is where the special gems on the internet still exist.
+
+Here are some notable pages to check out:
+
+- [Link:https://eblong.com/zarf/home.html]The homepage[/Link]
+
+- The [Link:https://eblong.com/zarf/sitemap.html]sitemap[/Link] where he lists decades of projects
+  - He even made an interactive-fiction-style [Link:https://eblong.com/zarf/cave/index.html]caves version[/Link] of the sitemap. What a clever idea!
+
+- A years-out-of-date [Link:https://eblong.com/zarf/changes.html]changes[/Link] page. When I see this, I think about how much more durable this is than posts on Facebook or Twitter. There's something special about this kind of website that we don't get in today's social media.
+
+- [Link:https://blog.zarfhome.com]Andrew's blog[/Link]
+  - This is what led me to the homepage in the first place
+
+
+As I browsed, I had a few neat surprises:
+
+- Over a decade ago, I downloaded a Python program called [Link:https://github.com/erkyrath/boodler]Boodler[/Link] to make soundscapes. It turns out Andrew made Boodler!
+
+- I had stumbled upon "Crazy Uncle Zarf"'s [Link:http://pr-if.org/doc/play-if-card/play-if-card-300dpi.png]handy interactive fiction reference card[/Link] when I was getting started playing IF. It turns out Andrew wrote this too!
+
+- Up until now, I hadn't seen other examples of blending richer interactive fiction with a web/mobile-friendly hyperlink interface like I recently experimented with in [Link:/p/dungeon-memalign.html]Dungeon Memalign[/Link]. I found that Andrew did some work like this back in 2012! His game, [Link:https://archiveofourown.org/collections/yuletide2012/works/598023]Bigger Than You Think[/Link], is played by clicking hyperlinks and picking up items.
+
+
+Andrew's decades of work, shared through his site with the world, are truly inspiring. It's so cool that he's shared complete projects, half-baked prototypes, random ideas, and more. Thank you Andrew!

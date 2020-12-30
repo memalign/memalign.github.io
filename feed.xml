@@ -5,10 +5,66 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2020-12-27T00:00:00-08:00</updated>
+<updated>2020-12-30T00:00:00-08:00</updated>
 <rights>Copyright © 2020, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Andrew Plotkin's Zarfhome</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/andrew-plotkin.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/andrew-plotkin.html" />
+<id>https://memalign.github.io/p/andrew-plotkin.html</id>
+<published>2020-12-30T00:00:00-08:00</published>
+<updated>2020-12-30T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/andrew-plotkin.html'>Andrew Plotkin's Zarfhome</a>
+</h2>
+</div>
+<img src="/m/play-if-card.png">
+<div id='postdate'>Posted on 12/30/2020</div>
+My interest in interactive fiction and simple-yet-vast personal websites intersected this week when I stumbled upon <a href="https://en.wikipedia.org/wiki/Andrew_Plotkin">Andrew Plotkin</a>'s <a href="https://eblong.com/zarf/home.html">homepage</a> (aka Zarfhome).<br />
+<br />
+(My previous adventures have led me to Drew's <a href="/p/clamps.html">clamps</a>, Lawrence's <a href="/p/coding-machines.html">coding machines</a>, and Eric Meyer's heartbreaking posts about his daughter <a href="/p/rebecca-meyer.html">Rebecca</a>.)<br />
+<br />
+Andrew has done some really cool work over the years. His body of work includes foundational tools for <a href="https://eblong.com/zarf/glk/index.html">building</a>/<a href="https://eblong.com/zarf/blorb/index.html">packaging</a> interactive fiction games and an impressive library of <a href="https://eblong.com/zarf/if.html">interactive fiction games</a>.<br />
+<br />
+Zarfhome's design aesthetic of black text, blue links, and a white background may not be enticing to everybody browsing the web these days. When I see a site like this, I'm drawn in. This is where the special gems on the internet still exist.<br />
+<br />
+Here are some notable pages to check out:<br />
+<br />
+- <a href="https://eblong.com/zarf/home.html">The homepage</a><br />
+<br />
+- The <a href="https://eblong.com/zarf/sitemap.html">sitemap</a> where he lists decades of projects<br />
+&nbsp;&nbsp;- He even made an interactive-fiction-style <a href="https://eblong.com/zarf/cave/index.html">caves version</a> of the sitemap. What a clever idea!<br />
+<br />
+- A years-out-of-date <a href="https://eblong.com/zarf/changes.html">changes</a> page. When I see this, I think about how much more durable this is than posts on Facebook or Twitter. There's something special about this kind of website that we don't get in today's social media.<br />
+<br />
+- <a href="https://blog.zarfhome.com">Andrew's blog</a><br />
+&nbsp;&nbsp;- This is what led me to the homepage in the first place<br />
+<br />
+<br />
+As I browsed, I had a few neat surprises:<br />
+<br />
+- Over a decade ago, I downloaded a Python program called <a href="https://github.com/erkyrath/boodler">Boodler</a> to make soundscapes. It turns out Andrew made Boodler!<br />
+<br />
+- I had stumbled upon "Crazy Uncle Zarf"'s <a href="http://pr-if.org/doc/play-if-card/play-if-card-300dpi.png">handy interactive fiction reference card</a> when I was getting started playing IF. It turns out Andrew wrote this too!<br />
+<br />
+- Up until now, I hadn't seen other examples of blending richer interactive fiction with a web/mobile-friendly hyperlink interface like I recently experimented with in <a href="/p/dungeon-memalign.html">Dungeon Memalign</a>. I found that Andrew did some work like this back in 2012! His game, <a href="https://archiveofourown.org/collections/yuletide2012/works/598023">Bigger Than You Think</a>, is played by clicking hyperlinks and picking up items.<br />
+<br />
+<br />
+Andrew's decades of work, shared through his site with the world, are truly inspiring. It's so cool that he's shared complete projects, half-baked prototypes, random ideas, and more. Thank you Andrew!<br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Product Review Writing Prompts</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/product-reviews.html" />
