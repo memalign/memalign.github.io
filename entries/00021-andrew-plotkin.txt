@@ -13,7 +13,7 @@ Zarfhome's design aesthetic of black text, blue links, and a white background ma
 
 Here are some notable pages to check out:
 
-- [Link:https://eblong.com/zarf/home.html]The homepage[/Link]
+- The [Link:https://eblong.com/zarf/home.html]homepage[/Link]
 
 - The [Link:https://eblong.com/zarf/sitemap.html]sitemap[/Link] where he lists decades of projects
   - He even made an interactive-fiction-style [Link:https://eblong.com/zarf/cave/index.html]caves version[/Link] of the sitemap. What a clever idea!
