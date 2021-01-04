@@ -13,7 +13,7 @@ class MAMap {
     // Back Alley
     //
 
-    let loc_backAlley = new MALocation("🌆🌆 back alley")
+    let loc_backAlley = new MALocation("🌆|🌆 back alley")
     this.startLocation = loc_backAlley
     this.addLocation(loc_backAlley)
 
@@ -46,7 +46,7 @@ class MAMap {
     // Sigil Street
     //
 
-    let loc_sigilStreet = new MALocation("🏬🏬 Sigil Street")
+    let loc_sigilStreet = new MALocation("🏬|🏬 Sigil Street")
     this.addLocation(loc_sigilStreet)
 
     loc_sigilStreet.appearance = function() {
@@ -110,7 +110,7 @@ class MAMap {
     // Ampersand Bend
     //
 
-    let loc_ampersandBend = new MALocation("🏛🏢 Ampersand Bend")
+    let loc_ampersandBend = new MALocation("🏛|🏢 Ampersand Bend")
     this.addLocation(loc_ampersandBend)
 
     loc_ampersandBend.appearance = function() {
@@ -164,7 +164,7 @@ class MAMap {
     // Fair
     //
 
-    let loc_fair = new MALocation("🍬🌭 Fair")
+    let loc_fair = new MALocation("🍬|🌭 Fair")
     this.addLocation(loc_fair)
 
     loc_fair.appearance = function() {
@@ -206,7 +206,7 @@ class MAMap {
     // Midway
     //
 
-    let loc_midway = new MALocation("🍎🍐 Midway")
+    let loc_midway = new MALocation("🍎|🍐 Midway")
     this.addLocation(loc_midway)
 
     loc_midway.appearance = function() {
@@ -311,7 +311,7 @@ class MAMap {
     // Park Center
     //
 
-    let loc_parkCenter = new MALocation("👩‍👧‍👧🌱 Park Center")
+    let loc_parkCenter = new MALocation("👩‍👧‍👧|🌱 Park Center")
     this.addLocation(loc_parkCenter)
 
     loc_parkCenter.appearance = function() {
@@ -394,7 +394,7 @@ class MAMap {
     // Heritage Corner
     //
 
-    let loc_heritageCorner = new MALocation("👯‍♀️👯‍♀️ Heritage Corner")
+    let loc_heritageCorner = new MALocation("👯‍♀️|👯‍♀️ Heritage Corner")
     this.addLocation(loc_heritageCorner)
 
     loc_heritageCorner.appearance = function() {
@@ -472,7 +472,7 @@ class MAMap {
     // Hostel
     //
 
-    let loc_hostel = new MALocation("👩‍💻📖 Hostel")
+    let loc_hostel = new MALocation("👩‍💻|📖 Hostel")
     this.addLocation(loc_hostel)
 
     loc_hostel.appearance = function() {
@@ -523,7 +523,7 @@ class MAMap {
     // Dormitory Room
     //
 
-    let loc_dorm = new MALocation("🛏🔒 Dormitory Room")
+    let loc_dorm = new MALocation("🛏|🔒 Dormitory Room")
     this.addLocation(loc_dorm)
 
     loc_dorm.appearance = function() {
@@ -713,10 +713,10 @@ class MAMap {
       let left = omitLeft ? "" : ("🌳" + separator)
 
       result +=
-`${left}🌳🌳${separator}🌳
-${left}🌳🌳${separator}🌳
-${left}🌳🌳${separator}🌳
-${left}🌳🌳${separator}🌳`
+`${left}🌳${separator}🌳${separator}🌳
+${left}🌳${separator}🌳${separator}🌳
+${left}🌳${separator}🌳${separator}🌳
+${left}🌳${separator}🌳${separator}🌳`
 
     } else {
       var roomName = loc.name.split(" ")[0]
@@ -749,16 +749,16 @@ ${left}🌳🌳${separator}🌳`
 
       if (omitLeft) {
         result +=
-`🌳${northDoor}${separator}🌳
+`🌳${separator}${northDoor}${separator}🌳
 ${roomName}${separator}🌳
-${emptyBlock}${userBlock}${separator}${eastDoor}
-🌳${southDoor}${separator}🌳`
+${emptyBlock}${separator}${userBlock}${separator}${eastDoor}
+🌳${separator}${southDoor}${separator}🌳`
       } else {
         result +=
-`🌳${separator}🌳${northDoor}${separator}🌳
+`🌳${separator}🌳${separator}${northDoor}${separator}🌳
 🌳${separator}${roomName}${separator}🌳
-${westDoor}${separator}${emptyBlock}${userBlock}${separator}${eastDoor}
-🌳${separator}🌳${southDoor}${separator}🌳`
+${westDoor}${separator}${emptyBlock}${separator}${userBlock}${separator}${eastDoor}
+🌳${separator}🌳${separator}${southDoor}${separator}🌳`
       }
     }
 
