@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="Utilities.js"></script>
+<script src="NounRepository.js"></script>
+<script src="GameEngine.js"></script>
+<script src="GameSegments.js"></script>
+<script src="Map.js"></script>
+<script src="Memories.js"></script>
+<script src="TestUtils.js"></script>
+<script src="UnitTests.js"></script>
+
+<script>
+
+window.onload = function () {
+
+  let ut = new UnitTests()
+  
+  try {
+    ut.run()
+  } catch(err) {
+    throw err
+  } finally {
+    let outputDiv = document.getElementById("testOutput")
+    let content = document.createTextNode(MALog.logs.join("\n"))
+    outputDiv.appendChild(content)
+  }
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput"></div>
+</pre>
+</body>
+
+</html>

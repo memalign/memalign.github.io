@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+
+<script src="Utilities.js"></script>
+<script src="TestUtils.js"></script>
+<script src="NounRepository.js"></script>
+<script src="GameEngine.js"></script>
+<script src="GameSegments.js"></script>
+<script src="Map.js"></script>
+<script src="Memories.js"></script>
+
+<script>
+
+var lastActionLogCount = 0
+
+function updateActions(gameEngine, gameState) {
+  let actions = gameEngine.actionsForGameState(gameState)
+
+  // actionsMap[uuid] = { action:, actionStr:, target: (optional) }
+  let actionsMap = {}
+
+  let actionsStrings = []
+  for (let action of actions) {
+    if (action.targets != null && action.targets()) {
+
+      for (let target of action.targets()) {
+        var targetStr = action.verbString(target)
+        
+        // $1[$2]$3
+        let match = targetStr.match(/([^\[]*)\[([^\]]+)\](.*)/)
+        if (match) {
+          let uuid = uuidv4()
+          actionsMap[uuid] = { action: action, actionStr: targetStr, target: target }
+        
+          targetStr = match[1] + `<a id='${uuid}'>` + match[2] + "</a>" + match[3]
+        }
+        
+        actionsStrings.push(targetStr)
+      }
+    } else {
+        var actionStr = action.verbString()
+        
+        // $1[$2]$3
+        let match = actionStr.match(/([^\[]*)\[([^\]]+)\](.*)/)
+        if (match) {
+          let uuid = uuidv4()
+          actionsMap[uuid] = { action: action, actionStr: actionStr }
+        
+          actionStr = match[1] + `<a id='${uuid}'>` + match[2] + "</a>" + match[3]
+          
+          actionsStrings.push(actionStr)
+        }
+    }
+  }
+
+
+  let actionsStr = actionsStrings.sort(MAUtils.actionsComparator).join("<br />")
+
+  let actionsDiv = document.getElementById("gameActions")
+  actionsDiv.innerHTML = actionsStr
+
+  for (let [actionUUID, actionDesc] of Object.entries(actionsMap)) {
+    let actionA = document.getElementById(actionUUID)
+    actionA.onclick = function () {
+      console.log("Action clicked " + actionDesc.actionStr)
+      
+      if (actionDesc.target) {
+        actionDesc.action.chosenTarget = actionDesc.target
+      }
+      
+      lastActionLogCount = gameState.log.logs.length
+      
+      gameEngine.performActionOnGameState(actionDesc.action, gameState)
+    }
+  }
+}
+
+function updateGameLogView(gameEngine, gameState) {
+  let seenLogDiv = document.getElementById("gameLogSeen")
+  let newLogDiv = document.getElementById("gameLogNew")
+  
+  let seenLogs = gameState.log.logs.slice(0, lastActionLogCount)
+  let newLogs = gameState.log.logs.slice(lastActionLogCount)
+  
+  
+  var seenContent = seenLogs.join("<br /><br />")
+  seenContent = seenContent.replace(/\n/g, "<br />")
+  seenLogDiv.innerHTML = seenContent
+  
+  if (seenLogs.length == 0) {
+    seenLogDiv.style.display = "none"
+  } else {
+    seenLogDiv.style.display = "block"
+  }
+  
+  
+  var newContent = newLogs.join("<br /><br />")
+  newContent = newContent.replace(/\n/g, "<br />")
+  newLogDiv.innerHTML = newContent
+
+  if (newLogs.length == 0) {
+    newLogDiv.style.display = "none"
+  } else {
+    newLogDiv.style.display = "block"
+  }
+  
+  
+  let mapDiv = document.getElementById("gameMap")
+  var mapContent = gameState.map.emojiMap(gameState.currentLocation).replace(/\n/g, "<br />")
+  mapDiv.innerHTML = mapContent
+  
+
+  updateActions(gameEngine, gameState)
+  
+  window.scrollTo(0, document.body.scrollHeight)
+}
+
+window.onload = function () {
+  // Setup link handlers
+  let startOverLink = document.getElementById("startOver")
+  startOverLink.onclick = function() {
+    let resetStorage = confirm("Start Over? All game progress will be lost.")
+
+    if (resetStorage) {
+      window.localStorage.removeItem('serializedActions')
+      return true
+    } else {
+      return false
+    }
+  }
+
+
+  // Instantiate the game
+  let gameState = new MAGameState()
+  let gameEngine = new MAGameEngine()
+  
+  gameEngine.didPerformActionCallback = function (gS) {
+    updateGameLogView(gameEngine, gS)
+
+    // Save game progress
+    window.localStorage.setItem('serializedActions', JSON.stringify(gS.serializedActions))
+  }
+    
+
+  let isCrawler = MAUtils.userAgentIsSearchEngineCrawler(navigator.userAgent)
+  if (!isCrawler) {
+    // Force crawler mode with ?crawler=1
+    let urlParams = new URLSearchParams(window.location.search)
+    let rawCrawler = urlParams.get('crawler')
+    if (rawCrawler) {
+      isCrawler = parseInt(rawCrawler) === 1
+    }
+  }
+
+  // Load game progress
+  var savedProgress = null
+
+  if (!isCrawler) {
+    let savedProgressRaw = window.localStorage.getItem('serializedActions')
+    if (savedProgressRaw) {
+      savedProgress = JSON.parse(savedProgressRaw)
+    }
+  }
+
+  gameEngine.setupNewGame(gameState, savedProgress)
+  
+  // Let crawlers index the full game transcript
+  if (isCrawler) {
+    MATestUtils.goFromStartToEnd(gameEngine, gameState)
+  }
+
+  updateGameLogView(gameEngine, gameState)
+}
+
+</script>
+
+</head>
+
+<body>
+  <div id="body">
+    <a href='/index.html'>Home</a>
+    <div id='about'>
+      <a href='/p/dungeon.html'>About</a> | <a id='startOver' href='./index.html'>Start Over</a>
+    </div>
+    <br />
+    <br />
+    <div id="gameLogSeen"></div>
+    <div id="gameLogNew"></div>
+    <div id="grid">
+      <div id="gameActions"></div>
+      <div id="gameMap"></div>
+    </div>
+  </div>
+</body>
+
+</html>
