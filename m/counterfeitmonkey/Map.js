@@ -13,7 +13,8 @@ class MAMap {
     // Back Alley
     //
 
-    let loc_backAlley = new MALocation("🌆|🌆 back alley")
+    let loc_backAlley = new MALocation("🌆🌆 back alley")
+    loc_backAlley.emojiName = "🌆|🌆"
     this.startLocation = loc_backAlley
     this.addLocation(loc_backAlley)
 
@@ -46,7 +47,8 @@ class MAMap {
     // Sigil Street
     //
 
-    let loc_sigilStreet = new MALocation("🏬|🏬 Sigil Street")
+    let loc_sigilStreet = new MALocation("🏬🏬 Sigil Street")
+    loc_sigilStreet.emojiName = "🏬|🏬"
     this.addLocation(loc_sigilStreet)
 
     loc_sigilStreet.appearance = function() {
@@ -110,7 +112,8 @@ class MAMap {
     // Ampersand Bend
     //
 
-    let loc_ampersandBend = new MALocation("🏛|🏢 Ampersand Bend")
+    let loc_ampersandBend = new MALocation("🏛🏢 Ampersand Bend")
+    loc_ampersandBend.emojiName = "🏛|🏢"
     this.addLocation(loc_ampersandBend)
 
     loc_ampersandBend.appearance = function() {
@@ -164,7 +167,8 @@ class MAMap {
     // Fair
     //
 
-    let loc_fair = new MALocation("🍬|🌭 Fair")
+    let loc_fair = new MALocation("🍬🌭 Fair")
+    loc_fair.emojiName = "🍬|🌭"
     this.addLocation(loc_fair)
 
     loc_fair.appearance = function() {
@@ -206,7 +210,8 @@ class MAMap {
     // Midway
     //
 
-    let loc_midway = new MALocation("🍎|🍐 Midway")
+    let loc_midway = new MALocation("🍎🍐 Midway")
+    loc_midway.emojiName = "🍎|🍐"
     this.addLocation(loc_midway)
 
     loc_midway.appearance = function() {
@@ -311,7 +316,8 @@ class MAMap {
     // Park Center
     //
 
-    let loc_parkCenter = new MALocation("👩‍👧‍👧|🌱 Park Center")
+    let loc_parkCenter = new MALocation("👩‍👧‍👧🌱 Park Center")
+    loc_parkCenter.emojiName = "👩‍👧‍👧|🌱"
     this.addLocation(loc_parkCenter)
 
     loc_parkCenter.appearance = function() {
@@ -394,7 +400,8 @@ class MAMap {
     // Heritage Corner
     //
 
-    let loc_heritageCorner = new MALocation("👯‍♀️|👯‍♀️ Heritage Corner")
+    let loc_heritageCorner = new MALocation("👯‍♀️👯‍♀️ Heritage Corner")
+    loc_heritageCorner.emojiName = "👯‍♀️|👯‍♀️"
     this.addLocation(loc_heritageCorner)
 
     loc_heritageCorner.appearance = function() {
@@ -472,7 +479,8 @@ class MAMap {
     // Hostel
     //
 
-    let loc_hostel = new MALocation("👩‍💻|📖 Hostel")
+    let loc_hostel = new MALocation("👩‍💻📖 Hostel")
+    loc_hostel.emojiName = "👩‍💻|📖"
     this.addLocation(loc_hostel)
 
     loc_hostel.appearance = function() {
@@ -523,7 +531,8 @@ class MAMap {
     // Dormitory Room
     //
 
-    let loc_dorm = new MALocation("🛏|🔒 Dormitory Room")
+    let loc_dorm = new MALocation("🛏🔒 Dormitory Room")
+    loc_dorm.emojiName = "🛏|🔒"
     this.addLocation(loc_dorm)
 
     loc_dorm.appearance = function() {
@@ -719,7 +728,7 @@ ${left}🌳${separator}🌳${separator}🌳
 ${left}🌳${separator}🌳${separator}🌳`
 
     } else {
-      var roomName = loc.name.split(" ")[0]
+      var roomName = loc.emojiName ? loc.emojiName : loc.name.split(" ")[0]
       var userBlock = showUser ? "😶" : "▫️"
       var emptyBlock = "▫️"
 
