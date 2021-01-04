@@ -111,9 +111,26 @@ function updateGameLogView(gameEngine, gameState) {
   }
   
   
-  let mapDiv = document.getElementById("gameMap")
-  var mapContent = gameState.map.emojiMap(gameState.currentLocation).replace(/\n/g, "<br />")
-  mapDiv.innerHTML = mapContent
+  let mapDiv = document.getElementById("gameMapTable")
+  let mapContent = gameState.map.emojiMap(gameState.currentLocation, "|")
+  
+  var mapTableHTML = "<table>\n"
+  let mapLines = mapContent.split("\n")
+  for (let mapLine of mapLines) {
+    mapTableHTML += "<tr>"
+
+    let mapCols = mapLine.split("|")
+    for (let mapCol of mapCols) {
+      mapTableHTML += "<td>" + mapCol + "</td>"
+    }
+
+    mapTableHTML += "</tr>\n"
+  }
+  mapTableHTML += "</table>"
+
+  //mapContent = mapContent.replace(/\n/g, "<br />")
+  //mapDiv.innerHTML = mapContent
+  mapDiv.innerHTML = mapTableHTML
   
 
   updateActions(gameEngine, gameState)
@@ -195,7 +212,7 @@ window.onload = function () {
     <div id="gameLogNew"></div>
     <div id="grid">
       <div id="gameActions"></div>
-      <div id="gameMap"></div>
+      <div id="gameMap"><div id="gameMapTable"></div></div>
     </div>
   </div>
 </body>

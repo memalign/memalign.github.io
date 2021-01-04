@@ -696,23 +696,27 @@ class MAMap {
     }
   }
 
-  locToEmoji(loc, omitTop, omitLeft, showUser) {
+  locToEmoji(loc, omitTop, omitLeft, showUser, separator) {
     // Example:
     //  ⬛️⬛️⬛️⬛️
     //  ⬛️🦊🩸⬛️
     //  ⬛️▫️▫️▫️
     //  ⬛️⬛️⬛️⬛️
 
+    if (!separator) {
+      separator = ""
+    }
+
     var result = ""
 
     if (!loc) {
-      let left = omitLeft ? "" : "🌳"
+      let left = omitLeft ? "" : ("🌳" + separator)
 
       result +=
-`${left}🌳🌳🌳
-${left}🌳🌳🌳
-${left}🌳🌳🌳
-${left}🌳🌳🌳`
+`${left}🌳🌳${separator}🌳
+${left}🌳🌳${separator}🌳
+${left}🌳🌳${separator}🌳
+${left}🌳🌳${separator}🌳`
 
     } else {
       var roomName = loc.name.split(" ")[0]
@@ -731,7 +735,7 @@ ${left}🌳🌳🌳`
 
       // Black out if relevant locations aren't inspected
       if (!loc.inspected) {
-        roomName = "🌳🌳"
+        roomName = `🌳${separator}🌳`
         userBlock = "🌳"
         emptyBlock = "🌳"
 
@@ -745,16 +749,16 @@ ${left}🌳🌳🌳`
 
       if (omitLeft) {
         result +=
-`🌳${northDoor}🌳
-${roomName}🌳
-${emptyBlock}${userBlock}${eastDoor}
-🌳${southDoor}🌳`
+`🌳${northDoor}${separator}🌳
+${roomName}${separator}🌳
+${emptyBlock}${userBlock}${separator}${eastDoor}
+🌳${southDoor}${separator}🌳`
       } else {
         result +=
-`🌳🌳${northDoor}🌳
-🌳${roomName}🌳
-${westDoor}${emptyBlock}${userBlock}${eastDoor}
-🌳🌳${southDoor}🌳`
+`🌳${separator}🌳${northDoor}${separator}🌳
+🌳${separator}${roomName}${separator}🌳
+${westDoor}${separator}${emptyBlock}${userBlock}${separator}${eastDoor}
+🌳${separator}🌳${southDoor}${separator}🌳`
       }
     }
 
@@ -767,7 +771,11 @@ ${westDoor}${emptyBlock}${userBlock}${eastDoor}
     return result
   }
 
-  emojiMap(currentLocation) {
+  emojiMap(currentLocation, separator) {
+    if (!separator) {
+      separator = ""
+    }
+
     let nameToXY = {}
 
     let loc = this.startLocation
@@ -810,14 +818,14 @@ ${westDoor}${emptyBlock}${userBlock}${eastDoor}
         let omitLeft = (x > 0)
 
         let currLoc = grid[x] ? grid[x][y] : null
-        let locLines = this.locToEmoji(currLoc, omitTop, omitLeft, currLoc==currentLocation).split("\n")
+        let locLines = this.locToEmoji(currLoc, omitTop, omitLeft, currLoc==currentLocation, separator).split("\n")
 
         var i = 0
         for (let line of locLines) {
           if (!rowLines[i]) {
             rowLines[i] = line
           } else {
-            rowLines[i] += line
+            rowLines[i] += separator + line
           }
           i++
         }
