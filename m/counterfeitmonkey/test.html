@@ -113,23 +113,7 @@ function updateGameLogView(gameEngine, gameState) {
   
   let mapDiv = document.getElementById("gameMapTable")
   let mapContent = gameState.map.emojiMap(gameState.currentLocation, "|")
-  
-  var mapTableHTML = "<table>\n"
-  let mapLines = mapContent.split("\n")
-  for (let mapLine of mapLines) {
-    mapTableHTML += "<tr>"
-
-    let mapCols = mapLine.split("|")
-    for (let mapCol of mapCols) {
-      mapTableHTML += "<td>" + mapCol + "</td>"
-    }
-
-    mapTableHTML += "</tr>\n"
-  }
-  mapTableHTML += "</table>"
-
-  //mapContent = mapContent.replace(/\n/g, "<br />")
-  //mapDiv.innerHTML = mapContent
+  let mapTableHTML = MAUtils.htmlTableFromEmojiMap(mapContent, "|")
   mapDiv.innerHTML = mapTableHTML
   
 

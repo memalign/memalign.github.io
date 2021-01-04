@@ -224,5 +224,26 @@ const MAUtils = {
 
     return gAPIs || gAdsBot || gMediaPartnersGoogle || googleBot || gFeedfetcher || gReadAloud || gDuplexWeb || gFavicon || gWeblight || bingBot || bAdidx || bingPreview
   },
+
+  htmlTableFromEmojiMap(emojiMap, separator) {
+    var mapTableHTML = "<table>\n"
+    let mapLines = emojiMap.split("\n")
+    for (let mapLine of mapLines) {
+      if (mapLine.length == 0) {
+        continue
+      }
+      mapTableHTML += "<tr>\n"
+
+      let mapCols = mapLine.split(separator)
+      for (let mapCol of mapCols) {
+        mapTableHTML += "<td>" + mapCol + "</td>"
+      }
+
+      mapTableHTML += "\n</tr>\n"
+    }
+    mapTableHTML += "</table>\n"
+
+    return mapTableHTML
+  },
 }
 Object.freeze(MAUtils)

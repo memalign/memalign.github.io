@@ -805,6 +805,355 @@ class UnitTests {
     assertEqualStrings(emojiMap, expectedMap)
   }
 
+  test_MAMap_oneLoc_uninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_oneLoc_inspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let emojiMap = "\n" + map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳
+🌳|🏢|🏬|🌳
+🌳|▫️|😶|🌳
+🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westInspected_eastUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("🌆🌆 back alley")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+🌳|🏢|🏬|🌳|🌳|🌳|🌳
+🌳|▫️|😶|▫️|🌳|🌳|🌳
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westUninspected_eastInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("🌆🌆 back alley")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳|🌆|🌆|🌳
+🌳|🌳|🌳|▫️|▫️|😶|🌳
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings("\n" + emojiMap, expectedMap)
+
+    let htmlMap = "\n" + MAUtils.htmlTableFromEmojiMap(emojiMap, "|")
+    let expectedHTML =
+`
+<table>
+<tr>
+<td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td><td>🌆</td><td>🌆</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>🌳</td><td>🌳</td><td>▫️</td><td>▫️</td><td>😶</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td>
+</tr>
+</table>
+`
+    assertEqualStrings(htmlMap, expectedHTML)
+  }
+
+  test_MAMap_twoLocs_westInspected_eastInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("🌆🌆 back alley")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+🌳|🏢|🏬|🌳|🌆|🌆|🌳
+🌳|▫️|▫️|▫️|▫️|😶|🌳
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westUninspected_eastUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("🌆🌆 back alley")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_northInspected_southUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("🌆🌆 back alley")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.South, loc1_0)
+
+    let emojiMap = map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳
+🌳|🏢|🏬|🌳
+🌳|▫️|😶|🌳
+🌳|🌳|▫️|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings("\n" + emojiMap, expectedMap)
+
+    let htmlMap = "\n" + MAUtils.htmlTableFromEmojiMap(emojiMap, "|")
+    let expectedHTML =
+`
+<table>
+<tr>
+<td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>🏢</td><td>🏬</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>▫️</td><td>😶</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>🌳</td><td>▫️</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td>
+</tr>
+<tr>
+<td>🌳</td><td>🌳</td><td>🌳</td><td>🌳</td>
+</tr>
+</table>
+`
+    assertEqualStrings(htmlMap, expectedHTML)
+  }
+
+  test_MAMap_twoLocs_northUninspected_southInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("🌆🌆 back alley")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.South, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|▫️|🌳
+🌳|🌆|🌆|🌳
+🌳|▫️|😶|🌳
+🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_northInspected_southInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("🌆🌆 back alley")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.South, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳
+🌳|🏢|🏬|🌳
+🌳|▫️|▫️|🌳
+🌳|🌳|▫️|🌳
+🌳|🌆|🌆|🌳
+🌳|▫️|😶|🌳
+🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_northUninspected_southUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("🏢🏬 Sigil Street")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("🌆🌆 back alley")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.South, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+🌳|🌳|🌳|🌳
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+
+
 // MANoun
 
   test_MANoun_inSentenceName() {

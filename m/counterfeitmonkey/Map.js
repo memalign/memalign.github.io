@@ -1,7 +1,7 @@
 class MAMap {
   // Properties:
   // - nameToLocation[string] = MALocation instance
-  // - startLocation = Library Lab; accessor
+  // - startLocation = MALocation instance
 
   constructor(gameState) {
     this.gameState = gameState

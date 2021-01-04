@@ -1195,7 +1195,7 @@ class MAGameSegmentTemporaryBarrier extends MAGameSegment {
 
   gameEngineWillPerformAction(action, gameState) {
     if (action instanceof MAActionMove) {
-      if (action.chosenTarget.name.includes("Fair") && !action.chosenTarget.visited) {
+      if (action.destinationLocation().name.includes("Fair") && !action.destinationLocation().visited) {
         if (!this.valueForKey(gameState, "hasUnlocked")) {
           gameState.log.log("The temporary barrier is locked. We need to set the code-lock to the right number first.")
 

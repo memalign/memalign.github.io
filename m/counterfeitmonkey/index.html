@@ -66,11 +66,9 @@ function updateActions(gameEngine, gameState) {
   for (let [actionUUID, actionDesc] of Object.entries(actionsMap)) {
     let actionA = document.getElementById(actionUUID)
     actionA.onclick = function () {
-      console.log("Action clicked " + actionDesc.actionStr)
+      console.log("Action clicked " + actionDesc.actionStr + " with target " + actionDesc.target)
       
-      if (actionDesc.target) {
-        actionDesc.action.chosenTarget = actionDesc.target
-      }
+      actionDesc.action.chosenTarget = actionDesc.target
       
       lastActionLogCount = gameState.log.logs.length
       
@@ -109,10 +107,11 @@ function updateGameLogView(gameEngine, gameState) {
   }
   
   
-  let mapDiv = document.getElementById("gameMap")
-  var mapContent = gameState.map.emojiMap(gameState.currentLocation).replace(/\n/g, "<br />")
-  mapDiv.innerHTML = mapContent
-  
+  let mapDiv = document.getElementById("gameMapTable")
+  let mapContent = gameState.map.emojiMap(gameState.currentLocation, "|")
+  let mapTableHTML = MAUtils.htmlTableFromEmojiMap(mapContent, "|")
+  mapDiv.innerHTML = mapTableHTML
+
 
   updateActions(gameEngine, gameState)
   
@@ -192,7 +191,7 @@ window.onload = function () {
     <div id="gameLogNew"></div>
     <div id="grid">
       <div id="gameActions"></div>
-      <div id="gameMap"></div>
+      <div id="gameMap"><div id="gameMapTable"></div></div>
     </div>
   </div>
 </body>
