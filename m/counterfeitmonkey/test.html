@@ -83,8 +83,10 @@ function updateGameLogView(gameEngine, gameState) {
   let seenLogDiv = document.getElementById("gameLogSeen")
   let newLogDiv = document.getElementById("gameLogNew")
   
-  let seenLogs = gameState.log.logs.slice(0, lastActionLogCount)
-  let newLogs = gameState.log.logs.slice(lastActionLogCount)
+  // Cap the amount of content we show on this test page
+  let seenLogs = [] //gameState.log.logs.slice(0, lastActionLogCount)
+  //let newLogs = gameState.log.logs.slice(lastActionLogCount)
+  let newLogs = gameState.log.logs.slice(gameState.log.logs.length - 3)
   
   
   var seenContent = seenLogs.join("<br /><br />")
@@ -146,7 +148,8 @@ window.onload = function () {
   }
     
 
-  let isCrawler = MAUtils.userAgentIsSearchEngineCrawler(navigator.userAgent)
+  // Force test mode
+  let isCrawler = true || MAUtils.userAgentIsSearchEngineCrawler(navigator.userAgent)
   if (!isCrawler) {
     // Force crawler mode with ?crawler=1
     let urlParams = new URLSearchParams(window.location.search)
