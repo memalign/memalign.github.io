@@ -311,7 +311,7 @@ class MAGameSegmentLockedDoors extends MAGameSegment {
     if (action instanceof MAActionMove) {
 
       if (gameState.currentLocation.name == "room 💼🔒") {
-        if (action.chosenTarget.name == "room 🧑‍🎤1️⃣") {
+        if (action.destinationLocation().name == "room 🧑‍🎤1️⃣") {
           if (!gameState.inventory.hasNounNamed("blue key")) {
             gameState.log.log("A locked door blocks your way.")
             return false
@@ -342,7 +342,7 @@ class MAGameSegmentLockedDoors extends MAGameSegment {
         }
 
       } else if (gameState.currentLocation.name == "room 🐲🐉") {
-        if (action.chosenTarget.name == "room 🎊🎉") {
+        if (action.destinationLocation().name == "room 🎊🎉") {
           if (!gameState.inventory.hasNounNamed("gold key")) {
             gameState.log.log("A locked door blocks your way.")
             return false
@@ -355,7 +355,7 @@ class MAGameSegmentLockedDoors extends MAGameSegment {
           }
         }
       } else if (gameState.currentLocation.name == "room 🧪1️⃣") {
-        if (action.chosenTarget.name == "room 📜🦷") {
+        if (action.destinationLocation().name == "room 📜🦷") {
           if (!gameState.inventory.hasNounNamed("orange key")) {
             gameState.log.log("A locked door blocks your way.")
             return false

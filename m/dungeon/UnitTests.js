@@ -101,9 +101,9 @@ class UnitTests {
       "Look at satchel",
       "Take food",
       "Go north",
-      "Go south",
-      "Go east",
       "Go west",
+      "Go east",
+      "Go south",
       "Go southeast",
       "Go northwest",
     ]
@@ -166,14 +166,53 @@ class UnitTests {
       "Look at <a id='12345-678-abcdef'>dog</a>",
       "Take food",
       "Go north",
-      "Go <a id='f2345-678-abcdef'>south</a>",
-      "Go east",
       "Go west",
+      "Go east",
+      "Go <a id='f2345-678-abcdef'>south</a>",
       "Go southeast",
       "Go northwest",
     ]
     assertEqualArrays(strings.sort(MAUtils.actionsComparator), expectation)
   }
+
+  test_MAUtils_userAgentIsSearchEngineCrawler() {
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/W.X.Y.Z Safari/537.36 Edg/W.X.Y.Z"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 Edg/W.X.Y.Z (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53 (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 530) like Gecko (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 530) like Gecko BingPreview/1.0b"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("APIs-Google (+https://developers.google.com/webmasters/APIs-Google.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mediapartners-Google"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("AdsBot-Google (+http://www.google.com/adsbot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Googlebot-Image/1.0"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Googlebot-News"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Googlebot-Video/1.0"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/W.X.Y.Z Safari/537.36"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Googlebot/2.1 (+http://www.google.com/bot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("compatible; Mediapartners-Google/2.1; +http://www.google.com/bot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("AdsBot-Google-Mobile-Apps"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("FeedFetcher-Google; (+http://www.google.com/feedfetcher.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36 (compatible; Google-Read-Aloud; +https://developers.google.com/search/docs/advanced/crawling/overview-google-crawlers)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.125 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://developers.google.com/search/docs/advanced/crawling/overview-google-crawlers)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012; DuplexWeb-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Mobile Safari/537.36"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36 Google Favicon"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko; googleweblight) Chrome/38.0.1025.166 Mobile Safari/535.19"), "")
+
+
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"), "iPhone Safari")
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Safari: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"), "iPad Safari")
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Safari: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"), "Mac Safari")
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"), "Mac Chrome")
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19"), "Android Chrome")
+  }
+
 
 // MADirection
 
@@ -539,6 +578,333 @@ class UnitTests {
 
     assertEqualStrings(emojiMap, expectedMap)
   }
+
+
+  test_MAMap_oneLoc_inspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let emojiMap = "\n" + map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|🏢|🏬|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westInspected_eastUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("room 🌆🌆")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|🏢|🏬|⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|😶|▫️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westUninspected_eastInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("room 🌆🌆")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️|🌆|🌆|⬛️
+⬛️|⬛️|⬛️|▫️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings("\n" + emojiMap, expectedMap)
+
+    let htmlMap = "\n" + MAUtils.htmlTableFromEmojiMap(emojiMap, "|")
+    let expectedHTML =
+`
+<table>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>🌆</td><td>🌆</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>▫️</td><td>▫️</td><td>😶</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+</table>
+`
+    assertEqualStrings(htmlMap, expectedHTML)
+  }
+
+  test_MAMap_twoLocs_westInspected_eastInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("room 🌆🌆")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|🏢|🏬|⬛️|🌆|🌆|⬛️
+⬛️|▫️|▫️|▫️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westUninspected_eastUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("room 🌆🌆")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_northInspected_southUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("room 🌆🌆")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.South, loc1_0)
+
+    let emojiMap = map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|🏢|🏬|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|▫️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings("\n" + emojiMap, expectedMap)
+
+    let htmlMap = "\n" + MAUtils.htmlTableFromEmojiMap(emojiMap, "|")
+    let expectedHTML =
+`
+<table>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>🏢</td><td>🏬</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>▫️</td><td>😶</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>▫️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+</table>
+`
+    assertEqualStrings(htmlMap, expectedHTML)
+  }
+
+  test_MAMap_twoLocs_northUninspected_southInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("room 🌆🌆")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.South, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|▫️|⬛️
+⬛️|🌆|🌆|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_northInspected_southInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("room 🌆🌆")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.South, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|🏢|🏬|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|⬛️|▫️|⬛️
+⬛️|🌆|🌆|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_northUninspected_southUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 🏢🏬")
+    loc0_0.emojiName = "🏢|🏬"
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("room 🌆🌆")
+    loc1_0.emojiName = "🌆|🌆"
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.South, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
 
 // MANoun
 
@@ -1911,6 +2277,172 @@ class UnitTests {
     assertTrue(this.lastLogContains("You sure like to sleep", gameState), "Sleep taunt second time")
   }
 
+  test_MAGameEngine_seeButNotDefeatTrollAndWolf() {
+    let gameState = new MAGameState()
+    let gameEngine = new MAGameEngine()
+    gameEngine.setupNewGame(gameState)
+    MATestUtils.setupTestHooks(gameEngine, gameState)
+
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Take satchel", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Take small potion", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    gameEngine.performActionLike("Take small leather armor", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Look at blue glimmer", gameState)
+    gameEngine.performActionLike("Take blue key", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go north", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Take torn parchment", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Heal injured fox", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Put small leather armor", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    assertTrue(this.lastLogContains("A goblin. This goblin is only about waist-high", gameState), "")
+    gameEngine.performActionLike("Tell fox to Bite", gameState)
+    gameEngine.performActionLike("Take small potion", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Look at piles of bones", gameState)
+    gameEngine.performActionLike("Take metal fangs", gameState)
+    gameEngine.performActionLike("Put metal fangs on fox", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    gameEngine.performActionLike("Run away", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Take elixir", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Look at piles of bones", gameState)
+    gameEngine.performActionLike("Take bronze helm", gameState)
+    gameEngine.performActionLike("Wear bronze helm", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Take small potion", gameState)
+    gameEngine.performActionLike("Look at satchel", gameState)
+    gameEngine.performActionLike("Use small potion", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Run away", gameState)
+    gameEngine.performActionLike("Go north", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Kick giant goblin", gameState)
+    gameEngine.performActionLike("Kick giant goblin", gameState)
+    gameEngine.performActionLike("Look at satchel", gameState)
+    gameEngine.performActionLike("Use elixir", gameState)
+    gameEngine.performActionLike("Look at satchel", gameState)
+    gameEngine.performActionLike("Use small potion", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    assertTrue(this.lastLogContains("Another troll. This one is even bigger than the first one, needing to slouch to avoid hitting his head on the ceiling.", gameState), "")
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Take large potion", gameState)
+    gameEngine.performActionLike("Look at satchel", gameState)
+    gameEngine.performActionLike("Use large potion", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    assertTrue(this.lastLogContains("the alpha wolf howls as you enter. His sensitive nose tells him your story: he smells troll sweat, he smells wolf pup, he smells dirty goblins, he smells his favorite lieutenant wolf, he smells DEATH!", gameState), "")
+  }
+
+  test_MAGameEngine_notSeeingWolfBeforeAlphaWolf() {
+    let gameState = new MAGameState()
+    let gameEngine = new MAGameEngine()
+    gameEngine.setupNewGame(gameState)
+    MATestUtils.setupTestHooks(gameEngine, gameState)
+
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Take satchel", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Take small potion", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    gameEngine.performActionLike("Take small leather armor", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Look at blue glimmer", gameState)
+    gameEngine.performActionLike("Take blue key", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go north", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Take torn parchment", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Heal injured fox", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Put small leather armor", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    assertTrue(this.lastLogContains("A goblin. This goblin is only about waist-high", gameState), "")
+    assertTrue(!this.lastLogContains("You can head", gameState), "")
+    assertTrue(gameEngine.hasActionLike("Run away", gameState), "Can Run away in battle mode")
+    assertTrue(gameEngine.hasActionLike("Punch small goblin", gameState), "Can Punch in battle mode")
+    assertTrue(gameEngine.hasActionLike("Tell fox to Bite small goblin", gameState), "Can Bite in battle mode")
+    assertTrue(gameEngine.hasActionLike("Tell fox to Scratch small goblin", gameState), "Can Scratch in battle mode")
+    gameEngine.performActionLike("Look at satchel", gameState)
+    assertTrue(this.lastLogContains("The satchel contains 2 items.", gameState, 2), "")
+    assertTrue(this.lastLogContains("You can act on items in the satchel.", gameState), "")
+    assertTrue(gameEngine.hasActionLike("Look at blue key", gameState), "satchel mode can look at blue key")
+    assertTrue(gameEngine.hasActionLike("Look at torn parchment", gameState), "satchel mode can look at torn parchment")
+    assertTrue(gameEngine.hasActionLike("Look up from satchel", gameState), "Has look up from satchel action in satchel mode")
+    gameEngine.performActionLike("Look at blue key", gameState)
+    assertTrue(gameEngine.hasActionLike("Run away", gameState), "look at an item leaves satchel mode")
+    gameEngine.performActionLike("Look at satchel", gameState)
+    assertTrue(gameEngine.hasActionLike("Look up from satchel", gameState), "Has look up from satchel action in satchel mode")
+    assertTrue(!gameEngine.hasActionLike("Run away", gameState), "No Run away action in satchel mode")
+    gameEngine.performActionLike("Look up from satchel", gameState)
+    assertTrue(gameEngine.hasActionLike("Run away", gameState), "look up from satchel leaves satchel mode")
+    gameEngine.performActionLike("Tell fox to Bite", gameState)
+    gameEngine.performActionLike("Take small potion", gameState)
+    gameEngine.performActionLike("Look at satchel", gameState)
+    assertTrue(gameEngine.hasActionLike("Use small potion", gameState), "can use small potion in satchel mode")
+    gameEngine.performActionLike("Use small potion", gameState)
+    assertTrue(this.lastLogContains("There's no need to use that item.", gameState), "")
+    assertTrue(gameEngine.hasActionLike("Look at satchel", gameState), "left satchel mode by trying to use small potion unnecessarily")
+    gameEngine.performActionLike("Go east", gameState)
+    gameEngine.performActionLike("Look at piles of bones", gameState)
+    gameEngine.performActionLike("Take metal fangs", gameState)
+    gameEngine.performActionLike("Put metal fangs on fox", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+    assertTrue(this.lastLogContains("You cut down my spawn. YOU SHALL PAY!", gameState), "")
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Look at satchel", gameState)
+    gameEngine.performActionLike("Use small potion", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    assertTrue(this.lastLogContains("You have to squeeze into this room because it's already nearly full with a gigantic foul-smelling occupant. A troll. This one is truly huge, needing to slouch to avoid hitting his head on the ceiling.", gameState), "")
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Tell fox to Metallic Bite", gameState)
+    gameEngine.performActionLike("Take large potion", gameState)
+    gameEngine.performActionLike("Look at satchel", gameState)
+    gameEngine.performActionLike("Use large potion", gameState)
+    gameEngine.performActionLike("Go east", gameState)
+    assertTrue(this.lastLogContains("His sensitive nose tells him your story: he smells troll sweat, he smells dirty goblins, he smells DEATH!", gameState), "")
+  }
 
   test_MAGameEngine_beatGame() {
     let gameState = new MAGameState()
@@ -2131,6 +2663,7 @@ class UnitTests {
     gameEngine.performActionLike("Go south", gameState)
     gameEngine.performActionLike("Go south", gameState)
     gameEngine.performActionLike("Go east", gameState)
+    assertTrue(this.lastLogContains("You have to squeeze into this room because it's already nearly full with a gigantic foul-smelling occupant. Another troll. This one is even bigger than the first one, needing to slouch ", gameState), "")
     assertTrue(this.lastLogContains("What he has in size, he lacks in eloquence", gameState), "")
     assertTrue(!this.lastLogContains("You can head", gameState), "")
     gameEngine.performActionLike("Tell fox to Super Metallic Bite", gameState)
@@ -2145,6 +2678,7 @@ class UnitTests {
     assertTrue(this.lastLogContains("The parchment's ink snakes around and shifts shape as it updates.", gameState, 2), "")
     assertTrue(this.lastLogContains("Health:\n😶 9/10\n🦊 5/5\n\nEquipment:\nbronze helm - reduces damage taken by 1\nsmall leather armor - reduces damage taken by 1\nsuper metal fangs - enables Super Metallic Bite attack\n\nAttacks:\n😶\nKick - deals 1 damage\nPunch - deals between 0 and 3 damage. Average: 1.4\n\n🦊\nScratch - deals 1 damage\nSuper Metallic Bite - deals between 0 and 7 damage. Average: 3\n\nInventory:\nsmall potion - restores 3 health\npotion - restores 5 health\nlarge potion - restores 10 health\nelixir - revives unconscious fox and restores 1 health\nlarge elixir - revives unconscious fox and restores full health", gameState), "")
     gameEngine.performActionLike("Go east", gameState)
+    assertTrue(this.lastLogContains("the alpha wolf howls as you enter. His sensitive nose tells him your story: he smells troll sweat, he smells wolf pup, he smells dirty goblins, he smells his favorite lieutenant wolf, he smells DEATH", gameState), "")
     assertTrue(this.lastLogContains("The alpha wolf's growls are a deep reverberating rumble in this stone chamber.", gameState), "")
     assertTrue(!this.lastLogContains("You can head", gameState), "")
     gameEngine.performActionLike("Tell fox to Super Metallic Bite", gameState)
@@ -2199,7 +2733,7 @@ class UnitTests {
     gameEngine.performActionLike("Go east", gameState)
     assertTrue(this.lastLogContains("You use the gold key to unlock the door to the east.", gameState, 2), "")
     assertTrue(this.lastLogContains("You enter room 🎊🎉.", gameState, 2), "")
-    assertTrue(this.lastLogContains("Fresh air! Your nose is suddenly more aware of how stale and putrid the cavern air has been.\n\nBright light! You squint as you adjust to the warm and overwhemling sunlight.\n\nYou have escaped with your life and also new wealth! Congratulations!\n\nNow... where the heck are you?\n\nTHE END 🥳", gameState), "")
+    assertTrue(this.lastLogContains("Fresh air! Your nose is suddenly more aware of how stale and putrid the cavern air has been.\n\nBright light! You squint as you adjust to the warm and overwhemling sunlight.\n\nYou have escaped with your life and also new wealth! Congratulations!\n\nNow... where the heck are you?\n\nTHE END 🥳\n\n\n<a href=\"/p/dungeon.html\">Learn more about this game</a>", gameState), "")
     gameEngine.performActionLike("Go west", gameState)
     assertTrue(this.lastLogContains("Nothing notable. You would never guess that a magestic beast lost its life here.", gameState), "")
     gameEngine.performActionLike("Go east", gameState)
@@ -2431,6 +2965,28 @@ class UnitTests {
     gameEngine.performActionLike("Look at satchel", gameState)
     assertTrue(gameEngine.hasActionLike("Look at small potion", gameState), "has look at small potion action")
     assertTrue(!gameEngine.hasActionLike("Use small potion", gameState), "lacks healing action")
+  }
+
+  test_MAGameEngine_showStableGoActionLinks() {
+    let gameState = new MAGameState()
+    let gameEngine = new MAGameEngine()
+    gameEngine.setupNewGame(gameState)
+    MATestUtils.setupTestHooks(gameEngine, gameState)
+
+
+    let actionStrs = gameEngine.actionStrings(gameState)
+
+    assertTrue(actionStrs.filter(x => x.includes("north")).length == 1, "has one north action")
+    assertTrue(actionStrs.filter(x => x.includes("[north")).length == 0, "north action is inactive")
+
+    assertTrue(actionStrs.filter(x => x.includes("west")).length == 1, "has one west action")
+    assertTrue(actionStrs.filter(x => x.includes("[west")).length == 0, "west action is inactive")
+
+    assertTrue(actionStrs.filter(x => x.includes("east")).length == 1, "has one east action")
+    assertTrue(actionStrs.filter(x => x.includes("[east")).length == 1, "east action is active")
+
+    assertTrue(actionStrs.filter(x => x.includes("south")).length == 1, "has one south action")
+    assertTrue(actionStrs.filter(x => x.includes("[south")).length == 0, "south action is inactive")
   }
 
   test_MAGameEngine_saveAndLoad() {

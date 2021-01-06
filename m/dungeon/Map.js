@@ -192,7 +192,7 @@ const MAEnemyFactory = {
     enemy.taunts = function() {
       return [
         "\"Prepare to die!\" shouts the giant goblin.",
-        "\"You killed my babies! My poopsies!\"",
+        "\"You killed my baby! My poopsie!\"",
         "The giant goblin menacingly shifts its weight from one foot to the other.",
         "\"You villain!\" declares your enemy.",
         "The giant goblin clenches its fists, preparing to attack.",
@@ -389,6 +389,7 @@ class MAMap {
     // (0,0)
     //
     let loc0_0 = new MALocation("room 👀👃")
+    loc0_0.emojiName = "👀|👃"
     this.startLocation = loc0_0
     this.addLocation(loc0_0)
 
@@ -411,6 +412,7 @@ class MAMap {
     // (1,0)
     //
     let loc1_0 = new MALocation("room 🛏🩹")
+    loc1_0.emojiName = "🛏|🩹"
     this.addLocation(loc1_0)
 
     loc1_0.appearance = function() {
@@ -430,6 +432,7 @@ class MAMap {
     // (2,0)
     //
     let loc2_0 = new MALocation("room 💼🔒")
+    loc2_0.emojiName = "💼|🔒"
     this.addLocation(loc2_0)
 
     loc2_0.appearance = function() {
@@ -454,8 +457,10 @@ class MAMap {
     // (3,0)
     //
     let loc4_0 = new MALocation("room 🩸🦊")
+    loc4_0.emojiName = "🩸|🦊"
 
     let loc3_0 = new MALocation("room 🩸〰️")
+    loc3_0.emojiName = "🩸|〰️"
     this.addLocation(loc3_0)
 
     loc3_0.appearance = function() {
@@ -507,6 +512,7 @@ class MAMap {
     // (0,1)
     //
     let loc0_1 = new MALocation("room 🔵🗝")
+    loc0_1.emojiName = "🔵|🗝"
     this.addLocation(loc0_1)
 
     loc0_1.appearance = function() {
@@ -535,6 +541,7 @@ class MAMap {
     // (1,1)
     //
     let loc1_1 = new MALocation("room 🐂🛡")
+    loc1_1.emojiName = "🐂|🛡"
     this.addLocation(loc1_1)
 
     loc1_1.appearance = function() {
@@ -567,6 +574,7 @@ class MAMap {
     // (2,1)
     //
     let loc2_1 = new MALocation("room 🧑‍🎤1️⃣")
+    loc2_1.emojiName = "🧑‍🎤|1️⃣"
     this.addLocation(loc2_1)
 
     loc2_1.appearance = function() {
@@ -592,6 +600,7 @@ class MAMap {
     // (3,1)
     //
     let loc3_1 = new MALocation("room 🦊🦷")
+    loc3_1.emojiName = "🦊|🦷"
     this.addLocation(loc3_1)
 
     let bones = new MAScenery("piles of bones")
@@ -632,6 +641,7 @@ class MAMap {
     // (4,1)
     //
     let loc4_1 = new MALocation("room 📜🦷")
+    loc4_1.emojiName = "📜|🦷"
     this.addLocation(loc4_1)
 
     loc4_1.appearance = function() {
@@ -647,6 +657,7 @@ class MAMap {
     // (0,2)
     //
     let loc0_2 = new MALocation("room 🥉⛑")
+    loc0_2.emojiName = "🥉|⛑"
     this.addLocation(loc0_2)
 
     let bones2 = new MAScenery("piles of bones")
@@ -685,6 +696,7 @@ class MAMap {
     // (1,2)
     //
     let loc1_2 = new MALocation("room 🧑‍🎤2️⃣")
+    loc1_2.emojiName = "🧑‍🎤|2️⃣"
     this.addLocation(loc1_2)
 
     loc1_2.appearance = function() {
@@ -710,6 +722,7 @@ class MAMap {
     // (2,2)
     //
     let loc2_2 = new MALocation("room 📜2️⃣")
+    loc2_2.emojiName = "📜|2️⃣"
     this.addLocation(loc2_2)
 
     loc2_2.appearance = function() {
@@ -730,6 +743,7 @@ class MAMap {
     // (3,2)
     //
     let loc3_2 = new MALocation("room 👿1️⃣")
+    loc3_2.emojiName = "👿|1️⃣"
     this.addLocation(loc3_2)
 
     loc3_2.appearance = function() {
@@ -755,6 +769,7 @@ class MAMap {
     // (4,2)
     //
     let loc4_2 = new MALocation("room 🧪1️⃣")
+    loc4_2.emojiName = "🧪|1️⃣"
     this.addLocation(loc4_2)
 
     loc4_2.appearance = function() {
@@ -782,6 +797,7 @@ class MAMap {
     // (0,3)
     //
     let loc0_3 = new MALocation("room 🐺1️⃣")
+    loc0_3.emojiName = "🐺|1️⃣"
     this.addLocation(loc0_3)
 
     loc0_3.appearance = function() {
@@ -809,6 +825,7 @@ class MAMap {
     // (1,3)
     //
     let loc1_3 = new MALocation("room 🐺2️⃣")
+    loc1_3.emojiName = "🐺|2️⃣"
     this.addLocation(loc1_3)
 
     loc1_3.appearance = function() {
@@ -836,12 +853,13 @@ class MAMap {
     // (2,3)
     //
     let loc2_3 = new MALocation("room 🧑‍🎤3️⃣")
+    loc2_3.emojiName = "🧑‍🎤|3️⃣"
     this.addLocation(loc2_3)
 
     loc2_3.appearance = function() {
       let goblinInLoc = loc2_3.hasNounNamed("giant goblin")
 
-      var prefix = "\"WELCOME TO HELL!\" bellows this room's unfriendly occupant.\n\nStanding in front of you is the biggest goblin that you have ever had the misfortune of meeting.\n\nThis goblin is green, sweaty, round like a globe, and matches you in height. Hopefully he's peaceful.\n\n\"You cut down my children. YOU SHALL PAY!\"\n\nYou notice giant slimy egg shells scattered around the room."
+      var prefix = "\"WELCOME TO HELL!\" bellows this room's unfriendly occupant.\n\nStanding in front of you is the biggest goblin that you have ever had the misfortune of meeting.\n\nThis goblin is green, sweaty, round like a globe, and matches you in height. Hopefully he's peaceful.\n\n\"You cut down my spawn. YOU SHALL PAY!\"\n\nYou notice giant slimy egg shells scattered around the room."
 
       if (loc2_3.inspected && goblinInLoc) {
         prefix = "The goblin looks uncomfortable -- like he's either going to lay another egg or rip your head off."
@@ -864,12 +882,19 @@ class MAMap {
     // (3,3)
     //
     let loc3_3 = new MALocation("room 👿2️⃣")
+    loc3_3.emojiName = "👿|2️⃣"
     this.addLocation(loc3_3)
 
     loc3_3.appearance = function() {
       let trollInLoc = loc3_3.hasNounNamed("troll")
 
+      let hasSeenSmallTroll = loc3_2.inspected
+
       var prefix = "You have to squeeze into this room because it's already nearly full with a gigantic foul-smelling occupant. Another troll. This one is even bigger than the first one, needing to slouch to avoid hitting his head on the ceiling.\n\n\"YOU NOT WELCOME! ME CRUSH YOU!\" What he has in size, he lacks in eloquence."
+
+      if (!hasSeenSmallTroll) {
+        prefix = "You have to squeeze into this room because it's already nearly full with a gigantic foul-smelling occupant. A troll. This one is truly huge, needing to slouch to avoid hitting his head on the ceiling.\n\n\"YOU NOT WELCOME! ME CRUSH YOU!\" What he has in size, he lacks in eloquence."
+      }
 
       if (loc3_3.inspected && trollInLoc) {
         prefix = "The troll angrily tries to stand upright to intimidate you but thumps his thick skull on the rocky ceiling. *bonk!*"
@@ -889,12 +914,19 @@ class MAMap {
     // (4,3)
     //
     let loc4_3 = new MALocation("room 🐺3️⃣")
+    loc4_3.emojiName = "🐺|3️⃣"
     this.addLocation(loc4_3)
 
     loc4_3.appearance = function() {
       let wolfInLoc = loc4_3.hasNounNamed("alpha wolf")
 
+      let hasSeenWolf = loc1_3.inspected
+
       let prefix = "\"AWOoooooOOooOoo!\" the alpha wolf howls as you enter. His sensitive nose tells him your story: he smells troll sweat, he smells wolf pup, he smells dirty goblins, he smells his favorite lieutenant wolf, he smells DEATH!\n\nHe smells fear...yours?\n\nThe alpha wolf's growls are a deep reverberating rumble in this stone chamber."
+
+      if (!hasSeenWolf) {
+        prefix = "\"AWOoooooOOooOoo!\" the alpha wolf howls as you enter. His sensitive nose tells him your story: he smells troll sweat, he smells dirty goblins, he smells DEATH!\n\nHe smells fear...yours?\n\nThe alpha wolf's growls are a deep reverberating rumble in this stone chamber."
+      }
 
       if (loc4_3.inspected) {
         if (wolfInLoc) {
@@ -916,6 +948,7 @@ class MAMap {
     // (0,4)
     //
     let loc0_4 = new MALocation("room 🧪2️⃣")
+    loc0_4.emojiName = "🧪|2️⃣"
     this.addLocation(loc0_4)
 
     loc0_4.appearance = function() {
@@ -942,6 +975,7 @@ class MAMap {
     // (1,4)
     //
     let loc1_4 = new MALocation("room 🧪3️⃣")
+    loc1_4.emojiName = "🧪|3️⃣"
     this.addLocation(loc1_4)
 
     loc1_4.appearance = function() {
@@ -967,6 +1001,7 @@ class MAMap {
     // (2,4)
     //
     let loc2_4 = new MALocation("room 🧪4️⃣")
+    loc2_4.emojiName = "🧪|4️⃣"
     this.addLocation(loc2_4)
 
     loc2_4.appearance = function() {
@@ -993,6 +1028,7 @@ class MAMap {
     // (3,4)
     //
     let loc3_4 = new MALocation("room 🔑💜")
+    loc3_4.emojiName = "🔑|💜"
     this.addLocation(loc3_4)
 
     loc3_4.appearance = function() {
@@ -1015,6 +1051,7 @@ class MAMap {
     // (4,4)
     //
     let loc4_4 = new MALocation("room 🐲🐉")
+    loc4_4.emojiName = "🐲|🐉"
     this.addLocation(loc4_4)
 
     loc4_4.appearance = function() {
@@ -1044,10 +1081,11 @@ class MAMap {
     // (5,4)
     //
     let loc5_4 = new MALocation("room 🎊🎉")
+    loc5_4.emojiName = "🎊|🎉"
     this.addLocation(loc5_4)
 
     loc5_4.appearance = function() {
-      return "Fresh air! Your nose is suddenly more aware of how stale and putrid the cavern air has been.\n\nBright light! You squint as you adjust to the warm and overwhemling sunlight.\n\nYou have escaped with your life and also new wealth! Congratulations!\n\nNow... where the heck are you?\n\nTHE END 🥳"
+      return "Fresh air! Your nose is suddenly more aware of how stale and putrid the cavern air has been.\n\nBright light! You squint as you adjust to the warm and overwhemling sunlight.\n\nYou have escaped with your life and also new wealth! Congratulations!\n\nNow... where the heck are you?\n\nTHE END 🥳\n\n\n<a href=\"/p/dungeon-memalign.html\">Learn more about this game</a>"
     }
 
 
@@ -1172,26 +1210,30 @@ class MAMap {
     }
   }
 
-  locToEmoji(loc, omitTop, omitLeft, showUser) {
+  locToEmoji(loc, omitTop, omitLeft, showUser, separator) {
     // Example:
     //  ⬛️⬛️⬛️⬛️
     //  ⬛️🦊🩸⬛️
     //  ⬛️▫️▫️▫️
     //  ⬛️⬛️⬛️⬛️
 
+    if (!separator) {
+      separator = ""
+    }
+
     var result = ""
 
     if (!loc) {
-      let left = omitLeft ? "" : "⬛️"
+      let left = omitLeft ? "" : ("⬛️" + separator)
 
       result +=
-`${left}⬛️⬛️⬛️
-${left}⬛️⬛️⬛️
-${left}⬛️⬛️⬛️
-${left}⬛️⬛️⬛️`
+`${left}⬛️${separator}⬛️${separator}⬛️
+${left}⬛️${separator}⬛️${separator}⬛️
+${left}⬛️${separator}⬛️${separator}⬛️
+${left}⬛️${separator}⬛️${separator}⬛️`
 
     } else {
-      var roomName = loc.name.replace("room ", "")
+      var roomName = loc.emojiName ? loc.emojiName : loc.name.replace("room ", "")
       var userBlock = showUser ? "😶" : "▫️"
       var emptyBlock = "▫️"
 
@@ -1207,7 +1249,7 @@ ${left}⬛️⬛️⬛️`
 
       // Black out if relevant locations aren't inspected
       if (!loc.inspected) {
-        roomName = "⬛️⬛️"
+        roomName = `⬛️${separator}⬛️`
         userBlock = "⬛️"
         emptyBlock = "⬛️"
 
@@ -1221,16 +1263,16 @@ ${left}⬛️⬛️⬛️`
 
       if (omitLeft) {
         result +=
-`⬛️${northDoor}⬛️
-${roomName}⬛️
-${emptyBlock}${userBlock}${eastDoor}
-⬛️${southDoor}⬛️`
+`⬛️${separator}${northDoor}${separator}⬛️
+${roomName}${separator}⬛️
+${emptyBlock}${separator}${userBlock}${separator}${eastDoor}
+⬛️${separator}${southDoor}${separator}⬛️`
       } else {
         result +=
-`⬛️⬛️${northDoor}⬛️
-⬛️${roomName}⬛️
-${westDoor}${emptyBlock}${userBlock}${eastDoor}
-⬛️⬛️${southDoor}⬛️`
+`⬛️${separator}⬛️${separator}${northDoor}${separator}⬛️
+⬛️${separator}${roomName}${separator}⬛️
+${westDoor}${separator}${emptyBlock}${separator}${userBlock}${separator}${eastDoor}
+⬛️${separator}⬛️${separator}${southDoor}${separator}⬛️`
       }
     }
 
@@ -1243,7 +1285,11 @@ ${westDoor}${emptyBlock}${userBlock}${eastDoor}
     return result
   }
 
-  emojiMap(currentLocation) {
+  emojiMap(currentLocation, separator) {
+    if (!separator) {
+      separator = ""
+    }
+
     let nameToXY = {}
 
     let loc = this.startLocation
@@ -1286,14 +1332,14 @@ ${westDoor}${emptyBlock}${userBlock}${eastDoor}
         let omitLeft = (x > 0)
 
         let currLoc = grid[x] ? grid[x][y] : null
-        let locLines = this.locToEmoji(currLoc, omitTop, omitLeft, currLoc==currentLocation).split("\n")
+        let locLines = this.locToEmoji(currLoc, omitTop, omitLeft, currLoc==currentLocation, separator).split("\n")
 
         var i = 0
         for (let line of locLines) {
           if (!rowLines[i]) {
             rowLines[i] = line
           } else {
-            rowLines[i] += line
+            rowLines[i] += separator + line
           }
           i++
         }
