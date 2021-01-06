@@ -112,8 +112,19 @@ td {
 #gameMap {
   padding: 8px;
   border-radius: 3px;
-  font-size: 5pt;
-  line-height: 9px;
+  font-size: 8pt;
+  line-height: 15px;
+  text-align: center;
+}
+
+#gameMapTable {
+  border-collapse: collapse;
+  display: inline-table;
+}
+
+#gameMapTable td {
+  padding: 0;
+  margin: 0;
   text-align: center;
 }
 
@@ -187,7 +198,8 @@ h3, h4 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:10.0000
 
 /* For wide screens */
 @media only screen and (min-width: 400px) {
-#gameMap { text-align: right;}
+#gameMap { text-align: right; align-self: end; }
+#gameActions { align-self: end; }
 #grid { display: grid; grid-template-columns: 1fr 1fr; }
 }
 

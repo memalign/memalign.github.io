@@ -94,13 +94,51 @@ class UnitTests {
       "Look at dog",
       "Take food",
       "Go north",
-      "Go south",
-      "Go east",
       "Go west",
+      "Go east",
+      "Go south",
       "Go southeast",
       "Go northwest",
     ]
     assertEqualArrays(strings.sort(MAUtils.actionsComparator), expectation)
+  }
+
+  test_MAUtils_userAgentIsSearchEngineCrawler() {
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/W.X.Y.Z Safari/537.36 Edg/W.X.Y.Z"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 Edg/W.X.Y.Z (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53 (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 530) like Gecko (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 530) like Gecko BingPreview/1.0b"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("APIs-Google (+https://developers.google.com/webmasters/APIs-Google.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mediapartners-Google"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("AdsBot-Google (+http://www.google.com/adsbot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Googlebot-Image/1.0"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Googlebot-News"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Googlebot-Video/1.0"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/W.X.Y.Z Safari/537.36"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Googlebot/2.1 (+http://www.google.com/bot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("compatible; Mediapartners-Google/2.1; +http://www.google.com/bot.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("AdsBot-Google-Mobile-Apps"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("FeedFetcher-Google; (+http://www.google.com/feedfetcher.html)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36 (compatible; Google-Read-Aloud; +https://developers.google.com/search/docs/advanced/crawling/overview-google-crawlers)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.125 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://developers.google.com/search/docs/advanced/crawling/overview-google-crawlers)"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012; DuplexWeb-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Mobile Safari/537.36"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36 Google Favicon"), "")
+    assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko; googleweblight) Chrome/38.0.1025.166 Mobile Safari/535.19"), "")
+
+
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"), "iPhone Safari")
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Safari: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"), "iPad Safari")
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Safari: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"), "Mac Safari")
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"), "Mac Chrome")
+    assertTrue(!MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19"), "Android Chrome")
   }
 
 // MADirection
@@ -188,6 +226,7 @@ class UnitTests {
   }
 
 // MAMap
+
   test_MAMap_oneLoc_uninspected() {
     let map = new MAMap()
     map.nameToLocation = {}
@@ -466,6 +505,334 @@ class UnitTests {
     assertEqualStrings(emojiMap, expectedMap)
   }
 
+  test_MAMap_oneLoc_uninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_oneLoc_inspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let emojiMap = "\n" + map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westInspected_eastUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("room 📜1️⃣")
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️|▫️|▫️|⬛️
+⬛️|▫️|😶|▫️|▫️|▫️|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westUninspected_eastInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("room 📜1️⃣")
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️|▫️|▫️|⬛️
+⬛️|▫️|▫️|▫️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+`
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westInspected_eastInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc1_0 = new MALocation("room 📜1️⃣")
+    map.addLocation(loc1_0)
+
+    loc1_0.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = "\n" + map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️|▫️|▫️|⬛️
+⬛️|▫️|▫️|▫️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_westUninspected_eastUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc1_0 = new MALocation("room 📜1️⃣")
+    map.addLocation(loc1_0)
+
+    loc0_0.addLinkInDirection(MADirection.East, loc1_0)
+
+    let emojiMap = map.emojiMap(loc1_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️|▫️|▫️|⬛️
+⬛️|▫️|▫️|▫️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings("\n" + emojiMap, expectedMap)
+
+    let htmlMap = "\n" + MAUtils.htmlTableFromEmojiMap(emojiMap, "|")
+    let expectedHTML =
+`
+<table>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>▫️</td><td>▫️</td><td>⬛️</td><td>▫️</td><td>▫️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>▫️</td><td>▫️</td><td>▫️</td><td>▫️</td><td>😶</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+</table>
+`
+    assertEqualStrings(htmlMap, expectedHTML)
+  }
+
+  test_MAMap_twoLocs_northInspected_southUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc0_1 = new MALocation("room 📜1️⃣")
+    map.addLocation(loc0_1)
+
+    loc0_0.addLinkInDirection(MADirection.South, loc0_1)
+
+    let emojiMap = map.emojiMap(loc0_0, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|▫️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings("\n" + emojiMap, expectedMap)
+
+    let htmlMap = "\n" + MAUtils.htmlTableFromEmojiMap(emojiMap, "|")
+    let expectedHTML =
+`
+<table>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>▫️</td><td>▫️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>▫️</td><td>😶</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>▫️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>▫️</td><td>▫️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>▫️</td><td>▫️</td><td>⬛️</td>
+</tr>
+<tr>
+<td>⬛️</td><td>⬛️</td><td>⬛️</td><td>⬛️</td>
+</tr>
+</table>
+`
+
+    assertEqualStrings(htmlMap, expectedHTML)
+  }
+
+  test_MAMap_twoLocs_northUninspected_southInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc0_1 = new MALocation("room 📜1️⃣")
+    map.addLocation(loc0_1)
+
+    loc0_1.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.South, loc0_1)
+
+    let emojiMap = "\n" + map.emojiMap(loc0_1, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|⬛️|▫️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_northInspected_southInspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    loc0_0.inspected = true
+
+    let loc0_1 = new MALocation("room 📜1️⃣")
+    map.addLocation(loc0_1)
+
+    loc0_1.inspected = true
+
+    loc0_0.addLinkInDirection(MADirection.South, loc0_1)
+
+    let emojiMap = "\n" + map.emojiMap(loc0_1, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|⬛️|▫️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
+  test_MAMap_twoLocs_northUninspected_southUninspected_separator() {
+    let map = new MAMap()
+    map.nameToLocation = {}
+
+    let loc0_0 = new MALocation("room 👀👃")
+    map.startLocation = loc0_0
+    map.addLocation(loc0_0)
+
+    let loc0_1 = new MALocation("room 📜1️⃣")
+    map.addLocation(loc0_1)
+
+    loc0_0.addLinkInDirection(MADirection.South, loc0_1)
+
+    let emojiMap = "\n" + map.emojiMap(loc0_1, "|")
+
+    let expectedMap =
+`
+⬛️|⬛️|⬛️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|⬛️|▫️|⬛️
+⬛️|▫️|▫️|⬛️
+⬛️|▫️|😶|⬛️
+⬛️|⬛️|⬛️|⬛️
+`
+
+    assertEqualStrings(emojiMap, expectedMap)
+  }
+
 // MANoun
 
   test_MANoun_inSentenceName() {
@@ -736,6 +1103,56 @@ class UnitTests {
     assertTrue(this.lastLogContains("You curse the sight of an empty room.", gameState), "hungry string")
     gameEngine.performActionLike("", gameState)
     gameEngine.performActionLike("", gameState)
+  }
+
+  test_MAGameEngine_avoidRedundantDisabledMoveAction() {
+    let gameState = new MAGameState()
+    let gameEngine = new MAGameEngine()
+    gameEngine.setupNewGame(gameState)
+    MATestUtils.setupTestHooks(gameEngine, gameState)
+
+
+    var actionStrs = gameEngine.actionStrings(gameState)
+
+    assertTrue(actionStrs.filter(x => x.includes("north")).length == 1, "has one north action")
+    assertTrue(actionStrs.filter(x => x.includes("[north")).length == 0, "north action is inactive")
+
+    assertTrue(actionStrs.filter(x => x.includes("west")).length == 1, "has one west action")
+    assertTrue(actionStrs.filter(x => x.includes("[west")).length == 1, "west action is active")
+
+    assertTrue(actionStrs.filter(x => x.includes("east")).length == 1, "has one east action")
+    assertTrue(actionStrs.filter(x => x.includes("[east")).length == 1, "east action is active")
+
+    assertTrue(actionStrs.filter(x => x.includes("south")).length == 1, "has one south action")
+    assertTrue(actionStrs.filter(x => x.includes("[south")).length == 0, "south action is inactive")
+
+
+    gameEngine.performActionLike("Go west", gameState)
+    gameEngine.performActionLike("Go north", gameState)
+    gameEngine.performActionLike("Go west", gameState)
+
+    let goWestActions = gameEngine.actionStrings(gameState).filter(x => x.includes("west"))
+    assertTrue(goWestActions.length == 1, "have one west action")
+
+    assertTrue(goWestActions.filter(x => x.includes("[")).length == 1, "west action is active")
+
+
+    gameEngine.performActionLike("Go west", gameState)
+
+
+    actionStrs = gameEngine.actionStrings(gameState)
+
+    assertTrue(actionStrs.filter(x => x.includes("north")).length == 1, "has one north action")
+    assertTrue(actionStrs.filter(x => x.includes("[north")).length == 0, "north action is inactive")
+
+    assertTrue(actionStrs.filter(x => x.includes("west")).length == 1, "has one west action")
+    assertTrue(actionStrs.filter(x => x.includes("[west")).length == 1, "west action is active")
+
+    assertTrue(actionStrs.filter(x => x.includes("east")).length == 1, "has one east action")
+    assertTrue(actionStrs.filter(x => x.includes("[east")).length == 1, "east action is active")
+
+    assertTrue(actionStrs.filter(x => x.includes("south")).length == 1, "has one south action")
+    assertTrue(actionStrs.filter(x => x.includes("[south")).length == 0, "south action is inactive")
   }
 
 

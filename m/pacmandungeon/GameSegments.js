@@ -592,7 +592,8 @@ class MAGameSegmentEnd extends MAGameSegment {
     let levelComplete = (remainingDots == 0)
 
     if (levelComplete) {
-      gameState.log.log(`◽️▪️◽️▪️ ◽️\n\nAs you swallow this last morsel, the walls blink: bright, dark, bright, dark.\n\nA glowing message appears in front of you: \"Score: ${gameState.score}\"\n\n Have you pleased whatever cruel captor trapped you here?\n\nNo.\n\nYou reawaken back at the start. Trapped for eternity.`)
+      gameState.log.log(`◽️▪️◽️▪️ ◽️\n\nAs you swallow this last morsel, the walls blink: bright, dark, bright, dark.\n\nA glowing message appears in front of you: \"Score: ${gameState.score}\"\n\n Have you pleased whatever cruel captor trapped you here?\n\nNo.\n\nYou reawaken back at the start. Trapped for eternity.\n\n\n<a href="/p/pacman-dungeon.html">Learn more about this game</a>`)
+      
 
       // Reset power pellet and user dead state
       this.gameSegmentGhost.resetState(gameState)

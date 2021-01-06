@@ -417,7 +417,7 @@ class MAGameEngine {
   }
 
   performActionMove(action, gameState) {
-    gameState.currentLocation = action.chosenTarget
+    gameState.currentLocation = action.destinationLocation()
 
     if (this.showLocationNames && !gameState.currentLocation.inspected) {
       gameState.log.log("You enter " + gameState.currentLocation.name + ".")
@@ -563,22 +563,46 @@ class MAActionRemember extends MAAction {
 class MAActionMove extends MAAction {
   // Properties:
   // - currentLocation (MALocation instance)
-  // - chosenTarget (MALocation instance)
+  //
+  // - chosenTarget (MALocation instance if !this.shouldProvideInactiveTargets)
+  // - chosenTarget (MADirection enum value if this.shouldProvideInactiveTargets)
 
   constructor(currentLocation) {
     super()
 
     this.currentLocation = currentLocation
+
+    // When true, MAActionMove will provide North, South, East, West targets
+    // including for directions the user can't move.
+    // Enable this behavior to have a more stable action list
+    //
+    // Limitations: only supports the 4 directions
+    this.shouldProvideInactiveTargets = true
   }
 
   targets() {
-    return this.currentLocation.linkedLocations()
+    if (this.shouldProvideInactiveTargets) {
+      let targets = [ MADirection.North, MADirection.South ]
+
+      // Portal Go action is provided by GameSegment
+      if (!this.currentLocation.eastPortal) {
+        targets.push(MADirection.East)
+      }
+
+      if (!this.currentLocation.westPortal) {
+        targets.push(MADirection.West)
+      }
+
+      return targets
+    } else {
+      return this.currentLocation.linkedLocations()
+    }
   }
 
-  dirForLoc(location) {
+  dirForLoc(loc) {
     var dir = MADirection.Count
     for (let i = 0; i < MADirection.Count; ++i) {
-      if (this.currentLocation.directionToLocation[i] == location) {
+      if (this.currentLocation.directionToLocation[i] == loc) {
         dir = i
         break
       }
@@ -591,29 +615,66 @@ class MAActionMove extends MAAction {
     return MADirection.toString(dir).toLowerCase()
   }
 
-  verbString(target) {
-    let dir = this.dirForLoc(target)
-    let dirStr = this.dirStr(dir)
-    let dirEmoji = MADirection.toEmoji(dir)
-
-    if (this.showLocationNames && target.visited) {
-      return `Go [${dirStr} ${dirEmoji}] to ${target.name}`
+  destinationLocation() {
+    if (this.shouldProvideInactiveTargets) {
+      return this.currentLocation.directionToLocation[this.chosenTarget]
     } else {
-      return `Go [${dirStr} ${dirEmoji}]`
+      return this.chosenTarget
+    }
+  }
+
+  verbString(target) {
+    if (this.shouldProvideInactiveTargets) {
+      let dir = target
+      let dirStr = this.dirStr(dir)
+      let dirEmoji = MADirection.toEmoji(dir)
+      let toLoc = this.currentLocation.directionToLocation[dir]
+      if (this.showLocationNames && toLoc && toLoc.visited) {
+        return `Go [${dirStr} ${dirEmoji}] to ${toLoc.name}`
+      } else if (toLoc) {
+        return `Go [${dirStr} ${dirEmoji}]`
+      } else {
+        return `Go ${dirStr} ${dirEmoji}`
+      }
+
+    } else {
+      let dir = this.dirForLoc(target)
+      let dirStr = this.dirStr(dir)
+      let dirEmoji = MADirection.toEmoji(dir)
+
+      if (this.showLocationNames && target.visited) {
+        return `Go [${dirStr} ${dirEmoji}] to ${target.name}`
+      } else {
+        return `Go [${dirStr} ${dirEmoji}]`
+      }
     }
   }
 
   description() {
-    let dirStr = this.dirStr(this.dirForLoc(this.chosenTarget))
-    let inspected = this.chosenTarget.inspected
-    if (this.showLocationNames && inspected) {
-      return `(go ${dirStr} to) ${this.chosenTarget.name}`
+    if (this.shouldProvideInactiveTargets) {
+      let dir = this.chosenTarget
+      let dirStr = this.dirStr(dir)
+      let dirEmoji = MADirection.toEmoji(dir)
+      let toLoc = this.currentLocation.directionToLocation[dir]
+
+      let inspected = toLoc && toLoc.inspected
+      if (this.showLocationNames && inspected) {
+        return `(go ${dirStr} to) ${toLoc.name}`
+      } else {
+        return `(go ${dirStr})`
+      }
+
     } else {
-      return `(go ${dirStr})`
+      let dirStr = this.dirStr(this.dirForLoc(this.chosenTarget))
+      let inspected = this.chosenTarget.inspected
+      if (this.showLocationNames && inspected) {
+        return `(go ${dirStr} to) ${this.chosenTarget.name}`
+      } else {
+        return `(go ${dirStr})`
+      }
     }
   }
 }
-
 
 // =====
 // Nouns

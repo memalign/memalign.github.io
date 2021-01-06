@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
-
+<title>Pac-Man Dungeon</title>
 <script src="Utilities.js"></script>
+<script src="TestUtils.js"></script>
 <script src="GameEngine.js"></script>
 <script src="GameSegments.js"></script>
 <script src="Map.js"></script>
@@ -64,11 +65,9 @@ function updateActions(gameEngine, gameState) {
   for (let [actionUUID, actionDesc] of Object.entries(actionsMap)) {
     let actionA = document.getElementById(actionUUID)
     actionA.onclick = function () {
-      console.log("Action clicked " + actionDesc.actionStr)
+      console.log("Action clicked " + actionDesc.actionStr + " with target " + actionDesc.target)
       
-      if (actionDesc.target) {
-        actionDesc.action.chosenTarget = actionDesc.target
-      }
+      actionDesc.action.chosenTarget = actionDesc.target
       
       lastActionLogCount = gameState.log.logs.length
       
@@ -107,10 +106,11 @@ function updateGameLogView(gameEngine, gameState) {
   }
   
   
-  let mapDiv = document.getElementById("gameMap")
-  var mapContent = gameState.map.emojiMap(gameState.currentLocation).replace(/\n/g, "<br />")
-  mapDiv.innerHTML = mapContent
-  
+  let mapDiv = document.getElementById("gameMapTable")
+  let mapContent = gameState.map.emojiMap(gameState.currentLocation, "|")
+  let mapTableHTML = MAUtils.htmlTableFromEmojiMap(mapContent, "|")
+  mapDiv.innerHTML = mapTableHTML
+
 
   updateActions(gameEngine, gameState)
   
@@ -126,8 +126,25 @@ window.onload = function () {
     updateGameLogView(gameEngine, gS)
   }
     
+
+  var isCrawler = MAUtils.userAgentIsSearchEngineCrawler(navigator.userAgent)
+  if (!isCrawler) {
+    // Force crawler mode with ?crawler=1
+    let urlParams = new URLSearchParams(window.location.search)
+    let rawCrawler = urlParams.get('crawler')
+    if (rawCrawler) {
+      isCrawler = parseInt(rawCrawler) === 1
+    }
+  }
+
   gameEngine.setupNewGame(gameState)
-    
+  
+  // Let crawlers index the full game transcript
+  if (isCrawler) {
+    MATestUtils.setupTestHooks(gameEngine, gameState)
+    MATestUtils.goFromStartToEnd(gameEngine, gameState)
+  }
+
   updateGameLogView(gameEngine, gameState)
 }
 
@@ -147,7 +164,7 @@ window.onload = function () {
     <div id="gameLogNew"></div>
     <div id="grid">
       <div id="gameActions"></div>
-      <div id="gameMap"></div>
+      <div id="gameMap"><div id="gameMapTable"></div></div>
     </div>
   </div>
 </body>

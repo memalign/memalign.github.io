@@ -282,23 +282,28 @@ class MAMap {
     }
   }
 
-  locToEmoji(loc, omitTop, omitLeft, showUser) {
+  locToEmoji(loc, omitTop, omitLeft, showUser, separator) {
     // Example:
     //  ⬛️⬛️⬛️⬛️
     //  ⬛️🦊🩸⬛️
     //  ⬛️▫️▫️▫️
     //  ⬛️⬛️⬛️⬛️
 
+
+    if (!separator) {
+      separator = ""
+    }
+    
     var result = ""
 
     if (!loc) {
-      let left = omitLeft ? "" : "⬛️"
+      let left = omitLeft ? "" : ("⬛️" + separator)
 
       result +=
-`${left}⬛️⬛️⬛️
-${left}⬛️⬛️⬛️
-${left}⬛️⬛️⬛️
-${left}⬛️⬛️⬛️`
+`${left}⬛️${separator}⬛️${separator}⬛️
+${left}⬛️${separator}⬛️${separator}⬛️
+${left}⬛️${separator}⬛️${separator}⬛️
+${left}⬛️${separator}⬛️${separator}⬛️`
 
     } else {
       var dotStr = "▫️"
@@ -317,7 +322,7 @@ ${left}⬛️⬛️⬛️`
         ghostStr = "👀"
       }
 
-      let roomName = dotStr + ghostStr
+      let roomName = dotStr + separator + ghostStr
 
       var userBlock = showUser ? "😶" : "▫️"
       var fruitBlock = loc.hasNounNamed("cherries") ? "🍒" : "▫️"
@@ -336,7 +341,7 @@ ${left}⬛️⬛️⬛️`
 
       // Black out if relevant locations aren't inspected
       if (hideUninspected && !loc.inspected) {
-        roomName = "⬛️⬛️"
+        roomName = `⬛️${separator}⬛️`
         userBlock = "⬛️"
         fruitBlock = "⬛️"
 
@@ -350,16 +355,16 @@ ${left}⬛️⬛️⬛️`
 
       if (omitLeft) {
         result +=
-`⬛️${northDoor}⬛️
-${roomName}⬛️
-${fruitBlock}${userBlock}${eastDoor}
-⬛️${southDoor}⬛️`
+`⬛️${separator}${northDoor}${separator}⬛️
+${roomName}${separator}⬛️
+${fruitBlock}${separator}${userBlock}${separator}${eastDoor}
+⬛️${separator}${southDoor}${separator}⬛️`
       } else {
         result +=
-`⬛️⬛️${northDoor}⬛️
-⬛️${roomName}⬛️
-${westDoor}${fruitBlock}${userBlock}${eastDoor}
-⬛️⬛️${southDoor}⬛️`
+`⬛️${separator}⬛️${separator}${northDoor}${separator}⬛️
+⬛️${separator}${roomName}${separator}⬛️
+${westDoor}${separator}${fruitBlock}${separator}${userBlock}${separator}${eastDoor}
+⬛️${separator}⬛️${separator}${southDoor}${separator}⬛️`
       }
     }
 
@@ -372,7 +377,11 @@ ${westDoor}${fruitBlock}${userBlock}${eastDoor}
     return result
   }
 
-  emojiMap(currentLocation) {
+  emojiMap(currentLocation, separator) {
+    if (!separator) {
+      separator = ""
+    }
+    
     let nameToXY = {}
 
     let loc = this.startLocation
@@ -415,14 +424,14 @@ ${westDoor}${fruitBlock}${userBlock}${eastDoor}
         let omitLeft = (x > 0)
 
         let currLoc = grid[x] ? grid[x][y] : null
-        let locLines = this.locToEmoji(currLoc, omitTop, omitLeft, currLoc==currentLocation).split("\n")
+        let locLines = this.locToEmoji(currLoc, omitTop, omitLeft, currLoc==currentLocation, separator).split("\n")
 
         var i = 0
         for (let line of locLines) {
           if (!rowLines[i]) {
             rowLines[i] = line
           } else {
-            rowLines[i] += line
+            rowLines[i] += separator + line
           }
           i++
         }

@@ -74,7 +74,20 @@ const MAUtils = {
     if (str.startsWith("Look")) { // First
       return 0
     } else if (str.startsWith("Go")) { // Last
-      return 100 + MADirection.parseString(str)
+      // Use a more natural sorting for these actions
+      let dir = MADirection.parseString(str)
+      var dirValue = dir
+      if (dir == MADirection.North) {
+        dirValue = 0
+      } else if (dir == MADirection.West) {
+        dirValue = 1
+      } else if (dir == MADirection.East) {
+        dirValue = 2
+      } else if (dir == MADirection.South) {
+        dirValue = 3
+      }
+
+      return 100 + dirValue
     } else {
       return 50
     }
@@ -91,6 +104,53 @@ const MAUtils = {
     } else {
       return diff
     }
+  },
+
+  userAgentIsSearchEngineCrawler(userAgent) {
+    if (!userAgent) {
+      return false
+    }
+
+    let lcUA = userAgent.toLowerCase()
+
+    // https://developers.google.com/search/docs/advanced/crawling/overview-google-crawlers
+    let gAPIs = lcUA.includes("apis-google")
+    let gAdsBot = lcUA.includes("adsbot")
+    let gMediaPartnersGoogle = lcUA.includes("mediapartners-google")
+    let googleBot = lcUA.includes("googlebot")
+    let gFeedfetcher = lcUA.includes("feedfetcher")
+    let gReadAloud = lcUA.includes("google-read-aloud")
+    let gDuplexWeb = lcUA.includes("duplexweb-google")
+    let gFavicon = lcUA.includes("google favicon")
+    let gWeblight = lcUA.includes("googleweblight")
+
+    // https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8c184ec0
+    let bingBot = lcUA.includes("bingbot")
+    let bAdidx = lcUA.includes("adidxbot")
+    let bingPreview = lcUA.includes("bingpreview")
+
+    return gAPIs || gAdsBot || gMediaPartnersGoogle || googleBot || gFeedfetcher || gReadAloud || gDuplexWeb || gFavicon || gWeblight || bingBot || bAdidx || bingPreview
+  },
+
+  htmlTableFromEmojiMap(emojiMap, separator) {
+    var mapTableHTML = "<table>\n"
+    let mapLines = emojiMap.split("\n")
+    for (let mapLine of mapLines) {
+      if (mapLine.length == 0) {
+        continue
+      }
+      mapTableHTML += "<tr>\n"
+
+      let mapCols = mapLine.split(separator)
+      for (let mapCol of mapCols) {
+        mapTableHTML += "<td>" + mapCol + "</td>"
+      }
+
+      mapTableHTML += "\n</tr>\n"
+    }
+    mapTableHTML += "</table>\n"
+
+    return mapTableHTML
   },
 }
 Object.freeze(MAUtils)
