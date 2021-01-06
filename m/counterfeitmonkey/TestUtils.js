@@ -1,6 +1,31 @@
 const MATestUtils = {
   setupTestHooks: function(gameEngine, gameState) {
 
+    gameEngine.actionStrings = function(gameState) {
+      if (!gameState) {
+        MALog.log("Missing gameState!")
+        assertTrue(false, "Missing gameState")
+      }
+
+      let actions = gameEngine.actionsForGameState(gameState)
+      let result = []
+
+      for (let action of actions) {
+        if (action.targets != null && action.targets()) {
+
+          for (let target of action.targets()) {
+            let targetStr = action.verbString(target)
+            result.push(targetStr)
+          }
+        } else {
+          let actionStr = action.verbString()
+          result.push(actionStr)
+        }
+      }
+
+      return result
+    }
+
     gameEngine.hasActionLike = function(str, gameState) {
       if (!gameState) {
         MALog.log("Missing gameState!")

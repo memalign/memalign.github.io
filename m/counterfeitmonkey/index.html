@@ -145,7 +145,7 @@ window.onload = function () {
   }
     
 
-  let isCrawler = MAUtils.userAgentIsSearchEngineCrawler(navigator.userAgent)
+  var isCrawler = MAUtils.userAgentIsSearchEngineCrawler(navigator.userAgent)
   if (!isCrawler) {
     // Force crawler mode with ?crawler=1
     let urlParams = new URLSearchParams(window.location.search)
@@ -161,7 +161,11 @@ window.onload = function () {
   if (!isCrawler) {
     let savedProgressRaw = window.localStorage.getItem('serializedActions')
     if (savedProgressRaw) {
-      savedProgress = JSON.parse(savedProgressRaw)
+      try {
+        savedProgress = JSON.parse(savedProgressRaw)
+      } catch(e) {
+        savedProgress = null
+      }
     }
   }
 
@@ -183,7 +187,7 @@ window.onload = function () {
   <div id="body">
     <a href='/index.html'>Home</a>
     <div id='about'>
-      <a href='/p/dungeon.html'>About</a> | <a id='startOver' href='./index.html'>Start Over</a>
+      <a href='/p/counterfeit-monkey.html'>About</a> | <a id='startOver' href='./index.html'>Start Over</a>
     </div>
     <br />
     <br />

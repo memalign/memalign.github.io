@@ -154,7 +154,21 @@ const MAUtils = {
     } else if (str.startsWith("Look")) {
       return 4
     } else if (str.startsWith("Go") || str.startsWith("Run")) { // Last
-      return 100 + MADirection.parseString(str)
+
+      // Use a more natural sorting for these actions
+      let dir = MADirection.parseString(str)
+      var dirValue = dir
+      if (dir == MADirection.North) {
+        dirValue = 0
+      } else if (dir == MADirection.West) {
+        dirValue = 1
+      } else if (dir == MADirection.East) {
+        dirValue = 2
+      } else if (dir == MADirection.South) {
+        dirValue = 3
+      }
+
+      return 100 + dirValue
     } else {
       return 50
     }

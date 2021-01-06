@@ -1902,7 +1902,7 @@ If you want to really have some fun, please check out the full original game, cr
 
 Alex and Andra could really use your help!
 
-<a href="https://memalign.github.io">Play in a web browser</a>
+<a href="/m/counterfeitmonkey/quixe/index.html">Play in a web browser</a>
 
 <a href="/p/counterfeit-monkey.html">Learn more about this demo</a>
 

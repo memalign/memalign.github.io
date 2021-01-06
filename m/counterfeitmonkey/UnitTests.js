@@ -105,9 +105,9 @@ class UnitTests {
       "Look at inventory",
       "Take food",
       "Go north",
-      "Go south",
-      "Go east",
       "Go west",
+      "Go east",
+      "Go south",
       "Go southeast",
       "Go northwest",
     ]
@@ -204,9 +204,9 @@ class UnitTests {
       "Look at <a id='12345-678-abcdef'>dog</a>",
       "Take food",
       "Go north",
-      "Go <a id='f2345-678-abcdef'>south</a>",
-      "Go east",
       "Go west",
+      "Go east",
+      "Go <a id='f2345-678-abcdef'>south</a>",
       "Go southeast",
       "Go northwest",
     ]
@@ -402,7 +402,7 @@ class UnitTests {
     assertEqualArrays(container.nouns, expectation)
   }
 
-  tests_MAUtils_userAgentIsSearchEngineCrawler() {
+  test_MAUtils_userAgentIsSearchEngineCrawler() {
     assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
     assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/W.X.Y.Z Safari/537.36 Edg/W.X.Y.Z"), "")
     assertTrue(MAUtils.userAgentIsSearchEngineCrawler("Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 Edg/W.X.Y.Z (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"), "")
@@ -1233,6 +1233,37 @@ class UnitTests {
 
     // Present in action
     assertTrue(gameEngine.hasActionLike("Go north ⬆️ to 🏬🏬 Sigil Street", gameState), "name present in action")
+  }
+
+  test_MAGameEngine_showStableGoActionLinks() {
+    let gameState = new MAGameState()
+    let gameEngine = new MAGameEngine()
+    gameEngine.setupNewGame(gameState)
+    MATestUtils.setupTestHooks(gameEngine, gameState)
+
+    // Get through initial waking
+    gameEngine.performActionLike("Say \"Yes\"", gameState)
+    gameEngine.performActionLike("Say \"Yes\"", gameState)
+    gameEngine.performActionLike("Say \"Andra\"", gameState)
+    gameEngine.performActionLike("Say \"Ok\"", gameState)
+
+    gameEngine.performActionLike("Go north", gameState)
+    gameEngine.performActionLike("Go south", gameState)
+
+
+    let actionStrs = gameEngine.actionStrings(gameState)
+
+    assertTrue(actionStrs.filter(x => x.includes("north")).length == 1, "has one north action")
+    assertTrue(actionStrs.filter(x => x.includes("[north")).length == 1, "north action is active")
+
+    assertTrue(actionStrs.filter(x => x.includes("west")).length == 1, "has one west action")
+    assertTrue(actionStrs.filter(x => x.includes("[west")).length == 0, "west action is inactive")
+
+    assertTrue(actionStrs.filter(x => x.includes("east")).length == 1, "has one east action")
+    assertTrue(actionStrs.filter(x => x.includes("[east")).length == 0, "east action is inactive")
+
+    assertTrue(actionStrs.filter(x => x.includes("south")).length == 1, "has one south action")
+    assertTrue(actionStrs.filter(x => x.includes("[south")).length == 0, "south action is inactive")
   }
 
   test_MAGameEngine_initialWaking_moreCoverage() {
