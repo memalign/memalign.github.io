@@ -1,0 +1,56 @@
+Title: Counterfeit Monkey
+Date: 1/9/2021
+
+[Image:/m/cm-map.jpg]
+
+[Link:https://ifdb.tads.org/viewgame?id=aearuuxv83plclpl]Counterfeit Monkey[/Link] is my favorite interactive fiction game. I love its rich world, its delightful mechanics, and its clever puzzles.
+
+You can play it [Link:http://iplayif.com/?story=https%3A%2F%2Fgithub.com%2Fi7%2Fcounterfeit-monkey%2Freleases%2Fdownload%2Fr9%2FCounterfeitMonkey-9.gblorb]here[/Link] ([Link:/m/counterfeitmonkey/quixe/index.html]my backup[/Link]).
+
+But before you dive in there, I'm hoping that you'll give this a try. I've written a small demo of the first section of the game as mobile-friendly [Link:/p/listed-action-if.html]Listed Action IF[/Link]:
+
+[Link:/m/counterfeitmonkey/index.html]Counterfeit Monkey demo[/Link]
+
+
+To learn more about the original game and my demo, please read on!
+
+
+Counterfeit Monkey was written by [Link:https://en.wikipedia.org/wiki/Emily_Short]Emily Short[/Link]. She's a brilliant author and has made huge contributions to the interactive fiction community. If you're interested in staying up-to-date on IF, I recommend checking out her [Link:https://emshort.blog]website[/Link] and following her blog.
+
+Counterfeit Monkey is a piece of traditional parser-based IF. Parser-based games create rich and immersive worlds through text. Unfortunately, the user needs to type commands to play which makes them unergonomic for touch-based devices like smartphones and tablets.
+
+I've [Link:/p/pacman-dungeon.html]written[/Link] [Link:/p/dungeon-memalign.html]recently[/Link] about bringing text-based games to touch-based devices and those posts even include some small games (playable in your web browser!).
+
+I've found that I'm not alone in exploring more touch-friendly IF games that retain the rich world model of traditional parser-based IF. I think a sub-genre of IF may be forming, one I called [Link:/p/listed-action-if.html]Listed Action IF[/Link] in a recent post.
+
+I was delighted when I saw that Emily licensed the game's [Link:https://github.com/i7/counterfeit-monkey]source code[/Link] using the [Link:https://creativecommons.org/licenses/by-sa/4.0/]Creative Commons Attribution-ShareAlike 4.0 license[/Link], opening up opportunities to extend and transform it.
+
+The games I've built so far are small and designed from the beginning for the limitations of short lists of actions. Adapting the first section of Counterfeit Monkey to the listed action model is an experiment to see how well a complex and rich game works.
+
+I think it's still really fun!
+
+
+Here are some things I've learned and observed during this exploration:
+
+- This demo is built on the same little game engine I wrote and described in the second half of this post about [Link:/p/dungeon-memalign.html]Dungeon Memalign[/Link]
+
+- When I shared Dungeon Memalign on [Link:https://news.ycombinator.com/item?id=25262631]HackerNews[/Link], I got helpful feedback that I've now fixed:
+  - The emoji map did not render well on every platform. Not every platform supports every emoji and not every platform has uniform-width emoji. To check platform support of an emoji, I search for it on [Link:https://emojipedia.org]emojipedia.org[/Link]. To handle non-uniform-width emoji, I put them in a transparent table.
+  - The Go actions would be in different positions depending on which directions were valid moves. That made the interface fiddly. To handle this, I now list every direction even when invalid.
+
+- I also noticed that search engines did not get useful text to index because they saw only the beginning of the game. To address this, I added a crawler mode that detects crawlers based on their user agent and gives them the text of a full play-through.
+
+- As Emily herself noted in an interesting [Link:https://emshort.blog/2010/06/07/so-do-we-need-this-parser-thing-anyway/]blog post from 2010[/Link], it's easy to list too many actions in this style of game. I've done a few things to try to optimize and shorten the list:
+  - Some actions are only relevant once so I remove them from the list, especially "look" actions
+  - Some actions can hide behind another, such as actions specific to some items being inside Inventory (used in Dungeon Memalign for healing potions)
+  - You'll see that I could still have done better in some parts of the demo where the lists of actions get quite long.
+
+- Some puzzles become easier or obvious when a new action appears. I think that's a pro and a con depending on the situation. Fortunately, Counterfeit Monkey's word-manipulation puzzles don't lose much of their challenge.
+  - Pro: parser-based games can be needlessly frustrating when trying to guess the right verb to use
+  - Con: command exploration is sometimes part of the puzzle, immersiveness, and fun of a parser-based game
+
+- I have new appreciation for how challenging it must have been to create the original game. Just porting a small portion of Emily's existing content was hard work. To have created its novel ideas and puzzles from scratch while also doing all of the implementation is just amazing. I'm reminded of Hunter S. Thompson typing out pages of The Great Gatsby to know what it felt like to write a classic.
+
+
+You can find the demo's source code [Link:https://github.com/memalign/memalign.github.io/tree/master/m/counterfeitmonkey]here[/Link]. Since GameSegments.js, NounRepository.js, Memories.js, and Map.js are based on the original game's content and source code, those files are licensed under the [Link:https://creativecommons.org/licenses/by-sa/4.0/]Creative Commons Attribution-ShareAlike 4.0 license[/Link] just like their source material.
+

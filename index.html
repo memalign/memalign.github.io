@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="/m/play-if-card.png" />
-<meta property="og:description" content="My interest in interactive fiction and simple-yet-vast personal websites intersected this week when I stumbled upon Andrew Plotkin's homepage (aka Zarfhome). (My previous adventures have led me to Drew's clamps,…" />
+<meta property="og:image" content="/m/cm-map.jpg" />
+<meta property="og:description" content="Counterfeit Monkey is my favorite interactive fiction game. I love its rich world, its delightful mechanics, and its clever puzzles. You can play it here (my backup). But before you…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -24,6 +24,8 @@
 <a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
 </div><div id='allposts'>
 <b>All posts:</b><br />
+<a href='p/counterfeit-monkey.html'>Counterfeit Monkey</a><br />
+<a href='p/listed-action-if.html'>Listed Action Interactive Fiction</a><br />
 <a href='p/andrew-plotkin.html'>Andrew Plotkin's Zarfhome</a><br />
 <a href='p/product-reviews.html'>Product Review Writing Prompts</a><br />
 <a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
@@ -47,6 +49,210 @@
 <a href='p/feedly.html'>RSS and Feedly</a><br />
 <a href='p/this-website.html'>Welcome</a><br />
 </div>
+
+<div id='header'>
+<h2>
+<a href='p/counterfeit-monkey.html'>Counterfeit Monkey</a>
+</h2>
+</div>
+<img src="/m/cm-map.jpg">
+<div id='postdate'>Posted on 1/9/2021</div>
+<a href="https://ifdb.tads.org/viewgame?id=aearuuxv83plclpl">Counterfeit Monkey</a> is my favorite interactive fiction game. I love its rich world, its delightful mechanics, and its clever puzzles.<br />
+<br />
+You can play it <a href="http://iplayif.com/?story=https%3A%2F%2Fgithub.com%2Fi7%2Fcounterfeit-monkey%2Freleases%2Fdownload%2Fr9%2FCounterfeitMonkey-9.gblorb">here</a> (<a href="/m/counterfeitmonkey/quixe/index.html">my backup</a>).<br />
+<br />
+But before you dive in there, I'm hoping that you'll give this a try. I've written a small demo of the first section of the game as mobile-friendly <a href="/p/listed-action-if.html">Listed Action IF</a>:<br />
+<br />
+<a href="/m/counterfeitmonkey/index.html">Counterfeit Monkey demo</a><br />
+<br />
+<br />
+To learn more about the original game and my demo, please read on!<br />
+<br />
+<br />
+Counterfeit Monkey was written by <a href="https://en.wikipedia.org/wiki/Emily_Short">Emily Short</a>. She's a brilliant author and has made huge contributions to the interactive fiction community. If you're interested in staying up-to-date on IF, I recommend checking out her <a href="https://emshort.blog">website</a> and following her blog.<br />
+<br />
+Counterfeit Monkey is a piece of traditional parser-based IF. Parser-based games create rich and immersive worlds through text. Unfortunately, the user needs to type commands to play which makes them unergonomic for touch-based devices like smartphones and tablets.<br />
+<br />
+I've <a href="/p/pacman-dungeon.html">written</a> <a href="/p/dungeon-memalign.html">recently</a> about bringing text-based games to touch-based devices and those posts even include some small games (playable in your web browser!).<br />
+<br />
+I've found that I'm not alone in exploring more touch-friendly IF games that retain the rich world model of traditional parser-based IF. I think a sub-genre of IF may be forming, one I called <a href="/p/listed-action-if.html">Listed Action IF</a> in a recent post.<br />
+<br />
+I was delighted when I saw that Emily licensed the game's <a href="https://github.com/i7/counterfeit-monkey">source code</a> using the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 license</a>, opening up opportunities to extend and transform it.<br />
+<br />
+The games I've built so far are small and designed from the beginning for the limitations of short lists of actions. Adapting the first section of Counterfeit Monkey to the listed action model is an experiment to see how well a complex and rich game works.<br />
+<br />
+I think it's still really fun!<br />
+<br />
+<br />
+Here are some things I've learned and observed during this exploration:<br />
+<br />
+- This demo is built on the same little game engine I wrote and described in the second half of this post about <a href="/p/dungeon-memalign.html">Dungeon Memalign</a><br />
+<br />
+- When I shared Dungeon Memalign on <a href="https://news.ycombinator.com/item?id=25262631">HackerNews</a>, I got helpful feedback that I've now fixed:<br />
+&nbsp;&nbsp;- The emoji map did not render well on every platform. Not every platform supports every emoji and not every platform has uniform-width emoji. To check platform support of an emoji, I search for it on <a href="https://emojipedia.org">emojipedia.org</a>. To handle non-uniform-width emoji, I put them in a transparent table.<br />
+&nbsp;&nbsp;- The Go actions would be in different positions depending on which directions were valid moves. That made the interface fiddly. To handle this, I now list every direction even when invalid.<br />
+<br />
+- I also noticed that search engines did not get useful text to index because they saw only the beginning of the game. To address this, I added a crawler mode that detects crawlers based on their user agent and gives them the text of a full play-through.<br />
+<br />
+- As Emily herself noted in an interesting <a href="https://emshort.blog/2010/06/07/so-do-we-need-this-parser-thing-anyway/">blog post from 2010</a>, it's easy to list too many actions in this style of game. I've done a few things to try to optimize and shorten the list:<br />
+&nbsp;&nbsp;- Some actions are only relevant once so I remove them from the list, especially "look" actions<br />
+&nbsp;&nbsp;- Some actions can hide behind another, such as actions specific to some items being inside Inventory (used in Dungeon Memalign for healing potions)<br />
+&nbsp;&nbsp;- You'll see that I could still have done better in some parts of the demo where the lists of actions get quite long.<br />
+<br />
+- Some puzzles become easier or obvious when a new action appears. I think that's a pro and a con depending on the situation. Fortunately, Counterfeit Monkey's word-manipulation puzzles don't lose much of their challenge.<br />
+&nbsp;&nbsp;- Pro: parser-based games can be needlessly frustrating when trying to guess the right verb to use<br />
+&nbsp;&nbsp;- Con: command exploration is sometimes part of the puzzle, immersiveness, and fun of a parser-based game<br />
+<br />
+- I have new appreciation for how challenging it must have been to create the original game. Just porting a small portion of Emily's existing content was hard work. To have created its novel ideas and puzzles from scratch while also doing all of the implementation is just amazing. I'm reminded of Hunter S. Thompson typing out pages of The Great Gatsby to know what it felt like to write a classic.<br />
+<br />
+<br />
+You can find the demo's source code <a href="https://github.com/memalign/memalign.github.io/tree/master/m/counterfeitmonkey">here</a>. Since GameSegments.js, NounRepository.js, Memories.js, and Map.js are based on the original game's content and source code, those files are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 license</a> just like their source material.<br />
+<br />
+
+<hr />
+
+<div id='header'>
+<h2>
+<a href='p/listed-action-if.html'>Listed Action Interactive Fiction</a>
+</h2>
+</div>
+<img src="/m/listed-actions.jpg">
+<div id='postdate'>Posted on 1/9/2021</div>
+As I so love to do, I've fallen down the <a href="/p/rabbit-hole.html">rabbit hole</a> on a new topic over winter break 2020: the different kinds of interactive fiction.<br />
+<br />
+After building <a href="/p/dungeon-memalign.html">my first text adventure game</a> (<a href="/m/dungeon/index.html">play here</a>) with the explicit goal of being mobile-friendly, I did some research and prototyping to understand:<br />
+<br />
+- What have people already figured out about touchscreen-friendly interactive fiction?<br />
+<br />
+- How well does the "listed action" approach I took in Dungeon Memalign work for a traditional IF game?<br />
+<br />
+<br />
+Excitingly, there's been some deep discussion and successful exploration in the community!<br />
+<br />
+<br />
+For context, here's a quick recap of the main types of interactive fiction you'll find today on <a href="https://ifdb.tads.org">IFDB</a>:<br />
+<br />
+- Parser-based IF<br />
+&nbsp;&nbsp;"Parser-based IF, also known as the 'text adventure' genre, represents one of the oldest and best-known forms of interactive fiction. Some early examples are digital games from the 70s and 80s like Zork and Enchanter. In a parser game, players type natural-language commands into a simulated world, and the game interprets them as actions for the story’s main character to carry out. Parser games often involve puzzles that the player must solve to move forward in the story."<br />
+<br />
+- Choice-based IF<br />
+&nbsp;&nbsp;"In choice-based interactive fiction, players choose among a number of options to advance the story. These options are presented either as an explicit multiple-choice menu, or as hyperlinks within the story text. Compared to parser IF, choice-based games tend to focus more on navigating branching narratives and multiple endings than on puzzles to solve or secrets to find."<br />
+&nbsp;&nbsp;- These games are similar to "Choose Your Own Adventure" books<br />
+<br />
+(These definitions are quoted from <a href="https://iftechfoundation.org/frequently-asked-questions/">IFTF's FAQ</a>)<br />
+<br />
+<br />
+Games that have a rich world model without requiring typed commands don't fit neatly into these two categories. Despite the lack of neat label, there are a bunch of cool games that can be played entirely (or almost entirely) by clicking/tapping instead of typing. Note: though I have tried all of these games, I have not played them to completion.<br />
+<br />
+- <a href="https://ifdb.tads.org/viewgame?id=41cr9x95gu6tlfeu">The Impossible Bottle</a> by <a href="https://www.linusakesson.net">Linus Åkesson</a> (<a href="https://linusakesson.net/games/the-impossible-bottle/rel1/play.html">play here</a>)<br />
+&nbsp;&nbsp;- This game tied for first place in <a href="https://ifdb.tads.org/viewcomp?id=zkwmnr8k90q7wb2">IFComp 2020</a>!<br />
+&nbsp;&nbsp;- Linus writes about the game in depth <a href="https://www.linusakesson.net/games/the-impossible-bottle/postscriptum/index.php">here</a>, including its hybrid interface:<br />
+&nbsp;&nbsp;"The Impossible Bottle is a hybrid parser/choice game. There's a prompt where you can type commands, but there are also hyperlinks for inserting text at the prompt, and it's possible to complete nearly all of the game using those links. Typing is generally faster, except on touch-screen devices where tapping on links is faster."<br />
+&nbsp;&nbsp;- Note: I almost missed the unique interface of this game because the big "Play On-line" button on IFDB takes you to the traditional parser-based way to play. The "play here" link above (which is less-prominently featured on the IFDB page) takes you to this special way to play.<br />
+<br />
+<br />
+- <a href="https://ifdb.tads.org/viewgame?id=h9x354wyakeeanik">Bigger Than You Think</a> by <a href="https://zarfhome.com/">Andrew Plotkin</a> (<a href="https://www.eblong.com/zarf/zweb/btyt/">play here</a>)<br />
+&nbsp;&nbsp;- At first this game may seem purely choice-based but there is rich world state. Andrew has shared the <a href="https://www.eblong.com/zarf/zweb/btyt/btyt-src.html">source code</a> which is an interesting read!<br />
+<br />
+<br />
+- <a href="https://ifdb.tads.org/viewgame?id=wbv84rstru6c91lr">Shadow Operative</a> by Michael Lauenstein (<a href="http://ifarchive.org/if-archive/games/competition2020/Games/Shadow%20Operative/index.html">play here</a>)<br />
+&nbsp;&nbsp;- This game placed 20th in IFComp 2020<br />
+&nbsp;&nbsp;- Shadow Operative uses a tool called <a href="https://vorple-if.com/">Vorple</a> to bridge <a href="http://inform7.com/">Inform</a> code to tightly integrate with JavaScript in the web browser<br />
+<br />
+<br />
+- <a href="https://ifdb.tads.org/viewgame?id=7btsk9iqqku2t8g9">En Garde</a> by Jack Welch (<a href="http://ifarchive.org/if-archive/games/competition2018/En%20Garde/Release/play.html">play here</a>)<br />
+&nbsp;&nbsp;- This game tied for 14th place in <a href="https://ifdb.tads.org/viewcomp?id=qwgk1gfg6s3pky3">IFComp 2018</a><br />
+&nbsp;&nbsp;- You play this game by pushing a few buttons with different colors that correspond to commands<br />
+<br />
+<br />
+- <a href="http://hlabrande.fr/welcome/">Hugo Labrande</a> has a few games like this, one of which he describes as a <a href="http://hlabrande.fr/my-games/commissions/">"parser game with hyperlinks to help beginners"</a>:<br />
+&nbsp;&nbsp;- <a href="https://ifdb.tads.org/viewgame?id=nmzjzrhbrhxsv3tx">Le kébab hanté</a> (<a href="http://www.fiction-interactive.fr/fi/hlabrand/kebab-hante/jouer.html">play here</a>)<br />
+&nbsp;&nbsp;- <a href="https://ifdb.tads.org/viewgame?id=c2lri3aknb6dghw2">Secrets de pêcheurs</a> (<a href="https://ad1s.itch.io/secrets-de-pcheurs">play here</a>)<br />
+<br />
+<br />
+<br />
+With this growing list that includes the tied-for-first place 2020 IFComp entry, I'd like to try finding a name for this category.<br />
+<br />
+<a href="https://emshort.blog/">Emily Short</a> wrote about options for leaving the parser behind a decade ago in an insightful post: <a href="https://emshort.blog/2010/06/07/so-do-we-need-this-parser-thing-anyway/">So, Do We Need This Parser Thing Anyway?</a><br />
+<br />
+Here, she describes "enumerated-choice games with world modeling" with meaningful discussion of the pros and cons.<br />
+<br />
+That's a good starting point for a name! Tweaking this label to set it apart from "choice-based" IF and using a word more ordinary than "enumerated," I've started calling this sub-genre "Listed Action Interactive Fiction."<br />
+<br />
+The key characteristics of the Listed Action IF sub-genre seem to be:<br />
+- The game has a rich world model<br />
+- The user interacts with lists of actions and objects<br />
+- The game can be played without typing<br />
+<br />
+These properties make these games easier for beginners to pick up and more ergonomic to play on your phone or iPad.<br />
+<br />
+<br />
+To test out how well this UI works in practice for a rich, more traditional IF game, I took a look at the <a href="https://github.com/i7/counterfeit-monkey">source code</a> of my favorite IF game (which also happens to be written by Emily Short!), <a href="https://ifdb.tads.org/viewgame?id=aearuuxv83plclpl">Counterfeit Monkey</a>, and I built a Listed Action demo of the first few puzzles! Emily's game is super fun and brilliant.<br />
+<br />
+<a href="/m/counterfeitmonkey/index.html">Play the Listed Action Counterfeit Monkey demo here.</a><br />
+Read my dedicated post about this demo <a href="/p/counterfeit-monkey.html">here</a>.<br />
+<br />
+(You can also play the full original parser-based game <a href="http://iplayif.com/?story=https%3A%2F%2Fgithub.com%2Fi7%2Fcounterfeit-monkey%2Freleases%2Fdownload%2Fr9%2FCounterfeitMonkey-9.gblorb">here</a> / <a href="/m/counterfeitmonkey/quixe/index.html">my backup</a>)<br />
+<br />
+<br />
+I hope you enjoy it! If you do, I hope you'll consider taking the Listed Action approach the next time you write a game!<br />
+<br />
+<br />
+<img src="/m/horizontalseparator.png"><br />
+<br />
+<br />
+Notes:<br />
+<br />
+Here's the chain of tangents I followed to research this topic. This list includes some links to tools that may help you build your own Listed Action IF game.<br />
+<br />
+This is all just light research I did as a hobby. I'm by no means an expert and there are many people more qualified to write on this subject. I'm just a person diving in for fun. I'm sharing this in the hopes it'll inspire and interest other people too.<br />
+<br />
+<br />
+- I played Counterfeit Monkey years ago and it renewed my interest in IF<br />
+<br />
+- I made my <a href="/p/dungeon-memalign.html">own game</a> and shared it on <a href="https://news.ycombinator.com/item?id=25262631">HackerNews</a><br />
+&nbsp;&nbsp;- One comment asked whether there are other "click and log" games like this. That made me wonder too.<br />
+<br />
+- I learned more about <a href="/p/andrew-plotkin.html">Andrew Plotkin</a> and explored <a href="https://zarfhome.com/">his website</a>. Some cool things he made:<br />
+&nbsp;&nbsp;- <a href="https://eblong.com/zarf/glulx/quixe/">Quixe</a> (used above to link to the original parser-based game, playable in a web browser)<br />
+&nbsp;&nbsp;- His game <a href="https://www.eblong.com/zarf/zweb/btyt/">Bigger Than You Think</a><br />
+&nbsp;&nbsp;- His iOS games, such as <a href="https://itunes.apple.com/us/app/hadean-lands-interactive-alchemical/id918958300?mt=8&uo=4&at=11l9WL">Hadean Lands</a>, that have been tuned to provide useful commands on touchscreen devices<br />
+&nbsp;&nbsp;- <a href="https://zarfhome.com/if.html">His framework</a> for IF on iOS<br />
+<br />
+- I worked on the <a href="/p/counterfeit-monkey.html">Counterfeit Monkey demo</a> to further explore Listed Action IF<br />
+&nbsp;&nbsp;- Take a look at the <a href="https://github.com/memalign/memalign.github.io/tree/master/m/counterfeitmonkey">source code</a> and feel free to fork it to make your own game. See also <a href="/p/dungeon-memalign.html">Dungeon Memalign</a> & <a href="/p/pacman-dungeon.html">PacMan Dungeon</a>.<br />
+<br />
+- I looked at <a href="https://ifdb.tads.org/viewcomp?id=zkwmnr8k90q7wb2">IFComp 2020</a> to see what the current state of the art is<br />
+<br />
+- That listed <a href="https://ifdb.tads.org/viewgame?id=41cr9x95gu6tlfeu">The Impossible Bottle</a> - I actually missed that this was Listed Action IF because I clicked the wrong link and initially only played the pure parser-based version<br />
+<br />
+- It also listed <a href="https://ifdb.tads.org/viewgame?id=wbv84rstru6c91lr">Shadow Operative</a><br />
+<br />
+- Shadow Operative led me to <a href="https://vorple-if.com/">Vorple</a><br />
+<br />
+- That led me to <a href="https://ifdb.tads.org/search?sortby=new&newSortBy.x=0&newSortBy.y=0&searchfor=vorple">audit Vorple games on IFDB</a> to see if any others are Listed Action IF<br />
+<br />
+- The audit led me to <a href="http://hlabrande.fr/welcome/">Hugo Labrande's website</a><br />
+<br />
+- Vorple's website led me to <a href="https://borogove.app/">Borogove</a>, an online IDE for making IF games<br />
+<br />
+- Borogove supports a few programming languages for developing IF. I was familiar with most but I saw a new one: <a href="https://www.linusakesson.net/dialog/">Dialog</a><br />
+<br />
+- Dialog led me to <a href="https://www.linusakesson.net/index.php">Linus Åkesson's website</a><br />
+<br />
+- That led me to Linus's games <a href="https://www.linusakesson.net/games/pas-de-deux/index.php">Pas De Deux</a> and <a href="https://www.linusakesson.net/games/the-impossible-bottle/index.php">The Impossible Bottle</a> - wait a sec! This is when I noticed that The Impossible Bottle is not standard parser-based IF.<br />
+<br />
+- Then I did some general web searches for:<br />
+&nbsp;&nbsp;- mobile interactive fiction<br />
+&nbsp;&nbsp;- hypertext hybrid interactive fiction<br />
+&nbsp;&nbsp;- etc<br />
+<br />
+- I saw that <a href="https://emshort.blog/">Emily Short</a>'s blog covered these topics<br />
+&nbsp;&nbsp;- This took me to her <a href="https://emshort.blog/2010/06/07/so-do-we-need-this-parser-thing-anyway/">2010 article</a><br />
+&nbsp;&nbsp;- Also this <a href="https://emshort.blog/2014/12/16/hybrid-interfaces-texture-contrition-porpentine-spondre-jay-nabonne/">other post</a><br />
+<br />
+
+<hr />
 
 <div id='header'>
 <h2>
@@ -1833,218 +2039,9 @@ Resources:<br />
 - <a href="/m/graph-js/states-daily.json">Snapshot of States Daily data</a><br />
 
 <hr />
-
-<div id='header'>
-<h2>
-<a href='p/books.html'>Books</a>
-</h2>
-</div>
-<img src="/m/book.svg">
-<div id='postdate'>Posted on 4/19/2020</div>
-I know some people who are always reading a book. I’m not an avid book reader like them.<br />
-<br />
-I enjoy reading, though. When reading, I get attached to the characters and the plot. When I finish a book, I feel melancholy, a mild mourning for my fictional companions.<br />
-I try to pick books that will be fun to read while also sticking with me for years to come.<br />
-In some ways, I treat TV, movies, and books similarly: I don’t always need to be consuming something and I try to pick meaningful ones. I like to think about what I watched/read for weeks or months before picking up something else.<br />
-<br />
-Here’s a list of some books I’ve read. I’ll try to update this periodically.<br />
-<br />
-<br />
-<br />
-Non-Fiction:<br />
-<br />
-- Becoming Steve Jobs<br />
-<br />
-- Black Like Me<br />
-<br />
-- The Checklist Manifesto<br />
-<br />
-- Creative Selection<br />
-<br />
-- Extreme Ownership<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The lessons in this book directly apply to engineering management and leadership. I highly recommend it.<br />
-<br />
-- Getting to Yes<br />
-<br />
-- The Hard Thing About Hard Things<br />
-<br />
-- Punished by Rewards<br />
-<br />
-- Radical Candor<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- This is another great book for leaders and managers.<br />
-<br />
-- Steve Jobs<br />
-<br />
-- Thinking Fast and Slow<br />
-<br />
-<br />
-<br />
-Fiction:<br />
-<br />
-- American Gods<br />
-<br />
-- Atlas Shrugged<br />
-<br />
-- The Bicentennial Man<br />
-<br />
-- Brave New World<br />
-<br />
-- Breakfast of Champions<br />
-<br />
-- Cat’s Cradle<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- I like Vonnegut’s writing for its humor, depth, and straightforwardness. He’s one of the few authors with more than one book on my list.<br />
-<br />
-- The Catcher in the Rye<br />
-<br />
-- Choke<br />
-<br />
-- Dirk Gently's Holistic Detective Agency<br />
-<br />
-- Dune<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The writing is dense and not usually what I would choose to read. I’m still glad I read it because it’s one of the classics which gets a lot of references.<br />
-<br />
-- <a href="http://www.galactanet.com/oneoff/theegg_mod.html">The Egg</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Wonderful short story by Andy Weir<br />
-<br />
-- Ender’s Game<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- One of my favorite books. It’s an interesting story which also influences my own thoughts about leadership in the real world.<br />
-<br />
-- Ender’s Shadow<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- A sort-of-sequel to Ender’s Game. I enjoyed how it layers extra depth onto a story I already loved.<br />
-<br />
-- Fight Club<br />
-<br />
-- Foundation trilogy<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Foundation<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Foundation and Empire<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Second Foundation<br />
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Asimov is another author with many books on my list. I think about these stories a lot today (in the year 2020) when things feel out of control.<br />
-<br />
-- Futuristic Violence and Fancy Suits<br />
-<br />
-- Girl with the Dragon Tattoo series<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Girl with the Dragon Tattoo<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Girl Who Played with Fire<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Girl Who Kicked the Hornets’ Nest<br />
-<br />
-- The Gods Themselves<br />
-<br />
-- Good Omens<br />
-<br />
-- Harry Potter series<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Sorcerer’s Stone<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Chamber of Secrets<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Prisoner of Azkaban<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Goblet of Fire<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Order of the Phoenix<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Half-Blood Prince<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Deathly Hallows<br />
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- A series core to my childhood and young adulthood. I got the first book as a present from my grandmother for graduating 5th grade.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
-- Hitchhiker’s Guide to the Galaxy trilogy<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Hitchhiker’s Guide to the Galaxy<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Restaurant at the End of the Universe<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Life, the Universe and Everything<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- So Long, and Thanks for All the Fish<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Mostly Harmless<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Young Zaphod Plays it Safe<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- And Another Thing...<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Funny and light while still carrying depth. Some of my favorites.<br />
-<br />
-- Hyperion<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Interesting stories though I wish I had known up-front that there would be no ending to tie off loose ends and plot-lines.<br />
-<br />
-- The Illustrated Man<br />
-<br />
-- John Dies at the End series<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- John Dies at the End<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- This Book is Full of Spiders<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- What the Hell Did I Just Read<br />
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Fun comedy horror from Jason Parkin (aka David Wong), another author with several books on my list.<br />
-<br />
-- <a href="https://www.multivax.com/last_question.html">The Last Question</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Wonderful short story by Isaac Asimov<br />
-<br />
-- Learning to Be Me<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Unsettling and thought-provoking short story by Greg Egan. It could be a Black Mirror episode.<br />
-<br />
-- The Little Prince<br />
-<br />
-- Lord of the Flies<br />
-<br />
-- Lord of the Rings<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Hobbit<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Fellowship of the Ring<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Two Towers<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- The Return of the King<br />
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Dense fantasy classics. I’m glad I’ve read them but I don’t love them. I tried to read the Silmarillion but that was way too far in the wrong direction for me (even more dense and way less story).<br />
-<br />
-- The Perks of Being a Wallflower<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Really resonated with my angsty teenager self<br />
-<br />
-- The Red Pony<br />
-<br />
-- Replay<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- One of my favorite books: fun, fast, thought-provoking<br />
-<br />
-- Slaughterhouse-Five<br />
-<br />
-- Snow Crash<br />
-<br />
-- The Terminal Experiment <br />
-<br />
-- Watchmen<br />
-<br />
-- Watership Down<br />
-
-<hr />
-
-<div id='header'>
-<h2>
-<a href='p/notes-txt.html'>notes.txt</a>
-</h2>
-</div>
-<img src="/m/ios-notes.png">
-<div id='postdate'>Posted on 4/13/2020</div>
-At a software engineering internship in 2006, my mentor told me that he kept a paper engineering journal that he put notes in every day as he worked on problems. He gave me one, too. I followed that habit during all of my internships.<br />
-<br />
-Then ~4 years later, I started working as a full-time software engineer. A few months into working, I stopped using a paper notebook. I think part of the reason is that I had a better tool: the bug tracker. Pretty much every assignment I got had a corresponding entry in a bug tracking database. I started keeping the notes of my investigations in bug reports directly so there would be a central and shared source of truth. A mentor at this job said "some of the best engineers" put frequent clear updates in their bugs.<br />
-<br />
-My personal projects had always been note-free, though. Unfortunately, I didn't bring the same problem-solving-and-knowledge-capturing discipline to personal projects until ~2016. That's a whole decade after learning the value of an engineering journal at work!<br />
-<br />
-Now, even for informal personal projects, I keep a notes.txt file in the <a href="/p/source-control.html">git repository</a>. <br />
-<br />
-Here's an excerpt from notes.txt for this website (which is a personal side-project of its own):<br />
-<br />
-<div id='code'>12/25/19<br />
-<br />
-I created a user page in github!<br />
-<br />
-I found that I have to publish from the master branch and the root directory of the memalign.github.io project. I also found that an index.html file with just plaintext contents wouldn&#039;t get served for https://memalign.github.io<br />
-<br />
-( I figured this out by googling and finding:<br />
-https://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266 )</div>
-(You can see the full notes.txt for the project <a href="/notes.txt">here</a>.)<br />
-<br />
-I use notes.txt to capture:<br />
-<br />
-- Problems I'm running into<br />
-- Thoughts on what might be happening<br />
-- Potential solutions to explore<br />
-- The solution that worked<br />
-- Useful links and other research<br />
-- Useful commands<br />
-- The full steps required to do something novel (for example: getting a 3rd party open source library to build and install correctly)<br />
-- Features I want to add<br />
-- The bug list<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- For a simple side-project a text bug list embedded in my notes is much easier than a full bug tracker
-<hr />
 More posts:<br />
+<a href='p/books.html'>Books</a><br />
+<a href='p/notes-txt.html'>notes.txt</a><br />
 <a href='p/speed-up-av.html'>Download Video Into Your Brain</a><br />
 <a href='p/tts-download-into-brain.html'>Download Text Into Your Brain</a><br />
 <a href='p/source-control.html'>Source Control</a><br />

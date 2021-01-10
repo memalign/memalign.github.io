@@ -1,0 +1,138 @@
+Title: Listed Action Interactive Fiction
+Date: 1/9/2021
+
+[Image:/m/listed-actions.jpg]
+
+As I so love to do, I've fallen down the [Link:/p/rabbit-hole.html]rabbit hole[/Link] on a new topic over winter break 2020: the different kinds of interactive fiction.
+
+After building [Link:/p/dungeon-memalign.html]my first text adventure game[/Link] ([Link:/m/dungeon/index.html]play here[/Link]) with the explicit goal of being mobile-friendly, I did some research and prototyping to understand:
+
+- What have people already figured out about touchscreen-friendly interactive fiction?
+
+- How well does the "listed action" approach I took in Dungeon Memalign work for a traditional IF game?
+
+
+Excitingly, there's been some deep discussion and successful exploration in the community!
+
+
+For context, here's a quick recap of the main types of interactive fiction you'll find today on [Link:https://ifdb.tads.org]IFDB[/Link]:
+
+- Parser-based IF
+  "Parser-based IF, also known as the 'text adventure' genre, represents one of the oldest and best-known forms of interactive fiction. Some early examples are digital games from the 70s and 80s like Zork and Enchanter. In a parser game, players type natural-language commands into a simulated world, and the game interprets them as actions for the story’s main character to carry out. Parser games often involve puzzles that the player must solve to move forward in the story."
+
+- Choice-based IF
+  "In choice-based interactive fiction, players choose among a number of options to advance the story. These options are presented either as an explicit multiple-choice menu, or as hyperlinks within the story text. Compared to parser IF, choice-based games tend to focus more on navigating branching narratives and multiple endings than on puzzles to solve or secrets to find."
+  - These games are similar to "Choose Your Own Adventure" books
+
+(These definitions are quoted from [Link:https://iftechfoundation.org/frequently-asked-questions/]IFTF's FAQ[/Link])
+
+
+Games that have a rich world model without requiring typed commands don't fit neatly into these two categories. Despite the lack of neat label, there are a bunch of cool games that can be played entirely (or almost entirely) by clicking/tapping instead of typing. Note: though I have tried all of these games, I have not played them to completion.
+
+- [Link:https://ifdb.tads.org/viewgame?id=41cr9x95gu6tlfeu]The Impossible Bottle[/Link] by [Link:https://www.linusakesson.net]Linus Åkesson[/Link] ([Link:https://linusakesson.net/games/the-impossible-bottle/rel1/play.html]play here[/Link])
+  - This game tied for first place in [Link:https://ifdb.tads.org/viewcomp?id=zkwmnr8k90q7wb2]IFComp 2020[/Link]!
+  - Linus writes about the game in depth [Link:https://www.linusakesson.net/games/the-impossible-bottle/postscriptum/index.php]here[/Link], including its hybrid interface:
+  "The Impossible Bottle is a hybrid parser/choice game. There's a prompt where you can type commands, but there are also hyperlinks for inserting text at the prompt, and it's possible to complete nearly all of the game using those links. Typing is generally faster, except on touch-screen devices where tapping on links is faster."
+  - Note: I almost missed the unique interface of this game because the big "Play On-line" button on IFDB takes you to the traditional parser-based way to play. The "play here" link above (which is less-prominently featured on the IFDB page) takes you to this special way to play.
+
+
+- [Link:https://ifdb.tads.org/viewgame?id=h9x354wyakeeanik]Bigger Than You Think[/Link] by [Link:https://zarfhome.com/]Andrew Plotkin[/Link] ([Link:https://www.eblong.com/zarf/zweb/btyt/]play here[/Link])
+  - At first this game may seem purely choice-based but there is rich world state. Andrew has shared the [Link:https://www.eblong.com/zarf/zweb/btyt/btyt-src.html]source code[/Link] which is an interesting read!
+
+
+- [Link:https://ifdb.tads.org/viewgame?id=wbv84rstru6c91lr]Shadow Operative[/Link] by Michael Lauenstein ([Link:http://ifarchive.org/if-archive/games/competition2020/Games/Shadow%20Operative/index.html]play here[/Link])
+  - This game placed 20th in IFComp 2020
+  - Shadow Operative uses a tool called [Link:https://vorple-if.com/]Vorple[/Link] to bridge [Link:http://inform7.com/]Inform[/Link] code to tightly integrate with JavaScript in the web browser
+
+
+- [Link:https://ifdb.tads.org/viewgame?id=7btsk9iqqku2t8g9]En Garde[/Link] by Jack Welch ([Link:http://ifarchive.org/if-archive/games/competition2018/En%20Garde/Release/play.html]play here[/Link])
+  - This game tied for 14th place in [Link:https://ifdb.tads.org/viewcomp?id=qwgk1gfg6s3pky3]IFComp 2018[/Link]
+  - You play this game by pushing a few buttons with different colors that correspond to commands
+
+
+- [Link:http://hlabrande.fr/welcome/]Hugo Labrande[/Link] has a few games like this, one of which he describes as a [Link:http://hlabrande.fr/my-games/commissions/]"parser game with hyperlinks to help beginners"[/Link]:
+  - [Link:https://ifdb.tads.org/viewgame?id=nmzjzrhbrhxsv3tx]Le kébab hanté[/Link] ([Link:http://www.fiction-interactive.fr/fi/hlabrand/kebab-hante/jouer.html]play here[/Link])
+  - [Link:https://ifdb.tads.org/viewgame?id=c2lri3aknb6dghw2]Secrets de pêcheurs[/Link] ([Link:https://ad1s.itch.io/secrets-de-pcheurs]play here[/Link])
+
+
+
+With this growing list that includes the tied-for-first place 2020 IFComp entry, I'd like to try finding a name for this category.
+
+[Link:https://emshort.blog/]Emily Short[/Link] wrote about options for leaving the parser behind a decade ago in an insightful post: [Link:https://emshort.blog/2010/06/07/so-do-we-need-this-parser-thing-anyway/]So, Do We Need This Parser Thing Anyway?[/Link]
+
+Here, she describes "enumerated-choice games with world modeling" with meaningful discussion of the pros and cons.
+
+That's a good starting point for a name! Tweaking this label to set it apart from "choice-based" IF and using a word more ordinary than "enumerated," I've started calling this sub-genre "Listed Action Interactive Fiction."
+
+The key characteristics of the Listed Action IF sub-genre seem to be:
+- The game has a rich world model
+- The user interacts with lists of actions and objects
+- The game can be played without typing
+
+These properties make these games easier for beginners to pick up and more ergonomic to play on your phone or iPad.
+
+
+To test out how well this UI works in practice for a rich, more traditional IF game, I took a look at the [Link:https://github.com/i7/counterfeit-monkey]source code[/Link] of my favorite IF game (which also happens to be written by Emily Short!), [Link:https://ifdb.tads.org/viewgame?id=aearuuxv83plclpl]Counterfeit Monkey[/Link], and I built a Listed Action demo of the first few puzzles! Emily's game is super fun and brilliant.
+
+[Link:/m/counterfeitmonkey/index.html]Play the Listed Action Counterfeit Monkey demo here.[/Link]
+Read my dedicated post about this demo [Link:/p/counterfeit-monkey.html]here[/Link].
+
+(You can also play the full original parser-based game [Link:http://iplayif.com/?story=https%3A%2F%2Fgithub.com%2Fi7%2Fcounterfeit-monkey%2Freleases%2Fdownload%2Fr9%2FCounterfeitMonkey-9.gblorb]here[/Link] / [Link:/m/counterfeitmonkey/quixe/index.html]my backup[/Link])
+
+
+I hope you enjoy it! If you do, I hope you'll consider taking the Listed Action approach the next time you write a game!
+
+
+[Image:/m/horizontalseparator.png]
+
+
+Notes:
+
+Here's the chain of tangents I followed to research this topic. This list includes some links to tools that may help you build your own Listed Action IF game.
+
+This is all just light research I did as a hobby. I'm by no means an expert and there are many people more qualified to write on this subject. I'm just a person diving in for fun. I'm sharing this in the hopes it'll inspire and interest other people too.
+
+
+- I played Counterfeit Monkey years ago and it renewed my interest in IF
+
+- I made my [Link:/p/dungeon-memalign.html]own game[/Link] and shared it on [Link:https://news.ycombinator.com/item?id=25262631]HackerNews[/Link]
+  - One comment asked whether there are other "click and log" games like this. That made me wonder too.
+
+- I learned more about [Link:/p/andrew-plotkin.html]Andrew Plotkin[/Link] and explored [Link:https://zarfhome.com/]his website[/Link]. Some cool things he made:
+  - [Link:https://eblong.com/zarf/glulx/quixe/]Quixe[/Link] (used above to link to the original parser-based game, playable in a web browser)
+  - His game [Link:https://www.eblong.com/zarf/zweb/btyt/]Bigger Than You Think[/Link]
+  - His iOS games, such as [Link:https://itunes.apple.com/us/app/hadean-lands-interactive-alchemical/id918958300?mt=8&uo=4&at=11l9WL]Hadean Lands[/Link], that have been tuned to provide useful commands on touchscreen devices
+  - [Link:https://zarfhome.com/if.html]His framework[/Link] for IF on iOS
+
+- I worked on the [Link:/p/counterfeit-monkey.html]Counterfeit Monkey demo[/Link] to further explore Listed Action IF
+  - Take a look at the [Link:https://github.com/memalign/memalign.github.io/tree/master/m/counterfeitmonkey]source code[/Link] and feel free to fork it to make your own game. See also [Link:/p/dungeon-memalign.html]Dungeon Memalign[/Link] & [Link:/p/pacman-dungeon.html]PacMan Dungeon[/Link].
+
+- I looked at [Link:https://ifdb.tads.org/viewcomp?id=zkwmnr8k90q7wb2]IFComp 2020[/Link] to see what the current state of the art is
+
+- That listed [Link:https://ifdb.tads.org/viewgame?id=41cr9x95gu6tlfeu]The Impossible Bottle[/Link] - I actually missed that this was Listed Action IF because I clicked the wrong link and initially only played the pure parser-based version
+
+- It also listed [Link:https://ifdb.tads.org/viewgame?id=wbv84rstru6c91lr]Shadow Operative[/Link]
+
+- Shadow Operative led me to [Link:https://vorple-if.com/]Vorple[/Link]
+
+- That led me to [Link:https://ifdb.tads.org/search?sortby=new&newSortBy.x=0&newSortBy.y=0&searchfor=vorple]audit Vorple games on IFDB[/Link] to see if any others are Listed Action IF
+
+- The audit led me to [Link:http://hlabrande.fr/welcome/]Hugo Labrande's website[/Link]
+
+- Vorple's website led me to [Link:https://borogove.app/]Borogove[/Link], an online IDE for making IF games
+
+- Borogove supports a few programming languages for developing IF. I was familiar with most but I saw a new one: [Link:https://www.linusakesson.net/dialog/]Dialog[/Link]
+
+- Dialog led me to [Link:https://www.linusakesson.net/index.php]Linus Åkesson's website[/Link]
+
+- That led me to Linus's games [Link:https://www.linusakesson.net/games/pas-de-deux/index.php]Pas De Deux[/Link] and [Link:https://www.linusakesson.net/games/the-impossible-bottle/index.php]The Impossible Bottle[/Link] - wait a sec! This is when I noticed that The Impossible Bottle is not standard parser-based IF.
+
+- Then I did some general web searches for:
+  - mobile interactive fiction
+  - hypertext hybrid interactive fiction
+  - etc
+
+- I saw that [Link:https://emshort.blog/]Emily Short[/Link]'s blog covered these topics
+  - This took me to her [Link:https://emshort.blog/2010/06/07/so-do-we-need-this-parser-thing-anyway/]2010 article[/Link]
+  - Also this [Link:https://emshort.blog/2014/12/16/hybrid-interfaces-texture-contrition-porpentine-spondre-jay-nabonne/]other post[/Link]
+
