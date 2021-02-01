@@ -83,8 +83,6 @@ Fiction:
 
     - Asimov is another author with many books on my list. I think about these stories a lot today (in the year 2020) when things feel out of control.
 
-- Futuristic Violence and Fancy Suits
-
 - Girl with the Dragon Tattoo series
     - The Girl with the Dragon Tattoo
     - The Girl Who Played with Fire
@@ -163,3 +161,7 @@ Fiction:
 - Watchmen
 
 - Watership Down
+
+- Zoey Ashe series
+    - Futuristic Violence and Fancy Suits
+    - Zoey Punches the Future in the Dick

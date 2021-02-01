@@ -55,6 +55,11 @@ Games that have a rich world model without requiring typed commands don't fit ne
   - [Link:https://ifdb.tads.org/viewgame?id=c2lri3aknb6dghw2]Secrets de pêcheurs[/Link] ([Link:https://ad1s.itch.io/secrets-de-pcheurs]play here[/Link])
 
 
+- [Link:https://swords.sleepless.com/]Swords[/Link] is a web-based world editor and game engine for Listed Action IF games
+  - Play an existing map [Link:https://swords.sleepless.com/play/]here[/Link]
+  - Create your own game [Link:https://swords.sleepless.com/editor/]here[/Link]
+  - In addition to web-based play, Swords games can be played via Amazon Alexa or Discord chat. I haven't tried this out though.
+
 
 With this growing list that includes the tied-for-first place 2020 IFComp entry, I'd like to try finding a name for this category.
 
@@ -136,3 +141,4 @@ This is all just light research I did as a hobby. I'm by no means an expert and 
   - This took me to her [Link:https://emshort.blog/2010/06/07/so-do-we-need-this-parser-thing-anyway/]2010 article[/Link]
   - Also this [Link:https://emshort.blog/2014/12/16/hybrid-interfaces-texture-contrition-porpentine-spondre-jay-nabonne/]other post[/Link]
 
+- About a month after originally publishing this post, I saw a [Link:https://www.reddit.com/r/textadventures/comments/i0uq4l/discord_text_adventure/]reddit post[/Link] about [Link:https://swords.sleepless.com]Swords[/Link].
