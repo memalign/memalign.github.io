@@ -1,0 +1,88 @@
+Title: Building a Reddit app
+Date: 2/7/2021
+
+[Image:/m/reddit.png]
+
+Visiting [Link:https://en.wikipedia.org/wiki/Reddit]Reddit[/Link] can be a nice way to relax. Reddit can be many things: entertaining, mindless, funny, eye-opening, and more.
+
+After years of using [Link:https://www.reddit.com]reddit.com[/Link] and various apps, I wondered whether I could improve my own Reddit browsing experience.
+
+It turned out I could! I was able to throw together a Reddit reader app by adopting the official Reddit API and reusing some components from my [Link:/p/feedly.html]Feedly RSS reader[/Link].
+
+Here are some unique user experiences I built in:
+
+- Automatically hide posts I've already seen
+  - I treat Reddit more like a news feed. Any post I scroll past is marked as "read" so I won't have to see it again. Even when I refresh later, read posts remain hidden. This differs from most Reddit reader apps, where if you browse and refresh over the course of an hour, you'll end up seeing a long list of posts you've already encountered.
+
+- Combine Best and Top lists
+  - Reddit's website and most apps let you pick whether you want to see the "best" posts or the "top" posts. You can even choose whether to see the "top" posts from the past hour, day, week, month, year, or all time. You can manually pick which list you want to browse.
+  - Instead of viewing one batch at a time, I combine several of these lists automatically
+  - This helps me avoid running out of content on the days I spend a lot of time on Reddit. It also helps me see the best things I missed on days when I didn't visit Reddit.
+  - Here's the heuristic I use as I load subsequent pages:
+    - When loading from the start, I load the 20 "best" posts and the 20 "top" posts for the day
+    - When I finish that first page, I load the next page of those requests
+    - When I finish reading the second page, I load the next page of those requests plus the 20 "top" posts for the week. This is where I start to mix in older posts that I might've missed.
+    - When I finish the third page, I load the next page of those requests plus the 20 "top" posts for the month
+    - When I finish the fourth page, I load the next page of those requests plus the 20 "top" posts for the year and all time
+    - For all subsequent pages, I load the next page of all those requests
+    - After 20 minutes of browsing, the next refresh automatically starts over at the first page
+
+- No infinite scrolling
+  - With infinite scrolling, it's too hard to find a stopping point. I prefer to manually "pull to refresh" to load the next page. I can set boundaries for myself such as "I'll just read one more page".
+
+
+
+Here's some quick info to get started adopting the Reddit API yourself:
+
+- Take a look at the official [Link:https://www.reddit.com/dev/api]Reddit API documentation[/Link]
+
+- The requests return JSON payloads which can be parsed easily in most programming languages
+
+- To get familiar with the specific payload formats, I like to make a request, copy its response, and paste it into a [Link:https://jsonformatter.org]JSON reformatter[/Link] to make it easier to read
+
+- Here's an example simple request you can perform on the command line:
+[Code]
+# Response will be outputted
+curl https://api.reddit.com/r/aww+funny+jokes/top?limit=20
+
+# Response will be copied to the clipboard (macOS only)
+curl https://api.reddit.com/r/aww+funny+jokes/top?limit=20 | pbcopy
+[/Code]
+
+- Here's more detail about the "top" request:
+[Code]
+https://api.reddit.com/r/SUBREDDITS/top?limit=LIMIT&t=TIMEFRAME&after=AFTER&count=COUNT
+
+SUBREDDITS = subreddit names separated by "+"
+LIMIT = integer number of posts to receive
+TIMEFRAME = "hour", "day", "week", "month", "year", or "all"
+AFTER = include this argument when requesting the next page. Use the "after" value from the response for the previous page.
+COUNT = number of posts seen on all previous pages (when using a limit of 20: count will be omitted on page 1, count=20 on page 2, count=40 on page 3, etc)
+
+Example:
+
+https://api.reddit.com/r/aww+funny+jokes/top?limit=20&t=hour
+(when requesting the first page, omit "after" and "count")
+
+https://api.reddit.com/r/aww+funny+jokes/top?limit=20&t=hour&after=t3_ldwt5j&count=20
+(when requesting the second page, include "after" and "count")
+[/Code]
+
+- Here's more detail about the "best" request:
+[Code]
+https://api.reddit.com/r/SUBREDDITS/best?limit=LIMIT&after=AFTER&count=COUNT
+
+SUBREDDITS = subreddit names separated by "+"
+LIMIT = integer number of posts to receive
+AFTER = include this argument when requesting the next page. Use the "after" value from the response for the previous page.
+COUNT = number of posts seen on all previous pages (when using a limit of 20: count will be omitted on page 1, count=20 on page 2, count=40 on page 3, etc)
+
+Example:
+
+https://api.reddit.com/r/aww+funny+jokes/best?limit=20
+(when requesting the first page, omit "after" and "count")
+
+https://api.reddit.com/r/aww+funny+jokes/best?limit=20&after=t3_ldwt5j&count=20
+(when requesting the second page, include "after" and "count")
+[/Code]
+

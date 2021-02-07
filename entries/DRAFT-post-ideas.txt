@@ -2,11 +2,10 @@
 - JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
 - SiteGenerator
 - Vision framework
-- Counterfeit Monkey
 - Andrew Myers' relplot: http://www.cs.cornell.edu/w8/~andru/relplot/ source: https://github.com/andrewcmyers/relplot
   - Relplot running in browser and more interactive?
   - Running SML in-browser may be possible: https://github.com/sergi/mlkit.git
-  
+
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 
 - https://freeicons.io/
