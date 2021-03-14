@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="/m/reddit.png" />
-<meta property="og:description" content="Visiting Reddit can be a nice way to relax. Reddit can be many things: entertaining, mindless, funny, eye-opening, and more. After years of using reddit.com and various apps, I wondered…" />
+<meta property="og:image" content="/m/whosampled.png" />
+<meta property="og:description" content="I like listening to music. I like it even more when I discover connections between songs. It's cool to find out that a song is a cover of another song…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -24,6 +24,7 @@
 <a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
 </div><div id='allposts'>
 <b>All posts:</b><br />
+<a href='p/similar-songs.html'>Similar Songs</a><br />
 <a href='p/reddit.html'>Building a Reddit app</a><br />
 <a href='p/counterfeit-monkey.html'>Counterfeit Monkey</a><br />
 <a href='p/listed-action-if.html'>Listed Action Interactive Fiction</a><br />
@@ -50,6 +51,52 @@
 <a href='p/feedly.html'>RSS and Feedly</a><br />
 <a href='p/this-website.html'>Welcome</a><br />
 </div>
+
+<div id='header'>
+<h2>
+<a href='p/similar-songs.html'>Similar Songs</a>
+</h2>
+</div>
+<img src="/m/whosampled.png">
+<div id='postdate'>Posted on 3/14/2021</div>
+I like listening to music. I like it even more when I discover connections between songs.<br />
+<br />
+It's cool to find out that a song is a cover of another song or that it contains samples of other songs.<br />
+<br />
+<a href="https://whosampled.com">WhoSampled.com</a> is a useful resource to find these connections. Rap songs in particular often contain a bunch of samples! Try searching for your favorites.<br />
+<br />
+<br />
+Here are some of my favorite connections:<br />
+<br />
+- <a href="https://www.youtube.com/watch?v=LDj8kkVwisY">My Name Is</a> by Eminem<br />
+&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=xKISdd2mKzU">I Got The...</a> by Labi Siffre<br />
+<br />
+- <a href="https://www.youtube.com/watch?v=9YpvNgCSaCU">Old Town Road</a> by Lil Nas X<br />
+&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=XF_ceFugJjQ">Ghosts IV - 34</a> by NIN<br />
+<br />
+- <a href="https://www.youtube.com/watch?v=LOZuxwVk7TU">Toxic</a> by Britney Spears<br />
+&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=oGKDBhdxn6c">Tere Mere Beech Mein</a> by Lata Mangeshkar & S. P. Balasubrahmanyam<br />
+<br />
+- <a href="https://www.youtube.com/watch?v=jPW5A_JyXCY">Sugar</a> by Robin Schulz feat. Francesco Yates<br />
+&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=6rgStv12dwA">Suga Suga</a> by Baby Bash feat. Frankie J<br />
+<br />
+- Seth Everman combining <a href="https://www.youtube.com/watch?v=Xrbqsk-21wQ">Moonlight Sonata and Still D.R.E.</a><br />
+<br />
+<br />
+Separate from direct samples, I started noting down songs that remind me of each other. Maybe the songs share a similar palette, a similar bassline, or similar instruments.<br />
+<br />
+- Shared characteristic: eerie robotic beeps and boops<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=U_qi6Zlo70o">Pure Imagination</a> by Fiona Apple<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- See also Chipotle's <a href="https://vimeo.com/98800121">Scarecrow</a> video that features the same song<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Note that this song is a cover of Gene Wilder's <a href="https://www.youtube.com/watch?v=RZ-uV72pQKI">original rendition</a> in Willy Wonka & the Chocolate Factory<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=0MJobnhWrk4">Terry Time</a> from Pixar's Soul by Trent Reznor and Atticus Ross<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=iT2kStWiUVw">Dr. Ford</a> from Westworld Season 1 Soundtrack by Ramin Djawadi<br />
+<br />
+- Shared characteristic: late 90s alt rock<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=PiBX-ESFDF0">Sunday Morning</a> by No Doubt<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=dTFg2N97Q98">Having An Average Weekend</a> (aka the theme song to Kids in the Hall) by Shadowy Men on a Shadowy Planet<br />
+
+<hr />
 
 <div id='header'>
 <h2>
@@ -1571,47 +1618,8 @@ For example:<br />
 - And now we're back to the beginning of our FaceTime call when I asked how you're doing in these crazy times<br />
 
 <hr />
-
-<div id='header'>
-<h2>
-<a href='p/live-covid19.html'>Live COVID-19 Dashboard</a>
-</h2>
-</div>
-<img src="/m/graph-js.jpg">
-<div id='postdate'>Posted on 5/9/2020</div>
-As a followup to <a href="/p/graph-js.html">graphing in Scriptable</a>, I took some time to convert the script into a live web dashboard.<br />
-<br />
-You can find the live dashboard <a href="/m/graph-js/covid19.html?maxStates=24">here</a>.<br />
-<br />
-<br />
-The main ways the code needed to change:<br />
-<br />
-- Instead of loading data synchronously, it is now loaded asynchronously via XMLHttpRequest<br />
-<br />
-- The document body is constructed dynamically once data loads (instead of being generated and then loaded into a web view in its complete form)<br />
-<br />
-- canvasJS requires divs to be set up before charts are created. I needed to move div setup to happen inline instead of at the end of the script.<br />
-<br />
-- Instead of generating JavaScript in string form to setup the charts, I set them up directly<br />
-<br />
-&nbsp;&nbsp;Code like this:<br />
-<div id='code'>var result = &quot;&quot;<br />
-...<br />
-result += &quot;{ x: new Date(&quot;+year+&quot;,&quot;+(month-1)+&quot;,&quot;+day+&quot;), y: &quot; + value + &quot; },\n&quot;<br />
-...<br />
-return result</div>
-&nbsp;&nbsp;Became this:<br />
-<div id='code'>var result = []<br />
-...<br />
-result.push({ x: new Date(year, month-1, day), y: value })<br />
-...<br />
-return result</div>
-- I limit the number of total charts because the full page was consuming too much memory which caused canvasJS to render completely blank charts, charts where some lines were missing, etc.<br />
-<br />
-- I also fixed a bug so lines can be hidden by clicking them in the legend<br />
-
-<hr />
 More posts:<br />
+<a href='p/live-covid19.html'>Live COVID-19 Dashboard</a><br />
 <a href='p/graph-js.html'>Create COVID-19 Graphs Using JavaScript</a><br />
 <a href='p/books.html'>Books</a><br />
 <a href='p/notes-txt.html'>notes.txt</a><br />

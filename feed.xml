@@ -5,10 +5,71 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2021-02-07T00:00:00-08:00</updated>
+<updated>2021-03-14T00:00:00-08:00</updated>
 <rights>Copyright © 2021, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Similar Songs</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/similar-songs.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/similar-songs.html" />
+<id>https://memalign.github.io/p/similar-songs.html</id>
+<published>2021-03-14T00:00:00-08:00</published>
+<updated>2021-03-14T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/similar-songs.html'>Similar Songs</a>
+</h2>
+</div>
+<img src="/m/whosampled.png">
+<div id='postdate'>Posted on 3/14/2021</div>
+I like listening to music. I like it even more when I discover connections between songs.<br />
+<br />
+It's cool to find out that a song is a cover of another song or that it contains samples of other songs.<br />
+<br />
+<a href="https://whosampled.com">WhoSampled.com</a> is a useful resource to find these connections. Rap songs in particular often contain a bunch of samples! Try searching for your favorites.<br />
+<br />
+<br />
+Here are some of my favorite connections:<br />
+<br />
+- <a href="https://www.youtube.com/watch?v=LDj8kkVwisY">My Name Is</a> by Eminem<br />
+&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=xKISdd2mKzU">I Got The...</a> by Labi Siffre<br />
+<br />
+- <a href="https://www.youtube.com/watch?v=9YpvNgCSaCU">Old Town Road</a> by Lil Nas X<br />
+&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=XF_ceFugJjQ">Ghosts IV - 34</a> by NIN<br />
+<br />
+- <a href="https://www.youtube.com/watch?v=LOZuxwVk7TU">Toxic</a> by Britney Spears<br />
+&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=oGKDBhdxn6c">Tere Mere Beech Mein</a> by Lata Mangeshkar & S. P. Balasubrahmanyam<br />
+<br />
+- <a href="https://www.youtube.com/watch?v=jPW5A_JyXCY">Sugar</a> by Robin Schulz feat. Francesco Yates<br />
+&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=6rgStv12dwA">Suga Suga</a> by Baby Bash feat. Frankie J<br />
+<br />
+- Seth Everman combining <a href="https://www.youtube.com/watch?v=Xrbqsk-21wQ">Moonlight Sonata and Still D.R.E.</a><br />
+<br />
+<br />
+Separate from direct samples, I started noting down songs that remind me of each other. Maybe the songs share a similar palette, a similar bassline, or similar instruments.<br />
+<br />
+- Shared characteristic: eerie robotic beeps and boops<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=U_qi6Zlo70o">Pure Imagination</a> by Fiona Apple<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- See also Chipotle's <a href="https://vimeo.com/98800121">Scarecrow</a> video that features the same song<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Note that this song is a cover of Gene Wilder's <a href="https://www.youtube.com/watch?v=RZ-uV72pQKI">original rendition</a> in Willy Wonka & the Chocolate Factory<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=0MJobnhWrk4">Terry Time</a> from Pixar's Soul by Trent Reznor and Atticus Ross<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=iT2kStWiUVw">Dr. Ford</a> from Westworld Season 1 Soundtrack by Ramin Djawadi<br />
+<br />
+- Shared characteristic: late 90s alt rock<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=PiBX-ESFDF0">Sunday Morning</a> by No Doubt<br />
+&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=dTFg2N97Q98">Having An Average Weekend</a> (aka the theme song to Kids in the Hall) by Shadowy Men on a Shadowy Planet<br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Building a Reddit app</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/reddit.html" />
