@@ -7,6 +7,10 @@
   - Running SML in-browser may be possible: https://github.com/sergi/mlkit.git
   
 - JavaScript Pascal compiler: https://github.com/lkesteloot/turbopascal
+  - Few dependencies (see vendor subdirectory)
+  
+- Graphtoy: https://graphtoy.com/
+  - Seems to eval JavaScript instead of make its own parser
 
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 

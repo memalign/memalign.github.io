@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="/m/whosampled.png" />
-<meta property="og:description" content="I like listening to music. I like it even more when I discover connections between songs. It's cool to find out that a song is a cover of another song…" />
+<meta property="og:image" content="/m/graphtoy.jpg" />
+<meta property="og:description" content="Computer graphics is a wonderful real-world use case for a lot of the math we learn in school. For example, take a look at Inigo Quilez's video tutorials. This one…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -24,6 +24,7 @@
 <a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
 </div><div id='allposts'>
 <b>All posts:</b><br />
+<a href='p/draw-shapes.html'>Draw Shapes Using Math</a><br />
 <a href='p/similar-songs.html'>Similar Songs</a><br />
 <a href='p/reddit.html'>Building a Reddit app</a><br />
 <a href='p/counterfeit-monkey.html'>Counterfeit Monkey</a><br />
@@ -51,6 +52,68 @@
 <a href='p/feedly.html'>RSS and Feedly</a><br />
 <a href='p/this-website.html'>Welcome</a><br />
 </div>
+
+<div id='header'>
+<h2>
+<a href='p/draw-shapes.html'>Draw Shapes Using Math</a>
+</h2>
+</div>
+<img src="/m/graphtoy.jpg">
+<div id='postdate'>Posted on 3/21/2021</div>
+Computer graphics is a wonderful real-world use case for a lot of the math we learn in school. For example, take a look at <a href="https://www.iquilezles.org">Inigo Quilez</a>'s video <a href="https://www.iquilezles.org/live/index.htm">tutorials</a>. <a href="https://www.youtube.com/watch?v=8--5LwHRhjk">This one</a> is particularly cool.<br />
+<br />
+I don't have skills like Inigo but I still have fun making 2D shapes using math.<br />
+<br />
+Here are a few fun tools for drawing 2D shapes using math:<br />
+<br />
+- TI calculators<br />
+&nbsp;&nbsp;- You might have had one of these in high school<br />
+&nbsp;&nbsp;- I had a TI-83 Plus which turned out to be a fun device. Here are some of its neat features:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- BASIC programming<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Play games in MirageOS (back in my day the most popular game was <a href="https://www.ticalc.org/archives/files/fileinfo/148/14876.html">Phoenix</a> and it looks like people kept <a href="https://www.ticalc.org/pub/83plus/asm/games/mirageos/">innovating</a> since then! They even made a version of <a href="https://www.ticalc.org/archives/files/fileinfo/429/42952.html">Geometry Wars</a>!)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Share programs and games via a cable (they spread through the whole high school this way)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Graph interesting equations and shapes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- There's a graphing mode which traces a function's shape with an animating circle. An upper classman graphed some functions together which made it look like this circle was a ball bouncing down stairs. This stuck with me and is part of the inspiration for this post!<br />
+&nbsp;&nbsp;- Looking back, I'm glad we got to play with these! Thank you, TI-83 Plus, for my earliest programming and engineering experiences!<br />
+<br />
+- Graphing calculator websites<br />
+&nbsp;&nbsp;- <a href="https://www.wolframalpha.com/input/?i=y%3Dx%2C+y%3Dx%5E2">WolframAlpha</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Very powerful. For example: <a href="https://www.wolframalpha.com/input/?i=x%5Ey+%3D+y%5Ex">graphing x^y = y^x</a>, including symbolically refactoring the equation to solve for y.<br />
+&nbsp;&nbsp;- <a href="https://www.meta-calculator.com/?panel-101-equations&data-bounds-xMin=-507.6239316239339&data-bounds-xMax=1540.3760683760684&data-bounds-yMin=-1183.3191489361732&data-bounds-yMax=1632.6808510638268&data-equations-0=%22y%3Dx%22&data-equations-1=%22y%3Dx%5E2%22&data-rand=undefined&data-hideGrid=false">Meta-Calculator</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- OK in a pinch<br />
+<br />
+- Graphing calculator apps<br />
+&nbsp;&nbsp;- <a href="https://apps.apple.com/us/app/geogebra-graphing-calculator/id1146717204">GeoGebra Graphing Calculator</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- This app is really good! Much like WolframAlpha and Relplot, this app can graph arbitrary equations and inequations like x^y = y^x, 1 = x^2 + y^2, y > x, etc.<br />
+&nbsp;&nbsp;- <a href="https://apps.apple.com/us/app/numworks-graphing-calculator/id1456585807">NumWorks Graphing Calculator</a> (simulates a physical calculator; hard to use)<br />
+<br />
+- <a href="https://www.cs.cornell.edu/w8/~andru/relplot/">Relplot</a><br />
+&nbsp;&nbsp;- Powerful graphing capabilities: arbitrary equations and inequations<br />
+&nbsp;&nbsp;- <a href="https://github.com/andrewcmyers/relplot">Source code</a> (<a href="/m/relplot.tar.gz">my backup</a>)<br />
+&nbsp;&nbsp;- Relplot is written by one of my favorite CS professors, <a href="https://www.cs.cornell.edu/andru/">Andrew Myers</a>!<br />
+&nbsp;&nbsp;- In fact, it's a more sophisticated version of a programming assignment we completed in his Functional Programming course<br />
+&nbsp;&nbsp;- Interesting implementation details:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Lexes and parses inputted formulas so they can be evaluated<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://github.com/andrewcmyers/relplot/blob/master/eqn.grm">Slightly refactors</a> the formulas to be of the form "0 = formula" or "0 > formula":<br />
+<div id='code'>Eqn   : Expr EQUALS Expr    (Plus(Expr1, neg(Expr2)))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Expr LT Expr        (Ltz(Plus(Expr1, neg(Expr2))))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Expr LE Expr        (Ltz(Plus(Expr1, neg(Expr2))))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Expr GE Expr        (Ltz(Plus(Expr2, neg(Expr1))))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Expr GT Expr        (Ltz(Plus(Expr2, neg(Expr1))))</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- For example, converts "1 = x^2 + y^2" into "0 = x^2 + y^2 + -(1)"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- In this form, all solutions to the formula are "zeros"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Uses <a href="https://en.wikipedia.org/wiki/Interval_arithmetic">interval arithmetic</a> (implemented <a href="https://github.com/andrewcmyers/relplot/blob/master/interval.sml">here</a>) to identify subsections of the graph that contain x, y values for which the formula evaluates to zero<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Like a binary search, recursively searches smaller and smaller subsections of the graph for zeros until the interval size is too small to be visible. At this threshold, it can just draw a tiny line between the corners of the interval.<br />
+<br />
+- <a href="https://graphtoy.com/">Graphtoy</a> (<a href="/m/graphtoy/index.html">my backup</a>)<br />
+&nbsp;&nbsp;- This is another cool piece of work by <a href="https://www.iquilezles.org">Inigo Quilez</a><br />
+&nbsp;&nbsp;- Something special: Graphtoy has a variable for elapsed time (t) which can be used to create animations<br />
+&nbsp;&nbsp;- <a href="/m/graphtoy/graphtoy.js">Source code</a><br />
+&nbsp;&nbsp;- Interesting implementation details:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Instead of implementing its own parser, Graphtoy turns the formulas into JavaScript snippets<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- See the "iCompile" function which tweaks the inputted formula strings to be valid JavaScript and constructs Formula objects which can later be invoked<br />
+
+<hr />
 
 <div id='header'>
 <h2>
@@ -1579,46 +1642,8 @@ function runEventLoop() {<br />
 var pauseAI = 0<br />
 runEventLoop()</div>
 <hr />
-
-<div id='header'>
-<h2>
-<a href='p/rabbit-hole.html'>Fall Down the Rabbit Hole</a>
-</h2>
-</div>
-<img src="/m/whiterabbit.jpg">
-<div id='postdate'>Posted on 5/15/2020</div>
-I enjoy following my interests and making connections that take me on tangents. This is a hobby that's supercharged by the internet.<br />
-<br />
-<br />
-A recent example:<br />
-<br />
-I was in the mood to read a good book so I asked my coworkers for recommendations. While reading the most enticing one, I had the idea to write about <a href="/p/books.html">notable books I've read</a>. While I wrote that, I did a little research into those books on Wikipedia and I discovered that, after Douglas Adams died, a concluding Hitchhiker's Guide book was published that I hadn't heard about. I read <a href="https://en.wikipedia.org/wiki/And_Another_Thing..._(novel)">that book</a> next. I refreshed my memory on his other work and saw that there was a 2016 TV series for <a href="https://www.imdb.com/title/tt4047038/">Dirk Gently's Holistic Detective Agency</a>. I watched the first episode and liked it so I binged its two seasons over the following days. I haven't read the original Dirk Gently books (and my impression is that the TV series is only loosely based on them) so I'm going to read those next. Who knows where those will take me!<br />
-<br />
-<br />
-A similar activity that can also be fun is to realize, deep into a conversation with people, that a chain of tangentially connected ideas led you to the current topic. Then you can work backwards together to figure out how you got there.<br />
-<br />
-For example:<br />
-<br />
-- What the heck led us to talking about Trader Joe's Everything but the Bagel Sesame Seasoning?<br />
-<br />
-- We were talking about having avocado toast and that seasoning goes great on it<br />
-<br />
-- Before that, we were talking about how your neighbor has an avocado tree<br />
-<br />
-- Before that, we were talking about fruit trees<br />
-<br />
-- Before that, we were talking about how Silicon Valley was largely covered in orchards before the tech boom. It was called the <a href="https://en.wikipedia.org/wiki/Santa_Clara_Valley">Valley of Heart's Delight</a>.<br />
-<br />
-- Before that, I mentioned how the first thing I noticed when I landed in the Bay Area for my first job interview is that it wasn't a frozen wasteland like upstate New York where I had just departed. The second thing I noticed is how many iconic tech companies I saw while driving down 101 from SFO to the South Bay.<br />
-<br />
-- Before that, we were fake complaining about the lack of seasons in the Bay Area... because none of us actually miss winter<br />
-<br />
-- Before that, we were talking about how time is blurring together while we're all sheltering in place<br />
-<br />
-- And now we're back to the beginning of our FaceTime call when I asked how you're doing in these crazy times<br />
-
-<hr />
 More posts:<br />
+<a href='p/rabbit-hole.html'>Fall Down the Rabbit Hole</a><br />
 <a href='p/live-covid19.html'>Live COVID-19 Dashboard</a><br />
 <a href='p/graph-js.html'>Create COVID-19 Graphs Using JavaScript</a><br />
 <a href='p/books.html'>Books</a><br />

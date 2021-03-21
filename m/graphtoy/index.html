@@ -1,0 +1,409 @@
+<html lang="en" xml:lang="en">
+<head>
+<meta charset="UTF-8">
+
+
+<title>Graphtoy</title>
+<link rel="icon" href="./favicon.png">
+<meta http-equiv="Content-Language" content="en">
+<meta name="Keywords" content="graphs, functions, mathematics, maths, quilez, inigo">
+<meta name="description" content="Graphtoy - easy graphing of functions.">
+<meta name="author" content="Inigo Quilez">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Graphtoy" />
+<meta property="og:description" content="Graphing functions easily on the web">
+<meta property="og:type" content="website" />
+<meta property="og:image" content="graphtoy.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:url" content="https://graphtoy.com" />
+<meta name="twitter:title" content="Graphtoy">
+<meta name="twitter:description" content="Graphing functions easily on the web">
+<meta name="twitter:image" content="graphtoy.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+
+:root
+{
+  --ctrlColor: #606060;
+  --ctrlColorHover: #b08010;
+}
+
+body
+{
+ color: #ffffff;
+ font-family: verdana, tahoma;
+ font-size: 15px;
+ background-color: #202020;
+ margin: 0px;
+ border: 0px;
+ padding:24px;
+}
+h1 { display: inline; }
+
+.ml { display: inline; }
+.ms { display: none; }
+
+div#formulaButtonBar
+{
+  width: 100%;
+  display: flex;
+  padding-bottom: 24px;
+}
+
+div#formulaParamBar
+{
+  width:100%;
+  display:flex;
+  align-items:center;
+  padding-top:8px;
+}
+
+.uiFuncPanel
+{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+  align-items:flex-start;
+  align-content:flex-start;
+  
+  row-gap:12px;
+  column-gap:12px;
+}
+
+.uiFuncGrid
+{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+  //margin-bottom:12px;
+  //margin-right:12px;
+}
+
+.uiFunc,
+.uiFuncB
+{
+ box-sizing:border-box;
+ //border: 1px solid;
+ margin:3px;
+ border-color: #000000;
+ border-radius:6px;
+ color:#ffffff;
+ padding-top: 6px;
+ cursor: pointer;
+ text-align: center;
+ height:32px;
+ background-color:var(--ctrlColor);
+ user-select: none;
+}
+.uiFunc  {width:88px; }
+.uiFuncB {grid-column:auto/span 2; }
+.uiFunc:hover,
+.uiFuncB:hover
+{
+ background-color: var(--ctrlColorHover);
+}
+
+//.uiFuncGrid:nth-child(2n+1) { background-color:#255061; }
+//.uiFuncGrid:nth-child(2n+0) { background-color:#346070; }
+
+.parts { display: grid; grid-template-columns: 1fr 1fr; padding-top:16px; column-gap:16px; }
+.part  { box-sizing:border-box;}
+
+.guiWindow { background-color:#404040; padding:8px; border-radius:6px;}
+
+td { padding:0; border:0 }
+a { text-decoration:none; color: #ffb010; }
+a:hover { color: #ffffff; }
+
+.formulaSection
+{
+  width:100%;
+  display:flex;
+  padding-bottom:4px;
+  align-items:center;
+}
+
+.userInput
+{
+ background-color: #202020;
+// border: 1px solid;
+ color: #ffffff;
+ padding: 4px;
+ font-size: 15px;
+ border-radius:6px;
+}
+.formVis
+{
+  flex-shrink: 0;
+  cursor: pointer;
+  color: #808080;
+}
+
+.formVisDar1 { color:#ffc040; }
+.formVisDar2 { color:#ffffa0; }
+.formVisDar3 { color:#a0ffc0; }
+.formVisDar4 { color:#40c0ff; }
+.formVisDar5 { color:#d0a0ff; }
+.formVisDar6 { color:#ff80b0; }
+
+
+.userInputButtonsBig,
+.userInputButtonsMedium,
+.userInputButtonsSmall
+{
+  background-color: var(--ctrlColor);
+  //border: 1px solid;
+  border-color: #000000;
+  color:#ffffff;
+  padding: 2px 12px 2px 12px;
+  cursor: pointer;
+  text-align: center;
+  border-radius:6px;
+  user-select: none;
+}
+.userInputButtonsBig    { min-width: 76px; }
+.userInputButtonsMedium { min-width: 48px; }
+.userInputButtonsSmall  { min-width: 48px; }
+
+.userInputButtonsBig:hover,
+.userInputButtonsMedium:hover,
+.userInputButtonsSmall:hover
+{
+ background-color: var(--ctrlColorHover);
+}
+
+
+@media only screen and (max-width: 1024px)
+{
+  body{ padding:0px; }
+  .parts { display: grid; grid-template-columns: 1fr; padding-top:0px; column-gap:0px; }
+  .part  { box-sizing:border-box; padding-bottom:16px; }
+  .ml { display: none; }
+  .ms { display: inline; }
+  div#formulaButtonBar { padding-bottom: 12px; }
+  .uiFuncGrid { grid-template-columns: 1fr 1fr 1fr; width:100%;}
+  .uiFunc  {width:auto;justify-self:stretch; }
+  .guiWindow { border-radius:0px;}
+}
+
+
+</style>
+
+<script src="graphtoy.js?v=17"></script>
+
+<script>
+var grapher = null;
+function myInit()
+{
+    let args = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    grapher = Grapher();
+	grapher.parseUrlFormulas( args );
+}
+</script>
+
+</head>
+
+<body onload="myInit();">
+<!-- --------------------------------------------------------------------------------- -->
+<div class="ml">
+<h1>Graphtoy v0.4</h1> by <a href="http://www.iquilezles.org">Inigo Quilez</a> (feedback from Raf&aelig;l Couto, Florian Mosleh, Nicholas Ralabate and Rich Eakin)</div>
+
+<!-- --------------------------------------------------------------------------------- -->
+
+<div class="parts">
+
+  <div class="part">
+
+     <div class="guiWindow" title="Pan: Left Mouse Button&#10;Zoom: Mouse Wheel, or Shift+Left Mouse Button">
+		<div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;padding-bottom:8px;">
+		  <div id="myTheme" class="userInputButtonsBig" style="margin-right:12px" onclick="grapher.toggleTheme();" title="Set Color Scheme">Dark</div>
+		  <div id="myAxes" class="userInputButtonsBig" style="margin-right:12px" onclick="grapher.toggleShowAxes();" title="Show/Hide Grid">Grid On</div>
+		  <div id="myRange" class="userInputButtonsBig" style="margin-right:12px" onclick="grapher.toggleRange();" title="Choose navigation mode">Free</div>
+		</div>
+      
+		<canvas id="mainCanvas" style="width:100%;height:auto;" width="720" height="540"></canvas>
+
+        <div id="formulaParamBar">
+		
+	        <div id="myCoords" style="margin-right: auto;">(0.0, 0.0)</div>
+            <div id="myTime" style="width:102px;">t = 0.0</div>
+		    <div class="userInputButtonsMedium" style="margin-right:12px" onclick="grapher.resetTime();"><img src="./rewind.png"/></div>
+		    <div class="userInputButtonsMedium" onclick="grapher.togglePlay();"><img id="myPlay" src="./pause.png"/></div>
+        </div>
+     </div>
+
+ </div>
+
+ <div class="part">
+
+    <div class="guiWindow">
+	    <div id="formulaButtonBar">
+            <div class="userInputButtonsSmall" style="margin-right:12px;margin-right: auto;" onclick="grapher.createLink();"><span class="ms">Link</span><span class="ml" title="Create an URL Link that you can share (already in clipboard) )">Create Link for Sharing</span></div>	
+            <div class="userInputButtonsSmall" style="margin-right:12px" onclick="grapher.clearFormulas();">Clear</div>	
+            <div class="userInputButtonsSmall" style="margin-right:12px" onclick="grapher.sample1Formulas();"><span class="ms">Ex 1</span><span class="ml">Example 1</span></div>	
+            <div class="userInputButtonsSmall" onclick="grapher.sample2Formulas();"><span class="ms">Ex 2</span><span class="ml">Example 2</span></div>	
+		</div>
+        		
+		<div class="formulaSection">
+			<div id="f1" class="formVis formVisDar1" onclick="grapher.toggleVisibility(1);">f<sub>1</sub>(x,t) = &nbsp;</div>
+			<input type="text" class="userInput" style="width:100%" name="formula1" id="formula1" value="" onchange="grapher.newFormula(1);grapher.draw();" />
+		</div>
+		<div class="formulaSection">
+			<div id="f2" class="formVis formVisDar2" onclick="grapher.toggleVisibility(2);">f<sub>2</sub>(x,t) = &nbsp;</div>
+			<input type="text" class="userInput" style="width:100%" name="formula2" id="formula2" value="" onchange="grapher.newFormula(2);grapher.draw();" />
+		</div>
+		<div class="formulaSection">
+			<div id="f3" class="formVis formVisDar3" onclick="grapher.toggleVisibility(3);">f<sub>3</sub>(x,t) = &nbsp;</div>
+			<input type="text" class="userInput" style="width:100%" name="formula3" id="formula3" value="" onchange="grapher.newFormula(3);grapher.draw();" />
+		</div>
+		<div class="formulaSection">
+			<div id="f4" class="formVis formVisDar4" onclick="grapher.toggleVisibility(4);">f<sub>4</sub>(x,t) = &nbsp;</div>
+			<input type="text" class="userInput" style="width:100%" name="formula4" id="formula4" value="" onchange="grapher.newFormula(4);grapher.draw();" />
+		</div>
+		<div class="formulaSection">
+			<div id="f5" class="formVis formVisDar5" onclick="grapher.toggleVisibility(5);">f<sub>5</sub>(x,t) = &nbsp;</div>
+			<input type="text" class="userInput" style="width:100%" name="formula5" id="formula5" value="" onchange="grapher.newFormula(5);grapher.draw();" />
+		</div>
+		<div class="formulaSection">
+			<div id="f6" class="formVis formVisDar6" onclick="grapher.toggleVisibility(6);">f<sub>6</sub>(x,t) = &nbsp;</div>
+			<input type="text" class="userInput" style="width:100%" name="formula6" id="formula6" value="" onchange="grapher.newFormula(6);grapher.draw();" />
+		</div>
+    </div>
+
+    <br>
+	<div class="guiWindow">
+
+     <div class="uiFuncPanel">
+
+	     <div class="uiFuncGrid">
+			 <div class="uiFunc" onclick="grapher.inject('()');">()</div>
+			 <div class="uiFunc" onclick="grapher.inject('+');">+</div>
+			 <div class="uiFunc" onclick="grapher.inject('-');">-</div>
+			 <div class="uiFunc" onclick="grapher.inject('*');">*</div>
+			 <div class="uiFunc" onclick="grapher.inject('/');">/</div>
+			 <div class="uiFunc" onclick="grapher.inject('rcp(');" title="1/x">rcp(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('fma(');" title="x*y+z">fma(x,y,z)</div>
+			 <div class="uiFunc" onclick="grapher.inject('%');"title="Reminder:&#10;&#10;5 % 3 = 2&#10;(-5) % 3 = -2">%</div>
+			 <div class="uiFunc" onclick="grapher.inject('mod(');" title="Modulo:&#10;&#10;mod(5,3)=2&#10;mod(-5,3)=1&#10;mod(5,-3)=-1&#10;mod(-5,-3)=-2&#10;mod(5,1.2)=0.2">mod(x,y)</div>
+			 <div></div>
+		 </div>
+	     <div class="uiFuncGrid">
+			 <div class="uiFunc" onclick="grapher.inject('^');">^</div>
+			 <div class="uiFunc" onclick="grapher.inject('**');">**</div>
+			 <div class="uiFunc" onclick="grapher.inject('pow(');">pow(x,y)</div>
+			 <div class="uiFunc" onclick="grapher.inject('exp(');">exp(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('exp2(');">exp2(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('exp10(');">exp10(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('log(');">log(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('log2(');">log2(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('log10(');">log10(x)</div>
+		 </div>
+	     <div class="uiFuncGrid">
+			 <div class="uiFunc" onclick="grapher.inject('sqrt(');">sqrt(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('cbrt(');">cbrt(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('rsqrt(');">rsqrt(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('rcbrt(');">rcbrt(x)</div>
+			 <div class="uiFuncB" onclick="grapher.inject('inversesqrt(');">inversesqrt(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('abs(');">abs(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('sign(');">sign(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('ssign(');">ssign(x)</div>
+        </div>
+        <div class="uiFuncGrid">
+			 <div class="uiFunc" onclick="grapher.inject('cos(');">cos(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('sin(');">sin(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('tan(');">tan(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('acos(');">acos(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('asin(');">asin(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('atan(');">atan(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('atan2(');">atan2(x,y)</div>
+			 <div class="uiFunc" onclick="grapher.inject('radians(');">radians(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('degrees(');">degrees(x)</div>
+	    </div>
+	    <div class="uiFuncGrid">
+			 <div class="uiFunc" onclick="grapher.inject('cosh(');">cosh(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('sinh(');">sinh(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('tanh(');">tanh(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('acosh(');">acosh(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('asinh(');">asinh(x)</div>
+			 <div class="uiFunc" onclick="grapher.inject('atanh(');">atanh(x)</div>
+        </div>
+	    <div class="uiFuncGrid">
+			<div class="uiFunc" onclick="grapher.inject('ceil(');">ceil(x)</div>
+			<div class="uiFunc" onclick="grapher.inject('floor(');">floor(x)</div>
+			<div class="uiFunc" onclick="grapher.inject('trunc(');">trunc(x)</div>
+			<div class="uiFunc" onclick="grapher.inject('round(');">round(x)</div>
+			<div class="uiFunc" onclick="grapher.inject('frac(');">frac(x)</div>
+			<div class="uiFunc" onclick="grapher.inject('fract(');">fract(x)</div>
+		</div>		 
+	    <div class="uiFuncGrid">
+			 <div class="uiFunc" onclick="grapher.inject('min(');">min(x,y)</div>
+			 <div class="uiFunc" onclick="grapher.inject('max(');">max(x,y)</div>
+			 <div class="uiFunc" onclick="grapher.inject('saturate(');">saturate(x)</div>
+			 <div class="uiFuncB" onclick="grapher.inject('clamp(');">clamp(x,c,d)</div>
+			 <div class="uiFunc" onclick="grapher.inject('step(');">step(a,x)</div>
+			 <div class="uiFuncB" onclick="grapher.inject('smoothstep(');">smoothstep(a,b,x)</div>
+			 <div class="uiFunc uiFuncG1" onclick="grapher.inject('over(');">over(x,y)</div>
+        </div>		 
+	    <div class="uiFuncGrid">
+			 <div class="uiFuncB uiFuncG2" onclick="grapher.inject('remap(');">remap(a,b,x,c,d)</div>
+			<div class="uiFunc" onclick="grapher.inject('mix(');">mix(a,b,x)</div>
+			<div class="uiFunc" onclick="grapher.inject('lerp(');">lerp(a,b,x)</div>
+			<div class="uiFunc" onclick="grapher.inject('tri(');">tri(a,x)</div>
+			<div class="uiFunc" onclick="grapher.inject('sqr(');">sqr(a,x)</div>
+			<div class="uiFunc" onclick="grapher.inject('noise(');">noise(x)</div>
+			<div class="uiFunc" onclick="grapher.inject('cellnoise(');">cellnoise(x)</div>
+			<div class="uiFunc" onclick="grapher.inject('voronoi(');">voronoi(x)</div>		 
+		</div>		 
+		<div class="uiFuncGrid">
+			<div class="uiFunc" onclick="grapher.inject('PI');">PI</div>
+			<div class="uiFunc" onclick="grapher.inject('E');">E</div>
+			<div class="uiFunc" onclick="grapher.inject('PHI');">PHI</div>
+			<div class="uiFunc" onclick="grapher.inject('LN10');">LN10</div>
+			<div class="uiFunc" onclick="grapher.inject('LN2');">LN2</div>
+			<div class="uiFunc" onclick="grapher.inject('LOG10E');">LOG10E</div>
+			<div class="uiFunc" onclick="grapher.inject('LOG2E');">LOG2E</div>
+			<div class="uiFunc" onclick="grapher.inject('SQRT2');">SQRT2</div>
+			<div class="uiFunc" onclick="grapher.inject('SQRT1_2');">SQRT1_2</div>
+		</div>		 
+		<div class="uiFuncGrid">
+			
+			<div class="uiFunc" onclick="grapher.inject('&#120587;');">&#120587;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#120591;');">&#120591;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x03C6;');">&#x03C6;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#xB2;');">&#xB2;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#xB3;');">&#xB3;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2074;');">&#x2074;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2075;');">&#x2075;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2076;');">&#x2076;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2077;');">&#x2077;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2078;');">&#x2078;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2079;');">&#x2079;</div>
+		</div>
+		<div class="uiFuncGrid">
+			<div class="uiFunc" onclick="grapher.inject('&#xBD;');">&#xBD;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2153;');">&#x2153;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2154;');">&#x2154;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#xBC;');">&#xBC;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#xBE;');">&#xBE;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2155;');">&#x2155;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2156;');">&#x2156;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2157;');">&#x2157;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2158;');">&#x2158;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2159;');">&#x2159;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x215A;');">&#x215A;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2150;');">&#x2150;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x215B;');">&#x215B;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x215C;');">&#x215C;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x215D;');">&#x215D;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x215E;');">&#x215E;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2151;');">&#x2151;</div>
+			<div class="uiFunc" onclick="grapher.inject('&#x2152;');">&#x2152;</div>
+		</div>
+	 </div>
+    </div>
+ </div>
+</div>
+
+</body>
+</html>

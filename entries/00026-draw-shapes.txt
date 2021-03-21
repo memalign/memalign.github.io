@@ -1,0 +1,59 @@
+Title: Draw Shapes Using Math
+Date: 3/21/2021
+
+[Image:/m/graphtoy.jpg]
+
+Computer graphics is a wonderful real-world use case for a lot of the math we learn in school. For example, take a look at [Link:https://www.iquilezles.org]Inigo Quilez[/Link]'s video [Link:https://www.iquilezles.org/live/index.htm]tutorials[/Link]. [Link:https://www.youtube.com/watch?v=8--5LwHRhjk]This one[/Link] is particularly cool.
+
+I don't have skills like Inigo but I still have fun making 2D shapes using math.
+
+Here are a few fun tools for drawing 2D shapes using math:
+
+- TI calculators
+  - You might have had one of these in high school
+  - I had a TI-83 Plus which turned out to be a fun device. Here are some of its neat features:
+    - BASIC programming
+    - Play games in MirageOS (back in my day the most popular game was [Link:https://www.ticalc.org/archives/files/fileinfo/148/14876.html]Phoenix[/Link] and it looks like people kept [Link:https://www.ticalc.org/pub/83plus/asm/games/mirageos/]innovating[/Link] since then! They even made a version of [Link:https://www.ticalc.org/archives/files/fileinfo/429/42952.html]Geometry Wars[/Link]!)
+    - Share programs and games via a cable (they spread through the whole high school this way)
+    - Graph interesting equations and shapes
+      - There's a graphing mode which traces a function's shape with an animating circle. An upper classman graphed some functions together which made it look like this circle was a ball bouncing down stairs. This stuck with me and is part of the inspiration for this post!
+  - Looking back, I'm glad we got to play with these! Thank you, TI-83 Plus, for my earliest programming and engineering experiences!
+
+- Graphing calculator websites
+  - [Link:https://www.wolframalpha.com/input/?i=y%3Dx%2C+y%3Dx%5E2]WolframAlpha[/Link]
+    - Very powerful. For example: [Link:https://www.wolframalpha.com/input/?i=x%5Ey+%3D+y%5Ex]graphing x^y = y^x[/Link], including symbolically refactoring the equation to solve for y.
+  - [Link:https://www.meta-calculator.com/?panel-101-equations&data-bounds-xMin=-507.6239316239339&data-bounds-xMax=1540.3760683760684&data-bounds-yMin=-1183.3191489361732&data-bounds-yMax=1632.6808510638268&data-equations-0=%22y%3Dx%22&data-equations-1=%22y%3Dx%5E2%22&data-rand=undefined&data-hideGrid=false]Meta-Calculator[/Link]
+    - OK in a pinch
+
+- Graphing calculator apps
+  - [Link:https://apps.apple.com/us/app/geogebra-graphing-calculator/id1146717204]GeoGebra Graphing Calculator[/Link]
+    - This app is really good! Much like WolframAlpha and Relplot, this app can graph arbitrary equations and inequations like x^y = y^x, 1 = x^2 + y^2, y > x, etc.
+  - [Link:https://apps.apple.com/us/app/numworks-graphing-calculator/id1456585807]NumWorks Graphing Calculator[/Link] (simulates a physical calculator; hard to use)
+
+- [Link:https://www.cs.cornell.edu/w8/~andru/relplot/]Relplot[/Link]
+  - Powerful graphing capabilities: arbitrary equations and inequations
+  - [Link:https://github.com/andrewcmyers/relplot]Source code[/Link] ([Link:/m/relplot.tar.gz]my backup[/Link])
+  - Relplot is written by one of my favorite CS professors, [Link:https://www.cs.cornell.edu/andru/]Andrew Myers[/Link]!
+  - In fact, it's a more sophisticated version of a programming assignment we completed in his Functional Programming course
+  - Interesting implementation details:
+    - Lexes and parses inputted formulas so they can be evaluated
+    - [Link:https://github.com/andrewcmyers/relplot/blob/master/eqn.grm]Slightly refactors[/Link] the formulas to be of the form "0 = formula" or "0 > formula":
+[Code]
+Eqn   : Expr EQUALS Expr    (Plus(Expr1, neg(Expr2)))
+      | Expr LT Expr        (Ltz(Plus(Expr1, neg(Expr2))))
+      | Expr LE Expr        (Ltz(Plus(Expr1, neg(Expr2))))
+      | Expr GE Expr        (Ltz(Plus(Expr2, neg(Expr1))))
+      | Expr GT Expr        (Ltz(Plus(Expr2, neg(Expr1))))
+[/Code]
+      - For example, converts "1 = x^2 + y^2" into "0 = x^2 + y^2 + -(1)"
+      - In this form, all solutions to the formula are "zeros"
+    - Uses [Link:https://en.wikipedia.org/wiki/Interval_arithmetic]interval arithmetic[/Link] (implemented [Link:https://github.com/andrewcmyers/relplot/blob/master/interval.sml]here[/Link]) to identify subsections of the graph that contain x, y values for which the formula evaluates to zero
+    - Like a binary search, recursively searches smaller and smaller subsections of the graph for zeros until the interval size is too small to be visible. At this threshold, it can just draw a tiny line between the corners of the interval.
+
+- [Link:https://graphtoy.com/]Graphtoy[/Link] ([Link:/m/graphtoy/index.html]my backup[/Link])
+  - This is another cool piece of work by [Link:https://www.iquilezles.org]Inigo Quilez[/Link]
+  - Something special: Graphtoy has a variable for elapsed time (t) which can be used to create animations
+  - [Link:/m/graphtoy/graphtoy.js]Source code[/Link]
+  - Interesting implementation details:
+    - Instead of implementing its own parser, Graphtoy turns the formulas into JavaScript snippets
+    - See the "iCompile" function which tweaks the inputted formula strings to be valid JavaScript and constructs Formula objects which can later be invoked
