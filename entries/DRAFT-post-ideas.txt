@@ -2,15 +2,15 @@
 - JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
 - SiteGenerator
 - Vision framework
-- Andrew Myers' relplot: http://www.cs.cornell.edu/w8/~andru/relplot/ source: https://github.com/andrewcmyers/relplot
-  - Relplot running in browser and more interactive?
-  - Running SML in-browser may be possible: https://github.com/sergi/mlkit.git
-  
+
+- Followup to Drawing Shapes Using Math
+  - Extend Graphtoy with Relplot capabilities? (Running in a browser and being more interactive than Relplot)
+    - First step: avoid building a parser by using functions instead of real operators (e.g. mul(x,y) instead of *)
+    - Second step: reuse lkesteloot's Pascal parser
+  - Create the bouncing ball animation using Graphtoy
+
 - JavaScript Pascal compiler: https://github.com/lkesteloot/turbopascal
   - Few dependencies (see vendor subdirectory)
-  
-- Graphtoy: https://graphtoy.com/
-  - Seems to eval JavaScript instead of make its own parser
 
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 

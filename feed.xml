@@ -5,10 +5,323 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2021-03-21T00:00:00-08:00</updated>
+<updated>2021-03-27T00:00:00-08:00</updated>
 <rights>Copyright © 2021, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Catalog of Math Shapes</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/shape-catalog.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/shape-catalog.html" />
+<id>https://memalign.github.io/p/shape-catalog.html</id>
+<published>2021-03-27T00:00:00-08:00</published>
+<updated>2021-03-27T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/shape-catalog.html'>Catalog of Math Shapes</a>
+</h2>
+</div>
+<img src="/m/graphtoy-smile.jpg">
+<div id='postdate'>Posted on 3/27/2021</div>
+I enjoy <a href="/p/draw-shapes.html">drawing shapes using math</a>. Much of the fun is exploring what formulas look like and figuring out how to warp them to look different.<br />
+<br />
+To be able to build more complex shapes and animations, in this post, I'll explore some formulas and create a catalog of shapes.<br />
+<br />
+<br />
+Circles:<br />
+<br />
+x^2 + y^2 = 1<br />
+<br />
+Graphtoy requires that we solve for y to create a function of x: f(x)<br />
+<br />
+y^2 = 1 - x^2<br />
+y = ± sqrt(1 - x^2)<br />
+f(x) = y = ± sqrt(1 - x^2)<br />
+<br />
+<br />
+Graphtoy doesn't understand ± so we need to write two separate formulas:<br />
+y = sqrt(1 - x^2)<br />
+y = -sqrt(1 - x^2)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(1%20-%20x%5E2)&v1=true&f2(x,t)=-sqrt(1%20-%20x%5E2)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/circle.jpg"><br />
+<br />
+In general, we can shift formulas up/down by adding/subtracting to/from the function. Here, we shift the circle up the y-axis by 2:<br />
+y = sqrt(1 - x^2) + 2<br />
+y = -sqrt(1 - x^2) + 2<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(1-x%5E2)+2&v1=true&f2(x,t)=-sqrt(1-x%5E2)+2&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+And we can shift left/right similarly by adding/subtracting from every instance of "x". Here, we shift the circle left on the x-axis by 3:<br />
+<br />
+y = sqrt(1 - (x+3)^2)<br />
+y = -sqrt(1 - (x+3)^2)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(1-(x+3)%5E2)&v1=true&f2(x,t)=-sqrt(1-(x+3)%5E2)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+We can combine these two techniques to shift left and up at the same time:<br />
+<br />
+y = sqrt(1 - (x+3)^2) + 2<br />
+y = -sqrt(1 - (x+3)^2) + 2<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(1-(x+3)%5E2)+2&v1=true&f2(x,t)=-sqrt(1-(x+3)%5E2)+2&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+<br />
+Lines:<br />
+<br />
+y = mx + b<br />
+m is the slope (change in y divided by change in x)<br />
+b is the y-intercept (notice that adding b is the same technique we used to shift the circle up)<br />
+<br />
+Here's a steep line that goes up 3 in the y direction for every increase of 1 in the x direction. I shifted it to intersect with the y-axis at y=1<br />
+<br />
+y = 3*x + 1<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=3*x%20+%201&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/line.jpg"><br />
+<br />
+In general, we can flip the shape over the x-axis by making it negative (notice this is similar to the way we draw the bottom half of a circle, by flipping the formula to the top half):<br />
+<br />
+y = - (3*x + 1)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-(3*x+1)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Similarly, we can flip a shape over the y-axis by replacing every instance of "x" with "-x":<br />
+<br />
+y = 3*(-x) + 1<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=(3*(-x)+1)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+<br />
+Sine wave:<br />
+<br />
+y = sin(x)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sin(x)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/sin.jpg"><br />
+<br />
+Something special about the shape of sin(x): it's periodic, repeating infinitely.<br />
+<br />
+<br />
+Parabola:<br />
+<br />
+y = x^2<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=x%5E2&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/parabola.jpg"><br />
+<br />
+If we want to turn a shape sideways (by swapping the axes), we can swap x and y.<br />
+<br />
+Sideways parabola:<br />
+<br />
+x = y^2<br />
+<br />
+Solve for y to be able to graph using Graphtoy:<br />
+<br />
+y = ± sqrt(x)<br />
+<br />
+y = sqrt(x)<br />
+y = -sqrt(x)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(x)&v1=true&f2(x,t)=-f1(x,t)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+<br />
+Combining shapes:<br />
+<br />
+We can combine formulas to combine their shapes. For example, we can make a sine wave follow the shape of a line by adding them together:<br />
+<br />
+Diagonal line:<br />
+y = x + 3<br />
+<br />
+Sine wave:<br />
+y = sin(3*x)<br />
+<br />
+Diagonal sine wave:<br />
+y = x + 3 + sin(3*x)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=x+3&v1=true&f2(x,t)=sin(3*x)&v2=true&f3(x,t)=x%20+%203%20+%20sin(3*x)&v3=true&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+<br />
+Steps (floor):<br />
+<br />
+We can do some neat things using functions like floor and ceil. Floor rounds down to the nearest integer. Ceil rounds up to the nearest integer.<br />
+<br />
+y = floor(x)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=floor(x)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+This looks like steps!<br />
+<br />
+<img src="/m/mathshapes/floor.jpg"><br />
+<br />
+We can make a spiky sawtooth wave by only giving y the decimal portion of x like this:<br />
+y = x - floor(x)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=x%20-%20floor(x)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+To get an intuitive understanding of a shape, sometimes it helps to write out some of the values in a table:<br />
+<div id='code'> x     floor(x)     x-floor(x)<br />
+=============================<br />
+0        0            0<br />
+0.2      0            0.2<br />
+0.5      0            0.5<br />
+1        1            0<br />
+1.2      1            0.2<br />
+1.5      1            0.5<br />
+2        2            0<br />
+2.2      2            0.2<br />
+2.5      2            0.5</div>
+This hopefully makes it easier to see how this ends up looking like a sawtooth.<br />
+<br />
+<br />
+Triangle wave:<br />
+<br />
+<div id='code'>A sawtooth wave looks like this:         /|/|/|/|<br />
+A flipped sawtooth wave looks like this: |\|\|\|\<br />
+A triangle wave looks like this:         /\/\/\/\</div>
+I noticed that I might be able to construct a triangle wave by combining a sawtooth wave with a flipped sawtooth wave.<br />
+<br />
+The naive approach of simply adding them together gives us this:<br />
+Sawtooth wave:<br />
+y = x - floor(x)<br />
+Flipped (across the y-axis) sawtooth wave:<br />
+y = -x - floor(-x)<br />
+(Note: when writing this, I accidentally flipped the formula over the x-axis: y = -(x-floor(x)). When I graphed it, I realized my mistake and played around with the -s to get it right. It's normal to play around and make mistakes! Make some terms negative and see what happens to the shape!)<br />
+<br />
+Added together:<br />
+y = x - floor(x) + -x - floor(-x)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=x-floor(x)&v1=false&f2(x,t)=-x-floor(-x)&v2=false&f3(x,t)=x-floor(x)-x-floor(-x)&v3=true&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Ah woops! That looks like a straight line. Graphing the sawtooth waves on top of each other reveals why: the diagonal portions cross each other, summing up to a constant value for most values of x.<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=x-floor(x)&v1=true&f2(x,t)=-x-floor(-x)&v2=true&f3(x,t)=x-floor(x)-x-floor(-x)&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+To get a triangle wave, I need to alternate taking a tooth from each sawtooth wave. I can take a tooth from one wave when floor(x) is even; a tooth from the other wave when floor(x) is odd.<br />
+<br />
+That sounds pretty crazy! Fortunately, <a href="https://en.wikipedia.org/wiki/Modulo_operation">modular division</a> is an easy way to test whether a number is even or odd.<br />
+<br />
+<div id='code'>        floor(x) % 2<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;also written as:<br />
+x     mod(floor(x), 2)<br />
+==============================<br />
+1         1             (odd)<br />
+1.9       1             (odd)<br />
+2         0             (even)<br />
+2.9       0             (even)<br />
+3         1             (odd)<br />
+4         0             (even)</div>
+Our gadget to determine when floor(x) is odd: mod(floor(x), 2)<br />
+We can use that to make a complementary gadget to determine when floor(x) is even: 1-mod(floor(x), 2)<br />
+<br />
+Sawtooth wave:<br />
+y = x - floor(x)<br />
+<br />
+Flipped (across the y-axis) sawtooth wave:<br />
+y = -x - floor(-x)<br />
+<br />
+Using our gadgets to zero out every other tooth:<br />
+<br />
+<div id='code'>    zero out even teeth                zero out odd teeth<br />
+y = mod(floor(x), 2) * (x-floor(x)) + (1-mod(floor(x), 2)) * (-x-floor(-x)))</div>
+<a href="/m/graphtoy/index.html?f1(x,t)=x-floor(x)&v1=false&f2(x,t)=-x-floor(-x)&v2=false&f3(x,t)=mod(floor(x),2)*(x-floor(x))%20+%20(1-mod(floor(x),2))*(-x-floor(-x))&v3=true&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/triangle-glitch.jpg"><br />
+<br />
+Notice that there are some visible glitches. Let's check the math:<br />
+<br />
+y = mod(floor(x), 2) * (x-floor(x)) + (1-mod(floor(x), 2)) * (-x-floor(-x)))<br />
+<br />
+Plug in x = 0:<br />
+<br />
+y = mod(floor(0), 2) * (0-floor(0)) + (1-mod(floor(0), 2)) * (-0-floor(-0)))<br />
+y = 0 * (0-floor(0)) + (1-0) * (-0-floor(-0)))<br />
+y = 0<br />
+<br />
+Ah but y is supposed to be 1. It looks like the equation has a bug.<br />
+<br />
+Checking a few more x, y values to build intuition:<br />
+<div id='code'> x   y   y is supposed to be<br />
+============================<br />
+&nbsp;0   0          1<br />
+&nbsp;1   0          0<br />
+&nbsp;2   0          1<br />
+&nbsp;3   0          0<br />
+&nbsp;4   0          1</div>
+In its current form, our formula is taking neither sawtooth's value when x is a perfect integer (looking at the formula, you can see that it's because (x-floor(x)) and (-x-floor(-x)) are always 0 when x is an integer.<br />
+<br />
+One fix is to add a term to our formula that has the value 1 for even integers and 0 otherwise.<br />
+<br />
+I played around and came up with this:<br />
+(1-mod(floor(x),2))*(1-ceil(x-floor(x)))<br />
+<br />
+The first half of this is our even/odd gadget. The second half is an expression that is 1 for integers, 0 otherwise.<br />
+<br />
+Checking its values:<br />
+<div id='code'>                                            (1-mod(floor(x),2)) *<br />
+&nbsp;x   1-mod(floor(x),2)  1-ceil(x-floor(x))  (1-ceil(x-floor(x)))<br />
+=================================================================<br />
+0          1                   1                  1*1 = 1<br />
+0.5        1                   0                  1*0 = 0<br />
+1          0                   1                  0*1 = 0<br />
+1.5        0                   0                  0*0 = 0<br />
+2          1                   1                  1*1 = 1</div>
+Fixed equation by adding this gadget:<br />
+<br />
+y = (mod(floor(x),2))*(x-floor(x))+(1-mod(floor(x),2))*(-x-floor(-x)) + (1-mod(floor(x),2))*(1-ceil(x-floor(x)))<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=(mod(floor(x),2))*(x-floor(x))+(1-mod(floor(x),2))*(-x-floor(-x))+(1-mod(floor(x),2))*(1-ceil(x-floor(x)))&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what the fixed equation looks like:<br />
+<br />
+<img src="/m/mathshapes/triangle.jpg"><br />
+<br />
+Looks perfect! Our formula is pretty complex, though. It's possible we could come up with a simpler formula by reading this <a href="https://en.wikipedia.org/wiki/Triangle_wave">Wikipedia page</a>.<br />
+<br />
+<br />
+Square wave:<br />
+<br />
+Here's one way to make a square wave: take an already periodic formula and make it blocky.<br />
+<br />
+An easy periodic formula is sin(x).<br />
+<br />
+y = sin(x)<br />
+<br />
+Instead of having the period of sin be 2*PI, I can change it to be 2:<br />
+<br />
+y = sin(x*PI)<br />
+<br />
+I can use the "sign" function to turn positive values into 1 and negative values into -1:<br />
+<br />
+y = sign(sin(x*PI))<br />
+<br />
+If I want it to be truly square (1 tall and 1 wide), I'll need to adjust the height and shift it up:<br />
+<br />
+y = sign(sin(x*PI))/2 + 0.5<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sign(sin(x*PI))/2%20+%20.5&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/square.jpg"><br />
+<br />
+<br />
+How did I come up with these formulas and techniques? I remember many of these from school and others I (re)discovered by playing around. You can expand your own catalog by trying out new formulas to see what they look like and taking <a href="/p/notes-txt.html">notes</a>!<br />
+<br />
+Here's a list of interesting things to explore:<br />
+log(x)<br />
+exp(x)<br />
+abs(x)<br />
+pow(x, n)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(8%5E2-x%5E2)&v1=true&f2(x,t)=-f1(x,t)&v2=true&f3(x,t)=7/2-sqrt(3%5E2-(abs(x)-3.5)%5E2)&v3=true&f4(x,t)=7/2+sqrt(3%5E2-(abs(x)-3.5)%5E2)/2&v4=true&f5(x,t)=3+sqrt(1-(abs(x+sin(4*t)/2)-3)%5E2)*2/3&v5=true&f6(x,t)=-3-sqrt(5%5E2-x%5E2)*(1/4+pow(0.5+0.5*sin(2*PI*t),6)/10)&v6=true&grid=true&coords=0,0,12">This animation that is built into Graphtoy</a><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Draw Shapes Using Math</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/draw-shapes.html" />
@@ -42,7 +355,7 @@ Here are a few fun tools for drawing 2D shapes using math:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Play games in MirageOS (back in my day the most popular game was <a href="https://www.ticalc.org/archives/files/fileinfo/148/14876.html">Phoenix</a> and it looks like people kept <a href="https://www.ticalc.org/pub/83plus/asm/games/mirageos/">innovating</a> since then! They even made a version of <a href="https://www.ticalc.org/archives/files/fileinfo/429/42952.html">Geometry Wars</a>!)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Share programs and games via a cable (they spread through the whole high school this way)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Graph interesting equations and shapes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- There's a graphing mode which traces a function's shape with an animating circle. An upper classman graphed some functions together which made it look like this circle was a ball bouncing down stairs. This stuck with me and is part of the inspiration for this post!<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- There's a graphing mode which traces a function's shape with an animating circle. An upperclassman graphed some functions together which made it look like this circle was a ball bouncing down stairs. This stuck with me and is part of the inspiration for this post!<br />
 &nbsp;&nbsp;- Looking back, I'm glad we got to play with these! Thank you, TI-83 Plus, for my earliest programming and engineering experiences!<br />
 <br />
 - Graphing calculator websites<br />

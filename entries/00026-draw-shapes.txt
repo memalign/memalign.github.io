@@ -16,7 +16,7 @@ Here are a few fun tools for drawing 2D shapes using math:
     - Play games in MirageOS (back in my day the most popular game was [Link:https://www.ticalc.org/archives/files/fileinfo/148/14876.html]Phoenix[/Link] and it looks like people kept [Link:https://www.ticalc.org/pub/83plus/asm/games/mirageos/]innovating[/Link] since then! They even made a version of [Link:https://www.ticalc.org/archives/files/fileinfo/429/42952.html]Geometry Wars[/Link]!)
     - Share programs and games via a cable (they spread through the whole high school this way)
     - Graph interesting equations and shapes
-      - There's a graphing mode which traces a function's shape with an animating circle. An upper classman graphed some functions together which made it look like this circle was a ball bouncing down stairs. This stuck with me and is part of the inspiration for this post!
+      - There's a graphing mode which traces a function's shape with an animating circle. An upperclassman graphed some functions together which made it look like this circle was a ball bouncing down stairs. This stuck with me and is part of the inspiration for this post!
   - Looking back, I'm glad we got to play with these! Thank you, TI-83 Plus, for my earliest programming and engineering experiences!
 
 - Graphing calculator websites
