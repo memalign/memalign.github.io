@@ -5,10 +5,165 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2021-03-27T00:00:00-08:00</updated>
+<updated>2021-03-28T00:00:00-08:00</updated>
 <rights>Copyright © 2021, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Bouncing Ball</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/bouncing-ball.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/bouncing-ball.html" />
+<id>https://memalign.github.io/p/bouncing-ball.html</id>
+<published>2021-03-28T00:00:00-08:00</published>
+<updated>2021-03-28T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/bouncing-ball.html'>Bouncing Ball</a>
+</h2>
+</div>
+<img src="/m/bouncing-ball.jpg">
+<div id='postdate'>Posted on 3/28/2021</div>
+I mentioned <a href="/p/draw-shapes.html">here</a> that TI calculators can make some simple animations:<br />
+"An upperclassman graphed some functions together which made it look like this circle was a ball bouncing down stairs."<br />
+<br />
+I also mentioned something special about <a href="https://graphtoy.com/">Graphtoy</a>:<br />
+"Graphtoy has a variable for elapsed time (t) which can be used to create animations"<br />
+<br />
+In this post, I'll recreate the bouncing ball animation using mathematical formulas in Graphtoy.<br />
+<br />
+Browsing our <a href="/p/shape-catalog.html">shape catalog</a> gives us a few useful components:<br />
+<br />
+Steps: y = floor(x)<br />
+<br />
+Diagonal sine wave: y = x + 3 + sin(3*x)<br />
+&nbsp;&nbsp;- This looks similar to the path of a ball as it bounces down steps<br />
+<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=floor(x)&v1=true&f2(x,t)=x+3+sin(3*x)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what those look like together:<br />
+<br />
+<img src="/m/mathshapes/steps-sine-wave.jpg"><br />
+<br />
+One aesthetic tweak: have the stairs go down to the right.<br />
+Adjust the sine wave to match the direction and slope of the stairs.<br />
+<br />
+Steps: y = -floor(x)+5<br />
+Ball's path: y = -x + 5 + sin(3*-x)<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-x+5+sin(3*-x)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+With a normal (non-diagonal) sine wave, every other hump is negative and below the x-axis. In our diagonal sine wave, every other hump is going under a step instead of bouncing off it.<br />
+<br />
+Let's figure out how to have a normal sine wave bounce off the x-axis and then bring that same modification to our more complex diagonal sine wave.<br />
+<br />
+To simply make all negative values positive, we can take the absolute value with the abs() function:<br />
+<br />
+y = abs(sin(x))<br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/sine-abs.jpg"><br />
+<br />
+Looks promising! Let's try using abs on the diagonal sine wave:<br />
+<br />
+y = -x + 5 + abs(sin(3*-x))<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-x+5+abs(sin(3*-x))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/sine-abs-bounce.jpg"><br />
+<br />
+There are a few problems still:<br />
+<br />
+- The bounce should happen in the middle of the step (not in the corner)<br />
+- It looks like the width of each period of the sine wave is not the same as the length of each step so there's visible drift<br />
+<br />
+We can fix both of these using techniques noted in the <a href="/p/shape-catalog.html">shape catalog</a>.<br />
+<br />
+Shift the bounce to happen farther right:<br />
+<br />
+y = -(x-0.5) + 5 + abs(sin(3*-(x-0.5)))<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(3*-(x-0.5)))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Fix the sine wave's period:<br />
+<br />
+y = -(x-0.5) + 5 + abs(sin(PI*-(x-0.5)))<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Here's what that looks like:<br />
+<br />
+<img src="/m/mathshapes/fixed-period.jpg"><br />
+<br />
+Now let's add our bouncing ball. We want to draw a circle that's centered on the diagonal bouncing sine wave.<br />
+<br />
+From the shape catalog, here is the equation for a circle centered at (-3, 2):<br />
+<br />
+y = sqrt(1 - (x+3)^2) + 2<br />
+y = -sqrt(1 - (x+3)^2) + 2<br />
+<br />
+To have the ball move to the right with time, we'll replace the -3 with t. t is the special parameter Graphtoy provides; its value is the number of seconds that have passed since the webpage refreshed.<br />
+<br />
+y = sqrt(1 - (x-t)^2) + 2<br />
+y = -sqrt(1 - (x-t)^2) + 2<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(1-(x-t)%5E2)+2&v3=true&f4(x,t)=-sqrt(1-(x-t)%5E2)+2&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+The y-value at time t is the value of our bouncing sine wave when x=t.<br />
+<br />
+Bouncing sine wave: y = -(x-0.5) + 5 + abs(sin(PI*-(x-0.5)))<br />
+<br />
+Value when x=t:<br />
+y = -(t-0.5) + 5 + abs(sin(PI*-(t-0.5)))<br />
+<br />
+Now, we'll replace the 2 in our circle equations with this y expression:<br />
+<br />
+y = sqrt(1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))<br />
+y = -sqrt(1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(1%20-%20(x-t)%5E2)%20+%20(-(t-0.5)%20+%205%20+%20abs(sin(PI*-(t-0.5))))&v3=true&f4(x,t)=-sqrt(1%20-%20(x-t)%5E2)%20+%20(-(t-0.5)%20+%205%20+%20abs(sin(PI*-(t-0.5))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Wow! This is getting really close!<br />
+<br />
+The ball is way too big. Let's shrink its radius:<br />
+<br />
+y = sqrt(0.1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))<br />
+y = -sqrt(0.1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(0.1-(x-t)%5E2)+(-(t-0.5)+5+abs(sin(PI*-(t-0.5))))&v3=true&f4(x,t)=-sqrt(0.1-(x-t)%5E2)+(-(t-0.5)+5+abs(sin(PI*-(t-0.5))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+(Note: once the circle moves off-screen, don't forget to reset t (or refresh the page) to make it reappear)<br />
+<br />
+More tweaks needed:<br />
+<br />
+- The ball bounces through the step. Need to shift the bouncing curve up by the ball's radius.<br />
+- The ball is too close to the edge of the step. Need to shift the bouncing curve farther to the right.<br />
+<br />
+Shifting up and to the right:<br />
+<br />
+Sine wave:<br />
+y = -(x-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(x-0.7)))<br />
+<br />
+Circle:<br />
+y = sqrt(0.1 - (x-t)^2) + (-(t-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(t-0.7))))<br />
+y = -sqrt(0.1 - (x-t)^2) + (-(t-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(t-0.7))))<br />
+<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.7)+5%20+%20sqrt(.1)+abs(sin(PI*-(x-0.7)))&v2=true&f3(x,t)=sqrt(0.1-(x-t)%5E2)+(-(t-0.7)+5+sqrt(.1)+abs(sin(PI*-(t-0.7))))&v3=true&f4(x,t)=-sqrt(0.1-(x-t)%5E2)+(-(t-0.7)+5+sqrt(.1)+abs(sin(PI*-(t-0.7))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+Looks perfect!<br />
+<br />
+<img src="/m/mathshapes/bouncing-ball-with-line.jpg"><br />
+<br />
+Bonus just for fun, here's the ball bouncing off a square wave, losing height with every bounce:<br />
+<br />
+<a href="/m/graphtoy/index.html?f1(x,t)=sign(sin(x*2*PI))/4+0.25&v1=true&f2(x,t)=((-x/5+4)%5E2/8)*(abs(sin(PI/2*-(x*2-0.5))))+0.5+sqrt(.1)&v2=true&f3(x,t)=sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v3=true&f4(x,t)=-sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
+<br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Catalog of Math Shapes</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/shape-catalog.html" />
@@ -31,7 +186,7 @@
 <div id='postdate'>Posted on 3/27/2021</div>
 I enjoy <a href="/p/draw-shapes.html">drawing shapes using math</a>. Much of the fun is exploring what formulas look like and figuring out how to warp them to look different.<br />
 <br />
-To be able to build more complex shapes and animations, in this post, I'll explore some formulas and create a catalog of shapes.<br />
+To be able to build more complex shapes and animations, in this post I'll explore some formulas and create a catalog of shapes.<br />
 <br />
 <br />
 Circles:<br />
@@ -317,6 +472,7 @@ exp(x)<br />
 abs(x)<br />
 pow(x, n)<br />
 <a href="/m/graphtoy/index.html?f1(x,t)=sqrt(8%5E2-x%5E2)&v1=true&f2(x,t)=-f1(x,t)&v2=true&f3(x,t)=7/2-sqrt(3%5E2-(abs(x)-3.5)%5E2)&v3=true&f4(x,t)=7/2+sqrt(3%5E2-(abs(x)-3.5)%5E2)/2&v4=true&f5(x,t)=3+sqrt(1-(abs(x+sin(4*t)/2)-3)%5E2)*2/3&v5=true&f6(x,t)=-3-sqrt(5%5E2-x%5E2)*(1/4+pow(0.5+0.5*sin(2*PI*t),6)/10)&v6=true&grid=true&coords=0,0,12">This animation that is built into Graphtoy</a><br />
+<a href="/p/bouncing-ball.html">Bouncing ball animation</a><br />
 
 ]]>
 </content>
@@ -355,7 +511,7 @@ Here are a few fun tools for drawing 2D shapes using math:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Play games in MirageOS (back in my day the most popular game was <a href="https://www.ticalc.org/archives/files/fileinfo/148/14876.html">Phoenix</a> and it looks like people kept <a href="https://www.ticalc.org/pub/83plus/asm/games/mirageos/">innovating</a> since then! They even made a version of <a href="https://www.ticalc.org/archives/files/fileinfo/429/42952.html">Geometry Wars</a>!)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Share programs and games via a cable (they spread through the whole high school this way)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Graph interesting equations and shapes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- There's a graphing mode which traces a function's shape with an animating circle. An upperclassman graphed some functions together which made it look like this circle was a ball bouncing down stairs. This stuck with me and is part of the inspiration for this post!<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- There's a graphing mode which traces a function's shape with an animating circle. An upperclassman graphed some functions together which made it look like this circle was a <a href="/p/bouncing-ball.html">ball bouncing down stairs</a>. This stuck with me and is part of the inspiration for this post!<br />
 &nbsp;&nbsp;- Looking back, I'm glad we got to play with these! Thank you, TI-83 Plus, for my earliest programming and engineering experiences!<br />
 <br />
 - Graphing calculator websites<br />

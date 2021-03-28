@@ -1,0 +1,135 @@
+Title: Bouncing Ball
+Date: 3/28/2021
+
+[Image:/m/bouncing-ball.jpg]
+
+I mentioned [Link:/p/draw-shapes.html]here[/Link] that TI calculators can make some simple animations:
+"An upperclassman graphed some functions together which made it look like this circle was a ball bouncing down stairs."
+
+I also mentioned something special about [Link:https://graphtoy.com/]Graphtoy[/Link]:
+"Graphtoy has a variable for elapsed time (t) which can be used to create animations"
+
+In this post, I'll recreate the bouncing ball animation using mathematical formulas in Graphtoy.
+
+Browsing our [Link:/p/shape-catalog.html]shape catalog[/Link] gives us a few useful components:
+
+Steps: y = floor(x)
+
+Diagonal sine wave: y = x + 3 + sin(3*x)
+  - This looks similar to the path of a ball as it bounces down steps
+
+[Link:/m/graphtoy/index.html?f1(x,t)=floor(x)&v1=true&f2(x,t)=x+3+sin(3*x)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+Here's what those look like together:
+
+[Image:/m/mathshapes/steps-sine-wave.jpg]
+
+One aesthetic tweak: have the stairs go down to the right.
+Adjust the sine wave to match the direction and slope of the stairs.
+
+Steps: y = -floor(x)+5
+Ball's path: y = -x + 5 + sin(3*-x)
+[Link:/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-x+5+sin(3*-x)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+With a normal (non-diagonal) sine wave, every other hump is negative and below the x-axis. In our diagonal sine wave, every other hump is going under a step instead of bouncing off it.
+
+Let's figure out how to have a normal sine wave bounce off the x-axis and then bring that same modification to our more complex diagonal sine wave.
+
+To simply make all negative values positive, we can take the absolute value with the abs() function:
+
+y = abs(sin(x))
+
+Here's what that looks like:
+
+[Image:/m/mathshapes/sine-abs.jpg]
+
+Looks promising! Let's try using abs on the diagonal sine wave:
+
+y = -x + 5 + abs(sin(3*-x))
+[Link:/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-x+5+abs(sin(3*-x))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+Here's what that looks like:
+
+[Image:/m/mathshapes/sine-abs-bounce.jpg]
+
+There are a few problems still:
+
+- The bounce should happen in the middle of the step (not in the corner)
+- It looks like the width of each period of the sine wave is not the same as the length of each step so there's visible drift
+
+We can fix both of these using techniques noted in the [Link:/p/shape-catalog.html]shape catalog[/Link].
+
+Shift the bounce to happen farther right:
+
+y = -(x-0.5) + 5 + abs(sin(3*-(x-0.5)))
+[Link:/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(3*-(x-0.5)))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+Fix the sine wave's period:
+
+y = -(x-0.5) + 5 + abs(sin(PI*-(x-0.5)))
+[Link:/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+Here's what that looks like:
+
+[Image:/m/mathshapes/fixed-period.jpg]
+
+Now let's add our bouncing ball. We want to draw a circle that's centered on the diagonal bouncing sine wave.
+
+From the shape catalog, here is the equation for a circle centered at (-3, 2):
+
+y = sqrt(1 - (x+3)^2) + 2
+y = -sqrt(1 - (x+3)^2) + 2
+
+To have the ball move to the right with time, we'll replace the -3 with t. t is the special parameter Graphtoy provides; its value is the number of seconds that have passed since the webpage refreshed.
+
+y = sqrt(1 - (x-t)^2) + 2
+y = -sqrt(1 - (x-t)^2) + 2
+[Link:/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(1-(x-t)%5E2)+2&v3=true&f4(x,t)=-sqrt(1-(x-t)%5E2)+2&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+The y-value at time t is the value of our bouncing sine wave when x=t.
+
+Bouncing sine wave: y = -(x-0.5) + 5 + abs(sin(PI*-(x-0.5)))
+
+Value when x=t:
+y = -(t-0.5) + 5 + abs(sin(PI*-(t-0.5)))
+
+Now, we'll replace the 2 in our circle equations with this y expression:
+
+y = sqrt(1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))
+y = -sqrt(1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))
+[Link:/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(1%20-%20(x-t)%5E2)%20+%20(-(t-0.5)%20+%205%20+%20abs(sin(PI*-(t-0.5))))&v3=true&f4(x,t)=-sqrt(1%20-%20(x-t)%5E2)%20+%20(-(t-0.5)%20+%205%20+%20abs(sin(PI*-(t-0.5))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+Wow! This is getting really close!
+
+The ball is way too big. Let's shrink its radius:
+
+y = sqrt(0.1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))
+y = -sqrt(0.1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))
+[Link:/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(0.1-(x-t)%5E2)+(-(t-0.5)+5+abs(sin(PI*-(t-0.5))))&v3=true&f4(x,t)=-sqrt(0.1-(x-t)%5E2)+(-(t-0.5)+5+abs(sin(PI*-(t-0.5))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+(Note: once the circle moves off-screen, don't forget to reset t (or refresh the page) to make it reappear)
+
+More tweaks needed:
+
+- The ball bounces through the step. Need to shift the bouncing curve up by the ball's radius.
+- The ball is too close to the edge of the step. Need to shift the bouncing curve farther to the right.
+
+Shifting up and to the right:
+
+Sine wave:
+y = -(x-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(x-0.7)))
+
+Circle:
+y = sqrt(0.1 - (x-t)^2) + (-(t-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(t-0.7))))
+y = -sqrt(0.1 - (x-t)^2) + (-(t-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(t-0.7))))
+
+[Link:/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.7)+5%20+%20sqrt(.1)+abs(sin(PI*-(x-0.7)))&v2=true&f3(x,t)=sqrt(0.1-(x-t)%5E2)+(-(t-0.7)+5+sqrt(.1)+abs(sin(PI*-(t-0.7))))&v3=true&f4(x,t)=-sqrt(0.1-(x-t)%5E2)+(-(t-0.7)+5+sqrt(.1)+abs(sin(PI*-(t-0.7))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
+Looks perfect!
+
+[Image:/m/mathshapes/bouncing-ball-with-line.jpg]
+
+Bonus just for fun, here's the ball bouncing off a square wave, losing height with every bounce:
+
+[Link:/m/graphtoy/index.html?f1(x,t)=sign(sin(x*2*PI))/4+0.25&v1=true&f2(x,t)=((-x/5+4)%5E2/8)*(abs(sin(PI/2*-(x*2-0.5))))+0.5+sqrt(.1)&v2=true&f3(x,t)=sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v3=true&f4(x,t)=-sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12]Graphtoy link[/Link]
+
