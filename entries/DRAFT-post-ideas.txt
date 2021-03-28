@@ -7,7 +7,6 @@
   - Extend Graphtoy with Relplot capabilities? (Running in a browser and being more interactive than Relplot)
     - First step: avoid building a parser by using functions instead of real operators (e.g. mul(x,y) instead of *)
     - Second step: reuse lkesteloot's Pascal parser
-  - Create the bouncing ball animation using Graphtoy
 
 - JavaScript Pascal compiler: https://github.com/lkesteloot/turbopascal
   - Few dependencies (see vendor subdirectory)
