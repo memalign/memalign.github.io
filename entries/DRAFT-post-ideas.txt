@@ -15,4 +15,10 @@
 
 - https://freeicons.io/
 
+- https://cube.zxh.io/
+  - backed up in ~/rubikscube
+  - add some patterns
+
 - Expand on what I noted in 00020-product-reviews.txt about reading and writing outside of school (pressures of grades, learning how to think, pursuing things that are more interesting than the curriculum, etc)
+
+- How many unique Gregorian calendars are there? Seems to repeat every 28 years
