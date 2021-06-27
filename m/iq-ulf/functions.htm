@@ -1,0 +1,244 @@
+        
+
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+        <meta charset="ISO-8859-1">
+		<meta name="keywords" content="quilez, inigo, iñigo, fractals, demoscene, computer graphics, mathematics, rendering, demo, 3D, realtime, shader, raytracing, shadertoy, glsl">
+		<meta name="description" content="Tutorials and articles of Inigo Quilez on computer graphics, fractals, demoscene, shaders and more.">
+		<meta name="author" content="Inigo Quilez">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<meta property="og:title" content="Inigo Quilez" />
+		<meta property="og:description" content="Articles on computer graphics, math and art">
+		<meta property="og:type" content="article" />
+		<meta property="og:image" content="./gfx34.jpg" />
+		<meta property="og:image:type" content="image/png" />
+		<meta property="og:url" content="https://iquilezles.org" />
+		
+		<meta name="twitter:title" content="Inigo Quilez">
+		<meta name="twitter:description" content="Articles on computer graphics, math and art">
+		<meta name="twitter:image" content="./gfx34.jpg">
+		<meta name="twitter:card" content="summary_large_image">
+
+		<link rel="canonical" href="https://iquilezles.org"/>
+		<title>Inigo Quilez :: fractals, computer graphics, mathematics, shaders, demoscene and more</title>
+		<link href="style.css" rel="stylesheet">
+		
+	</head>
+
+	<body><div style="display:flex;flex-direction:column;min-height:100vh;">
+		
+		<header>
+		
+		<div>
+		  <a class="menu" href="functions.htm">Inigo Quilez</a>
+		
+		  &nbsp; :: &nbsp; <a class="menu" href="functions.htm">articles</a>&nbsp; :: &nbsp; <a class="menu" href="functions.htm">useful little functions</a>		</div>
+		
+		<!--<div style="font-size:0.75em;margin:0;padding:0;">-->
+		<!--<div style="margin:0;padding:0;background-color:#00ff00;display:flex;justify-self:self-end;">-->
+		<div style="padding:0;margin:0;border:0;display:flex;flex-flow:row wrap;justify-content:flex-end;">
+            			
+			<a href="https://twitter.com/iquilezles"><img class="socialMediaIcon" src="imgTwitter.png"/></a>
+			<a href="https://www.youtube.com/channel/UCdmAhiG8HQDlz8uyekw4ENw"><img class="socialMediaIcon" src="imgYoutube.png"/></a>
+			<a href="https://www.shadertoy.com/user/iq/"><img class="socialMediaIcon" src="imgShadertoy.png"/></a> 
+            <a href="https://www.patreon.com/inigoquilez"><img class="socialMediaIcon" src="imgPatreon.png"/></a> 
+			<a href="https://www.tiktok.com/@inigoquilez"><img class="socialMediaIcon" src="imgTikTok.png"/></a> 
+			<a href="https://space.bilibili.com/673661710"><img class="socialMediaIcon" src="imgBiliBili.png"/></a> 
+            <a href="http://paypal.me/inigoquilez"><img class="socialMediaIcon" src="imgPayPal.png"/></a> 
+					</div>
+		
+		</header>
+		
+        <div id="container" style="flex-grow:1;">
+
+
+<!-- --------------------------------------------------------------------------------- -->
+
+<style>
+.part1 { width: 56%; padding-right:64px; padding-bottom:48px;}
+.part2 { width: 38%; padding-right:0px;  padding-bottom:48px;}
+@media only screen and (max-width: 1280px)
+{
+  .part1 { width: 100%; padding-right:0px; }
+  .part2 { width: 100%; }
+}
+</style>
+
+<!---------------------------------------------------------------------------->
+
+<h3>Intro</h3><hr>
+When writing shader or during any procedural creation process (texturing, modeling, shading, animation...) you often find yourself modifying signals in different ways so they behave the way you need. It is common to use smoothstep() to threshold some values, or pow() to shape a signal, or clamp() to clip it, fmod() to make it repeat, a mix() to blend between two signals, exp() for attenuatation, etc etc. All these functions are often conveniently available by default in most languages. However there are some operations that are also relativelly used that don't come by default in any language. The following is a list of some of the functions that I find myself using over and over again:<br>
+<br>
+<br>
+
+<!---------------------------------------------------------------------------->
+
+<div class="partsL"><div class="part1"><h3>Almost Identity (I)</h3>
+Imagine you don't want to modify a signal unless it's drops to zero or close to it, in which case you want to replace the value with a small possitive constant. Then, rather than clamping the value and introduce a discontinuity, you can smoothly blend the signal into the desired clipped value. So, let <b>m</b> be the threshold (anything above <b>m</b> stays unchanged), and <b>n</b> the value things will take when the signal is zero. Then, the following function does the soft clipping (in a cubic fashion):<br>
+<br>
+<div class="code">float almostIdentity( float x, float m, float n )
+{
+    if( x>m ) return x;
+    const float a = 2.0*n - m;
+    const float b = 2.0*m - 3.0*n;
+    const float t = x/m;
+    return (a*t + b)*t*t + n;
+}</div></div><div class="part2"><img class="formula" src="gfx00.png"></div></div>
+
+<!---------------------------------------------------------------------------->
+
+<div class="partsL"><div class="part1"><h3>Almost Identity (II)</h3>
+A different way to achieve a near identity is through the square root of a biased square. I saw this technique first in a shader by user "omeometo" in Shadertoy. This approach can be a bit slower than the cubic above, depending on the hardware, but I find myself using it a lot these days. While it has zero derivative, it has a non-zero second derivative, so keep an eye in case it causes problems in your application.<br>
+<br>
+An extra nice thing is that this function can be used, unaltered, as an smooth-abs() function, which comes handy for symmetric funtions such as mirrored SDFs.<br>
+<br>
+<div class="code">float almostIdentity( float x, float n )
+{
+    return sqrt(x*x+n);
+}</div></div><div class="part2"><img class="formula" src="gfx10.png"></div></div>
+
+<!---------------------------------------------------------------------------->
+
+<div class="partsL"><div class="part1"><h3>Almost Unit Identity</h3>
+This is a near-identiy function that maps the unit interval into itself. It is the cousin of smoothstep(), in that it maps 0 to 0, 1 to 1, and has a 0 derivative at the origin, just like smoothstep. However, instead of having a 0 derivative at 1, it has a derivative of 1 at that point. It's equivalent to the Almost Identiy above with n=0 and m=1. Since it's a cubic just like smoothstep() it is very fast to evaluate:<br>
+<br>
+<div class="code">float almostUnitIdentity( float x )
+{
+    return x*x*(2.0-x);
+}</div></div><div class="part2"><img class="formula" src="gfx11.png"></div></div>
+
+<!---------------------------------------------------------------------------->
+
+<div class="partsL"><div class="part1"><h3>Smoothstep Integral</h3>
+If you use smoothstep for a velocity signal (say, you want to smoothly accelerate a stationary object into constant velocity motion), you need to integrate smoothstep() over time in order to get the actual position of value of the animation. The function below is exactly that, the position of an object that accelerates with smoothstep. Note it's derivative is never larger than 1, so no decelerations happen.<br>
+<br>
+<div class="code">float integralSmoothstep( float x, float T )
+{
+    if( x>T ) return x - T/2.0;
+    return x*x*x*(1.0-x*0.5/T)/T/T;
+}</div></div><div class="part2"><img class="formula" src="gfx13.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Exponential Impulse</h3>
+Impulses are great for triggering behaviours or making envelopes for music or animation. Baiscally, for anything that grows fast and then decays slowly. The following is an exponential impulse function. Use <b>k</b> to control the stretching of the function. Its maximum, which is 1, happens at exactly x = 1/k.<br>
+<br>
+<div class="code">float expImpulse( float x, float k )
+{
+    const float h = k*x;
+    return h*exp(1.0-h);
+}</div></div><div class="part2"><img class="formula" src="gfx02.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Polynomial Impulse</h3>
+Another impulse function that doesn't use exponentials can be designed by using polynomials. Use <b>k</b> to control falloff of the function. For example, a quadratic can be used, which peaks at x = sqrt(1/k).<br>
+<br>
+<div class="code">float quaImpulse( float k, float x )
+{
+    return 2.0*sqrt(k)*x/(1.0+k*x*x);
+}</div><br>
+You can easily generalize it to other powers to get different falloff shapes, where <b>n</b> is the degree of the polynomial:<br>
+<br>
+<div class="code">float polyImpulse( float k, float n, float x )
+{
+    return (n/(n-1.0))*pow((n-1.0)*k,1.0/n)*x/(1.0+k*pow(x,n));
+}</div><br>
+These generalized impulses peak at x = [k(n-1)]<sup>-1/n</sup>.
+</div><div class="part2"><img class="formula" src="gfx09.png"></div></div>
+
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Sustained Impulse</h3>
+Similar to the previous, but it allows for control on the width of attack (through the parameter "k") and the release (parameter "f") independently. Also, the impulse releases at a value of 1 instead of 0.<br>
+<br>
+<div class="code">float expSustainedImpulse( float x, float f, float k )
+{
+    float s = max(x-f,0.0)
+    return min( x*x/(f*f), 1+(2.0/f)*s*exp(-k*s));
+}</div></div><div class="part2"><img class="formula" src="gfx12.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Cubic Pulse</h3>
+Chances are you found yourself doing smoothstep(c-w,c,x)-smoothstep(c,c+w,x) very often. I do, for example when I need to isolate some features in a signal. For those cases, this cubicPulse() below is my new friend and will be yours too soon. Bonus - you can also use it as a performant replacement for a gaussian.<br>
+<br>
+<div class="code">float cubicPulse( float c, float w, float x )
+{
+    x = fabs(x - c);
+    if( x>w ) return 0.0;
+    x /= w;
+    return 1.0 - x*x*(3.0-2.0*x);
+}</div></div><div class="part2"><img class="formula" src="gfx03.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Exponential Step</h3>
+A natural attenuation is an exponential of a linearly decaying quantity: yellow curve, exp(-x). A gaussian, is an exponential of a quadratically decaying quantity: light green curve, exp(-x<sup>2</sup>). You can generalize and keep increasing powers, and get a sharper and sharper s-shaped curves. For really high values of n you can approximate a perfect step(). If you want such step to transition at x=a, like in the graphs to the right, you can set k = a<sup>-n</sup>&sdot;ln 2.<br>
+<br>
+<div class="code">float expStep( float x, float k, float n )
+{
+    return exp( -k*pow(x,n) );
+}</div></div><div class="part2"><img class="formula" src="gfx04.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Gain</h3>
+Remapping the unit interval into the unit interval by expanding the sides and compressing the center, and keeping 1/2 mapped to 1/2, that can be done with the gain() function. This was a common function in RSL tutorials (the Renderman Shading Language). k=1 is the identity curve, k&lt;1 produces the classic gain() shape, and k>1 produces "s" shaped curces. The curves are symmetric (and inverse) for k=a and k=1/a.<br>
+<br>
+<div class="code">float gain(float x, float k) 
+{
+    const float a = 0.5*pow(2.0*((x&lt;0.5)?x:1.0-x), k);
+    return (x&lt;0.5)?a:1.0-a;
+}</div></div><div class="part2"><img class="formula" src="gfx05.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Parabola</h3>
+A nice choice to remap the 0..1 interval into 0..1, such that the corners are mapped to 0 and the center to 1. You can then rise the parabolar to a power k to control its shape.<br>
+<br>
+<div class="code">float parabola( float x, float k )
+{
+    return pow( 4.0*x*(1.0-x), k );
+}</div></div><div class="part2"><img class="formula" src="gfx06.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Power curve</h3>
+This is a generalziation of the Parabola() above. It also maps the 0..1 interval into 0..1 by keeping the corners mapped to 0. But in this generalziation you can control the shape one either side of the curve, which comes handy when creating leaves, eyes, and many other interesting shapes.<br>
+<br>
+<div class="code">float pcurve( float x, float a, float b )
+{
+    const float k = pow(a+b,a+b)/(pow(a,a)*pow(b,b));
+    return k*pow(x,a)*pow(1.0-x,b);
+}</div><br>
+Note that <b>k</b> is chosen such that pcurve() reaches exactly 1 at its maximum for illustration purposes, but in many applications the curve needs to be scaled anyways so the slow computation of <b>k</b> can be simply avoided.</div><div class="part2"><img class="formula" src="gfx07.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+<div class="partsL"><div class="part1"><h3>Sinc curve</h3>
+A phase shifted <a class="regular" href="http://mathworld.wolfram.com/SincFunction.html">sinc curve</a> can be useful if it starts at zero and ends at zero, for some bouncing behaviors (suggested by Hubert-Jan). Give <b>k</b> different integer values to tweak the amount of bounces. It peaks at 1.0, but that take negative values, which can make it unusable in some applications.<br>
+<br>
+<div class="code">float sinc( float x, float k )
+{
+    const float a = PI*((k*x-1.0);
+    return sin(a)/a;
+}</div></div><div class="part2"><img class="formula" src="gfx08.png"></div></div>
+
+<!-- ------------------------------------ -->
+
+
+
+
+
+	
+    
+
+    </div> <!-- container -->
+	<footer><a href="http://www.iquilezles.org">inigo quilez</a> - learning computer graphics since 1994</footer>
+    </div></body>
+</html>
