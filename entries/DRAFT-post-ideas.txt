@@ -10,6 +10,12 @@
 
 - JavaScript Pascal compiler: https://github.com/lkesteloot/turbopascal
   - Few dependencies (see vendor subdirectory)
+  
+  
+- Graphics in javascript:
+  - https://play.ertdfgcvb.xyz/
+  - https://www.dwitter.net/
+  
 
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 

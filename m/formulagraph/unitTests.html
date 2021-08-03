@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- Parser -->
+<script src="parser/builtin.js"></script>
+<script src="parser/CommentStripper.js"></script>
+<script src="parser/inst.js"></script>
+<script src="parser/Lexer.js"></script>
+<script src="parser/modules.js"></script>
+<script src="parser/Native.js"></script>
+<script src="parser/NativeProcedure.js"></script>
+<script src="parser/Node.js"></script>
+<script src="parser/Parser.js"></script>
+<script src="parser/PascalError.js"></script>
+<script src="parser/RawData.js"></script>
+<script src="parser/Stream.js"></script>
+<script src="parser/Symbol.js"></script>
+<script src="parser/SymbolLookup.js"></script>
+<script src="parser/SymbolTable.js"></script>
+<script src="parser/Token.js"></script>
+<script src="parser/utils.js"></script>
+
+<!-- relplot -->
+<script src="utilities.js"></script>
+<script src="relplot.js"></script>
+<script src="UnitTests.js"></script>
+
+<script>
+
+window.onload = function () {
+  MAUtils.performAsync(function() {
+    let ut = new UnitTests()
+
+    try {
+      ut.run()
+    } catch(err) {
+      throw err
+    } finally {
+      let outputDiv = document.getElementById("testOutput")
+      let content = document.createTextNode("\n"+MALog.logs.join("\n"))
+      outputDiv.appendChild(content)
+    }
+  }, 100)
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput">Running tests...</div>
+</pre>
+</body>
+
+</html>
