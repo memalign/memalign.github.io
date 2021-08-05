@@ -9,6 +9,12 @@ I don't have skills like Inigo but I still have fun making 2D shapes using math.
 
 Here are a few fun tools for drawing 2D shapes using math:
 
+- [Link:/m/formulagraph/index.html]FormulaGraph[/Link]
+  - ** Added to this list in August 2021 **
+  - After originally publishing this list, I built my own formula grapher by combining Relplot and Graphtoy (both mentioned below)
+  - Features: interactive graphs, convenient UI, animate with time, available in any web browser, graph formulas (not just functions), graph polar formulas, graph inequalities
+  - See the full details [Link:/p/formulagraph.html]here[/Link]
+
 - TI calculators
   - You might have had one of these in high school
   - I had a TI-83 Plus which turned out to be a fun device. Here are some of its neat features:

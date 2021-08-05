@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>FormulaGraph</title>
+<meta property="og:title" content="FormulaGraph" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/formulagraph.html" />
+<meta property="og:image" content="/m/formulagraph.jpg" />
+<meta property="og:description" content="I'm excited to introduce FormulaGraph, a graphing calculator for general formulas (not just functions of x)! Whereas many graphing calculators require an equation like y = sqrt(1 - x^2), FormulaGraph…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+FormulaGraph
+</h1>
+</div>
+<img src="/m/formulagraph.jpg">
+<div id='postdate'>Posted on 8/4/2021</div>
+I'm excited to introduce <a href="/m/formulagraph/index.html">FormulaGraph</a>, a graphing calculator for general formulas (not just functions of x)!<br />
+<br />
+Whereas many graphing calculators require an equation like <a href="/m/formulagraph/index.html?f1(x,t)=y%20=%20sqrt(1-x%5E2)&v1=true&f2(x,t)=y%20=%20-sqrt(1-x%5E2)&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y = sqrt(1 - x^2)</a>, FormulaGraph can handle formulas like <a href="/m/formulagraph/index.html?f1(x,t)=y%5E2%20+%20x%5E2%20=%201&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y^2 + x^2 = 1</a>. You don't have to solve for y to use FormulaGraph.<br />
+<br />
+Here's what else it can do:<br />
+<br />
+- Polar formulas in terms of r and theta, such as <a href="/m/formulagraph/index.html?f1(x,t)=r%20=%202*sin(2*theta)&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">r = 2*sin(2*theta)</a><br />
+- Animate based on time t: <a href="/m/formulagraph/index.html?f1(x,t)=y=%20x%5E(t%254)&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=false">y = x^(t % 4)</a><br />
+- Inequalities: <a href="/m/formulagraph/index.html?f1(x,t)=x%5E100%20+%20y%5E100%20%3C=%202&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">x^100 + y^100 <= 2</a><br />
+- Handle panning and zooming using mouse and touch/pinch<br />
+- Share links<br />
+<br />
+<br />
+While FormulaGraph lacks features other graphing calculators have (such as precisely calculating y- and x-intercepts), it has some unique benefits:<br />
+(I introduced this list of calculators <a href="/p/draw-shapes.html">previously</a>)<br />
+<br />
+- TI-83 Plus<br />
+&nbsp;&nbsp;- Features only in FormulaGraph: interactive graphs, animate with time, available in any web browser, graph formulas (not just functions)<br />
+<br />
+- WolframAlpha<br />
+&nbsp;&nbsp;- Features only in FormulaGraph: interactive graphs, animate with time<br />
+&nbsp;&nbsp;- WolframAlpha won't graph some formulas, e.g. <a href="/m/formulagraph/index.html?f1(x,t)=y%5E2+x%5Ex=1&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y^2+x^x=1</a> and <a href="/m/formulagraph/index.html?f1(x,t)=x%5Ey=x%5Ex%5Ex%5Ex%5Ex%5Ex&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">x^y=x^x^x^x^x^x</a><br />
+<br />
+- Meta-Calculator<br />
+&nbsp;&nbsp;- Features only in FormulaGraph: interactive graphs, animate with time, graph formulas (not just functions), modulo operator<br />
+<br />
+- FooPlot<br />
+&nbsp;&nbsp;- Features only in FormulaGraph: animate with time, graph formulas (not just functions), graph inequalities<br />
+<br />
+- GeoGebra Graphing Calculator<br />
+&nbsp;&nbsp;- Features only in FormulaGraph: available in any web browser, graph polar formulas, modulo operator<br />
+&nbsp;&nbsp;- GeoGebra Graphing Calculator won't graph some formulas, e.g. <a href="/m/formulagraph/index.html?f1(x,t)=x*y*(x-y)*(x+y)%20%3C%201&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">x*y*(x-y)*(x+y) < 1</a><br />
+<br />
+- Desmos<br />
+&nbsp;&nbsp;- Desmos is really great. It's the best graphing calculator in this list. It can handle formulas, animations, polar formulas, and more!<br />
+&nbsp;&nbsp;- One thing FormulaGraph handles better: Desmos doesn't support polar equations which aren't linear in r. Example: <a href="/m/formulagraph/index.html?f1(x,t)=r%5E2=cos(theta)&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">r^2 = cos(theta)</a><br />
+&nbsp;&nbsp;- Also, FormulaGraph is available in any web browser whereas Desmos is an app<br />
+<br />
+- NumWorks Graphing Calculator<br />
+&nbsp;&nbsp;- Features only in FormulaGraph: interactive graphs, convenient UI, animate with time, available in any web browser, graph formulas (not just functions), graph polar formulas, graph inequalities<br />
+<br />
+- Relplot<br />
+&nbsp;&nbsp;- Features only in FormulaGraph: interactive graphs, animate with time<br />
+&nbsp;&nbsp;- Relplot has some graphing correctness bugs. Examples: <a href="/m/formulagraph/index.html?f1(x,t)=y=x%252&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y = x mod 2</a>, <a href="/m/formulagraph/index.html?f1(x,t)=y=x%5Ex&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y = x^x</a>, <a href="/m/formulagraph/index.html?f1(x,t)=y%5Ey=x%5Ex&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y^y = x^x</a>, <a href="/m/formulagraph/index.html?f1(x,t)=r=2*sin(4*theta)&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">r = 2*sin(4*theta)</a>, <a href="/m/formulagraph/index.html?f1(x,t)=r=theta&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">r = theta</a> covers a small range of theta values<br />
+&nbsp;&nbsp;- I'm reporting these bugs and I hope they get fixed!<br />
+<br />
+- Graphtoy<br />
+&nbsp;&nbsp;- Features only in FormulaGraph: graph formulas (not just functions), graph polar formulas, graph inequalities<br />
+&nbsp;&nbsp;- Graphtoy has visual glitches (missing segments) when drawing circles and other similar shapes (e.g. <a href="/m/formulagraph/index.html?f1(x,t)=y=sqrt(1-x%5E2)&v1=true&f2(x,t)=y=-sqrt(1-x%5E2)&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y = sqrt(1-x^2) and y = -sqrt(1-x^2)</a>)<br />
+<br />
+- Bonus: FormulaGraph has tons of test coverage, including checks that graphs render accurately. You can run the tests <a href="/m/formulagraph/unitTests.html">here</a>. Beware: they take ~1 minute to run!<br />
+<br />
+<br />
+FormulaGraph's origins:<br />
+<br />
+This is a hobby project I made by combining code and ideas from other peoples' cool projects.<br />
+<br />
+It all started with <a href="https://www.cs.cornell.edu/w8/~andru/relplot/">Relplot</a>, a project by Cornell's <a href="https://www.cs.cornell.edu/andru/">Andrew Myers</a>. In Professor Myers' functional programming class, we implemented formula plotters using interval arithmetic.<br />
+<br />
+Over a decade later, I stumbled upon <a href="https://www.iquilezles.org">Inigo Quilez</a>'s <a href="https://graphtoy.com/">Graphtoy</a>. I had fun <a href="/p/shape-catalog.html">making shapes</a> and I thought it'd be even more fun to bring Relplot's general formula capabilities to Graphtoy's interactive UI.<br />
+<br />
+So that's what I did: I ported Relplot's implementation of interval arithmetic from SML to JavaScript and spliced it into Graphtoy. I really appreciate all the work Professor Myers and Inigo did, especially publishing the source code for these projects.<br />
+<br />
+There was one remaining difficulty: While Graphtoy uses JavaScript's built-in parser for inputted expressions, I needed to completely replace the implementations of operators like +, -, *, /, %. JavaScript doesn't have operator overloading so I needed my own expression parser.<br />
+<br />
+That's where <a href="https://www.teamten.com/">Lawrence Kesteloot</a>'s awesome web implementation of <a href="https://github.com/lkesteloot/turbopascal">Turbo Pascal</a> (<a href="/m/turbopascal.zip">my backup</a>) comes in (see his interesting <a href="https://www.teamten.com/lawrence/projects/turbo_pascal_compiler/">writeup</a> about the project). I simply copied and reused his expression parser. Thank you Lawrence for building and sharing that passion project! I particularly like that this project has very few dependencies. And I was able to remove the few 3rd party dependencies it had in the portion of code I reused.<br />
+<br />
+Key integration points where these projects are glued together:<br />
+- <a href="/m/formulagraph/relplot.js">relplot.js</a> - look for "MAIntervalMath" for a reimplementation of Relplot's interval arithmetic<br />
+- <a href="/m/formulagraph/graphtoy.js">graphtoy.js</a> - look for "Draw Relplot graphs" to see where Relplot was added to Graphtoy<br />
+- <a href="/m/formulagraph/utilities.js">utilities.js</a> - look for "_convertFormulaToFnSyntax" to see where the parser comes into play<br />
+<br />
+<br />
+Here are some miscellaneous things I've learned during this project:<br />
+<br />
+- Some equations have solutions that are not clearly visible on most graphing calculators. For example, <a href="/m/formulagraph/index.html?f1(x,t)=y=x%5Ex&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y = x^x</a> has valid solutions for negative values of x which are single points (e.g. (-1, -1)).<br />
+<br />
+- New shapes:<br />
+&nbsp;&nbsp;- <a href="/m/formulagraph/index.html?f1(x,t)=y%5E100%20+%20x%5E100%20%3C%201&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">Square</a><br />
+&nbsp;&nbsp;- <a href="/m/formulagraph/index.html?f1(x,t)=x%5E2+(y-(x%5E2)%5E(1/3))%5E2%20%3C%201&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">Heart</a><br />
+&nbsp;&nbsp;- <a href="/m/formulagraph/index.html?f1(x,t)=((x*y*(x-y)*(x+y)*(x%5E2+y%5E2-4))%5E2-1)%3C1&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">Crazy lotus</a><br />
+<br />
+- Modulo<br />
+&nbsp;&nbsp;- Create <a href="/m/formulagraph/index.html?f1(x,t)=(x%5E2+y%5E2)%2540=1&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">concentric shapes</a> using modulo<br />
+&nbsp;&nbsp;- Create <a href="/m/formulagraph/index.html?f1(x,t)=y%20=%20x%5E(t%20%25%203)&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=false">repeating animations</a> using modulo<br />
+&nbsp;&nbsp;- There are different definitions of <a href="https://en.wikipedia.org/wiki/Modulo_operation">modulo</a> for negative numbers<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Many programming languages implement modulo as "truncated division"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Desmos, Relplot, and Graphtoy use "floored division" so I use that in FormulaPlot too<br />
+<br />
+- How to convert Cartesian coordinates to polar<br />
+&nbsp;&nbsp;- Based on Relplot's implementation, I thought I just had to replace "r" with "sqrt(x^2+y^2)" and "theta" with "atan2(y, x)".<br />
+&nbsp;&nbsp;- This turned out to be much harder than I expected in part because Relplot's polar coodinate support is incomplete (noted above in my comparison of FormulaGraph and Relplot).<br />
+&nbsp;&nbsp;- After what I thought would be a 20 minute feature consumed several weekends, I'm reminded of the tongue-in-cheek <a href="https://twitter.com/Pinboard/status/761656824202276864">Programmers' Credo</a>: "We do these things not because they are easy, but because we thought they were going to be easy"<br />
+&nbsp;&nbsp;- I solved this with 3 techniques: graph positive r and negative r (with theta shifted by pi), translate atan2's result range to [0, 2pi] (instead of [-pi, pi]), and iteratively render with theta += 2pi.<br />
+<br />
+- Debugging an incorrect graph is similar to general debugging. Try to find the simplest case that reproduces the issue. I was relieved when a glitch in <a href="/m/formulagraph/index.html?f1(x,t)=y%20=%20(mod(floor(x),2))*(x-floor(x))+(1-mod(floor(x),2))*(-x-floor(-x))+(1-mod(floor(x),2))*(1-ceil(x-floor(x)))&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y = (mod(floor(x),2))*(x-floor(x))+(1-mod(floor(x),2))*(-x-floor(-x))+(1-mod(floor(x),2))*(1-ceil(x-floor(x)))</a> reproduced in the far simpler <a href="/m/formulagraph/index.html?f1(x,t)=y=ceil(x-floor(x))&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y = ceil(x-floor(x))</a>.<br />
+<br />
+- When using interval arithmetic to graph formulas, it's ok to return wide intervals when the input is wide as long as the result intervals converge as the inputs get smaller. I use this technique to avoid the incorrect vertical line segments some graphing calculators (including Relplot and Graphtoy) show for <a href="/m/formulagraph/index.html?f1(x,t)=y=floor(x)&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">y = floor(x)</a>.<br />
+<br />
+<br />
+To conclude, here's an improved version of the <a href="/m/formulagraph/index.html?f1(x,t)=&v1=true&f2(x,t)=-(x-0.7)+sqrt(.1)+abs(sin(PI*-(x-0.7)))&v2=false&f3(x,t)=&v3=true&f4(x,t)=y%3C-floor(x)&v4=true&f5(x,t)=(y-(-((t%2519-8)-0.7)+sqrt(.1)+abs(sin(PI*-((t%2519-8)-0.7)))))%5E2+(x-(t%2519-8))%5E2%3C=0.1&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=false">bouncing ball animation</a> (original <a href="/p/bouncing-ball.html">here</a>).<br />
+<br />
+Happy graphing :)<br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>
