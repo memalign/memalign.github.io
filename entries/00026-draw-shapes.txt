@@ -39,6 +39,7 @@ Here are a few fun tools for drawing 2D shapes using math:
     - This app is really good! Much like WolframAlpha and Relplot, this app can graph arbitrary equations and inequations like x^y = y^x, 1 = x^2 + y^2, y > x, etc.
   - [Link:https://apps.apple.com/us/app/desmos-graphing-calculator/id653517540]Desmos Graphing Calculator[/Link]
     - This app might be even better. It also supports polar equations (e.g. r = cos(4*theta)).
+    - Also available as a [Link:https://www.desmos.com/calculator]website[/Link]
   - [Link:https://apps.apple.com/us/app/numworks-graphing-calculator/id1456585807]NumWorks Graphing Calculator[/Link] (simulates a physical calculator; hard to use)
 
 - [Link:https://www.cs.cornell.edu/w8/~andru/relplot/]Relplot[/Link]

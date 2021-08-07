@@ -39,7 +39,7 @@ While FormulaGraph lacks features other graphing calculators have (such as preci
 - Desmos
   - Desmos is really great. It's the best graphing calculator in this list. It can handle formulas, animations, polar formulas, and more!
   - One thing FormulaGraph handles better: Desmos doesn't support polar equations which aren't linear in r. Example: [Link:/m/formulagraph/index.html?f1(x,t)=r%5E2=cos(theta)&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true]r^2 = cos(theta)[/Link]
-  - Also, FormulaGraph is available in any web browser whereas Desmos is an app
+  - Desmos has another quirky inconvenience: it's not possible to copy/paste formulas or easily edit their text. FormulaGraph's formula input boxes are super convenient in comparison.
 
 - NumWorks Graphing Calculator
   - Features only in FormulaGraph: interactive graphs, convenient UI, animate with time, available in any web browser, graph formulas (not just functions), graph polar formulas, graph inequalities

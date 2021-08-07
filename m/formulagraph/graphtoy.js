@@ -371,7 +371,7 @@ function Grapher()
 
 	function iNotOnDenyList( formula )
 	{
-		if( formula.length > 256 )
+		if( formula.length > 2048 )
 		{
 			alert("Formula is too long...");
 			return false;
