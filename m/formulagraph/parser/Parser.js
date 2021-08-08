@@ -975,6 +975,38 @@
 
     // Parses a multiplicative expression.
     Parser.prototype._parseMultiplicativeExpression = function (symbolTable) {
+        var node = this._parseExponentiationExpression(symbolTable);
+
+        while (true) {
+            var token = this.lexer.peek();
+            if (token.isSymbol("*")) {
+                node = this._createBinaryNode(symbolTable, token, node, Node.MULTIPLICATION,
+                                              this._parseExponentiationExpression);
+            } else if (token.isSymbol("/")) {
+                node = this._createBinaryNode(symbolTable, token, node, Node.DIVISION,
+                                              this._parseExponentiationExpression, Node.realType);
+            } else if (token.isReservedWord("div")) {
+                node = this._createBinaryNode(symbolTable, token, node, Node.INTEGER_DIVISION,
+                                              this._parseExponentiationExpression, Node.integerType);
+            } else if (token.isSymbol("%")) {
+                node = this._createBinaryNode(symbolTable, token, node, Node.MOD,
+                                              this._parseExponentiationExpression, Node.realType);
+            //} else if (token.isReservedWord("mod")) {
+            //    node = this._createBinaryNode(symbolTable, token, node, Node.MOD,
+            //                                  this._parseExponentiationExpression, Node.integerType);
+            } else if (token.isReservedWord("and")) {
+                node = this._createBinaryNode(symbolTable, token, node, Node.AND,
+                                              this._parseExponentiationExpression, Node.booleanType);
+            } else {
+                break;
+            }
+        }
+
+        return node;
+    };
+
+    // Parses an exponentiation expression.
+    Parser.prototype._parseExponentiationExpression = function (symbolTable) {
         var node = this._parseUnaryExpression(symbolTable);
 
         while (true) {
@@ -982,24 +1014,6 @@
             if (token.isSymbol("^")) {
                 node = this._createBinaryNode(symbolTable, token, node, Node.RAISE_TO_POWER,
                                               this._parseUnaryExpression);
-            } else if (token.isSymbol("*")) {
-                node = this._createBinaryNode(symbolTable, token, node, Node.MULTIPLICATION,
-                                              this._parseUnaryExpression);
-            } else if (token.isSymbol("/")) {
-                node = this._createBinaryNode(symbolTable, token, node, Node.DIVISION,
-                                              this._parseUnaryExpression, Node.realType);
-            } else if (token.isReservedWord("div")) {
-                node = this._createBinaryNode(symbolTable, token, node, Node.INTEGER_DIVISION,
-                                              this._parseUnaryExpression, Node.integerType);
-            } else if (token.isSymbol("%")) {
-                node = this._createBinaryNode(symbolTable, token, node, Node.MOD,
-                                              this._parseUnaryExpression, Node.realType);
-            //} else if (token.isReservedWord("mod")) {
-            //    node = this._createBinaryNode(symbolTable, token, node, Node.MOD,
-            //                                  this._parseUnaryExpression, Node.integerType);
-            } else if (token.isReservedWord("and")) {
-                node = this._createBinaryNode(symbolTable, token, node, Node.AND,
-                                              this._parseUnaryExpression, Node.booleanType);
             } else {
                 break;
             }

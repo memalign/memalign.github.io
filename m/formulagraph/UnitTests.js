@@ -312,6 +312,28 @@ class UnitTests {
     str1 = "plus(pow(x,t),pow(y,t)) = times(t,times(x,y))"
     str2 = "x^t+y^t = t*(x*y)"
     assertEqual(MAUtils.convertFormulaToJS(str1), MAUtils.convertFormulaToJS(str2))
+
+    // This behavior matches Excel and MATLAB but not WolframAlpha
+    str1 = "y = pow(pow(2,3),4)"
+    str2 = "y = 2^3^4"
+    assertEqual(MAUtils.convertFormulaToJS(str1), MAUtils.convertFormulaToJS(str2))
+
+    str1 = "y = pow(2,pow(3, 4))"
+    str2 = "y = 2^(3^4)"
+    assertEqual(MAUtils.convertFormulaToJS(str1), MAUtils.convertFormulaToJS(str2))
+
+    str1 = "y = times(2,pow(x,3))"
+    str2 = "y = 2*x^3"
+    assertEqual(MAUtils.convertFormulaToJS(str1), MAUtils.convertFormulaToJS(str2))
+
+    str1 = "y = pow(times(2,x),3)"
+    str2 = "y = (2*x)^3"
+    assertEqual(MAUtils.convertFormulaToJS(str1), MAUtils.convertFormulaToJS(str2))
+
+    // This behavior matches Excel but not WolframAlpha and Google
+    str1 = "y = pow(neg(3),2)"
+    str2 = "y = -3^2"
+    assertEqual(MAUtils.convertFormulaToJS(str1), MAUtils.convertFormulaToJS(str2))
   }
 
   test_MAUtils_formulaFnUsesR() {
@@ -5461,6 +5483,108 @@ class UnitTests {
     assertListVisuallyContainsPoint(result, new MAPoint(-10, -4), res, false)
   }
 
+  // Before fixing a parser bug, one of the segments in a batman curve drew anellipse instead of two partial segments. I added parens here to graph the ellipse on purpose so I can assert that these same points do not show up in the graph of the correctly parsed formula in the next test
+  test_MARelplot_render_batman_ellipse() {
+    let formulaStr = "(x^2+(4*y)^2-100*sqrt(abs((7-abs(2*y-1)))/(7-abs(2*y-1))))=0"
+    let result = []
+    let formulaFn = new Function("x,y,t,mathContext", MAUtils.convertFormulaToJS(formulaStr))
+    let xInterval = new MAInterval(-12, 12)
+    let yInterval = new MAInterval(-9, 9)
+    let res = (xInterval.ub-xInterval.lb)/800
+    MARelplot.render(formulaFn, xInterval, yInterval, 0, res, result)
+
+    assertListVisuallyContainsPoint(result, new MAPoint(0, 2.48), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(0, -2.48), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(-5, 2.15), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(5, 2.15), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(-5, -2.15), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(5, -2.15), res, true)
+
+    // On both curves
+    assertListVisuallyContainsPoint(result, new MAPoint(-10, 0), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(10, 0), res, true)
+
+
+    // Not on curve
+    assertListVisuallyContainsPoint(result, new MAPoint(-6, 4), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(6, 4), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(-8, 3), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(8, 3), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(8, -3), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(-8, 3), res, false)
+
+    // Not on either curve
+    assertListVisuallyContainsPoint(result, new MAPoint(-6, -4), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(6, -4), res, false)
+  }
+
+  test_MARelplot_render_batman_partial_ellipse() {
+    let formulaStr = "(x^2+4*y^2-100*sqrt(abs((7-abs(2*y-1)))/(7-abs(2*y-1))))=0"
+    let result = []
+    let formulaFn = new Function("x,y,t,mathContext", MAUtils.convertFormulaToJS(formulaStr))
+    let xInterval = new MAInterval(-12, 12)
+    let yInterval = new MAInterval(-9, 9)
+    let res = (xInterval.ub-xInterval.lb)/800
+    MARelplot.render(formulaFn, xInterval, yInterval, 0, res, result)
+
+    assertListVisuallyContainsPoint(result, new MAPoint(-6, 4), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(6, 4), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(-8, 3), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(8, 3), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(8, -3), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(-8, 3), res, true)
+
+    // On both curves
+    assertListVisuallyContainsPoint(result, new MAPoint(-10, 0), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(10, 0), res, true)
+
+
+    // Not on curve
+    assertListVisuallyContainsPoint(result, new MAPoint(0, 2.48), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(0, -2.48), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(-5, 2.15), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(5, 2.15), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(-5, -2.15), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(5, -2.15), res, false)
+
+    // Not on either curve
+    assertListVisuallyContainsPoint(result, new MAPoint(-6, -4), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(6, -4), res, false)
+  }
+
+  test_MARelplot_render_batman_partial_ellipse_with_parens() {
+    let formulaStr = "(x^2+4*(y^2)-100*sqrt(abs((7-abs(2*y-1)))/(7-abs(2*y-1))))=0"
+    let result = []
+    let formulaFn = new Function("x,y,t,mathContext", MAUtils.convertFormulaToJS(formulaStr))
+    let xInterval = new MAInterval(-12, 12)
+    let yInterval = new MAInterval(-9, 9)
+    let res = (xInterval.ub-xInterval.lb)/800
+    MARelplot.render(formulaFn, xInterval, yInterval, 0, res, result)
+
+    assertListVisuallyContainsPoint(result, new MAPoint(-6, 4), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(6, 4), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(-8, 3), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(8, 3), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(8, -3), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(-8, 3), res, true)
+
+    // On both curves
+    assertListVisuallyContainsPoint(result, new MAPoint(-10, 0), res, true)
+    assertListVisuallyContainsPoint(result, new MAPoint(10, 0), res, true)
+
+
+    // Not on curve
+    assertListVisuallyContainsPoint(result, new MAPoint(0, 2.48), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(0, -2.48), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(-5, 2.15), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(5, 2.15), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(-5, -2.15), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(5, -2.15), res, false)
+
+    // Not on either curve
+    assertListVisuallyContainsPoint(result, new MAPoint(-6, -4), res, false)
+    assertListVisuallyContainsPoint(result, new MAPoint(6, -4), res, false)
+  }
 
   // Rendering polar coordinate formulas
 
