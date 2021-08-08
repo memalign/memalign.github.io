@@ -2,21 +2,11 @@
 - JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
 - SiteGenerator
 - Vision framework
-
-- Followup to Drawing Shapes Using Math
-  - Extend Graphtoy with Relplot capabilities? (Running in a browser and being more interactive than Relplot)
-    - First step: avoid building a parser by using functions instead of real operators (e.g. mul(x,y) instead of *)
-    - Second step: reuse lkesteloot's Pascal parser
-
-- JavaScript Pascal compiler: https://github.com/lkesteloot/turbopascal
-  - Few dependencies (see vendor subdirectory)
-  
   
 - Graphics in javascript:
   - https://play.ertdfgcvb.xyz/
   - https://www.dwitter.net/
   
-
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 
 - https://freeicons.io/

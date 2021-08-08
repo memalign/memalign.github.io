@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Batman Curve Notes</title>
+<meta property="og:title" content="Batman Curve Notes" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/m/batman-notes.html" />
+<meta property="og:image" content="/m/batman-curve.jpg" />
+<meta property="og:description" content="Batman Curve Notes" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+Batman Curve Notes
+</h1>
+</div>
+<img src="/m/batman-curve.jpg">
+<br />
+The full Batman Curve writeup can be found <a href='/p/batman-curve.html'>here</a>.
+<br />
+<br />
+<div id='code'>8/5/21
+
+Need to debug:
+https://math.stackexchange.com/questions/54506/is-this-batman-equation-for-real
+  
+Batman:
+    
+Looks good (outer wings):
+  (((x/7)^2)*sqrt((abs(abs(x)-3))/(abs(x)-3))+((y/3)^2)*sqrt((abs(y+3*sqrt(33)/7))/(y+3*sqrt(33)/7))-1) = 0    
+    
+Looks good (bottom curves):
+  (abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(1-(abs(abs(x)-2)-1)^2)-y) = 0
+  
+  Fixed version: (abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x)))) =0
+  
+  
+Looks right (outer ears):
+  (9*sqrt(abs((abs(x)-1)*(abs(x)-0.75))/((1-abs(x))*(abs(x)-0.75)))-8*abs(x)-y) = 0
+  
+Looks right (inner ears):
+  (3*abs(x)+0.75*sqrt(abs((abs(x)-0.75)*(abs(x)-0.5))/((0.75-abs(x))*(abs(x)-0.5)))-y) = 0
+
+Looks right (top of head):
+  (2.25*sqrt(abs((x-0.5)*(x+0.5))/((0.5-x)*(0.5+x)))-y) = 0
+  
+  Fixed version: (2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x)))) = 0
+
+Looks right (shoulders)
+  (6*sqrt(10)/7+(1.5-0.5*abs(x))*sqrt(abs(abs(x)-1)/(abs(x)-1))-6*sqrt(10)/14*sqrt(4-(abs(x)-1)^2)-y) = 0
+
+But when I multiply them all together, I get no graph result.
+
+(Quick proof to myself that I can generally compose shapes using multiplication like this:
+(2.25-y) * (x^2+y^2-1) * (x^2+y^2-4) = 0
+This works!)
+
+
+Desmos yields at least some graph for:
+  (2.25*sqrt(abs((x-0.5)*(x+0.5))/((0.5-x)*(0.5+x)))-y) * (abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(1-(abs(abs(x)-2)-1)^2)-y)=0
+  
+Ah good FormulaPlot's result matches Desmos.
+
+This is the combination of the top of head and bottom curves. The top of head formula restricts x to a small range. Then this also restricts the bottom curves to that same valid range of x.
+
+This term: sqrt(abs((x-0.5)*(x+0.5))/((0.5-x)*(0.5+x)))
+Makes the whole formula invalid for any x values for which this is negative:
+abs((x-0.5)*(x+0.5))/((0.5-x)*(0.5+x)) -- seemingly anything outside of x=[-0.5, 0.5]
+
+
+Instead of restricting values by creating complex numbers (thus breaking the actual graph), I might be able to create a gadget using max and/or min (similar to the graph below)
+
+Take this segment for example:
+  (2.25*sqrt(abs((x-0.5)*(x+0.5))/((0.5-x)*(0.5+x)))-y) = 0
+  
+Can I restrict x to be between [-0.5,0.5] another way?
+
+y = 2.25
+x = [-0.5,0.5]
+
+2.25 - y + min(0.5, (floor(abs(x)+0.5))) = 0
+Close but not quite right
+
+I think I want to find a term that evaluates to 0 iff x is in the desired range  
+
+First attempt:
+x is less than 0.5:
+min(0, 0.5-x)
+min(1, ceil(abs(min(0, 0.5-x))))
+
+x is greater than -0.5:
+max(0, -0.5-x)
+min(1, ceil(abs(max(0, -0.5-x))))
+
+x is between -0.5 and 0.5:
+(min(0, 0.5-x)+max(0, -0.5-x))
+(min(1, ceil(abs(max(0, -0.5-x))))+min(1, ceil(abs(min(0, 0.5-x)))))
+
+
+(2.25-y)*(min(0, 0.5-x)+max(0, -0.5-x)) = 0
+Not quite right: we need x between these AND y needs to equal 2.25
+
+(2.25-y)+(min(0, 0.5-x)+max(0, -0.5-x)) = 0
+
+We're still finding valid x values outside the desired range
+
+This seems to work:
+(2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x))))=0
+
+Squaring the y term prevents it from having a negative value that would cancel out the 1 we get when x is out of range. Using abs instead of ^2 also would work.
+
+Fixed gadgets:
+x is less than 0.5:
+min(1, ceil(abs(min(0, 0.5-x))))
+
+x is greater than -0.5:
+min(1, ceil(abs(max(0, -0.5-x))))
+
+x is between -0.5 and 0.5:
+(min(1, ceil(abs(max(0, -0.5-x))))+min(1, ceil(abs(min(0, 0.5-x)))))
+
+
+Can I combine that with the bottom curves?
+(abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(1-(abs(abs(x)-2)-1)^2)-y)=0
+
+The desired x range for this segment is -4 to 4.
+
+Examine whats in the sqrt:
+(abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+  sqrt(1-(abs(abs(x)-2)-1)^2)     -y)
+
+sqrt(1-(abs(abs(x)-2)-1)^2)
+
+I can adjust this to be valid for all x:
+sqrt(abs(1-(abs(abs(x)-2)-1)^2))
+Graphing this confirms it keeps the shape for x in [-4,4] while also being valid outside that range. Then I can constrain it with my x range gadgets separately.
+
+Bringing this to the full formula for the bottom curves:
+(abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)=0
+
+Constraining x's values:
+(abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x)))) =0
+
+Combine that with the top of head:
+
+(2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x))))=0
+and
+(abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x)))) =0
+
+((2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x))))) * ((abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x))))) = 0
+
+That works!
+
+Next steps: fix each term in the equation:
+- Fix them so there are solutions for the full range of x
+- Use my gadget to constrain formula F's x range to [L,U]:
+
+(F^2 + min(1, ceil(abs(min(0, U-x))))+min(1, ceil(abs(max(0, L-x))))) = 0
+
+- Combine segments by multiplying the sub-formulas together
+
+
+Fixing outer wings:
+(((x/7)^2)*sqrt((abs(abs(x)-3))/(abs(x)-3))+((y/3)^2)*sqrt((abs(y+3*sqrt(33)/7))/(y+3*sqrt(33)/7))-1)=0
+
+The top has a different x range than the bottom and there are two sections. I might need to split this into several sub-sections... as many as 4.
+
+I'll focus on the right side first and then might be able to just flip over the y-axis to get the left side.
+
+x ranges from 3 to 7 for y>0
+x ranges from 4 to 7 for y<0
+
+
+Fix formula to be valid for full range of x:
+(((x/7)^2)*sqrt( (abs(abs(x)-3))/(abs(x)-3)  )+((y/3)^2)*sqrt((abs(y+3*sqrt(33)/7))/(y+3*sqrt(33)/7))-1)=0
+
+The sqrt terms seem to only exist to limit the graph so I'll remove them. Ah, looks like the formula for a normal ellipse now.
+(((x/7)^2)+((y/3)^2)-1)=0
+
+Focus on the section where y>0:
+(((x/7)^2)+((y/3)^2)-1)=0
+
+min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)=0
+
+Restrict x to [3,7]:
+
+(min(1, ceil(abs(max(0, 3-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)=0
+
+
+Now for y<0, restrict x to [4,7]:
+
+(min(1, ceil(abs(max(0, 4-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(min(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)=0
+
+
+Flip both of those over the y-axis by negating x terms:
+
+(min(1, ceil(abs(max(0, 3-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(max(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)=0
+
+(min(1, ceil(abs(max(0, 4-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(min(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)=0
+
+
+Combine all four of those together:
+(((min(1, ceil(abs(max(0, 3-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(min(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 3-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(max(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(min(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)))=0
+
+Hmm this is giving me glitches close to (x,y)=(0,0)
+
+I could add a term to ensure abs(x)>1?
+
+(((min(1, ceil(abs(max(0, 3-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(min(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 3-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(max(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(min(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1))  +  min(1, ceil(abs(max(0, 1-abs(x)))))   )=0
+
+That worked!
+
+
+Add that to the portion of the graph I already had:
+
+
+((2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x))))) * ((abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x))))) = 0
+
+and
+
+(((min(1, ceil(abs(max(0, 3-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(min(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 3-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(max(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(min(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1))  +  min(1, ceil(abs(max(0, 1-abs(x)))))   )=0
+
+
+(((2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x))))) * ((abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x)))))) * (((min(1, ceil(abs(max(0, 3-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(min(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 3-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(max(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(min(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1))  +  min(1, ceil(abs(max(0, 1-abs(x)))))   )=0
+
+
+Looking good!
+
+
+Next segment:
+
+Shoulders:
+  (6*sqrt(10)/7+(1.5-0.5*abs(x))*sqrt(abs(abs(x)-1)/(abs(x)-1))-6*sqrt(10)/14*sqrt(4-(abs(x)-1)^2)-y)
+  =0
+
+Focus on the segment that runs from x=1 to x=3 and then I'll mirror it:
+
+  (6*sqrt(10)/7+(1.5-0.5*abs(x))* sqrt(abs(abs(x)-1)/(abs(x)-1))  -6*sqrt(10)/14*sqrt(4-(abs(x)-1)^2)-y)
+  =0
+
+Remove term that just serves to restrict x:
+
+  (6*sqrt(10)/7+(1.5-0.5*abs(x))  -6*sqrt(10)/14*sqrt(4-(abs(x)-1)^2)-y)
+  =0
+
+What about the other sqrt term?
+  (6*sqrt(10)/7+(1.5-0.5*abs(x))  -6*sqrt(10)/14*  sqrt(abs(4-(abs(x)-1)^2))  -y)
+  =0
+
+Looks kind of like a dress now
+
+Now limit x's range to [1,3]:
+
+(min(1, ceil(abs(min(0, 3-x))))+min(1, ceil(abs(max(0, 1-x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(x)-1)^2))-y))^2
+  =0
+
+
+Reflect over the y axis too:
+
+(min(1, ceil(abs(min(0, 3+x))))+min(1, ceil(abs(max(0, 1+x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(-x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(-x)-1)^2))-y))^2
+  =0
+
+
+Combine:
+
+((min(1, ceil(abs(min(0, 3-x))))+min(1, ceil(abs(max(0, 1-x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(x)-1)^2))-y))^2) * ((min(1, ceil(abs(min(0, 3+x))))+min(1, ceil(abs(max(0, 1+x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(-x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(-x)-1)^2))-y))^2)
+  =0
+
+
+Combine with the rest of the batman:
+
+(((2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x))))) * ((abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x)))))) * (((min(1, ceil(abs(max(0, 3-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(min(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 3-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(max(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(min(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1))  +  min(1, ceil(abs(max(0, 1-abs(x)))))   ) * ((min(1, ceil(abs(min(0, 3-x))))+min(1, ceil(abs(max(0, 1-x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(x)-1)^2))-y))^2) * ((min(1, ceil(abs(min(0, 3+x))))+min(1, ceil(abs(max(0, 1+x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(-x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(-x)-1)^2))-y))^2)
+  =0
+
+Almost done!!
+
+
+Next segment:
+
+Outer ears:
+  (9* sqrt( abs((abs(x)-1)*(abs(x)-0.75)) / ((1-abs(x))*(abs(x)-0.75))  )-8*abs(x)-y) = 0
+
+This runs from y=1 to y=3
+
+Removing the sqrt term:
+  (9-8*abs(x)-y) = 0
+  
+Restricting y value to [1,3]:
+
+((min(1, ceil(abs(max(0, 1-y))))+min(1, ceil(abs(min(0, 3-y))))) + (9-8*abs(x)-y)^2) = 0
+
+
+Adding to the whole batman:
+
+(((2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x))))) * ((abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x)))))) * (((min(1, ceil(abs(max(0, 3-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(min(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 3-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(max(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(min(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1))  +  min(1, ceil(abs(max(0, 1-abs(x)))))   ) * ((min(1, ceil(abs(min(0, 3-x))))+min(1, ceil(abs(max(0, 1-x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(x)-1)^2))-y))^2) * ((min(1, ceil(abs(min(0, 3+x))))+min(1, ceil(abs(max(0, 1+x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(-x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(-x)-1)^2))-y))^2) * ((min(1, ceil(abs(max(0, 1-y))))+min(1, ceil(abs(min(0, 3-y))))) + (9-8*abs(x)-y)^2)
+  =0
+
+
+Last segment:
+
+Inner ears:
+  (3*abs(x)+0.75*sqrt(abs((abs(x)-0.75)*(abs(x)-0.5))/((0.75-abs(x))*(abs(x)-0.5)))-y) = 0
+
+Removing the sqrt element:
+  (3*abs(x)+0.75-y) = 0
+
+Restrict y to [2.25,3]:
+
+((min(1, ceil(abs(max(0, 2.25-y))))+min(1, ceil(abs(min(0, 3-y))))) +  (3*abs(x)+0.75-y)^2) = 0
+
+
+Complete our batman equation:
+
+(((2.25-y)^2+min(1, ceil(abs(min(0, 0.5-x))))+min(1, ceil(abs(max(0, -0.5-x))))) * ((abs(x/2)-((3*sqrt(33)-7)/112)*(x^2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)^2))-y)^2 + min(1, ceil(abs(min(0, 4-x))))+min(1, ceil(abs(max(0, -4-x)))))) * (((min(1, ceil(abs(max(0, 3-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(max(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-x))))+min(1, ceil(abs(min(0, 7-x))))) + min(1, ceil(abs(min(0, 0-y))))+ (((x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 3-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(max(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1)) * ((min(1, ceil(abs(max(0, 4-(-x)))))+min(1, ceil(abs(min(0, 7-(-x)))))) + min(1, ceil(abs(min(0, 0-y))))+ (((-x/7)^2)+((y/3)^2)-1))  +  min(1, ceil(abs(max(0, 1-abs(x)))))   ) * ((min(1, ceil(abs(min(0, 3-x))))+min(1, ceil(abs(max(0, 1-x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(x)-1)^2))-y))^2) * ((min(1, ceil(abs(min(0, 3+x))))+min(1, ceil(abs(max(0, 1+x))))) +  ((6*sqrt(10)/7+(1.5-0.5*abs(-x))  -6*sqrt(10)/14*sqrt(abs(4-(abs(-x)-1)^2))-y))^2) * ((min(1, ceil(abs(max(0, 1-y))))+min(1, ceil(abs(min(0, 3-y))))) + (9-8*abs(x)-y)^2) * ((min(1, ceil(abs(max(0, 2.25-y))))+min(1, ceil(abs(min(0, 3-y))))) +  (3*abs(x)+0.75-y)^2) = 0
+
+Looks perfect!
+
+
+Bonus points... can I get the shape to fill in with an inequality? It looks like the wings and the body have different polarity so changing to "<=0" only fills in the wings. I wonder if I can make the formulas for the wings negative to get what I want.
+
+I can't quite figure this out right now. It actually might not even be possible without other major rework because using ">=0" fills in far more than the body.
+</div>
+<div id="footer"></div>
+</body>
+</html>
