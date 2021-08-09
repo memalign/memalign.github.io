@@ -18,3 +18,21 @@
 - Expand on what I noted in 00020-product-reviews.txt about reading and writing outside of school (pressures of grades, learning how to think, pursuing things that are more interesting than the curriculum, etc)
 
 - How many unique Gregorian calendars are there? Seems to repeat every 28 years
+
+- List of tools for making IF:
+  https://adventuron.io/
+  Quest (and its peer made by the same group)
+  Twine
+  TADS
+  Inform
+  Linus Akesson’s system
+  Custom engine (like mine) 
+  Swords
+  Browse r/interactivefiction for others 
+  Look at development systems section: https://en.wikipedia.org/wiki/Interactive_fiction
+  https://tajmone.github.io/awesome-interactive-fiction/
+  https://github.com/tajmone/awesome-interactive-fiction
+  https://www.google.com/search?q=list+of+interactive+fiction+development+systems&client=safari&sxsrf=ALeKk02AjE2Gg_9H_K_mVf7_kLd4e9gWmw%3A1616488462941&source=hp&ei=DqhZYNGdN5iq0PEPieajCA&iflsig=AINFCbYAAAAAYFm2Hlr_knE_pyfeB-mf6Y9lpyH3GMX9&oq=list+of+interactive+fiction+development+systems&gs_lcp=Cgdnd3Mtd2l6EAM6BwgjEOoCECc6BAgjECc6BQgAEJECOgUIABCxAzoLCC4QsQMQxwEQowI6CAguELEDEIMBOggILhDHARCjAjoCCAA6BQguELEDOgIILjoICAAQsQMQyQM6BQgAEMkDOgYIABAWEB46CAghEBYQHRAeOgUIIRCgAToFCCEQqwI6BwghEAoQoAFQmhlYhnZgundoAXAAeACAAX6IAeMekgEENDIuNZgBAKABAaoBB2d3cy13aXqwAQo&sclient=gws-wiz&ved=0ahUKEwjR3PXkgMbvAhUYFTQIHQnzCAEQ4dUDCAw&uact=5&safari_group=9
+  http://www.ifwiki.org/index.php/Engine_List
+  https://emshort.blog/how-to-play/writing-if/
+  https://emshort.blog/2021/03/31/end-of-march-link-assortment-5/
