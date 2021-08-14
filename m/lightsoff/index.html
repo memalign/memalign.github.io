@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<meta http-equiv="Content-Language" content="en">
+<meta name="Keywords" content="lights off, lights out, tiger, electronics, iphone, touch, play, online, puzzle, puzzles, memalign, original, native, game, stephen, troughton, troughton-smith, lucas, newman, adam, betts, craig, hockenberry">
+<meta name="description" content="Lights Off - puzzle game inspired by Tiger Electronic's Lights Out. Play in your web browser! Turn out all the lights by tapping on the right squares. Can you beat every level? Chase the lights!">
+<meta name="author" content="memalign">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+<meta property="og:title" content="Lights Off" />
+<meta property="og:description" content="Play Lights Off in your web browser">
+<meta property="og:type" content="website" />
+<meta property="og:image" content="/m/lightsoff.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:url" content="https://memalign.github.io/m/lightsoff/index.html" />
+<meta name="twitter:title" content="Lights Off">
+<meta name="twitter:description" content="Play Lights Off in your web browser">
+<meta name="twitter:image" content="/m/lightsoff.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<title>Lights Off</title>
+<script src="Utilities.js"></script>
+<script src="GameGenerator.js"></script>
+<script src="GameState.js"></script>
+<script src="GameEngine.js"></script>
+<script src="GridViewProducer.js"></script>
+
+<script>
+
+// From https://stackoverflow.com/questions/10614481/disable-double-tap-zoom-option-in-browser-on-touch-devices
+function preventZoom(e) {
+  var t2 = e.timeStamp;
+  var t1 = e.currentTarget.dataset.lastTouch || t2;
+  var dt = t2 - t1;
+  var fingers = e.touches.length;
+  e.currentTarget.dataset.lastTouch = t2;
+
+  if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+
+  e.preventDefault();
+
+  // Instead of a click, force onmousedown so our code to act on a specific
+  // cell works
+  //e.target.click();
+
+  let gameViewDiv = document.getElementById("gameView")
+  gameViewDiv.onmousedown(e)
+}
+
+function updateGameView(gameEngine, gridViewProducer) {
+  let gameViewDiv = document.getElementById("gameView")
+  
+  let htmlStr = gridViewProducer.htmlStringForGameState(gameEngine.gameState)
+
+  gameViewDiv.innerHTML = htmlStr
+
+  // Disable double-tap to zoom
+  gameViewDiv.addEventListener('touchstart', preventZoom)
+
+
+  let gameLevelDiv = document.getElementById("gameLevelDisplay")
+  // Don't show the level complete indicator during animation
+  let completedStr = gameEngine.acceptUserInput &&  gameEngine.currentLevelPreviouslyCompleted() ? "*" : ""
+  let percentComplete = Math.round(gameEngine.levelsCompleted() / gameEngine.levelCount() * 1000)/10
+  let isCyclingStr = gameEngine.isCyclingThroughLevels ? " - You beat every level!" : ""
+  gameLevelDiv.innerHTML = `Level: ${gameEngine.gameState.level+1}${completedStr} / ${gameEngine.levelCount()}${isCyclingStr}<br />${percentComplete}% complete`
+
+
+  let gameActionsDiv = document.getElementById("gameActions")
+
+  let prevLink = gameEngine.acceptUserInput && gameEngine.gameState.level > 0 ? "<a id='previousLevel' href='./index.html'>Previous</a>" : "Previous"
+  let nextLink = gameEngine.acceptUserInput && gameEngine.gameState.level < gameEngine.levelCount()-1 ? "<a id='nextLevel' href='./index.html'>Next</a>" : "Next"
+  let resetLink = gameEngine.acceptUserInput ? "<a id='resetLevel' href='./index.html'>Reset Level</a>" : "Reset Level"
+  gameActionsDiv.innerHTML = `${prevLink} | ${nextLink}<br />${resetLink}`
+
+  // Setup link handlers
+
+  let prevLinkElement = document.getElementById("previousLevel")
+  if (prevLinkElement) {
+    prevLinkElement.onclick = function() {
+      gameEngine.goToPreviousLevel()
+      return false
+    }
+  }
+
+  let nextLinkElement = document.getElementById("nextLevel")
+  if (nextLinkElement) {
+    nextLinkElement.onclick = function() {
+      gameEngine.goToNextLevel()
+      return false
+    }
+  }
+
+  let resetLinkElement = document.getElementById("resetLevel")
+  if (resetLinkElement) {
+    resetLinkElement.onclick = function() {
+      gameEngine.resetLevel()
+      return false
+    }
+  }
+}
+
+window.onload = function () {
+  // Setup link handlers
+  let startOverLink = document.getElementById("startOver")
+  startOverLink.onclick = function() {
+    let resetStorage = confirm("Start Over? All game progress will be lost.")
+
+    if (resetStorage) {
+      window.localStorage.clear()
+      return true
+    } else {
+      return false
+    }
+  }
+
+
+  // Instantiate the game
+  let gameEngine = new MAGameEngine()
+  let gridViewProducer = new MAGridViewProducer()
+  
+  gameEngine.didPerformChangeCallback = function () {
+    updateGameView(gameEngine, gridViewProducer)
+
+    // Save game progress
+    window.localStorage.setItem('level', JSON.stringify(gameEngine.gameState.level))
+    window.localStorage.setItem('completedLevels', JSON.stringify(gameEngine.gameState.completedLevels))
+  }
+    
+
+  var isCrawler = MAUtils.userAgentIsSearchEngineCrawler(navigator.userAgent)
+  if (!isCrawler) {
+    // Force crawler mode with ?crawler=1
+    let urlParams = new URLSearchParams(window.location.search)
+    let rawCrawler = urlParams.get('crawler')
+    if (rawCrawler) {
+      isCrawler = parseInt(rawCrawler) === 1
+    }
+  }
+
+  // Load game progress
+  let loadedLevel = null
+  let loadedCompletedLevels = null
+
+  if (!isCrawler) {
+    let levelRaw = window.localStorage.getItem('level')
+    let completedLevelsRaw = window.localStorage.getItem('completedLevels')
+    if (levelRaw && completedLevelsRaw) {
+      try {
+        loadedLevel = JSON.parse(levelRaw)
+        loadedCompletedLevels = JSON.parse(completedLevelsRaw)
+      } catch(e) {
+        loadedLevel = null
+        loadedCompletedLevels = null
+      }
+    }
+  } else {
+    // Crawler
+    let headerDiv = document.getElementById("header")
+    let node = document.createTextNode("Lights Off - puzzle game inspired by Tiger Electronic's Lights Out. Play in your web browser! Turn out all the lights by tapping on the right squares. Can you beat every level? Chase the lights!")
+    headerDiv.appendChild(node)
+  }
+
+  gameEngine.startNewGame(loadedLevel, loadedCompletedLevels)
+  updateGameView(gameEngine, gridViewProducer)
+
+  // Setup user input handling
+  let gameViewDiv = document.getElementById("gameView")
+  gameViewDiv.onmousedown = function(e) {
+    if (!e) {
+      e = window.event
+    }
+
+    var target = e.target ? e.target : e.srcElement
+
+    console.log(`User clicked ${target.tagName} element with id ${target.id} class ${target.className}`)
+
+    let className = target.className
+
+    // cell_$1_$2
+    let match = className.match(/^cell_(\d+)_(\d+)$/)
+    if (match) {
+      let xStr = match[1]
+      let yStr = match[2]
+      let x = parseInt(xStr)
+      let y = parseInt(yStr)
+      
+      gameEngine.handleUserActionOnCell(x, y)
+    }
+    
+  }
+}
+
+</script>
+
+</head>
+
+<body>
+  <div id="body">
+    <a href='/index.html'>Home</a>
+    <div id='about'>
+      <a href='/p/lights-off.html'>About</a> | <a id='startOver' href='./index.html'>Start Over</a>
+    </div>
+    <div id='header'>
+      <h1>
+        Lights Off
+      </h1>
+    </div>
+    <div id="gameView"></div>
+    <div id="grid">
+      <div id="gameLevelDisplay"></div>
+      <div id="gameActions"></div>
+    </div>
+  </div>
+</body>
+
+</html>

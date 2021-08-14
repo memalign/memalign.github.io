@@ -6,6 +6,8 @@
 - Graphics in javascript:
   - https://play.ertdfgcvb.xyz/
   - https://www.dwitter.net/
+  - http://pixelverse.org/experiments/natsukashii/
+  - https://bbcmic.ro/?experimental=true&#
   
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 

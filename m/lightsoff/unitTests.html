@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="GameGenerator.js"></script>
+<script src="GameEngine.js"></script>
+<script src="GameState.js"></script>
+<script src="UnitTests.js"></script>
+
+<script>
+
+window.onload = function () {
+
+  let ut = new UnitTests()
+  
+  try {
+    ut.run()
+  } catch(err) {
+    throw err
+  } finally {
+    let outputDiv = document.getElementById("testOutput")
+    let content = document.createTextNode(MALog.logs.join("\n"))
+    outputDiv.appendChild(content)
+  }
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput"></div>
+</pre>
+</body>
+
+</html>
