@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Lights Off</title>
+<meta property="og:title" content="Lights Off" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/lights-off.html" />
+<meta property="og:image" content="/m/lightsoff.jpg" />
+<meta property="og:description" content="Tap or click and take a trip down memory lane with the historic Lights Off. Exactly fourteen years ago today Wired got the scoop: Lights Off: First iPhone Native Game…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+Lights Off
+</h1>
+</div>
+<img src="/m/lightsoff.jpg">
+<div id='postdate'>Posted on 8/14/2021</div>
+Tap or click and take a trip down memory lane with the historic Lights Off. Exactly fourteen years ago today Wired got the scoop: <a href="https://www.wired.com/2007/08/lights-off-first-iphone-native-game-arrives/">Lights Off: First iPhone Native Game Arrives</a>.<br />
+<br />
+And today I'm sharing a new implementation that everyone can play in their web browser:<br />
+<br />
+<a href="/m/lightsoff/index.html">Play here!</a><br />
+<br />
+<br />
+Lights Off's story begins with Tiger Electronics who launched their game <a href="https://en.wikipedia.org/wiki/Lights_Out_(game)">Lights Out</a> in 1995. Then in 2007 Lucas Newman and Adam Betts cloned the game for the iPhone's touch screen. Notably, they built the game before there was an official iPhone SDK or App Store. It was only available to jailbreakers!<br />
+<br />
+A year later, <a href="https://twitter.com/chockenberry">Craig Hockenberry</a> wrote a <a href="https://furbo.org/2008/09/19/lights-off/">post</a> to commemorate the milestone and share the <a href="https://github.com/chockenberry/LightsOffTouch/">source code</a> (<a href="/m/lightsoff-orig.zip">my backup</a>).<br />
+<br />
+Since then the app was rebuilt and modernized by <a href="https://twitter.com/stroughtonsmith">Steve Troughton-Smith</a> as possibly the <a href="https://twitter.com/bennettk/status/880175781057445888?s=20">oldest</a> <a href="https://twitter.com/gruber/status/880462796286291968?s=20">still-actively-maintained app</a> on the App Store. You can find his version <a href="https://apps.apple.com/us/app/lights-off/id292025150">here</a>.<br />
+<br />
+For more history on the App Store and its first killer apps, check out <a href="https://techcrunch.com/2018/03/06/the-day-that-changed-your-phone-forever/">this article</a> (also written by Craig Hockenberry - <a href="https://blog.iconfactory.com/2018/03/a-lot-can-happen-in-a-decade/">mirror</a> on the iconfactory website).<br />
+<br />
+<br />
+In the process of building the web version, I wrote <a href="/m/lightsoff/unitTests.html">tests</a> (<a href="/m/lightsoff/UnitTests.js">source code</a>) to ensure every level is solvable. To my surprise almost half of the original levels cannot be solved! How cruel! This was probably a mistake in how the levels were generated - maybe by flipping certain lights on without checking that the overall puzzle was valid.<br />
+<br />
+To replace the bad levels, I generated my own levels of increasing difficulty by ramping up the minimum number of taps required to solve each puzzle. My algorithm can be found in the unit tests code in the "test_generateLevels" method. This could even be hooked into the game itself for an "endless" mode.<br />
+<br />
+If ever you can't figure out how to solve a level in the fewest taps, there's a guaranteed method to win called "light chasing" or "chase the lights":<br />
+- Start on the top row<br />
+- For every lit button in the row, turn it off by tapping the button in the row right below it<br />
+- Repeat until you get to the bottom row<br />
+- At this point, the bottom row will have one of seven patterns. Based on the pattern, tap the specific circled cells on the top row and repeat these steps. By the time you reach the bottom row again, every light will be off!<br />
+<div id='code'>⬛⬛⬛⬛⬛      ⬛⭕️⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+🟡🟡🟡⬛⬛      🟡🟡🟡⬛⬛<br />
+<br />
+<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⭕️⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛⬛🟡🟡🟡      ⬛⬛🟡🟡🟡<br />
+<br />
+<br />
+⬛⬛⬛⬛⬛      ⬛⬛⭕️⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+🟡🟡⬛🟡🟡      🟡🟡⬛🟡🟡<br />
+<br />
+<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⭕️<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+🟡⬛🟡🟡⬛      🟡⬛🟡🟡⬛<br />
+<br />
+<br />
+⬛⬛⬛⬛⬛      ⭕️⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛🟡🟡⬛🟡      ⬛🟡🟡⬛🟡<br />
+<br />
+<br />
+⬛⬛⬛⬛⬛      ⭕️⭕️⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+🟡⬛⬛⬛🟡      🟡⬛⬛⬛🟡<br />
+<br />
+<br />
+⬛⬛⬛⬛⬛      ⭕️⬛⬛⭕️⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
+⬛🟡⬛🟡⬛      ⬛🟡⬛🟡⬛</div>
+While every level can be beaten mechanically like this, it's still more fun (and often faster) to find the fewest taps needed! That's the real challenge.<br />
+<br />
+Have fun! :)<br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

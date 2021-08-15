@@ -1,0 +1,83 @@
+Title: Lights Off
+Date: 8/14/2021
+
+[Image:/m/lightsoff.jpg]
+
+Tap or click and take a trip down memory lane with the historic Lights Off. Exactly fourteen years ago today Wired got the scoop: [Link:https://www.wired.com/2007/08/lights-off-first-iphone-native-game-arrives/]Lights Off: First iPhone Native Game Arrives[/Link].
+
+And today I'm sharing a new implementation that everyone can play in their web browser:
+
+[Link:/m/lightsoff/index.html]Play here![/Link]
+
+
+Lights Off's story begins with Tiger Electronics who launched their game [Link:https://en.wikipedia.org/wiki/Lights_Out_(game)]Lights Out[/Link] in 1995. Then in 2007 Lucas Newman and Adam Betts cloned the game for the iPhone's touch screen. Notably, they built the game before there was an official iPhone SDK or App Store. It was only available to jailbreakers!
+
+A year later, [Link:https://twitter.com/chockenberry]Craig Hockenberry[/Link] wrote a [Link:https://furbo.org/2008/09/19/lights-off/]post[/Link] to commemorate the milestone and share the [Link:https://github.com/chockenberry/LightsOffTouch/]source code[/Link] ([Link:/m/lightsoff-orig.zip]my backup[/Link]).
+
+Since then the app was rebuilt and modernized by [Link:https://twitter.com/stroughtonsmith]Steve Troughton-Smith[/Link] as possibly the [Link:https://twitter.com/bennettk/status/880175781057445888?s=20]oldest[/Link] [Link:https://twitter.com/gruber/status/880462796286291968?s=20]still-actively-maintained app[/Link] on the App Store. You can find his version [Link:https://apps.apple.com/us/app/lights-off/id292025150]here[/Link].
+
+For more history on the App Store and its first killer apps, check out [Link:https://techcrunch.com/2018/03/06/the-day-that-changed-your-phone-forever/]this article[/Link] (also written by Craig Hockenberry - [Link:https://blog.iconfactory.com/2018/03/a-lot-can-happen-in-a-decade/]mirror[/Link] on the iconfactory website).
+
+
+In the process of building the web version, I wrote [Link:/m/lightsoff/unitTests.html]tests[/Link] ([Link:/m/lightsoff/UnitTests.js]source code[/Link]) to ensure every level is solvable. To my surprise almost half of the original levels cannot be solved! How cruel! This was probably a mistake in how the levels were generated - maybe by flipping certain lights on without checking that the overall puzzle was valid.
+
+To replace the bad levels, I generated my own levels of increasing difficulty by ramping up the minimum number of taps required to solve each puzzle. My algorithm can be found in the unit tests code in the "test_generateLevels" method. This could even be hooked into the game itself for an "endless" mode.
+
+If ever you can't figure out how to solve a level in the fewest taps, there's a guaranteed method to win called "light chasing" or "chase the lights":
+- Start on the top row
+- For every lit button in the row, turn it off by tapping the button in the row right below it
+- Repeat until you get to the bottom row
+- At this point, the bottom row will have one of seven patterns. Based on the pattern, tap the specific circled cells on the top row and repeat these steps. By the time you reach the bottom row again, every light will be off!
+[Code]
+⬛⬛⬛⬛⬛      ⬛⭕️⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛  =>  ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+🟡🟡🟡⬛⬛      🟡🟡🟡⬛⬛
+
+
+⬛⬛⬛⬛⬛      ⬛⬛⬛⭕️⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛  =>  ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛⬛🟡🟡🟡      ⬛⬛🟡🟡🟡
+
+
+⬛⬛⬛⬛⬛      ⬛⬛⭕️⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛  =>  ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+🟡🟡⬛🟡🟡      🟡🟡⬛🟡🟡
+
+
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⭕️
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛  =>  ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+🟡⬛🟡🟡⬛      🟡⬛🟡🟡⬛
+
+
+⬛⬛⬛⬛⬛      ⭕️⬛⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛  =>  ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛🟡🟡⬛🟡      ⬛🟡🟡⬛🟡
+
+
+⬛⬛⬛⬛⬛      ⭕️⭕️⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛  =>  ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+🟡⬛⬛⬛🟡      🟡⬛⬛⬛🟡
+
+
+⬛⬛⬛⬛⬛      ⭕️⬛⬛⭕️⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛  =>  ⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛
+⬛🟡⬛🟡⬛      ⬛🟡⬛🟡⬛
+[/Code]
+
+While every level can be beaten mechanically like this, it's still more fun (and often faster) to find the fewest taps needed! That's the real challenge.
+
+Have fun! :)
