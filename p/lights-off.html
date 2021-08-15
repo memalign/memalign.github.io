@@ -43,7 +43,7 @@ Since then the app was rebuilt and modernized by <a href="https://twitter.com/st
 For more history on the App Store and its first killer apps, check out <a href="https://techcrunch.com/2018/03/06/the-day-that-changed-your-phone-forever/">this article</a> (also written by Craig Hockenberry - <a href="https://blog.iconfactory.com/2018/03/a-lot-can-happen-in-a-decade/">mirror</a> on the iconfactory website).<br />
 <br />
 <br />
-In the process of building the web version, I wrote <a href="/m/lightsoff/unitTests.html">tests</a> (<a href="/m/lightsoff/UnitTests.js">source code</a>) to ensure every level is solvable. To my surprise almost half of the original levels cannot be solved! How cruel! This was probably a mistake in how the levels were generated - maybe by flipping certain lights on without checking that the overall puzzle was valid.<br />
+In the process of building the web version, I wrote <a href="/m/lightsoff/unitTests.html">tests</a> (<a href="/m/lightsoff/UnitTests.js">source code</a>) to ensure every level is solvable. To my surprise almost half of the original levels <a href="https://github.com/chockenberry/LightsOffTouch/issues/1">cannot be solved</a>! How cruel! This was probably a mistake in how the levels were generated - maybe by flipping certain lights on without checking that the overall puzzle was valid.<br />
 <br />
 To replace the bad levels, I generated my own levels of increasing difficulty by ramping up the minimum number of taps required to solve each puzzle. My algorithm can be found in the unit tests code in the "test_generateLevels" method. This could even be hooked into the game itself for an "endless" mode.<br />
 <br />
