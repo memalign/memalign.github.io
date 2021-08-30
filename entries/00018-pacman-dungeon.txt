@@ -1,5 +1,6 @@
 Title: Pac-Man Dungeon
 Date: 11/24/2020
+Tags: Games, Programming, Interactive Fiction
 
 [Image:/m/pacman.jpg]
 

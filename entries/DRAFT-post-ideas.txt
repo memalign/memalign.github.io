@@ -11,6 +11,8 @@
   
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 
+- Free game assets: https://www.kenney.nl/assets/
+
 - https://freeicons.io/
 
 - https://cube.zxh.io/

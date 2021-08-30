@@ -1,5 +1,6 @@
 Title: How to Program a Text Adventure
 Date: 3/25/2020
+Tags: Programming, Interactive Fiction
 
 [Image:/m/text-adventure.jpg]
 

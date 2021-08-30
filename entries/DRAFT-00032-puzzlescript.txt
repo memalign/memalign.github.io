@@ -4,6 +4,30 @@ Tags: Games, Programming
 
 [Image:/m/lightsoff.jpg]
 
+*** change these --^
+
+https://www.puzzlescript.net/
+https://www.puzzlescript.net/Gallery/index.html
+
+
+https://github.com/increpare/PuzzleScript/blob/master/src/js/toolbar.js
+- Code for publishing a gist: "function shareClick()"
+
+https://github.com/increpare/PuzzleScript/blob/master/src/play.html
+- Code for loading a gist: "function getData()"
+- Risk of loading content this way: Looks like you published it when really it was someone else. Could be offensive or harmful. Mitigation: should show a disclaimer and link to the original author's post.
+
+
+Specific game I enjoyed:
+https://www.puzzlescript.net/play.html?p=6994394
+- Code published as a gist: https://api.github.com/gists/6994394
+
+
+
+
+
+
+
 Tap or click and take a trip down memory lane with the historic Lights Off. Exactly fourteen years ago today Wired got the scoop: [Link:https://www.wired.com/2007/08/lights-off-first-iphone-native-game-arrives/]Lights Off: First iPhone Native Game Arrives[/Link].
 
 And today I'm sharing a new implementation that everyone can play in their web browser:

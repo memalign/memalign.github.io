@@ -1,5 +1,6 @@
 Title: Counterfeit Monkey
 Date: 1/9/2021
+Tags: Games, Programming, Interactive Fiction
 
 [Image:/m/cm-map.jpg]
 

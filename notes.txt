@@ -353,3 +353,22 @@ https://www.seomechanic.com/why-is-my-website-not-showing-in-google-search-resul
 Google indexed the sitemap!
 I saw this info here:
 https://search.google.com/search-console/sitemaps?resource_id=https%3A%2F%2Fmemalign.github.io%2F
+
+
+8/28/21
+
+I have enough posts now that instead of listing all posts at the top, I want to try organizing them based on tags.
+
+[x]- Show the tags somewhere in the entry's page (and the post as it's represented in index.html)
+[x]  - Style 'tags' the same as postdate
+[ntbf]- Show the organized tags at the top of index.html
+[x]- Link the tags for a post to a tags page that has all entries organized by tag
+- Unit test Entry class: with empty tags list, with one tag, with two tags
+- Unit test "Interactive Fiction" as a tag, ensure it doesn't get split
+- Unit test column layout for 15 or more entries
+- Unit test TagsIndex writeHTMLDocument; ensure entries are sorted correctly
+
+- Investigate providing a full URL for og image, json feed, and rss feed preview images
+
+
+

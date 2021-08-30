@@ -9,11 +9,15 @@ body {
 
 h1,
 h2,
-h3,
-h4 {
+h3 {
   text-align: center;
   color : #666;
   margin: 0;
+}
+
+h4 {
+  color : #666;
+  display: inline;
 }
 
 img {
@@ -66,12 +70,30 @@ td {
 }
 
 #allposts {
+  margin: 2em 0;
+}
 
+#grid {
+  display: grid;
+  grid-row-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, max(150px, 30%));
+  justify-content: space-evenly;
+}
+
+#grid-entry img {
+  max-width: 100%;
+  max-height: 400px;
+  height: auto;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 3px;
 }
 
 #feeds {
-  float: right;
   text-align: right;
+  margin-bottom: 1em;
 }
 
 #postdate {

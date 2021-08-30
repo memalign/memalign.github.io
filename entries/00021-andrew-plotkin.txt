@@ -1,5 +1,6 @@
 Title: Andrew Plotkin's Zarfhome
 Date: 12/30/2020
+Tags: Leisure, Interactive Fiction
 
 [Image:/m/play-if-card.png]
 

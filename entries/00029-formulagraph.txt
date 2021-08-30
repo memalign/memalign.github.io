@@ -1,5 +1,6 @@
 Title: FormulaGraph
 Date: 8/4/2021
+Tags: Programming, Math
 
 [Image:/m/formulagraph.jpg]
 

@@ -1,5 +1,6 @@
 Title: Live COVID-19 Dashboard
 Date: 5/9/2020
+Tags: Programming
 
 [Image:/m/graph-js.jpg]
 

@@ -1,5 +1,6 @@
 Title: Personal Projects
 Date: 3/26/2020
+Tags: Other
 
 [Image:/m/sitegenerator.jpg]
 

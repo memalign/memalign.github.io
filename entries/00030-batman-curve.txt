@@ -1,5 +1,6 @@
 Title: Batman Curve
 Date: 8/7/2021
+Tags: Math
 
 [Image:/m/batman-curve.jpg]
 

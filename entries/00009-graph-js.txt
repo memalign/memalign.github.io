@@ -1,5 +1,6 @@
 Title: Create COVID-19 Graphs Using JavaScript
 Date: 5/8/2020
+Tags: Programming
 
 [Image:/m/graph-js.jpg]
 

@@ -188,12 +188,7 @@ class Index extends HTMLDocument {
     let str = ""
     str += this.htmlDocumentPrefix()
 
-    str += "<div id='header'><h1>" + this.title + "</h1></div>\n";
 
-
-    this.sortEntries()
-        
-    
     // Links to feeds
     str += "<div id='feeds'>\n"
     str += "<a href='"+this.atomFeedURL()+"'>RSS</a>"
@@ -201,19 +196,53 @@ class Index extends HTMLDocument {
     str += "<a href='"+this.jsonFeedURL()+"'>JSON Feed</a>"
     str += "\n</div>"
 
-    
-    // Links to every post
-    
-    str += "<div id='allposts'>\n"
-    str += "<b>All posts:</b><br />\n"
-    
-    for (let entry of this.entries) {
-      str += "<a href='" + entry.relativeURL() + "'>" + entry.title + "</a><br />\n"
-    }
-    
-    str += "</div>\n"
-             
+    str += "<div id='header'><h1>" + this.title + "</h1></div>\n";
+
+
+    this.sortEntries()
+        
+
+    if (this.entries.length < 15) {
+      
+      // Links to every post in one column
+  
+      str += "<div id='allposts'>\n"
+      str += "<b>All posts:</b><br />\n"
+      
+      for (let entry of this.entries) {
+        str += "<a href='" + entry.relativeURL() + "'>" + entry.title + "</a><br />\n"
+      }
+      
+      str += "</div>\n"  
+
+    } else {
      
+      // Links to every post, in columns
+      
+      str += "<div id='allposts'>\n"
+    
+      let numCols = 3
+      let colLength = Math.floor(this.entries.length / numCols)
+      let entryI = 0
+      str += "<div id='grid'>\n"
+      str += "<div id='grid-entry'>\n"
+      for (let entry of this.entries) {
+        if (entryI > colLength) {  
+          str += "</div>"
+          str += "<div id='grid-entry'>\n"
+          entryI = 0
+        }
+        
+        str += "<a href='" + entry.relativeURL() + "'>" + entry.title + "</a><br />\n"
+        
+        entryI++
+      }
+      str += "</div>\n" // grid-entry
+      str += "</div>\n" // grid
+      str += "</div>\n" // allposts
+    }
+
+  
     // Include the most recent this.entriesOnIndex posts
     let c = 0
     for (let entry of this.entries) {
@@ -251,6 +280,102 @@ class Index extends HTMLDocument {
 }
 
 
+// TagsIndex class
+
+class TagsIndex extends HTMLDocument {
+  constructor(entries) {
+    super()
+    
+    this.entries = entries
+    this.title = "memalign.github.io tags"
+  }
+  
+  ogImage() {
+    let result = super.ogImage()
+    
+    this.sortEntries()
+    
+    for (let i = 0; i < this.entries.length; ++i) {
+      let entry = this.entries[i]
+      let entryImageURL = entry.imageURL()
+      if (entryImageURL) {
+        result = entryImageURL
+        break
+      }
+    }
+    
+    return result
+  }
+  
+  ogDescription() {
+    return "memalign.github.io posts organized by tag"
+  }
+  
+  sortEntries() {
+    // Sort entries by postNumber, highest (newest) to lowest (oldest)
+    this.entries.sort(function (a, b) { return b.postNumber - a.postNumber })
+  }
+  
+  htmlDocumentPrefix() {
+    let str = super.htmlDocumentPrefix()
+    
+    str += "<a href='/index.html'>Home</a>"
+    
+    return str
+  }
+
+  
+  toHTML() {
+    let str = ""
+    str += this.htmlDocumentPrefix()
+
+    str += `<div id='header'><h1>${this.title}</h1></div>\n`;
+
+    this.sortEntries()
+
+    // List every tag and its entries
+
+    let allTags = new Set()
+    for (let entry of this.entries) {
+       entry.tags.forEach(t => allTags.add(t))
+    }
+    let sortedTags = Array.from(allTags).sort()
+
+    str += "<div id='allposts'>\n"
+    
+    str += "<div id='grid'>\n"
+    for (let tag of sortedTags) {
+      str += "<div id='grid-entry'>\n"
+      str += `<h4>${tag}</h4><br />` 
+      
+      for (let entry of this.entries) {
+        if (entry.tags.includes(tag)) {  
+          str += "<a href='" + entry.relativeURL() + "'>" + entry.title + "</a><br />\n"
+        }
+      }
+      
+      str += "</div>\n"
+    }
+    str += "</div>\n"
+    
+    str += "</div>\n" // allposts
+    
+    str += this.htmlDocumentSuffix()
+    
+    return str
+  }
+  
+  htmlFilename() {
+    return "tags.html"
+  }
+  
+  // Relative to the website root
+  relativeURL() {  
+    return this.htmlFilename()
+  }
+}
+
+
 // Entry class
 
 class Entry extends HTMLDocument {
@@ -271,7 +396,7 @@ class Entry extends HTMLDocument {
     
     let contents = fileContents ? fileContents : this.fileContents()
     
-    let contentsMatches = contents.match(/^Title: ([^\r\n]+)[\r\n]+Date: (\d+\/\d+\/\d{4})[\r\n]+(.+)$/ms)
+    let contentsMatches = contents.match(/^Title: ([^\r\n]+)[\r\n]+Date: (\d+\/\d+\/\d{4})[\r\n]+Tags: ([^\r\n]+)[\r\n]+(.+)$/ms)
     
     if (!contentsMatches) {
       console.log("Entry header doesn't match required format. Make sure to use a 4-digit year.")
@@ -280,7 +405,10 @@ class Entry extends HTMLDocument {
     
     this.title = contentsMatches[1]
     this.dateString = contentsMatches[2]
-    this.contents = contentsMatches[3]
+    
+    this.tags = contentsMatches[3].split(/, */).filter(x => x.length > 0)
+    
+    this.contents = contentsMatches[4]
   }
   
   fileContents() {
@@ -423,7 +551,17 @@ ${this.title}
     htmlContents = htmlContents.replace(/\n/g, "<br />\n")
 
 
-    let postDateStr = "<div id='postdate'>Posted on " + this.dateString + "</div>\n"
+    let tagsStr = ""
+    if (this.tags.length > 0) {
+      tagsStr = "<br />\nTags: "
+      let comma = ""
+      for (let tag of this.tags) {
+        tagsStr += `${comma}<a href='/tags.html'>${tag}</a>`
+        comma = ", "
+      } 
+    }
+
+    let postDateStr = "<div id='postdate'>Posted on " + this.dateString + tagsStr + "</div>\n"
     
     // If the post starts with an image, put the "Posted on" string after the image so it's not too isolated from the post text
     // Note that this doesn't intelligently handle consecutive images at the top of a post
@@ -663,6 +801,9 @@ function runScript() {
   }
   
   index.writeHTMLDocument(repoPath())
+  
+  let tagsIndex = new TagsIndex(index.entries)
+  tagsIndex.writeHTMLDocument(repoPath())
   
   let jsonFeed = new JSONFeed(index)
   jsonFeed.writeFeedFile(repoPath())

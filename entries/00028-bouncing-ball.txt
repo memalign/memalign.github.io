@@ -1,5 +1,6 @@
 Title: Bouncing Ball
 Date: 3/28/2021
+Tags: Math
 
 [Image:/m/bouncing-ball.jpg]
 

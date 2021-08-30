@@ -1,5 +1,6 @@
 Title: Dungeon Memalign
 Date: 11/30/2020
+Tags: Games, Programming, Interactive Fiction
 
 [Image:/m/dungeon.jpg]
 

@@ -1,5 +1,6 @@
 Title: Catalog of Math Shapes
 Date: 3/27/2021
+Tags: Math
 
 [Image:/m/graphtoy-smile.jpg]
 

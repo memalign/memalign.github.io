@@ -1,5 +1,6 @@
 Title: Welcome
 Date: 12/26/2019
+Tags: Other
 
 [Image:/m/shiba.jpg]
 

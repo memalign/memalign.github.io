@@ -1,5 +1,6 @@
 Title: Draw Shapes Using Math
 Date: 3/21/2021
+Tags: Math
 
 [Image:/m/graphtoy.jpg]
 

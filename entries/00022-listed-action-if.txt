@@ -1,5 +1,6 @@
 Title: Listed Action Interactive Fiction
 Date: 1/9/2021
+Tags: Interactive Fiction
 
 [Image:/m/listed-actions.jpg]
 

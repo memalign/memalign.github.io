@@ -1,5 +1,6 @@
 Title: Universal Paperclips
 Date: 9/13/2020
+Tags: Games, Programming
 
 [Image:/m/universal-paperclips.png]
 

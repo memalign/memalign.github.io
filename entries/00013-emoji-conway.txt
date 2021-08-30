@@ -1,5 +1,6 @@
 Title: Emoji Simulator
 Date: 10/31/2020
+Tags: Games
 
 [Image:/m/glider.jpg]
 
