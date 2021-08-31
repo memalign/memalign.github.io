@@ -363,12 +363,12 @@ I have enough posts now that instead of listing all posts at the top, I want to 
 [x]  - Style 'tags' the same as postdate
 [ntbf]- Show the organized tags at the top of index.html
 [x]- Link the tags for a post to a tags page that has all entries organized by tag
-- Unit test Entry class: with empty tags list, with one tag, with two tags
-- Unit test "Interactive Fiction" as a tag, ensure it doesn't get split
+[x]- Unit test Entry class: [x]missing tags line, [x]with empty tags list, [x]with one tag, [x]with two tags
+[x]- Unit test Entry class: "Interactive Fiction" as a tag, ensure it doesn't get split
 - Unit test column layout for 15 or more entries
 - Unit test TagsIndex writeHTMLDocument; ensure entries are sorted correctly
 
-- Investigate providing a full URL for og image, json feed, and rss feed preview images
+- Investigate providing a full URL (e.g. https://memalign.github.io/m/example.jpg) for og image, json feed, and rss feed preview images
 
 
 

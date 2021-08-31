@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -396,7 +396,7 @@ class Entry extends HTMLDocument {
     
     let contents = fileContents ? fileContents : this.fileContents()
     
-    let contentsMatches = contents.match(/^Title: ([^\r\n]+)[\r\n]+Date: (\d+\/\d+\/\d{4})[\r\n]+Tags: ([^\r\n]+)[\r\n]+(.+)$/ms)
+    let contentsMatches = contents.match(/^Title: ([^\r\n]+)[\r\n]+Date: (\d+\/\d+\/\d{4})[\r\n]+Tags:(| ([^\r\n]+))[\r\n]+(.+)$/ms)
     
     if (!contentsMatches) {
       console.log("Entry header doesn't match required format. Make sure to use a 4-digit year.")
@@ -406,9 +406,13 @@ class Entry extends HTMLDocument {
     this.title = contentsMatches[1]
     this.dateString = contentsMatches[2]
     
-    this.tags = contentsMatches[3].split(/, */).filter(x => x.length > 0)
+    if (contentsMatches[3].length > 0) {
+      this.tags = contentsMatches[4].split(/, */).filter(x => x.length > 0)
+    } else {
+      this.tags = []
+    }
     
-    this.contents = contentsMatches[4]
+    this.contents = contentsMatches[5]
   }
   
   fileContents() {
@@ -837,7 +841,7 @@ class UnitTests {
 // HTMLDocument class
 
   test_HTMLDocument_writeHTMLDocument() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
     
     let fm = FileManager.local()
     let tempDir = fm.temporaryDirectory() + "/" + uuidv4()
@@ -864,13 +868,23 @@ class UnitTests {
     assertTrue(!fm.fileExists(tempDir), "dir doesn't exist")
   }
 
+  test_HTMLDocument_writeHTMLDocument_missingTagsLine() {
+    let caughtException = false
+    try {
+      let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")  
+    } catch (e) {
+      caughtException = true
+    }
+    
+    assertTrue(caughtException, "Missing tags line causes exception")
+  }
 
 // Index class
 
   test_Index_sortEntries() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\ntest text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\ntest text3")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1, Tag2\ntest text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags:\ntest text3")
     
     let index = new Index([entry2, entry1, entry3])
     index.sortEntries()  
@@ -878,9 +892,9 @@ class UnitTests {
   }
 
   test_Index_ogDescription() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\ntest text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\ntest text3")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1, Tag2\ntest text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: Tag with spaces,Tag2\ntest text3")
     
     let index = new Index([entry2, entry1, entry3])
     
@@ -901,9 +915,9 @@ class UnitTests {
   }
   
   test_Index_ogImage() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test1.jpg]")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\n[Image:/m/test2.jpg]")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\n[Image:/m/test3.jpg]")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Image:/m/test1.jpg]")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1\n[Image:/m/test2.jpg]")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: Tag1,Tag2\n[Image:/m/test3.jpg]")
     
     let index = new Index([entry2, entry1, entry3])
     
@@ -923,9 +937,9 @@ class UnitTests {
   }
 
   test_Index_toHTML() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
     
     let index = new Index([entry2, entry1, entry3])  
     
@@ -952,10 +966,10 @@ class UnitTests {
 </head>
 <body>
 <div id="body">
-<div id='header'><h1>memalign.github.io</h1></div>
 <div id='feeds'>
 <a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
-</div><div id='allposts'>
+</div><div id='header'><h1>memalign.github.io</h1></div>
+<div id='allposts'>
 <b>All posts:</b><br />
 <a href='p/some-title3.html'>This title3</a><br />
 <a href='p/some-title2.html'>This title2</a><br />
@@ -968,7 +982,8 @@ class UnitTests {
 </h2>
 </div>
 <img src="/m/test3.jpg">
-<div id='postdate'>Posted on 12/28/2019</div>
+<div id='postdate'>Posted on 12/28/2019<br />
+Tags: <a href='/tags.html'>iTag</a>, <a href='/tags.html'>iTag2</a></div>
 text3 text3
 <hr />
 
@@ -977,7 +992,8 @@ text3 text3
 <a href='p/some-title2.html'>This title2</a>
 </h2>
 </div>
-<div id='postdate'>Posted on 12/27/2019</div>
+<div id='postdate'>Posted on 12/27/2019<br />
+Tags: <a href='/tags.html'>Tag2</a></div>
 text2 text2
 <hr />
 More posts:<br />
@@ -988,6 +1004,7 @@ More posts:<br />
 </body>
 </html>
 `
+
     assertTrue(index.toHTML() == expectation, "index html")
   }
 
@@ -999,15 +1016,71 @@ More posts:<br />
     
     assertTrue(entry.isDraft, "Entry is draft")
   }
+
+  test_Entry_missingTags() {
+    let caughtException = false
+    try {  
+      let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")  
+    } catch (e) {
+      caughtException = true
+    }
+    
+    assertTrue(caughtException, "missing tags -> throws exception")
+  }
   
-  test_Entry_regular() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")  
+  test_Entry_regular_noTags() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\ntest text")  
     assertTrue(!entry.isDraft, "Entry isn't draft")
     assertTrue(entry.title == "This title", "entry title")
     assertTrue(entry.postLinkName == "some-title", "postLinkName")
     assertTrue(entry.postNumber == 1, "postNumber")
     assertTrue(entry.dateString == "12/26/2019", "dateString")
     assertTrue(entry.contents == "test text", "contents")
+    assertTrue(entry.tags.length == 0, "empty tags list")
+    assertTrue(entry.htmlFilename() == "some-title.html", "Entry.htmlFilename")
+    assertTrue(entry.relativeURL() == "p/some-title.html", "Entry.relativeURL")
+  }
+
+  test_Entry_regular_oneTag() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")  
+    assertTrue(!entry.isDraft, "Entry isn't draft")
+    assertTrue(entry.title == "This title", "entry title")
+    assertTrue(entry.postLinkName == "some-title", "postLinkName")
+    assertTrue(entry.postNumber == 1, "postNumber")
+    assertTrue(entry.dateString == "12/26/2019", "dateString")
+    assertTrue(entry.contents == "test text", "contents")
+    assertTrue(entry.tags.length == 1, "one tag")
+    assertTrue(entry.tags[0] == "Tag1", "Tag1")
+    assertTrue(entry.htmlFilename() == "some-title.html", "Entry.htmlFilename")
+    assertTrue(entry.relativeURL() == "p/some-title.html", "Entry.relativeURL")
+  }
+
+  test_Entry_regular_twoTags() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2\ntest text")  
+    assertTrue(!entry.isDraft, "Entry isn't draft")
+    assertTrue(entry.title == "This title", "entry title")
+    assertTrue(entry.postLinkName == "some-title", "postLinkName")
+    assertTrue(entry.postNumber == 1, "postNumber")
+    assertTrue(entry.dateString == "12/26/2019", "dateString")
+    assertTrue(entry.contents == "test text", "contents")
+    assertTrue(entry.tags.length == 2, "two tags")
+    assertTrue(entry.tags[0] == "Tag1", "Tag1")
+    assertTrue(entry.tags[1] == "Tag2", "Tag2")
+    assertTrue(entry.htmlFilename() == "some-title.html", "Entry.htmlFilename")
+    assertTrue(entry.relativeURL() == "p/some-title.html", "Entry.relativeURL")
+  }
+  
+  test_Entry_regular_tagWithSpace() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction, Tag2\ntest text")  
+    assertTrue(!entry.isDraft, "Entry isn't draft")
+    assertTrue(entry.title == "This title", "entry title")
+    assertTrue(entry.postLinkName == "some-title", "postLinkName")
+    assertTrue(entry.postNumber == 1, "postNumber")
+    assertTrue(entry.dateString == "12/26/2019", "dateString")
+    assertTrue(entry.contents == "test text", "contents")
+    assertTrue(entry.tags.length == 2, "two tags")
+    assertTrue(entry.tags[0] == "Interactive Fiction", "Interactive Fiction")
+    assertTrue(entry.tags[1] == "Tag2", "Tag2")
     assertTrue(entry.htmlFilename() == "some-title.html", "Entry.htmlFilename")
     assertTrue(entry.relativeURL() == "p/some-title.html", "Entry.relativeURL")
   }
@@ -1023,22 +1096,22 @@ More posts:<br />
   }
   
   test_imageURL_noImages() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\ntest text")  
     assertTrue(entry.imageURL() == null, "no imageURL")
   }
   
   test_imageURL_oneImage() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     assertTrue(entry.imageURL() == "/m/test.jpg", "one imageURL")
   }
 
   test_imageURL_twoImages() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2 space\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
     assertTrue(entry.imageURL() == "/m/test.jpg", "two imageURLs")
   }
 
   test_htmlBody_imageRewriting() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">"), "Has img tag")
@@ -1047,7 +1120,7 @@ More posts:<br />
   }
 
   test_htmlBody_linkRewriting() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<a href=\"/m/test.jpg\">here</a>"), "Has a href tag")
@@ -1056,7 +1129,7 @@ More posts:<br />
   }
 
   test_htmlBody_linkRewriting_noInnerText() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link]/m/test.jpg[/Link]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link]/m/test.jpg[/Link]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<a href=\"/m/test.jpg\">/m/test.jpg</a>"), "Has a href tag")
@@ -1065,7 +1138,7 @@ More posts:<br />
   }
 
   test_htmlBody_code_oneliner() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some code[/Code]")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some code[/Code]")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<div id='code'>some code</div>"), "Has code div")
@@ -1078,7 +1151,7 @@ More posts:<br />
     // This unit test documents this limitation
     // When oneliner HTML support is added, this test needs to be modified
     
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some <html> code[/Code]")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some <html> code[/Code]")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<div id='code'>some <html> code</div>"), "Has code div")
@@ -1089,7 +1162,7 @@ More posts:<br />
   }
 
   test_htmlBody_code_multiLine() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line two\n[/Code]\nafter code")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line two\n[/Code]\nafter code")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("test text<br />\n<div id='code'>some code<br />\n&nbsp;&nbsp;line two</div>\nafter code"), "Has code div")
@@ -1098,7 +1171,7 @@ More posts:<br />
   }
 
   test_htmlBody_code_multiLine_withHTML() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line <td> two\n[/Code]\nafter code")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line <td> two\n[/Code]\nafter code")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("test text<br />\n<div id='code'>some code<br />\n&nbsp;&nbsp;line &lt;td&gt; two</div>\nafter code"), "Has code div")
@@ -1107,24 +1180,24 @@ More posts:<br />
   }
 
   test_htmlBody_title_withTitleURL() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody("p/some-title.html")
     
     assertTrue(htmlBody.includes("<div id='header'>\n<h2>\n<a href='p/some-title.html'>This title</a>"), "Has title URL")
   }
 
   test_htmlBody_title_withoutTitleURL() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<div id='header'>\n<h1>\nThis title\n</h1>"), "Has h1 title")
   }
   
   test_htmlBody_startsWithImage() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
-    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">\n<div id='postdate'>Posted on 12/26/2019</div>"), "Date follows image")
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">\n<div id='postdate'>Posted on 12/26/2019<br />"), "Date follows image")
     assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
     let toHTML = entry.toHTML()
     
@@ -1156,21 +1229,23 @@ This title
 </h1>
 </div>
 <img src="/m/test.jpg">
-<div id='postdate'>Posted on 12/26/2019</div>
+<div id='postdate'>Posted on 12/26/2019<br />
+Tags: <a href='/tags.html'>Tag1</a></div>
 test text
 </div>
 <div id="footer"></div>
 </body>
 </html>
 `
+
     assertTrue(toHTML == expectation, "toHTML matches expectation")
   }
 
   test_htmlBody_startsWithText() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTest text\n[Image:/m/test.jpg]\nmore text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction, Programming\nTest text\n[Image:/m/test.jpg]\nmore text")  
     let htmlBody = entry.htmlBody()
     
-    assertTrue(htmlBody.includes("<div id='postdate'>Posted on 12/26/2019</div>\nTest text<br />\n<img src=\"/m/test.jpg\">"), "Date precedes text")
+    assertTrue(htmlBody.includes("<div id='postdate'>Posted on 12/26/2019<br />\nTags: <a href='/tags.html'>Interactive Fiction</a>, <a href='/tags.html'>Programming</a></div>\nTest text<br />\n<img src=\"/m/test.jpg\">"), "Date precedes text")
     assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
     
     let toHTML = entry.toHTML()
@@ -1201,7 +1276,8 @@ test text
 This title
 </h1>
 </div>
-<div id='postdate'>Posted on 12/26/2019</div>
+<div id='postdate'>Posted on 12/26/2019<br />
+Tags: <a href='/tags.html'>Interactive Fiction</a>, <a href='/tags.html'>Programming</a></div>
 Test text<br />
 <img src="/m/test.jpg"><br />
 more text
