@@ -11,6 +11,9 @@
   
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 
+- 101 Zen Stories, put in a maze like memalign dungeon: https://nkanaev.com/zen101/en/
+
+
 - Free game assets: https://www.kenney.nl/assets/
 
 - https://freeicons.io/

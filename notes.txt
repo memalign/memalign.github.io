@@ -365,8 +365,10 @@ I have enough posts now that instead of listing all posts at the top, I want to 
 [x]- Link the tags for a post to a tags page that has all entries organized by tag
 [x]- Unit test Entry class: [x]missing tags line, [x]with empty tags list, [x]with one tag, [x]with two tags
 [x]- Unit test Entry class: "Interactive Fiction" as a tag, ensure it doesn't get split
+[x]- Fix existing unit tests
 - Unit test column layout for 15 or more entries
 - Unit test TagsIndex writeHTMLDocument; ensure entries are sorted correctly
+
 
 - Investigate providing a full URL (e.g. https://memalign.github.io/m/example.jpg) for og image, json feed, and rss feed preview images
 

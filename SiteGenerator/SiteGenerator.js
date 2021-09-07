@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = true
+const UNIT_TEST = false
 
 
 // Utilities
@@ -1290,8 +1290,8 @@ more text
   }
   
   test_toHTML_noImages() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")
-    let entry2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n\ntest text")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Test\ntest text")
+    let entry2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Test\n\ntest text")
     
     assertTrue(entry.toHTML() == entry2.toHTML(), "Preceding newlines ignored")  
 
@@ -1303,7 +1303,8 @@ more text
 This title
 </h1>
 </div>
-<div id='postdate'>Posted on 12/26/2019</div>
+<div id='postdate'>Posted on 12/26/2019<br />
+Tags: <a href='/tags.html'>Test</a></div>
 test text
 </div>
 <div id="footer"></div>
@@ -1314,27 +1315,27 @@ test text
   }
     
   test_htmlBody_startsWithTwoImages() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Abc\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     // This behavior isn't good. I'm writing this test to document the existing limitation. We probably want the postdate to follow all leading images in a post instead.
-    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">\n<div id='postdate'>Posted on 12/26/2019</div>\n<img src=\"/m/test2.jpg\">"), "Date follows first image")
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">\n<div id='postdate'>Posted on 12/26/2019<br />\nTags: <a href='/tags.html'>Abc</a></div>\n<img src=\"/m/test2.jpg\">"), "Date follows first image")
     assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
   }
   
   test_htmlBody_indentation() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text\n one\n  two\n   three\n    - Four")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Image:/m/test.jpg]\ntest text\n one\n  two\n   three\n    - Four")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("test text<br />\n&nbsp;one<br />\n&nbsp;&nbsp;two<br />\n&nbsp;&nbsp;&nbsp;three<br />\n&nbsp;&nbsp;&nbsp;&nbsp;- Four"), "indentation")
   }
   
   test_ogDescription() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: TestTag\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
-    let entryWithLinebreak = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\none two three four five six seven eight nine ten eleven twelve thirteen.\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithLinebreak = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction\none two three four five six seven eight nine ten eleven twelve thirteen.\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
 
-    let entryWithImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: counting\n[Image:/m/test.jpg]one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
 
 
     let expectation = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty…"
@@ -1343,54 +1344,54 @@ test text
     assertTrue(entryWithLinebreak.ogDescription() == expectation, "Entry with linebreak truncated in correct place")
     assertTrue(entryWithImage.ogDescription() == expectation, "Description truncated in correct place")
     
-    let entrySentence = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty. thirtyone")
+    let entrySentence = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Sentences\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty. thirtyone")
 
     let expectation2 = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty. …"
     assertTrue(entrySentence.ogDescription() == expectation2, "Description ending with period gets correct ellipses behavior")
     
-    let entryFits = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty")
+    let entryFits = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Fitting In\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty")
     
     let expectationFits = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty"
     assertTrue(entryFits.ogDescription() == expectationFits, "Whole entry fits")
     
-    let entryJustImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]")
+    let entryJustImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Just Image Things\n[Image:/m/test.jpg]")
     assertTrue(entryJustImage.ogDescription() == "", "empty desc")
     
     
-    let entryWithLink1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link:/m/test.jpg]here[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithLink1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Link1\n[Link:/m/test.jpg]here[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationLink1 = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithLink1.ogDescription() == expectationLink1, "ogDescription link1")
 
-    let entryWithLink2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Link]/m/test.jpg[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithLink2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Link2\n[Link]/m/test.jpg[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationLink2 = "/m/test.jpg one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithLink2.ogDescription() == expectationLink2, "ogDescription link2")
     
-    let entryWithCode = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Code]here[/Code] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithCode = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[Code]here[/Code] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationCode = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithCode.ogDescription() == expectationCode, "ogDescription code")
   }
   
   test_Entry_ogImage() {
-    let entryNoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")
+    let entryNoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\ntest text")
     assertTrue(entryNoImages.ogImage() == "/m/shiba.jpg", "default ogImage")
     
-    let entryOneImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")
+    let entryOneImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images, Fun\n[Image:/m/test.jpg]\ntest text")
     assertTrue(entryOneImage.ogImage() == "/m/test.jpg", "picks image")
 
-    let entryTwoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")
+    let entryTwoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")
     assertTrue(entryTwoImages.ogImage() == "/m/test.jpg", "picks first image")
   }
   
   test_Entry_fullBaseURL() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: URLs\n[Image:/m/test.jpg]\ntest text")
     assertTrue(entry.fullBaseURL() == "https://memalign.github.io/p/", "fullBaseURL")
   }
 
   test_Entry_dateRFC3339() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test.jpg]\ntest text")
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: URLs\n[Image:/m/test.jpg]\ntest text")
     assertTrue(entry.dateRFC3339() == "2019-12-26T00:00:00-08:00", "dateRFC3339")    
   }
   
@@ -1398,7 +1399,7 @@ test text
 // Feed class
 
   test_Feed_writeFeedFile() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Feeds\n[Image:/m/test1.jpg]\ntext1 text1")
     
     let index = new Index([entry1])
     
@@ -1435,7 +1436,7 @@ test text
 // JSONFeed class
 
   test_JSONFeed_escapeContent() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: JavaScript\n[Image:/m/test1.jpg]\ntext1 text1")
     
     let index = new Index([entry1])
     
@@ -1447,9 +1448,9 @@ test text
   }
 
   test_JSONFeed_entryToItem() {
-    let entryWithImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entryNoImage = new Entry("/path/0002-some-title.txt", "Title: This title\nDate: 12/26/2019\ntext1 text1")
-    let entryJustImage = new Entry("/path/0003-some-title.txt", "Title: This title\nDate: 12/26/2019\n[Image:/m/test1.jpg]")
+    let entryWithImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Entries\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entryNoImage = new Entry("/path/0002-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\ntext1 text1")
+    let entryJustImage = new Entry("/path/0003-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Feeds\n[Image:/m/test1.jpg]")
     
     let jsonFeed = new JSONFeed(new Index([entryWithImage, entryNoImage, entryJustImage]))
 
@@ -1462,7 +1463,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019</div>\\ntext1 text1"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Entries</a></div>\\ntext1 text1"
     }`
     
     assertTrue(jsonFeed.entryToItem(entryWithImage) == expectationWithImage, "json with image")
@@ -1475,7 +1476,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/26/2019</div>\\ntext1 text1"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Programming</a></div>\\ntext1 text1"
     }`
     assertTrue(jsonFeed.entryToItem(entryNoImage) == expectationNoImage, "json no image")
     
@@ -1488,18 +1489,18 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019</div>\\n"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Feeds</a></div>\\n"
     }`
     
     assertTrue(jsonFeed.entryToItem(entryJustImage) == expectationJustImage, "json just image")
   }
 
   test_JSONFeed_toText() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
-    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\ntext4")
-    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\ntext5")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\nTags: JSON\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\nTags: JSON\ntext2 text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
+    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
+    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
 
     
     let index = new Index([entry2, entry1, entry3, entry4, entry5])
@@ -1527,7 +1528,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title5.html'>This title5</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/11/2020</div>\\ntext5"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title5.html'>This title5</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/11/2020<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext5"
     },
     {
          "title" : "This title4",
@@ -1537,7 +1538,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title4.html'>This title4</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/1/2020</div>\\ntext4"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title4.html'>This title4</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/1/2020<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext4"
     },
     {
          "title" : "This title3",
@@ -1548,7 +1549,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\">\\n<div id='postdate'>Posted on 12/28/2019</div>\\ntext3\\ttext3\\\\'"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\">\\n<div id='postdate'>Posted on 12/28/2019<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext3\\ttext3\\\\'"
     },
     {
          "title" : "This title2",
@@ -1558,7 +1559,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title2.html'>This title2</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/2/2019</div>\\ntext2 text2"
+         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title2.html'>This title2</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/2/2019<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext2 text2"
     }
   ]
 }
@@ -1571,11 +1572,11 @@ test text
 // AtomFeed class
 
   test_AtomFeed_toText() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
-    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\ntext4")
-    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\ntext5")
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\nTags: JSON\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\nTags: JSON\ntext2 text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
+    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
+    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
     
     let index = new Index([entry2, entry1, entry3, entry4, entry5])
     
@@ -1611,7 +1612,8 @@ test text
 <a href='https://memalign.github.io/p/some-title5.html'>This title5</a>
 </h2>
 </div>
-<div id='postdate'>Posted on 1/11/2020</div>
+<div id='postdate'>Posted on 1/11/2020<br />
+Tags: <a href='/tags.html'>JSON</a></div>
 text5
 ]]>
 </content>
@@ -1635,7 +1637,8 @@ text5
 <a href='https://memalign.github.io/p/some-title4.html'>This title4</a>
 </h2>
 </div>
-<div id='postdate'>Posted on 1/1/2020</div>
+<div id='postdate'>Posted on 1/1/2020<br />
+Tags: <a href='/tags.html'>JSON</a></div>
 text4
 ]]>
 </content>
@@ -1660,7 +1663,8 @@ text4
 </h2>
 </div>
 <img src="/m/test3.jpg">
-<div id='postdate'>Posted on 12/28/2019</div>
+<div id='postdate'>Posted on 12/28/2019<br />
+Tags: <a href='/tags.html'>JSON</a></div>
 text3\ttext3\\'
 ]]>
 </content>
@@ -1684,7 +1688,8 @@ text3\ttext3\\'
 <a href='https://memalign.github.io/p/some-title2.html'>This title2</a>
 </h2>
 </div>
-<div id='postdate'>Posted on 12/2/2019</div>
+<div id='postdate'>Posted on 12/2/2019<br />
+Tags: <a href='/tags.html'>JSON</a></div>
 text2 text2
 ]]>
 </content>
