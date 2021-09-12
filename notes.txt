@@ -366,7 +366,8 @@ I have enough posts now that instead of listing all posts at the top, I want to 
 [x]- Unit test Entry class: [x]missing tags line, [x]with empty tags list, [x]with one tag, [x]with two tags
 [x]- Unit test Entry class: "Interactive Fiction" as a tag, ensure it doesn't get split
 [x]- Fix existing unit tests
-- Unit test column layout for 15 or more entries
+[x]- Unit test column layout for 15 or more entries
+[x]  - 32 entries led to 4 columns due to a bug. Unit test that we don't end up with more than 3 columns when not perfectly divisible by 3
 - Unit test TagsIndex writeHTMLDocument; ensure entries are sorted correctly
 
 
