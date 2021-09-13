@@ -64,8 +64,16 @@ class HTMLDocument {
     return this.baseURL() + "/" + this.relativeURL();
   }
   
+  makeFullURLFromURL(url) {
+    if (!url.includes("://")) {
+      let separator = url.startsWith("/") ? "" : "/"
+      url = this.baseURL() + separator + url
+    }
+    return url
+  }
+  
   ogImage() {
-    return "/m/shiba.jpg"
+    return this.makeFullURLFromURL("/m/shiba.jpg")
   }
   
   ogDescription() {
@@ -160,7 +168,7 @@ class Index extends HTMLDocument {
       }
     }
     
-    return result
+    return this.makeFullURLFromURL(result)
   }
   
   ogDescription() {
@@ -304,7 +312,7 @@ class TagsIndex extends HTMLDocument {
       }
     }
     
-    return result
+    return this.makeFullURLFromURL(result)
   }
   
   ogDescription() {
@@ -438,7 +446,7 @@ class Entry extends HTMLDocument {
     if (imageURL) {
       result = imageURL
     }
-    return result
+    return this.makeFullURLFromURL(result)
   }
   
   ogDescription() {

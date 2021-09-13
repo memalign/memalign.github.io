@@ -372,6 +372,7 @@ I have enough posts now that instead of listing all posts at the top, I want to 
 
 
 - Investigate providing a full URL (e.g. https://memalign.github.io/m/example.jpg) for og image, json feed, and rss feed preview images
+  - Unit test HTMLDocument.makeFullURLFromURL(url): already a full url, a relative URL that doesn't start with /, an absolute url that starts with /
 
 
 
