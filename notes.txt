@@ -368,7 +368,7 @@ I have enough posts now that instead of listing all posts at the top, I want to 
 [x]- Fix existing unit tests
 [x]- Unit test column layout for 15 or more entries
 [x]  - 32 entries led to 4 columns due to a bug. Unit test that we don't end up with more than 3 columns when not perfectly divisible by 3
-- Unit test TagsIndex writeHTMLDocument; ensure entries are sorted correctly
+[x]- Unit test TagsIndex writeHTMLDocument; ensure entries are sorted correctly
 
 
 - Investigate providing a full URL (e.g. https://memalign.github.io/m/example.jpg) for og image, json feed, and rss feed preview images
