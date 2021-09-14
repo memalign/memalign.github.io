@@ -886,6 +886,14 @@ class UnitTests {
     
     assertTrue(caughtException, "Missing tags line causes exception")
   }
+  
+  test_HTMLDocument_makeFullURLFromURL() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
+  
+    assertTrue(entry.makeFullURLFromURL("https://example.com/m/image.jpg") == "https://example.com/m/image.jpg", "already full url")
+    assertTrue(entry.makeFullURLFromURL("/m/image.jpg") == "https://memalign.github.io/m/image.jpg", "absolute url")
+    assertTrue(entry.makeFullURLFromURL("m/image.jpg") == "https://memalign.github.io/m/image.jpg", "relative url")
+  }
 
 // Index class
 
@@ -929,19 +937,19 @@ class UnitTests {
     
     let index = new Index([entry2, entry1, entry3])
     
-    assertTrue(index.ogImage() == "/m/test3.jpg", "most recent post image")
+    assertTrue(index.ogImage() == "https://memalign.github.io/m/test3.jpg", "most recent post image")
     
     entry3.contents = null
     
-    assertTrue(index.ogImage() == "/m/test2.jpg", "second post image")
+    assertTrue(index.ogImage() == "https://memalign.github.io/m/test2.jpg", "second post image")
     
     entry2.contents = "just text"
     
-    assertTrue(index.ogImage() == "/m/test1.jpg", "first post image")
+    assertTrue(index.ogImage() == "https://memalign.github.io/m/test1.jpg", "first post image")
     
     index.entriesOnIndex = 2
     
-    assertTrue(index.ogImage() == "/m/shiba.jpg", "default image")
+    assertTrue(index.ogImage() == "https://memalign.github.io/m/shiba.jpg", "default image")
   }
 
   test_Index_toHTML() {
@@ -967,7 +975,7 @@ class UnitTests {
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="/m/test3.jpg" />
+<meta property="og:image" content="https://memalign.github.io/m/test3.jpg" />
 <meta property="og:description" content="text3 text3" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
@@ -1052,7 +1060,7 @@ More posts:<br />
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="/m/test3.jpg" />
+<meta property="og:image" content="https://memalign.github.io/m/test3.jpg" />
 <meta property="og:description" content="text3 text3" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
@@ -1184,7 +1192,7 @@ More posts:<br />
 <meta property="og:title" content="memalign.github.io tags" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/tags.html" />
-<meta property="og:image" content="/m/test3.jpg" />
+<meta property="og:image" content="https://memalign.github.io/m/test3.jpg" />
 <meta property="og:description" content="memalign.github.io posts organized by tag" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
@@ -1457,7 +1465,7 @@ More posts:<br />
 <meta property="og:title" content="This title" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/p/some-title.html" />
-<meta property="og:image" content="/m/test.jpg" />
+<meta property="og:image" content="https://memalign.github.io/m/test.jpg" />
 <meta property="og:description" content="test text" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
@@ -1505,7 +1513,7 @@ test text
 <meta property="og:title" content="This title" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/p/some-title.html" />
-<meta property="og:image" content="/m/test.jpg" />
+<meta property="og:image" content="https://memalign.github.io/m/test.jpg" />
 <meta property="og:description" content="Test text more text…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
@@ -1618,13 +1626,13 @@ test text
   
   test_Entry_ogImage() {
     let entryNoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\ntest text")
-    assertTrue(entryNoImages.ogImage() == "/m/shiba.jpg", "default ogImage")
+    assertTrue(entryNoImages.ogImage() == "https://memalign.github.io/m/shiba.jpg", "default ogImage")
     
     let entryOneImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images, Fun\n[Image:/m/test.jpg]\ntest text")
-    assertTrue(entryOneImage.ogImage() == "/m/test.jpg", "picks image")
+    assertTrue(entryOneImage.ogImage() == "https://memalign.github.io/m/test.jpg", "picks image")
 
     let entryTwoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")
-    assertTrue(entryTwoImages.ogImage() == "/m/test.jpg", "picks first image")
+    assertTrue(entryTwoImages.ogImage() == "https://memalign.github.io/m/test.jpg", "picks first image")
   }
   
   test_Entry_fullBaseURL() {
