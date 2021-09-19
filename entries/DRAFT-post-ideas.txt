@@ -26,6 +26,41 @@
 
 - How many unique Gregorian calendars are there? Seems to repeat every 28 years
 
+- Interesting code snippets:
+  - Seedable random number generator: https://github.com/phoboslab/underrun/blob/master/source/random.js
+[Code]
+var rand_high, rand_low;
+
+function random_int(min, max) {
+	rand_high = ((rand_high << 16) + (rand_high >> 16) + rand_low) & 0xffffffff;
+	rand_low = (rand_low + rand_high) & 0xffffffff;
+	var n = (rand_high >>> 0) / 0xffffffff;
+	return (min + n * (max-min+1))|0;
+}
+
+function random_seed(seed) {
+	rand_high = seed || 0xBADC0FFE;
+	rand_low = seed ^ 0x49616E42;
+}
+[/Code]
+
+
+- PICO-8
+  - https://twitter.com/johanpeitz/status/1438898759484780547?s=20
+  - https://twitter.com/RadioFlower/status/1437838558463598592?s=20
+  - "Instead of physical cartridges, programs made for PICO-8 are distributed on .png images that look like cartridges, complete with labels and a fixed 32k data capacity." 🤯
+ - https://www.lexaloffle.com/pico-8.php?page=faq
+ - https://www.lexaloffle.com/bbs/?pid=97365#playing
+ - https://www.lexaloffle.com/bbs/?pid=96332#playing
+ - https://www.lexaloffle.com/bbs/?pid=11437#playing
+ - https://www.lexaloffle.com/bbs/?pid=48475#playing
+ - https://twitter.com/tommulgrew/status/1438833647851749384
+ - So many cool ideas: https://www.lexaloffle.com/bbs/?cat=7#sub=2
+ - Download the whole archive to have a ton of offline games?
+ 
+
+
+
 - List of tools for making IF:
   https://adventuron.io/
   Quest (and its peer made by the same group)
@@ -43,3 +78,14 @@
   http://www.ifwiki.org/index.php/Engine_List
   https://emshort.blog/how-to-play/writing-if/
   https://emshort.blog/2021/03/31/end-of-march-link-assortment-5/
+  
+  - Also check out Gruescript:
+    https://versificator.itch.io/gruescript
+    https://ifdb.org/viewgame?id=zke2u3fliyl2151
+    https://intfiction.org/t/announce-gruescript/52104/54
+    
+  - Sort of LAIF: Seltani
+    https://emshort.blog/2015/05/25/writing-for-seltani-in-general/
+    https://ifdb.org/search?searchbar=seltani
+    http://seltani.net/about
+  

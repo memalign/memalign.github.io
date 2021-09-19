@@ -11,6 +11,17 @@
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
     {
+         "title" : "Day and Night",
+         "date_published" : "2021-09-18T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/day-and-night.html",
+         "url" : "https://memalign.github.io/p/day-and-night.html",
+         "image" : "https://memalign.github.io/m/FullMoon2010.jpg",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\n<div id='header'>\n<h2>\n<a href='https://memalign.github.io/p/day-and-night.html'>Day and Night</a>\n</h2>\n</div>\n<img src=\"/m/FullMoon2010.jpg\">\n<div id='postdate'>Posted on 9/18/2021<br />\nTags: <a href='/tags.html'>Writing</a>, <a href='/tags.html'>Poetry</a></div>\nSaul made a friend or two<br />\nA friend was successful, Saul celebrated<br />\nA friend had misfortune, Saul felt their pain and supported them with kindness<br />\nSaul had success, the friends celebrated<br />\nSaul had misfortune, they came to the rescue<br />\nSometimes they didn't see each other but could always pick up where they left off<br />\nFriendships were sometimes superficial and sometimes deep<br />\nThey looked past the worst in each other and focused on the best<br />\nConsciously managing impulses, starving envy, amplifying empathy<br />\nTheir warmth welcomed others and their circle grew<br />\n<br />\nLuna had some friends<br />\nA friend had professional success, but Luna could have done that job better<br />\nA friend had a relationship, but their partner wasn't very intelligent or funny or interesting or attractive or...<br />\nA friend tried to stay in touch, but it was just superficial. Why are they even bothering?<br />\nA friend was happy to catch up and chat, but they were never the one to initiate. Forget them.<br />\nLuna and a friend had an argument. Luna was still upset later and said some hurtful things, as hurtful as possible. Later, with regret, Luna asked, \"Why can't we pick back up where we left off? Can't you see I need you? Can't you see I need compassion?\"<br />\nBut no one was left to respond"
+    },
+    {
          "title" : "Lights Off",
          "date_published" : "2021-08-14T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/lights-off.html",
