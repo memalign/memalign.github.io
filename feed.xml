@@ -5,10 +5,79 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2021-09-18T00:00:00-08:00</updated>
+<updated>2021-09-25T00:00:00-08:00</updated>
 <rights>Copyright © 2021, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Tim's Vermeer</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/tims-vermeer.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/tims-vermeer.html" />
+<id>https://memalign.github.io/p/tims-vermeer.html</id>
+<published>2021-09-25T00:00:00-08:00</published>
+<updated>2021-09-25T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/tims-vermeer.html'>Tim's Vermeer</a>
+</h2>
+</div>
+<img src="/m/tim-final-painting-closeup.jpg">
+<div id='postdate'>Posted on 9/25/2021<br />
+Tags: <a href='/tags.html'>Art</a>, <a href='/tags.html'>Leisure</a></div>
+I recently saw <a href="https://arstechnica.com/science/2021/09/restored-vermeer-painting-finally-reveals-hidden-cupid-in-background/">news</a> that a painting from the 1650s had been restored to unhide a painting-within-a-painting in the background.<br />
+<br />
+Here's what the "after" and "before" look like:<br />
+<br />
+<img src="/m/vermeer-after-and-before.jpg"><br />
+<br />
+It's fascinating that modern technology can both find the hidden painted-over image and confirm that it was painted over by someone other than the artist.<br />
+<br />
+I showed my wife who asked "Is that a Vermeer?" which then sent me down another <a href="/p/rabbit-hole.html">rabbit hole</a>.<br />
+<br />
+I asked "Whoah how could you tell?" and she said that all Vermeer paintings look exactly like this due to similar composition and photo-realistic lighting.<br />
+<br />
+I found that I was already familiar with one of Vermeer's paintings, <a href="https://en.wikipedia.org/wiki/Girl_with_a_Pearl_Earring">Girl with a Pearl Earring</a>, possibly due to its use as an example image in computer vision.<br />
+<br />
+<img src="/m/912px-1665_Girl_with_a_Pearl_Earring.jpg"><br />
+<br />
+Then I stumbled upon <a href="https://en.wikipedia.org/wiki/Tim%27s_Vermeer">Tim's Vermeer</a>, a documentary made by Penn and Teller about an inventor (and successful company founder) named Tim Jenison who had a side-project (bordering on obsession) to understand how Vermeer captured such realistic lighting in paintings and then do so himself.<br />
+<br />
+He ultimately figured out a combination of two mirrors that enable you to color match what's painted exactly to the real scene. It turns the process of painting a brilliant masterpiece into something mechanical, essentially a manual photograph machine with a person holding a paintbrush in the middle.<br />
+<br />
+He starts out copying an old black-and-white photograph this way:<br />
+<br />
+<img src="/m/tim-photograph.jpg"><br />
+<br />
+The results are phenomenal! Tim says this was the first painting he's ever made and it was a wholly mechanical process of copying the color he saw in the mirror.<br />
+<br />
+After that successful proof of concept, Tim sets out to completely recreate one of Vermeer's most detailed paintings.<br />
+<br />
+Check out the full documentary (it's only 80 minutes long and you can <a href="/p/speed-up-av.html">watch it faster than 1x</a>) to see how he first replicates the physical space and then reproduces the painting. The painting itself takes 130 days.<br />
+<br />
+Here are some snapshots of the mirror setup and the final painting:<br />
+<br />
+<img src="/m/tim-mirror-setup.jpg"><br />
+<img src="/m/tim-final-painting-closeup.jpg"><br />
+<img src="/m/tim-with-painting.jpg"><br />
+<br />
+By the end of the documentary, I'm convinced that Vermeer used a setup like Tim's. Here's why:<br />
+<br />
+- At one point, Tim realizes that the mirrors cause slight visual distortion in the form of curving of straight lines. He looks at the original Vermeer and discovers the same distortion!<br />
+- The lighting in Vermeer paintings goes beyond what the human visual system can detect across the size of the rooms in the paintings<br />
+- The fine detail in the rug in the painting is not perceivable from the artist's distance without the magnifying help of the mirrors<br />
+- And several more visual quirks of Vermeer's paintings shown in the documentary<br />
+<br />
+But don't take my word for it - check it out yourself!
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Day and Night</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/day-and-night.html" />

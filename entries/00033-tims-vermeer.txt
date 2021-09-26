@@ -1,0 +1,50 @@
+Title: Tim's Vermeer
+Date: 9/25/2021
+Tags: Art, Leisure
+
+[Image:/m/tim-final-painting-closeup.jpg]
+
+I recently saw [Link:https://arstechnica.com/science/2021/09/restored-vermeer-painting-finally-reveals-hidden-cupid-in-background/]news[/Link] that a painting from the 1650s had been restored to unhide a painting-within-a-painting in the background.
+
+Here's what the "after" and "before" look like:
+
+[Image:/m/vermeer-after-and-before.jpg]
+
+It's fascinating that modern technology can both find the hidden painted-over image and confirm that it was painted over by someone other than the artist.
+
+I showed my wife who asked "Is that a Vermeer?" which then sent me down another [Link:/p/rabbit-hole.html]rabbit hole[/Link].
+
+I asked "Whoah how could you tell?" and she said that all Vermeer paintings look exactly like this due to similar composition and photo-realistic lighting.
+
+I found that I was already familiar with one of Vermeer's paintings, [Link:https://en.wikipedia.org/wiki/Girl_with_a_Pearl_Earring]Girl with a Pearl Earring[/Link], possibly due to its use as an example image in computer vision.
+
+[Image:/m/912px-1665_Girl_with_a_Pearl_Earring.jpg]
+
+Then I stumbled upon [Link:https://en.wikipedia.org/wiki/Tim%27s_Vermeer]Tim's Vermeer[/Link], a documentary made by Penn and Teller about an inventor (and successful company founder) named Tim Jenison who had a side-project (bordering on obsession) to understand how Vermeer captured such realistic lighting in paintings and then do so himself.
+
+He ultimately figured out a combination of two mirrors that enable you to color match what's painted exactly to the real scene. It turns the process of painting a brilliant masterpiece into something mechanical, essentially a manual photograph machine with a person holding a paintbrush in the middle.
+
+He starts out copying an old black-and-white photograph this way:
+
+[Image:/m/tim-photograph.jpg]
+
+The results are phenomenal! Tim says this was the first painting he's ever made and it was a wholly mechanical process of copying the color he saw in the mirror.
+
+After that successful proof of concept, Tim sets out to completely recreate one of Vermeer's most detailed paintings.
+
+Check out the full documentary (it's only 80 minutes long and you can [Link:/p/speed-up-av.html]watch it faster than 1x[/Link]) to see how he first replicates the physical space and then reproduces the painting. The painting itself takes 130 days.
+
+Here are some snapshots of the mirror setup and the final painting:
+
+[Image:/m/tim-mirror-setup.jpg]
+[Image:/m/tim-final-painting-closeup.jpg]
+[Image:/m/tim-with-painting.jpg]
+
+By the end of the documentary, I'm convinced that Vermeer used a setup like Tim's. Here's why:
+
+- At one point, Tim realizes that the mirrors cause slight visual distortion in the form of curving of straight lines. He looks at the original Vermeer and discovers the same distortion!
+- The lighting in Vermeer paintings goes beyond what the human visual system can detect across the size of the rooms in the paintings
+- The fine detail in the rug in the painting is not perceivable from the artist's distance without the magnifying help of the mirrors
+- And several more visual quirks of Vermeer's paintings shown in the documentary
+
+But don't take my word for it - check it out yourself!

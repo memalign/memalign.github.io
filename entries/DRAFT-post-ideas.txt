@@ -54,11 +54,13 @@ function random_seed(seed) {
  - https://www.lexaloffle.com/bbs/?pid=96332#playing
  - https://www.lexaloffle.com/bbs/?pid=11437#playing
  - https://www.lexaloffle.com/bbs/?pid=48475#playing
+ - https://www.lexaloffle.com/bbs/?tid=29590#playing
  - https://twitter.com/tommulgrew/status/1438833647851749384
  - So many cool ideas: https://www.lexaloffle.com/bbs/?cat=7#sub=2
  - Download the whole archive to have a ton of offline games?
  
 
+- https://1j01.github.io/pbp2d/
 
 
 - List of tools for making IF:
