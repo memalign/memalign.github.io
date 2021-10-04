@@ -114,6 +114,13 @@ td {
   line-height: 16pt;
 }
 
+blockquote {
+  background: #EEE;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 1em;
+}
+
 #code {
   font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
   white-space: pre-wrap;

@@ -459,6 +459,7 @@ class Entry extends HTMLDocument {
     // Strip tags for this simple page summary
     result = result.replace(/\[Image:([^\]]+)\]/g, "")
     result = result.replace(/\[\/?Code\]/g, "")
+    result = result.replace(/\[\/?Quote\]/g, "")
     result = result.replace(/\[Link:([^\]]+)\]/g, "")
     result = result.replace(/\[Link\]([^\[]+)/g, '$1')
     result = result.replace(/\[\/Link\]/g, "")
@@ -547,7 +548,10 @@ ${this.title}
     
     htmlContents = htmlContents.replace(/\[Code\]\n*/g, "<div id='code'>")
     htmlContents = htmlContents.replace(/\n*\[\/Code\]/g, "</div>")
-
+  
+    // [Quote] support
+    htmlContents = htmlContents.replace(/\[Quote\]\n*/g, "<blockquote>")
+    htmlContents = htmlContents.replace(/\n*\[\/Quote\]/g, "</blockquote>")
 
     // [Image] support
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
@@ -589,6 +593,8 @@ ${this.title}
     
     // Remove any linebreaks after </div> to fully control margins with CSS
     htmlContents = htmlContents.replace(/<\/div>(\n*<br \/>)*/g, "</div>")
+    // Same for blockquote
+    htmlContents = htmlContents.replace(/<\/blockquote>(\n*<br \/>)*/g, "</blockquote>")
     
     str += htmlContents
     return str
@@ -1428,6 +1434,24 @@ More posts:<br />
     assertTrue(!htmlBody.includes("[Code"), "Lacks code brackets")
     assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
   }
+  
+  test_htmlBody_quote_oneliner() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Quote]some quote[/Quote]")
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<blockquote>some quote</blockquote>"), "Has quote div")
+    assertTrue(!htmlBody.includes("[Quote"), "Lacks quote brackets")
+    assertTrue(!htmlBody.includes("Quote]"), "Lacks closing quote brackets")
+  }
+
+  test_htmlBody_quote_multiLine() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Quote]\nsome quote\n  line two\n[/Quote]\nafter quote")
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("test text<br />\n<blockquote>some quote<br />\n&nbsp;&nbsp;line two</blockquote>\nafter quote"), "Has blockquote")
+    assertTrue(!htmlBody.includes("[Quote"), "Lacks quote brackets")
+    assertTrue(!htmlBody.includes("Quote]"), "Lacks closing quote brackets")
+  }
 
   test_htmlBody_title_withTitleURL() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2\n[Image:/m/test.jpg]\ntest text")  
@@ -1622,6 +1646,11 @@ test text
     
     let expectationCode = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithCode.ogDescription() == expectationCode, "ogDescription code")
+
+    let entryWithQuote = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[Quote]here[/Quote] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    
+    let expectationQuote = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
+    assertTrue(entryWithQuote.ogDescription() == expectationQuote, "ogDescription quote")
   }
   
   test_Entry_ogImage() {

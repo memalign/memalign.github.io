@@ -10,7 +10,7 @@ Tags: Leisure
 - MUDs
 - original Pokémon 
 - Wario
-- Palm m130, diddlebug, warfare inc
+- Palm m130, diddlebug, warfare inc, sim city, AvantGo, TuCows
 - Windows 3.1
 - loderunner 
 - Math blaster
@@ -18,3 +18,5 @@ Tags: Leisure
 - Kid Works 2 ( https://www.old-games.com/download/10348/kidworks-2 ) ( Video: https://www.squakenet.com/game/kid-works-2/ )
 - Sega genesis
 - SNES
+- Chex Quest
+- Snood
