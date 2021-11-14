@@ -5,10 +5,54 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2021-11-13T00:00:00-08:00</updated>
+<updated>2021-11-14T00:00:00-08:00</updated>
 <rights>Copyright © 2021, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Fussy Baby Checklist</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/fussy-checklist.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/fussy-checklist.html" />
+<id>https://memalign.github.io/p/fussy-checklist.html</id>
+<published>2021-11-14T00:00:00-08:00</published>
+<updated>2021-11-14T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/fussy-checklist.html'>Fussy Baby Checklist</a>
+</h2>
+</div>
+<img src="/m/webmd-baby-cry.jpg">
+<div id='postdate'>Posted on 11/14/2021<br />
+Tags: <a href='/tags.html'>Parenting</a></div>
+Do you have a fussy infant?<br />
+<br />
+Here's my checklist for trying to resolve fussiness:<br />
+<br />
+- Does the baby need a diaper change? Check for diaper rash - make sure to slather on extra diaper paste if you see redness/bumps. I saw one website say you should spread it on as if "icing a cake".<br />
+<br />
+- Does the baby want a pacifier?<br />
+<br />
+- Is the baby hungry? Try offering a bottle even if they recently ate. They might be going through a growth spurt.<br />
+<br />
+- Does the baby need to burp? Try holding them upright and patting their back.<br />
+<br />
+- They might be uncomfortable. Try holding the baby in different positions.<br />
+<br />
+- The baby might be overstimulated after a long and interesting day. Try darkening the room and make it quiet. Try putting them down for sleep. Try putting them in a bouncer. Try putting them on your chest for a rest.<br />
+<br />
+- If you're feeling overwhelmed or desperate, tag your partner in for help!<br />
+<br />
+- Echoing advice from our pediatrician: If your baby won't stop crying no matter what you try and you're at your wit's end, call your pediatrician. Your baby could be telling you something more serious. WebMD has some <a href="https://www.webmd.com/parenting/baby/why-baby-cries#1">additional advice</a>.
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Fall Asleep</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/zen-sleep.html" />
