@@ -83,6 +83,11 @@ function random_seed(seed) {
  - https://www.lexaloffle.com/bbs/?tid=35349#comments
  - https://freds72.itch.io/poom
  - https://www.lexaloffle.com/bbs/?pid=98070#playing
+ - https://www.lexaloffle.com/bbs/?tid=44863#playing
+ - lumines: https://www.lexaloffle.com/bbs/?tid=43692#playing
+ - Mea's Castle: https://www.lexaloffle.com/bbs/?pid=81448#playing
+ - The Lost Night (rpg): https://www.lexaloffle.com/bbs/?pid=88259#playing
+ - Virush: https://www.lexaloffle.com/bbs/?tid=38236
  - Download the whole archive to have a ton of offline games?
  
 
