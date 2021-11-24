@@ -1,0 +1,4981 @@
+
+
+<html>
+<head>
+<title>Virush</title>
+<meta charset="utf-8"/><meta property="og:title"
+          content="Virush"/>
+<meta name="viewport" content="width=device-width">
+
+<script type="text/javascript">
+function microAjax(B,A){this.bindFunction=function(E,D){return function(){return E.apply(D,[D])}};this.stateChange=function(D){if(this.request.readyState==4){this.callbackFunction(this.request.responseText)}};this.getRequest=function(){if(window.ActiveXObject){return new ActiveXObject("Microsoft.XMLHTTP")}else{if(window.XMLHttpRequest){return new XMLHttpRequest()}}return false};this.postBody=(arguments[2]||"");this.callbackFunction=A;this.url=B;this.request=this.getRequest();if(this.request){var C=this.request;C.onreadystatechange=this.bindFunction(this.stateChange,this);if(this.postBody!==""){C.open("POST",B,true);C.setRequestHeader("X-Requested-With","XMLHttpRequest");C.setRequestHeader("Content-type","application/x-www-form-urlencoded");C.setRequestHeader("Connection","close")}else{C.open("GET",B,true)}C.send(this.postBody)}};
+</script>
+
+
+<STYLE TYPE="text/css">
+<!--
+
+.banner_div{display:block}
+.topmenu_div{display:table}
+.lilmenu_div{display:none}
+.desktop_div{display:inline}
+.mobile_div{display:none}
+
+.info_box {
+display:table; float:left; margin-left:8px; margin-right:16px;
+margin-top:0px; margin-bottom:16px; text-align:left;
+}
+
+.info_box_right_old {display:table; margin-left:16px; margin-right:8px;
+margin-top:-10px; margin-bottom:16px; float:right; text-align:left;
+}
+
+.info_box_right {
+	margin-top:-10px;
+}
+
+
+.info_box h2 {margin-top:-16px;}
+h2 {margin-top:0px;}
+
+.info_group {
+	display:table; max-width:800px;
+	margin-bottom:20px; text-align:left
+}
+
+.info_group h2{
+	text-decoration: none; 
+	color:#fab;
+	font-weight: normal;
+}
+
+.form_button{
+	padding:8px; display:table; margin-top:24px;
+	border:1px solid;
+	border-color:#999;
+	border-radius:6px;
+}
+
+.form_button:hover{
+	background-color:#fab;
+	color:#222;
+	cursor:pointer;
+}
+
+.form_button_span{
+	padding:2px; 
+	padding-left:4px; padding-right:4px;
+	display:inline;
+	border:1px solid;
+	border-color:#999;
+}
+
+.form_button_span:hover{
+	background-color:#fab;
+	color:#222;
+	cursor:pointer;
+}
+
+.edit_tool_button{
+	padding:4px; display:table;
+	padding-left:8px; padding-right:8px;
+	border-radius:1;
+	margin-right:4px;
+	margin-bottom:2px;
+	border:1px solid;
+	border-color:#999;
+	margin-bottom:8px;
+}
+
+.edit_tool_button:hover{
+	background-color:#fab;
+	color:#222;
+	cursor:pointer;
+}
+
+
+.form_tab{
+	padding:12px; padding-right:20px; padding-top:8px; padding-bottom:8px; display: table; float:left;
+	font-size:14pt; border-radius:0px;
+	margin-right:2px;
+	color:#ccc;
+	background-color:#444;
+}
+
+.form_tab:hover{
+	background-color:#f8a;
+	color:#fff;
+	cursor:pointer;
+}
+
+
+zzz_canvas{
+				image-rendering: optimizeSpeed;
+				image-rendering: -moz-crisp-edges;
+				image-rendering: -webkit-optimize-contrast;
+				image-rendering: optimize-contrast;
+				image-rendering: pixelated;
+				-ms-interpolation-mode: nearest-neighbor;
+				border: 0px;
+				width:512px;
+				height:512px;
+}
+
+.favlike{
+	min-width:160px;
+}
+
+.pixel_perfect{
+				image-rendering: optimizeSpeed;
+				image-rendering: -moz-crisp-edges;
+				image-rendering: -webkit-optimize-contrast;
+				image-rendering: optimize-contrast;
+				image-rendering: pixelated;
+				-ms-interpolation-mode: nearest-neighbor;
+				border: 0px;
+}
+
+.subnav{float:right; max-width:400px; margin-top:10px}					
+
+.snb{
+	padding:6px; margin:2px; 
+	display:flex;
+}
+
+@media screen and (max-width: 800px)
+{
+	.subnav{float:left; width:100%;}
+	.snb{padding:5px;}
+}
+
+@media screen and (max-width: 800px) {
+    .banner_div{display:none;}
+    .topmenu_div{display:none;}
+    .lilmenu_div{display:table;}
+	.desktop_div{display:none;}
+	.mobile_div{display:inline;}
+	.info_box{float:left;width:100%; margin:0px;  margin-bottom:10px}
+	.info_box_right{float:left; width:100%; margin:0px; margin-bottom:10px}
+	
+	.favlike{ min-width:10px; }
+}
+.block {
+  text-align: center;
+  margin: 20px;
+}
+.centered {
+  display: inline-block;
+  vertical-align: middle;
+  width: 300px;
+}
+
+
+body{
+	color:#e0e0e0;
+	background-color:#303030;
+	margin:0px;
+	padding:0px;
+}
+
+img{
+	max-width: 100%;
+	height:auto;
+}
+
+body{ 
+	font-size:10pt;
+	font-family : Verdana, Geneva, sans-serif;
+	line-height: 1.4;
+}
+
+TD{font-size:10pt; font-family : Verdana, Geneva, sans-serif}
+p{
+	font-size: 10pt; font-family : Verdana, Geneva, sans-serif
+}
+
+a:hover {
+	cursor:pointer;
+}
+
+b{color: #ffffff}
+
+.tag {
+	float:left;
+	display:table;
+	text-align:left;
+	font-size:8pt;
+	margin-right:4px;
+	margin-bottom:4px;
+	padding:3px;
+	padding-left:6px;
+	padding-right:6px;
+	background-color:#aaa;
+	color:#444;
+	
+	border-radius:2px;
+}
+
+.tag:hover
+{
+	cursor:pointer;
+	color:#fff;
+	background-color:#f8a;
+}
+
+.bright_hover{
+	cursor:pointer;
+	opacity: 0.3;
+}
+.bright_hover:hover{
+	opacity: 1.0;
+}
+
+.menu_icon_lil {
+	display:inline-block;
+	padding-top:4px;
+	padding-left:2px;
+	padding-right:2px;
+}
+
+.menu_icon {
+	display:inline-block;
+	padding-top:4px;
+	padding-left:2px;
+	padding-right:2px;
+}
+
+.menu_icon a{
+	display:inline-block;
+	opacity:0.5;
+}
+
+.menu_icon a:hover{
+	opacity:1.0;
+	background: #ff80a0;
+}
+
+.menu_icon hover{
+	opacity:1.0;
+	background: #ff80a0;
+}
+
+.thread_preview{
+	width:100%; 
+	min-height:64px;
+	margin-top:2px;
+	background-color:#444;
+}
+
+.stitched {
+   padding: 10px;
+   padding-left: 20px;
+   padding-right: 20px;
+   margin: 10px;
+   margin-right: 50px;
+   background: #f8f8f8;
+   color: #404040;
+   font-size: 21px;
+   font-weight: bold;
+   line-height: 0.5em;
+   border: 2px dashed #d0e0ff;
+   border-radius: 5px;
+   box-shadow: 0 0 0 4px #f8f8f8, 2px 1px 6px 4px rgba(5, 5, 0, 0.2);
+   font-weight: normal;
+}
+
+.social_button{
+	opacity:0.5;
+}
+.social_button:hover{
+	opacity:1.0;
+}
+
+.support_button{
+	padding:8px; 
+	background-color:#fab; 
+	color:#333; 
+	font-size:10pt; 
+	display:table;
+	opacity:1.0;
+}
+.support_button:hover{
+	background-color:#fab; 
+	opacity:1.0;
+}
+
+
+
+
+.pinkhover{
+	cursor:pointer;
+}
+
+.pinkhover:hover{
+	background:#fab;
+	color:#222;	
+}
+
+.pink-hover_t a{
+		opacity: 0.5;
+}
+
+.pink-hover_t2 a{
+		
+}
+.pink-hover a:hover {
+		display: block;
+		background: #ff80a0;
+		opacity: 1.0;
+}
+.pink-hover_t a:hover {
+		display: block;
+		background: #ff80a0;
+		opacity: 1.0;
+}
+
+
+
+.post_title{
+	font-size: 9pt;
+	font-family : Verdana, Geneva, sans-serif;	
+}
+
+.post_title2{
+	font-size: 20pt;
+	font-family : Helvetica;
+	color : #ffffff;
+	margin: 0px;
+	margin-bottom: 8px;
+	margin-top:0px;
+}
+
+@media screen and (max-width: 800px) {
+	.post_title2{font-size:16pt};
+}
+
+.breadcrumbs{
+	margin-left:8px;
+	font-size:12px;
+	color:#888;
+	border-radius:0px;
+}
+
+.breadcrumbs a:link {
+	color: #ccc;
+	background-color: #666;
+	padding: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+
+	display:inline-block;	
+}
+
+.breadcrumbs a:visited {
+	color: #ccc;
+	background-color: #666;
+}
+
+.breadcrumbs a:hover {
+	color: #fff;
+	background-color: #888;
+}
+
+
+
+.breadcrumbs2{
+	margin-left:8px;
+	font-size:12px;
+	color:#888;
+	border-radius:0px;
+}
+.breadcrumbs2 a:link {
+	color: #999;
+	padding: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+	display:inline-block;	
+}
+.breadcrumbs2 a:visited {
+	color: #999;
+}
+.breadcrumbs2 a:hover {
+	color: #fab;
+}
+
+
+
+.post_title3{
+	font-size: 10pt;
+	font-family : Verdana, Geneva, sans-serif;	
+	font-weight : bold;
+	color : #ff3070;
+}
+
+.blog_title2{
+	font-size: 20pt;
+	font-family : Verdana, Geneva, sans-serif;
+	color : #ff3070;
+}
+.blog_title{
+	font-size: 16pt;
+	font-family : Verdana, Geneva, sans-serif;
+	color : #202020;
+	
+}
+.blog_num_comments{
+	font-size: 14pt;
+	font-family : Helvetica;
+	color : #303030;
+	font-weight : bold;
+}
+.user_title{
+	font-size: 12pt;
+	font-family : Helvetica;
+	color : #ffe0d0;
+}
+
+h1{color:#ffffff;font-size:22pt;font-family : Verdana, Geneva, sans-serif; padding-top:8px}
+h2{color:#ffffff;font-size:16pt;font-family : Verdana, Geneva, sans-serif; padding-top:16px}
+h3{color:#f8a; font-size:12pt;font-family : Verdana, Geneva, sans-serif; padding-top:8px}
+
+zzzh3{color:#ff80a0;font-size:10pt;font-family : Verdana, Geneva, sans-serif}
+
+
+A:link { 
+	text-decoration: none;
+	color: #fff;
+}
+
+A:visited { 
+	text-decoration: none;
+	color: #fff;
+}
+
+p A:link { 
+	zzz_text-decoration: underline;
+	color:#fbc;
+}
+p A:hover{
+	color:#f0f;
+}
+p A:visited {
+	zzz_text-decoration: underline;
+	color:#fbc;
+}
+p A:visited:hover { 
+	color:#fff;
+}
+
+.link_with_image_unused{
+	background-image:url("ext_link.png");
+	background-repeat: no-repeat;
+    background-position: right;
+    padding-right:20px;color:#fff;
+}
+
+
+
+A:hover {
+	text-decoration: none;
+	color: #fff;
+}
+A:active { 
+	text-decoration: none;
+	color: #ffffff
+}
+
+.navstring a {
+	color: #808080;
+	font-weight : bold;
+}
+.navstring a:hover {
+	color: #faa;
+	font-weight : bold;
+}
+.navstring{
+	color: #c0c0c0;
+	font-weight : bold;
+}
+
+
+
+.linkydiv{
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  font-family : sans-serif;
+  margin: 0px;
+   background-color : #ff80a0;
+}
+
+.linkydiv:hover {
+  background-color : #ff80a0;
+  color: #ffffff;
+}
+
+.cartfile{
+	float:left;
+	width:160px;
+	height:200px;
+	margin: 4px;
+	padding: 4px;
+	text-align: center;
+}
+
+.cartlabel{
+	background:#333;
+	width:124;
+	
+	padding:2px;
+	margin-top:8px;
+	padding-top:4px;
+	padding-bottom:4px;
+	font-size:10px;
+}
+
+.cartlabelbig{
+	background:#333;
+	width:252;
+
+	padding-top:14px;
+	padding-bottom:14px;
+	margin-top:16px;
+	font-size:16px;
+}
+
+
+
+.linkybutton {
+  float: left;
+  font-size: 12px;
+  color: #808080;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-family : sans-serif;
+  margin: 0px;
+  height: 16px;
+}
+
+
+@media screen and (max-width: 800px) {
+	.linkybutton{
+		float:none;
+		display:flex;
+		padding:12px;
+		
+		align-text: left;
+		margin-left:50px;
+		font-size:11pt;
+	}
+}
+
+.linkbutton.img img{
+	display:inline-block; 
+	vertical-align:middle;
+
+}
+
+.linkybutton:hover {
+  background-color : #ff80a0;
+  color: #ffffff;
+}
+
+.linkybutton_lil0 {
+  float:left;
+  background-color : #555;
+  padding: 6px;
+  color: #aaa;
+  font-size: 12px;
+  height:20px;
+  vertical-align:center;
+  display:inline-table;
+  margin:2px;
+}
+
+.linkybutton_lil {
+  float:left;
+  background-color : #555;
+  padding: 6px;
+  color: #aaa;
+  font-size: 16px;
+  height:20px;
+  vertical-align:center;
+  display:inline-table;
+  margin:2px;
+}
+
+.linkybutton_lil:hover {
+  background-color : #ff80a0;
+  color: #ffffff;
+}
+
+.pinkbutton{
+	background:#505050;
+	padding:6px;
+}
+
+.pinkbutton:hover {
+  background-color : #808080;
+}
+
+
+.pbutton{
+	padding: 0px;
+	margin: 0px;
+	font-family : Verdana, Geneva, sans-serif;	
+	background-color : #505050;
+	color : #a0a0a0;
+}
+
+.pbutton:hover{
+	background-color : #707070;
+}
+
+
+.logininput {
+  font-size: 12px;
+  color: #000000;
+  line-height: 14px;
+  border: 0;
+  margin: 2px;
+  padding: 2px;
+  background-color : #ccc;
+  height: 30px;
+  font-family : sans-serif;
+}
+.logininput:hover {
+  background-color : #ff80a0;
+}
+
+.logininput2 {
+  font-size: 12px;
+  color: #fff;
+	border-width: 1px;
+	border-style: solid;
+  border-color:#fff;
+	border-radius:3px;
+  margin: 4px;
+  padding: 8px;
+  padding-left:16px; padding-right:16px;
+  background-color : #333;
+  height: 32px;
+  font-family : sans-serif;
+  cursor:pointer;
+}
+.logininput2:hover {
+  background-color : #ff80a0;
+}
+
+input {
+	background-color:#ffffe0;
+	color:#202020;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #404040;
+}
+
+
+.lexinput_search {
+background-color:#999;
+color:#202020;
+font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+font-size: 10pt;
+color: #111;
+height:20px;
+margin-right: 8px;
+}
+
+.lexinput {
+background-color:#ffffe0;
+color:#202020;
+border-width: 1px;
+border-style: solid;
+border-color: #999999;
+font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+font-size: 12pt;
+color: #404040;
+height:32px;
+margin-left:8px;
+}
+
+.result_msg {
+	color:#888;
+}
+
+
+#login_button {
+  width: 48px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent url(https://www.lexaloffle.com/bbs/img/login_button.png) no-repeat center top;
+  text-indent: -1000em;
+}
+#signup_button {
+  width: 48px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent url(https://www.lexaloffle.com/bbs/img/signup_button.png) no-repeat center top;
+  text-indent: -1000em;
+}
+-->
+</STYLE>
+
+<script>
+		var current_time="2021-11-24 00:01:13";
+		var s_uid=0;	
+	
+function $(name)
+{
+	return document.getElementById(name);
+}
+
+// globals
+
+var p_page = 1;
+var p_sub = 0;
+var p_cat = 0;
+var p_pid = 0;
+var search_url_base = "";
+var tag_url_base = "";
+var pip_form_data = {};
+var touch_detected = false;
+var undefined = "undefined"; // :/
+var current_playing_cart_id = -1;
+
+
+function microAjax(B,A){this.bindFunction=function(E,D){return function(){return E.apply(D,[D])}};this.stateChange=function(D){if(this.request.readyState==4){this.callbackFunction(this.request.responseText)}};this.getRequest=function(){if(window.ActiveXObject){return new ActiveXObject("Microsoft.XMLHTTP")}else{if(window.XMLHttpRequest){return new XMLHttpRequest()}}return false};this.postBody=(arguments[2]||"");this.callbackFunction=A;this.url=B;this.request=this.getRequest();if(this.request){var C=this.request;C.onreadystatechange=this.bindFunction(this.stateChange,this);if(this.postBody!==""){C.open("POST",B,true);C.setRequestHeader("X-Requested-With","XMLHttpRequest");C.setRequestHeader("Content-type","application/x-www-form-urlencoded");C.setRequestHeader("Connection","close")}else{C.open("GET",B,true)}C.send(this.postBody)}};
+
+// from: https://plainjs.com/javascript/ajax/send-ajax-get-and-post-requests-47/
+function post_ajax(url, data, success) {
+    var params = typeof data == 'string' ? data : Object.keys(data).map(
+            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+        ).join('&');
+
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open('POST', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+ 	xhr.setRequestHeader('Content-Type', 'text/plain; charset=UTF-8');
+ 	
+    xhr.send(params);
+    return xhr;
+}
+
+// in ms.  1000, 20 means 50fps for 1 second. 
+function poll_function(duration, interval, func) {
+    var start_t = (new Date()).getTime();
+    (function p() {
+		tt = (new Date).getTime() - start_t;
+        if (tt <= duration)  {
+			func(tt/duration);
+            setTimeout(p, interval);
+        }
+    })();
+}
+
+
+function insertTextAtCursor(el, text, overwrite)
+{
+	if (typeof el == "string")
+	{
+		el_str = el;
+		el = document.getElementById(el);
+		if (!el){
+			console.log("@ could not find element to insert text: "+el_str);
+		}
+	}
+	
+	var val = el.value, endIndex, range, doc = el.ownerDocument;
+	
+	if (overwrite)
+	{
+		el.focus();
+		el.value = text;
+		return;
+	}
+    
+    if (typeof el.selectionStart == "number"
+		&& typeof el.selectionEnd == "number") 
+    {
+	  endIndex = el.selectionEnd;
+	  el.value = val.slice(0, endIndex) + text + val.slice(endIndex);
+	  el.selectionStart = el.selectionEnd = endIndex + text.length;
+    } 
+    else if (doc.selection != "undefined" && doc.selection.createRange) 
+    {
+	  el.focus();
+	  range = doc.selection.createRange();
+	  range.collapse(false);
+	  range.text = text;
+	  range.select();
+    }
+   
+     
+}
+
+
+
+function set_enter_to_save(el, save_el)
+{
+	if (!el) return;
+	
+	// experimental: only auto-save when value has changed (can tab through unchanged fields)
+	var start_val = el.value;
+	
+	if (!el.installed_enter_to_save) // only install once
+	{
+		console.log("@installing set_enter_to_save: "+el+", "+save_el);
+
+		el.installed_enter_to_save = true;
+		el.addEventListener("keyup",
+			function(event){
+				//console.log(event.keyCode);
+				
+				if (event.keyCode == 13)
+					 //if (el.value != start_val) // commented --  don't need / confusing.
+						save_el.click();
+				
+			
+				//if (event.keyCode == 9) // tab  // commented -- use blur if want to do this
+				//	save_el.click();
+			}
+		);
+	
+		// also auto-save on tab / click off
+	
+		// careful not to introduce double sends (hard to get right -- maybe not worth it)
+		el.addEventListener("blur",
+			function(event){
+				var x = event.clientX, y = event.clientY;
+				if (typeof x != 'number') return;
+				if (typeof y != 'number') return;
+				
+	  			var el0 = document.elementFromPoint(x, y);
+	  			if (!el0 || el0.name != "cancel_button")
+				
+				//if (el.value != start_val) save_el.click();
+				
+				save_el.click();
+			}
+		);
+	}
+	
+}
+
+
+function toggle_set_button(el_name, post_id, which, sid)
+{
+	var el = document.getElementsByClassName(el_name);
+	var eli = document.getElementsByClassName('i_'+el_name);
+	
+	if (s_uid == 0)
+	{
+		window.alert("Please log in first.");
+		return;
+	}
+
+	// window.alert(el_name);
+			
+	for(var i = 0; i < eli.length; i++) {
+		eli[i].innerHTML = '<center><img src="load16.gif" width=20 height=20></center>';
+	}
+	
+	microAjax("/bbs/set.php?pid="+post_id+"&sid="+sid+"&which="+which,
+	
+		function (retdata)
+		{
+			var el = document.getElementsByClassName(el_name);
+			for(var i = 0; i < el.length; i++) {
+				el[i].innerHTML = json_parse(retdata)['printable'];
+			}
+			
+			if (which == "tick")
+			{
+				// location.reload(true); // bleh
+			}
+		}
+	);
+}
+
+function hide_save_draft_button()
+{
+	var el = document.getElementById("save_draft_button");
+	if (el) el.style.display = "none";
+	var el = document.getElementById("preview_button");
+	if (el) el.style.display = "";
+	var el = document.getElementById("publish_post_button");
+	if (el) el.style.innerHTML = "Publish Changes";
+}
+
+function save_attr(val_id, div_id, url, post_save, extract_snippets)
+{
+	if (extract_snippets)
+		url = url+'&extract_snippets=1';
+	
+	//console.log("@ save_attr("+val_id+", "+div_id+", "+url+")");
+	//console.log("  @  extract_snippets: "+extract_snippets);
+	
+	var el1 = document.getElementById(div_id);
+	var el = document.getElementById(val_id);
+
+	if (el)
+	{
+		//console.log(" @ sending:" + el.value);
+		
+		value = el.value;
+		
+		post_ajax(url, el.value,
+			function (retdata)
+			{
+				dat = json_parse(retdata);
+				el1.innerHTML = dat['printable'];
+				
+				// set value field
+				if (dat['modified'] && dat['status'] == "ok")
+					el.value = dat['modified'];
+				//else
+				//	console.log("  @ no modified text");
+				
+				if (post_save)
+					post_save();
+			}
+		);
+	}
+	else
+	{
+		// grab value from url (val=) instead of body. e.g. catsub buttons
+		microAjax(url, 
+			function (retdata)
+			{
+				el1.innerHTML = json_parse(retdata)['printable'];
+			}
+		)
+	}
+	
+	//el1.innerHTML = '<img src="load16.gif">';
+	el1.innerHTML = '<div style="padding:8px"><img src="load16.gif"></div>';
+	
+}
+
+
+function cancel_attr(val_id, div_id, url)
+{
+	console.log("@ cancel_attr("+val_id+", "+div_id+", "+url);
+	
+	var el = document.getElementById(val_id);
+	if (el)
+	{
+		var el1 = document.getElementById(div_id);
+		el1.innerHTML = '<div style="padding:8px"><img src="load16.gif"></div>';
+		
+		microAjax(url,
+			function (retdata)
+			{
+				el1.innerHTML = json_parse(retdata)['printable'];;
+			}
+		);	
+	}
+}
+
+
+function edit_attr(val_id, div_id, save_id, url, has_autosave)
+{
+	//console.log("@ edit_attr("+val_id+", "+div_id+", "+url+", "+has_autosave);
+
+	var el = document.getElementById(div_id);
+	
+	if (el)
+	{
+		//el.innerHTML='<img src="load16.gif">';//+el.innerHTML;
+		el.innerHTML = '<div style="padding:8px"><img src="load16.gif"></div>';
+		
+		microAjax(url,
+			function (retdata)
+			{
+				el.innerHTML = json_parse(retdata)['printable'];
+				
+				var el2 = document.getElementById(val_id);
+				
+				if (el2)
+				if (has_autosave)
+				{
+					el2.focus();
+					//el2.select();
+					var el3 = document.getElementById(save_id);
+					set_enter_to_save(el2, el3);
+				}
+			}
+		);
+	}
+}
+
+
+
+// enter data 
+function submit_pip_form_data(form)
+{
+	// for each class=pip_form_input element, add to global pip_form_data
+
+	var els = document.getElementsByClassName('pip_form_input');
+	
+	console.log("@ submit form: adding "+els.length+" values");
+	
+	for(var i = 0; i < els.length; i++) {
+		el = els[i];
+		
+		if (el.checked)
+		{
+			pip_form_data[el.id] = "checked";
+		}
+		else if (el.value)
+		{
+			pip_form_data[el.id] = el.value;
+		}
+		
+		console.log("@ set "+el.id+" to "+pip_form_data[el.id]); 
+		
+		if (el.files && el.files[0])
+		{
+			console.log("@ file: "+el.files[0].name);
+
+			pip_form_data["uploaded_file"] = JSON.stringify(el.files[0]);
+			pip_form_data["uploaded_file_size"] = el.files[0].size;
+			pip_form_data["uploaded_name"] = el.files[0].name;
+			pip_form_data["uploaded_type"] = el.files[0].type;
+		}
+	}
+}
+
+function reload_pip_form(form, step)
+{
+	var el = document.getElementById(form);
+
+	console.log("reloading form: "+form+" // step "+step);	
+	
+	if (el)
+	{
+		var el1 = document.getElementById("form_loading_icon");
+		if (el1)
+			el1.innerHTML='<img src="load16.gif">';
+		
+		stringified_data = JSON.stringify(pip_form_data);
+		
+		if (stringified_data.length > 1024*1024*8)
+		{
+			window.alert('Sorry, that file is too large.');
+			return;
+		}
+
+		//window.alert('pip_form_data.target_field:'+pip_form_data["target_field"]);
+		
+		// pass along some context
+		post_ajax("/form.php?form="+form+"&step="+step+"&cat="+p_cat+"&sub="+p_sub+"&pid="+
+				p_pid+"&page="+p_page,
+			stringified_data,
+			function (retdata)
+			{
+				el.innerHTML = retdata; // not JSON!
+			}
+		);
+	}
+	else
+	{
+		console.log("@@ could not find form element");
+	}
+}
+
+function save_open_pip_form_fields()
+{
+	// click all the save buttons
+	var els = document.getElementsByClassName('form_button');
+	//for(var i = 0; i < els.length; i++) // invalidates iterator on first save! ha!
+	for(var i = els.length-1; i >= 0; i--) 
+	{
+		var el = els[i];
+		suffix = el.id.substr(el.id.length-5);
+		if (suffix == "_save")
+			el.click();
+	}
+}
+
+function submit_pip_form(form, step)
+{
+	// save any open fields
+	
+	submit_pip_form_data(form);
+	reload_pip_form(form, step);
+}
+
+function clear_pip_form()
+{
+	pip_form_data = {};
+}
+
+
+function randomize_cart_id_field()
+{
+	el = document.getElementById("cart_lid");
+	
+	c = "bdfghjkmnprstwyz";
+	v = "aiueo";
+
+	val = "";
+	for (i = 0; i < 5; i++)
+	{
+		val = val + c.substr(Math.floor(Math.random()*16), 1);
+		val = val + v.substr(Math.floor(Math.random()*6), 1);
+	}
+	
+	el.value = val;
+}
+
+// https://stackoverflow.com/questions/12710001/how-to-convert-uint8-array-to-base64-encoded-string
+function Uint8ToBase64(u8Arr){
+  var CHUNK_SIZE = 0x8000; //arbitrary number
+  var index = 0;
+  var length = u8Arr.length;
+  var result = '';
+  var slice;
+  while (index < length) {
+    slice = u8Arr.subarray(index, Math.min(index + CHUNK_SIZE, length)); 
+    result += String.fromCharCode.apply(null, slice);
+    index += CHUNK_SIZE;
+  }
+  return btoa(result);
+}
+
+
+function reader_onload(evt)
+{
+	// evt.target.result is a ArrayBuffer
+	
+	var bytes = new Uint8Array( evt.target.result );
+	pip_form_data["file_contents"] = Uint8ToBase64(bytes);
+	
+	// show submit button
+	var el = document.getElementById("uploaded_button");
+	el.style.display = "table";
+}
+
+function filechooser_onchange(files)
+{
+	var file = files[0];
+	var reader = new FileReader();
+	reader.onload = function(evt) { reader_onload(evt); };
+	reader.readAsArrayBuffer(file);
+}
+
+
+
+function toggle_visible(el)
+{
+	//console.log("@toggle_visible: "+el);
+	
+	if (typeof el == 'string')
+	{
+		el = document.getElementById(el);
+	}
+	
+	if (!el){
+		return;
+	}
+	
+	if (el.style.display == "")
+	{
+		el.style.display="none";
+		return false;
+		
+	}
+	else
+	{
+		
+		el.style.display="";
+		return true;
+	}
+}
+
+/*
+	show active tab under tab_name, hide others
+	assume only one set of tabs on page
+*/
+function show_tab(tab_name, which, tab_group)
+{
+	var el;
+	
+	console.log("toggle tab "+tab_name+"_"+which);
+	
+	if (!tab_group) tab_group = "form_tab";
+	
+	var els = document.getElementsByClassName(tab_group);
+	
+	//console.log("found "+els.length);
+	
+	for(var i = 0; i < els.length; i++) {
+		el = els[i];
+		el2 = document.getElementById(el.id+"_content");
+		
+		if (el.id == tab_name+"_"+which)
+		{
+			// open tab
+			el.style["background-color"] = "#f8a";
+			el.style.color="#222";
+			if (el2) console.log(" opening "+el2.id);
+			if (el2) el2.style.display="block";
+		}
+		else
+		{
+			// hide tab
+			el.style["background-color"] = "";
+			el.style.color="#fff";
+			if (el2) console.log(" hiding "+el2.id);
+			if (el2) el2.style.display="none";
+		}
+		
+	}
+	
+	
+}
+
+
+function get_cart_url(lid, cat)
+{
+	//console.log("@get_cart_url lid:"+lid+" cat:"+cat);
+	
+	/*
+	console.log("@number:  "+Number(lid));
+	console.log("@string:  "+String(lid));
+	console.log("@equality:"+((Number(lid) == String(lid)) ? "true" : "false"));
+	*/
+	
+	if (Number(lid) == String(lid) && Number(lid) > 0)
+	{
+		num = Math.floor(lid / 10000);
+		url = `/bbs/cposts/`+num+`/`;
+		if (cat == 6) return url + `cpost` + lid + `.png`;
+		if (cat == 7) return url + lid + `.p8.png`;
+	}
+	else
+	{
+		lid = String(lid);
+		if (cat == 6) return `/bbs/cposts/`+lid.substr(0,2)+`/`+lid+`.vx.png`;
+		if (cat == 7) return `/bbs/cposts/`+lid.substr(0,2)+`/`+lid+`.p8.png`;
+	}
+	return '';
+}
+
+function element_dismisser(el, event)
+{
+	var inner = el.childNodes[1];
+	if (!inner) return;
+	var rect = inner.getBoundingClientRect();
+	
+	
+	if (!el.real_dismiss) 
+	{
+		//console.log(' @@ element_dismisser: not real click -- return early');
+		el.real_dismiss = true; // next time!
+		return;
+	}
+	
+	if (rect && rect.bottom > 0)
+	if (event.clientX < rect.left || event.clientX > rect.right || 
+		event.clientY > rect.bottom || event.clientY < rect.top)
+	{
+		//console.log(' @@ element_dismisser: dismissing');
+		console.log(rect);
+		el.style.display="none";
+		document.removeEventListener('click', dismisser_func);		
+	}
+
+}
+var dismisser_func = null;
+
+function install_dismisser(el1)
+{ 
+	//console.log('@@ installing dismisser');	
+	
+	// just in case
+	document.removeEventListener('click', dismisser_func);
+	dismisser_func = 
+	function(event){
+		element_dismisser(el1, event);
+	}
+	document.addEventListener('click', dismisser_func);
+	el1.real_dismiss = false; // hack -- first click is to open pulldown
+}
+
+
+function install_search_listener(el)
+{
+	el.addEventListener("keyup",
+		function(event){
+			if (event.keyCode == 13)
+				window.location.hash = "" + search_url_base + el.value;
+		}
+	);
+}
+
+
+		function json_parse(data){
+			if (data[0] != '{'){ window.alert('Error // Bad Data Format: ' + data);
+			  return {"printable" : "[error]", "status" : "bad_data"};
+			} return JSON.parse(data);
+		}</script>
+
+	<script>
+	
+	var cart_info = {};
+	
+	// from https://github.com/kripken/emscripten/issues/2053
+	
+	function fullscreenable_canvas(canEl)
+	{
+		// var canEl = document.getElementById("canvas");
+
+		var reqFuncName = (canEl.mozRequestFullScreen || canEl.webkitRequestFullScreen || {"name": "requestFullScreen"}).name;
+		document.addEventListener(reqFuncName.slice(0, -"requestFullScreen".length) + "fullscreenchange", function (evt) {
+		if(document.mozFullScreen || document.webkitIsFullScreen || document.fullScreen || document.isFullScreen) {
+
+			var w = canEl.clientWidth;
+			var h = canEl.clientHeight;
+			var factor = Math.min(screen.width / w, screen.height / h);
+
+			canEl.setAttribute("style", "width: " + Math.round(w * factor) + 
+				"px !important; height: " + Math.round(h * factor) + "px !important;");
+
+			}
+			else {
+				canEl.removeAttribute("style");
+			}
+		}, false);
+		
+		// in Firefox full screen must be set to the parent of the canvas to allow resizing the canvas for correct aspect ratio
+		if(reqFuncName == "mozRequestFullScreen") {
+			canEl[reqFuncName] = function() { 
+				this.parentNode[reqFuncName].apply(this.parentNode, arguments);
+			};
+		}
+	}
+	
+	
+	function pip_requestFullscreen( element ) {
+	  if ( element.requestFullscreen ) {
+		element.requestFullscreen();
+	  } else if ( element.mozRequestFullScreen ) {
+		element.mozRequestFullScreen();
+	  } else if ( element.webkitRequestFullScreen ) {
+		element.webkitRequestFullScreen( Element.ALLOW_KEYBOARD_INPUT );
+	  }
+	}
+
+
+	window.onload = function() {
+		//fullscreenable_canvas();
+	}
+	
+	
+	
+	</script>
+
+<script>
+function validate_signup (form)
+{
+	if (form.su_agree.checked)
+	{
+		return true;
+	}
+	else
+	{
+		alert ("If you wish to sign up, you need to agree to the Terms of Use")
+		return false;
+	}
+}
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-367250-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+
+</script>
+</head><body><div id="body_0">
+		<div class=mobile_div>
+		<div 
+		class = "lilmenu_div"
+
+		style = "
+		padding:0px;
+		margin:0px;
+		top:0px;
+		
+		width:100%;
+		height:128px;
+		
+		background:url('h800_pico8.png') no-repeat center;
+		
+		-webkit-background-size:cover;
+		-moz-background-size:cover;
+		-o-background-size:cover;
+		background-size:cover;
+	">
+	
+			<a href="https://www.lexaloffle.com/pico-8.php">
+			<div style="
+				position:absolute;
+				top: 0px;
+				height:128;
+				width:100%;
+			">
+			</div></a>
+			<div style="
+			position:relative;
+			height:48px;
+			top: 76px;
+			margin:0px;
+		"><div style="float:left; height:48px; display:flex; align-items:center; ">
+				
+				<a onclick="
+					var el = document.getElementById('lil_menu_pulldown');
+					toggle_visible(el);
+					var el = document.getElementById('account_pulldown');
+					el.style.display='none';
+			
+				">
+					<div style="background-color:rgba(0,0,0,0.5); 
+					margin-left:8px; padding:12px">
+					<img src="top_pulldown.png" width=20 height=20>
+					
+					</div>
+				</a>
+				
+			</div>
+		<div style="float:right; margin-right:12px; height:48px; 
+			display:flex; align-items:center; 
+			background-color:rgba(0,0,0,0.5);
+		">
+		<script>
+			function click_account_pulldown()
+			{
+				el1 = document.getElementById('account_pulldown');
+				if (toggle_visible(el1))
+				{
+					install_dismisser(el1);
+					el2 = document.getElementById('lil_menu_pulldown');
+					el2.style.display='none';	
+				}
+			}
+		</script>
+		<a onclick="click_account_pulldown();">
+		
+		<div style="display:flex; align-items:center; 
+		height:100%; float:right; 
+		">
+		
+		<div style="
+			padding:8px;
+			display:flex; align-items:center; 
+		">
+	Log In &nbsp<img style="margin-left:8px;" src="top_drop.png">
+		</div>
+		</div>
+		</a></div></div></div>
+	
+		<style>
+	
+			.pdmi{
+				display:flex;
+				align-items:center;
+				padding:4px;
+				font-size:12pt;
+			};
+		</style>
+	
+	
+		<div id="lil_menu_pulldown" 
+			   style="
+			   		z-index: 400;
+			   	   position:absolute;
+			   	   
+				   display:table;
+				   padding-top:20px;
+				   padding-bottom:20px;
+				   background-color:rgba(0,0,0,0.8);
+				   width:100%; display:none"><div style="width:auto;padding:16px"><div class="menu_icon" title="Lexaloffle Games"><a href="https://www.lexaloffle.com/"><img src="top_info.png"></a></div><div class="menu_icon" title="PICO-8"><a href="https://www.lexaloffle.com/pico-8.php"><img src="p8b_pico8.png"></a></div><div class="menu_icon" title="Voxatron"><a href="https://www.lexaloffle.com/voxatron.php" style="padding-right:4px;padding-left:4px;"><img src="p8b_vox.png"></a></div><div class="menu_icon" title="BBS" ><a href="https://www.lexaloffle.com/bbs"><img src="bbs_cube.gif" width=40></a></div><div class="menu_icon" title="Superblog"><a href="https://www.lexaloffle.com/bbs/superblog.php"><img src="top_blog.png"></a></div></div><a href="https://www.lexaloffle.com/pico-8.php" ><div class="linkybutton">PICO-8</div></a><a href="https://www.lexaloffle.com/pico-8.php?page=faq" ><div class="linkybutton">FAQ</div></a><a href="https://www.lexaloffle.com/pico-8.php?page=resources" ><div class="linkybutton">Resources</div></a><a href="https://www.lexaloffle.com/pico-8.php?page=schools" ><div class="linkybutton">Schools</div></a><a href="https://www.lexaloffle.com/pico-8.php?page=submit" ><div class="linkybutton">Submit</div></a><a href="https://www.lexaloffle.com/bbs/?cat=7#sub=2" ><div class="linkybutton" style="background-color : #a0a0a0; color:#fff">Forum</div></a><a href="https://www.lexaloffle.com/bbs/?cat=7&amp;carts_tab=1&amp;" ><div class="linkybutton">Carts</div></a></div></div>
+			<div 
+			class = "topmenu_div"
+			id = "banner"
+			style="
+				margin:0px;
+				top:0px;
+				background-color:#111;
+				width:100%;
+				height:25vh;
+			
+				background:url('h800_pico8.png') no-repeat center;
+				
+				-webkit-background-size:cover;
+				-moz-background-size:cover;
+				-o-background-size:cover;
+				background-size:cover;
+		">
+	<a href="https://www.lexaloffle.com/pico-8.php">
+	<div style="
+		position:absolute;
+		top: 0px;
+		height:25vh;
+		width:100%;
+	">
+	</div></a>
+	<div 
+		class = "topmenu_div"
+		id="m"
+		style="
+		position:relative;
+		top: -47.9px; transform: translate(0, 25vh);
+		margin:0px;
+		background-color:rgba(10,0,20,0.8);
+		width:100%;
+		height:48px;
+
+	"><div style="float:left; margin-left:0px;"><div class="menu_icon" title="Lexaloffle Games"><a href="https://www.lexaloffle.com/"><img src="top_info.png"></a></div><div class="menu_icon" title="PICO-8"><a href="https://www.lexaloffle.com/pico-8.php"><img src="p8b_pico8.png"></a></div><div class="menu_icon" title="Voxatron"><a href="https://www.lexaloffle.com/voxatron.php" style="padding-right:4px;padding-left:4px;"><img src="p8b_vox.png"></a></div><div class="menu_icon" title="BBS" ><a href="https://www.lexaloffle.com/bbs"><img src="bbs_cube.gif" width=40></a></div><div class="menu_icon" title="Superblog"><a href="https://www.lexaloffle.com/bbs/superblog.php"><img src="top_blog.png"></a></div><div style="display:inline-block;background-color:#555;width:1px;height:40px;
+			margin-left:10px;margin-right:10px"></div><div style="display:inline-block;margin:4px" class="navstring"><a href="https://www.lexaloffle.com/pico-8.php" ><div class="linkybutton">PICO-8</div></a><a href="https://www.lexaloffle.com/pico-8.php?page=faq" ><div class="linkybutton">FAQ</div></a><a href="https://www.lexaloffle.com/pico-8.php?page=resources" ><div class="linkybutton">Resources</div></a><a href="https://www.lexaloffle.com/pico-8.php?page=schools" ><div class="linkybutton">Schools</div></a><a href="https://www.lexaloffle.com/pico-8.php?page=submit" ><div class="linkybutton">Submit</div></a><a href="https://www.lexaloffle.com/bbs/?cat=7#sub=2" ><div class="linkybutton" style="background-color : #a0a0a0; color:#fff">Forum</div></a><a href="https://www.lexaloffle.com/bbs/?cat=7&amp;carts_tab=1&amp;" ><div class="linkybutton">Carts</div></a></div></div>
+		<script>
+			function click_account_pulldown()
+			{
+				el1 = document.getElementById('account_pulldown');
+				if (toggle_visible(el1))
+				{
+					install_dismisser(el1);
+					el2 = document.getElementById('lil_menu_pulldown');
+					el2.style.display='none';	
+				}
+			}
+		</script>
+		<a onclick="click_account_pulldown();">
+		
+		<div style="display:flex; align-items:center; 
+		height:100%; float:right; 
+		">
+		
+		<div style="
+			padding:8px;
+			display:flex; align-items:center; 
+		">
+	Log In &nbsp<img style="margin-left:8px;" src="top_drop.png">
+		</div>
+		</div>
+		</a></div></div><div 
+		id = "account_pulldown"
+		style="position:relative; left: -28px; float:right;
+			width: 240px; height:0px;
+			z-index: 400;
+			display:none;"
+	>
+	
+	<div 
+		id = "account_pulldown_inner"
+
+		style="
+		padding:12px; 
+		background-color:rgba(0,0,0,0.8);
+		width:100%;
+		border-width: 1px;
+		border-style: solid;
+		border-color: #000;
+
+		">
+	
+		<div style="margin-right:20px">
+		
+	<form style="margin:8px;" name="loginsubmit" method="post" action="https://www.lexaloffle.com/account.php?page=login">
+		<table><tr>
+		<td>User:</td><td>
+		<INPUT name="user" class="logininput" size=16 ><br>
+		</td></tr><tr><td>
+		Password:</td><td>
+		<INPUT name="pass" type="password" class="logininput" size=16 type=text><br>
+		<INPUT type="hidden" name="go" value="/bbs/?tid=38236">
+		</td></tr><tr><td></td><td>
+		<input type=submit class="logininput2" style="margin-top:8px" value="LOG IN">
+		</td></tr></table>
+		
+		<br>
+		<a href="https://www.lexaloffle.com/account.php?page=new_user" style="color:#fab">New User</a>
+		|
+		<a href="https://www.lexaloffle.com/account.php" style="color:#fab">Account Help</a>
+		
+		</td></tr></table>
+		</form></div></div></div>
+		<div style="max-width:100vw; padding:0vw">
+
+	    <div 
+	    id="main_div"
+	    style="
+	    	max-width:920px;
+			min-height:50vh;
+			margin:auto;
+			display:block;
+			padding-top:16px; 
+			padding-bottom:16px;
+			overflow:hidden;
+			
+			"
+		><script language="javascript" type="text/javascript">
+		var p_sub = 0;
+		var p_cat = 0;
+		var s_uid = 0;
+		var p_page = "1";
+		var p_mode = "";
+	
+var imageChooserWindow;
+function popup(which) {
+	if (imageChooserWindow)
+	imageChooserWindow.close();
+   imageChooserWindow=window.open('popup.php?page='+which,'windowname','height=600,width=600,scrollbars=yes');
+}
+
+
+
+function load_hash_location()
+{
+	var h = window.location.hash.substr(1);
+
+	var params = 'use_hurl=1'; // use "#url" format for single page location changes
+	
+	
+	if (typeof p_cat !== 'undefined') params = params+'&cat=' + p_cat;
+	
+	// pass along params specified in ? part
+	// (when clicked, effectively moves from ? part to # part
+	if (typeof p_sub !== 'undefined') params = params+'&sub='+p_sub;
+	
+	if (typeof p_page !== 'undefined') params = params+'&page='+p_page;
+	if (typeof p_mode !== 'undefined') params = params+'&mode='+p_mode;
+	if (typeof p_orderby !== 'undefined') params = params+'&orderby='+p_orderby;
+	
+	
+	params = params+'&'+h;
+	
+	console.log("@ load_hash_location "+params);
+	
+	// set main_list to loading
+	show_loading_spinner();
+	
+	// /bbs/lister.php
+	microAjax('lister.php?'+params,
+	
+		function (retdata)
+		{
+			var el = document.getElementById('main_list');
+			if (el)
+			{
+				el.innerHTML = retdata;
+				hide_loading_spinner();
+				// re-run self (including this)
+				var el2 = document.getElementById('cart_data_script');
+				if (el2)
+				{
+					console.log("@ running cart_data_script\n");
+					eval(el2.innerHTML);
+				}
+				update_stick_scrolling();
+				
+			}
+		}
+	);
+}
+
+function show_loading_spinner()
+{
+	var el = document.getElementById('loading_spinner');
+	//if (el) el.style.display = 'block';
+	
+	if (el) el.innerHTML='<img src="load16.gif">';
+}
+
+function hide_loading_spinner()
+{
+//	var el = document.getElementById('loading_spinner');
+//	if (el) el.style.display = 'none';
+}
+
+
+function get_relative_time(s)
+{
+	//return '['+current_time+' , '+s+']';
+		
+	var d0 = Math.round(new Date(s.replace(" ","T")).getTime() / 1000);
+	//var d1 = Math.round(new Date().getTime() / 1000);
+	var d1 = Math.round(new Date(current_time.replace(" ","T")).getTime() / 1000);
+	
+	
+	var t = d1-d0; // seconds
+	
+	if (t < 60)
+		return "just now";
+		//return Math.round(t)+" seconds ago";
+	
+	if (t < 3600)
+		return Math.round(t / 60)+" minutes ago";
+	
+	if (t < 3600*24)
+		return Math.round(t / 3600)+" hours ago";
+	
+	// convert to days
+	t = Math.round(t / (3600*24));
+	
+	if (t < 30)
+		return Math.round(t)+" days ago";
+	
+	if (t < 365)
+		return Math.round(t/30.43)+" months ago";
+	
+	return Math.round(t/365.25)+" years ago";
+}
+
+
+function update_stick_scrolling()
+{
+	var el = document.getElementById('sticky');
+	if (el)
+	{
+		// when placeholder parent is above top of screen, make fixed
+		var screen_y  = el.parentNode.getBoundingClientRect().top;
+		if (screen_y < 0)
+			el.style.position = 'fixed';
+		else
+			el.style.position = 'relative';
+	}
+}
+
+document.addEventListener("scroll", update_stick_scrolling);
+
+
+function print_cart_code(url, div_id)
+{
+/*
+	if (print_pico8_code){
+		print_pico8_code(url, div_id);
+		return;		
+	}
+*/
+
+	window.alert("printing code 1! "+url+" "+div_id);
+
+	e = document.createElement("script");
+	e.type = "application/javascript";
+	e.src = "/bbs/cart_tools.js";
+	e.id = "e_script";
+
+	document.body.appendChild(e); // load and run
+
+	Module.onRuntimeInitialized = _ => {
+		
+   		const print_pico8_code = Module.cwrap('print_pico8_code', 'number', ['string','string']);
+
+		print_pico8_code(url, div_id);
+	};
+
+	
+}
+
+
+
+</script><div id="p8_desktop" class="desktop_div" style="position:absolute; left:0"></div> <!-- desktop for saving gifs / screenshots -->
+	<div style="display:inline-table;width:100%;margin-bottom:4px;margin-top:4;
+	"></div>
+	<br><div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p77498 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=21440"><img width=48 height=48 src="8_mario-rek-top.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">arlefreak</div></a>
+			
+			<div style="min-width:54px; max-width:66px; display:table"><a target=_home href="https://ellugar.co/" class=social_button>
+	<img class=pixel_perfect src="so_home.png" width=16 height=16" 
+		style="float:left; margin-left:4px; margin-top:0px; margin-bottom:4px">
+	</a><a target=_twitter href="https://twitter.com/afk_mario" class=social_button>
+	<img class=pixel_perfect src="so_twitter.png" width=16 height=16" 
+		style="float:left; margin-left:4px; margin-top:0px; margin-bottom:4px">
+	</a><a target=_itch href="https://afk-mario.itch.io/" class=social_button>
+	<img class=pixel_perfect src="so_itch.png" width=16 height=16" 
+		style="float:left; margin-left:4px; margin-top:0px; margin-bottom:4px">
+	</a></div> 
+			</center>
+			</div><div style="width:100%;"><div style="width:100%; display:flex;"><table width=100% cellspacing=0 cellpadding=0><tr><td valign=top><div style="display:table;">
+					<a href="index.html%3Ftid=38236.html"><div class=post_title2>Virush</div></a>
+			
+
+			<div class="mobile_div">
+			<div style="float:left;  margin-top:4px; margin-right:4px; padding:4px;">
+				<a href="https://www.lexaloffle.com/bbs/?uid=21440"><span style="color:#fab">@arlefreak</style></a>
+			</div>
+			</div>
+				
+				<div class=breadcrumbs style="float:left; margin-left:0px; margin-top:4px"><div class=desktop_div><a href="https://www.lexaloffle.com/bbs">BBS</a></div><a href="https://www.lexaloffle.com/bbs/?cat=7"> PICO-8</a><a href="https://www.lexaloffle.com/bbs/?cat=7#sub=2"style="background-color:#fab; color:#222">Cartridges</a></div>
+							
+			</td><td width=40>
+		  <div style="display:table;">
+			  
+			  <div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77498_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_77498_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div><div style="margin-left:4px; margin-right:6px; margin-top:2px; font-size:9pt; color:#999">22</div></div>
+				</div>
+			  </div>
+			  
+			  <div  style=" margin:2px; background-color:#444">
+			  <center><div style="padding:4px; background-color:#444; display:table">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77498_fav"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Add to your favourites collection"
+		class="i_rate_77498_fav"
+	>
+			<img src="set_fav0.png" width=20 height=20>
+		</div></div>
+				</div><center>
+			  </div>
+			  
+	
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_77498');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	
+		</div>
+	</td></tr></table></div>
+		<div id="set_extra_77498" style="display:none; float:right; width:288px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:270px; 
+			z-index: 300;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77498_watch"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77498_watch"
+	>
+			<img src="set_watch0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77498_watch', 77498, 'watch', 12);">Subscribe to this Thread<br><span style="color:#999;font-size:9pt">
+			(Receive email notifications)</span></div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77498_pinned"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77498_pinned"
+	>
+			<img src="set_pinned0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77498_pinned', 77498, 'pinned', 10);">Pin To Profile</div>	</div>
+		  </div><hr><div style="padding:8px"> Community Tags <a href="index.html%3Ftid=38236.html"></a></div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77498_adult"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77498_adult"
+	>
+			<img src="set_adult0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77498_adult', 77498, 'adult', 201);">Mature Content</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77498_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77498_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77498_spam', 77498, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p><div style="display:table; "><div id="pvirush-3" class="playarea_0" 
+			style="max-width:620px; 
+			"><script>
+	// globals
+	var p8_is_running = false;
+	var p8_script = null;
+	var Module = null;
+	var codo_textarea = null;
+	var menu_buttons_extra_hack = 0;
+
+	var p8_current_playing_lid = null;
+
+	function p8_document()
+	{
+		/*
+		if (p8_current_playing_lid)
+		{
+			var playing_div = document.getElementById("cart_player_"+p8_current_playing_lid);
+			if (playing_div)
+				return playing_div;
+		}
+		*/
+
+		return document;
+	}
+
+
+	// Default shell for PICO-8 0.1.12
+
+	// options
+
+	// p8_autoplay true to boot the cartridge automatically after page load when possible
+	// if the browser can not create an audio context outside of a user gesture (e.g. on iOS), p8_autoplay has no effect
+	var p8_autoplay = false;
+
+	// When pico8_state is defined, PICO-8 will set .is_paused, .sound_volume and .frame_number each frame 
+	// (used for determining button icons)
+	var pico8_state = [];
+
+	// use to send keypresses 
+//	var codo_key_buffer = [];
+	var codo_key_buffer = [];
+	var p8_keyboard_state = 0; // mode (toggle with shift)
+
+	// When pico8_buttons is defined, PICO-8 reads each int as a bitfield holding that player's button states
+	// 0x1 left, 0x2 right, 0x4 up, 0x8 right, 0x10 O, 0x20 X, 0x40 menu
+	// (used by p8_update_gamepads)
+	var pico8_buttons = [0, 0, 0, 0, 0, 0, 0, 0]; // max 8 players
+
+	// When pico8_mouse is defined and .length>0, PICO-8 reads the 3 integers as X, Y and a bitfield for buttons: 0x1 LMB, 0x2 RMB
+	var pico8_mouse = [];
+
+	// used to display number of detected joysticks
+	var pico8_gamepads = {};
+	pico8_gamepads.count = 0;
+
+	// When pico8_gpio is defined, reading and writing to gpio pins will read and write to these values
+	var pico8_gpio = new Array(128);
+
+	// When pico8_audio_context context is defined, the html shell (this file) is responsible for creating and managing it
+	// Otherwise, PICO-8 will create its own one
+	var pico8_audio_context;
+
+	
+
+	p8_gfx_dat={
+			"p8b_pause1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAOUlEQVRIx2NgGPbg/8cX/0F46FtAM4vobgHVLRowC6hm0YBbQLFFoxaM4FQ0dHPy0C1Nh26NNugBAAnizNiMfvbGAAAAAElFTkSuQmCC",
+"p8b_controls":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAQ0lEQVRIx2NgGAXEgP8fX/ynBaap4XBLhqcF1IyfYWQBrZLz0LEAlzqqxQFVLcAmT3MLqJqTaW7B4CqLaF4fjIIBBwBL/B2vqtPVIwAAAABJRU5ErkJggg==",
+"p8b_full":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAN0lEQVRIx2NgGPLg/8cX/2mJ6WcBrUJm4CwgOSgGrQVEB8WoBaMWDGMLhm5OHnql6dCt0YY8AAA9oZm+9Z9xQAAAAABJRU5ErkJggg==",
+"p8b_pause0":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAKUlEQVRIx2NgGHbg/8cX/7FhctWNWjBqwagFoxaMWjBqwagF5Fkw5AAAPaGZvsIUtXUAAAAASUVORK5CYII=",
+"p8b_sound0":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAANklEQVRIx2NgGDHg/8cX/5Hx0LEA3cChYwEugwavBcRG4qgFoxYMZwuGfk4efqXp8KnRBj0AAMz7cLDnG4FeAAAAAElFTkSuQmCC",
+"p8b_sound1":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAPUlEQVRIx2NgGDHg/8cX/5Hx0LEA3cChYwEugwhZQLQDqG4BsZFIKMhGLRi1YChbMPRz8vArTYdPjTboAQCSVgpXUWQAMAAAAABJRU5ErkJggg==",
+"p8b_close":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAU0lEQVRIx2NkoDFgpJsF/z+++I8iwS9BkuW49A+cBcRaREgf/Swg1SJi1dHfAkIG4EyOOIJy4Cwg1iJCiWDUAvItGLqpaOjm5KFfmg79Gm3ItioAl+mAGVYIZUUAAAAASUVORK5CYII=",
+
+"p8b_cart":'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAZ0lEQVR4Ae2dsQrAMAhEa+ie1f//uq79Ajs1OKRyiGDTeuAQAr4cp5lpU5LzEH32ijqPvi2ioaUpgDqTp2BApHbrEs3k6fV5GRSgAD8DmJtsbegaDpb4iz6eAao7q5njHAfo9Lxiii5mqxbMNtaN0wAAABB0RVh0TG9kZVBORwAyMDExMDIyMeNZtsEAAAAASUVORK5CYII=',
+
+"controls_left_panel":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAAEI0lEQVR42u3dMU7DQBCG0Tjam9DTcP8jpEmfswS5iHBhAsLxev/hvQY6pGXyZRTQ+nQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHqbHEEtl+vt7hS+fLy/mXHBQqxEi/6aI/AiFW9SnB2BWDkDBAtAsADBAhAsAMECBAtAsAAECxAsAMECECxAsAAEC0CwONJ8tYvrXRAsImK19j0IFsPGSrQQLCJiNV+et7xAT7QQLIaN1dr3ooVgMWysRAvBIipWooVgERUr0UKwiIqVaCFYRMVKtBAsomIlWggWUbESLQSLqFiJFoJFVKxEC8EiKlaihWARFSvRQrDYJSSVfhaCBSBYAIIFCBbAHpoj4Bl/scOGBWDD4lX8iwE2LADBAgQLQLAABAsQLADBAhAsQLAABAtAsADBAhAsAMECBAtAsAAECxAsAMECECxAsAAECxAsAMECECxAsMh1ud7uTsHZVDcZyFo8Yt5sVJ6NyUAaSNEyIymaXwZepIKd4mwoQbAFC0CwAMECECwAwQIEC0CwAAQLECwAwQIQLECwAAQLQLAAwQI4UHME2/10QZq7usyBObBhRQwpmBUb1nADuPbuaUD/p2ezMH+1admwhosVfBcxb2SCJVaIlmAhVoiWYIkVoiVagiVWiJZgiZVYIVqCJVaIlmgJllghWoIlViBagiVWiJZoCZZYIVqCJVYgWoIlViBaggUIlnc0sPELlmghVmIlWKKFWAmWaIFYCZZoIVYIlmghVoIlWiBWgiVaiJVgIVqIlWCJFoiVYIkWYiVYiBZiJViihViJ1XbNEWyL1mMQRYvfvIGJlQ1rmE0LzIoNyyBiDrBhAYIFIFiAYAEIFoBgAYIFIFgAggUIFoBgAQgWIFgAggUgWIBgDc+Nn1D/tdH8YupwgZy5qG4ykKIlVmZDsDjshSlazqQqH7p793Q2CBaAYAGCBSBYAIIFCBaAYAEIFiBYAIIFIFiAYAEIFoBgAYIFIFgAggUIFoBgAQgWIFgAggUgWIBgAQgWwENzBKxZPub9CJ7WjA0LsGFRV+9N5+jNDhsWgGABggUgWACCxW56fgjuA3cEiz9Z/nWwR0iWP8P/YCFYDBstsUKwiIiWWCFYRERLrBAsIqIlVggWEdESKwSLiGiJFYJFRLTECsEiIlpihWARES2xQrCIiJZYIVhEREusECwioiVWCBYx0RIrBIuoaIkVr+YhFHTZtMCGBQgWgGABCBYgWACCBSBYgGABCBaAYAGCBSBYAIIFCBbj2uOR8s6AEbhexgsWYri3SKhKczcXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMA2n+e0UMDzh3yTAAAAAElFTkSuQmCC",
+
+
+"controls_right_panel":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAFeCAYAAAA/lyK/AAAKHklEQVR42u3dAZKaWBAGYE3tvfBmMCfDnGzWJLhLHHBGBt7rhu+rSiWbbAk8p3+7UeF0AgAAAAAAAAAAAOAQzpaAzN5vDlOsNwILhJXQSuIfP/YoZMGcxQ9LgLByfAILQGABAgtAYAEILEBgAQgsAIEFCCwAgQUgsACBBSCwAAQWILAABBYst/cL3LmA3/9ccRRFTRquZIigylKsrjwKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMZ0tAXz0/v7eLi6q8/nNCgos2CKYmttvl+E/uw02cX/M6y3IflpxgQVLu6fuScC8HDIP4ff08XVhwNMwuf3q3z9qvzP+fTUgh1+P+iHkAP4Li6mQairtTzO3T54tEFRhu5mZrk9wwYGDqo0+ds10XYILjhRUjgOI2J30ezqRvcdjAmH1dzeyu6KeCC7dFiQt5sMU8mMwe/YhV9cx1jhuQKehswRWCKvm4GvRCC3I0VUYhT6GlvNaIKyEFiCshBYIK6EltKBuAQorawYKz9oBaxWct+uXraGPf0ChYuudh7GOkKkzUGTrhpZOFTYcBY0x1hR0A7pWQFF5MYDDFJSxpdBoaDVgp93Vk3sJzmmjdjF76rLc+Zmq3dXvH8KbKCF1+nPn5svDP12HX1Om/v9fukh3d4621pC1u2oD7cv4+vDtwscJeZ/BSOsNKbur2udVtrqlVtT7DDqXBQlf7aduo1UoFPsjrzvorpaFVdGbOUwEZHPEtYeMYdXU6jZqXzcqQmiN9sHHSOCFsaQpvN0mSIdT9WoKo3UwFkLEkSTaZWtqh6exEIK+uke9xta40zpKlwvGwc+32Qf+NH2VfTMWQsBRJMMXq2t9bcZYCF8rkrZ0UUYefWp9Ofke5tl+hn4oI0oVSOnOZfjjr+/0/Yy6LsO+XWusUa1tQorAKjwOphp5KnVZzmNB7YLM+BWUGvvsPBY8L45eIc7uc/FvANxP+GdaJ+ewKOm602192+hc1sUaCSwqjzsVtnVNuFTX0utVY3sCiyxdxNset5V1nzOukcBibzrHsF8CC6EVcCxEYIHAElgAAgtAYAECC0BgAQgsiOdiCQQWx9IJLIEFwsoxCCxYW8YL07mYnsDiYAU5+kJvxtHq8nAMAhIqhVWxq2m6gN/XA8sF/OCTDqKALmEHcV+b6w6fD0jZYbkJRaD9zdiJ6rAopSu8vWuWLmt8S7IDPC+QooNo3Uh1ch+r3kjViXd4HiBthaJ0q/qZtfFTCZ90PJUCoQ+4HtX2zT0J4esdT1Nwm81oNGwDrsV7hW03xkEIWijRQuthf5oK22+jn9uDw46FEUJiqrOqtR/GQUjw6v4QWjXOG/UBwso4CAsKpq+8/WLBMWyzD9Lh9cZBSDSSTARIv+G22ppdnXEQ1iviNsh+rHpCfgjETR57D+sOuqx1g6tfUtTD4/TRgmpP3dVZ6VArJE5/vsfWlbr+0xf36XL6eBWD62n+KgpT//8p0nFFXW+BRbou6/cP4U3QQD2dvv7l4G44ljdrDTvtsqJ/128n69w7dwUrvfJ7m33T9W28Mwi6LN0VKCq8GECSscVoaE1BN6BrBTYqMqFlHSHVGKMz+F6nahSEwqGl4KwdKDxrBqxZgL0CXBRWzluB0BJWgNASViC0hBVQr0C9XT8dVj7+AQlCqz/oGvTCCnJ2F4fpto563KDT0FkCtQt5b13HxO3IjICws6JOH1x7PCZgvttK243s5TiAhQUfvTuJeuNVoF5whRurJkY/QQWC64NqXddMNyWogE+7mXt4tRtvu50JKSfTX+QusByy6xr+2E388/jvrufz+ecroXj6+7b1s4+f+XbxAmv/hfH6E+MHuljnNQqZboNNdEvCD4Hlhx4vNgLLWGGsAEJ2Uk7cAuG7KW+NA9mCyocPgfBB5esdQPygchxAxO7EJUqAVN2Ii8ABYYvZZXaBFF2HGxkYEUGnobME1g4rN+MUWpCiqzAKndzuHISV0AKEldACYYXQgmAFKKysGSg8awesVXDerl+2hj7+AYWKrXcexjpCps5Aka0bWjpV2HAUNMZYU9AN6FoBReXFAA5TUMaWQqOh1YBA3dWeinLNY9FlwYrdVdTH28u67GltyOtH9u5q+GO31mOeb7J3Wvd9vx/LirqHdQcivOJn7Sa23m9dFjqsIN1V9k5rw85KlwUZXumzdBQl91OXhQ7rtYK5f3zhuvW2MnRahTqrsevD8wAC64nLluNgptCqEFbjdb8oIQg6kkQbhWruj7EQHdZr42BXetuROq1KndWHLstYiMD62jh4rbHxCKEVIKzG628shOijiLHUWIgO66VxpKYanVaQzirU84DAitxdhfqwYsnQChhWYZ8XBFYot5p9O1JoRQ2rSM8DROywwp4z2Wrfop8nch4LHdZz16Bd3+qdVuQxMPrzgcBSIAVDK0lYCSwE1kwBpzixu0ZoJQqrdM8PAqt0ILwl2MfFoZUtrJx4R2DtwJLQythZgcA6YGgJKxBYKUJLWIHAShFawgoEVorQElYgsFKElrACgZUmtIQVCKzwpkZCQGCFDavzQGiBwAofVo8jodACgRU6rIQWCKxUYSW0YOeBlemqAK98dCFraLlKAwJruqDfkhXyy5+zytxpuWoDAmvaZY9hlTi0LsoIZoIgeiGvtY9ZrpXumu7osOZ1e+2skndanVJCYM0HQxtwn1b/bmD00HLCHYH1vIDfghbuZl9kztBpOeEOT8IhUvGW2p+I54qcv0KH9bluKJZmz51V9E5rtP6dMkJgzbsOv1+OElZBQ+vy8HwAEUeRo2/fOIgOK8lYGOFKobU7LeMgvFgwwwt8f+Suotb+/Fr3YdONn0YIWKxRR6Aa+2UcxEi4fCxsSxRo7TEwyng4Wm/jIER7pfedPt0VOqwUXVamW3GV6LR0VxD0FT9rJ7Hlfuuu0GGt12X1axZmls6qVKc1Wl/dFazxyr/G2+x76SLWPI7Rx0h0V7BCQbVrfS5rT0W5YmDdP3flcjKgqI7xYgBMjC0+gW1NQTegawU2KjKhZR0h1RijM/hep2oUhMKhpeCsHSg8awasWYC9AlwUVs5bgdASVoDQElYgtIQVUK9AvV0/HVY+/gEJQqs/6Br0wgpydheH6baOetyg09BZArULeW9dx9BVGQFhx0WdPrj2eEzAfLeVthvZy3EACws+encydFSCCgRX3LFqYvQTVCC4PqjWdc10U4IK+LSbuYdXu/G225mQcjKdwzhbguUBMvyxm/jn8d9dz+fzz1dC8fbbZeax/vq72+O+eSYQWLzceY1CpttgE92S8AOBxZIu7PUnRvcEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwwL/cvBIh09+hJAAAAABJRU5ErkJggg==",
+
+	};
+
+	// added w/ pico-8 0.2.1: dummys listeners on document required to allow touch events inside iframe (e.g. itch.io player)
+
+	document.addEventListener('touchstart', {});
+	document.addEventListener('touchmove', {});
+	document.addEventListener('touchend', {});
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	// pico-8 0.2.2: allow dropping files
+	var p8_dropped_cart = null;
+	var p8_dropped_cart_name = "";
+	function p8_drop_file(e)
+	{
+		// console.log("@@ dropping file...");
+	
+		e.stopPropagation();
+		e.preventDefault();
+
+		let file = null;
+
+		// dropped file
+		if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0])
+			file = e.dataTransfer.files[0]
+
+		// file selected via chooser
+		if (!file && e.target && e.target.files && e.target.files[0])
+			file = e.target.files[0];
+
+
+		if (file)
+		{
+			// read from file
+			reader = new FileReader();
+
+			let dropped_filename = 'dropped.p8.png';
+			try {
+				if (typeof file.fileName !== 'undefined') dropped_filename = file.fileName;
+				if (typeof file.name !== 'undefined') dropped_filename = file.name;
+			}
+			catch(err) {
+				// was happening when inside reader.onload -- files[] becomes an empty set by that stage under Chrome on Chromebook (eh?)
+			  console.log("@@ failed to set dropped file name: "+err.message+" files:"+JSON.stringify(e.dataTransfer.files));
+			}
+
+			console.log("@@ fetching dropped file: "+dropped_filename);
+			reader.onload = function (event)
+			{
+				p8_dropped_cart = reader.result;
+				p8_dropped_cart_name = dropped_filename;
+				console.log("@@ finished reading dropped file: "+dropped_filename);
+
+				// data:image/png;base64
+				e.stopPropagation();
+				e.preventDefault();
+				codo_command = 9; // read directly from p8_dropped_cart with libb64 decoder
+			};
+			
+			reader.readAsDataURL(file);
+			
+		}
+		else if (e.dataTransfer)
+		{
+			// read from url (or data url)
+			txt = e.dataTransfer.getData('Text');
+			if (txt){
+				p8_dropped_cart_name = "untitled.p8.png";
+				p8_dropped_cart = txt;
+				codo_command = 9;
+			}
+		}
+	}
+
+
+	function nop(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+	}
+	function dragover(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+		Module.pico8DragOver();
+	}
+	function dragstop(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+		Module.pico8DragStop();
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+
+
+
+	var p8_buttons_hash = -1;
+	function p8_update_button_icons()
+	{
+		var w = 24;
+		var bottom_margin = 12;
+		var padding = 4;
+		var left = 44;
+		var p8tv_mode = false;
+
+		// buttons only appear when running
+		if (!p8_is_running)
+		{
+			requestAnimationFrame(p8_update_button_icons);
+			return;
+		}
+
+		// p8tv font page player
+		if (typeof(pico8_player_button_w) !== 'undefined') 
+		{
+			p8tv_mode = true;
+			w = Math.floor(pico8_player_button_w);
+			// console.log("@@ player_button_w: "+w);
+			bottom_margin = Math.floor(w*3/4) - 4;
+			padding = Math.floor(w / 4);
+			left = Math.floor(w * 2 / 3);
+		}
+
+		var is_fullscreen=(document.fullscreenElement || document.mozFullScreenElement || document.webkitIsFullScreen || document.msFullscreenElement);
+			
+
+		// hash based on: pico8_state.sound_volume  pico8_state.is_paused bottom_margin left is_fullscreen p8_touch_detected
+		var hash = 0;
+		hash = pico8_state.sound_volume;
+		if (pico8_state.is_paused) hash += 0x100;
+		if (p8_touch_detected)     hash += 0x200;
+		if (is_fullscreen)         hash += 0x400;
+		hash += bottom_margin * 0.001;
+		hash += left * 1001.3;
+
+		if (p8_buttons_hash == hash)
+		{
+			requestAnimationFrame(p8_update_button_icons);
+			return;
+		}
+		
+		p8_buttons_hash = hash;
+		// console.log("@@ updating button icons");
+
+		// regenerate every frame (shouldn't be expensive?)
+		els = p8_document().getElementsByClassName('p8_menu_button');
+		for (i = 0; i < els.length; i++)
+		{
+			el = els[i];
+			index = el.id;
+			
+			if (p8tv_mode) // cludge button positions
+			{
+				el.style.marginBottom = bottom_margin;
+				el.style.paddingBottom = bottom_margin;
+				el.style.padding = 0;
+				el.style.left = left; 
+			}
+			else
+			{
+				// arrrrgh
+				//el.style.marginLeft = menu_buttons_extra_hack;
+			}
+
+			if (index == 'p8b_sound') index += (pico8_state.sound_volume == 0 ? "0" : "1"); // 1 if undefined
+			if (index == 'p8b_pause') index += (pico8_state.is_paused > 0 ? "1" : "0");     // 0 if undefined
+
+			new_str = '<img width='+w+' height='+w+' style="display:table; pointer-events:none;" src="https://www.lexaloffle.com/bbs/'+p8_gfx_dat[index]+'">';
+			if (el.innerHTML != new_str) // :/
+				el.innerHTML = new_str;
+
+			// hide all buttons for touch mode (can pause with menu buttons)
+			
+			var is_visible = p8_is_running;
+
+			if (!p8_touch_detected && el.parentElement.id == "p8_menu_buttons_touch") 
+//			if (el.parentElement.id == "p8_menu_buttons_touch") 
+				is_visible = false;
+
+			if (p8_touch_detected && el.parentElement.id == "p8_menu_buttons")
+				is_visible = false;
+
+			if (is_fullscreen) 
+				is_visible = false;
+
+			if (is_visible)
+				el.style.display="";
+			else
+				el.style.display="none";
+		}
+		requestAnimationFrame(p8_update_button_icons);
+	}
+
+	function abs(x)
+	{
+		return x < 0 ? -x : x;
+	}
+
+	function pico8_buttons_event(e, step)
+	{
+		if (!p8_is_running) return;
+
+		if (!document.getElementById("touch_controls_gfx")) return;
+
+		// console.log("button event step ",step);
+
+		if (step == 2 && typeof(pico8_mouse) !== 'undefined')
+		{
+			pico8_mouse[2] = 0;
+		}
+
+		// on canvas
+		
+		var num = 0;
+		if (e.touches) num = e.touches.length;
+
+		if (num == 0)
+		{
+			// no active touches: release mouse button from anywhere on page
+			if (typeof(pico8_mouse) !== 'undefined')
+				pico8_mouse[2] = 0;
+		}
+		else
+		{		
+			let touch = e.touches[0];
+
+			var x = touch.clientX;
+			var y = touch.clientY;
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+
+			let canvas = p8_document().getElementById("canvas");
+
+			if (p8_touch_detected)
+			if (typeof(pico8_mouse) !== 'undefined')
+			if (canvas)
+			{
+				var rect = canvas.getBoundingClientRect();
+				//console.log(rect.top, rect.right, rect.bottom, rect.left, x, y);
+
+				if (x >= rect.left && x < rect.right && y >= rect.top && y < rect.bottom)
+				{
+					// only define pico8_mouse once it is needed (otherwise codo mouse is clobbered on desktop)
+					pico8_mouse = [
+						Math.floor((x - rect.left) * 128 / (rect.right - rect.left)),
+						Math.floor((y - rect.top) * 128 / (rect.bottom - rect.top)),
+						step < 2 ? 1 : 0
+					];
+					//console.log("-> x y b ", pico8_mouse[0], pico8_mouse[1], pico8_mouse[2]);
+					// return; // commented -- blocks overlapping buttons
+				}else
+				{
+					pico8_mouse[2] = 0;
+				}
+			}
+		}
+
+		if (document.getElementById("touch_controls_gfx").style.display != "none")
+			pico8_buttons_event_virtual_dpad(e, step);
+		else
+			pico8_buttons_event_virtual_keyboard(e, step);
+	}
+
+	// ** dupe ** (virtual_dpad)
+	function pico8_buttons_event_virtual_keyboard(e, step)
+	{
+		if (!p8_is_running) return;	
+		if (step != 0) return;
+		
+		var num = 0;
+		if (e.touches) num = e.touches.length;
+		
+		for (var i = 0; i < num; i++)
+		if (e.touches[i])
+		{
+			var touch = e.touches[i];
+			var x = touch.clientX;
+			var y = touch.clientY;
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+
+			var r = Math.min(w,h) / 12;
+			if (r > 40) r = 40;
+			var keybd_h = (r*12)*132.0/200.0
+
+			// console.log("x:",x," y:",y," keybd_h:",keybd_h," r:",r);
+
+			if (y < h - r*9)
+			{
+				// no controller buttons up here; includes canvas and menu buttons at top in touch mode
+			}
+			else
+			{
+				e.preventDefault();
+				
+				var y1 = Math.floor((y - (h - keybd_h)) * 6 / keybd_h);
+				if (y1 == 3) x -= (r*12.0/10.0)*3.0/20.0;
+				if (y1 == 4) x -= (r*12.0/10.0)*6.0/20.0;
+				var x1 = Math.floor(x * 10 / (r*12));
+
+				
+				if (x1 >= 0 && x1 < 10 && y1 >= 0 && y1 < 6)
+				{
+					// send keypress signal to pico-8
+
+					let key_chars=[
+						[
+							"X{[(*-=_+X",
+							"1234567890",
+							"qwertyuiop",
+							"asdfghjklX",
+							"zxcvbnm,.X",
+							"XXXX   <>/"
+						],
+						[
+							"XXXXX[]`~X",
+							`!"#$%^&@()`,
+							"QWERTYUIOP",
+							"ASDFGHJKLX",
+							"ZXCVBNM;:X",
+							`XXXX   ?'\\`
+						]
+					];
+
+					let val = key_chars[p8_keyboard_state][y1].charCodeAt(x1);
+					if ((y1==3 || y1==4) && x1==9) val = 13; // enter
+
+					//if (y1==0 && x1==9) val = 9; // del
+					
+					if (y1==0 && x1==9) val = 8; // backspace
+					if (y1==0 && x1==0) val = 27;
+					if (y1==5 && x1>=0 && x1 < 4) val = -1; // shift, alt, left, right
+					
+					codo_key_buffer.push(val);
+
+					// macros 
+					if (p8_keyboard_state == 0)
+					if (y1 == 0 && x1 >= 1 && x1 <= 3)
+					{
+						if (x1 == 1) codo_key_buffer.push("}".charCodeAt(0));
+						if (x1 == 2) codo_key_buffer.push("]".charCodeAt(0));
+						if (x1 == 3) codo_key_buffer.push(")".charCodeAt(0));
+
+						// to do: push left-cursor here
+					}
+
+					// special: shift key (show alt keys set)
+					if (y1 == 5 && x1 == 0){
+						// toggle
+
+						p8_keyboard_state = p8_keyboard_state ? 0 : 1;
+
+						el = document.getElementById("controls_keyboard_panel");
+						if (el)
+							el.setAttribute("src", p8_keyboard_state ? "/gfx/controls_keyboard2.png" : "/gfx/controls_keyboard.png");
+					}
+
+					p8_give_focus(); // ** hrm.
+				}
+			}
+		}
+	}
+	
+	// step 0 down 1 drag 2 up (not used)
+	function pico8_buttons_event_virtual_dpad(e, step)
+	{
+		if (!p8_is_running) return;
+
+		pico8_buttons[0] = 0;
+		
+		var num = 0;
+		if (e.touches) num = e.touches.length;
+		
+		for (var i = 0; i < num; i++)
+		if (e.touches[i])
+		{
+			var touch = e.touches[i];
+			var x = touch.clientX;
+			var y = touch.clientY;
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+			
+			//console.log("dpad touch ",x,y);
+
+			var r = Math.min(w,h) / 12;
+			if (r > 40) r = 40;
+			
+			b = 0;
+
+			if (y < h - r*8)
+			{
+				// no controller buttons up here; includes canvas and menu buttons at top in touch mode
+			}
+			else
+			{
+				e.preventDefault();
+
+				if ((y < h - r*6) && y > (h - r*8))
+				{
+					// menu button: half as high as X O button
+					// stretch across right-hand half above X O buttons
+					if (x > w - r*3) 
+						b |= 0x40;
+
+					// escape button for pwa (doesn't do anything otherwise)
+					if (x < r*3){
+						codo_key_buffer.push(27);
+						p8_give_focus();
+					}
+
+				}
+				else if (x < w/2 && x < r*6)
+				{
+					// stick
+
+					mask = 0xf; // dpad
+					var cx = 0 + r*3;
+					var cy = h - r*3;
+
+					deadzone = r/3;
+					var dx = x - cx;
+					var dy = y - cy;
+
+					if (abs(dx) > abs(dy) * 0.6) // horizontal 
+					{
+						if (dx < -deadzone) b |= 0x1;
+						if (dx > deadzone) b |= 0x2;
+					}
+					if (abs(dy) > abs(dx) * 0.6) // vertical
+					{
+						if (dy < -deadzone) b |= 0x4;
+						if (dy > deadzone) b |= 0x8;
+					}
+				}
+				else if (x > w - r*6)
+				{
+					// button; diagonal split from bottom right corner
+				
+					mask = 0x30;
+					
+					// one or both of [X], [O]
+					if ( (h-y) > (w-x) * 0.8) b |= 0x10;
+					if ( (w-x) > (h-y) * 0.8) b |= 0x20;
+				}
+			}
+
+			pico8_buttons[0] |= b;
+		
+		}
+
+	}
+
+
+	var p8_update_layout_hash = -1;	
+	var last_windowed_container_height = 512;
+	function p8_update_layout()
+	{
+		var canvas = p8_document().getElementById("canvas");
+		var p8_playarea = p8_document().getElementById("p8_playarea");
+		var p8_container = p8_document().getElementById("p8_container");
+		var p8_frame = p8_document().getElementById("p8_frame");
+
+		var csize = 512;
+
+		var margin_top = 0;
+		var margin_left = 0;
+		var aspect = p8_aspect;
+
+		// page didn't load yet? first call should be after p8_frame is created
+		if (!canvas || !p8_playarea || !p8_container || !p8_frame)
+		{
+			p8_update_layout_hash = -1;
+			requestAnimationFrame(p8_update_layout);
+			return;
+		}
+
+
+
+		// assumes frame doesn't have padding
+		
+		var is_fullscreen=(document.fullscreenElement || document.mozFullScreenElement || document.webkitIsFullScreen || document.msFullscreenElement);
+		var frame_width = p8_frame.offsetWidth;
+		var frame_height = p8_frame.offsetHeight;
+
+		if (is_fullscreen)
+		{
+			// same as window
+			frame_width = window.innerWidth;
+			frame_height = window.innerHeight;
+		}
+		else{
+			// never larger than window  // (happens when address bar is down in portraight mode on phone)
+			frame_width  = Math.min(frame_width, window.innerWidth);
+			frame_height = Math.min(frame_height, window.innerHeight);
+		}
+
+		// as big as will fit in a frame..
+		csize =  Math.min(frame_width,frame_height);
+
+		// .. but never more than 2/3 of longest side for touch (e.g. leave space for controls on iPad)
+		if (p8_touch_detected && p8_is_running)
+		{
+			var longest_side = Math.max(window.innerWidth,window.innerHeight);
+			csize = Math.min(csize, longest_side * 2/3);
+		}
+
+		// pixel perfect: quantize to closest multiple of 128
+		// only when large display (desktop)
+		if (aspect == 1.0) // pico-8
+		if (frame_width >= 512 && frame_height >= 512)
+		{
+			csize = (csize+1) & ~0x7f;
+		}
+
+		// csize should never be higher than parent frame
+		// (otherwise stretched large when fullscreen and then return)
+		if (!is_fullscreen && p8_frame) 
+			csize = Math.min(csize, last_windowed_container_height); // p8_frame_0 parent
+
+
+		if (is_fullscreen)
+		{
+			// always center horizontally
+			margin_left = (frame_width - (csize * aspect))/2;
+
+			if (p8_touch_detected)
+			{
+				if (window.innerWidth < window.innerHeight)
+				{
+					// portrait: keep at y=40 (avoid rounded top corners / camer num thing etc.)
+					margin_top = Math.min(40, frame_height - csize);
+				}
+				else
+				{
+					// landscape: put a little above vertical center
+					margin_top = (frame_height - csize)/4;
+				}
+			}
+			else{
+				// non-touch: center vertically
+				margin_top = (frame_height - csize)/2;
+			}
+
+			// turn off temp hack
+/* deleteme
+			canvas.style.position = "";
+			canvas.style.left = 0.0;
+*/
+			
+		}
+/* deleteme
+		else
+		{
+
+			// temp hack: had to remove margin:auto from p8_container tostop blurry scale under chrome
+			p8_container.style.margin = 0; // WHHHHY
+			let left = (frame_width - (csize * aspect))/2;
+			canvas.style.position = "relative";
+			canvas.style.left = left;
+			menu_buttons_extra_hack = left;
+
+//			p8_menu_buttons.style.marginLeft = 40;//10.0 + Math.floor(left);
+
+		}
+*/
+
+		// temporary voxatron hacks
+		if (p8_aspect > 1.0)
+			margin_left -= 72;
+
+		
+		// skip if relevant state has not changed
+
+		var update_hash = csize + margin_top * 1000.3 + margin_left * 0.001 + frame_width * 333.33 + frame_height * 772.15134;
+		if (is_fullscreen) update_hash += 0.1237;
+
+		if (!is_fullscreen) // fullscreen: update every frame for safety. should be cheap!
+		if (!p8_touch_detected) // mobile: update every frame because nothing can be trusted
+		if (p8_update_layout_hash == update_hash)
+		{
+			//console.log("p8_update_layout(): skipping");
+			requestAnimationFrame(p8_update_layout);
+			return;
+		}
+		p8_update_layout_hash = update_hash;
+
+		// record this for returning to original size after fullscreen pushes out container height (argh)
+		if (!is_fullscreen && p8_frame)
+			last_windowed_container_height = p8_frame.parentNode.parentNode.offsetHeight;
+
+
+		//console.log("@@ p8_update_layout(): updating "+(is_fullscreen ? "fullscreen" : "windowed")+"  csize: " + csize);
+		
+		// mobile in portrait mode: put screen at top (w / a little space for fullscreen button)
+		// (don't cart about buttons overlapping screen)
+		if (p8_touch_detected && p8_is_running && document.body.clientWidth < document.body.clientHeight)
+			p8_playarea.style.marginTop = 32;
+		else if (p8_touch_detected && p8_is_running) // landscape: slightly above vertical center (only relevant for iPad / highres devices)
+			p8_playarea.style.marginTop = (document.body.clientHeight - csize) / 4;
+		else
+			p8_playarea.style.marginTop = "";
+
+		canvas.style.width = csize * aspect;
+		canvas.style.height = csize;
+
+		// to do: this should just happen from css layout
+		canvas.style.marginLeft = margin_left;
+		canvas.style.marginTop = margin_top;
+
+		p8_container.style.width = csize * aspect;
+		p8_container.style.height = csize;
+
+		if (p8_touch_detected && p8_is_running)
+		{
+			// turn off pointer events to prevent double-tap zoom etc (works on Android)
+			// don't want this for desktop because breaks mouse input & click-to-focus when using codo_textarea
+			canvas.style.pointerEvents = "none";
+
+			p8_container.style.marginTop = "0px";
+
+			// buttons
+			
+			// same as touch event handling
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+			var r = Math.min(w,h) / 12;
+
+			if (r > 40) r = 40;
+
+			el = document.getElementById("controls_right_panel");
+			el.style.left = w-r*6;
+			el.style.top = h-r*7;
+			el.style.width = r*6;
+			el.style.height = r*7;
+			if (el.getAttribute("src") != p8_gfx_dat["controls_right_panel"]) // optimisation: avoid reload? (browser should handle though)
+				el.setAttribute("src", p8_gfx_dat["controls_right_panel"]);
+
+			el = document.getElementById("controls_left_panel");
+			el.style.left = 0;
+			el.style.top = h-r*6;
+			el.style.width = r*6;
+			el.style.height = r*6;
+			if (el.getAttribute("src") != p8_gfx_dat["controls_left_panel"]) // optimisation: avoid reload? (browser should handle though)
+				el.setAttribute("src", p8_gfx_dat["controls_left_panel"]);
+
+			el = document.getElementById("controls_keyboard_panel");
+			el.style.left = 0;
+			el.style.top = h-r*12*(132.0/200.0);
+			el.style.width = r*12;
+			el.style.height = r*12*(132.0/200.0);
+
+			if (el.getAttribute("src") == "")
+				el.setAttribute("src", "/gfx/controls_keyboard.png");
+			
+			// scroll to cart (need to stop running with X)
+			p8_frame.scrollIntoView(true);
+
+			if (pico8_state.show_dpad == 0 && w < h) // not true when undefined
+			{
+				// virtual keyboard
+				document.getElementById("touch_controls_gfx").style.display="none";
+				document.getElementById("touch_keyboard_gfx").style.display="table";
+
+				// hide touch menu bottons
+				//document.getElementById("p8_menu_buttons_touch").style.display="none";
+				
+			}
+			else{
+				// virtual dpad
+				document.getElementById("touch_controls_gfx").style.display="table";
+				document.getElementById("touch_keyboard_gfx").style.display="none";
+			}
+			
+
+			// don't use background -- just hide body div
+			//document.getElementById("touch_controls_background").style.display="table";
+
+		}
+		else{
+			// no touch
+			document.getElementById("touch_controls_gfx").style.display="none";
+			document.getElementById("touch_keyboard_gfx").style.display="none";
+
+			//document.getElementById("touch_controls_background").style.display="none";
+		}
+
+		if (!p8_is_running)
+		{
+			p8_playarea.style.display="none";
+			p8_container.style.display="flex";
+			p8_container.style.marginTop="auto";
+
+			el = p8_document().getElementById("p8_start_button");
+			if (el) el.style.display="flex";
+		}
+
+		requestAnimationFrame(p8_update_layout);	
+	}
+
+
+	var p8_touch_detected = false;
+
+	//addEventListener("click", function(event){alert(pico8_state.show_dpad);});
+
+	addEventListener("touchstart", function(event)
+	{
+		p8_touch_detected = true;
+
+		// hide textarea, so that virtual mobile keyboard doesn't come up
+		// (and fall back to internal copy/paste -- can't paste from other apps, but can ctrl-c,v within PICO-8)
+		if (codo_textarea && codo_textarea.style.display != "none")
+			codo_textarea.style.display="none";
+
+/* // deleteme
+		if (typeof(pico8_state.show_dpad) === 'undefined' || pico8_state.show_dpad)
+		{
+			if (codo_textarea && codo_textarea.style.display != "none")
+				codo_textarea.style.display="none";
+		}
+		else
+		{
+			if (codo_textarea && codo_textarea.style.display != "")
+				codo_textarea.style.display="";
+		}
+*/
+
+
+	},  {passive: true});
+
+	function p8_create_audio_context()
+	{
+		if (pico8_audio_context) 
+		{
+			try {
+				pico8_audio_context.resume();
+			}
+			catch(err) {
+				console.log("** pico8_audio_context.resume() failed");
+			}
+			return;
+		}
+
+		var webAudioAPI = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext;			
+		if (webAudioAPI)
+		{
+			pico8_audio_context = new webAudioAPI;
+
+			// wake up iOS
+			if (pico8_audio_context)
+			{
+				try {
+					var dummy_source_sfx = pico8_audio_context.createBufferSource();
+					dummy_source_sfx.buffer = pico8_audio_context.createBuffer(1, 1, 22050); // dummy
+					dummy_source_sfx.connect(pico8_audio_context.destination);
+					dummy_source_sfx.start(1, 0.25); // gives InvalidStateError -- why? hasn't been played before 
+					//dummy_source_sfx.noteOn(0); // deleteme
+				}
+				catch(err) {
+					console.log("** dummy_source_sfx.start(1, 0.25) failed");
+				}
+			}
+		}
+	}
+
+
+	// just hides. can reopen in a paused state.
+	// used only by mobile X button after touch_detected
+	function p8_close_cart()
+	{
+		p8_is_running = false;
+		p8_touch_detected = false;
+		Module.pico8SetPaused(1);
+
+		// hide stuff
+
+		el = document.getElementById("p8_frame_0");
+			if (el) el.style.display="none";
+
+		// show page
+		el = document.getElementById("body_0");
+			if (el) el.style.display="";
+
+		// (re-)show dormant players
+		els = document.getElementsByClassName("dormant_player");
+	  	for (i = 0; i < els.length; i++)
+			els[i].style.display = ''; // show
+
+	}
+
+
+	function p8_run_cart(player_url, cart_lid, cart_url)
+	{
+		cart_lid=0;console.log("p8_run_cart: "+player_url+" "+cart_lid+" "+cart_url);
+		p8_current_playing_lid = cart_lid;
+		//codo_textarea = document.getElementById("codo_textarea_global");
+		codo_textarea = document.getElementById("codo_textarea_"+cart_lid);
+		
+		// e.g. for "currently playing" update
+		if (typeof(p8_run_cart_onrun) !== 'undefined')
+		{
+			p8_run_cart_onrun(cart_lid);			
+		}
+
+		if (p8_is_running)
+		{
+			if (cart_lid != 0){
+				_cartname=[String(cart_lid)];
+				codo_command = 6;
+			}
+			return;
+		}
+
+		p8_is_running = true;
+
+		// create audio context and wake it up (for iOS -- needs happen inside touch event)		
+		p8_create_audio_context();
+
+		// show touch elements
+		els = document.getElementsByClassName('p8_controller_area');
+		for (i = 0; i < els.length; i++)
+			els[i].style.display="";
+
+
+		// install touch events. These also serve to block scrolling / pinching / zooming on phones when p8_is_running
+			// moved event.preventDefault(); calls into pico8_buttons_event (want to let top buttons pass through)
+		addEventListener("touchstart", function(event){ pico8_buttons_event(event, 0); }, {passive: false});
+		addEventListener("touchmove",  function(event){ pico8_buttons_event(event, 1); }, {passive: false});
+		addEventListener("touchend",   function(event){ pico8_buttons_event(event, 2); }, {passive: false});
+
+
+		// load and run script
+		e = document.createElement("script");
+		p8_script = e;
+		e.onload = function(){
+
+			//window.alert("loaded "+p8_update_layout_hash);
+			
+			// show canvas / menu buttons only after loading
+			el = document.getElementById("p8_playarea");
+			if (el) el.style.display="table";
+
+			if (typeof(last_pico8_player_layout_hash) !== 'undefined') // p8tv
+				last_pico8_player_layout_hash = -1;
+			if (typeof(p8_update_layout_hash) !== 'undefined')
+				p8_update_layout_hash = -77;
+			if (typeof(p8_buttons_hash) !== 'undefined')
+				p8_buttons_hash = -1;
+			
+/*
+			// happens outside; when generating player.
+			Module = {};
+			Module.canvas = document.getElementById("canvas");
+			Module.arguments = [cart_url.toString()];
+			p8_update_button_icons();
+*/
+
+			// Module.arguments = [cart_url.toString()]; // doesn't work
+			// hack: use command 6 instead. will load as soon as codo_update is spinning
+			// allows starting player AND choosing cart by clicking on p8tv cart
+			// could just always do this anyway; is cleaner.
+
+			if (cart_lid != 0){
+				_cartname=[String(cart_lid)];
+				codo_command = 6;
+			}
+
+			// install drag and drop thing
+
+			function noopHandler(evt) {
+				evt.stopPropagation();
+				evt.preventDefault();
+			}
+			var canvas = p8_document().getElementById("canvas");
+
+			canvas.addEventListener('dragenter', noopHandler, false);
+			canvas.addEventListener('dragover', noopHandler, false);
+			canvas.addEventListener('dragleave', noopHandler, false);
+			canvas.addEventListener('drop', noopHandler, false);
+			
+			canvas.addEventListener('drop', p8_drop_file, false);
+
+		}
+		e.type = "application/javascript";
+		e.src = player_url;
+		e.id = "e_script";
+		
+		document.body.appendChild(e); // load and run
+
+		// hide start button and show canvas / menu buttons. hide start button
+		el = document.getElementById("p8_start_button");
+		if (el) el.style.display="none";
+
+		// add #playing for touchscreen devices (allows back button to close)
+		if (p8_touch_detected)
+		{
+			window.location.hash = "#playing";
+			window.onhashchange = function()
+			{
+				if (window.location.hash.search("playing") < 0)
+					p8_close_cart();
+			}
+		}
+
+		// install drag&drop listeners
+		{
+			let canvas = p8_document().getElementById("canvas");
+			if (canvas)
+			{
+				canvas.addEventListener('dragenter', dragover, false);
+				canvas.addEventListener('dragover', dragover, false);
+				canvas.addEventListener('dragleave', dragstop, false);
+				canvas.addEventListener('drop', nop, false);
+				canvas.addEventListener('drop', p8_drop_file, false);
+			}
+		}
+
+		// install "sure you'd like to navigate away?" thing
+		window.onbeforeunload = function() {
+			if (pico8_state.require_page_navigate_confirmation)
+				return "Are you sure you want to navigate away?";
+			else
+				return null; // ok to close immediately
+		}
+
+	}
+
+	// Gamepad code  // from @weeble's mod
+	
+	var P8_BUTTON_O = {action:'button', code: 0x10};
+	var P8_BUTTON_X = {action:'button', code: 0x20};
+	var P8_DPAD_LEFT = {action:'button', code: 0x1};
+	var P8_DPAD_RIGHT = {action:'button', code: 0x2};
+	var P8_DPAD_UP = {action:'button', code: 0x4};
+	var P8_DPAD_DOWN = {action:'button', code: 0x8};
+	var P8_MENU = {action:'menu'};
+	var P8_NO_ACTION = {action:'none'};
+
+	var P8_BUTTON_MAPPING = [
+		// ref: https://w3c.github.io/gamepad/#remapping
+		P8_BUTTON_O,          // Bottom face button
+		P8_BUTTON_X,          // Right face button
+		P8_BUTTON_X,          // Left face button
+		P8_BUTTON_O,          // Top face button
+		P8_NO_ACTION,         // Near left shoulder button (L1)
+		P8_NO_ACTION,         // Near right shoulder button (R1)
+		P8_NO_ACTION,         // Far left shoulder button (L2)
+		P8_NO_ACTION,         // Far right shoulder button (R2)
+		P8_MENU,              // Left auxiliary button (select)
+		P8_MENU,              // Right auxiliary button (start)
+		P8_NO_ACTION,         // Left stick button
+		P8_NO_ACTION,         // Right stick button
+		P8_DPAD_UP,           // Dpad up
+		P8_DPAD_DOWN,         // Dpad down
+		P8_DPAD_LEFT,         // Dpad left
+		P8_DPAD_RIGHT,        // Dpad right
+	];
+
+	// Track which player is controller by each gamepad. Gamepad index i controls the
+	// player with index pico8_gamepads_mapping[i]. Gamepads with null player are
+	// currently unassigned - they get assigned to a player when a button is pressed.
+	var pico8_gamepads_mapping = [];
+
+	function p8_unassign_gamepad(gamepad_index) {
+		if (pico8_gamepads_mapping[gamepad_index] == null) {
+			return;
+		}
+		pico8_buttons[pico8_gamepads_mapping[gamepad_index]] = 0;
+		pico8_gamepads_mapping[gamepad_index] = null;
+	}
+
+
+	function p8_first_player_without_gamepad(max_players) {
+		var allocated_players = pico8_gamepads_mapping.filter(function(x) { return x != null; });
+		var sorted_players = Array.from(allocated_players).sort();
+		for (var desired = 0; desired < sorted_players.length && desired < max_players; ++desired) {
+			if (desired != sorted_players[desired]) {
+				return desired;
+			}
+		}
+		if (sorted_players.length < max_players) {
+			return sorted_players.length;
+		}
+		return null;
+	}
+
+	function p8_assign_gamepad_to_player(gamepad_index, player_index) {
+		p8_unassign_gamepad(gamepad_index);
+		pico8_gamepads_mapping[gamepad_index] = player_index;
+	}
+
+	function p8_convert_standard_gamepad_to_button_state(gamepad, axis_threshold, button_threshold) {
+		// Given a gamepad object, return:
+		// {
+		//     button_state: the binary encoded Pico 8 button state
+		//     menu_button: true if any menu-mapped button was pressed
+		//     any_button: true if any button was pressed, including d-pad
+		//         buttons and unmapped buttons
+		// }
+		if (!gamepad || !gamepad.axes || !gamepad.buttons) {
+			return {
+				button_state: 0,
+				menu_button: false,
+				any_button: false
+			};
+		}
+		function button_state_from_axis(axis, low_state, high_state, default_state) {
+			if (axis && axis < -axis_threshold) return low_state;
+			if (axis && axis > axis_threshold) return high_state;
+			return default_state;
+		}
+		var axes_actions = [
+			button_state_from_axis(gamepad.axes[0], P8_DPAD_LEFT, P8_DPAD_RIGHT, P8_NO_ACTION),
+			button_state_from_axis(gamepad.axes[1], P8_DPAD_UP, P8_DPAD_DOWN, P8_NO_ACTION),
+		];
+
+		var button_actions = gamepad.buttons.map(function (button, index) {
+			var pressed = button.value > button_threshold || button.pressed;
+			if (!pressed) return P8_NO_ACTION;
+			return P8_BUTTON_MAPPING[index] || P8_NO_ACTION;
+		});
+
+		var all_actions = axes_actions.concat(button_actions);
+		
+		var menu_button = button_actions.some(function (action) { return action.action == 'menu'; });
+		var button_state = (all_actions
+			.filter(function (a) { return a.action == 'button'; })
+			.map(function (a) { return a.code; })
+			.reduce(function (result, code) { return result | code; }, 0)
+		);
+		var any_button = gamepad.buttons.some(function (button) {
+			return button.value > button_threshold || button.pressed;
+		});
+
+		any_button |= button_state; //jww: include axes 0,1 as might be first intended action
+
+
+		return {
+			button_state,
+			menu_button,
+			any_button
+		};
+	}
+
+	// jww: pico-8 0.2.1 version for unmapped gamepads, following p8_convert_standard_gamepad_to_button_state
+	// axes 0,1 & buttons 0,1,2,3 are reasonably safe. don't try to read dpad.
+	// menu buttons are unpredictable, but use 6..8 anyway (better to have a weird menu button than none)
+	function p8_convert_unmapped_gamepad_to_button_state(gamepad, axis_threshold, button_threshold) {
+
+		if (!gamepad || !gamepad.axes || !gamepad.buttons) {
+			return {
+				button_state: 0,
+				menu_button: false,
+				any_button: false
+			};
+		}
+
+		var button_state = 0;
+
+		if (gamepad.axes[0] && gamepad.axes[0] < -axis_threshold) button_state |= 0x1;
+		if (gamepad.axes[0] && gamepad.axes[0] > axis_threshold)  button_state |= 0x2;
+		if (gamepad.axes[1] && gamepad.axes[1] < -axis_threshold) button_state |= 0x4;
+		if (gamepad.axes[1] && gamepad.axes[1] > axis_threshold)  button_state |= 0x8;
+
+		// buttons: first 4 taken to be O/X, 6..8 taken to be menu button
+
+		for (j = 0; j < gamepad.buttons.length; j++)
+		if (gamepad.buttons[j].value > 0 || gamepad.buttons[j].pressed)
+		{
+			if (j < 4)
+				button_state |= (0x10 << (((j+1)/2)&1)); // 0 1 1 0 -- A,X -> O,X on xbox360
+			else if (j >= 6 && j <= 8)
+				button_state |= 0x40;
+		}
+
+		var menu_button = button_state & 0x40;
+
+
+		var any_button = gamepad.buttons.some(function (button) {
+			return button.value > button_threshold || button.pressed;
+		});
+
+		any_button |= button_state; //jww: include axes 0,1 as might be first intended action
+		
+		return {
+			button_state,
+			menu_button,
+			any_button
+		};
+	}
+	
+	// gamepad  https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API
+	// (sets bits in pico8_buttons[])
+	function p8_update_gamepads() {
+		var axis_threshold = 0.3;
+		var button_threshold = 0.5; // Should be unnecessary, we should be able to trust .pressed
+		var max_players = 8;
+		var gps = navigator.getGamepads() || navigator.webkitGetGamepads();
+
+		if (!gps) return;
+
+		// In Chrome, gps is iterable but it's not an array.
+		gps = Array.from(gps);
+
+		pico8_gamepads.count = gps.length;
+		while (gps.length > pico8_gamepads_mapping.length) {
+		    pico8_gamepads_mapping.push(null);
+		}
+
+		var menu_button = false;
+		var gamepad_states = gps.map(function (gp) {
+			return (gp && gp.mapping == "standard") ?
+				p8_convert_standard_gamepad_to_button_state(gp, axis_threshold, button_threshold) :
+				p8_convert_unmapped_gamepad_to_button_state(gp, axis_threshold, button_threshold);
+		});
+
+		// Unassign disconnected gamepads.
+		// gps.forEach(function (gp, i) { if (gp && !gp.connected) { p8_unassign_gamepad(i); }});
+		gps.forEach(function (gp, i) { if (!gp || !gp.connected) { p8_unassign_gamepad(i); }}); // https://www.lexaloffle.com/bbs/?pid=87132#p
+
+		// Assign unassigned gamepads when any button is pressed.
+		gamepad_states.forEach(function (state, i) {
+			if (state.any_button && pico8_gamepads_mapping[i] == null) {
+				var first_free_player = p8_first_player_without_gamepad(max_players);
+				p8_assign_gamepad_to_player(i, first_free_player);
+			}
+		});
+
+		// Update pico8_buttons array.
+		gamepad_states.forEach(function (gamepad_state, i) {
+			if (pico8_gamepads_mapping[i] != null) {
+				pico8_buttons[pico8_gamepads_mapping[i]] = gamepad_state.button_state;
+			}
+		});
+
+		// Update menu button.
+		// Pico 8 only recognises the menu button on the first player, so we
+		// press it when any gamepad has pressed a button mapped to menu.
+		if (gamepad_states.some(function (state) { return state.menu_button; })) {
+			pico8_buttons[0] |= 0x40;
+		}
+
+		requestAnimationFrame(p8_update_gamepads);
+	}
+	requestAnimationFrame(p8_update_gamepads);
+
+	// End of gamepad code
+
+
+	// key blocker. prevent cursor keys from scrolling page while playing cart.
+	// also don't act on M, R so that can mute / reset cart
+	document.addEventListener('keydown',
+	function (event) {
+		event = event || window.event;
+		if (!p8_is_running) return;
+
+		//console.log(event.keyCode+":"+([17,88,67,86].indexOf(event.keyCode)));
+
+		if (pico8_state.has_focus == 1)
+			// commented -- catch /all/ keypresses to support editor, and because using codo_textfield focus method
+			// if ([32, 37, 38, 39, 40, 77, 82, 80, 9].indexOf(event.keyCode) > -1)   // allow: cursors, M R P, tab
+			if ([17,88,67,86].indexOf(event.keyCode) < 0) // block all keypresses except ctrl,x,c,v (need for codo_textfield clipboard)
+				if (event.preventDefault) event.preventDefault();
+	},{passive: false});
+
+	// same as in codo_update_js_textfield()
+	function p8_give_focus()
+	{
+		el = (typeof codo_textarea === 'undefined') ? document.getElementById("codo_textarea") : codo_textarea;
+		if (el)
+		{
+			el.focus();
+			el.select();
+		}
+	}
+
+	function p8_request_fullscreen() {
+
+		var is_fullscreen=(document.fullscreenElement || document.mozFullScreenElement || document.webkitIsFullScreen || document.msFullscreenElement);
+
+		if (is_fullscreen)
+		{
+			 if (document.exitFullscreen) {
+		        document.exitFullscreen();
+		    } else if (document.webkitExitFullscreen) {
+		        document.webkitExitFullscreen();
+		    } else if (document.mozCancelFullScreen) {
+		        document.mozCancelFullScreen();
+		    } else if (document.msExitFullscreen) {
+		        document.msExitFullscreen();
+		    }
+			return;
+		}
+		
+		var el = document.getElementById("p8_playarea");
+
+		if ( el.requestFullscreen ) {
+			el.requestFullscreen();
+		} else if ( el.mozRequestFullScreen ) {
+			el.mozRequestFullScreen();
+		} else if ( el.webkitRequestFullScreen ) {
+			el.webkitRequestFullScreen( Element.ALLOW_KEYBOARD_INPUT );
+		}
+	}
+
+
+var p8_aspect = 1.0;
+
+function activate_p8_player(player_url, cart_lid, cart_url, new_parent_id, dormant_player_id)
+{
+	var p8_frame_0 = document.getElementById("p8_frame_0");
+	var new_parent = document.getElementById(new_parent_id);
+	var dormant_player = document.getElementById(dormant_player_id);
+
+	p8_aspect = 1.0;
+	if (player_url.indexOf("vox") >= 0) p8_aspect = 820.0/512.0;
+
+	if (!p8_frame_0)
+	{
+		console.log("@@ could not find p8_frame_0");
+		return;
+	}
+
+	p8_frame_0.parentNode.removeChild(p8_frame_0);
+	new_parent.appendChild(p8_frame_0);
+
+	//p8_frame_0.style.display="table";
+	p8_frame_0.style="display:table; width:100%;height:100%; max-width:100vw;max-height:100vh;  min-width:256px;min-height:256px;margin:0px;background-color:#111"
+	
+	dormant_player.style.display = 'none';
+
+	// bbs player: can remove entire page and move player div to front
+	// (differs from exported player approach
+
+	if (p8_touch_detected)
+	{
+		el = document.getElementById("body_0");
+			if (el) el.style.display="none";
+
+		el.parentNode.appendChild(document.getElementById("p8_frame_0"));
+	}
+
+	// run!
+	p8_run_cart(player_url, cart_lid, cart_url);
+
+	// load cart menu
+	embedded = (window.parent && window.parent != window) ? 1 : 0;
+
+	// to do: decide cab (and make cab system clearer. count as bbs play -- need for voxatron embeds)
+
+	//var el = document.getElementById("more_carts_global");
+	//if (!el) console.log("@@ could not find "+"more_carts_"+cart_lid);
+	//if (el) // only load if can find element for it
+	{
+		microAjax("/bbs/on_play.php?id="+cart_lid+"&embedded="+embedded+"&cab=0",
+			function (retdata){
+				var el = document.getElementById("more_carts_"+cart_lid);
+				//var el = document.getElementById("more_carts_global");
+				if (el) el.innerHTML = retdata;
+			}
+		);
+	}
+
+	// show dormant frames on other carts // was set_active_widget()
+	els = document.getElementsByClassName("dormant_player");
+  	for (i = 0; i < els.length; i++)
+	if (els[i] != dormant_player)
+		els[i].style.display = ''; // show
+
+
+	// safety. should be unnecessary :|
+	// when running wasm version, canvas seems right size, but then shrinks. sdl? to do: investigate
+	setTimeout(function(){
+		p8_update_layout_hash = -55;
+	},1000);
+
+}
+
+function toggle_cart_menu(div_id)
+{
+	var el=$(div_id);
+	if (el)
+	{
+		el.style.display = (el.style.display=='none') ? 'table' : 'none';
+		var slider_el = el.childNodes[1];
+		if (true)
+		{
+			left_target = 0;
+			slider_el.style.left = (left_target + 540)+'px';
+
+			poll_function(200, 10,
+			function(q){
+				q= 1 - (1-q)*(1-q);
+				slider_el.style.left = (left_target + (1-q)*540)+'px';
+			});
+		}
+		codo_running = (el.style.display == 'none'); // running if hidden
+		codo_command = 5; codo_command_p = !codo_running;
+	}
+}
+
+// for downloading saved carts
+function download_browser_file(filename, contents)
+{
+  var element = document.createElement('a');
+  if (filename.substr(filename.length - 7) == ".p8.png")
+  	element.setAttribute('href', 'data:image/png;base64,' + encodeURIComponent(contents));
+  else
+  	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(contents));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+
+</script><STYLE TYPE="text/css">
+	<!--.p8_menu_button{
+	opacity:0.2;
+	padding:4px;
+	display:table;
+	width:24px;	
+	height:24px;
+}
+
+
+.p8_menu_button:hover{
+	opacity:1.0;
+	cursor:pointer;
+}
+
+canvas{
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+	border: 0px;
+	cursor: none;
+}
+
+
+.button_gfx{
+	stroke-width:2;
+	stroke: #ffffff;
+	stroke-opacity:0.4;
+	fill-opacity:0.2;
+	fill:black;
+}
+
+.button_gfx_icon{
+	stroke-width:3;
+	stroke: #909090;
+	stroke-opacity:0.7;
+	fill:none;
+}
+
+.p8_start_button{
+	cursor:pointer;
+	-repeat center;
+	-webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;
+}
+
+.p8_menu_buttons{
+	display: flex;
+  	flex-direction: column;
+	height:512px;
+	background-color:#f8a;
+}
+
+@media screen and (max-width: 800px)
+{
+	.cart_player_wrapper{
+		width:384px; 
+		height:384px;
+	}
+	.p8_menu_buttons{
+		margin-top:0px;
+		display:none;
+	}
+}
+
+
+
+
+-->
+	</STYLE>
+	<div id="p8_frame_0" style="display:none; width:100%;height:100%; max-width:95vw;max-height:95vh; min-width:256px;min-height:256px;margin:auto;background-color:#111">
+	<div id="p8_frame"   style="display:flex; width:100%;height:100%; max-width:95vh;max-height:95vw; min-width:256px;min-height:256px;margin:auto;">
+	<textarea id="codo_textarea_virush-3" class="emscripten" style="position:absolute; left:-9999px; height:0px; overflow:hidden"></textarea><input id="p8_file_chooser" type="file" name="name" style="display: none;" onchange='p8_drop_file(event)'/>
+
+	<div id="p8_menu_buttons_touch" style="position:absolute; width:100%; z-index:10; left:0px; top:0px;">
+		<div class="p8_menu_button" id="p8b_full"  style="float:left;margin-left:10px" onClick="p8_give_focus(); p8_request_fullscreen();"></div>
+		<div class="p8_menu_button" id="p8b_sound" style="float:left;margin-left:10px" onClick="p8_give_focus(); p8_create_audio_context(); Module.pico8ToggleSound();"></div>
+		<div class="p8_menu_button" id="p8b_close" style="float:right; margin-right:10px" onClick="p8_close_cart();"></div>
+	</div>
+
+	<div id="p8_container"
+		style="margin:auto; display:table;"
+		onclick="if (!p8_is_running) {p8_create_audio_context(); p8_run_cart('pico8_0203_3.js', 'virush-3', '/bbs/cposts/vi/virush-3.p8.png');}">
+
+
+
+
+		<div id="p8_playarea" style="display:none; margin:auto;
+			-webkit-user-select:none; -moz-user-select: none; user-select: none; -webkit-touch-callout:none;
+		">
+
+			<div  id="touch_controls_background"
+				  style=" pointer-events:none; display:none; background-color:#000; opacity:0.5;
+						 position:fixed; top:0px; left:0px; border:0; width:100vw; height:200vh; overflow:hidden">
+				&nbsp
+			</div>
+
+			
+			<div id="p8_playarea_flex" style="display:flex; position:relative">
+
+				<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault();">
+				</canvas>
+
+				<div class=p8_menu_buttons id="p8_menu_buttons" style="margin-left:10px;">
+
+					<div class="p8_menu_button" style="position:absolute; margin-top:20px" id="p8b_cart"  onClick="p8_give_focus(); toggle_cart_menu('cart_menu_');"></div>
+
+					<div class="p8_menu_button" style="position:absolute; bottom:125px" id="p8b_controls" onClick="p8_give_focus(); Module.pico8ToggleControlMenu();"></div>					
+					<div class="p8_menu_button" style="position:absolute; bottom:90px" id="p8b_pause" onClick="p8_give_focus(); Module.pico8TogglePaused(); p8_update_layout_hash = -22;"></div>
+					<div class="p8_menu_button" style="position:absolute; bottom:55px" id="p8b_sound" onClick="p8_give_focus(); p8_create_audio_context(); Module.pico8ToggleSound();"></div>
+
+					<div class="p8_menu_button" style="position:absolute; bottom:20px" id="p8b_full" onClick="p8_give_focus(); p8_request_fullscreen();"></div>
+				</div>
+
+
+			</div>
+
+			<!-- display after first layout update -->
+
+			<div  id="touch_controls_gfx"
+				  style=" pointer-events:none; display:table; 
+						 position:fixed; top:0px; left:0px; border:0; width:100vw; height:100vh">
+
+					<img src="index.html%3Ftid=38236.html" id="controls_right_panel" style="position:absolute; opacity:0.5;">
+					<img src="index.html%3Ftid=38236.html" id="controls_left_panel" style="position:absolute;  opacity:0.5;">
+					
+			</div> <!-- touch_controls_gfx -->
+
+			<div  id="touch_keyboard_gfx"
+				  style=" pointer-events:none; display:table; 
+						 position:fixed; top:0px; left:0px; border:0; width:100vw; height:100vh">
+
+					<img src="index.html%3Ftid=38236.html" id="controls_keyboard_panel" style="position:absolute; opacity:0.5;">
+					
+			</div> <!-- touch_keyboard_gfx -->
+
+		</div> <!--p8_playarea -->
+	</div> <!-- p8_container -->
+
+</div> <!-- p8_frame -->
+</div> <!-- size limit -->
+
+<script type="text/javascript">p8_update_layout(); p8_update_button_icons();
+
+	var canvas = document.getElementById("canvas");
+	Module = {};
+	Module.canvas = canvas;
+Module.arguments = ["virush-3.p8.png"];</script>
+		<div id="cart_player_virush-3" style="overflow:hidden; display:table; width:620px; max-width:90vw; height:512px; max-height:90vw; background-color:#111">
+			<div class="dormant_player" id="cart_player_dormant_virush-3" style="">
+
+			<div style="position:absolute; z-index:20; padding:8px; max-width:620px">
+
+				<div style="font-size:15pt"><a href="https://www.lexaloffle.com/bbs/?pid=virush#p">Virush</a></div>				
+				<div style="font-size:11pt; margin-top:4px">by <a href="https://www.lexaloffle.com/bbs/?uid=21440">arlefreak</a></div>
+				
+			</div>
+			
+			<center>
+			<div style="display:table; background-color:#002;">
+
+				
+				<div style="display:flex; position:absolute; z-index:10; width:100%; height:512; max-height:90vw; align-items:center;">
+
+				<center>
+
+					<div id=push_parent_out_for_centering_this_is_ridiculous style="width:512px; display:table; max-width:100vw"></div>
+
+					
+					<img style="cursor:pointer; width:80px; height:80px;"
+					onClick="activate_p8_player('pico8_0203_3.js', 'virush-3', '/bbs/cposts/vi/virush-3.p8.png', 'cart_player_virush-3', 'cart_player_dormant_virush-3');"
+					src="play80.png" class="pixel_perfect"/>
+					
+				</center>
+
+				</div>
+
+				<img 
+					src="pico8_virush-3.png" style="opacity:0.7; width:512px; height:512px; max-width:90vw; max-height:90vw;
+					"
+				>
+		
+			</div>
+			</center>
+			
+			</div>
+		</div>
+	<div style="display:table; width:100%; background-color:#222; padding-top:2px; padding-bottom:2px">
+								<div class=desktop_div style="margin-top:4px;margin-left:8px;float:left;">
+								<a href="https://www.lexaloffle.com/bbs/cposts/vi/virush-3.p8.png"><img src="cart32.png" width=16 height=20></a>
+								</div>
+								
+								<div style="margin-top:6px;margin-left:4px;float:left;">
+								<font color=#999 size=1>
+								
+								<a title="Open Cartridge File" href="https://www.lexaloffle.com/bbs/cposts/vi/virush-3.p8.png">Cart</a> #virush-3
+
+								| <span title="2020-07-05 20:28:31" >2020-07-05</span>
+
+			 | 
+	<a style="cursor:pointer;" 
+	onclick='
+ 		
+ 		var el = document.getElementById("cartsrc_virush-3");
+ 		
+ 		if (el.style.display == "none")
+		{
+ 			el.style.display = "";
+			//print_cart_code("https://www.lexaloffle.com/bbs/cposts/vi/virush-3.p8.png", "cartsrc_virush-3");
+		}
+ 		else
+ 			el.style.display = "none";
+ 		
+		/*
+ 		microAjax("/bbs/snippet.php?cart_id=virush-3&src=1",
+				function (retdata){
+					var el = document.getElementById("cartsrc_virush-3");
+					el.innerHTML = retdata;
+					
+				}
+			);
+		*/
+ 	'>
+ 	Code &#9661;</a>
+	<span  class=desktop_div >
+	|
+	<a style="cursor:pointer;" 
+	onclick='
+ 		
+ 		var el = document.getElementById("cartembed_virush-3");
+ 		
+ 		if (el.style.display == "none")
+ 			el.style.display = "";
+ 		else
+ 			el.style.display = "none";
+ 	'>
+ 	Embed &#9661;</a>
+ 	</span> | <span class="desktop_div" style="color:#666">License:</span> <a target=_cc4 href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color:#aaa">CC4-BY-NC-SA</a></div>
+								
+								<div class="desktop_div" style="float:right; margin-right:10px; margin-top:2px">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77498_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_77498_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div><div style="margin-left:4px; margin-right:6px; margin-top:2px; font-size:9pt; color:#999">22</div></div></div>
+								<div class="desktop_div" style="float:right; margin-right:10px; margin-top:2px">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77498_fav"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Add to your favourites collection"
+		class="i_rate_77498_fav"
+	>
+			<img src="set_fav0.png" width=20 height=20>
+		</div></div></div>
+								</font></div></div></div>
+ 	<div style="max-width:620px; border:0px; margin:0px; padding:0px; background-color:#224; display:none" id="cartsrc_virush-3" >
+	
+		<iframe src="snippet.php%3Fcart_id=virush-3&amp;src=1.html" style="width:100%; height:400px; border:none; overflow:hidden"></iframe>
+
+
+	</div>
+ 	
+	 	<div style="width:620px; display:none; background-color:#222;" id="cartembed_virush-3">
+	
+			<div style="padding:8px; display:table; color:#fff; width:100%">
+				Copy and paste the snippet below into your HTML.
+			</div> 
+		
+		
+		<div style="padding:10px;">
+		 	<textarea rows=5 class=lexinput  style="width:580px;height:50px;background-color:#fed;font-size:10pt;"><iframe src="widget.php%3Fpid=virush.html" allowfullscreen width="621" height="513" style="border:none; overflow:hidden"></iframe></textarea>
+		</div>
+		</div>
+ 	</p>
+<p>A small survival turn based game where you have to build defenses to defeat all the virushes and survive the quarantine.</p>
+<p>CONTROLS<br />
+Arrow keys to move and navigate menus.<br />
+[X] To place  or upgrade defenses<br />
+[Z] To swap between defenses</p>
+<p>HOW TO PLAY<br />
+Defeat all the virushes in a level to advance to the next day<br />
+Look for materials, they pop randomly on the level<br />
+Upgrade the your defenses so they can reach enemies</p>
+<p>CREDITS<br />
+Code: Mario Carballo (<a href="https://twitter.com/afk_mario">@afk_mario</a>)<br />
+Art+Audio: JP (<a href="https://twitter.com/eljovenpaul">@eljovenpaul</a>)</p>
+<p><a href="https://afk-mario.itch.io/virush">itch.io</a></p></div><div style="display:table; margin-bottom:8px; margin-top: 8px"><a href="https://www.lexaloffle.com/bbs/?cat=7#tag=picoclub"><span class="tag">picoclub</span></a> </div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=77498#p"  style="color:#999" >
+		P#77498</a> 2020-06-01 17:59 ( Edited 2020-07-05 20:28)</font></div></div></div></div></div><br id=comments><div style="width:100%; height:1px; background-color:#555; margin-bottom:10px"></div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p77542 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=43295"><img width=48 height=48 src="pixilart-drawing.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">piman3.14</div></a>
+			
+			 
+			</center>
+			</div><div style="width:100%;"><div class="mobile_div" 
+				style="margin-left:8px;"> <span style="color:#f8a">::</span> <a href="https://www.lexaloffle.com/bbs/?uid=43295"><span style="color:#f8a">piman3.14</span></a></div><div style="float:right; width:32px; height:48px;display:table">
+			<div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77542_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_77542_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div><div style="margin-left:4px; margin-right:6px; margin-top:2px; font-size:9pt; color:#999">2</div></div>
+				</div>
+			</div>
+		
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_77542');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	</div>
+		<div id="set_extra_77542" style="display:none; float:right; width:318px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:300px; 
+			z-index: 2;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77542_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77542_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77542_spam', 77542, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77542_abuse"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77542_abuse"
+	>
+			<img src="set_abuse0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77542_abuse', 77542, 'abuse', 13);">Report Abuse</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p>Wow. Just Wow. amazing game dude</p></div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=77542#p"  style="color:#999" >
+		P#77542</a> 2020-06-02 17:00</font></div></div></div></div></div><div style="width:100%; height:1px; background-color:#555; margin-bottom:10px"></div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p77545 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=21440"><img width=48 height=48 src="8_mario-rek-top.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">arlefreak</div></a>
+			
+			 
+			</center>
+			</div><div style="width:100%;"><div class="mobile_div" 
+				style="margin-left:8px;"> <span style="color:#f8a">::</span> <a href="https://www.lexaloffle.com/bbs/?uid=21440"><span style="color:#f8a">arlefreak</span></a></div><div style="float:right; width:32px; height:48px;display:table">
+			<div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77545_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_77545_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div></div>
+				</div>
+			</div>
+		
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_77545');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	</div>
+		<div id="set_extra_77545" style="display:none; float:right; width:318px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:300px; 
+			z-index: 2;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77545_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77545_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77545_spam', 77545, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77545_abuse"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77545_abuse"
+	>
+			<img src="set_abuse0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77545_abuse', 77545, 'abuse', 13);">Report Abuse</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p>Thanks for playing :)!</p></div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=77545#p"  style="color:#999" >
+		P#77545</a> 2020-06-02 17:02</font></div></div></div></div></div><div style="width:100%; height:1px; background-color:#555; margin-bottom:10px"></div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p77552 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=44509"><img width=48 height=48 src="pi29.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">ncolas.priniotakis</div></a>
+			
+			 
+			</center>
+			</div><div style="width:100%;"><div class="mobile_div" 
+				style="margin-left:8px;"> <span style="color:#f8a">::</span> <a href="https://www.lexaloffle.com/bbs/?uid=44509"><span style="color:#f8a">ncolas.priniotakis</span></a></div><div style="float:right; width:32px; height:48px;display:table">
+			<div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77552_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_77552_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div><div style="margin-left:4px; margin-right:6px; margin-top:2px; font-size:9pt; color:#999">2</div></div>
+				</div>
+			</div>
+		
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_77552');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	</div>
+		<div id="set_extra_77552" style="display:none; float:right; width:318px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:300px; 
+			z-index: 2;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77552_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77552_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77552_spam', 77552, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77552_abuse"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77552_abuse"
+	>
+			<img src="set_abuse0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77552_abuse', 77552, 'abuse', 13);">Report Abuse</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p>Color me addicted! Well done!</p></div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=77552#p"  style="color:#999" >
+		P#77552</a> 2020-06-02 19:29</font></div></div></div></div></div><div style="width:100%; height:1px; background-color:#555; margin-bottom:10px"></div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p77579 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=21440"><img width=48 height=48 src="8_mario-rek-top.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">arlefreak</div></a>
+			
+			 
+			</center>
+			</div><div style="width:100%;"><div class="mobile_div" 
+				style="margin-left:8px;"> <span style="color:#f8a">::</span> <a href="https://www.lexaloffle.com/bbs/?uid=21440"><span style="color:#f8a">arlefreak</span></a></div><div style="float:right; width:32px; height:48px;display:table">
+			<div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77579_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_77579_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div></div>
+				</div>
+			</div>
+		
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_77579');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	</div>
+		<div id="set_extra_77579" style="display:none; float:right; width:318px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:300px; 
+			z-index: 2;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77579_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77579_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77579_spam', 77579, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77579_abuse"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77579_abuse"
+	>
+			<img src="set_abuse0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77579_abuse', 77579, 'abuse', 13);">Report Abuse</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p>A few fixes</p>
+<ul>
+<li>Night 07 startup materials can now be picked up</li>
+<li>Hospitals no longer charge you when they are out of service (they still do if you use them on full health)</li>
+<li>Re-balanced some levels</li>
+</ul></div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=77579#p"  style="color:#999" >
+		P#77579</a> 2020-06-03 04:59</font></div></div></div></div></div><div style="width:100%; height:1px; background-color:#555; margin-bottom:10px"></div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p77659 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=20519"><img width=48 height=48 src="CaptainSmog.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">FlyingSmog</div></a>
+			
+			 
+			</center>
+			</div><div style="width:100%;"><div class="mobile_div" 
+				style="margin-left:8px;"> <span style="color:#f8a">::</span> <a href="https://www.lexaloffle.com/bbs/?uid=20519"><span style="color:#f8a">FlyingSmog</span></a></div><div style="float:right; width:32px; height:48px;display:table">
+			<div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77659_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_77659_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div><div style="margin-left:4px; margin-right:6px; margin-top:2px; font-size:9pt; color:#999">1</div></div>
+				</div>
+			</div>
+		
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_77659');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	</div>
+		<div id="set_extra_77659" style="display:none; float:right; width:318px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:300px; 
+			z-index: 2;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77659_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77659_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77659_spam', 77659, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77659_abuse"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77659_abuse"
+	>
+			<img src="set_abuse0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77659_abuse', 77659, 'abuse', 13);">Report Abuse</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p>This is super super fun! Goes right to the action after the first learning levels. Awesome!</p></div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=77659#p"  style="color:#999" >
+		P#77659</a> 2020-06-04 11:49</font></div></div></div></div></div><div style="width:100%; height:1px; background-color:#555; margin-bottom:10px"></div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p77835 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=21440"><img width=48 height=48 src="8_mario-rek-top.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">arlefreak</div></a>
+			
+			 
+			</center>
+			</div><div style="width:100%;"><div class="mobile_div" 
+				style="margin-left:8px;"> <span style="color:#f8a">::</span> <a href="https://www.lexaloffle.com/bbs/?uid=21440"><span style="color:#f8a">arlefreak</span></a></div><div style="float:right; width:32px; height:48px;display:table">
+			<div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77835_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_77835_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div></div>
+				</div>
+			</div>
+		
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_77835');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	</div>
+		<div id="set_extra_77835" style="display:none; float:right; width:318px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:300px; 
+			z-index: 2;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77835_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77835_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77835_spam', 77835, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_77835_abuse"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_77835_abuse"
+	>
+			<img src="set_abuse0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_77835_abuse', 77835, 'abuse', 13);">Report Abuse</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p>New overall level design balancing and the little angry enemies have a new design</p></div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=77835#p"  style="color:#999" >
+		P#77835</a> 2020-06-09 04:14</font></div></div></div></div></div><div style="width:100%; height:1px; background-color:#555; margin-bottom:10px"></div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p78081 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=45233"><img width=48 height=48 src="pi17.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">larviform</div></a>
+			
+			 
+			</center>
+			</div><div style="width:100%;"><div class="mobile_div" 
+				style="margin-left:8px;"> <span style="color:#f8a">::</span> <a href="https://www.lexaloffle.com/bbs/?uid=45233"><span style="color:#f8a">larviform</span></a></div><div style="float:right; width:32px; height:48px;display:table">
+			<div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_78081_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_78081_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div><div style="margin-left:4px; margin-right:6px; margin-top:2px; font-size:9pt; color:#999">1</div></div>
+				</div>
+			</div>
+		
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_78081');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	</div>
+		<div id="set_extra_78081" style="display:none; float:right; width:318px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:300px; 
+			z-index: 2;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_78081_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_78081_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_78081_spam', 78081, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_78081_abuse"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_78081_abuse"
+	>
+			<img src="set_abuse0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_78081_abuse', 78081, 'abuse', 13);">Report Abuse</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p>i just started playing pico-8 and this is my favorite game so far.</p></div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=78081#p"  style="color:#999" >
+		P#78081</a> 2020-06-14 19:30</font></div></div></div></div></div><div style="width:100%; height:1px; background-color:#555; margin-bottom:10px"></div><div style="display:block;  width:100%; max-width:820px;
+			padding-bottom:0px;  margin-bottom:0px; margin-bottom:-8px; padding-bottom:0px "><div id=p style="padding:8px; display:block;"><div id=p78125 style="display:flex; 
+		min-width:240px; margin-bottom:16px; 
+		"><div class="desktop_div"
+			style=" margin-right:16px; padding-top:6px; min-width:72px; padding-right:8px">
+			<center><a href="https://www.lexaloffle.com/bbs/?uid=21440"><img width=48 height=48 src="8_mario-rek-top.png" style="padding-bottom:4px">
+			<br>
+			<div style="font-size:9pt; margin-bottom:4px">arlefreak</div></a>
+			
+			 
+			</center>
+			</div><div style="width:100%;"><div class="mobile_div" 
+				style="margin-left:8px;"> <span style="color:#f8a">::</span> <a href="https://www.lexaloffle.com/bbs/?uid=21440"><span style="color:#f8a">arlefreak</span></a></div><div style="float:right; width:32px; height:48px;display:table">
+			<div style=" margin:2px;">
+				<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_78125_like"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title="Give this post a star"
+		class="i_rate_78125_like"
+	>
+			<img src="set_like0.png" width=20 height=20>
+		</div></div>
+				</div>
+			</div>
+		
+		<div style=" margin:2px; background-color:#444;"><center>
+				<div style="padding:4px; padding-left:8px; padding-right:8px;
+					background-color:#444; display:table; cursor:pointer;
+					"
+				onClick="
+					el1 = document.getElementById('set_extra_78125');
+					if (toggle_visible(el1))
+						install_dismisser(el1);
+				">
+					<img src="top_drop.png" style="min-width:12px">
+				</div> </center>  
+		</div>
+	</div>
+		<div id="set_extra_78125" style="display:none; float:right; width:318px;
+		"  >
+		<div style=" padding:8px; background-color:#444;
+			position:absolute; width:300px; 
+			z-index: 2;
+			"><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_78125_spam"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_78125_spam"
+	>
+			<img src="set_spam0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_78125_spam', 78125, 'spam', 9);">Mark as Spam</div>	</div>
+		  </div><div style="  margin:2px;">
+			<div style="padding:4px; display:flex; background-color:#444;">
+	<div style="display:flex; align-items: center; cursor:pointer;"
+		class="rate_78125_abuse"
+		
+	
+			onclick="window.alert('Please log in first.')">
+	<div 
+		style="display:table; width:20px; height:20px"
+		title=""
+		class="i_rate_78125_abuse"
+	>
+			<img src="set_abuse0.png" width=20 height=20>
+		</div></div>
+				<div style="margin-left:10px; cursor:pointer"
+	onclick="toggle_set_button('rate_78125_abuse', 78125, 'abuse', 13);">Report Abuse</div>	</div>
+		  </div></div></div><div style="min-height:44px;"><p>@laviform glad you liked it :)!</p></div>
+		<div style="display:table;padding-top:6px;">
+		<font style="color:#707070;font-size:7pt">
+		<a href="https://www.lexaloffle.com/bbs/?pid=78125#p"  style="color:#999" >
+		P#78125</a> 2020-06-15 17:52</font></div></div></div></div></div><div style="width:100%; height:1px; margin-bottom:15px; background-color:#555; 
+					padding-left:16px;padding-right:16px"></div>
+	<div style="display:inline-table;width:100%;margin-bottom:4px;margin-top:4;
+	"></div>
+	<br>
+<p id=comment style="margin-top:20px; margin-bottom:20px">[Please log in to post a comment]</p></div><script id=cart_data_script>
+		p_sub = 0;
+		pdat=[
+	['virush-3', 38236, `Virush`,"",,,"2020-07-05 20:28:31",21440,"arlefreak","",0,"",,1,77498,7,2,'0',[],0,5,,``,``],
+		];
+		var updat=[
+	];
+		search_url_base = "?sub=0&search=";
+		tag_url_base =    "?sub=0&tag=";
+		
+		function make_stat_box(set_name, num, state, post_id, bg, margin)
+		{
+			var imgf = set_name;
+			if (state == 1)
+				imgf = imgf + `1.png`;
+			else
+				imgf = imgf + `0.png`;
+			
+			var s =
+			`
+				<div style="display:flex; background:`+bg+`; padding:6px;
+					align-items: center; cursor:pointer; margin-left:`+margin+`px"
+					class=rate_` + post_id + `_` + set_name;
+			
+			if (set_name!="comments")
+			{
+				s = s +	`				
+					onclick="window.alert('Please log in to like and favourites posts.');"`;
+
+			}
+			
+			s = s + `
+				>
+				<div class=i_rate_` + post_id + `_` + set_name+` style="width:20px;height:20px">
+					<img width=20 height=20 src="https://www.lexaloffle.com/gfx/set_`+imgf+`">
+				</div>
+			`;
+			
+			if (num >= 0)
+				s=s+`<div  style="margin-left:8px">`+num+`</div>`;
+			s = s + `  </div>`;
+			return s;
+		}
+	
+	function generate_thread_preview(dat, set_flags)
+{
+	//var s = `<div style="display:flex;align-items: center; padding:4px">`;
+	
+	var s= `<table width=100% cellspacing=0 cellpadding=0><tr><td width=100%>`;
+
+	var thread_url = `/bbs/?tid=`+dat[1];
+	var pid_url    = `/bbs/?pid=`+dat[0];
+	if (dat[15] == -1){
+		thread_url = pid_url + `&tkey=`+dat[23];
+		pid_url    = pid_url + `&tkey=`+dat[23];
+	}
+
+	// :: thumb
+
+	if (dat[17])
+	{
+		// cover
+		s += `
+		<a href="https://www.lexaloffle.com/bbs/`+pid_url+`#p">
+		<div style="display:flex; min-height:64px; align-items:center; float:left; padding:8px">
+		<div
+			style="
+			cursor:pointer; width:64px; height:64px; 
+			background:url(https://www.lexaloffle.com/bbs/\'`+dat[3]+`\') no-repeat center;
+			-webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;
+			
+		">
+		</div>
+		</div>
+		</a>
+	`;
+
+	/* popup player. better just to show the cart in thread context with fast load
+		s += `
+			<div style="display:flex; min-height:64px; align-items:center; float:left; padding:8px">
+			<div style="width:64px">
+				<a onClick="toggle_playarea('playarea_popup','`+dat[17]+`');">
+					<center>
+					<img src="https://www.lexaloffle.com/bbs/`+dat[3]+`" width=`+dat[4]+` height=`+dat[5]+`></center>
+				</a>
+			</div>
+			</div>
+		`;
+	*/
+	}
+	else
+	{
+		// no cart in thumb; link to cat
+		s += `
+		<div style="display:flex; min-height:64px; align-items:center; float:left; padding:8px">
+		<div style="width:64px">
+			<a href="https://www.lexaloffle.com/bbs/?cat=`+dat[15]+`">
+				<center><img src="https://www.lexaloffle.com/bbs/`+dat[3]+`" width=`+dat[4]+` height=`+dat[5]+`></center>
+			</a>
+		</div>
+		</div>
+	`;
+	}
+	
+	// :: title and tags (gets space left over)
+	{
+		s = s +
+		`<div style="display:flex; min-height:48px; align-items: center; padding:10px;">
+			<div>
+				<div style="font-size:14pt;margin-bottom:8px; margin-top:4px">
+				<a href="https://www.lexaloffle.com/bbs/`+thread_url+`" >`;
+		s = s + dat[2];
+		s = s + `</a>`
+		
+		// by fred, last reply by annie 4 days ago
+		{
+			s += ` <br> <span style="color:#777;font-size:8pt;padding-top:4px; display:table">
+				by <a style="color:#ccc" href="https://www.lexaloffle.com/bbs/?uid=`+dat[7]+`">`+dat[8]+`</a>`;
+			s += ` `+get_relative_time(dat[6]);//+`</span>`;
+			
+			if (true)
+			{
+				if (dat[13] > 1)
+				s += ` ::  
+					<a style="color:#ccc" href="https://www.lexaloffle.com/bbs/?uid=`+dat[10]+`">`+dat[11]+`</a> replied 
+					`+get_relative_time(dat[9]);
+			}
+		}
+		
+		s += `</span>`;
+		
+		s += `</div>`;
+	
+	
+		// category (only need if not viewing that sub-forum)
+		if (false)
+		if (p_sub==0)
+		{
+			s = s + `<div style="float:left; display:flex; align-items:center; margin:4px; padding:4px;
+				background-color:#999; color:#222; font-size:8pt; border-color:#939; border:4px; border-radius:4px">
+			<div style="width:16px"><img src="i_cart1.png" width=16 height=16></div>
+			<div style="display:span">Carts</div></div>`;
+		}
+		
+		// catsub
+		if (p_cat == 0 || p_sub == 0)
+		{
+			label = '';
+			if (p_cat == 0)
+			{
+				label = 'Blog';
+				if (dat[15] == 6) label = 'Voxatron > ';
+				if (dat[15] == 7) label = 'PICO-8 > ';
+				if (dat[15] == -1) label = 'Unlisted';
+			}
+			
+			
+			cols = ['f47','fab','4af','fa4','f8a','5ff','4c4','f47','f8a',  'cde', 'cde', 'cde', '8df', 'cde', 'fcb', '8fa'];
+			
+			col = cols[dat[16]%16];
+			
+			
+				 if (dat[16] == 1) label += 'Discussion';
+			//else if (dat[16] == 2) label += '<img src="i_cart1.png" width=18> Carts';
+			else if (dat[16] == 2) label += 'Cartridges';
+			else if (dat[16] == 3) label += 'Work in Progress';
+			else if (dat[16] == 4) label += 'Collaboration';
+			else if (dat[16] == 5) label += 'Workshop';
+			else if (dat[16] == 6) label += 'Support';
+			else if (dat[16] == 7) label += 'Blog';
+			else if (dat[16] == 8) label += 'Jam';
+			else if (dat[16] == 9) label += 'Code Snippet';
+			else if (dat[16] == 14) label += 'GFX Snippet';
+			else if (dat[16] == 15) label += 'SFX Snippet';
+
+			//else label += '?';
+			
+			s += `
+			<a href="https://www.lexaloffle.com/bbs/?cat=`+dat[15]+`#sub=`+dat[16]+`">
+			<div class=tag style="background-color:#`;
+			s += col;
+			s += `;">`+label+`</div></a>`;
+			
+		}
+		
+		// cc4
+		if (dat[20] & 0x1)
+		{
+			s += `
+				<a href="https://www.lexaloffle.com/bbs/?cat=`+p_cat+`#sub=`+p_sub+`&cc4=1">
+				<div class=tag style="background-color:#f90; color:#fff"> CC</div></a>`;
+		}
+		
+		// resolved
+		if (dat[16] == 6) // support sub. to do: how-to or workshop sub?
+		{
+			if (dat[19] & 0x1)
+				s += `<div class=tag style="background-color:#2a4; color:#afa">
+				<img src="set_tick1.png" width=10 height=10> Resolved</div>`;
+			else
+				s += `<div class=tag style="background-color:#c96; color:#fff">Unresolved</div>`;	
+		}
+		
+		
+		// tags
+		if (dat[18]) // tags
+		{
+			for (var j=0; j < dat[18].length; j++)
+				s +=` <a href="https://www.lexaloffle.com/bbs/`&#32;+&#32;tag_url_base&#32;+&#32;dat[18][j]&#32;+&#32;`"><div class="tag">#`+dat[18][j]+`</div></a>`;
+		}
+		
+		s = s + `</div></div>`;
+	}
+	
+	s = s + `</td><td>`;
+
+	// :: extra info float right
+	if (dat[15] != -1)
+	{
+		s = s + `
+		<div style="float:right;margin-right:12px;display:flex;align-items: center;">`;
+
+		// :: resolved tick in support sub, when same author
+		if (false) // nope -- just set inside post view (should be after reading anyway)
+		if (dat[16] == 6 && s_uid == dat[7])
+		{
+			s = s + make_stat_box("tick", -1, (set_flags & 0x4) ? 1 : 0, dat[0]);
+		}
+	
+		// :: author + timestamp x2
+		/*
+		s = s + `
+		<div class="desktop_div" style="margin-right:10px; min-width:120px; font-size:9pt">
+
+			<a href="https://www.lexaloffle.com/bbs/?uid=`+dat[7]+`">`+dat[8]+`</a><br>
+			<span style="color:#777;font-size:8pt;margin-right:10px;">`+get_relative_time(dat[6])+`</span><br>
+			<div style="display:block; height:6px"></div>
+			<a href="https://www.lexaloffle.com/bbs/?uid=`+dat[10]+`">`+dat[11]+`</a><br>
+			<span style="color:#777;font-size:8pt;margin-right:10px;">`+get_relative_time(dat[9])+`</span>
+			
+		</div>
+		`;
+		*/
+		
+		// :: fav, like, comments
+		s = s + `<div class="desktop_div" style="background-color:;">`;
+		s = s + `
+		<div style="min-width:160px;float:right;margin-right:4px;display:flex;">`;
+
+		s = s + make_stat_box("fav", -1, (set_flags & 0x2) ? 1 : 0, dat[0], "#555", 12);
+		s = s + make_stat_box("like", dat[12],  (set_flags & 0x1) ? 1 : 0, dat[0], "#555", 12);
+
+		
+		s = s + `<a href="https://www.lexaloffle.com/bbs/`+thread_url+`">`;
+
+		s = s + make_stat_box("comments", dat[13], 0, dat[0], "#555", 12);
+		s = s + `</a></div>`;
+		
+		if (false)
+		{
+			s += `
+				<span style="color:#777;font-size:8pt;padding:4px; padding-left:12px; display:table;">
+				<a href="https://www.lexaloffle.com/bbs/?uid=`+dat[7]+`">`+dat[8]+`</a>
+				`+get_relative_time(dat[6])+`</span>`;
+		}
+		
+		s += `</div>`;
+
+		// end of extra info float right
+		s = s + `</div>`;
+	}
+
+	s = s + `</td></tr></table>`;
+	//s = s + `</div>`;
+
+	return s;
+}
+
+
+
+
+// overlapping
+function generate_cart_preview_overlapping(dat, set_flags)
+{
+	// /gfx/p8b_pico8.png
+	
+	s = '';
+	
+	// image
+	s = s + `
+	<div
+	
+	style="cursor:pointer; margin-right:10px; float:left;
+		width:256px; height:192px; 
+		margin-bottom:12px;
+		background:url('https://www.lexaloffle.com/bbs/`+dat[3]+`') no-repeat center;
+		-webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;
+		">	
+	`;
+	
+	// title, author
+	s += `
+	<div >
+	<div style="display:block; padding-top:0px; padding-bottom:6px; overflow:hidden; border-radius:0px;">
+
+
+	<div style="display:block; padding-top:4px; padding-bottom:8px; 
+			background-color:rgba(16,0,32,0.5); // rgba
+			border-radius:0px;
+			min-height:40px ">
+
+	<div style="float:right; display:table;">
+	`;
+	
+	// favourite, cc4
+	s += `<div style="margin-top:-6px">`;
+	
+	// dat[0] is the containing post
+	s += make_stat_box("fav", -1, 0, dat[0], "", 2);
+	
+	if (dat[20] & 0x1) //cc4
+	{
+		s += `
+		<a href="https://www.lexaloffle.com/bbs/?cat=`+p_cat+`#sub=`+p_sub+`&cc4=1">		
+		<div class=tag style="background-color:#444; margin-top:-4px; margin-left:6px; 
+				color:#bbb; border:1px solid; border-radius:4px; padding:0px;
+				padding-right:4px; padding-left:4px">
+		CC</div></a>`;
+	}
+	
+	s += `</div>`;
+	
+	
+	s += `
+		</div>
+		<div style="max-height:90px; margin-left:5px">
+			
+			<a href="https://www.lexaloffle.com/bbs/?pid=`+dat[0]+`#p">
+				<font style="color:#fff; font-size:12pt">`+dat[22]+`</font>
+			</a>
+			<br>
+			<a href="https://www.lexaloffle.com/bbs/?uid=`+dat[7]+`&amp;mode=carts">
+				<font style="color:#fab; font-size:8pt">@`+dat[8]+`</font>
+			</a>
+			
+		</div>
+		
+		
+	
+	</div>
+	</div>
+	</div>
+	`;
+	
+	
+	// buttons
+	s = s + `
+		<div style="display:flex; color:#222;">
+	`;
+	
+	//s = s + make_stat_box("comments", -1, -1, dat[0], "#ddd");
+	
+	// like and fav are for parent post, not cart id
+	bgcol="#ddd";
+	bgcol="#bbb";
+	
+	//s = s + '<div style="display:inline-block">';
+	
+	if (false)
+	{
+		s = s + make_stat_box("cc", -1, (set_flags & 8) ? 1 : 0, dat[0], bgcol, 2);
+		s = s + make_stat_box("fav", -1, (set_flags & 0x12) ? 1 : 0, dat[14], bgcol, 2);
+		s = s + make_stat_box("like", dat[12],  (set_flags & 0x11) ? 1 : 0, dat[14], bgcol, 2);
+		
+	}
+	
+	//s = s + '</div>';
+	
+	s = s + `
+		</div></div>
+	`;
+	
+	s = s + `
+	
+		</div>
+		</div>
+	`;
+	
+	return s;
+}
+
+function generate_cart_preview(dat, set_flags)
+{
+	// /gfx/p8b_pico8.png
+	
+	s = '';
+	bgcol="#bbb";
+	
+	
+	// image
+	/* pop up player
+	s = s + `
+	<a onClick="toggle_playarea('playarea_popup','`+dat[17]+`');" style="cursor:pointer;">
+	<img class=pixel_perfect src="https://www.lexaloffle.com/bbs/`+dat[3]+`" width=`+dat[4]+` height=`+dat[5]+` 
+		style="border:1px solid black;
+				margin-bottom:-4px;
+		">
+	</a>
+	`;
+	*/
+
+
+	// image
+
+	// cover square
+	// pixel perfect iff pico-8
+	var class_str='';
+	if (dat[15] == 7)
+		class_str='class="pixel_perfect"';
+
+	s = s + `
+		<a href="https://www.lexaloffle.com/bbs/?pid=`+&#32;dat[0]&#32;+&#32;`#p" >
+			<div 
+				`+class_str+`
+				style="
+				border-radius:0px;
+				cursor:pointer; width:256px; height:192px; 
+				background:url(https://www.lexaloffle.com/bbs/\'`+dat[3]+`\') no-repeat center;
+				-webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;
+			">
+			</div>
+		</a>
+	`;
+	
+	
+	s += `
+	
+	<div>
+
+	<div style="display:block; padding-top:0px; padding-bottom:6px; overflow:hidden; border-radius:0px;">
+	<div style="background-color:#444448; height:4px; width:256px; border-radius:0px;"></div>
+	<div style="display:block; padding-top:8px; padding-bottom:8px; background-color:#555; color:#fff;
+				border-radius:0px;
+				min-height:36px; width:256px;">
+	<div style="float:right; display:table;">
+	`;
+	
+	// favourite, cc4
+	s += `<div style="margin-top:-6px">`;
+	
+	// dat[0] is the containing post
+	s = s + make_stat_box("fav", -1, (set_flags & 0x2) ? 1 : 0, dat[0], "", 2);
+	
+	if (false)
+	{
+		s += '<div style="margin-top:-10px">';
+		s = s + make_stat_box("like", dat[12],  (set_flags & 0x1) ? 1 : 0, dat[0], "", 2);
+		s += '</div>';
+	}
+	
+	
+	if (dat[20] & 0x1)
+	{
+		s += `<div class=tag style="background-color:#444; margin-top:-4px; margin-left:6px; 
+				color:#bbb; border:1px solid; border-radius:4px; padding:0px;
+				padding-right:4px; padding-left:4px">
+		CC</div>`;
+	}
+	
+	s += `</div>`;
+	
+	var imgstr = '<img src="p8b_pico8.png" width=20>';
+	if (dat[15] == 6) imgstr = '<img src="p8b_vox.png" width=20>';
+	
+	// title, author
+	s += `
+		</div>
+		
+		<div style="max-height:90px; margin-left:5px; display:table">
+			
+			<div style="padding-bottom:3px; padding-right:4px">
+			<a href="https://www.lexaloffle.com/bbs/?pid=`+dat[0]+`#p">
+				<font style="color:#fff; font-size:10pt">`+dat[22]+`</font>
+			</a>
+			</div>
+
+			<div style="float:left; margin-bottom:4px; margin-right:8px">`+imgstr+`</div>
+			<a href="https://www.lexaloffle.com/bbs/?uid=`+dat[7]+`&amp;mode=carts">
+				<font style="color:#fff; font-size:8pt;">by `+dat[8]+`</font>
+			</a>
+			
+		</div>
+		
+		
+	
+	</div>
+	</div>
+	</div>
+	`;
+	
+	
+	// buttons
+	s = s + `
+		<div style="display:flex; color:#222;">
+	`;
+	
+	//s = s + make_stat_box("comments", -1, -1, dat[0], "#ddd");
+	
+	// like and fav are for parent post, not cart id
+	
+	//s = s + '<div style="display:inline-block">';
+	
+	if (false)
+	{
+		s = s + make_stat_box("cc", -1, (set_flags & 8) ? 1 : 0, dat[0], bgcol, 2);
+		s = s + make_stat_box("fav", -1, (set_flags & 0x2) ? 1 : 0, dat[0], bgcol, 2);
+		s = s + make_stat_box("like", dat[12],  (set_flags & 0x1) ? 1 : 0, dat[0], bgcol, 2);
+		
+	}
+	
+	//s = s + '</div>';
+	
+	s = s + `
+		</div></div>
+	`;
+	
+	s = s + `
+	
+		</div>
+	`;
+	
+	return s;
+}
+
+
+function inject_cart_data()
+{
+
+/*
+	var el = document.getElementById('cart_data_script');
+	if (el)
+	{
+		eval(el.innerHTML);
+	}
+*/
+
+	console.log('@ injecting ' + pdat.length);
+	
+	for (var i = 0; i < pdat.length; i++)
+	{
+		// generate inner html
+	
+		var dat = pdat[i];
+		set_flags = updat[i];
+		
+		el = document.getElementById('pdat_'+dat[0]);
+
+		if (el)
+		{
+			if (pdat[i][19] & 2) // show as cart
+				el.innerHTML = generate_cart_preview(pdat[i], updat[i]);
+			else
+				el.innerHTML = generate_thread_preview(pdat[i], updat[i]);
+		}
+		else
+		{
+			// no placeholder
+			console.log('error: no placeholder for pdat_'+dat[0]);
+		}
+	}
+}
+
+
+
+//------------------------------------------
+
+	window.onhashchange=load_hash_location;
+	//inject_cart_data();
+
+//------------------------------------------
+
+
+</script></div></div>
+			
+
+	<div style="
+		width:100%;
+		min-height:300px;
+		background-color:#000;
+	"><div style="padding:20px">
+	
+	<center><div style="display:table">
+	
+		<div style="display:block; margin-bottom:10px;">
+		<center>
+			<a style="margin:8px" href="https://www.lexaloffle.com/info.php">About</a> |
+			<a style="margin:8px" href="https://www.lexaloffle.com/cdn-cgi/l/email-protection#97fff2eed7fbf2eff6fbf8f1f1fbf2b9f4f8fa">Contact</a> |
+			<a style="margin:8px"  href="https://www.lexaloffle.com/games.php?page=updates">Updates</a> |
+			<a style="margin:8px"  href="https://www.lexaloffle.com/info.php?page=tos">Terms of Use</a> |
+			<a style="margin:8px"  href="https://www.lexaloffle.com/picotron.php">Picotron</a>
+		</center>
+		</div>
+		
+		<center>
+			<div style="display:table; margin-bottom:10px">
+			<div style="font-size:10pt; display:flex; align-items:center">
+				Follow Lexaloffle:
+				&nbsp
+				<a href="https://twitter.com/lexaloffle" class=social_button><img class=pixel_perfect src="so_twitter.png" width=32 height=32 border=0></a>
+				&nbsp
+				<a href="https://www.facebook.com/pages/Lexaloffle-Games/152417151455469" class=social_button>
+					<img class=pixel_perfect  src="so_facebook.png" width=32 height=32 border=0></a>
+				&nbsp
+				<a href="https://www.youtube.com/user/lexaloffletv" class=social_button>
+					<img class=pixel_perfect  src="so_youtube.png" width=32 height=32 border=0></a>			
+				&nbsp
+				<a href="https://www.lexaloffle.com/bbs/feed.php" class=social_button><img class=pixel_perfect  src="so_rss.png" width=32 height=32></a>
+			</div>
+			</div>
+			
+			<div style="color:#777;font-size:8pt;">
+			
+				Generated 2021-11-24 00:01:13 |
+				0.097s | 
+				Q:26 <div id=cache_info style="display:inline;"> </div>
+			</div>
+
+		</center>
+
+	</div></center>
+	
+
+	</div></div>
+
+
+</body_0>
+<script data-cfasync="false" src="email-decode.min.js"></script></body>
+</html>
+	

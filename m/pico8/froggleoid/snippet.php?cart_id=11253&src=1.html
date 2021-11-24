@@ -1,0 +1,29 @@
+
+<script src="cart_tools.js">
+</script>
+<script>
+  Module.onRuntimeInitialized = _ => {
+    const print_pico8_code = Module.cwrap('print_pico8_code', 'number', ['string','string']);
+	print_pico8_code("/bbs/cposts/1/11253.p8.png","output");
+  };
+</script>
+
+
+<STYLE TYPE="text/css">
+<!--
+.line_num {
+	color: #446;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-webkit-touch-callout : none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none; 
+}
+</STYLE>
+
+<div id="output" style="padding:0px;margin:0px; width:100%; height:100%;
+		font-family : monospace; font-size:9pt;background-color:#224; overflow:scroll">
+
+</div>
+
