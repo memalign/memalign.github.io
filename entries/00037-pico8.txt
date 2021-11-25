@@ -1,0 +1,143 @@
+Title: PICO-8
+Date: 11/24/2021
+Tags: Games
+
+[Image:/m/pico8/celeste/celesterevenge1.gif]
+
+[Link:https://www.lexaloffle.com/pico-8.php]PICO-8[/Link] is a way to make "retro"-style games and then play them anywhere, including on the web.
+
+PICO-8 initially caught my eye with a few beautiful pixelated games and graphics. Just look at the delightful screen capture of [Link:https://www.lexaloffle.com/bbs/?tid=2145]Celeste[/Link] above.
+
+Here's what I love about this platform:
+
+- Thanks to web technologies, these games can be played anywhere. They work great on touchscreens on iOS and Android. They work great with keyboard and mouse.
+
+- I love the aesthetic of these games: the low resolution, the 16-color palette. It's inspiring to see how expressive people have been despite (and thanks to) these limitations.
+
+- Another limitation is code size. This usually means the games are bite-sized and can be played and beaten in a sitting.
+
+- These limitations are chosen on purpose and are part of the magic. From the [Link:https://www.lexaloffle.com/info.php]about[/Link] page for PICO-8's website: "Lexaloffle is the home of computer games and fantasy consoles made by [Link:https://www.lexaloffle.com/bbs/?uid=1]Joseph White[/Link], whose principle mission is to seek out and explore mathematically cute sets of rules that somehow give rise to thematically cute game worlds."
+
+- My taste in games is trapped in the past, probably the SNES era. Even though SNES was slightly before my time, I've had a blast playing those games. In comparison, games that push the limits of today's hardware are impressive but they are too complex for me. What truly brings me joy are simple "retro"-style games.
+
+- PICO-8 introduced me to the concept of a game "[Link:https://en.wikipedia.org/wiki/Video_game_remake#Demakes]demake[/Link]". When creating a demake, people boil a game down to its essence. They create a game with the same feel or personality as the original game but smaller and much simpler, usually with simpler graphics. My favorite demake right now is [Link:https://www.lexaloffle.com/bbs/?tid=29590]Picopolis[/Link], a demake of Sim City.
+
+- PICO-8 games are distributed as PNG "virtual cartridges" with the code embedded in the cartridge image itself. The images look like the physical game cartridges of the 1980s and 90s. How delightful! You can see examples below.
+
+- The creator of PICO-8, [Link:https://www.lexaloffle.com/bbs/?uid=1]Joseph White[/Link] aka "zep" ([Link:https://twitter.com/lexaloffle]twitter[/Link]), is a prolific software developer. He came up with the idea for PICO-8 and then built all of the development tools for editing code, music, sound effects, graphics, etc. In addition to creating PICO-8, he also built the BBS website where users post, comment on, and collaborate on games. The community is very creative and positive. He's made his own games such as [Link:https://www.lexaloffle.com/bbs/?tid=40058]Wobblepaint[/Link]. He has other projects too, which you can learn about on [Link:https://www.lexaloffle.com/]lexaloffle.com[/Link].
+
+
+Here are some of my favorite games so far:
+
+
+
+*** Categorize all the links, write a sentence about each one, post it with its cartridge image; link to page and my backups
+
+
+Demake:
+[x] -Sonic16x16 https://www.lexaloffle.com/bbs/?pid=97365#playing
+[x] -Pico-Man https://www.lexaloffle.com/bbs/?pid=11437#playing
+[x] - Picopolis: https://www.lexaloffle.com/bbs/?tid=29590#playing
+   - made by https://en.wikipedia.org/wiki/Jens_Bergensten
+[x] - Snowfight demake! https://www.lexaloffle.com/bbs/?pid=mb_advent2019#playing
+
+
+Platformer/Metroidvania:
+[x] Get Me the Spell Outta Here!! - https://www.lexaloffle.com/bbs/?tid=38333#playing
+[x] - MetroCUBEvania https://www.lexaloffle.com/bbs/?pid=48475#playing
+
+[x] - Celeste: https://www.lexaloffle.com/bbs/?tid=2145#playing
+   - https://en.wikipedia.org/wiki/Celeste_(video_game)
+[x] - Celeste 2: https://www.lexaloffle.com/bbs/?pid=86783#p
+
+
+Fast platformer:
+[x] - Sprint'a'Gift: https://www.lexaloffle.com/bbs/?tid=40717
+
+
+Dungeon Crawler:
+[x] - It Takes Four to Party: https://www.lexaloffle.com/bbs/?tid=29788
+   - made by https://en.wikipedia.org/wiki/Jens_Bergensten
+
+3D:
+[x]  - racing game: https://www.lexaloffle.com/bbs/?pid=mot_grandprix-3#playing
+
+
+Simple:
+[x]  - Froggleoid: https://www.lexaloffle.com/bbs/?pid=11111#playing
+[x] - Tiny Dungeon Explorer https://www.lexaloffle.com/bbs/?pid=96332#playing
+
+
+
+Not available yet:
+  - Metroid: https://twitter.com/johanpeitz/status/1438898759484780547?s=20
+  - picoCAD: https://twitter.com/RadioFlower/status/1437838558463598592?s=20  
+      - video from the tweet: https://video.twimg.com/tweet_video/E_N69IIWYAAuNbA.mp4 converted to gif: https://storage.cloudconvert.com/tasks/3480eee6-0a0c-4498-9b38-1aea671b061e/E_N69IIWYAAuNbA.gif?AWSAccessKeyId=cloudconvert-production&Expires=1637917762&Signature=CBxvlheodpMVn649GIWw9kttunQ%3D&response-content-disposition=attachment%3B%20filename%3D%22E_N69IIWYAAuNbA.gif%22&response-content-type=image%2Fgif   saved as picoCAD_gastly.gif
+  
+  
+
+
+ - https://www.lexaloffle.com/pico-8.php?page=faq
+ - So many cool ideas: https://www.lexaloffle.com/bbs/?cat=7#sub=2
+   - featured: https://www.lexaloffle.com/bbs/?cat=7&carts_tab=1&#sub=2&mode=carts&orderby=featured
+
+
+[x] - made by the creator of pico8: wobblepaint: https://www.lexaloffle.com/bbs/?tid=40058#comments
+    - https://news.ycombinator.com/item?id=24927001
+[x] - also by zep: https://www.lexaloffle.com/bbs/?tid=34088#playing
+
+[x] - https://pahammond.itch.io/phoenix
+
+[x] - https://www.lexaloffle.com/bbs/?tid=3421#playing
+[x] - https://soundole.itch.io/spoider-boi
+[x] - https://eggnog.itch.io/u-dead
+[x] - https://joeschmoeish.itch.io/falling-balls
+[x] - https://www.lexaloffle.com/bbs/?tid=43833#playing
+[x] - https://www.lexaloffle.com/bbs/?tid=35349#comments
+[x] - https://freds72.itch.io/poom
+[x] - https://www.lexaloffle.com/bbs/?pid=98070#playing
+[x] - https://www.lexaloffle.com/bbs/?tid=44863#playing
+[x] - lumines: https://www.lexaloffle.com/bbs/?tid=43692#playing
+[x] - Mea's Castle: https://www.lexaloffle.com/bbs/?pid=81448#playing
+[x] - The Lost Night (rpg): https://www.lexaloffle.com/bbs/?pid=88259#playing
+[x] - Virush: https://www.lexaloffle.com/bbs/?tid=38236
+
+ - Download the whole archive to have a ton of offline games?
+ 
+
+
+
+
+
+*** Original post below this line =====
+
+I've always had a hard time [Link:/p/emoji-conway.html]falling asleep[/Link]. Closing my eyes invites a whirlwind of thoughts. I can't stop thinking so I can't fall asleep.
+
+Then I found a way to clear my head and fall asleep quickly. It's been working for months now!
+
+Here's what I do:
+
+As I shower and brush my teeth before bed, I spend that ~30 minutes clearing my head. When I notice a thought, I think "ah" and let the thought go, let it dissipate and fade. This isn't the time for thinking and problem solving, it's the time to empty my mind so I can fall asleep.
+
+I repeat this for every thought that creeps in. I've found it also helps to focus on my immediate senses to keep my head emptier: the sound of the toothbrush, the soap/water/friction on my hands. I'm grounded in the present. I'm not thinking about these sounds and feelings; I'm just experiencing them without commentary.
+
+Sometimes this helps me notice a feeling of muscle tightness. Maybe I'm furrowing my brow or frowning. Maybe I have tightness in my shoulders. I release the tension and phsyically relax.
+
+I continue this meditation as I slide into bed until I fall asleep. And I continue it if I wake up in the middle of the night.
+
+
+[Image:/m/horizontalseparator.png]
+
+I don't know if this technique is real "meditation" in the Zen Buddhism sense but I was inspired to try it after, months ago, stumbling upon [Link:https://nkanaev.com/zen101/en/]101 Zen Stories[/Link] ([Link:https://en.wikipedia.org/wiki/101_Zen_Stories]Wikipedia[/Link]). (Warning: these are old and may contain antiquated or even racist terms)
+
+I don't understand them even though they are simple. I tried to search for answers about one of the more famous stories: [Link:https://nkanaev.com/zen101/en/021/]The Sound of One Hand[/Link] ([Link:/m/sound-of-one-hand.html]mirror[/Link]).
+
+I found a [Link:https://www.quora.com/What-is-the-meaning-behind-What-is-the-sound-of-one-hand-clapping]Quora thread[/Link] with some discussion. No answer was perfectly satisfying but two similar posts stood out:
+
+Khiêm Bảo Thiện: 
+[Quote]However, when one asks you about one hand clapping - which is extraordinary, uncommon, unseen, not understandable - your mind starts to set on a quest for answer, which raises a lot of noises, like you throw a big rock into a tranquil lake. ... So, using this koan and similar, for certain situations, helps the learner realize his/her mind's activities.[/Quote]
+
+Chris Peters:
+[Quote]The idea behind this phrase is not literal, but is meant to "blend" your mind Matrix-style and hopefully trick you into observing your mind as it kinda freaks out.[/Quote]
+
+Is the key to enlightenment learning to notice your thoughts and then clear your head? Who knows. I certainly feel lighter when my head is clear, my muscles are relaxed, and I float off to sleep.
