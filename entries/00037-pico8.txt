@@ -51,15 +51,27 @@ Demakes and Remakes:
   
 
 [x] -Pico-Man https://www.lexaloffle.com/bbs/?pid=11437
-     - A clone of Pac-Man. Thoroughly enjoyable just like the original.
-
+     - A clone of Pac-Man. Thoroughly enjoyable just like the original. One user commented, "more proof that games just look cuter on the PICO :3".
 
 
 [x] - https://pahammond.itch.io/phoenix
-[x] - https://freds72.itch.io/poom
-[x] - lumines: https://www.lexaloffle.com/bbs/?tid=43692#playing
+   - My introduction to Phoenix-style games was in [Link:/p/draw-shapes.html]MirageOS on a TI calculator[/Link]. It turns out Phoenix was originally an arcade game and this is a more faithful remake.
 
+[x] - https://pahammond.itch.io/lode-runner
+   - A clone of Lode Runner. Classic :)
+
+[x] - https://freds72.itch.io/poom
+   - A port of Doom. No platform is complete without one of these! This port really pushes the limits of PICO-8 and works around some of the limitations by splitting its code across several cartridges and then seamlessly jumping between them.
+
+[x] - lumines: https://www.lexaloffle.com/bbs/?tid=43692#playing
+   - This is a work-in-progress demake of Lumines. The mechanics aren't perfect and the iconic and addictive music and sound effects are missing but this still satisfied my craving for some Lumines action! That's particularly helpful because Lumines is one of those games that has been released several time as a new iOS app only to be abandoned and broken a few years later.
+
+- Teaser: Metroid
+   - This demake isn't available to play but it looks SO GOOD!
   - Not available yet: Metroid: https://twitter.com/johanpeitz/status/1438898759484780547?s=20
+  
+  - https://video.twimg.com/tweet_video/E_f-kZAXIA8ArT_.mp4
+  
   
   
 
