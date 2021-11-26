@@ -35,15 +35,28 @@ Here are some of my favorite games so far:
 
 
 Demakes and Remakes:
-[x] -Sonic16x16 https://www.lexaloffle.com/bbs/?pid=97365#playing
-[x] -Pico-Man https://www.lexaloffle.com/bbs/?pid=11437#playing
-[x] - Picopolis: https://www.lexaloffle.com/bbs/?tid=29590#playing
-   - made by https://en.wikipedia.org/wiki/Jens_Bergensten
-[x] - Snowfight demake! https://www.lexaloffle.com/bbs/?pid=mb_advent2019#playing
+[x] - Picopolis: https://www.lexaloffle.com/bbs/?tid=29590
+   - Demake of Sim City. Usually Sim City has no win condition and I like how the author gave us some way to declare victory: by building a $10 million "Victory Monument". Playing this scratched the itch I had to play classic Sim City. Picopolis is made by [Link:https://en.wikipedia.org/wiki/Jens_Bergensten]Jens Bergensten[/Link] (aka Jeb) who's best known for significant contributions to Minecraft.
+
+
+[x] - Snowfight demake! https://www.lexaloffle.com/bbs/?pid=mb_advent2019
+      - This is a remake of an old Flash game winter holidays greeting card. Even the same winning strategy works as it did on the original game. Major nostalgic fun :)
+      
+
+[x] -Sonic16x16 https://www.lexaloffle.com/bbs/?pid=97365
+      - I love this! Great example of a demake. Sonic is only 2 pixels and yet anyone who's played a side-scrolling Sonic game will recognize the feel of the game, the music, and the iconic [Link:https://en.wikipedia.org/wiki/Green_Hill_Zone]Green Hill Zone[/Link].
+
+[x] - R-Type: https://www.lexaloffle.com/bbs/?pid=98070
+      - Intensely challenging remake of the classic side-scrolling shoot'em up game. Fortunately there's a cheat mode! 
+  
+
+[x] -Pico-Man https://www.lexaloffle.com/bbs/?pid=11437
+     - A clone of Pac-Man. Thoroughly enjoyable just like the original.
+
+
+
 [x] - https://pahammond.itch.io/phoenix
 [x] - https://freds72.itch.io/poom
-[x] - R-Type: https://www.lexaloffle.com/bbs/?pid=98070#playing
-[x] - Stargate: https://www.lexaloffle.com/bbs/?tid=44863#playing
 [x] - lumines: https://www.lexaloffle.com/bbs/?tid=43692#playing
 
   - Not available yet: Metroid: https://twitter.com/johanpeitz/status/1438898759484780547?s=20
