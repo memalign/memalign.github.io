@@ -30,44 +30,63 @@ Here's what I love about this platform:
 Here are some of my favorite games so far:
 
 
-
-*** Categorize all the links, write a sentence about each one, post it with its cartridge image; link to page and my backups
+***  Post each with its cartridge image; link to page and my backups; figure out exact formatting after I have the rest done
 
 
 Demakes and Remakes:
+[Image:/m/pico8/picopolis/42427.p8.png]
 [x] - Picopolis: https://www.lexaloffle.com/bbs/?tid=29590
+[Link:/m/pico8/picopolis/index.html]backup[/Link]
    - Demake of Sim City. Usually Sim City has no win condition and I like how the author gave us some way to declare victory: by building a $10 million "Victory Monument". Playing this scratched the itch I had to play classic Sim City. Picopolis is made by [Link:https://en.wikipedia.org/wiki/Jens_Bergensten]Jens Bergensten[/Link] (aka Jeb) who's best known for significant contributions to Minecraft.
 
 
+[Image:/m/pico8/snowfight/mb_advent2019-2.p8.png]
 [x] - Snowfight demake! https://www.lexaloffle.com/bbs/?pid=mb_advent2019
+[Link:/m/pico8/snowfight/index.html]backup[/Link]
       - This is a remake of an old Flash game winter holidays greeting card. Even the same winning strategy works as it did on the original game. Major nostalgic fun :)
       
 
+[Image:/m/pico8/sonic16x16/8JwsJq.gif]
 [x] -Sonic16x16 https://www.lexaloffle.com/bbs/?pid=97365
+[Link:/m/pico8/sonic16x16/index.html]backup[/Link]
       - I love this! Great example of a demake. Sonic is only 2 pixels and yet anyone who's played a side-scrolling Sonic game will recognize the feel of the game, the music, and the iconic [Link:https://en.wikipedia.org/wiki/Green_Hill_Zone]Green Hill Zone[/Link].
 
+[Image:/m/pico8/rtype/rtype-2.p8.png]
 [x] - R-Type: https://www.lexaloffle.com/bbs/?pid=98070
+[Link:/m/pico8/rtype/index.html]backup[/Link]
       - Intensely challenging remake of the classic side-scrolling shoot'em up game. Fortunately there's a cheat mode! 
   
 
+[Image:/m/pico8/picoman/22937.p8.png]
 [x] -Pico-Man https://www.lexaloffle.com/bbs/?pid=11437
+[Link:/m/pico8/picoman/index.html]backup[/Link]
      - A clone of Pac-Man. Thoroughly enjoyable just like the original. One user commented, "more proof that games just look cuter on the PICO :3".
 
 
+[Image:/m/pico8/phoenix/phoenix08-0.p8.png]
 [x] - https://pahammond.itch.io/phoenix
+[Link:/m/pico8/phoenix/index.html]backup[/Link]
    - My introduction to Phoenix-style games was in [Link:/p/draw-shapes.html]MirageOS on a TI calculator[/Link]. It turns out Phoenix was originally an arcade game and this is a more faithful remake.
 
+
+[Image:/m/pico8/loderunner/loderunner08-1.p8.png]
 [x] - https://pahammond.itch.io/lode-runner
+[Link:/m/pico8/loderunner/index.html]backup[/Link]
    - A clone of Lode Runner. Classic :)
 
+[Image:/m/pico8/poom/poom.png]
 [x] - https://freds72.itch.io/poom
+[Link:/m/pico8/poom/index.html]backup[/Link]
    - A port of Doom. No platform is complete without one of these! This port really pushes the limits of PICO-8 and works around some of the limitations by splitting its code across several cartridges and then seamlessly jumping between them.
 
-[x] - lumines: https://www.lexaloffle.com/bbs/?tid=43692#playing
+
+[Image:/m/pico8/picones/picones_0_0_1-0.p8.png]
+[x] - Picones: https://www.lexaloffle.com/bbs/?tid=43692#playing
+[Link:/m/pico8/picones/index.html]backup[/Link]
    - This is a work-in-progress demake of Lumines. The mechanics aren't perfect and the iconic and addictive music and sound effects are missing but this still satisfied my craving for some Lumines action! That's particularly helpful because Lumines is one of those games that has been released several time as a new iOS app only to be abandoned and broken a few years later.
 
 - Teaser: Metroid
-   - This demake isn't available to play but it looks SO GOOD!
+   - This demake isn't available to play (yet?) but it looks SO GOOD!
   - Not available yet: Metroid: https://twitter.com/johanpeitz/status/1438898759484780547?s=20
   - /m/pico8/pico8_metroid.gif
   - https://video.twimg.com/tweet_video/E_f-kZAXIA8ArT_.mp4
@@ -156,11 +175,9 @@ Simple:
    - A work-in-progress with a similar feel to Lode Runner. It's really cool that these levels are procedurally generated.
 
 
-  
-Explore more games:
- - https://www.lexaloffle.com/pico-8.php?page=faq
- - So many cool ideas: https://www.lexaloffle.com/bbs/?cat=7#sub=2
-   - featured: https://www.lexaloffle.com/bbs/?cat=7&carts_tab=1&#sub=2&mode=carts&orderby=featured
+Explore more about PICO-8:
 
-
-
+- [Link:https://en.wikipedia.org/wiki/PICO-8]PICO-8[/Link] on Wikipedia
+- Official [Link:https://www.lexaloffle.com/pico-8.php?page=faq]FAQ[/Link]
+- [Link:https://www.lexaloffle.com/bbs/?cat=7&carts_tab=1&#sub=2&mode=carts&orderby=featured]Featured cartridges[/Link]
+- [Link:https://www.lexaloffle.com/bbs/?cat=7#sub=2]Cartridge BBS[/Link]
