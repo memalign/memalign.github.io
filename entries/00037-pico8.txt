@@ -199,13 +199,19 @@ Simple:
 [Link:/m/pico8/froggleoid/index.html]backup[/Link]
    - A cute little mini-game by zep. Supports multiple players!
 
+[Image:/m/pico8/spoiderboi/spoiderboi.png]
 [x] - https://soundole.itch.io/spoider-boi
+[Link:/m/pico8/spoiderboi/index.html]backup[/Link]
    - A one-button Spider-Man-inspired game. I like the feel of the game!
 
+[Image:/m/pico8/fallingballs/fallingballs.png]
 [x] - https://joeschmoeish.itch.io/falling-balls
+[Link:/m/pico8/fallingballs/index.html]backup[/Link]
    - I find this concept really funny!
    
+[Image:/m/pico8/dungeonguy/dungeonguy-1.png]
 [x] - Dungeon guy: https://www.lexaloffle.com/bbs/?tid=35349
+[Link:/m/pico8/dungeonguy/index.html]backup[/Link]
    - A work-in-progress with a similar feel to Lode Runner. It's really cool that these levels are procedurally generated.
 
 
