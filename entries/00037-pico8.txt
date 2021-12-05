@@ -145,35 +145,48 @@ Fast platformer:
 
 
 RPG:
+[Image:/m/pico8/lostnight/the_lost_night-5.p8.png]
 [x] - The Lost Night (rpg): https://www.lexaloffle.com/bbs/?pid=88259
+[Link:/m/pico8/lostnight/index.html]backup[/Link]
    - Fairly complete RPG! I like the world and the quests. I don't like how many times I had to play the mini-game. I almost gave up when I was just about to beat the game because I found the mini-game so tedious. It reminded me of how many Zubat you have to fight in Pokémon caves. Grind through and you'll beat the game.
 
 
 Turn-based:
+[Image:/m/pico8/virush/virush-3.p8.png]
 [x] - Virush: https://www.lexaloffle.com/bbs/?tid=38236
+[Link:/m/pico8/virush/index.html]backup[/Link]
    - With some tower-defense mechanics too. Fun!
 
 
 Dungeon Crawler:
+[Image:/m/pico8/fourtoparty/43288.p8.png]
 [x] - It Takes Four to Party: https://www.lexaloffle.com/bbs/?tid=29788
+[Link:/m/pico8/fourtoparty/index.html]backup[/Link]
    - Another game made by Jens Bergensten. This one has a similar feel to the dungeons in classic [Link:https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Link%27s_Awakening]Zelda[/Link] games with [Link:https://en.wikipedia.org/wiki/Roguelike]roguelike[/Link] flavor.
 
 
 3D:
+[Image:/m/pico8/motgrandprix/mot_grandprix-8.p8.png]
 [x]  - racing game: https://www.lexaloffle.com/bbs/?pid=mot_grandprix-3
+[Link:/m/pico8/motgrandprix/index.html]backup[/Link]
    - Beautiful in low-res 3D. Amazing this is possible in PICO-8!
 
+[Image:/m/pico8/trialofthesorcerer/mot_sorcerer-9.p8.png]
 [x] - Dungeon: Trial of the Sorcerer https://www.lexaloffle.com/bbs/?tid=43833
+[Link:/m/pico8/trialofthesorcerer/index.html]backup[/Link]
    - 3D dungeon crawler
    - Reminiscent of the old Windows 95 3D Maze screensaver. recreated in JS here: https://github.com/ibid-11962/Windows-95-3D-Maze-Screensaver/tree/master/desktop
    - I remember watching this on the PCs in [Link:https://en.wikipedia.org/wiki/CompUSA]CompUSA[/Link].
    
    
 App:
+[Image:/m/pico8/wobblepaint/wobblekirb.gif]
 [x] - made by the creator of pico8: wobblepaint: https://www.lexaloffle.com/bbs/?tid=40058#comments
+[Link:/m/pico8/wobblepaint/index.html]backup[/Link]
    - This is a charming drawing app. The wobble effect adds a lot of personality to the drawings. Another cartridge made by zep -- he has a knack for coming up with charming ideas! Some [Link:https://news.ycombinator.com/item?id=24927001]interesting discussion[/Link].
 
 
+[Image:/m/pico8/picoCAD_gastly.gif]
 - picoCAD:  https://johanpeitz.itch.io/picocad
    - 3D modeling! This cartridge is available on itch.io as "name your own price" so I didn't grab a backup.
       - Really impressive work and I love the aesthetic: https://twitter.com/RadioFlower/status/1437838558463598592?s=20 
@@ -181,7 +194,9 @@ App:
 
 
 Simple:
+[Image:/m/pico8/froggleoid/11253.p8.png]
 [x]  - Froggleoid: https://www.lexaloffle.com/bbs/?pid=11111
+[Link:/m/pico8/froggleoid/index.html]backup[/Link]
    - A cute little mini-game by zep. Supports multiple players!
 
 [x] - https://soundole.itch.io/spoider-boi
