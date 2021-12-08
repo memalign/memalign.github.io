@@ -26,162 +26,157 @@ Here's what I love about this platform:
 
 - The creator of PICO-8, [Link:https://www.lexaloffle.com/bbs/?uid=1]Joseph White[/Link] aka "zep" ([Link:https://twitter.com/lexaloffle]twitter[/Link]), is a prolific software developer. He came up with the idea for PICO-8 and then built all of the development tools for editing code, music, sound effects, graphics, etc. In addition to creating PICO-8, he also built the BBS website where users post, comment on, and collaborate on games. The community is very creative and positive. He's made his own games such as [Link:https://www.lexaloffle.com/bbs/?tid=40058]Wobblepaint[/Link]. He has other projects too, which you can learn about on [Link:https://www.lexaloffle.com/]lexaloffle.com[/Link].
 
+Learn more about PICO-8:
+
+- [Link:https://en.wikipedia.org/wiki/PICO-8]PICO-8[/Link] on Wikipedia
+- Official [Link:https://www.lexaloffle.com/pico-8.php?page=faq]FAQ[/Link]
+- [Link:https://www.lexaloffle.com/bbs/?cat=7&carts_tab=1&#sub=2&mode=carts&orderby=featured]Featured cartridges[/Link]
+- [Link:https://www.lexaloffle.com/bbs/?cat=7#sub=2]Cartridge BBS[/Link]
 
 Here are some of my favorite games so far:
 
+[SectionTitle:Demakes and Remakes]
 
-***  Post each with its cartridge image; link to page and my backups; figure out exact formatting after I have the rest done
-
-
-Demakes and Remakes:
-[Image:/m/pico8/picopolis/42427.p8.png]
-[x] - Picopolis: https://www.lexaloffle.com/bbs/?tid=29590
-[Link:/m/pico8/picopolis/index.html]backup[/Link]
-   - Demake of Sim City. Usually Sim City has no win condition and I like how the author gave us some way to declare victory: by building a $10 million "Victory Monument". Playing this scratched the itch I had to play classic Sim City. Picopolis is made by [Link:https://en.wikipedia.org/wiki/Jens_Bergensten]Jens Bergensten[/Link] (aka Jeb) who's best known for significant contributions to Minecraft.
+[Link:https://www.lexaloffle.com/bbs/?tid=29590][Image:/m/pico8/picopolis/42427.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=29590]Picopolis[/Link]] ([Link:/m/pico8/picopolis/index.html]backup[/Link])
+Demake of Sim City. Usually Sim City has no win condition and I like how the author gave us some way to declare victory: by building a $10 million "Victory Monument". Playing this scratched the itch I had to play classic Sim City. Picopolis is made by [Link:https://en.wikipedia.org/wiki/Jens_Bergensten]Jens Bergensten[/Link] (aka Jeb) who's best known for significant contributions to Minecraft.
 
 
-[Image:/m/pico8/snowfight/mb_advent2019-2.p8.png]
-[x] - Snowfight demake! https://www.lexaloffle.com/bbs/?pid=mb_advent2019
-[Link:/m/pico8/snowfight/index.html]backup[/Link]
-      - This is a remake of an old Flash game winter holidays greeting card. Even the same winning strategy works as it did on the original game. Major nostalgic fun :)
+[Link:https://www.lexaloffle.com/bbs/?pid=mb_advent2019][Image:/m/pico8/snowfight/mb_advent2019-2.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=mb_advent2019]Snowfight[/Link]] ([Link:/m/pico8/snowfight/index.html]backup[/Link])
+This is a remake of an old Flash game winter holidays greeting card. Even the same winning strategy works as it did on the original game. Major nostalgic fun :)
       
 
-[Image:/m/pico8/sonic16x16/8JwsJq.gif]
-[x] -Sonic16x16 https://www.lexaloffle.com/bbs/?pid=97365
-[Link:/m/pico8/sonic16x16/index.html]backup[/Link]
-      - I love this! Great example of a demake. Sonic is only 2 pixels and yet anyone who's played a side-scrolling Sonic game will recognize the feel of the game, the music, and the iconic [Link:https://en.wikipedia.org/wiki/Green_Hill_Zone]Green Hill Zone[/Link].
+[Link:https://www.lexaloffle.com/bbs/?pid=97365][Image:/m/pico8/sonic16x16/8JwsJq.gif][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=97365]Sonic16x16[/Link]] ([Link:/m/pico8/sonic16x16/index.html]backup[/Link])
+I love this! Great example of a demake. Sonic is only 2 pixels and yet anyone who's played a side-scrolling Sonic game will recognize the feel of the game, the music, and the iconic [Link:https://en.wikipedia.org/wiki/Green_Hill_Zone]Green Hill Zone[/Link].
 
-[Image:/m/pico8/rtype/rtype-2.p8.png]
-[x] - R-Type: https://www.lexaloffle.com/bbs/?pid=98070
-[Link:/m/pico8/rtype/index.html]backup[/Link]
-      - Intensely challenging remake of the classic side-scrolling shoot'em up game. Fortunately there's a cheat mode! 
+
+[Link:https://www.lexaloffle.com/bbs/?pid=98070][Image:/m/pico8/rtype/rtype-2.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=98070]R-Type[/Link]] ([Link:/m/pico8/rtype/index.html]backup[/Link])
+Intensely challenging remake of the classic side-scrolling shoot'em up game. Fortunately there's a cheat mode! 
   
 
-[Image:/m/pico8/picoman/22937.p8.png]
-[x] -Pico-Man https://www.lexaloffle.com/bbs/?pid=11437
-[Link:/m/pico8/picoman/index.html]backup[/Link]
-     - A clone of Pac-Man. Thoroughly enjoyable just like the original. One user commented, "more proof that games just look cuter on the PICO :3".
+[Link:https://www.lexaloffle.com/bbs/?pid=11437][Image:/m/pico8/picoman/22937.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=11437]Pico-Man[/Link]] ([Link:/m/pico8/picoman/index.html]backup[/Link])
+A clone of Pac-Man. Thoroughly enjoyable just like the original. One user commented, "more proof that games just look cuter on the PICO :3".
 
 
-[Image:/m/pico8/phoenix/phoenix08-0.p8.png]
-[x] - https://pahammond.itch.io/phoenix
-[Link:/m/pico8/phoenix/index.html]backup[/Link]
-   - My introduction to Phoenix-style games was in [Link:/p/draw-shapes.html]MirageOS on a TI calculator[/Link]. It turns out Phoenix was originally an arcade game and this is a more faithful remake.
+[Link:https://pahammond.itch.io/phoenix][Image:/m/pico8/phoenix/phoenix08-0.p8.png][/Link]
+[ParagraphTitle:[Link:https://pahammond.itch.io/phoenix]Phoenix[/Link]] ([Link:/m/pico8/phoenix/index.html]backup[/Link])
+My introduction to Phoenix-style games was in [Link:/p/draw-shapes.html]MirageOS on a TI calculator[/Link]. It turns out Phoenix was originally an arcade game and this is a more faithful remake.
 
 
-[Image:/m/pico8/loderunner/loderunner08-1.p8.png]
-[x] - https://pahammond.itch.io/lode-runner
-[Link:/m/pico8/loderunner/index.html]backup[/Link]
-   - A clone of Lode Runner. Classic :)
-
-[Image:/m/pico8/poom/poom.png]
-[x] - https://freds72.itch.io/poom
-[Link:/m/pico8/poom/index.html]backup[/Link]
-   - A port of Doom. No platform is complete without one of these! This port really pushes the limits of PICO-8 and works around some of the limitations by splitting its code across several cartridges and then seamlessly jumping between them.
+[Link:https://pahammond.itch.io/lode-runner][Image:/m/pico8/loderunner/loderunner08-1.p8.png][/Link]
+[ParagraphTitle:[Link:https://pahammond.itch.io/lode-runner]Lode Runner[/Link]] ([Link:/m/pico8/loderunner/index.html]backup[/Link])
+A clone of Lode Runner. Classic :)
 
 
-[Image:/m/pico8/picones/picones_0_0_1-0.p8.png]
-[x] - Picones: https://www.lexaloffle.com/bbs/?tid=43692#playing
-[Link:/m/pico8/picones/index.html]backup[/Link]
-   - This is a work-in-progress demake of Lumines. The mechanics aren't perfect and the iconic and addictive music and sound effects are missing but this still satisfied my craving for some Lumines action! That's particularly helpful because Lumines is one of those games that has been released several time as a new iOS app only to be abandoned and broken a few years later.
-
-- Teaser: Metroid
-   - This demake isn't available to play (yet?) but it looks SO GOOD!
-  - Not available yet: Metroid: https://twitter.com/johanpeitz/status/1438898759484780547?s=20
-  - /m/pico8/pico8_metroid.gif
-  - https://video.twimg.com/tweet_video/E_f-kZAXIA8ArT_.mp4
-  
-  <video preload="none" playsinline="" aria-label="Embedded video" disablepictureinpicture="" style="width: 100%; height: 100%; position: absolute; background-color: black; top: 0%; left: 0%; transform: rotate(0deg) scale(1.005);" poster="https://pbs.twimg.com/tweet_video_thumb/E_f-kZAXIA8ArT_.jpg" src="https://video.twimg.com/tweet_video/E_f-kZAXIA8ArT_.mp4" type="video/mp4"></video>
-  
-
-Platformer/Metroidvania:
-
-[Image:/m/pico8/meascastle/meas_castle-12.p8.png]
-[x] - Mea's Castle: https://www.lexaloffle.com/bbs/?pid=81448
-[Link:/m/pico8/meascastle/index.html]backup[/Link]
-   - Really fun Metroid-style game. I played through in one sitting and had a blast :) There were some jumps that were tricky (and frustrating) using the touch controls which might be easier with a keyboard.
-
-[Image:/m/pico8/spellouttahere/witchescape3-5.p8.png]
-[x] Get Me the Spell Outta Here!! - https://www.lexaloffle.com/bbs/?tid=38333
-[Link:/m/pico8/spellouttahere/index.html]backup[/Link]
-   - Another fun Metroid-style game. You're a witch who uses a growing repertoire of spells to navigate a castle.
-
-[Image:/m/pico8/celeste/15133.p8.png]
-[x] - Celeste: https://www.lexaloffle.com/bbs/?tid=2145
-[Link:/m/pico8/celeste/index.html]backup[/Link]
-   - Hardcore platformer that was made in four days as part of a game jam. Very impressive! It was ultimately fleshed out into a [Link:https://en.wikipedia.org/wiki/Celeste_(video_game)]full commercially successful game[/Link].
-
-[Image:/m/pico8/celeste2/celeste_classic_2-5.p8.png]
-[x] - Celeste 2: https://www.lexaloffle.com/bbs/?pid=86783
-[Link:/m/pico8/celeste2/index.html]backup[/Link]
-   - A follow-up game with slightly different mechanics. Also tricky and fun like the original.
-
-[Image:/m/pico8/metrocubevania/cubevania12-0.p8.png]
-[x] - MetroCUBEvania https://www.lexaloffle.com/bbs/?pid=48475
-[Link:/m/pico8/metrocubevania/index.html]backup[/Link]
-   - Play as a bouncing cube gaining new abilities as the game progresses.
-
-[Image:/m/pico8/blocksforlife/blocks_for_life-0.p8.png]
-[x] - Blocks For Life: https://www.lexaloffle.com/bbs/?tid=34088
-[Link:/m/pico8/blocksforlife/index.html]backup[/Link]
-   - Made by zep, the creator of PICO-8!
+[Link:https://freds72.itch.io/poom][Image:/m/pico8/poom/poom.png][/Link]
+[ParagraphTitle:[Link:https://freds72.itch.io/poom]Poom[/Link]] ([Link:/m/pico8/poom/index.html]backup[/Link])
+A port of Doom. No platform is complete without one of these! This port really pushes the limits of PICO-8 and works around some of the limitations by splitting its code across several cartridges and then seamlessly jumping between them.
 
 
-Fast platformer:
-[Image:/m/pico8/sprintagift/eyn_sprintagift-2.p8.png]
-[x] - Sprint'a'Gift: https://www.lexaloffle.com/bbs/?tid=40717
-[Link:/m/pico8/sprintagift/index.html]backup[/Link]
-   - Endless runner. Made for the 2020 PICO-8 Advent Calendar.
-
-[Image:/m/pico8/mistigri/21603.p8.png]
-[x] - Mistigri: https://www.lexaloffle.com/bbs/?tid=3421
-[Link:/m/pico8/mistigri/index.html]backup[/Link]
-   - Super polished graphics with many different enemies. Fun to play but hard to beat!
-
-[Image:/m/pico8/udead/udead.gif]
-[x] - https://eggnog.itch.io/u-dead
-[Link:/m/pico8/udead/index.html]backup[/Link]
-   - Not technically a platformer but requires precise reaction time. Reminds me of Flappy Bird. The first game like this I ever played was [Link:http://www.sunflat.net]SFCave[/Link] in black and white on PalmOS (made in [Link:http://www.sunflat.net/android/app/sfcave/?lang=en]1998[/Link]!).
+[Link:https://www.lexaloffle.com/bbs/?tid=43692][Image:/m/pico8/picones/picones_0_0_1-0.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=43692]Picones[/Link]] ([Link:/m/pico8/picones/index.html]backup[/Link])
+This is a work-in-progress demake of Lumines. The mechanics aren't perfect and the iconic and addictive music and sound effects are missing but this still satisfied my craving for some Lumines action! That's particularly helpful because Lumines is one of those games that has been released several time as a new iOS app only to be abandoned and broken a few years later.
 
 
-RPG:
-[Image:/m/pico8/lostnight/the_lost_night-5.p8.png]
-[x] - The Lost Night (rpg): https://www.lexaloffle.com/bbs/?pid=88259
-[Link:/m/pico8/lostnight/index.html]backup[/Link]
-   - Fairly complete RPG! I like the world and the quests. I don't like how many times I had to play the mini-game. I almost gave up when I was just about to beat the game because I found the mini-game so tedious. It reminded me of how many Zubat you have to fight in Pokémon caves. Grind through and you'll beat the game.
+[Image:/m/pico8/pico8_metroid.mp4]
+[ParagraphTitle:Teaser: [Link:https://twitter.com/johanpeitz/status/1438898759484780547?s=20]Metroid[/Link]]
+This demake isn't available to play (yet?) but it looks SO GOOD!
 
 
-Turn-based:
-[Image:/m/pico8/virush/virush-3.p8.png]
-[x] - Virush: https://www.lexaloffle.com/bbs/?tid=38236
-[Link:/m/pico8/virush/index.html]backup[/Link]
-   - With some tower-defense mechanics too. Fun!
+[SectionTitle:Platformer/Metroidvania]
+
+[Link:https://www.lexaloffle.com/bbs/?pid=81448][Image:/m/pico8/meascastle/meas_castle-12.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=81448]Mea's Castle[/Link]] ([Link:/m/pico8/meascastle/index.html]backup[/Link])
+Really fun Metroid-style game. I played through in one sitting and had a blast :) There were some jumps that were tricky (and frustrating) using the touch controls which might be easier with a keyboard.
 
 
-Dungeon Crawler:
-[Image:/m/pico8/fourtoparty/43288.p8.png]
-[x] - It Takes Four to Party: https://www.lexaloffle.com/bbs/?tid=29788
-[Link:/m/pico8/fourtoparty/index.html]backup[/Link]
-   - Another game made by Jens Bergensten. This one has a similar feel to the dungeons in classic [Link:https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Link%27s_Awakening]Zelda[/Link] games with [Link:https://en.wikipedia.org/wiki/Roguelike]roguelike[/Link] flavor.
+[Link:https://www.lexaloffle.com/bbs/?tid=38333][Image:/m/pico8/spellouttahere/witchescape3-5.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=38333]Get Me the Spell Outta Here!![/Link]] ([Link:/m/pico8/spellouttahere/index.html]backup[/Link])
+Another fun Metroid-style game. You're a witch who uses a growing repertoire of spells to navigate a castle.
 
 
-3D:
-[Image:/m/pico8/motgrandprix/mot_grandprix-8.p8.png]
-[x]  - racing game: https://www.lexaloffle.com/bbs/?pid=mot_grandprix-3
-[Link:/m/pico8/motgrandprix/index.html]backup[/Link]
-   - Beautiful in low-res 3D. Amazing this is possible in PICO-8!
+[Link:https://www.lexaloffle.com/bbs/?tid=2145][Image:/m/pico8/celeste/15133.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=2145]Celeste[/Link]] ([Link:/m/pico8/celeste/index.html]backup[/Link])
+Hardcore platformer that was made in four days as part of a game jam. Very impressive! It was ultimately fleshed out into a [Link:https://en.wikipedia.org/wiki/Celeste_(video_game)]full commercially successful game[/Link].
 
-[Image:/m/pico8/trialofthesorcerer/mot_sorcerer-9.p8.png]
-[x] - Dungeon: Trial of the Sorcerer https://www.lexaloffle.com/bbs/?tid=43833
-[Link:/m/pico8/trialofthesorcerer/index.html]backup[/Link]
-   - 3D dungeon crawler
-   - Reminiscent of the old Windows 95 3D Maze screensaver. recreated in JS here: https://github.com/ibid-11962/Windows-95-3D-Maze-Screensaver/tree/master/desktop
+
+[Link:https://www.lexaloffle.com/bbs/?pid=86783][Image:/m/pico8/celeste2/celeste_classic_2-5.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=86783]Celeste 2[/Link]] ([Link:/m/pico8/celeste2/index.html]backup[/Link])
+A follow-up game with slightly different mechanics. Also tricky and fun like the original.
+
+
+[Link:https://www.lexaloffle.com/bbs/?pid=48475][Image:/m/pico8/metrocubevania/cubevania12-0.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=48475]MetroCUBEvania[/Link]] ([Link:/m/pico8/metrocubevania/index.html]backup[/Link])
+Play as a bouncing cube gaining new abilities as the game progresses.
+
+
+[Link:https://www.lexaloffle.com/bbs/?tid=34088][Image:/m/pico8/blocksforlife/blocks_for_life-0.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=34088]Blocks For Life[/Link]] ([Link:/m/pico8/blocksforlife/index.html]backup[/Link])
+Made by zep, the creator of PICO-8!
+
+
+[SectionTitle:Fast platformer]
+
+[Link:https://www.lexaloffle.com/bbs/?tid=40717][Image:/m/pico8/sprintagift/eyn_sprintagift-2.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=40717]Sprint'a'Gift[/Link]] ([Link:/m/pico8/sprintagift/index.html]backup[/Link])
+Endless runner. Made for the 2020 PICO-8 Advent Calendar.
+
+
+[Link:https://www.lexaloffle.com/bbs/?tid=3421][Image:/m/pico8/mistigri/21603.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=3421]Mistigri[/Link]] ([Link:/m/pico8/mistigri/index.html]backup[/Link])
+Super polished graphics with many different enemies. Fun to play but hard to beat!
+
+
+[Link:https://eggnog.itch.io/u-dead][Image:/m/pico8/udead/udead.gif][/Link]
+[ParagraphTitle:[Link:https://eggnog.itch.io/u-dead]U Dead[/Link]] ([Link:/m/pico8/udead/index.html]backup[/Link])
+Not technically a platformer but requires precise reaction time. Reminds me of Flappy Bird. The first game like this I ever played was [Link:http://www.sunflat.net]SFCave[/Link] in black and white on PalmOS (made in [Link:http://www.sunflat.net/android/app/sfcave/?lang=en]1998[/Link]!).
+
+
+[SectionTitle:RPG]
+
+[Link:https://www.lexaloffle.com/bbs/?pid=88259][Image:/m/pico8/lostnight/the_lost_night-5.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=88259]The Lost Night[/Link]] ([Link:/m/pico8/lostnight/index.html]backup[/Link])
+Fairly complete RPG! I like the world and the quests. I don't like how many times I had to play the mini-game. I almost gave up when I was just about to beat the game because I found the mini-game so tedious. It reminded me of how many Zubat you have to fight in Pokémon caves. Grind through and you'll beat the game.
+
+
+[SectionTitle:Turn-based]
+
+[Link:https://www.lexaloffle.com/bbs/?tid=38236][Image:/m/pico8/virush/virush-3.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=38236]Virush[/Link]] ([Link:/m/pico8/virush/index.html]backup[/Link])
+With some tower-defense mechanics too. Fun!
+
+
+[SectionTitle:Dungeon Crawler]
+
+[Link:https://www.lexaloffle.com/bbs/?tid=29788][Image:/m/pico8/fourtoparty/43288.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=29788]It Takes Four to Party[/Link]] ([Link:/m/pico8/fourtoparty/index.html]backup[/Link])
+Another game made by Jens Bergensten. This one has a similar feel to the dungeons in classic [Link:https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Link%27s_Awakening]Zelda[/Link] games with [Link:https://en.wikipedia.org/wiki/Roguelike]roguelike[/Link] flavor.
+
+
+[SectionTitle:3D]
+
+[Link:https://www.lexaloffle.com/bbs/?pid=mot_grandprix-3][Image:/m/pico8/motgrandprix/mot_grandprix-8.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=mot_grandprix-3]Mot's Grand Prix[/Link]] ([Link:/m/pico8/motgrandprix/index.html]backup[/Link])
+Beautiful in low-res 3D. Amazing this is possible in PICO-8!
+
+
+[Link:https://www.lexaloffle.com/bbs/?tid=43833][Image:/m/pico8/trialofthesorcerer/mot_sorcerer-9.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=43833]Trial of the Sorcerer[/Link]] ([Link:/m/pico8/trialofthesorcerer/index.html]backup[/Link])
+3D dungeon crawler. Reminiscent of the old Windows 95 3D Maze screensaver (recreated in JavaScript here *** Add link). 
+
+*** Left off here
+
+recreated in JS here: https://github.com/ibid-11962/Windows-95-3D-Maze-Screensaver/tree/master/desktop
    - I remember watching this on the PCs in [Link:https://en.wikipedia.org/wiki/CompUSA]CompUSA[/Link].
    
    
 App:
 [Image:/m/pico8/wobblepaint/wobblekirb.gif]
-[x] - made by the creator of pico8: wobblepaint: https://www.lexaloffle.com/bbs/?tid=40058#comments
+- made by the creator of pico8: wobblepaint: https://www.lexaloffle.com/bbs/?tid=40058#comments
 [Link:/m/pico8/wobblepaint/index.html]backup[/Link]
    - This is a charming drawing app. The wobble effect adds a lot of personality to the drawings. Another cartridge made by zep -- he has a knack for coming up with charming ideas! Some [Link:https://news.ycombinator.com/item?id=24927001]interesting discussion[/Link].
 
@@ -190,34 +185,27 @@ App:
 - picoCAD:  https://johanpeitz.itch.io/picocad
    - 3D modeling! This cartridge is available on itch.io as "name your own price" so I didn't grab a backup.
       - Really impressive work and I love the aesthetic: https://twitter.com/RadioFlower/status/1437838558463598592?s=20 
-      - video from the tweet: https://video.twimg.com/tweet_video/E_N69IIWYAAuNbA.mp4 converted to gif: https://storage.cloudconvert.com/tasks/3480eee6-0a0c-4498-9b38-1aea671b061e/E_N69IIWYAAuNbA.gif?AWSAccessKeyId=cloudconvert-production&Expires=1637917762&Signature=CBxvlheodpMVn649GIWw9kttunQ%3D&response-content-disposition=attachment%3B%20filename%3D%22E_N69IIWYAAuNbA.gif%22&response-content-type=image%2Fgif   saved as picoCAD_gastly.gif
+<!--      - video from the tweet: https://video.twimg.com/tweet_video/E_N69IIWYAAuNbA.mp4 converted to gif: https://storage.cloudconvert.com/tasks/3480eee6-0a0c-4498-9b38-1aea671b061e/E_N69IIWYAAuNbA.gif?AWSAccessKeyId=cloudconvert-production&Expires=1637917762&Signature=CBxvlheodpMVn649GIWw9kttunQ%3D&response-content-disposition=attachment%3B%20filename%3D%22E_N69IIWYAAuNbA.gif%22&response-content-type=image%2Fgif   saved as picoCAD_gastly.gif
+-->
 
 
 Simple:
 [Image:/m/pico8/froggleoid/11253.p8.png]
-[x]  - Froggleoid: https://www.lexaloffle.com/bbs/?pid=11111
+- Froggleoid: https://www.lexaloffle.com/bbs/?pid=11111
 [Link:/m/pico8/froggleoid/index.html]backup[/Link]
    - A cute little mini-game by zep. Supports multiple players!
 
 [Image:/m/pico8/spoiderboi/spoiderboi.png]
-[x] - https://soundole.itch.io/spoider-boi
+- https://soundole.itch.io/spoider-boi
 [Link:/m/pico8/spoiderboi/index.html]backup[/Link]
    - A one-button Spider-Man-inspired game. I like the feel of the game!
 
 [Image:/m/pico8/fallingballs/fallingballs.png]
-[x] - https://joeschmoeish.itch.io/falling-balls
+- https://joeschmoeish.itch.io/falling-balls
 [Link:/m/pico8/fallingballs/index.html]backup[/Link]
    - I find this concept really funny!
    
-[Image:/m/pico8/dungeonguy/dungeonguy-1.png]
-[x] - Dungeon guy: https://www.lexaloffle.com/bbs/?tid=35349
+[Image:/m/pico8/dungeonguy/dungeonguy-1.p8.png]
+- Dungeon guy: https://www.lexaloffle.com/bbs/?tid=35349
 [Link:/m/pico8/dungeonguy/index.html]backup[/Link]
    - A work-in-progress with a similar feel to Lode Runner. It's really cool that these levels are procedurally generated.
-
-
-Explore more about PICO-8:
-
-- [Link:https://en.wikipedia.org/wiki/PICO-8]PICO-8[/Link] on Wikipedia
-- Official [Link:https://www.lexaloffle.com/pico-8.php?page=faq]FAQ[/Link]
-- [Link:https://www.lexaloffle.com/bbs/?cat=7&carts_tab=1&#sub=2&mode=carts&orderby=featured]Featured cartridges[/Link]
-- [Link:https://www.lexaloffle.com/bbs/?cat=7#sub=2]Cartridge BBS[/Link]
