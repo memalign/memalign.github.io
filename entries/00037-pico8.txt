@@ -166,46 +166,38 @@ Beautiful in low-res 3D. Amazing this is possible in PICO-8!
 
 [Link:https://www.lexaloffle.com/bbs/?tid=43833][Image:/m/pico8/trialofthesorcerer/mot_sorcerer-9.p8.png][/Link]
 [ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=43833]Trial of the Sorcerer[/Link]] ([Link:/m/pico8/trialofthesorcerer/index.html]backup[/Link])
-3D dungeon crawler. Reminiscent of the old Windows 95 3D Maze screensaver (recreated in JavaScript here *** Add link). 
+3D dungeon crawler. Reminiscent of the old Windows 95 3D Maze screensaver (recreated by someone in JavaScript [Link:https://ibid-11962.github.io/Windows-95-3D-Maze-Screensaver/desktop/index.html]here[/Link] ([Link:/m/Windows3DMaze/index.html]backup[/Link])). I remember watching this on the PCs in [Link:https://en.wikipedia.org/wiki/CompUSA]CompUSA[/Link].
 
-*** Left off here
+  
+[SectionTitle:App]
 
-recreated in JS here: https://github.com/ibid-11962/Windows-95-3D-Maze-Screensaver/tree/master/desktop
-   - I remember watching this on the PCs in [Link:https://en.wikipedia.org/wiki/CompUSA]CompUSA[/Link].
+[Link:https://www.lexaloffle.com/bbs/?tid=40058][Image:/m/pico8/wobblepaint/wobblekirb.gif][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=40058]Wobblepaint[/Link]] ([Link:/m/pico8/wobblepaint/index.html]backup[/Link])
+This is a charming drawing app. The wobble effect adds a lot of personality to the drawings. Another cartridge made by zep -- he has a knack for coming up with charming ideas! Some [Link:https://news.ycombinator.com/item?id=24927001]interesting discussion[/Link].
+
+
+[Link:https://johanpeitz.itch.io/picocad][Image:/m/pico8/picoCAD_gastly.mp4][/Link]
+[ParagraphTitle:[Link:https://johanpeitz.itch.io/picocad]picoCAD[/Link]]
+3D modeling! This cartridge is available on itch.io as "name your own price" so I didn't grab a backup. Really impressive work and I love the aesthetic. The Gastly above was posted by an artist [Link:https://twitter.com/RadioFlower/status/1437838558463598592]here[Link].
+
+
+[SectionTitle:Simple]
+
+[Link:https://www.lexaloffle.com/bbs/?pid=11111][Image:/m/pico8/froggleoid/11253.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=11111]Froggleoid[/Link]] ([Link:/m/pico8/froggleoid/index.html]backup[/Link])
+A cute little mini-game by zep. Supports multiple players!
+
+
+[Link:https://soundole.itch.io/spoider-boi][Image:/m/pico8/spoiderboi/spoiderboi.png][/Link]
+[ParagraphTitle:[Link:https://soundole.itch.io/spoider-boi]Spoiderboi[/Link]] ([Link:/m/pico8/spoiderboi/index.html]backup[/Link])
+A one-button Spider-Man-inspired game. I like the feel of the game!
+
+
+[Link:https://joeschmoeish.itch.io/falling-balls][Image:/m/pico8/fallingballs/fallingballs.png][/Link]
+[ParagraphTitle:[Link:https://joeschmoeish.itch.io/falling-balls]Falling Balls[/Link]] ([Link:/m/pico8/fallingballs/index.html]backup[/Link])
+I find this concept really funny!
+
    
-   
-App:
-[Image:/m/pico8/wobblepaint/wobblekirb.gif]
-- made by the creator of pico8: wobblepaint: https://www.lexaloffle.com/bbs/?tid=40058#comments
-[Link:/m/pico8/wobblepaint/index.html]backup[/Link]
-   - This is a charming drawing app. The wobble effect adds a lot of personality to the drawings. Another cartridge made by zep -- he has a knack for coming up with charming ideas! Some [Link:https://news.ycombinator.com/item?id=24927001]interesting discussion[/Link].
-
-
-[Image:/m/pico8/picoCAD_gastly.gif]
-- picoCAD:  https://johanpeitz.itch.io/picocad
-   - 3D modeling! This cartridge is available on itch.io as "name your own price" so I didn't grab a backup.
-      - Really impressive work and I love the aesthetic: https://twitter.com/RadioFlower/status/1437838558463598592?s=20 
-<!--      - video from the tweet: https://video.twimg.com/tweet_video/E_N69IIWYAAuNbA.mp4 converted to gif: https://storage.cloudconvert.com/tasks/3480eee6-0a0c-4498-9b38-1aea671b061e/E_N69IIWYAAuNbA.gif?AWSAccessKeyId=cloudconvert-production&Expires=1637917762&Signature=CBxvlheodpMVn649GIWw9kttunQ%3D&response-content-disposition=attachment%3B%20filename%3D%22E_N69IIWYAAuNbA.gif%22&response-content-type=image%2Fgif   saved as picoCAD_gastly.gif
--->
-
-
-Simple:
-[Image:/m/pico8/froggleoid/11253.p8.png]
-- Froggleoid: https://www.lexaloffle.com/bbs/?pid=11111
-[Link:/m/pico8/froggleoid/index.html]backup[/Link]
-   - A cute little mini-game by zep. Supports multiple players!
-
-[Image:/m/pico8/spoiderboi/spoiderboi.png]
-- https://soundole.itch.io/spoider-boi
-[Link:/m/pico8/spoiderboi/index.html]backup[/Link]
-   - A one-button Spider-Man-inspired game. I like the feel of the game!
-
-[Image:/m/pico8/fallingballs/fallingballs.png]
-- https://joeschmoeish.itch.io/falling-balls
-[Link:/m/pico8/fallingballs/index.html]backup[/Link]
-   - I find this concept really funny!
-   
-[Image:/m/pico8/dungeonguy/dungeonguy-1.p8.png]
-- Dungeon guy: https://www.lexaloffle.com/bbs/?tid=35349
-[Link:/m/pico8/dungeonguy/index.html]backup[/Link]
-   - A work-in-progress with a similar feel to Lode Runner. It's really cool that these levels are procedurally generated.
+[Link:https://www.lexaloffle.com/bbs/?tid=35349][Image:/m/pico8/dungeonguy/dungeonguy-1.p8.png][/Link]
+[ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=35349]Dungeon Guy[/Link]] ([Link:/m/pico8/dungeonguy/index.html]backup[/Link])
+A work-in-progress with a similar feel to Lode Runner. It's really cool that these levels are procedurally generated.
