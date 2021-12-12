@@ -376,4 +376,23 @@ I have enough posts now that instead of listing all posts at the top, I want to 
 [x]  - Unit test HTMLDocument.makeFullURLFromURL(url): already a full url, a relative URL that doesn't start with /, an absolute url that starts with /
 
 
+12/6/21
+
+I'd like to support looping mp4s as "GIF"s because their file size is so much smaller.
+
+Here's code that Twitter uses to embed videos like this:
+<video preload="none" playsinline="" aria-label="Embedded video" disablepictureinpicture="" style="width: 100%; height: 100%; position: absolute; background-color: black; top: 0%; left: 0%; transform: rotate(0deg) scale(1.005);" src="/m/pico8/pico8_metroid.mp4" type="video/mp4"></video>
+
+I pared this down and it seems to work:
+<video muted loop autoplay disablepictureinpicture="" src="/m/pico8/pico8_metroid.mp4" type="video/mp4"></video>
+
+I'll support this as a special case in [Image:]
+
+
+*** Test ogDescription with SectionTitle tag in it
+*** Test the HTML produced for SectionTitle tag
+*** Test ogDescription with ParagraphTitle tag in it
+*** Test the HTML produced for ParagraphTitle tag
+*** Test [Link][/Link] inside of a SectionTitle, ParagraphTitle
+*** Avoid using Image:mp4 as the og:image (test this: a post that only has an mp4, a post with an mp4 before a jpg, a post with an mp4 after a jpg)
 

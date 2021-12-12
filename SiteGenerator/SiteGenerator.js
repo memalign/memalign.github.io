@@ -433,7 +433,8 @@ class Entry extends HTMLDocument {
       return result
     }
     
-    let matches = this.contents.match(/\[Image:([^\]]+)\]/)
+    // Exclude mp4 since it's technically a video
+    let matches = this.contents.match(/\[Image:([^\]]+[^4])\]/)
     if (matches) {
       result = matches[1]
     }
@@ -463,7 +464,8 @@ class Entry extends HTMLDocument {
     result = result.replace(/\[Link:([^\]]+)\]/g, "")
     result = result.replace(/\[Link\]([^\[]+)/g, '$1')
     result = result.replace(/\[\/Link\]/g, "")
-    
+    result = result.replace(/\[SectionTitle:([^\]]+)\]/g, '$1')
+    result = result.replace(/\[ParagraphTitle:([^\]]+)\]/g, '$1')
     
     result = result.replace(/^\n+/, "")
     let origResult = result
@@ -553,6 +555,10 @@ ${this.title}
     htmlContents = htmlContents.replace(/\[Quote\]\n*/g, "<blockquote>")
     htmlContents = htmlContents.replace(/\n*\[\/Quote\]/g, "</blockquote>")
 
+
+    // [Image] support: mp4
+    htmlContents = htmlContents.replace(/\[Image:([^\]]+[mM][pP]4)\]/g, '<video muted loop autoplay disablepictureinpicture="" src="$1" type="video/mp4"></video>')
+
     // [Image] support
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
     
@@ -560,6 +566,17 @@ ${this.title}
     htmlContents = htmlContents.replace(/\[Link:([^\]]+)\]/g, '<a href="$1">')
     htmlContents = htmlContents.replace(/\[Link\]([^\[]+)/g, '<a href="$1">$1')
     htmlContents = htmlContents.replace(/\[\/Link\]/g, '</a>')
+    
+    // Handle Titles after other tags so that tags (such as Link) can be used within titles. For example:    
+    // [ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?pid=mb_advent2019]Snowfight[/Link]]  
+    // Since this isn't a real parser, the inner-most tag's text replacement needs to happen first
+    
+    // [SectionTitle:] support
+    htmlContents = htmlContents.replace(/\[SectionTitle:([^\]]+)\]/g, '<h3>$1</h3>')
+
+    // [ParagraphTitle:] support
+    htmlContents = htmlContents.replace(/\[ParagraphTitle:([^\]]+)\]/g, '<h4>$1</h4>')
+
     
     // Indentation support
     htmlContents = htmlContents.replace(/^( +)/gm, (match) => '&nbsp;'.repeat(match.length))
