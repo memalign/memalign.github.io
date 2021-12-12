@@ -45,6 +45,8 @@ function random_seed(seed) {
 }
 [/Code]
 
+- Similar to interesting code snippets: these effects such as dissolving comet-like tail: https://twitter.com/blinry/status/1467112486952443907?s=20
+
 
 - https://1j01.github.io/pbp2d/
   - New URL: https://1j01.github.io/pbj-sandbox/
