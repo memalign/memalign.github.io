@@ -5,7 +5,7 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2021-11-24T00:00:00-08:00</updated>
+<updated>2021-12-12T00:00:00-08:00</updated>
 <rights>Copyright © 2021, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
@@ -14,8 +14,8 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/pico8.html" />
 <link rel="related" type="text/html" href="https://memalign.github.io/p/pico8.html" />
 <id>https://memalign.github.io/p/pico8.html</id>
-<published>2021-11-24T00:00:00-08:00</published>
-<updated>2021-11-24T00:00:00-08:00</updated>
+<published>2021-12-12T00:00:00-08:00</published>
+<updated>2021-12-12T00:00:00-08:00</updated>
 <author>
 <name>memalign</name>
 <uri>https://memalign.github.io/index.html</uri>
@@ -28,7 +28,7 @@
 </h2>
 </div>
 <img src="/m/pico8/celeste/celesterevenge1.gif">
-<div id='postdate'>Posted on 11/24/2021<br />
+<div id='postdate'>Posted on 12/12/2021<br />
 Tags: <a href='/tags.html'>Games</a></div>
 <a href="https://www.lexaloffle.com/pico-8.php">PICO-8</a> is a way to make "retro"-style games and then play them anywhere, including on the web.<br />
 <br />
