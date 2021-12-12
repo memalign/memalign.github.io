@@ -20,7 +20,7 @@ Here's what I love about this platform:
 
 - My taste in games is trapped in the past, probably the SNES era. Even though SNES was slightly before my time, I've had a blast playing those games. In comparison, games that push the limits of today's hardware are impressive but they are too complex for me. What truly brings me joy are simple "retro"-style games.
 
-- PICO-8 introduced me to the concept of a game "[Link:https://en.wikipedia.org/wiki/Video_game_remake#Demakes]demake[/Link]". When creating a demake, people boil a game down to its essence. They create a game with the same feel or personality as the original game but smaller and much simpler, usually with simpler graphics. My favorite demake right now is [Link:https://www.lexaloffle.com/bbs/?tid=29590]Picopolis[/Link], a demake of Sim City.
+- PICO-8 introduced me to the concept of a game "[Link:https://en.wikipedia.org/wiki/Video_game_remake#Demakes]demake[/Link]". When creating a demake, people boil a game down to its essence. They create a game with the same feel or personality as the original game but smaller and much simpler, usually with simpler graphics. My favorite right now is [Link:https://www.lexaloffle.com/bbs/?tid=29590]Picopolis[/Link], a demake of Sim City.
 
 - PICO-8 games are distributed as PNG "virtual cartridges" with the code embedded in the cartridge image itself. The images look like the physical game cartridges of the 1980s and 90s. How delightful! You can see examples below.
 
@@ -79,10 +79,10 @@ A port of Doom. No platform is complete without one of these! This port really p
 
 [Link:https://www.lexaloffle.com/bbs/?tid=43692][Image:/m/pico8/picones/picones_0_0_1-0.p8.png][/Link]
 [ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=43692]Picones[/Link]] ([Link:/m/pico8/picones/index.html]backup[/Link])
-This is a work-in-progress demake of Lumines. The mechanics aren't perfect and the iconic and addictive music and sound effects are missing but this still satisfied my craving for some Lumines action! That's particularly helpful because Lumines is one of those games that has been released several time as a new iOS app only to be abandoned and broken a few years later.
+This is a work-in-progress demake of Lumines. The mechanics aren't perfect and the iconic and addictive music and sound effects are missing but this still satisfied my craving for some Lumines action! That's particularly helpful because Lumines is one of those games that has been released several times as a new iOS app only to be abandoned and broken a few years later.
 
 
-[Image:/m/pico8/pico8_metroid.mp4]
+[Link:https://twitter.com/johanpeitz/status/1438898759484780547?s=20][Image:/m/pico8/pico8_metroid.mp4][/Link]
 [ParagraphTitle:Teaser: [Link:https://twitter.com/johanpeitz/status/1438898759484780547?s=20]Metroid[/Link]]
 This demake isn't available to play (yet?) but it looks SO GOOD!
 
@@ -166,7 +166,7 @@ Beautiful in low-res 3D. Amazing this is possible in PICO-8!
 
 [Link:https://www.lexaloffle.com/bbs/?tid=43833][Image:/m/pico8/trialofthesorcerer/mot_sorcerer-9.p8.png][/Link]
 [ParagraphTitle:[Link:https://www.lexaloffle.com/bbs/?tid=43833]Trial of the Sorcerer[/Link]] ([Link:/m/pico8/trialofthesorcerer/index.html]backup[/Link])
-3D dungeon crawler. Reminiscent of the old Windows 95 3D Maze screensaver (recreated by someone in JavaScript [Link:https://ibid-11962.github.io/Windows-95-3D-Maze-Screensaver/desktop/index.html]here[/Link] ([Link:/m/Windows3DMaze/index.html]backup[/Link])). I remember watching this on the PCs in [Link:https://en.wikipedia.org/wiki/CompUSA]CompUSA[/Link].
+3D dungeon crawler. Reminiscent of the old Windows 95 3D Maze screensaver (recreated by someone in JavaScript [Link:https://ibid-11962.github.io/Windows-95-3D-Maze-Screensaver/maze.html]here[/Link] ([Link:/m/Windows3DMaze/maze.html]backup[/Link])). I remember watching this on the PCs in [Link:https://en.wikipedia.org/wiki/CompUSA]CompUSA[/Link].
 
   
 [SectionTitle:App]
