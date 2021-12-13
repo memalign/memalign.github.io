@@ -1391,6 +1391,16 @@ More posts:<br />
     assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
   }
+  
+  test_htmlBody_imageRewriting_mp4() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.mp4]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes(`<video muted loop autoplay disablepictureinpicture="" src="/m/test.mp4" type="video/mp4"></video>`), "Has video tag")
+    assertTrue(!htmlBody.includes("<img"), "Lacks <img tag")
+    assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
+    assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
+  }
 
   test_htmlBody_linkRewriting() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text")  
@@ -1408,6 +1418,46 @@ More posts:<br />
     assertTrue(htmlBody.includes("<a href=\"/m/test.jpg\">/m/test.jpg</a>"), "Has a href tag")
     assertTrue(!htmlBody.includes("[Link"), "Lacks link brackets")
     assertTrue(!htmlBody.includes("Link]"), "Lacks closing link brackets")
+  }
+
+  test_htmlBody_linkRewriting_insideSectionTitle() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[SectionTitle:[Link:/m/test.jpg]here[/Link]]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<h3><a href=\"/m/test.jpg\">here</a></h3>"), "Has a href tag")
+    assertTrue(!htmlBody.includes("[Link"), "Lacks link brackets")
+    assertTrue(!htmlBody.includes("Link]"), "Lacks closing link brackets")
+    assertTrue(!htmlBody.includes("[SectionTitle"), "Lacks SectionTitle")
+    assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
+  }
+
+  test_htmlBody_linkRewriting_insideParagraphTitle() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[ParagraphTitle:[Link:/m/test.jpg]here[/Link]]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<h4><a href=\"/m/test.jpg\">here</a></h4>"), "Has a href tag")
+    assertTrue(!htmlBody.includes("[Link"), "Lacks link brackets")
+    assertTrue(!htmlBody.includes("Link]"), "Lacks closing link brackets")
+    assertTrue(!htmlBody.includes("[ParagraphTitle"), "Lacks ParagraphTitle")
+    assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
+  }
+  
+  test_htmlBody_ParagraphTitle() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[ParagraphTitle:Nice title]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<h4>Nice title</h4>"), "Has a h4 tag")
+    assertTrue(!htmlBody.includes("[ParagraphTitle"), "Lacks ParagraphTitle")
+    assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
+  }
+
+  test_htmlBody_SectionTitle() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[SectionTitle:Nice title]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<h3>Nice title</h3>"), "Has a h3 tag")
+    assertTrue(!htmlBody.includes("[SectionTitle"), "Lacks SectionTitle")
+    assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
   }
 
   test_htmlBody_code_oneliner() {
@@ -1668,6 +1718,16 @@ test text
     
     let expectationQuote = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithQuote.ogDescription() == expectationQuote, "ogDescription quote")
+  
+    let entryWithSectionTitle = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[SectionTitle:here] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    
+    let expectationSectionTitle = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
+    assertTrue(entryWithSectionTitle.ogDescription() == expectationSectionTitle, "ogDescription sectiontitle")
+
+    let entryWithParagraphTitle = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[ParagraphTitle:here] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    
+    let expectationParagraphTitle = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
+    assertTrue(entryWithParagraphTitle.ogDescription() == expectationParagraphTitle, "ogDescription paragraphtitle")
   }
   
   test_Entry_ogImage() {
@@ -1679,6 +1739,18 @@ test text
 
     let entryTwoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")
     assertTrue(entryTwoImages.ogImage() == "https://memalign.github.io/m/test.jpg", "picks first image")
+
+  
+    // Don't pick MP4 as the ogImage
+    
+    let entryOnlyMP4 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.mp4]\ntest text")
+    assertTrue(entryOnlyMP4.ogImage() == "https://memalign.github.io/m/shiba.jpg", "default ogImage")
+
+    let entryMP4BeforeJPG = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.mp4]\n[Image:/m/test2.jpg]\ntest text")
+    assertTrue(entryMP4BeforeJPG.ogImage() == "https://memalign.github.io/m/test2.jpg", "skips mp4")
+
+    let entryMP4AfterJPG = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.jpg]\n[Image:/m/test2.mp4]\ntest text")
+    assertTrue(entryMP4AfterJPG.ogImage() == "https://memalign.github.io/m/test.jpg", "picks first jpg")
   }
   
   test_Entry_fullBaseURL() {

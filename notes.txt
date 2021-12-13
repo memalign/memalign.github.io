@@ -389,10 +389,11 @@ I pared this down and it seems to work:
 I'll support this as a special case in [Image:]
 
 
-*** Test ogDescription with SectionTitle tag in it
-*** Test the HTML produced for SectionTitle tag
-*** Test ogDescription with ParagraphTitle tag in it
-*** Test the HTML produced for ParagraphTitle tag
-*** Test [Link][/Link] inside of a SectionTitle, ParagraphTitle
-*** Avoid using Image:mp4 as the og:image (test this: a post that only has an mp4, a post with an mp4 before a jpg, a post with an mp4 after a jpg)
+[x] - Test ogDescription with SectionTitle tag in it
+[x] - Test ogDescription with ParagraphTitle tag in it
+[x] - Test the HTML produced for SectionTitle tag
+[x] - Test the HTML produced for ParagraphTitle tag
+[x] - Test HTML produced for [Link][/Link] inside of a SectionTitle, ParagraphTitle
+[x] - Test HTML produced for mp4 image
+[x] - Avoid using Image:mp4 as the og:image (test this: [x]a post that only has an mp4, [x]a post with an mp4 before a jpg, [x]a post with an mp4 after a jpg)
 
