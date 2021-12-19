@@ -53,6 +53,8 @@ function random_seed(seed) {
 
 - JavaScript games:
   - https://github.com/DennisBengs/envisionator
+    - https://donitz.itch.io/envisionator
+    - This is the game with a robot you control by giving movement commands
   - https://github.com/DennisBengs/retrohaunt
   - http://lalo.li/ddd/
   - http://lalo.li/lsd/

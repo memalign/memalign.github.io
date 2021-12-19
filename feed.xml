@@ -5,10 +5,46 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2021-12-12T00:00:00-08:00</updated>
+<updated>2021-12-19T00:00:00-08:00</updated>
 <rights>Copyright © 2021, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Wheat Chex</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/wheat-chex.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/wheat-chex.html" />
+<id>https://memalign.github.io/p/wheat-chex.html</id>
+<published>2021-12-19T00:00:00-08:00</published>
+<updated>2021-12-19T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/wheat-chex.html'>Wheat Chex</a>
+</h2>
+</div>
+<img src="/m/wheat-chex.jpg">
+<div id='postdate'>Posted on 12/19/2021<br />
+Tags: <a href='/tags.html'>Food</a></div>
+The Chex cereal pieces in official store-bought Chex Mix are not the same as the pieces you get in cereal boxes!<br />
+<br />
+Just take a look at the photo above. The Wheat Chex on the left is from a bag of Chex Mix. The Wheat Chex on the right is from a cereal box.<br />
+<br />
+Notice how the cereal box one is flatter, denser, has little rectangular holes instead of little square ones.<br />
+<br />
+The taste and texture of the Chex are different too. The one from the Chex Mix tastes better and has a more pleasant crunch.<br />
+<br />
+One may be optimized for delicious dry snackiness while the other is optimized for being eaten in milk.<br />
+<br />
+It's interesting to know we can't replicate store-bought Chex Mix at home because the Chex we can buy make for an inferior snack!
+]]>
+</content>
+</entry>
+
 <entry>
 <title>PICO-8</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/pico8.html" />

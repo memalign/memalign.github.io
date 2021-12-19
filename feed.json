@@ -11,6 +11,17 @@
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
     {
+         "title" : "Wheat Chex",
+         "date_published" : "2021-12-19T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/wheat-chex.html",
+         "url" : "https://memalign.github.io/p/wheat-chex.html",
+         "image" : "https://memalign.github.io/m/wheat-chex.jpg",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "\n<div id='header'>\n<h2>\n<a href='https://memalign.github.io/p/wheat-chex.html'>Wheat Chex</a>\n</h2>\n</div>\n<img src=\"/m/wheat-chex.jpg\">\n<div id='postdate'>Posted on 12/19/2021<br />\nTags: <a href='/tags.html'>Food</a></div>\nThe Chex cereal pieces in official store-bought Chex Mix are not the same as the pieces you get in cereal boxes!<br />\n<br />\nJust take a look at the photo above. The Wheat Chex on the left is from a bag of Chex Mix. The Wheat Chex on the right is from a cereal box.<br />\n<br />\nNotice how the cereal box one is flatter, denser, has little rectangular holes instead of little square ones.<br />\n<br />\nThe taste and texture of the Chex are different too. The one from the Chex Mix tastes better and has a more pleasant crunch.<br />\n<br />\nOne may be optimized for delicious dry snackiness while the other is optimized for being eaten in milk.<br />\n<br />\nIt's interesting to know we can't replicate store-bought Chex Mix at home because the Chex we can buy make for an inferior snack!"
+    },
+    {
          "title" : "PICO-8",
          "date_published" : "2021-12-12T00:00:00-08:00",
          "id" : "https://memalign.github.io/p/pico8.html",
