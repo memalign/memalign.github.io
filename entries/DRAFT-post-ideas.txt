@@ -13,6 +13,11 @@
 
 - 101 Zen Stories, put in a maze like memalign dungeon: https://nkanaev.com/zen101/en/
 
+- Make memes, mock up UI in Keynote
+
+- Similar Songs update:
+  - Check and add that Wonderful Christmastime and Dear Prudence have a similar lyrical cadence
+  - Consider scraping soundsjustlike.com to make it searchable
 
 - Free game assets: https://www.kenney.nl/assets/
 

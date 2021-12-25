@@ -1,0 +1,112 @@
+{
+  "url": "https://api.github.com/gists/6994394",
+  "forks_url": "https://api.github.com/gists/6994394/forks",
+  "commits_url": "https://api.github.com/gists/6994394/commits",
+  "id": "6994394",
+  "node_id": "MDQ6R2lzdDY5OTQzOTQ=",
+  "git_pull_url": "https://gist.github.com/6994394.git",
+  "git_push_url": "https://gist.github.com/6994394.git",
+  "html_url": "https://gist.github.com/6994394",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/anonymous/6994394/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/anonymous/6994394/raw/e2ca4d17e93996a1e5ba576c29bdd9746cad1d1e/script.txt",
+      "size": 10283,
+      "truncated": false,
+      "content": "title Atlas Shrank\nauthor James Noeckel\nrun_rules_on_level_start\nflickscreen 18x11\n\n========\nOBJECTS\n========\n\nBackground \n#0e193f #202a4c #20324a #1f3649 #00003d\n00004\n13210\n04000\n10111\n00032\n\nExit \n#d0691d #9a521d #7b441c #ad5a1d #8e4c1c yellow\n.222.\n23140\n23140\n25140\n23140 \n\nDoorO\n#cf732f\n0...0\n0...0\n0...0\n0...0\n0...0\n\nSwitch\n#ec5656 #ec3232 #b31313\n01.01\n1...2\n.....\n0...2\n12.22\n\nDoor\n#d0691d #9a521d #7b441c #ad5a1d #8e4c1c\n03412\n04132\n03112\n01142\n04112\n\nShadowDoor\nblack\n\nShadowDoorO\nblack\n\nWallUD\n#697490 #485b76 #8083ba #646f8a #6d7b96\n23041\n23041\n23041\n23041\n23041\n\nWallRL\n#697490 #485b76 #8083ba #646f8a #6d7b96\n22222\n33333\n00000\n44444\n11111\n\nWallR\n#697490 #485b76 #8083ba #646f8a #6d7b96\n40401\n03401\n40031\n03001\n00001\n\nWallL\n#697490 #485b76 #8083ba #646f8a #6d7b96\n20404\n20430\n23004\n20030\n20000\n\nWallU\n#697490 #485b76 #8083ba #646f8a #6d7b96\n22222\n00000\n40300\n03044\n40430\n\nWallD\n#697490 #485b76 #8083ba #646f8a #6d7b96\n04030\n03400\n04004\n30304\n11111\n\nWallM\n#697490 #485b76 #8083ba #646f8a #6d7b96\n03040\n34430\n43340\n44303\n30030\n\n\nWallsolo\n#697490 #485b76 #8083ba #a7aae3 #2d425e #646f8a #6d7b96\n32220\n20651\n25561\n26601\n01114\n\nPlayerS\n#ffb173 #ff6464 #d7d7d7 #d74629\n.000.\n.101.\n02220\n03230\n.0.0.\n\nPlayerL\n#ffb173 #ff6464 #d7d7d7 #d74629\n.000.\n.100.\n.223.\n.233.\n.0.0.\n\nPlayerR   \n#ffb173 #ff6464 #d7d7d7 #d74629\n.000.\n.001.\n.322.\n.332.\n.0.0.\n\nPlayerLH\n#ffb173 #ff6464 #d7d7d7 #d74629\n.0.0.\n.100.\n.220.\n.233.\n.0.0.\n\nPlayerRH\n#ffb173 #ff6464 #d7d7d7 #d74629\n.0.0.\n.001.\n.022.\n.332.\n.0.0.\n\nCrate \n#9f7666 #c8917c #945a50 #8b4c42\n.000.\n00113\n01123\n01223\n.333.\n\nHeldcrate\n#9f7666 #c8917c #945a50 #8b4c42\n.000.\n00113\n01123\n01223\n.333.\n\nShadowcrate\nblack\n\nH_pickup\nred\n.....\n.....\n..0..\n.....\n.....\n\nH_drop\nred\n.....\n.....\n..0..\n.....\n.....\n\nH_grav\ngray\n.....\n.....\n..0..\n.....\n.....\n\nH_step\nyellow\n.....\n.....\n..0..\n.....\n.....\n\n=======\nLEGEND\n=======\n\n. = Background\n# = Wallsolo\nP = PlayerS\n* = Crate\nO = Exit\nX = Door\nT = Switch\n@ = Switch and Crate\nWall = WallUD or WallRL or WallR or WallL or WallM or Wallsolo or WallU or WallD\nPlayer = PlayerL or PlayerR or PlayerS or PlayerRH or PlayerLH\nSolid = Player or Crate or Wall or Heldcrate or Door or Shadowcrate or Shadowdoor\nMassive =  Crate\nHelpers = H_pickup or H_drop or H_grav or H_step\nWeight = Player or Crate\n\n=======\nSOUNDS\n=======\nSFX1 87921103\nSFX2 82865707\nSFX3 70226500\nSFX4 68263307\n\nSFX5 60968508\nSFX6 358900\n================\nCOLLISIONLAYERS\n================\n\nBackground\nExit\nPlayer, Solid\nHelpers\nDoorO, ShadowdoorO, Switch\n\n======\nRULES     \n======    \n\n(Wallify)\nVertical [ Wall | Wallsolo | Wall ] -> [ Wall | WallUD | Wall ]\nHorizontal [ Wall | Wallsolo | Wall ] -> [ Wall | WallRL | Wall ]\nHorizontal [ Wall | WallUD | Wall ] -> [ Wall | WallM | Wall ]\nLeft [ WallUD | Wall ] -> [ WallR | Wall ]\nRight [ WallUD | Wall ] -> [ WallL | Wall ]\nUp [ WallRL | Wall ] -> [ WallD | Wall ]\nDown [ WallRL | Wall ] -> [ WallU | Wall ]\n\n(steps)\nup [ Player | no Solid ] -> [ Player | H_step ]\nup [ Player | Heldcrate no H_step ] -> [ Player | Heldcrate H_step ]\n[ Moving Player ] [ H_step ] -> [ Moving Player ] [ Moving H_step ]\n\n(gravity)\ndown [ Player no H_grav | no Solid ] -> [ Player H_grav | ]\ndown [ Player ] [ H_grav ] -> [ > Player ] [ H_grav ] again\nDown [ Massive ] -> [ down Massive ] again\n\n[ up Player ] -> cancel\n\n(movement/pushing)\nRight [ > Player ] -> [ > PlayerR ]\nLeft [ > Player ] -> [ > PlayerL ]\nHorizontal [ >  Player | Crate | no Solid ] -> [  >  Player | > Crate | ] SFX2\n\n(picking up and holding crates)\nHorizontal [ Crate | Action PlayerS | Crate ] -> message I am paralyzed with indecision!\nRight [ Action PlayerR | Crate ] [Player no H_pickup ] -> [ Player | Shadowcrate ] [ Player H_pickup ] SFX1\nLeft [ Action PlayerL | Crate ] [Player no H_pickup ] -> [ Player | Shadowcrate ] [ Player H_pickup ] SFX1\n([ Moving Player ] [ Heldcrate ] -> [ Moving Player ] [ Moving Heldcrate ])\n([ > Player | no Solid ] [ Heldcrate ] -> [ > Player |  ] [ > Heldcrate ])\n(late Up [ Player | no Solid ] [ Heldcrate ] -> [ Player | Heldcrate ] [ ])\n\n(putting down)\n(Left [ Action Heldcrate | no Solid ] [ PlayerLH ] -> [ | Crate ] [ PlayerL ]\nRight [ Action Heldcrate | no Solid ] [ PlayerRH ] -> [ | Crate ] [ PlayerR ])\nRight [ Heldcrate | no Solid ] [ Action PlayerRH ] -> [ Heldcrate | H_drop ] [ PlayerR ]\nLeft [ Heldcrate | no Solid ] [ Action PlayerLH ] -> [ Heldcrate | H_drop ] [ PlayerL ]\n\n\n(steps late)\nlate [ H_step ] [H_grav ] -> [ ] [ H_grav ]\nlate Down [ H_step | Player ] -> [ | Player ]\nlate up [ H_step no Solid | no Solid ] [ Heldcrate ] -> [ H_step | Heldcrate ] [ ]\nlate [ H_step no Solid ] [ Player ] -> [ Player ] [ ] SFX4\n\n(crate rules)\nlate [ Heldcrate ] [ H_drop ] -> [ ] [ Crate ]\nlate up [ Player | no Solid ] [ Heldcrate ] -> [ Player | Heldcrate ] [ ]\n\nlate Up [ H_pickup | no Solid ] [ Shadowcrate ] -> [ | Heldcrate ] [ ]\nlate [ Shadowcrate ] -> [ Crate ]\nlate Down [ Heldcrate | no Player ] -> [ Crate | ]\n\nlate up [ PlayerR ] [ Heldcrate ] -> [ PlayerRH ] [ Heldcrate ]\nlate up [ PlayerL ] [ Heldcrate ] -> [ PlayerLH ] [ Heldcrate ]\n\n\n(cleanup)\nlate [ H_pickup ] -> [ ]\nlate [ H_grav ] -> [ ]\nlate [ H_step ] -> [ ]\n\n\nlate [ Player Exit ] -> SFX3\n\n(doors)\nlate [ Door ] -> [ Shadowdoor ]\nlate [ DoorO ] -> [ ShadowDoorO ]\nlate [ ShadowdoorO no Solid ] [ ShadowdoorO Solid ] -> [ DoorO ] [ ShadowdoorO Solid ]\nlate [ Switch no Weight ] [ ShadowDoorO no Solid ] -> [ Switch ] [ Door ] SFX5\nlate [ Switch no Weight ] [ Shadowdoor ] -> [ Switch ] [ Door ]\nlate [ Shadowdoor ] -> [ DoorO ] SFX6\nlate [ ShadowdoorO ] -> [ DoorO ]\n\n==============\nWINCONDITIONS\n==============\nall Exit on Player\n\n=======     \nLEVELS\n=======\nmessage Demoted again\n###############\n#.......O.....#\n#.......#.....#\n#......##.....#\n#.....###.....#\n#.P..####**...#\n###############\n\nmessage First gas planets, and now this\nmessage [Pick up with x]\n###############\n#.............#\n#...........O.#\n#..........####\n#..........#..#\n#P..**...*.#..#\n###############\n\n##################\n############.....#\n#########*##.....#\n#########*##.....#\n####.....*....o..#\n####.....*.#######\n####.....*.#######\n####.....*########\n#####....*########\n######..p*########\n##################\n\n###############\n#..*###....#..#\n#..*..........#\n#..####.......#\n#.**......**P.#\n#.#############\n#......*.#....#\n#...*..#.X..O.#\n#...##.#T######\n###############\n\nmessage what is even my job\n*#####*###########\n#*##.##.#...#....#\n##.#..#..........#\n#.....#*........O#\n#......###.....###\n#.........#....###\n#......*..*....###\n#....#############\n#...#............#\n#**..............#\n#####...##########\n****.#..##########\n****..#..#########\n****...#....######\n****....#.......*#\n*###....##......*#\n*.....#####...####\n#......###....####\n*.......x..#######\n##.#....x.########\n.p.*.*ttx#########\n##################\n\nmessage I could lift these all day\n######x###########\n##*#..x.......#..#\n###...x*......x.o#\n#.....##.....*x.##\n#....#xp..@..#x..#\n#...##x###########\n#*..*.x.....######\n######x.....#....#\n######x......*...#\n######.#*....##..#\n######.###########\n\n##################\n#............*...#\n#..@......*.t@p..#\n#xxx#xxxxxxxxxxx##\n#.#.#...........##\n#.#.#.#.#.#.#.#.##\n#.#.#.#.#.#.#.#.##\n#...#########.####\n##....*x.....*...#\n###...##....###.o#\n##################\n\n##################\n##...........x...#\n##...........x.*.#\n##.........t####.#\n##..........#....#\n##..........#....#\n##...***#####.##x#\n##...***##.o..###*\n##...***####.....#\n##.p.***##.......#\n##################\n\nmessage I miss the reassuring weight of a globe across my shoulders\n#.................\n#..#.#.#.#.......#\n#..#.#.#.#.......#\n#..#.#.t*........#\n#..#.#*###.......#\n#...*.*...*......#\n*..#####.###.....#\n#.*.........#...*#\n####.......*....##\n##t*.p.....#.##.##\n##t###t#x#########\n##t#####x#########\n##t##.......######\n####.........#####\n###...........####\n##......o......###\n#......###......##\n.................#\n..................\n\n.....................##*#*****....*...................\n..o....##.#.######....##******...**.........#.........\n..#.###############....####*********........#........*\n################.#.##..x############........#........#\n#####............#..#..x....................#.........\n###.#............#..#.*x....................#.........\n#.*.#................#####..................#.........\n#***#............#*....*..p**.........t.*..#.........*\n#####...........######################.#####.........#\n#..............#########################...##.........\n#.............#########.#.#.#...............#**.......\n#............#########..#.#.#...............####......\n#............########..#*#*#*#..............#.########\n#............########..#*#*#*#..............#.#....###\n#*...........#####......#.#.#...............#.#......#\n#*.......#######........#...................#.#......#\n#*......######..............................#.#......#\n#*.....#..##............*...................#.#......#\n#**...**......*.......#.#.#.#..........t....#.#.....##\n#####*#######**###########################*######*####\n\n*#***#*.#...##....#...........########...............*#................#\n*#***#*.....#.....*...........#.#.#.#................*#................#\n*#***##.....#.....**...#.#....*.*.*..................##................#\n*#***#......#.....##...#.#....########...............##................#\n*#***......*#.....##*..#.#....##***###...............#*................#\n*#**#......#......*#####.#########**##...............##................#\n*#**.......#......***##...###....##**####............##..........*.....#\n*#**.......#......***......#......##*##*#............xx..........##....#\n##*###############****............##****#............xx............#...#\n##*################****.....#..o..##*#**#p....@.@.@..xx....@.@.@...**..#\n####################################*##*################################\n\n.................############*#.#.##\n.................#..*........*.....#\n.................#.t###....*########\n#................#.....*...#o......#\n#.....................##########...#\n#....................#.....**.....*#\n#................##.#....###x#######\n#...............###.#*.......*.....#\n#.........*..###############x###...#\n##....p..**................*......*#\n############################x#######\n....................................\n\nmessage Congratulations!\nmessage You rearranged the rubble!\nmessage the end"
+    }
+  },
+  "public": true,
+  "created_at": "2013-10-15T16:28:14Z",
+  "updated_at": "2018-03-17T06:59:22Z",
+  "description": "title",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/6994394/comments",
+  "forks": [
+    {
+      "url": "https://api.github.com/gists/4e93280ee9933ea9a02caa0b38cc959a",
+      "user": {
+        "login": "philschatz",
+        "id": 253202,
+        "node_id": "MDQ6VXNlcjI1MzIwMg==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/253202?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/philschatz",
+        "html_url": "https://github.com/philschatz",
+        "followers_url": "https://api.github.com/users/philschatz/followers",
+        "following_url": "https://api.github.com/users/philschatz/following{/other_user}",
+        "gists_url": "https://api.github.com/users/philschatz/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/philschatz/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/philschatz/subscriptions",
+        "organizations_url": "https://api.github.com/users/philschatz/orgs",
+        "repos_url": "https://api.github.com/users/philschatz/repos",
+        "events_url": "https://api.github.com/users/philschatz/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/philschatz/received_events",
+        "type": "User",
+        "site_admin": false,
+        "name": "Philip Schatz",
+        "company": "@OpenStax",
+        "blog": "https://philschatz.com",
+        "location": "pale blue dot",
+        "email": null,
+        "hireable": null,
+        "bio": "open source developer, manager, and architect for @openstax (free textbooks for everyone!)",
+        "twitter_username": null,
+        "public_repos": 257,
+        "public_gists": 165,
+        "followers": 161,
+        "following": 7,
+        "created_at": "2010-04-26T15:20:07Z",
+        "updated_at": "2021-12-07T20:08:43Z"
+      },
+      "id": "4e93280ee9933ea9a02caa0b38cc959a",
+      "created_at": "2018-03-17T06:59:21Z",
+      "updated_at": "2018-03-17T06:59:22Z"
+    }
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "invalid-email-address",
+        "id": 148100,
+        "node_id": "MDQ6VXNlcjE0ODEwMA==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/148100?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/invalid-email-address",
+        "html_url": "https://github.com/invalid-email-address",
+        "followers_url": "https://api.github.com/users/invalid-email-address/followers",
+        "following_url": "https://api.github.com/users/invalid-email-address/following{/other_user}",
+        "gists_url": "https://api.github.com/users/invalid-email-address/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/invalid-email-address/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/invalid-email-address/subscriptions",
+        "organizations_url": "https://api.github.com/users/invalid-email-address/orgs",
+        "repos_url": "https://api.github.com/users/invalid-email-address/repos",
+        "events_url": "https://api.github.com/users/invalid-email-address/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/invalid-email-address/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "8ecf3a4bc29b76501d4b9fddec6e5945b65894ae",
+      "committed_at": "2013-10-15T16:28:14Z",
+      "change_status": {
+        "total": 512,
+        "additions": 512,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/6994394/8ecf3a4bc29b76501d4b9fddec6e5945b65894ae"
+    }
+  ],
+  "truncated": false
+}

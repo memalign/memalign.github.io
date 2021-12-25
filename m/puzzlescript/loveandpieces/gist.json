@@ -1,0 +1,112 @@
+{
+  "url": "https://api.github.com/gists/6846450",
+  "forks_url": "https://api.github.com/gists/6846450/forks",
+  "commits_url": "https://api.github.com/gists/6846450/commits",
+  "id": "6846450",
+  "node_id": "MDQ6R2lzdDY4NDY0NTA=",
+  "git_pull_url": "https://gist.github.com/6846450.git",
+  "git_push_url": "https://gist.github.com/6846450.git",
+  "html_url": "https://gist.github.com/6846450",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/anonymous/6846450/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/anonymous/6846450/raw/c332bb089cdf9b644b8f357bb441d4356e61c81a/script.txt",
+      "size": 2065,
+      "truncated": false,
+      "content": "title Love and Pieces\nauthor lexaloffle\nhomepage www.lexaloffle.com\n\n========\nOBJECTS\n========\n\nBackground \nWhite LightBlue\n00000\n01110\n01110\n01110\n00000\n\n\nWall     \nDarkBlue Black DarkGray LightGray White\n23330\n22300\n22100\n21110\n11111\n\nPlayer \nYellow Orange Red White LightBrown\n20002\n01130\n01110\n04110\n20002\n\nGrayBlock\nGray DarkGray Green\n10001\n01210\n02220\n01210\n10001\n\nLitBlock\nGreen DarkGray\n00000\n01110\n01110\n01110\n00000\n\n\n=======\nLEGEND\n=======\n\n. = Background\n# = Wall\nP = Player\no = GrayBlock\nBlock = GrayBlock or Player\n\n=======\nSOUNDS\n=======\n\nGrayBlock MOVE 36772507\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\nPlayer, Wall, GrayBlock, LitBlock\n\n======\nRULES     \n======     \n\n[ > Player | Wall ] -> cancel\nlate [ Player | GrayBlock ] -> [ Player | Player ]   \n\n==============\nWINCONDITIONS\n==============\n\nNo GrayBlock\n\n=======     \nLEVELS\n=======\n\n\n\n############\n#...#......#\n#..........#\n#.p..o..o..#\n#..........#\n#..#.......#\n#..........#\n#......#...#\n#..........#\n############\n\n############\n#..........#\n#..........#\n#....#o....#\n#..#.o.#...#\n#....#.....#\n#....o.....#\n#.o......p.#\n#..........#\n############\n\n############\n#o...o.....#\n#.o...o....#\n#..o...o...#\n#...o...o..#\n#o...o...o.#\n#.o...o...o#\n#..o...o.p.#\n#...o...o..#\n############\n\n############\n#..........#\n#..o....o..#\n#.p#....#o.#\n#..........#\n#..........#\n#.o#....#o.#\n#..o....o..#\n#..........#\n############\n\n\n############\n#..o.......#\n#.....oo...#\n#...o......#\n#.o#..p..o.#\n#....o.....#\n#..o....o..#\n#o.o...#...#\n#...o...o..#\n############\n\n############\n#p.o.......#\n#..........#\n#.o..o...###\n#........###\n###.o......#\n###......o.#\n#o.....##..#\n#......##.o#\n############\n\n\n############\n#........o.#\n#..o.##....#\n#....o.o...#\n#.#......#.#\n#.#..p.o.#.#\n#..o.......#\n#....##....#\n#.o......o.#\n############\n\n\n############\n###........#\n##....o.o..#\n#....#.#...#\n#...o.o.o..#\n#....#.#...#\n#...o.o....#\n##........##\n###.p....###\n############\n\n\n###########o\n#....p....##\n#....p.....#\n#...ppp....# \n#ppppppppp.#\n#...ppp....#\n#..ppppp...#\n#.pp...pp..#\n#.p.....p..#\n############\n"
+    }
+  },
+  "public": true,
+  "created_at": "2013-10-05T21:46:51Z",
+  "updated_at": "2018-03-17T07:05:54Z",
+  "description": "title",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/6846450/comments",
+  "forks": [
+    {
+      "url": "https://api.github.com/gists/372087f4734188ee8bc66acd1360b6e4",
+      "user": {
+        "login": "philschatz",
+        "id": 253202,
+        "node_id": "MDQ6VXNlcjI1MzIwMg==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/253202?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/philschatz",
+        "html_url": "https://github.com/philschatz",
+        "followers_url": "https://api.github.com/users/philschatz/followers",
+        "following_url": "https://api.github.com/users/philschatz/following{/other_user}",
+        "gists_url": "https://api.github.com/users/philschatz/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/philschatz/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/philschatz/subscriptions",
+        "organizations_url": "https://api.github.com/users/philschatz/orgs",
+        "repos_url": "https://api.github.com/users/philschatz/repos",
+        "events_url": "https://api.github.com/users/philschatz/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/philschatz/received_events",
+        "type": "User",
+        "site_admin": false,
+        "name": "Philip Schatz",
+        "company": "@OpenStax",
+        "blog": "https://philschatz.com",
+        "location": "pale blue dot",
+        "email": null,
+        "hireable": null,
+        "bio": "open source developer, manager, and architect for @openstax (free textbooks for everyone!)",
+        "twitter_username": null,
+        "public_repos": 257,
+        "public_gists": 165,
+        "followers": 161,
+        "following": 7,
+        "created_at": "2010-04-26T15:20:07Z",
+        "updated_at": "2021-12-07T20:08:43Z"
+      },
+      "id": "372087f4734188ee8bc66acd1360b6e4",
+      "created_at": "2018-03-17T07:05:53Z",
+      "updated_at": "2018-03-17T07:05:54Z"
+    }
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "invalid-email-address",
+        "id": 148100,
+        "node_id": "MDQ6VXNlcjE0ODEwMA==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/148100?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/invalid-email-address",
+        "html_url": "https://github.com/invalid-email-address",
+        "followers_url": "https://api.github.com/users/invalid-email-address/followers",
+        "following_url": "https://api.github.com/users/invalid-email-address/following{/other_user}",
+        "gists_url": "https://api.github.com/users/invalid-email-address/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/invalid-email-address/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/invalid-email-address/subscriptions",
+        "organizations_url": "https://api.github.com/users/invalid-email-address/orgs",
+        "repos_url": "https://api.github.com/users/invalid-email-address/repos",
+        "events_url": "https://api.github.com/users/invalid-email-address/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/invalid-email-address/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "555b36aeb841cbcb125f47faeae1df15ee359921",
+      "committed_at": "2013-10-05T21:46:51Z",
+      "change_status": {
+        "total": 195,
+        "additions": 195,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/6846450/555b36aeb841cbcb125f47faeae1df15ee359921"
+    }
+  ],
+  "truncated": false
+}

@@ -1,0 +1,48 @@
+Title: PuzzleScript
+Date: 12/24/2021
+Tags: Games, Programming
+
+[Image:/m/puzzlescript/atlasshrank/atlasshrank.gif]
+
+[Link:https://www.puzzlescript.net/]PuzzleScript[/Link] is a way to make tile-based games that run on the web. It was [Link:https://www.puzzlescript.net/Documentation/about.html]created[/Link] by [Link:https://www.increpare.com/]increpare[/Link].
+
+An interesting tidbit from the [Link:https://www.puzzlescript.net/Documentation/credits.html]credits[/Link] page: PuzzleScript's creator is/was flatmates with [Link:https://terrycavanaghgames.com/]Terry Cavanagh[/Link], who made a bunch of popular and creative games: [Link:http://thelettervsixtim.es/]VVVVVV[/Link], [Link:http://superhexagon.com/]Super Hexagon[/Link], and (my favorite) [Link:https://apps.apple.com/us/app/dont-look-back/id568668228]Don't Look Back[/Link].
+
+The PuzzleScript games I've seen usually have [Link:https://en.wikipedia.org/wiki/Sokoban]Sokoban[/Link] elements: pushing/moving crates to solve puzzles. The wrong moves can make a level unbeatable so another core element of PuzzleScript games is unlimited undo by pressing 'z'. Explore the [Link:https://www.puzzlescript.net/Gallery/index.html]gallery[/Link] and check out increpare's [Link:https://www.increpare.com/]portfolio of games[/Link].
+
+[SectionTitle:Notable Games]
+
+[Link:https://www.puzzlescript.net/play.html?p=d210a5248fa713153950][Image:/m/puzzlescript/sokoboros/sokoboros.gif][/Link]
+[ParagraphTitle:[Link:https://www.puzzlescript.net/play.html?p=d210a5248fa713153950]Sokoboros[/Link]] ([Link:/m/puzzlescript/sokoboros/index.html]backup[/Link])
+I enjoyed this game the most. Sokoboros combines elements of Sokoban and [Link:https://en.wikipedia.org/wiki/Snake_(video_game_genre)]Snake[/Link]. The game's name is a clever pun that combines "Sokoban" and "[Link:https://en.wikipedia.org/wiki/Ouroboros]Ouroboros[/Link]"!
+
+
+[Link:https://www.puzzlescript.net/play.html?p=6994394][Image:/m/puzzlescript/atlasshrank/atlasshrank.gif][/Link]
+[ParagraphTitle:[Link:https://www.puzzlescript.net/play.html?p=6994394]Atlas Shrank[/Link]] ([Link:/m/puzzlescript/atlasshrank/index.html]backup[/Link])
+I enjoyed this game where you play as the Greek Titan [Link:https://en.wikipedia.org/wiki/Atlas_(mythology)]Atlas[/Link] who has been shrunken down and needs to escape a series increasingly complex of rooms.
+
+
+[Link:https://www.puzzlescript.net/play.html?p=6880313][Image:/m/puzzlescript/legendofzokoban/legendofzokoban.gif][/Link]
+[ParagraphTitle:[Link:https://www.puzzlescript.net/play.html?p=6880313]Legend of Zokoban[/Link]] ([Link:/m/puzzlescript/legendofzokoban/index.html]backup[/Link])
+This [Link:https://pixelverse.org/files/06c9d85eae32d864c4788e40a1882614-10.html]Zelda-inspired[/Link] game is made by [Link:https://pixelverse.org/]Joshua Minor[/Link]. Joshua's [Link:http://twitter.com/jminor]twitter[/Link] feed has led me to many interesting projects and ideas, including PuzzleScript and [Link:/p/pico8.html]PICO-8[/Link]! If not for him, these posts wouldn't exist. According to [Link:https://www.linkedin.com/in/joshua-minor-972851]LinkedIn[/Link], Joshua's been an engineer at Pixar for 21 years at the time of writing. How cool!
+
+
+[Link:https://www.puzzlescript.net/play.html?p=11358856][Image:/m/puzzlescript/collapse/collapse.gif][/Link]
+[ParagraphTitle:[Link:https://www.puzzlescript.net/play.html?p=11358856]Collapse[/Link]] ([Link:/m/puzzlescript/collapse/index.html]backup[/Link])
+Terry Cavanagh made this game. I'm reminded slightly of [Link:https://apps.apple.com/us/app/dont-look-back/id568668228]Don't Look Back[/Link]: the main character is navigating a hellish and dangerous world to retrieve something beautiful.
+
+
+[Link:https://www.puzzlescript.net/play.html?p=6846450][Image:/m/puzzlescript/loveandpieces/loveandpieces.gif][/Link]
+[ParagraphTitle:[Link:https://www.puzzlescript.net/play.html?p=6846450]Love and Pieces[/Link]] ([Link:/m/puzzlescript/loveandpieces/index.html]backup[/Link])
+Love and Pieces is made by Lexaloffle / Zep, the creator of [Link:/p/pico8.html]PICO-8[/Link]!
+
+
+[SectionTitle:Some Technical Details]
+
+PuzzleScript [Link:https://github.com/increpare/PuzzleScript]source code[/Link] ([Link:/m/puzzlescript/puzzlescript.zip]backup[/Link]) reveals some cool details:
+- PuzzleScript has its own web-based [Link:https://www.puzzlescript.net/editor.html?hack=6994394]code editor[/Link]. I particularly like how it displays colors for the sprite pixels defined in text.
+- Instead of hosting its own database of games, it integrates with GitHub's gist API. Every game is just stored in a gist in a user's GitHub account. For example, Atlas Shrank's gist is [Link:https://api.github.com/gists/6994394]here[/Link]. This is an interesting and clever way to avoid hosting your own server.
+  - The code to post a new gist can be found in the shareClick function [Link:https://github.com/increpare/PuzzleScript/blob/master/src/js/toolbar.js]here[/Link].
+  - The code to load a gist can be found in the getData function [Link:https://github.com/increpare/PuzzleScript/blob/master/src/play.html]here[/Link].
+  - play.html loads whatever gist id is appended to the url (which looks like: [Link]https://www.puzzlescript.net/play.html?p=6994394[/Link])
+  - I think there's a risk loading content this way: it could look like the website owner published content when really it was published by someone else. The content could be offensive or harmful. To mitigate this, if I use this technique in a project I will probably show a disclaimer on the website that this content is from an external user with a direct link to that user's gist.
