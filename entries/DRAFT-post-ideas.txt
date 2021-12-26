@@ -14,9 +14,9 @@
 - 101 Zen Stories, put in a maze like memalign dungeon: https://nkanaev.com/zen101/en/
 
 - Make memes, mock up UI in Keynote
-
-- Similar Songs update:
-  - Consider scraping soundsjustlike.com to make it searchable
+  
+- More PICO-8 games
+  - Holiday Jumper by zep: https://www.lexaloffle.com/bbs/?tid=45856
 
 - Free game assets: https://www.kenney.nl/assets/
 
