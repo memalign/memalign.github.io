@@ -65,6 +65,7 @@ function random_seed(seed) {
   - http://lalo.li/ddd/
   - http://lalo.li/lsd/
   - Chroma Incident: https://js13kgames.com/entries/the-chroma-incident https://github.com/Rybar/js13k2018
+  - Space Garden: https://js13kgames.com/entries/space-garden ; Relaxing, a lot more fun than Asteroids, but no win/end condition
 
 
 - List of tools for making IF:

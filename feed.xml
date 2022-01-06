@@ -1361,7 +1361,7 @@ Here's what the fixed equation looks like:<br />
 <br />
 <img src="/m/mathshapes/triangle.jpg"><br />
 <br />
-Looks perfect! Our formula is pretty complex, though. It's possible we could come up with a simpler formula by reading this <a href="https://en.wikipedia.org/wiki/Triangle_wave">Wikipedia page</a>.<br />
+Looks perfect! Our formula is pretty complex, though. It's possible we could come up with a <a href="/m/formulagraph/index.html?f1(x,t)=abs(1-mod(x,2))&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">simpler formula</a> by reading this <a href="https://en.wikipedia.org/wiki/Triangle_wave">Wikipedia page</a>.<br />
 <br />
 <br />
 Square wave:<br />

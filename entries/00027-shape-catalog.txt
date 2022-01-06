@@ -272,7 +272,7 @@ Here's what the fixed equation looks like:
 
 [Image:/m/mathshapes/triangle.jpg]
 
-Looks perfect! Our formula is pretty complex, though. It's possible we could come up with a simpler formula by reading this [Link:https://en.wikipedia.org/wiki/Triangle_wave]Wikipedia page[/Link].
+Looks perfect! Our formula is pretty complex, though. It's possible we could come up with a [Link:/m/formulagraph/index.html?f1(x,t)=abs(1-mod(x,2))&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true]simpler formula[/Link] by reading this [Link:https://en.wikipedia.org/wiki/Triangle_wave]Wikipedia page[/Link].
 
 
 Square wave:
