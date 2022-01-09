@@ -397,3 +397,10 @@ I'll support this as a special case in [Image:]
 [x] - Test HTML produced for mp4 image
 [x] - Avoid using Image:mp4 as the og:image (test this: [x]a post that only has an mp4, [x]a post with an mp4 before a jpg, [x]a post with an mp4 after a jpg)
 
+
+1/8/22
+
+MP4s as Images weren't autoplaying on iPhone. I found this blog post:
+https://webkit.org/blog/6784/new-video-policies-for-ios/
+
+I fixed this by using the playsinline attribute in the video tag.

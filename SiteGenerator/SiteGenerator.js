@@ -557,7 +557,7 @@ ${this.title}
 
 
     // [Image] support: mp4
-    htmlContents = htmlContents.replace(/\[Image:([^\]]+[mM][pP]4)\]/g, '<video muted loop autoplay disablepictureinpicture="" src="$1" type="video/mp4"></video>')
+    htmlContents = htmlContents.replace(/\[Image:([^\]]+[mM][pP]4)\]/g, '<video muted loop autoplay playsinline disablepictureinpicture="" src="$1" type="video/mp4"></video>')
 
     // [Image] support
     htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
@@ -1396,7 +1396,7 @@ More posts:<br />
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.mp4]\ntest text")  
     let htmlBody = entry.htmlBody()
     
-    assertTrue(htmlBody.includes(`<video muted loop autoplay disablepictureinpicture="" src="/m/test.mp4" type="video/mp4"></video>`), "Has video tag")
+    assertTrue(htmlBody.includes(`<video muted loop autoplay playsinline disablepictureinpicture="" src="/m/test.mp4" type="video/mp4"></video>`), "Has video tag")
     assertTrue(!htmlBody.includes("<img"), "Lacks <img tag")
     assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
