@@ -5,10 +5,91 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2021-12-26T00:00:00-08:00</updated>
-<rights>Copyright © 2021, memalign</rights>
+<updated>2022-02-10T00:00:00-08:00</updated>
+<rights>Copyright © 2022, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>My Beatles Picks</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/beatles.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/beatles.html" />
+<id>https://memalign.github.io/p/beatles.html</id>
+<published>2022-02-10T00:00:00-08:00</published>
+<updated>2022-02-10T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/beatles.html'>My Beatles Picks</a>
+</h2>
+</div>
+<img src="/m/applerecords.jpg">
+<div id='postdate'>Posted on 2/10/2022<br />
+Tags: <a href='/tags.html'>Music</a></div>
+I've had the Beatles on my mind recently thanks to the buzz around Peter Jackson's "<a href="https://en.wikipedia.org/wiki/The_Beatles:_Get_Back">The Beatles: Get Back</a>" documentary.<br />
+<br />
+I grew up long after the Beatles had broken up and I had never listened to a full Beatles album despite liking a lot of their songs. I decided to listen to every album in order, looking up interesting details about the albums and songs on Wikipedia along the way. (I wish there were more <a href="https://en.wikipedia.org/wiki/Pop-Up_Video">pop-up videos</a>!)<br />
+<br />
+I now have a lot more appreciation for the Beatles members as people, how hard-working they were, and how their music evolved.<br />
+<br />
+Here are my Beatles picks (in no particular order). Many of these songs are so popular that I already knew them; others I heard for the first time during this listen-through. I left off some songs (Hey Jude, Lucy in the Sky With Diamonds, and many more) that are objectively good but that I don't like enough to consider "my picks". Some of these songs are funny (such as Norwegian Wood, Michelle, Girl (how a pained John Lennon sucks in air through his teeth), Getting Better), some are just fun, and others are among the most beautiful songs I've ever heard.<br />
+<br />
+- In My Life<br />
+- Here Comes the Sun<br />
+- Something<br />
+- All My Loving<br />
+- Love Me Do<br />
+- Please Please Me<br />
+- I'm So Tired<br />
+- Dear Prudence<br />
+- While My Guitar Gently Weeps<br />
+- You Never Give Me Your Money<br />
+- And I Love Her<br />
+- Eight Days a Week<br />
+- Help!<br />
+- The Night Before<br />
+- Yesterday<br />
+- You've Got to Hide Your Love Away<br />
+- Drive My Car<br />
+- Norwegian Wood<br />
+- The Word<br />
+- Michelle<br />
+- Girl<br />
+- Eleanor Rigby<br />
+- Sgt. Pepper's Lonely Hearts Club Band<br />
+- With a Little Help From My Friends<br />
+- Lucy In the Sky with Diamonds<br />
+- Getting Better<br />
+- Fixing a Hole<br />
+- Lovely Rita<br />
+- I Am the Walrus<br />
+- Strawberry Fields Forever<br />
+- Penny Lane<br />
+- The Continuing Story of Bungalow Bill<br />
+- Sexy Sadie<br />
+- I Want You (She's So Heavy)<br />
+- Because<br />
+- Across the Universe<br />
+- A Day In The Life (the version from "The Beatles / 1967-1970"; the original has creepy audio at the end that's not pleasant in a playlist)<br />
+<br />
+Post-Beatles honorable mentions:<br />
+<br />
+- John Lennon - How Do You Sleep?<br />
+- Paul McCartney - Maybe I'm Amazed<br />
+- Paul McCartney & Michael Jackson - Say Say Say<br />
+- Paul McCartney & Wings - Live and Let Die<br />
+- Rihanna & Kanye West & Paul McCartney - FourFiveSeconds<br />
+<br />
+I also watched the movies <a href="https://en.wikipedia.org/wiki/Yesterday_(2019_film)">Yesterday</a> and <a href="https://en.wikipedia.org/wiki/Across_the_Universe_(film)">Across the Universe</a> and enjoyed them more than I could've if I hadn't heard these albums and learned some of the history beforehand.<br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>SoundsJustLike</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/soundsjustlike.html" />
@@ -4930,75 +5011,6 @@ I like this website because:<br />
 <br />
 <br />
 This tutorial can serve as a great example for other types of online textbooks.
-]]>
-</content>
-</entry>
-
-<entry>
-<title>RSS and Feedly</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/feedly.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/feedly.html" />
-<id>https://memalign.github.io/p/feedly.html</id>
-<published>2020-03-22T00:00:00-08:00</published>
-<updated>2020-03-22T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/feedly.html'>RSS and Feedly</a>
-</h2>
-</div>
-<img src="/m/feedly.jpg">
-<div id='postdate'>Posted on 3/22/2020<br />
-Tags: <a href='/tags.html'>Programming</a></div>
-I like to read news feeds to learn, find entertainment, and stay up-to-date on various topics.<br />
-<br />
-RSS feeds and Atom feeds are a great way to subscribe to news feeds. I used to use Google Reader and, after that service shut down, I moved to Feedly.<br />
-<br />
-Feedly is really cool! Especially for developers.<br />
-<br />
-Over winter break in 2019, I decided to build an app for myself to read news feeds (mainly so I could write smart filters to remove uninteresting entries). I did some cursory research into Feedly's developer support and I was pleasantly surprised by how easy the Feedly API is to adopt! Even though every website's RSS or Atom feed can have weird quirks, Feedly solves all of those problems for us. It's straightforward and quick to use the Feedly API to build a simple RSS reader.<br />
-<br />
-<br />
-Here's how I adopted the Feedly API (and how you can too):<br />
-<br />
-1. Become a Feedly user. Create an account using their website or app.<br />
-<br />
-2. Subscribe to some RSS feeds using their app<br />
-<br />
-3. Decide to build a custom news reader app to read these feeds<br />
-<br />
-4. Look at their developer documentation with an eye toward ease of adoption and whether all needed functionality exists<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Documentation is found here: <a href="https://developer.feedly.com/">https://developer.feedly.com/</a><br />
-<br />
-5. Note the primitives needed to build an app:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Get a list of news feeds with unread entries: <a href="https://developer.feedly.com/v3/markers/">https://developer.feedly.com/v3/markers/</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Get information about a feed (I use this to get its icon): <a href="https://developer.feedly.com/v3/collections/">https://developer.feedly.com/v3/collections/</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Get a list of news entries (including their content) for a given feed: <a href="https://developer.feedly.com/v3/streams/">https://developer.feedly.com/v3/streams/</a><br />
-<br />
-6. Get access to their API. It's easy to start prototyping for your own use with a developer access token: <a href="https://developer.feedly.com/v3/developer/">https://developer.feedly.com/v3/developer/</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Your developer access token can then be included in HTTP requests instead of a real OAuth token.<br />
-<br />
-7. Use <a href="https://en.wikipedia.org/wiki/CURL">curl</a> to quickly prove that the developer access token works and the APIs return expected results<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Here's an example command:<br />
-<div id='code'>curl -H &#039;Authorization: OAuth YOUR_DEV_TOKEN&#039; https://cloud.feedly.com/v3/markers/counts</div>
-8. Think about how to organize your code into classes. Some useful classes might be: FeedlyDataSource, NewsFeed, NewsEntry.<br />
-<br />
-9. Use your platform's built-in APIs for making HTTP requests, parsing JSON, displaying a list of NewsEntrys to the user.<br />
-<br />
-10. As you build your app, add unit tests for parsing responses. One tip: save some curl results to files and inject those files into tests so your tests can work offline. Save to file like this:<br />
-<div id='code'>curl -H &#039;Authorization: OAuth YOUR_DEV_TOKEN&#039; https://cloud.feedly.com/v3/markers/counts &gt; /path/to/test_data_files/markersCountsResponse.txt</div>
-If you need any help, please @ me on <a href="http://twitter.com/memalign">Twitter</a>.<br />
-<br />
-<br />
-Bonus:<br />
-<br />
-- You can subscribe to YouTube channels in Feedly<br />
-- I like to subscribe to HackerNews in Feedly instead of reading it on the website: <a href="https://news.ycombinator.com/rss">https://news.ycombinator.com/rss</a>
 ]]>
 </content>
 </entry>

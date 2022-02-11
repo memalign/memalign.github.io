@@ -15,6 +15,8 @@
 
 - Make memes, mock up UI in Keynote
 
+- Make font in js: https://brutalita.com/
+
 - Similar Songs Jukebox: use Spotify, Apple Music, or YouTube to play similar songs back-to-back
   
 - More PICO-8 games
