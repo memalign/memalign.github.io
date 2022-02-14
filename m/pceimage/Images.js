@@ -218,7 +218,7 @@ o:#FFFFFF
   },
 
   puzzlescriptLogo: {
-    name: "Puzzlescript",
+    name: "PuzzleScript",
     imageStr: `.:#00000000
 @:#9D9D9D
 #:#DE8C46

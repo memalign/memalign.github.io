@@ -18,6 +18,10 @@
 - Make font in js: https://brutalita.com/
 
 - Similar Songs Jukebox: use Spotify, Apple Music, or YouTube to play similar songs back-to-back
+
+- Generated art
+  - https://twitter.com/sportsracer48?s=20&t=O1ABZqjOT03HXA5InI9HOQ
+  - https://github.com/sportsracer48/pytti
   
 - More PICO-8 games
   - Holiday Jumper by zep: https://www.lexaloffle.com/bbs/?tid=45856
