@@ -1,0 +1,154 @@
+/*! * Colr Pickr * * R-TEK * * https://github.com/R-TEK/colr_pickr * * MIT License */
+
+#color_picker input{
+    height:30px;
+    border:1px solid #ccc;
+    outline:0;
+    font-family:monospace;
+    font-size:12px;
+    color:#333;
+    text-align:center
+}
+#color_picker input:focus{
+    border:1px solid #007cff
+}
+#color_picker input::-webkit-outer-spin-button,#color_picker input::-webkit-inner-spin-button{
+    -webkit-appearance:none;
+    margin:0
+}
+#color_picker input[type='number']{
+    -moz-appearance:textfield
+}
+#color_picker{
+    width:269px;
+    background-color:#fff;
+    border:1px solid #ccc;
+    border-radius:5px;
+    z-index:99999;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+}
+#color_picker #color_box_div{
+  top:3px;
+  position:relative;
+}
+#color_picker #sliders{
+  position:relative;
+    padding:5px 0 0px 0;
+}
+#color_picker #color_slider{
+}
+#color_picker #color_text_values{
+    padding:3px 0 2px 0;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    outline:0;
+    height:58px;
+    text-align:center
+}
+#color_picker #switch_color_type{
+    position:relative;
+    padding:0;
+    right:-111px;
+    width:24px;
+    height:23px;
+    top:-50px;
+    background:0;
+    border:0;
+    cursor:pointer
+}
+#color_picker .label_text{
+    position:relative;
+    margin:0 !important;
+    height:15px;
+    top:2px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:12px;
+    color:#555
+}
+#color_picker #hex_input{
+    width:100px
+}
+#color_picker .rgba_divider,#color_picker .hsla_divider{
+    display:inline-block
+}
+#color_picker .rgba_input,#color_picker .hsla_input{
+    margin:0 1px;
+    width:28px
+}
+#color_picker #custom_colors{
+    text-align:left
+}
+#color_picker #custom_colors_header{
+    height:35px
+}
+#color_picker #custom_colors_pallet_icon{
+    margin:9px 15px
+}
+#color_picker #custom_colors_add{
+    position:relative;
+    margin:6px 0;
+    padding:0;
+    width:24px;
+    height:23px;
+    top:-10px;
+    right:-185px;
+    background:0;
+    border:0;
+    outline:0;
+    cursor:pointer
+}
+#color_picker #custom_colors_box{
+    padding:0 0 0 14px;
+}
+#color_picker .custom_colors_preview{
+    position:relative;
+    margin:0 7px 6px 0;
+    width:18px;
+    height:18px;
+    top:1px;
+    border:1px solid #d0d0d0;
+    border-radius:3px;
+    outline:0;
+    cursor:pointer;
+    transition:all .2s;
+}
+#color_picker .custom_colors_preview:hover{
+    transform:scale(1.1)
+}
+#color_picker .custom_colors_preview:focus{
+    transform:scale(1.1)
+}
+#color_picker #color_context_menu{
+    display:none;
+    position:fixed;
+    padding:3px 0;
+    width:115px;
+    background:#fff;
+    border:1px solid #ccc;
+    border-radius:5px
+}
+#color_picker #color_clear_single,#color_picker #color_clear_all{
+    padding:4px;
+    width:100%;
+    background:0;
+    border:0;
+    outline:0;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:12px;
+    color:#111;
+    text-align:left;
+    cursor:pointer
+}
+#color_picker #color_clear_single:hover,#color_picker #color_clear_all:hover{
+    background-color:#ececec
+}
+#color_picker .add_outline:focus{
+    outline:1px solid #007cff !important
+}
+#color_picker .remove_outline{
+    outline:0
+}

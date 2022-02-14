@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<meta http-equiv="Content-Language" content="en">
+<meta name="Keywords" content="pixel, character, encoding, pceimage, image, wobble, gif, png, ascii, memalign">
+<meta name="description" content="PCEImage Editor - ASCII pixel art creator">
+<meta name="author" content="memalign">
+<meta property="og:title" content="PCEImage Editor" />
+<meta property="og:description" content="ASCII pixel art creator">
+<meta property="og:type" content="website" />
+<meta property="og:image" content="pceimage.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:url" content="https://memalign.github.io/m/pceimage/index.html" />
+<meta name="twitter:title" content="PCEImage Editor">
+<meta name="twitter:description" content="ASCII pixel art creator">
+<meta name="twitter:image" content="pceimage.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="editor/codemirror.css">
+<link rel="stylesheet" href="editor/midnight.css">
+<link rel="stylesheet" href="colr_pickr/colr_pickr.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+<title>PCEImage Editor</title>
+<script src="Utilities.js"></script>
+<script src="PCEImage.js"></script>
+<script src="Images.js"></script>
+<script src="jsgif/LZWEncoder.js"></script>
+<script src="jsgif/NeuQuant.js"></script>
+<script src="jsgif/GIFEncoder.js"></script>
+<script src="jsgif/b64.js"></script>
+<script src="editor/codemirror.js"></script>
+<script src="editor/parser.js"></script>
+
+<script>
+
+// Globals
+let generationID = 0
+let gifEncodeWorker = null
+
+let editor = null
+let pceImage = null
+let scale = 10
+let editorDirty = false
+let editorCleanState = ""
+
+function generateShareLink() {
+  let wobbleDD = document.getElementById("wobbleDropdown")
+  let url = "?w=" + (wobbleDD.value == "wobble" ? "1" : "0")
+
+  let scaleDD = document.getElementById("scaleDropdown")
+  url += "&s=" + scaleDD.value
+
+  let text = editor.getValue()
+  url += "&t=" + encodeURI(text)
+
+  let base = window.location.href.split('?')[0]
+  let finalURL = base + url
+
+  return finalURL
+}
+
+function shareLinkClicked() {
+  let finalURL = generateShareLink()
+
+  if (navigator.clipboard)
+  {
+    navigator.clipboard.writeText(finalURL).then(
+      function() { window.location.replace(finalURL) },
+      function(err) { window.location.replace(finalURL) })
+  } else {
+    window.location.replace(finalURL)
+  }
+
+  return false 
+}
+
+function setEditorClean() {
+  editorCleanState = editor.getValue()
+  if (editorDirty===true) {
+    editorDirty = false
+  }
+}
+
+function canReplaceContents() {
+  if(!editorDirty) {
+    return true
+  }
+
+  return confirm("Are you sure you want to replace editor contents?")
+}
+
+function handleDropdownChange() {
+  let dropdown = document.getElementById("exampleDropdown")
+
+  let imageToLoad = dropdown.value == "loadExample" ? 1 : dropdown.value
+  dropdown.selectedIndex = 0
+
+  if(!canReplaceContents()) {
+    return
+  }
+
+  let code = PCEImageLibrary.examples()[imageToLoad].imageStr
+  setEditorText(code, true)
+}
+
+function setEditorText(text, shouldSetClean) {
+  editor.setValue(text)
+  if (shouldSetClean) {
+    setEditorClean()
+  }
+}
+
+function selectDropdownValue(dropdown, value) {
+  for (let i = 0; i < dropdown.options.length; i++) {
+    if (dropdown.options[i].value == value) {
+      dropdown.options[i].selected = true
+      break
+    }
+  }
+}
+
+function handleScaleDropdownChange() {
+  let dropdown = document.getElementById("scaleDropdown")
+  scale = parseInt(dropdown.value)
+  updatePCEImage()
+}
+
+function updatePCEImage() {
+  if (!editor) return
+
+  let dropdown = document.getElementById("wobbleDropdown")
+  if (dropdown.value == "wobble") {
+    pceImage = new PCEWobbleImage(editor.getValue())
+    requestGIFGeneration()
+  } else {
+    pceImage = new PCEImage(editor.getValue())
+    generatePNG()
+  }
+
+  // Save progress in localStorage
+  // Only save if editor is dirty: don't overwrite storage when the user just loaded a link
+  if (editorDirty) {
+    let saveURL = generateShareLink()
+    window.localStorage.setItem('storedPCEImage', saveURL)
+  }
+}
+
+function generatePNG() {
+  let canvas = document.createElement("canvas")
+  canvas.width = pceImage.width * scale
+  canvas.height = pceImage.height * scale
+
+  let ctx = canvas.getContext("2d")
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  pceImage.drawInCanvas(canvas, scale)
+
+  let img = document.getElementById("wobbleImg")
+  img.src = canvas.toDataURL()
+  img.width = pceImage.width * scale
+  img.height = pceImage.height * scale
+
+  updateImageURL()
+}
+
+function generateGIFSync() {
+  let canvas = document.createElement("canvas")
+  canvas.width = pceImage.width * scale
+  canvas.height = pceImage.height * scale
+
+  if (canvas.width === 0 || canvas.height === 0) {
+    console.log("Skipping GIFGeneration because dimension is 0")
+    return
+  }
+
+  let ctx = canvas.getContext("2d")
+
+  let encoder = new GIFEncoder()
+  encoder.setRepeat(0)
+  encoder.setDelay(150)
+  encoder.start()
+  let usesTransparency = pceImage.usesTransparency()
+  if (usesTransparency) {
+    encoder.setTransparent(0xFFFFF1)
+  }
+
+  for (let i = 0; i < pceImage.maxTicks; i++) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = "#FFFFF1"
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    pceImage.drawInCanvas(canvas, scale)
+    pceImage.tick()
+
+    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+    encoder.addFrame(imageData, true)
+  }
+
+  encoder.finish()
+
+  let gifData = encoder.stream().getData()
+
+  let base64GIFStr = 'data:image/gif;base64,' + encode64(gifData)
+
+  let img = document.getElementById("wobbleImg")
+  img.src = base64GIFStr
+  img.width = pceImage.width * scale
+  img.height = pceImage.height * scale
+
+  updateImageURL()
+}
+
+function requestGIFGeneration() {
+  generationID++
+
+  let usesTransparency = pceImage.usesTransparency()
+  let workerContext = [ generationID, usesTransparency ]
+  //console.log("Requesting gID: " + generationID)
+  //console.log("gID image:\n" + pceImage.imageStrLines.join("\n"))
+
+  let canvas = document.createElement("canvas")
+  canvas.width = pceImage.width * scale
+  canvas.height = pceImage.height * scale
+
+  if (canvas.width === 0 || canvas.height === 0) {
+    console.log("Skipping GIFGeneration because dimension is 0")
+    return
+  }
+
+  let ctx = canvas.getContext("2d")
+
+
+  for (let i = 0; i < pceImage.maxTicks; i++) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = "#FFFFF1"
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    pceImage.drawInCanvas(canvas, scale)
+    pceImage.tick()
+    workerContext.push(ctx.getImageData(0, 0, canvas.width, canvas.height))
+  }
+
+  if (!gifEncodeWorker) {
+    gifEncodeWorker = new Worker("gifEncodeWorker.js")
+    gifEncodeWorker.addEventListener("message", event => {
+      const [base64GIFStr, completedGenerationID] = event.data;
+
+      //console.log("Received gif gID:" + completedGenerationID)
+      if (completedGenerationID == generationID) {
+        //console.log("Displaying gID: " + generationID)
+        let img = document.getElementById("wobbleImg")
+        img.src = base64GIFStr
+        img.width = pceImage.width * scale
+        img.height = pceImage.height * scale
+
+        updateImageURL()
+      }
+    })
+  }
+  gifEncodeWorker.postMessage(workerContext)
+}
+
+function updateImageURL() {
+  let img = document.getElementById("wobbleImg")
+
+  let downloadImage = document.getElementById("downloadImage")
+  downloadImage.download = imageFilename()
+  downloadImage.href = img.src
+}
+
+function imageFilename() {
+  return (pceImage instanceof PCEWobbleImage) ? "image.gif" : "image.png"
+}
+
+window.onload = function () {
+  // Setup editor
+  let code = document.getElementById('code')
+
+  editor = window.CodeMirror.fromTextArea(code, {
+    lineWrapping: false,
+    lineNumbers: true,
+    styleActiveLine: false,
+    theme: "midnight",
+    mode: "pceimage",
+  })
+
+  editorCleanState = editor.getValue()
+
+  function checkEditorDirty() {
+    if (editorCleanState !== editor.getValue()) {
+      editorDirty = true
+    } else {
+      editorDirty = false
+    }
+  }
+
+  editor.on('change', function(cm, changeObj) {
+    updatePCEImage()
+
+    // editor is dirty
+    checkEditorDirty()
+  })
+
+  code.editorreference = editor
+
+
+  // Setup palette info
+  let paletteCode = document.getElementById('paletteCode')
+
+  let paletteEditor = window.CodeMirror.fromTextArea(paletteCode, {
+    lineWrapping: false,
+    lineNumbers: false,
+    readOnly: true,
+    styleActiveLine: false,
+    theme: "midnight",
+    mode: "pceimage",
+  })
+  paletteCode.editorreference = paletteEditor
+
+
+  // Populate Load Example dropdown
+  let exampleDropdown = document.getElementById("exampleDropdown")
+  let optGroup = document.createElement("optgroup")
+
+  PCEImageLibrary.examples().forEach(function(e, index) { 
+    let opt = document.createElement("option")
+    opt.textContent = e.name
+    opt.value = index
+    optGroup.appendChild(opt)
+  }) 
+  exampleDropdown.appendChild(optGroup)
+
+
+  // Setup link handlers
+
+  let shareImageLink = document.getElementById("shareImage")
+  shareImageLink.onclick = function() {
+    let img = document.getElementById("wobbleImg")
+    const dataURL = img.src
+
+    fetch(dataURL).then(function(data) {
+      const blobPromise = data.blob()
+      blobPromise.then(function(blob) {
+        const filesArray = [
+          new File(
+            [blob],
+            imageFilename(),
+            {
+              type: blob.type,
+              lastModified: new Date().getTime()
+            }
+          )
+        ]
+        const shareData = {
+          files: filesArray,
+        }
+        if (navigator.canShare && navigator.canShare(shareData)) {
+          navigator.share(shareData)
+        } else {
+          let downloadImage = document.getElementById("downloadImage")
+          downloadImage.click()
+        }
+      })
+    })
+    return true
+  }
+
+  // Setup animation
+
+  let tRegex = /[^\?]*\?w=([01])&s=(\d+)&t=(.+)$/
+  let match = window.location.href.match(tRegex)
+  let setEditorCleanIfMatch = true
+
+  // Try loading any saved data from localStorage
+  if (!match) {
+    let savedURL = window.localStorage.getItem('storedPCEImage')
+    if (savedURL) {
+      match = savedURL.match(tRegex)
+      setEditorCleanIfMatch = false // Consider the editor "dirty" because it's user-edited
+    }
+  }
+
+  if (match) {
+    let wobbleValue = match[1] == "1" ? "wobble" : "still"
+    let wobbleDD = document.getElementById("wobbleDropdown")
+    selectDropdownValue(wobbleDD, wobbleValue)
+    let scaleValue = match[2]
+    let scaleDD = document.getElementById("scaleDropdown")
+    selectDropdownValue(scaleDD, scaleValue)
+    let code = decodeURI(match[3])
+    setEditorText(code, setEditorCleanIfMatch)
+    handleScaleDropdownChange()
+  } else {
+    handleDropdownChange()
+  }
+  editor.clearHistory() // don't let the user undo back to an empty editor
+  updatePCEImage()
+}
+
+</script>
+
+</head>
+
+<body>
+  <div id="body">
+    <a href='/index.html'>Home</a>
+    <div id='about'>
+      <a href='/p/pceimage.html'>About PCEImages</a><br />
+      <a href='/p/pceimage-editor.html'>About this editor</a>
+    </div>
+    <br />
+    <br />
+    <br />
+    <h2>PCEImage Editor</h2>
+    <h4>(Pixel-Character Encoded Image Editor)</h4>
+    <br />
+    <br />
+<form id="form1" name="form1" action="javascript:void(0);"><textarea id="code" class="codeform" name="code" rows="20" cols="20" style="display: none;"></textarea></form>
+<div>
+<form action="" style="display:inline;">
+<select id="exampleDropdown" name="default" style="display:inline; width:150px" onchange="handleDropdownChange()">
+<option value="loadExample" selected>Load Example</option>
+</select>
+<select id="wobbleDropdown" name="default" style="display:inline; width:150px" onchange="updatePCEImage()">
+<option value="wobble">Wobble</option>
+<option value="still">Still</option>
+</select>
+<select id="scaleDropdown" name="default" style="display:inline; width:150px" onchange="handleScaleDropdownChange()">
+<optgroup label="Scale">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10" selected>10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select>
+<a href="#" onclick="shareLinkClicked(); return false;">Share Link</a>
+</form>
+<br />
+<a href="https://github.com/memalign/memalign.github.io/edit/master/m/pceimage/Images.js" target="_blank" rel="noreferrer noopener" class="smaller">Submit an Example</a>
+</div>
+<br />
+<img id="wobbleImg">
+<br />
+<div id="imageLinks">
+  <a id="downloadImage">Download</a> | <a id="shareImage">Share</a>
+</div>
+
+<br />
+<br />
+<h3>Color Utilities</h3>
+<br />
+<center><div id="color_picker"></div></center>
+<br />
+<center>
+<div>
+<input id="systemColor" class="vertical-center" type="color" value="#FF004D"> <input size="8" id="colorText" class="vertical-center" readonly>
+</div>
+</center>
+<br />
+<form id="form2" name="form2" action="javascript:void(0);"><textarea id="paletteCode" class="codeform" name="paletteCode" rows="20" cols="20" style="display: none;">// PICO-8 Palette
+// (https://lospec.com/palette-list/pico-8)
+// #000000 #1D2B53 #7E2553 #008751
+// #AB5236 #5F574F #C2C3C7 #FFF1E8
+// #FF004D #FFA300 #FFEC27 #00E436
+// #29ADFF #83769C #FF77A8 #FFCCAA
+//
+// PICO-8 Palette Extension
+// (https://lospec.com/palette-list/pico-8-secret-palette)
+// #291814 #111D35 #422136 #125359
+// #742F29 #49333B #A28879 #F3EF7D
+// #BE1250 #FF6C24 #A8E72E #00B543
+// #065AB5 #754665 #FF6E59 #FF9D81
+//
+// Gameboy Color
+// #000000 #FFFFFF #7F7F7C #3E3E44
+// #BAA7A7 #A7120C #880606 #BA381F
+// #57381F #3E2519 #8E634B #BA4B32
+// #C0BA6F #517525 #385D12 #6F8E44
+// #5D6FA7 #8EA7A7 #4B575D</textarea></form>
+
+</div>
+
+<script type="text/javascript" src="colr_pickr/long-press-event.js"></script>
+<script type="text/javascript" src="colr_pickr/setup.js"></script>
+<script type="text/javascript" src="colr_pickr/color_change_event.js"></script>
+<script type="text/javascript" src="colr_pickr/color_conversion.js"></script>
+<script type="text/javascript" src="colr_pickr/color_text_values.js"></script>
+<script type="text/javascript" src="colr_pickr/custom_color.js"></script>
+<script type="text/javascript" src="colr_pickr/hue_slider.js"></script>
+<script type="text/javascript" src="colr_pickr/opacity_slider.js"></script>
+<script type="text/javascript" src="colr_pickr/saturation_lightness_box.js"></script>
+<script type="text/javascript" src="colr_pickr/update_picker.js"></script>
+<script type="text/javascript">
+let el = document.createElement("div")
+let colorPicker = new ColorPicker(el, "#29ADFF")
+
+let systemColorInput = document.getElementById("systemColor")
+systemColorInput.addEventListener("change", function(e) {
+  let colorText = document.getElementById("colorText")
+  colorText.value = e.target.value.toUpperCase()
+})
+let colorText = document.getElementById("colorText")
+colorText.value = systemColorInput.value.toUpperCase()
+</script>
+
+</body>
+
+</html>

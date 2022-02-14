@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>PCEImage</title>
+<meta property="og:title" content="PCEImage" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/pceimage.html" />
+<meta property="og:image" content="https://memalign.github.io/m/pceimage/koffing.gif" />
+<meta property="og:description" content="I recently needed to make pixel art for a game and wanted to define the images in code rather than having separate image asset files. Defining the images in code…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+PCEImage
+</h1>
+</div>
+<img src="/m/pceimage/koffing.gif">
+<div id='postdate'>Posted on 2/13/2022<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a></div>
+I recently needed to make pixel art for a game and wanted to define the images in code rather than having separate image asset files.<br />
+<br />
+Defining the images in code comes with some benefits:<br />
+- I don't need separate versions of the images for different resolutions. I can easily scale them up automatically.<br />
+- I can easily slice the <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a> to animate them programmatically<br />
+- I can make minor tweaks with a text editor (my tool of choice! I am much more at home in a text editor than image editing software)<br />
+- I get useful diffs when changing images in <a href="/p/source-control.html">source control</a><br />
+<br />
+To achieve this, I created a simple format I'm calling "PCEImage" (which is short for "Pixel-Character Encoded Image"). Here's what it looks like:<br />
+<br />
+<div id='code'>.:#00000000<br />
+@:#444444<br />
+#:#5555FF<br />
+<br />
+.......<br />
+.@.@...<br />
+.@.@...<br />
+.@.@...<br />
+.@@@.#.<br />
+.@.@...<br />
+.@.@.#.<br />
+.@.@.#.<br />
+.@.@.#.<br />
+.......</div>
+Here's that image as a PNG (drawn with scale 10):<br />
+<img src="/m/pceimage/hi.png"><br />
+A neat benefit of this encoding is that the images are also ASCII art -- it's easy to see what a PCEImage looks like even without coloring. In fact, this format is a combination of ASCII art and <a href="https://en.wikipedia.org/wiki/Indexed_color">indexed color</a>.<br />
+<br />
+<br />
+<h3>PCEImage Format Specification</h3><br />
+The first section of a PCEImage defines what color each character represents. Each line in this section looks like: CHARACTER:HEXCOLOR<br />
+Then there's one blank line.<br />
+Then the second section is the image itself. Every character in this section (except for the newline at the end of each line) represents a pixel in the image. Every line in this section should be the same length (the width of the image).<br />
+There should not be a newline character after the last pixel character on the last line.<br />
+<br />
+<br />
+<h3>PCEImage Reference Implementation</h3><br />
+I wrote a reference implementation of this specification in JavaScript <a href="/m/pceimage/PCEImage.js">here</a>.<br />
+<br />
+I had a little fun and also added a wobble mode (similar to <a href="https://www.lexaloffle.com/bbs/?tid=40058">Wobblepaint</a>, mentioned in my <a href="/p/pico8.html">PICO-8 post</a>).<br />
+<br />
+See it in action in my <a href="/m/pceimage/index.html">PCEImage Editor</a>.<br />
+<br />
+Read more about the editor <a href="/p/pceimage-editor.html">here</a>.<br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/applerecords.jpg" />
-<meta property="og:description" content="I've had the Beatles on my mind recently thanks to the buzz around Peter Jackson's "The Beatles: Get Back" documentary. I grew up long after the Beatles had broken up…" />
+<meta property="og:image" content="https://memalign.github.io/m/pceimage/koffing-code.png" />
+<meta property="og:description" content="After defining the PCEImage specification, I wanted to create a great code editor that can color each character in the image. Try out the editor in your browser or read…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -25,6 +25,8 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/pceimage-editor.html'>PCEImage Editor</a><br />
+<a href='p/pceimage.html'>PCEImage</a><br />
 <a href='p/beatles.html'>My Beatles Picks</a><br />
 <a href='p/soundsjustlike.html'>SoundsJustLike</a><br />
 <a href='p/puzzlescript.html'>PuzzleScript</a><br />
@@ -38,8 +40,8 @@
 <a href='p/lights-off.html'>Lights Off</a><br />
 <a href='p/batman-curve.html'>Batman Curve</a><br />
 <a href='p/formulagraph.html'>FormulaGraph</a><br />
-<a href='p/bouncing-ball.html'>Bouncing Ball</a><br />
 </div><div id='grid-entry'>
+<a href='p/bouncing-ball.html'>Bouncing Ball</a><br />
 <a href='p/shape-catalog.html'>Catalog of Math Shapes</a><br />
 <a href='p/draw-shapes.html'>Draw Shapes Using Math</a><br />
 <a href='p/similar-songs.html'>Similar Songs</a><br />
@@ -72,6 +74,91 @@
 </div>
 </div>
 </div>
+
+<div id='header'>
+<h2>
+<a href='p/pceimage-editor.html'>PCEImage Editor</a>
+</h2>
+</div>
+<img src="/m/pceimage/koffing-code.png">
+<div id='postdate'>Posted on 2/13/2022<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a>, <a href='/tags.html'>Tools</a></div>
+After defining the <a href="/p/pceimage.html">PCEImage specification</a>, I wanted to create a great code editor that can color each character in the image.<br />
+<br />
+<a href="/m/pceimage/index.html">Try out the editor in your browser</a> or read on for more details.<br />
+<br />
+I was inspired by the <a href="https://www.puzzlescript.net/editor.html?hack=6994394">PuzzleScript editor</a> (mentioned in my <a href="/p/puzzlescript.html">post about PuzzleScript</a>), especially how sprites are defined and styled. Whereas PuzzleScript sprites use <a href="https://en.wikipedia.org/wiki/Indexed_color">indexed color</a>, PCEImage can use almost any ASCII character as a pixel so I couldn't just reuse the same editor.<br />
+<br />
+I could reuse the same foundations, though! PuzzleScript's editor is built using <a href="https://codemirror.net/">CodeMirror</a>, an open-source text editor implemented in JavaScript for the browser.<br />
+<br />
+CodeMirror is super customizable and I was able to add the coloring support I needed by writing a <a href="/m/pceimage/editor/parser.js">parser</a> and making some changes to <a href="/m/pceimage/editor/codemirror.js">codemirror.js</a>.<br />
+<br />
+I also added support to the editor to automatically generate PNGs and, to add a little fun, wobbling GIFs.<br />
+<br />
+<img src="/m/pceimage/koffing.gif"><br />
+<br />
+For the wobble effect, I was inspired by <a href="https://www.lexaloffle.com/bbs/?tid=40058">Wobblepaint</a> (mentioned in my <a href="/p/pico8.html">PICO-8 post</a>) and did my best to try to capture the same organic and charming wobble <a href="https://www.lexaloffle.com/bbs/?uid=1">zep</a> invented.<br />
+<br />
+I also included some "Color Utilites" on the editor page: a simple color picker, a button to invoke your system color picker, and some example palettes (including PICO-8's). Check out <a href="https://lospec.com/palette-list">Lospec's Palette List</a> for even more ideas.<br />
+<br />
+If you create any cool PCEImages, I hope you'll consider <a href="https://github.com/memalign/memalign.github.io/edit/master/m/pceimage/Images.js">submitting a pull request</a> to add your example! I'll find some way to credit the submitters on the page if I get any!<br />
+
+<hr />
+
+<div id='header'>
+<h2>
+<a href='p/pceimage.html'>PCEImage</a>
+</h2>
+</div>
+<img src="/m/pceimage/koffing.gif">
+<div id='postdate'>Posted on 2/13/2022<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a></div>
+I recently needed to make pixel art for a game and wanted to define the images in code rather than having separate image asset files.<br />
+<br />
+Defining the images in code comes with some benefits:<br />
+- I don't need separate versions of the images for different resolutions. I can easily scale them up automatically.<br />
+- I can easily slice the <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a> to animate them programmatically<br />
+- I can make minor tweaks with a text editor (my tool of choice! I am much more at home in a text editor than image editing software)<br />
+- I get useful diffs when changing images in <a href="/p/source-control.html">source control</a><br />
+<br />
+To achieve this, I created a simple format I'm calling "PCEImage" (which is short for "Pixel-Character Encoded Image"). Here's what it looks like:<br />
+<br />
+<div id='code'>.:#00000000<br />
+@:#444444<br />
+#:#5555FF<br />
+<br />
+.......<br />
+.@.@...<br />
+.@.@...<br />
+.@.@...<br />
+.@@@.#.<br />
+.@.@...<br />
+.@.@.#.<br />
+.@.@.#.<br />
+.@.@.#.<br />
+.......</div>
+Here's that image as a PNG (drawn with scale 10):<br />
+<img src="/m/pceimage/hi.png"><br />
+A neat benefit of this encoding is that the images are also ASCII art -- it's easy to see what a PCEImage looks like even without coloring. In fact, this format is a combination of ASCII art and <a href="https://en.wikipedia.org/wiki/Indexed_color">indexed color</a>.<br />
+<br />
+<br />
+<h3>PCEImage Format Specification</h3><br />
+The first section of a PCEImage defines what color each character represents. Each line in this section looks like: CHARACTER:HEXCOLOR<br />
+Then there's one blank line.<br />
+Then the second section is the image itself. Every character in this section (except for the newline at the end of each line) represents a pixel in the image. Every line in this section should be the same length (the width of the image).<br />
+There should not be a newline character after the last pixel character on the last line.<br />
+<br />
+<br />
+<h3>PCEImage Reference Implementation</h3><br />
+I wrote a reference implementation of this specification in JavaScript <a href="/m/pceimage/PCEImage.js">here</a>.<br />
+<br />
+I had a little fun and also added a wobble mode (similar to <a href="https://www.lexaloffle.com/bbs/?tid=40058">Wobblepaint</a>, mentioned in my <a href="/p/pico8.html">PICO-8 post</a>).<br />
+<br />
+See it in action in my <a href="/m/pceimage/index.html">PCEImage Editor</a>.<br />
+<br />
+Read more about the editor <a href="/p/pceimage-editor.html">here</a>.<br />
+
+<hr />
 
 <div id='header'>
 <h2>
@@ -130,10 +217,12 @@ Here are my Beatles picks (in no particular order). Many of these songs are so p
 Post-Beatles honorable mentions:<br />
 <br />
 - John Lennon - How Do You Sleep?<br />
+- John Lennon - Jealous Guy<br />
 - Paul McCartney - Maybe I'm Amazed<br />
 - Paul McCartney & Michael Jackson - Say Say Say<br />
 - Paul McCartney & Wings - Live and Let Die<br />
 - Rihanna & Kanye West & Paul McCartney - FourFiveSeconds<br />
+- George Harrison - My Sweet Lord<br />
 <br />
 I also watched the movies <a href="https://en.wikipedia.org/wiki/Yesterday_(2019_film)">Yesterday</a> and <a href="https://en.wikipedia.org/wiki/Across_the_Universe_(film)">Across the Universe</a> and enjoyed them more than I could've if I hadn't heard these albums and learned some of the history beforehand.<br />
 
@@ -882,450 +971,9 @@ To conclude, here's an improved version of the <a href="/m/formulagraph/index.ht
 Happy graphing :)<br />
 
 <hr />
-
-<div id='header'>
-<h2>
-<a href='p/bouncing-ball.html'>Bouncing Ball</a>
-</h2>
-</div>
-<img src="/m/bouncing-ball.jpg">
-<div id='postdate'>Posted on 3/28/2021<br />
-Tags: <a href='/tags.html'>Math</a></div>
-I mentioned <a href="/p/draw-shapes.html">here</a> that TI calculators can make some simple animations:<br />
-"An upperclassman graphed some functions together which made it look like this circle was a ball bouncing down stairs."<br />
-<br />
-I also mentioned something special about <a href="https://graphtoy.com/">Graphtoy</a>:<br />
-"Graphtoy has a variable for elapsed time (t) which can be used to create animations"<br />
-<br />
-In this post, I'll recreate the bouncing ball animation using mathematical formulas in Graphtoy.<br />
-<br />
-Browsing our <a href="/p/shape-catalog.html">shape catalog</a> gives us a few useful components:<br />
-<br />
-Steps: y = floor(x)<br />
-<br />
-Diagonal sine wave: y = x + 3 + sin(3*x)<br />
-&nbsp;&nbsp;- This looks similar to the path of a ball as it bounces down steps<br />
-<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=floor(x)&v1=true&f2(x,t)=x+3+sin(3*x)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what those look like together:<br />
-<br />
-<img src="/m/mathshapes/steps-sine-wave.jpg"><br />
-<br />
-One aesthetic tweak: have the stairs go down to the right.<br />
-Adjust the sine wave to match the direction and slope of the stairs.<br />
-<br />
-Steps: y = -floor(x)+5<br />
-Ball's path: y = -x + 5 + sin(3*-x)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-x+5+sin(3*-x)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-With a normal (non-diagonal) sine wave, every other hump is negative and below the x-axis. In our diagonal sine wave, every other hump is going under a step instead of bouncing off it.<br />
-<br />
-Let's figure out how to have a normal sine wave bounce off the x-axis and then bring that same modification to our more complex diagonal sine wave.<br />
-<br />
-To simply make all negative values positive, we can take the absolute value with the abs() function:<br />
-<br />
-y = abs(sin(x))<br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/sine-abs.jpg"><br />
-<br />
-Looks promising! Let's try using abs on the diagonal sine wave:<br />
-<br />
-y = -x + 5 + abs(sin(3*-x))<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-x+5+abs(sin(3*-x))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/sine-abs-bounce.jpg"><br />
-<br />
-There are a few problems still:<br />
-<br />
-- The bounce should happen in the middle of the step (not in the corner)<br />
-- It looks like the width of each period of the sine wave is not the same as the length of each step so there's visible drift<br />
-<br />
-We can fix both of these using techniques noted in the <a href="/p/shape-catalog.html">shape catalog</a>.<br />
-<br />
-Shift the bounce to happen farther right:<br />
-<br />
-y = -(x-0.5) + 5 + abs(sin(3*-(x-0.5)))<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(3*-(x-0.5)))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Fix the sine wave's period:<br />
-<br />
-y = -(x-0.5) + 5 + abs(sin(PI*-(x-0.5)))<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=abs(sin(x))&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/fixed-period.jpg"><br />
-<br />
-Now let's add our bouncing ball. We want to draw a circle that's centered on the diagonal bouncing sine wave.<br />
-<br />
-From the shape catalog, here is the equation for a circle centered at (-3, 2):<br />
-<br />
-y = sqrt(1 - (x+3)^2) + 2<br />
-y = -sqrt(1 - (x+3)^2) + 2<br />
-<br />
-To have the ball move to the right with time, we'll replace the -3 with t. t is the special parameter Graphtoy provides; its value is the number of seconds that have passed since the webpage refreshed.<br />
-<br />
-y = sqrt(1 - (x-t)^2) + 2<br />
-y = -sqrt(1 - (x-t)^2) + 2<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(1-(x-t)%5E2)+2&v3=true&f4(x,t)=-sqrt(1-(x-t)%5E2)+2&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-The y-value at time t is the value of our bouncing sine wave when x=t.<br />
-<br />
-Bouncing sine wave: y = -(x-0.5) + 5 + abs(sin(PI*-(x-0.5)))<br />
-<br />
-Value when x=t:<br />
-y = -(t-0.5) + 5 + abs(sin(PI*-(t-0.5)))<br />
-<br />
-Now, we'll replace the 2 in our circle equations with this y expression:<br />
-<br />
-y = sqrt(1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))<br />
-y = -sqrt(1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(1%20-%20(x-t)%5E2)%20+%20(-(t-0.5)%20+%205%20+%20abs(sin(PI*-(t-0.5))))&v3=true&f4(x,t)=-sqrt(1%20-%20(x-t)%5E2)%20+%20(-(t-0.5)%20+%205%20+%20abs(sin(PI*-(t-0.5))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Wow! This is getting really close!<br />
-<br />
-The ball is way too big. Let's shrink its radius:<br />
-<br />
-y = sqrt(0.1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))<br />
-y = -sqrt(0.1 - (x-t)^2) + (-(t-0.5) + 5 + abs(sin(PI*-(t-0.5))))<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.5)+5+abs(sin(PI*-(x-0.5)))&v2=true&f3(x,t)=sqrt(0.1-(x-t)%5E2)+(-(t-0.5)+5+abs(sin(PI*-(t-0.5))))&v3=true&f4(x,t)=-sqrt(0.1-(x-t)%5E2)+(-(t-0.5)+5+abs(sin(PI*-(t-0.5))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-(Note: once the circle moves off-screen, don't forget to reset t (or refresh the page) to make it reappear)<br />
-<br />
-More tweaks needed:<br />
-<br />
-- The ball bounces through the step. Need to shift the bouncing curve up by the ball's radius.<br />
-- The ball is too close to the edge of the step. Need to shift the bouncing curve farther to the right.<br />
-<br />
-Shifting up and to the right:<br />
-<br />
-Sine wave:<br />
-y = -(x-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(x-0.7)))<br />
-<br />
-Circle:<br />
-y = sqrt(0.1 - (x-t)^2) + (-(t-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(t-0.7))))<br />
-y = -sqrt(0.1 - (x-t)^2) + (-(t-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(t-0.7))))<br />
-<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-floor(x)+5&v1=true&f2(x,t)=-(x-0.7)+5%20+%20sqrt(.1)+abs(sin(PI*-(x-0.7)))&v2=true&f3(x,t)=sqrt(0.1-(x-t)%5E2)+(-(t-0.7)+5+sqrt(.1)+abs(sin(PI*-(t-0.7))))&v3=true&f4(x,t)=-sqrt(0.1-(x-t)%5E2)+(-(t-0.7)+5+sqrt(.1)+abs(sin(PI*-(t-0.7))))&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Looks perfect!<br />
-<br />
-<img src="/m/mathshapes/bouncing-ball-with-line.jpg"><br />
-<br />
-Bonus just for fun, here's the ball bouncing off a square wave, losing height with every bounce:<br />
-<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sign(sin(x*2*PI))/4+0.25&v1=true&f2(x,t)=((-x/5+4)%5E2/8)*(abs(sin(PI/2*-(x*2-0.5))))+0.5+sqrt(.1)&v2=true&f3(x,t)=sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v3=true&f4(x,t)=-sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-
-<hr />
-
-<div id='header'>
-<h2>
-<a href='p/shape-catalog.html'>Catalog of Math Shapes</a>
-</h2>
-</div>
-<img src="/m/graphtoy-smile.jpg">
-<div id='postdate'>Posted on 3/27/2021<br />
-Tags: <a href='/tags.html'>Math</a></div>
-I enjoy <a href="/p/draw-shapes.html">drawing shapes using math</a>. Much of the fun is exploring what formulas look like and figuring out how to warp them to look different.<br />
-<br />
-To be able to build more complex shapes and animations, in this post I'll explore some formulas and create a catalog of shapes.<br />
-<br />
-<br />
-Circles:<br />
-<br />
-x^2 + y^2 = 1<br />
-<br />
-Graphtoy requires that we solve for y to create a function of x: f(x)<br />
-<br />
-y^2 = 1 - x^2<br />
-y = ± sqrt(1 - x^2)<br />
-f(x) = y = ± sqrt(1 - x^2)<br />
-<br />
-<br />
-Graphtoy doesn't understand ± so we need to write two separate formulas:<br />
-y = sqrt(1 - x^2)<br />
-y = -sqrt(1 - x^2)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(1%20-%20x%5E2)&v1=true&f2(x,t)=-sqrt(1%20-%20x%5E2)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/circle.jpg"><br />
-<br />
-In general, we can shift formulas up/down by adding/subtracting to/from the function. Here, we shift the circle up the y-axis by 2:<br />
-y = sqrt(1 - x^2) + 2<br />
-y = -sqrt(1 - x^2) + 2<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(1-x%5E2)+2&v1=true&f2(x,t)=-sqrt(1-x%5E2)+2&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-And we can shift left/right similarly by adding/subtracting from every instance of "x". Here, we shift the circle left on the x-axis by 3:<br />
-<br />
-y = sqrt(1 - (x+3)^2)<br />
-y = -sqrt(1 - (x+3)^2)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(1-(x+3)%5E2)&v1=true&f2(x,t)=-sqrt(1-(x+3)%5E2)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-We can combine these two techniques to shift left and up at the same time:<br />
-<br />
-y = sqrt(1 - (x+3)^2) + 2<br />
-y = -sqrt(1 - (x+3)^2) + 2<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(1-(x+3)%5E2)+2&v1=true&f2(x,t)=-sqrt(1-(x+3)%5E2)+2&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-<br />
-Lines:<br />
-<br />
-y = mx + b<br />
-m is the slope (change in y divided by change in x)<br />
-b is the y-intercept (notice that adding b is the same technique we used to shift the circle up)<br />
-<br />
-Here's a steep line that goes up 3 in the y direction for every increase of 1 in the x direction. I shifted it to intersect with the y-axis at y=1<br />
-<br />
-y = 3*x + 1<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=3*x%20+%201&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/line.jpg"><br />
-<br />
-In general, we can flip the shape over the x-axis by making it negative (notice this is similar to the way we draw the bottom half of a circle, by flipping the formula to the top half):<br />
-<br />
-y = - (3*x + 1)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=-(3*x+1)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Similarly, we can flip a shape over the y-axis by replacing every instance of "x" with "-x":<br />
-<br />
-y = 3*(-x) + 1<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=(3*(-x)+1)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-<br />
-Sine wave:<br />
-<br />
-y = sin(x)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sin(x)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/sin.jpg"><br />
-<br />
-Something special about the shape of sin(x): it's periodic, repeating infinitely.<br />
-<br />
-<br />
-Parabola:<br />
-<br />
-y = x^2<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=x%5E2&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/parabola.jpg"><br />
-<br />
-If we want to turn a shape sideways (by swapping the axes), we can swap x and y.<br />
-<br />
-Sideways parabola:<br />
-<br />
-x = y^2<br />
-<br />
-Solve for y to be able to graph using Graphtoy:<br />
-<br />
-y = ± sqrt(x)<br />
-<br />
-y = sqrt(x)<br />
-y = -sqrt(x)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(x)&v1=true&f2(x,t)=-f1(x,t)&v2=true&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-<br />
-Combining shapes:<br />
-<br />
-We can combine formulas to combine their shapes. For example, we can make a sine wave follow the shape of a line by adding them together:<br />
-<br />
-Diagonal line:<br />
-y = x + 3<br />
-<br />
-Sine wave:<br />
-y = sin(3*x)<br />
-<br />
-Diagonal sine wave:<br />
-y = x + 3 + sin(3*x)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=x+3&v1=true&f2(x,t)=sin(3*x)&v2=true&f3(x,t)=x%20+%203%20+%20sin(3*x)&v3=true&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-<br />
-Steps (floor):<br />
-<br />
-We can do some neat things using functions like floor and ceil. Floor rounds down to the nearest integer. Ceil rounds up to the nearest integer.<br />
-<br />
-y = floor(x)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=floor(x)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-This looks like steps!<br />
-<br />
-<img src="/m/mathshapes/floor.jpg"><br />
-<br />
-We can make a spiky sawtooth wave by only giving y the decimal portion of x like this:<br />
-y = x - floor(x)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=x%20-%20floor(x)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-To get an intuitive understanding of a shape, sometimes it helps to write out some of the values in a table:<br />
-<div id='code'> x     floor(x)     x-floor(x)<br />
-=============================<br />
-0        0            0<br />
-0.2      0            0.2<br />
-0.5      0            0.5<br />
-1        1            0<br />
-1.2      1            0.2<br />
-1.5      1            0.5<br />
-2        2            0<br />
-2.2      2            0.2<br />
-2.5      2            0.5</div>
-This hopefully makes it easier to see how this ends up looking like a sawtooth.<br />
-<br />
-<br />
-Triangle wave:<br />
-<br />
-<div id='code'>A sawtooth wave looks like this:         /|/|/|/|<br />
-A flipped sawtooth wave looks like this: |\|\|\|\<br />
-A triangle wave looks like this:         /\/\/\/\</div>
-I noticed that I might be able to construct a triangle wave by combining a sawtooth wave with a flipped sawtooth wave.<br />
-<br />
-The naive approach of simply adding them together gives us this:<br />
-Sawtooth wave:<br />
-y = x - floor(x)<br />
-Flipped (across the y-axis) sawtooth wave:<br />
-y = -x - floor(-x)<br />
-(Note: when writing this, I accidentally flipped the formula over the x-axis: y = -(x-floor(x)). When I graphed it, I realized my mistake and played around with the -s to get it right. It's normal to play around and make mistakes! Make some terms negative and see what happens to the shape!)<br />
-<br />
-Added together:<br />
-y = x - floor(x) + -x - floor(-x)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=x-floor(x)&v1=false&f2(x,t)=-x-floor(-x)&v2=false&f3(x,t)=x-floor(x)-x-floor(-x)&v3=true&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Ah woops! That looks like a straight line. Graphing the sawtooth waves on top of each other reveals why: the diagonal portions cross each other, summing up to a constant value for most values of x.<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=x-floor(x)&v1=true&f2(x,t)=-x-floor(-x)&v2=true&f3(x,t)=x-floor(x)-x-floor(-x)&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-To get a triangle wave, I need to alternate taking a tooth from each sawtooth wave. I can take a tooth from one wave when floor(x) is even; a tooth from the other wave when floor(x) is odd.<br />
-<br />
-That sounds pretty crazy! Fortunately, <a href="https://en.wikipedia.org/wiki/Modulo_operation">modular division</a> is an easy way to test whether a number is even or odd.<br />
-<br />
-<div id='code'>        floor(x) % 2<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;also written as:<br />
-x     mod(floor(x), 2)<br />
-==============================<br />
-1         1             (odd)<br />
-1.9       1             (odd)<br />
-2         0             (even)<br />
-2.9       0             (even)<br />
-3         1             (odd)<br />
-4         0             (even)</div>
-Our gadget to determine when floor(x) is odd: mod(floor(x), 2)<br />
-We can use that to make a complementary gadget to determine when floor(x) is even: 1-mod(floor(x), 2)<br />
-<br />
-Sawtooth wave:<br />
-y = x - floor(x)<br />
-<br />
-Flipped (across the y-axis) sawtooth wave:<br />
-y = -x - floor(-x)<br />
-<br />
-Using our gadgets to zero out every other tooth:<br />
-<br />
-<div id='code'>    zero out even teeth                zero out odd teeth<br />
-y = mod(floor(x), 2) * (x-floor(x)) + (1-mod(floor(x), 2)) * (-x-floor(-x)))</div>
-<a href="/m/graphtoy/index.html?f1(x,t)=x-floor(x)&v1=false&f2(x,t)=-x-floor(-x)&v2=false&f3(x,t)=mod(floor(x),2)*(x-floor(x))%20+%20(1-mod(floor(x),2))*(-x-floor(-x))&v3=true&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/triangle-glitch.jpg"><br />
-<br />
-Notice that there are some visible glitches. Let's check the math:<br />
-<br />
-y = mod(floor(x), 2) * (x-floor(x)) + (1-mod(floor(x), 2)) * (-x-floor(-x)))<br />
-<br />
-Plug in x = 0:<br />
-<br />
-y = mod(floor(0), 2) * (0-floor(0)) + (1-mod(floor(0), 2)) * (-0-floor(-0)))<br />
-y = 0 * (0-floor(0)) + (1-0) * (-0-floor(-0)))<br />
-y = 0<br />
-<br />
-Ah but y is supposed to be 1. It looks like the equation has a bug.<br />
-<br />
-Checking a few more x, y values to build intuition:<br />
-<div id='code'> x   y   y is supposed to be<br />
-============================<br />
-&nbsp;0   0          1<br />
-&nbsp;1   0          0<br />
-&nbsp;2   0          1<br />
-&nbsp;3   0          0<br />
-&nbsp;4   0          1</div>
-In its current form, our formula is taking neither sawtooth's value when x is a perfect integer (looking at the formula, you can see that it's because (x-floor(x)) and (-x-floor(-x)) are always 0 when x is an integer.<br />
-<br />
-One fix is to add a term to our formula that has the value 1 for even integers and 0 otherwise.<br />
-<br />
-I played around and came up with this:<br />
-(1-mod(floor(x),2))*(1-ceil(x-floor(x)))<br />
-<br />
-The first half of this is our even/odd gadget. The second half is an expression that is 1 for integers, 0 otherwise.<br />
-<br />
-Checking its values:<br />
-<div id='code'>                                            (1-mod(floor(x),2)) *<br />
-&nbsp;x   1-mod(floor(x),2)  1-ceil(x-floor(x))  (1-ceil(x-floor(x)))<br />
-=================================================================<br />
-0          1                   1                  1*1 = 1<br />
-0.5        1                   0                  1*0 = 0<br />
-1          0                   1                  0*1 = 0<br />
-1.5        0                   0                  0*0 = 0<br />
-2          1                   1                  1*1 = 1</div>
-Fixed equation by adding this gadget:<br />
-<br />
-y = (mod(floor(x),2))*(x-floor(x))+(1-mod(floor(x),2))*(-x-floor(-x)) + (1-mod(floor(x),2))*(1-ceil(x-floor(x)))<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=(mod(floor(x),2))*(x-floor(x))+(1-mod(floor(x),2))*(-x-floor(-x))+(1-mod(floor(x),2))*(1-ceil(x-floor(x)))&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what the fixed equation looks like:<br />
-<br />
-<img src="/m/mathshapes/triangle.jpg"><br />
-<br />
-Looks perfect! Our formula is pretty complex, though. It's possible we could come up with a <a href="/m/formulagraph/index.html?f1(x,t)=abs(1-mod(x,2))&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">simpler formula</a> by reading this <a href="https://en.wikipedia.org/wiki/Triangle_wave">Wikipedia page</a>.<br />
-<br />
-<br />
-Square wave:<br />
-<br />
-Here's one way to make a square wave: take an already periodic formula and make it blocky.<br />
-<br />
-An easy periodic formula is sin(x).<br />
-<br />
-y = sin(x)<br />
-<br />
-Instead of having the period of sin be 2*PI, I can change it to be 2:<br />
-<br />
-y = sin(x*PI)<br />
-<br />
-I can use the "sign" function to turn positive values into 1 and negative values into -1:<br />
-<br />
-y = sign(sin(x*PI))<br />
-<br />
-If I want it to be truly square (1 tall and 1 wide), I'll need to adjust the height and shift it up:<br />
-<br />
-y = sign(sin(x*PI))/2 + 0.5<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sign(sin(x*PI))/2%20+%20.5&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
-<br />
-Here's what that looks like:<br />
-<br />
-<img src="/m/mathshapes/square.jpg"><br />
-<br />
-<br />
-How did I come up with these formulas and techniques? I remember many of these from school and others I (re)discovered by playing around. You can expand your own catalog by trying out new formulas to see what they look like and taking <a href="/p/notes-txt.html">notes</a>!<br />
-<br />
-Here's a list of interesting things to explore:<br />
-log(x)<br />
-exp(x)<br />
-abs(x)<br />
-pow(x, n)<br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(8%5E2-x%5E2)&v1=true&f2(x,t)=-f1(x,t)&v2=true&f3(x,t)=7/2-sqrt(3%5E2-(abs(x)-3.5)%5E2)&v3=true&f4(x,t)=7/2+sqrt(3%5E2-(abs(x)-3.5)%5E2)/2&v4=true&f5(x,t)=3+sqrt(1-(abs(x+sin(4*t)/2)-3)%5E2)*2/3&v5=true&f6(x,t)=-3-sqrt(5%5E2-x%5E2)*(1/4+pow(0.5+0.5*sin(2*PI*t),6)/10)&v6=true&grid=true&coords=0,0,12">This animation that is built into Graphtoy</a><br />
-<a href="/m/graphtoy/index.html?f1(x,t)=sqrt(t-x%5E2)&v1=true&f2(x,t)=-f1(x,t)&v2=true&f3(x,t)=f1(x,t/2)&v3=true&f4(x,t)=-f3(x,t)&v4=true&f5(x,t)=f1(x,%20t/4)&v5=true&f6(x,t)=-f5(x,t)&v6=true&grid=true&coords=0,0,12">Growing concentric circles</a><br />
-<a href="/p/bouncing-ball.html">Bouncing ball animation</a><br />
-<a href="https://iquilezles.org/www/articles/functions/functions.htm">Inigo Quilez's Useful Little Functions</a> (<a href="/m/iq-ulf/functions.htm">my backup</a>)<br />
-
-<hr />
 More posts:<br />
+<a href='p/bouncing-ball.html'>Bouncing Ball</a><br />
+<a href='p/shape-catalog.html'>Catalog of Math Shapes</a><br />
 <a href='p/draw-shapes.html'>Draw Shapes Using Math</a><br />
 <a href='p/similar-songs.html'>Similar Songs</a><br />
 <a href='p/reddit.html'>Building a Reddit app</a><br />

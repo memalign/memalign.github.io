@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>PCEImage Editor</title>
+<meta property="og:title" content="PCEImage Editor" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/pceimage-editor.html" />
+<meta property="og:image" content="https://memalign.github.io/m/pceimage/koffing-code.png" />
+<meta property="og:description" content="After defining the PCEImage specification, I wanted to create a great code editor that can color each character in the image. Try out the editor in your browser or read…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a>
+<div id='header'>
+<h1>
+PCEImage Editor
+</h1>
+</div>
+<img src="/m/pceimage/koffing-code.png">
+<div id='postdate'>Posted on 2/13/2022<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a>, <a href='/tags.html'>Tools</a></div>
+After defining the <a href="/p/pceimage.html">PCEImage specification</a>, I wanted to create a great code editor that can color each character in the image.<br />
+<br />
+<a href="/m/pceimage/index.html">Try out the editor in your browser</a> or read on for more details.<br />
+<br />
+I was inspired by the <a href="https://www.puzzlescript.net/editor.html?hack=6994394">PuzzleScript editor</a> (mentioned in my <a href="/p/puzzlescript.html">post about PuzzleScript</a>), especially how sprites are defined and styled. Whereas PuzzleScript sprites use <a href="https://en.wikipedia.org/wiki/Indexed_color">indexed color</a>, PCEImage can use almost any ASCII character as a pixel so I couldn't just reuse the same editor.<br />
+<br />
+I could reuse the same foundations, though! PuzzleScript's editor is built using <a href="https://codemirror.net/">CodeMirror</a>, an open-source text editor implemented in JavaScript for the browser.<br />
+<br />
+CodeMirror is super customizable and I was able to add the coloring support I needed by writing a <a href="/m/pceimage/editor/parser.js">parser</a> and making some changes to <a href="/m/pceimage/editor/codemirror.js">codemirror.js</a>.<br />
+<br />
+I also added support to the editor to automatically generate PNGs and, to add a little fun, wobbling GIFs.<br />
+<br />
+<img src="/m/pceimage/koffing.gif"><br />
+<br />
+For the wobble effect, I was inspired by <a href="https://www.lexaloffle.com/bbs/?tid=40058">Wobblepaint</a> (mentioned in my <a href="/p/pico8.html">PICO-8 post</a>) and did my best to try to capture the same organic and charming wobble <a href="https://www.lexaloffle.com/bbs/?uid=1">zep</a> invented.<br />
+<br />
+I also included some "Color Utilites" on the editor page: a simple color picker, a button to invoke your system color picker, and some example palettes (including PICO-8's). Check out <a href="https://lospec.com/palette-list">Lospec's Palette List</a> for even more ideas.<br />
+<br />
+If you create any cool PCEImages, I hope you'll consider <a href="https://github.com/memalign/memalign.github.io/edit/master/m/pceimage/Images.js">submitting a pull request</a> to add your example! I'll find some way to credit the submitters on the page if I get any!<br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

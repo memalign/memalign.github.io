@@ -1,0 +1,53 @@
+Title: PCEImage
+Date: 2/13/2022
+Tags: Programming, Art
+
+[Image:/m/pceimage/koffing.gif]
+
+I recently needed to make pixel art for a game and wanted to define the images in code rather than having separate image asset files.
+
+Defining the images in code comes with some benefits:
+- I don't need separate versions of the images for different resolutions. I can easily scale them up automatically.
+- I can easily slice the [Link:https://en.wikipedia.org/wiki/Sprite_(computer_graphics)]sprites[/Link] to animate them programmatically
+- I can make minor tweaks with a text editor (my tool of choice! I am much more at home in a text editor than image editing software)
+- I get useful diffs when changing images in [Link:/p/source-control.html]source control[/Link]
+
+To achieve this, I created a simple format I'm calling "PCEImage" (which is short for "Pixel-Character Encoded Image"). Here's what it looks like:
+
+[Code]
+.:#00000000
+@:#444444
+#:#5555FF
+
+.......
+.@.@...
+.@.@...
+.@.@...
+.@@@.#.
+.@.@...
+.@.@.#.
+.@.@.#.
+.@.@.#.
+.......
+[/Code]
+
+Here's that image as a PNG (drawn with scale 10):
+[Image:/m/pceimage/hi.png]
+A neat benefit of this encoding is that the images are also ASCII art -- it's easy to see what a PCEImage looks like even without coloring. In fact, this format is a combination of ASCII art and [Link:https://en.wikipedia.org/wiki/Indexed_color]indexed color[/Link].
+
+
+[SectionTitle:PCEImage Format Specification]
+The first section of a PCEImage defines what color each character represents. Each line in this section looks like: CHARACTER:HEXCOLOR
+Then there's one blank line.
+Then the second section is the image itself. Every character in this section (except for the newline at the end of each line) represents a pixel in the image. Every line in this section should be the same length (the width of the image).
+There should not be a newline character after the last pixel character on the last line.
+
+
+[SectionTitle:PCEImage Reference Implementation]
+I wrote a reference implementation of this specification in JavaScript [Link:/m/pceimage/PCEImage.js]here[/Link].
+
+I had a little fun and also added a wobble mode (similar to [Link:https://www.lexaloffle.com/bbs/?tid=40058]Wobblepaint[/Link], mentioned in my [Link:/p/pico8.html]PICO-8 post[/Link]).
+
+See it in action in my [Link:/m/pceimage/index.html]PCEImage Editor[/Link].
+
+Read more about the editor [Link:/p/pceimage-editor.html]here[/Link].

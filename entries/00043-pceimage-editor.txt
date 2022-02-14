@@ -1,0 +1,25 @@
+Title: PCEImage Editor
+Date: 2/13/2022
+Tags: Programming, Art, Tools
+
+[Image:/m/pceimage/koffing-code.png]
+
+After defining the [Link:/p/pceimage.html]PCEImage specification[/Link], I wanted to create a great code editor that can color each character in the image.
+
+[Link:/m/pceimage/index.html]Try out the editor in your browser[/Link] or read on for more details.
+
+I was inspired by the [Link:https://www.puzzlescript.net/editor.html?hack=6994394]PuzzleScript editor[/Link] (mentioned in my [Link:/p/puzzlescript.html]post about PuzzleScript[/Link]), especially how sprites are defined and styled. Whereas PuzzleScript sprites use [Link:https://en.wikipedia.org/wiki/Indexed_color]indexed color[/Link], PCEImage can use almost any ASCII character as a pixel so I couldn't just reuse the same editor.
+
+I could reuse the same foundations, though! PuzzleScript's editor is built using [Link:https://codemirror.net/]CodeMirror[/Link], an open-source text editor implemented in JavaScript for the browser.
+
+CodeMirror is super customizable and I was able to add the coloring support I needed by writing a [Link:/m/pceimage/editor/parser.js]parser[/Link] and making some changes to [Link:/m/pceimage/editor/codemirror.js]codemirror.js[/Link].
+
+I also added support to the editor to automatically generate PNGs and, to add a little fun, wobbling GIFs.
+
+[Image:/m/pceimage/koffing.gif]
+
+For the wobble effect, I was inspired by [Link:https://www.lexaloffle.com/bbs/?tid=40058]Wobblepaint[/Link] (mentioned in my [Link:/p/pico8.html]PICO-8 post[/Link]) and did my best to try to capture the same organic and charming wobble [Link:https://www.lexaloffle.com/bbs/?uid=1]zep[/Link] invented.
+
+I also included some "Color Utilites" on the editor page: a simple color picker, a button to invoke your system color picker, and some example palettes (including PICO-8's). Check out [Link:https://lospec.com/palette-list]Lospec's Palette List[/Link] for even more ideas.
+
+If you create any cool PCEImages, I hope you'll consider [Link:https://github.com/memalign/memalign.github.io/edit/master/m/pceimage/Images.js]submitting a pull request[/Link] to add your example! I'll find some way to credit the submitters on the page if I get any!
