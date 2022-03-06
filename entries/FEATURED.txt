@@ -1,0 +1,24 @@
+PCEImage Editor
+- Image: /m/pceimage/koffing-code.png
+- /m/pceimage/index.html
+
+Lights Off
+- Image: /m/lightsoff.jpg
+- /m/lightsoff/index.html
+
+FormulaGraph
+- Image: /m/formulagraph-stairs.png
+- /m/formulagraph/index.html
+
+Counterfeit Monkey
+- Image: /m/cm-map.jpg
+- /m/counterfeitmonkey/index.html
+
+Dungeon Memalign
+- Image: /m/dungeon.jpg
+- /m/dungeon/index.html
+
+Pac-Man Dungeon
+- Image: /m/pacman.jpg
+- /m/pacmandungeon/index.html
+

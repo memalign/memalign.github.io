@@ -404,3 +404,20 @@ MP4s as Images weren't autoplaying on iPhone. I found this blog post:
 https://webkit.org/blog/6784/new-video-policies-for-ios/
 
 I fixed this by using the playsinline attribute in the video tag.
+
+
+3/1/22
+
+I'm adding a featured projects section to the top of the main page.
+
+[x]- Port over the changes in test.html to the generator
+[x]  - Don't forget to add a new div around each post (so images will be styled correctly)
+[x]- Use entries/FEATURED.txt
+[x] - Delete test.html
+- Unit test
+  - Creating Featured with a single item
+  - Creating Featured with a list of items
+[x]  - Index created without featured projects doesn't add that section or section titles ( featured projects ) ; ( posts )
+  - Index created with featured projects shows them
+[x]- Make a more favorable crop of FormulaGraph's image
+

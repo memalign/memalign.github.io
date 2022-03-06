@@ -44,6 +44,10 @@ Non-Fiction:
 
 Fiction:
 
+- The Alchemist
+
+- '--All You Zombies--'
+
 - American Gods
 
 - Atlas Shrugged
@@ -61,6 +65,8 @@ Fiction:
 
 - Choke
 
+- Death of a Salesman
+
 - Dirk Gently's Holistic Detective Agency
 
 - Dune
@@ -74,6 +80,8 @@ Fiction:
 
 - Ender’s Shadow
     - A sort-of-sequel to Ender’s Game. I enjoyed how it layers extra depth onto a story I already loved.
+
+- Fahrenheit 451
 
 - Fight Club
 
@@ -93,6 +101,10 @@ Fiction:
 
 - Good Omens
 
+- The Graduate
+
+- The Great Gatsby
+
 - Harry Potter series
     - Harry Potter and the Sorcerer’s Stone
     - Harry Potter and the Chamber of Secrets
@@ -103,7 +115,7 @@ Fiction:
     - Harry Potter and the Deathly Hallows
 
     - A series core to my childhood and young adulthood. I got the first book as a present from my grandmother for graduating 5th grade.
-    
+
 - Hitchhiker’s Guide to the Galaxy trilogy
     - The Hitchhiker’s Guide to the Galaxy
     - The Restaurant at the End of the Universe
@@ -112,7 +124,7 @@ Fiction:
     - Mostly Harmless
     - Young Zaphod Plays it Safe
     - And Another Thing...
-    
+
     - Funny and light while still carrying depth. Some of my favorites.
 
 - Hyperion
@@ -148,6 +160,8 @@ Fiction:
 - The Perks of Being a Wallflower
     - Really resonated with my angsty teenager self
 
+- Permutation City
+
 - The Red Pony
 
 - Replay
@@ -157,7 +171,7 @@ Fiction:
 
 - Snow Crash
 
-- The Terminal Experiment 
+- The Terminal Experiment
 
 - Watchmen
 

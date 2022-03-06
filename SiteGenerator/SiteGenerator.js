@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -145,10 +145,11 @@ class HTMLDocument {
 // Index class
 
 class Index extends HTMLDocument {
-  constructor(entries) {
+  constructor(entries, featured) {
     super()
     
     this.entries = entries
+    this.featured = featured
     this.title = "memalign.github.io"
     
     this.entriesOnIndex = 15
@@ -206,9 +207,31 @@ class Index extends HTMLDocument {
 
     str += "<div id='header'><h1>" + this.title + "</h1></div>\n";
 
+  
+    // Show featured projects
+  
+    let showFeaturedProjects = this.featured && this.featured.items.length > 0    
+    if (showFeaturedProjects) {
+      str += "<div id='top-header'><h3>( ( ( featured projects ) ) )</h3></div>\n"
+  
+      str += "<div id='projects-grid'>\n"
+      
+      for (let featuredItem of this.featured.items) {
+        str += "  <div id='projects-grid-entry'>\n"
+        str += "    <a href='" + featuredItem.url + "'>\n"
+        str += "    <div id='projects-grid-title'>" + featuredItem.title + "</div>\n"
+        str += "    <div class='rect-img-container'><img src='" + featuredItem.imageURL + "'></div>\n"
+        str += "    </a>\n"
+        str += "  </div>\n" // projects-grid-entry
+      }
+      
+      str += "</div>\n" // projects-grid
+    }
 
+  
+    // List all entries
+    
     this.sortEntries()
-        
 
     if (this.entries.length < 15) {
       
@@ -225,6 +248,10 @@ class Index extends HTMLDocument {
 
     } else {
      
+      if (showFeaturedProjects) {
+        str += "<div id='top-header'><h3>( ( ( posts ) ) )</h3></div>\n"
+      }
+    
       // Links to every post, in columns
       
       str += "<div id='allposts'>\n"
@@ -252,6 +279,7 @@ class Index extends HTMLDocument {
 
   
     // Include the most recent this.entriesOnIndex posts
+    
     let c = 0
     for (let entry of this.entries) {
       if (c < this.entriesOnIndex) {
@@ -383,6 +411,36 @@ class TagsIndex extends HTMLDocument {
   }
 }
 
+// FeaturedItem class
+
+class FeaturedItem {
+  // Properties:
+  // - title
+  // - url
+  // - imageURL
+  constructor(str) {
+    let lines = str.split("\n")
+    this.title = lines[0]  
+    this.imageURL = lines[1].match(/- Image: (.+)/)[1]
+    this.url = lines[2].match(/- (.+)/)[1]
+  }
+}
+
+// Featured class
+
+class Featured {
+  constructor(filename, fileContents /* optional */) {
+    this.filename = filename
+    
+    let contents = fileContents ? fileContents : this.fileContents()
+    
+    this.items = contents.trim().split("\n\n").map(str => new FeaturedItem(str))
+  }
+  
+  fileContents() {
+    return FileManager.local().readString(this.filename)
+  }
+}
 
 // Entry class
 
@@ -500,6 +558,8 @@ class Entry extends HTMLDocument {
 
   htmlBody(titleURL) {
     let str = ""
+  
+    str += "<div id='post'>"
 
     // If there's no title url, this post is on its own page    
     if (!titleURL) {
@@ -614,6 +674,9 @@ ${this.title}
     htmlContents = htmlContents.replace(/<\/blockquote>(\n*<br \/>)*/g, "</blockquote>")
     
     str += htmlContents
+    
+    str += "\n</div>\n"
+    
     return str
   }
   
@@ -815,13 +878,21 @@ ${entry.htmlBody(entry.fullURL())}
 
 function runScript() {  
   let fm = FileManager.local()
-
-  let index = new Index([])
+    
+  let entries = []
+  let featured = null
 
   let entryFilenames = fm.listContents(entriesPath())
   for (entryFilename of entryFilenames) {
     console.log("Entry filename: " + entryFilename)
-    let entry = new Entry(entriesPath() + "/" + entryFilename)
+    let entryFullPath = entriesPath() + "/" + entryFilename
+    
+    if (entryFilename == "FEATURED.txt") {
+      featured = new Featured(entryFullPath)
+      continue
+    }
+    
+    let entry = new Entry(entryFullPath)
     if (entry.isDraft) {
       continue
     }
@@ -832,8 +903,10 @@ function runScript() {
     
     console.log("===")
     
-    index.entries.push(entry)
+    entries.push(entry)
   }
+    
+  let index = new Index(entries, featured)
   
   index.writeHTMLDocument(repoPath())
   
@@ -1014,7 +1087,7 @@ class UnitTests {
 <a href='p/some-title2.html'>This title2</a><br />
 <a href='p/some-title.html'>This title</a><br />
 </div>
-
+<div id='post'>
 <div id='header'>
 <h2>
 <a href='p/some-title3.html'>This title3</a>
@@ -1024,8 +1097,10 @@ class UnitTests {
 <div id='postdate'>Posted on 12/28/2019<br />
 Tags: <a href='/tags.html'>iTag</a>, <a href='/tags.html'>iTag2</a></div>
 text3 text3
-<hr />
+</div>
 
+<hr />
+<div id='post'>
 <div id='header'>
 <h2>
 <a href='p/some-title2.html'>This title2</a>
@@ -1034,6 +1109,8 @@ text3 text3
 <div id='postdate'>Posted on 12/27/2019<br />
 Tags: <a href='/tags.html'>Tag2</a></div>
 text2 text2
+</div>
+
 <hr />
 More posts:<br />
 <a href='p/some-title.html'>This title</a><br />
@@ -1116,7 +1193,7 @@ More posts:<br />
 </div>
 </div>
 </div>
-
+<div id='post'>
 <div id='header'>
 <h2>
 <a href='p/some-title15.html'>This title15IF</a>
@@ -1126,8 +1203,10 @@ More posts:<br />
 <div id='postdate'>Posted on 12/28/2019<br />
 Tags: <a href='/tags.html'>Interactive Fiction</a></div>
 text3 text3
-<hr />
+</div>
 
+<hr />
+<div id='post'>
 <div id='header'>
 <h2>
 <a href='p/some-title14.html'>This title14IF</a>
@@ -1137,6 +1216,8 @@ text3 text3
 <div id='postdate'>Posted on 12/28/2019<br />
 Tags: <a href='/tags.html'>iTag</a>, <a href='/tags.html'>iTag2</a>, <a href='/tags.html'>Interactive Fiction</a></div>
 text3 text3
+</div>
+
 <hr />
 More posts:<br />
 <a href='p/some-title13.html'>This title13L</a><br />
@@ -1563,7 +1644,7 @@ More posts:<br />
 </head>
 <body>
 <div id="body">
-<a href='/index.html'>Home</a>
+<a href='/index.html'>Home</a><div id='post'>
 <div id='header'>
 <h1>
 This title
@@ -1573,6 +1654,8 @@ This title
 <div id='postdate'>Posted on 12/26/2019<br />
 Tags: <a href='/tags.html'>Tag1</a></div>
 test text
+</div>
+
 </div>
 <div id="footer"></div>
 </body>
@@ -1611,7 +1694,7 @@ test text
 </head>
 <body>
 <div id="body">
-<a href='/index.html'>Home</a>
+<a href='/index.html'>Home</a><div id='post'>
 <div id='header'>
 <h1>
 This title
@@ -1622,6 +1705,8 @@ Tags: <a href='/tags.html'>Interactive Fiction</a>, <a href='/tags.html'>Program
 Test text<br />
 <img src="/m/test.jpg"><br />
 more text
+</div>
+
 </div>
 <div id="footer"></div>
 </body>
@@ -1638,7 +1723,7 @@ more text
 
     let expectation = `<body>
 <div id="body">
-<a href='/index.html'>Home</a>
+<a href='/index.html'>Home</a><div id='post'>
 <div id='header'>
 <h1>
 This title
@@ -1647,6 +1732,8 @@ This title
 <div id='postdate'>Posted on 12/26/2019<br />
 Tags: <a href='/tags.html'>Test</a></div>
 test text
+</div>
+
 </div>
 <div id="footer"></div>
 </body>
@@ -1831,7 +1918,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Entries</a></div>\\ntext1 text1"
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Entries</a></div>\\ntext1 text1\\n</div>\\n"
     }`
     
     assertTrue(jsonFeed.entryToItem(entryWithImage) == expectationWithImage, "json with image")
@@ -1844,7 +1931,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Programming</a></div>\\ntext1 text1"
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Programming</a></div>\\ntext1 text1\\n</div>\\n"
     }`
     assertTrue(jsonFeed.entryToItem(entryNoImage) == expectationNoImage, "json no image")
     
@@ -1857,9 +1944,9 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Feeds</a></div>\\n"
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title.html'>This title</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test1.jpg\\">\\n<div id='postdate'>Posted on 12/26/2019<br />\\nTags: <a href='/tags.html'>Feeds</a></div>\\n\\n</div>\\n"
     }`
-    
+
     assertTrue(jsonFeed.entryToItem(entryJustImage) == expectationJustImage, "json just image")
   }
 
@@ -1896,7 +1983,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title5.html'>This title5</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/11/2020<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext5"
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title5.html'>This title5</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/11/2020<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext5\\n</div>\\n"
     },
     {
          "title" : "This title4",
@@ -1906,7 +1993,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title4.html'>This title4</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/1/2020<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext4"
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title4.html'>This title4</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/1/2020<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext4\\n</div>\\n"
     },
     {
          "title" : "This title3",
@@ -1917,7 +2004,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\">\\n<div id='postdate'>Posted on 12/28/2019<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext3\\ttext3\\\\'"
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\">\\n<div id='postdate'>Posted on 12/28/2019<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext3\\ttext3\\\\'\\n</div>\\n"
     },
     {
          "title" : "This title2",
@@ -1927,7 +2014,7 @@ test text
          "author" : {
             "name" : "memalign"
          },
-         "content_html" : "\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title2.html'>This title2</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/2/2019<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext2 text2"
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title2.html'>This title2</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/2/2019<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext2 text2\\n</div>\\n"
     }
   ]
 }
@@ -1974,7 +2061,7 @@ test text
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-
+<div id='post'>
 <div id='header'>
 <h2>
 <a href='https://memalign.github.io/p/some-title5.html'>This title5</a>
@@ -1983,6 +2070,8 @@ test text
 <div id='postdate'>Posted on 1/11/2020<br />
 Tags: <a href='/tags.html'>JSON</a></div>
 text5
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1999,7 +2088,7 @@ text5
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-
+<div id='post'>
 <div id='header'>
 <h2>
 <a href='https://memalign.github.io/p/some-title4.html'>This title4</a>
@@ -2008,6 +2097,8 @@ text5
 <div id='postdate'>Posted on 1/1/2020<br />
 Tags: <a href='/tags.html'>JSON</a></div>
 text4
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2024,7 +2115,7 @@ text4
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-
+<div id='post'>
 <div id='header'>
 <h2>
 <a href='https://memalign.github.io/p/some-title3.html'>This title3</a>
@@ -2034,6 +2125,8 @@ text4
 <div id='postdate'>Posted on 12/28/2019<br />
 Tags: <a href='/tags.html'>JSON</a></div>
 text3\ttext3\\'
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2050,7 +2143,7 @@ text3\ttext3\\'
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-
+<div id='post'>
 <div id='header'>
 <h2>
 <a href='https://memalign.github.io/p/some-title2.html'>This title2</a>
@@ -2059,11 +2152,14 @@ text3\ttext3\\'
 <div id='postdate'>Posted on 12/2/2019<br />
 Tags: <a href='/tags.html'>JSON</a></div>
 text2 text2
+</div>
+
 ]]>
 </content>
 </entry>
 </feed><!-- THE END -->
 `
+
     assertTrue(atomFeed.toText() == expectation, "atom expectation")
   }
 

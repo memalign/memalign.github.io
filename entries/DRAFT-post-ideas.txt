@@ -9,6 +9,10 @@
   - http://pixelverse.org/experiments/natsukashii/
   - https://bbcmic.ro/?experimental=true&#
   
+- Graphs in JavaScript: https://github.com/vega/vega-lite
+- Syntax highlighting in JavaScript: https://prismjs.com/
+- PalmOS emulator: https://cloudpilot-emu.github.io/app/#/tab/emulation
+  
 - Make your own Muncher game (input a file, get a munchers game; have a listing of sample ones)
 
 - 101 Zen Stories, put in a maze like memalign dungeon: https://nkanaev.com/zen101/en/
@@ -20,11 +24,13 @@
 - Similar Songs Jukebox: use Spotify, Apple Music, or YouTube to play similar songs back-to-back
 
 - Generated art
+  - https://github.com/google/deepdream/blob/master/dream.ipynb
   - https://twitter.com/sportsracer48?s=20&t=O1ABZqjOT03HXA5InI9HOQ
   - https://github.com/sportsracer48/pytti
   
 - More PICO-8 games
   - Holiday Jumper by zep: https://www.lexaloffle.com/bbs/?tid=45856
+  - https://www.lexaloffle.com/bbs/?tid=46495
 
 - Free game assets: https://www.kenney.nl/assets/
 
@@ -171,6 +177,7 @@ class MARunloop {
   - http://lalo.li/lsd/
   - Chroma Incident: https://js13kgames.com/entries/the-chroma-incident https://github.com/Rybar/js13k2018
   - Space Garden: https://js13kgames.com/entries/space-garden ; Relaxing, a lot more fun than Asteroids, but no win/end condition
+  - https://www.lessmilk.com/almost-pong/
 
 
 - List of tools for making IF:

@@ -21,6 +21,7 @@
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -50,6 +51,8 @@ I also included some "Color Utilites" on the editor page: a simple color picker,
 <br />
 If you create any cool PCEImages, I hope you'll consider <a href="https://github.com/memalign/memalign.github.io/edit/master/m/pceimage/Images.js">submitting a pull request</a> to add your example! I'll find some way to credit the submitters on the page if I get any!<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -66,6 +69,7 @@ If you create any cool PCEImages, I hope you'll consider <a href="https://github
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -120,6 +124,8 @@ See it in action in my <a href="/m/pceimage/index.html">PCEImage Editor</a>.<br 
 <br />
 Read more about the editor <a href="/p/pceimage-editor.html">here</a>.<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -136,6 +142,7 @@ Read more about the editor <a href="/p/pceimage-editor.html">here</a>.<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -198,10 +205,16 @@ Post-Beatles honorable mentions:<br />
 - Paul McCartney - Maybe I'm Amazed<br />
 - Paul McCartney & Michael Jackson - Say Say Say<br />
 - Paul McCartney & Wings - Live and Let Die<br />
+- Paul McCartney & Kanye West - Only One<br />
 - Rihanna & Kanye West & Paul McCartney - FourFiveSeconds<br />
 - George Harrison - My Sweet Lord<br />
+- George Harrison - Got My Mind Set On You<br />
+- George Harrison - Marwa Blues<br />
+- Traveling Wilburys - Handle with Care<br />
 <br />
 I also watched the movies <a href="https://en.wikipedia.org/wiki/Yesterday_(2019_film)">Yesterday</a> and <a href="https://en.wikipedia.org/wiki/Across_the_Universe_(film)">Across the Universe</a> and enjoyed them more than I could've if I hadn't heard these albums and learned some of the history beforehand.<br />
+
+</div>
 
 ]]>
 </content>
@@ -219,6 +232,7 @@ I also watched the movies <a href="https://en.wikipedia.org/wiki/Yesterday_(2019
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -235,6 +249,8 @@ I recently listened to <a href="https://www.youtube.com/watch?v=wQA59IkCF5I">Dea
 SoundsJustLike.com is pretty cool with a long list of user-submitted song connections. Unfortunately, it's hard to search for a specific song. To make it easier, I created <a href="/m/similarsongs.html">this one-page snapshot</a> of all the songs users have submitted.<br />
 <br />
 There are a lot of great songs on there to explore!
+</div>
+
 ]]>
 </content>
 </entry>
@@ -251,6 +267,7 @@ There are a lot of great songs on there to explore!
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -302,6 +319,8 @@ PuzzleScript <a href="https://github.com/increpare/PuzzleScript">source code</a>
 &nbsp;&nbsp;- The code to load a gist can be found in the getData function <a href="https://github.com/increpare/PuzzleScript/blob/master/src/play.html">here</a>.<br />
 &nbsp;&nbsp;- play.html loads whatever gist id is appended to the url (which looks like: <a href="https://www.puzzlescript.net/play.html?p=6994394">https://www.puzzlescript.net/play.html?p=6994394</a>)<br />
 &nbsp;&nbsp;- I think there's a risk loading content this way: it could look like the website owner published content when really it was published by someone else. The content could be offensive or harmful. To mitigate this, if I use this technique in a project I will probably show a disclaimer on the website that this content is from an external user with a direct link to that user's gist.
+</div>
+
 ]]>
 </content>
 </entry>
@@ -318,6 +337,7 @@ PuzzleScript <a href="https://github.com/increpare/PuzzleScript">source code</a>
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -338,6 +358,8 @@ The taste and texture of the Chex are different too. The one from the Chex Mix t
 One may be optimized for delicious dry snackiness while the other is optimized for being eaten in milk.<br />
 <br />
 It's interesting to know we can't replicate store-bought Chex Mix at home because the Chex we can buy make for an inferior snack!
+</div>
+
 ]]>
 </content>
 </entry>
@@ -354,6 +376,7 @@ It's interesting to know we can't replicate store-bought Chex Mix at home becaus
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -563,6 +586,8 @@ I find this concept really funny!<br />
 <a href="https://www.lexaloffle.com/bbs/?tid=35349"><img src="/m/pico8/dungeonguy/dungeonguy-1.p8.png"></a><br />
 <h4><a href="https://www.lexaloffle.com/bbs/?tid=35349">Dungeon Guy</a></h4> (<a href="/m/pico8/dungeonguy/index.html">backup</a>)<br />
 A work-in-progress with a similar feel to Lode Runner. It's really cool that these levels are procedurally generated.
+</div>
+
 ]]>
 </content>
 </entry>
@@ -579,6 +604,7 @@ A work-in-progress with a similar feel to Lode Runner. It's really cool that the
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -607,6 +633,8 @@ Here's my checklist for trying to resolve fussiness:<br />
 - If you're feeling overwhelmed or desperate, tag your partner in for help!<br />
 <br />
 - Echoing advice from our pediatrician: If your baby won't stop crying no matter what you try and you're at your wit's end, call your pediatrician. Your baby could be telling you something more serious. WebMD has some <a href="https://www.webmd.com/parenting/baby/why-baby-cries#1">additional advice</a>.
+</div>
+
 ]]>
 </content>
 </entry>
@@ -623,6 +651,7 @@ Here's my checklist for trying to resolve fussiness:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -660,6 +689,8 @@ Khiêm Bảo Thiện: <br />
 Chris Peters:<br />
 <blockquote>The idea behind this phrase is not literal, but is meant to "blend" your mind Matrix-style and hopefully trick you into observing your mind as it kinda freaks out.</blockquote>
 Is the key to enlightenment learning to notice your thoughts and then clear your head? Who knows. I certainly feel lighter when my head is clear, my muscles are relaxed, and I float off to sleep.
+</div>
+
 ]]>
 </content>
 </entry>
@@ -676,6 +707,7 @@ Is the key to enlightenment learning to notice your thoughts and then clear your
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -708,6 +740,8 @@ Of course, really bad things happen sometimes and you can't just ignore them. It
 This is similar to what I'm trying to say in <a href="/p/day-and-night.html">Day and Night</a>. Thinking envious thoughts leads to envious actions. Comparing yourself to others leads to unempathetic behaviors. And envious actions, unempathetic behaviors lead to a lonely life.<br />
 <br />
 On the other hand, looking for the good and trying to be truly empathetic can lead to happiness, more positivity, and supportive friendships.
+</div>
+
 ]]>
 </content>
 </entry>
@@ -724,6 +758,7 @@ On the other hand, looking for the good and trying to be truly empathetic can le
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -777,6 +812,8 @@ By the end of the documentary, I'm convinced that Vermeer used a setup like Tim'
 - And several more visual quirks of Vermeer's paintings shown in the documentary<br />
 <br />
 But don't take my word for it - check it out yourself!
+</div>
+
 ]]>
 </content>
 </entry>
@@ -793,6 +830,7 @@ But don't take my word for it - check it out yourself!
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -820,6 +858,8 @@ A friend tried to stay in touch, but it was just superficial. Why are they even 
 A friend was happy to catch up and chat, but they were never the one to initiate. Forget them.<br />
 Luna and a friend had an argument. Luna was still upset later and said some hurtful things, as hurtful as possible. Later, with regret, Luna asked, "Why can't we pick back up where we left off? Can't you see I need you? Can't you see I need compassion?"<br />
 But no one was left to respond
+</div>
+
 ]]>
 </content>
 </entry>
@@ -836,6 +876,7 @@ But no one was left to respond
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -921,6 +962,8 @@ While every level can be beaten mechanically like this, it's still more fun (and
 <br />
 Have fun! :)<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -937,6 +980,7 @@ Have fun! :)<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -998,6 +1042,8 @@ J. Matthew Register shared a newer formula on his Quora post:<br />
 (I made one substantive change as I re-transcribed the formula so the top of head line would be long enough to touch the ears)<br />
 <br />
 Compare his original and new Batman Curves <a href="/m/formulagraph/index.html?f1(x,t)=(3*sqrt(4-(abs(x)-2)%5E2)+abs(x)-20-4*y)=0&v1=true&f2(x,t)=(3*sqrt(4-(abs(x)-6)%5E2)+abs(x)-20-4*y)=0&v2=true&f3(x,t)=(x%5E2+4*(y%5E2)-100*sqrt(abs((7-abs(2*y-1)))/(7-abs(2*y-1))))=0&v3=true&f4(x,t)=(2*((abs(x)-3)%5E2)-9*y+18*sqrt(abs((2-abs((abs(x)-4))))/(2-abs((abs(x)-4)))))=0&v4=true&f5(x,t)=(-68*abs((abs(x)-3/2))-9*y+54*sqrt(abs((43-abs((136*abs(x)-229))))/(43-abs((136*abs(x)-229)))))=0&v5=true&f6(x,t)=(((2.25-y)%5E2+min(1,%20ceil(abs(min(0,%200.5-x))))+min(1,%20ceil(abs(max(0,%20-0.5-x)))))%20*%20((abs(x/2)-((3*sqrt(33)-7)/112)*(x%5E2)-3+sqrt(abs(1-(abs(abs(x)-2)-1)%5E2))-y)%5E2%20+%20min(1,%20ceil(abs(min(0,%204-x))))+min(1,%20ceil(abs(max(0,%20-4-x))))))%20*%20(((min(1,%20ceil(abs(max(0,%203-x))))+min(1,%20ceil(abs(min(0,%207-x)))))%20+%20min(1,%20ceil(abs(max(0,%200-y))))+%20(((x/7)%5E2)+((y/3)%5E2)-1))%20*%20((min(1,%20ceil(abs(max(0,%204-x))))+min(1,%20ceil(abs(min(0,%207-x)))))%20+%20min(1,%20ceil(abs(min(0,%200-y))))+%20(((x/7)%5E2)+((y/3)%5E2)-1))%20*%20((min(1,%20ceil(abs(max(0,%203-(-x)))))+min(1,%20ceil(abs(min(0,%207-(-x))))))%20+%20min(1,%20ceil(abs(max(0,%200-y))))+%20(((-x/7)%5E2)+((y/3)%5E2)-1))%20*%20((min(1,%20ceil(abs(max(0,%204-(-x)))))+min(1,%20ceil(abs(min(0,%207-(-x))))))%20+%20min(1,%20ceil(abs(min(0,%200-y))))+%20(((-x/7)%5E2)+((y/3)%5E2)-1))%20%20+%20%20min(1,%20ceil(abs(max(0,%201-abs(x))))))%20*%20((min(1,%20ceil(abs(min(0,%203-x))))+min(1,%20ceil(abs(max(0,%201-x)))))%20+%20%20((6*sqrt(10)/7+(1.5-0.5*abs(x))%20%20-6*sqrt(10)/14*sqrt(abs(4-(abs(x)-1)%5E2))-y))%5E2)%20*%20((min(1,%20ceil(abs(min(0,%203+x))))+min(1,%20ceil(abs(max(0,%201+x)))))%20+%20%20((6*sqrt(10)/7+(1.5-0.5*abs(-x))%20%20-6*sqrt(10)/14*sqrt(abs(4-(abs(-x)-1)%5E2))-y))%5E2)%20*%20((min(1,%20ceil(abs(max(0,%201-y))))+min(1,%20ceil(abs(min(0,%203-y)))))%20+%20(9-8*abs(x)-y)%5E2)%20*%20((min(1,%20ceil(abs(max(0,%202.25-y))))+min(1,%20ceil(abs(min(0,%203-y)))))%20+%20%20(3*abs(x)+0.75-y)%5E2)%20=%200&v6=true&grid=true&coords=0,0,12&paused=true">here</a>.
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1014,6 +1060,7 @@ Compare his original and new Batman Curves <a href="/m/formulagraph/index.html?f
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -1127,6 +1174,8 @@ To conclude, here's an improved version of the <a href="/m/formulagraph/index.ht
 <br />
 Happy graphing :)<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1143,6 +1192,7 @@ Happy graphing :)<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -1283,6 +1333,8 @@ Bonus just for fun, here's the ball bouncing off a square wave, losing height wi
 <a href="/m/graphtoy/index.html?f1(x,t)=sign(sin(x*2*PI))/4+0.25&v1=true&f2(x,t)=((-x/5+4)%5E2/8)*(abs(sin(PI/2*-(x*2-0.5))))+0.5+sqrt(.1)&v2=true&f3(x,t)=sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v3=true&f4(x,t)=-sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
 <br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1299,6 +1351,7 @@ Bonus just for fun, here's the ball bouncing off a square wave, losing height wi
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -1600,6 +1653,8 @@ pow(x, n)<br />
 <a href="/p/bouncing-ball.html">Bouncing ball animation</a><br />
 <a href="https://iquilezles.org/www/articles/functions/functions.htm">Inigo Quilez's Useful Little Functions</a> (<a href="/m/iq-ulf/functions.htm">my backup</a>)<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1616,6 +1671,7 @@ pow(x, n)<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -1690,6 +1746,8 @@ Here are a few fun tools for drawing 2D shapes using math:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Instead of implementing its own parser, Graphtoy turns the formulas into JavaScript snippets<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- See the "iCompile" function which tweaks the inputted formula strings to be valid JavaScript and constructs Formula objects which can later be invoked<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1706,6 +1764,7 @@ Here are a few fun tools for drawing 2D shapes using math:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -1765,6 +1824,8 @@ Separate from direct samples, I started noting down songs that remind me of each
 - Similar vocalization of "oooOOoohhh"<br />
 &nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=Hr4wz4-27PY">Oh</a> by Ciara<br />
 &nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=HPTDgfhhJ3s">Do It to It</a> by Cherish, later <a href="https://www.youtube.com/watch?v=6wwuEXlIniU">remade</a> by Acraze ft. Cherish. And there's a <a href="https://www.youtube.com/watch?v=DxzdRri8o6o">really cool mash-up</a> with an eerie song from Squid Game by Zedd.
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1781,6 +1842,7 @@ Separate from direct samples, I started noting down songs that remind me of each
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -1865,6 +1927,8 @@ https://api.reddit.com/r/aww+funny+jokes/best?limit=20<br />
 https://api.reddit.com/r/aww+funny+jokes/best?limit=20&amp;after=t3_ldwt5j&amp;count=20<br />
 (when requesting the second page, include &quot;after&quot; and &quot;count&quot;)</div>
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1881,6 +1945,7 @@ https://api.reddit.com/r/aww+funny+jokes/best?limit=20&amp;after=t3_ldwt5j&amp;c
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -1942,6 +2007,8 @@ Here are some things I've learned and observed during this exploration:<br />
 You can find the demo's source code <a href="https://github.com/memalign/memalign.github.io/tree/master/m/counterfeitmonkey">here</a>. Since GameSegments.js, NounRepository.js, Memories.js, and Map.js are based on the original game's content and source code, those files are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 license</a> just like their source material.<br />
 <br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -1958,6 +2025,7 @@ You can find the demo's source code <a href="https://github.com/memalign/memalig
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2107,6 +2175,8 @@ This is all just light research I did as a hobby. I'm by no means an expert and 
 <br />
 - About a month after originally publishing this post, I saw a <a href="https://www.reddit.com/r/textadventures/comments/i0uq4l/discord_text_adventure/">reddit post</a> about <a href="https://swords.sleepless.com">Swords</a>.<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2123,6 +2193,7 @@ This is all just light research I did as a hobby. I'm by no means an expert and 
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2164,6 +2235,8 @@ As I browsed, I had a few neat surprises:<br />
 <br />
 Andrew's decades of work, shared through his site with the world, are truly inspiring. It's so cool that he's shared complete projects, half-baked prototypes, random ideas, and more. Thank you Andrew!<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2180,6 +2253,7 @@ Andrew's decades of work, shared through his site with the world, are truly insp
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2305,6 +2379,8 @@ Other:<br />
 <br />
 <br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2321,6 +2397,7 @@ Other:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2444,6 +2521,8 @@ I'll close this post with some ideas to extend or reuse these pieces:<br />
 - And one idea I executed on as soon as I had it: <a href="/p/pacman-dungeon.html">Pac-Man Dungeon</a><br />
 <br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2460,6 +2539,7 @@ I'll close this post with some ideas to extend or reuse these pieces:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2526,6 +2606,8 @@ Other notes:<br />
 - The game source source code can be found <a href="https://github.com/memalign/memalign.github.io/tree/master/m/pacmandungeon">here</a><br />
 - I wrote a simple <a href="https://github.com/memalign/memalign.github.io/blob/master/m/pacmandungeon/UnitTests.js">unit test harness</a>. Run the tests <a href="/m/pacmandungeon/unitTests.html">here</a>.<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2542,6 +2624,7 @@ Other notes:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2579,6 +2662,8 @@ I eventually found more inspiring takeaways:<br />
 <br />
 In the end, the story resonates with me and the series is great entertainment.<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2595,6 +2680,7 @@ In the end, the story resonates with me and the series is great entertainment.<b
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2612,6 +2698,8 @@ Eric shared his experiences as they happened. You can find them <a href="https:/
 <br />
 (I normally try to keep a backup of external sites but I'm not grabbing one here. I want to be respectful of Eric and his family's potential future choices to remove their story.)<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2628,6 +2716,7 @@ Eric shared his experiences as they happened. You can find them <a href="https:/
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2641,6 +2730,8 @@ Back when I discovered the website about <a href="/p/clamps.html">clamps</a>, I 
 <br />
 You can check it out <a href="https://www.teamten.com/lawrence/writings/coding-machines/">here</a>.<br />
 (My backup of the story is <a href="/m/coding-machines/index.html">here</a>.)<br />
+
+</div>
 
 ]]>
 </content>
@@ -2658,6 +2749,7 @@ You can check it out <a href="https://www.teamten.com/lawrence/writings/coding-m
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2681,6 +2773,8 @@ This is a glimpse into a more fun era of the web.<br />
 <br />
 The author eventually took the website down and replaced it with a much more professional one. Normally I would give full attribution but since he removed all the content, I decided to scrub his full name and web address from this post and my backup of the page. I'm assuming he intentionally wants to have a less personal presence on the web. (Drew, if you want attribution or want me to remove this post, please let me know via GitHub.)<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2697,6 +2791,7 @@ The author eventually took the website down and replaced it with a much more pro
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -2744,6 +2839,8 @@ I wondered if other people would find this site cool too. To get the idea out of
 <br />
 And, somehow, I eventually fell asleep.<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -2760,6 +2857,7 @@ And, somehow, I eventually fell asleep.<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -3457,6 +3555,8 @@ function runEventLoop() {<br />
 <br />
 var pauseAI = 0<br />
 runEventLoop()</div>
+</div>
+
 ]]>
 </content>
 </entry>
@@ -3473,6 +3573,7 @@ runEventLoop()</div>
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -3512,6 +3613,8 @@ For example:<br />
 <br />
 - And now we're back to the beginning of our FaceTime call when I asked how you're doing in these crazy times<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -3528,6 +3631,7 @@ For example:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -3568,6 +3672,8 @@ return result</div>
 <br />
 - I also fixed a bug so lines can be hidden by clicking them in the legend<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -3584,6 +3690,7 @@ return result</div>
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -4103,6 +4210,8 @@ Resources:<br />
 - <a href="/m/graph-js/us-daily.json">Snapshot of US Daily data</a><br />
 - <a href="/m/graph-js/states-daily.json">Snapshot of States Daily data</a><br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -4119,6 +4228,7 @@ Resources:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -4168,6 +4278,10 @@ Non-Fiction:<br />
 <br />
 Fiction:<br />
 <br />
+- The Alchemist<br />
+<br />
+- '--All You Zombies--'<br />
+<br />
 - American Gods<br />
 <br />
 - Atlas Shrugged<br />
@@ -4185,6 +4299,8 @@ Fiction:<br />
 <br />
 - Choke<br />
 <br />
+- Death of a Salesman<br />
+<br />
 - Dirk Gently's Holistic Detective Agency<br />
 <br />
 - Dune<br />
@@ -4198,6 +4314,8 @@ Fiction:<br />
 <br />
 - Ender’s Shadow<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- A sort-of-sequel to Ender’s Game. I enjoyed how it layers extra depth onto a story I already loved.<br />
+<br />
+- Fahrenheit 451<br />
 <br />
 - Fight Club<br />
 <br />
@@ -4217,6 +4335,10 @@ Fiction:<br />
 <br />
 - Good Omens<br />
 <br />
+- The Graduate<br />
+<br />
+- The Great Gatsby<br />
+<br />
 - Harry Potter series<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Sorcerer’s Stone<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Chamber of Secrets<br />
@@ -4227,7 +4349,7 @@ Fiction:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Harry Potter and the Deathly Hallows<br />
 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;- A series core to my childhood and young adulthood. I got the first book as a present from my grandmother for graduating 5th grade.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
 - Hitchhiker’s Guide to the Galaxy trilogy<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- The Hitchhiker’s Guide to the Galaxy<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- The Restaurant at the End of the Universe<br />
@@ -4236,7 +4358,7 @@ Fiction:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Mostly Harmless<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Young Zaphod Plays it Safe<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- And Another Thing...<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Funny and light while still carrying depth. Some of my favorites.<br />
 <br />
 - Hyperion<br />
@@ -4272,6 +4394,8 @@ Fiction:<br />
 - The Perks of Being a Wallflower<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Really resonated with my angsty teenager self<br />
 <br />
+- Permutation City<br />
+<br />
 - The Red Pony<br />
 <br />
 - Replay<br />
@@ -4281,7 +4405,7 @@ Fiction:<br />
 <br />
 - Snow Crash<br />
 <br />
-- The Terminal Experiment <br />
+- The Terminal Experiment<br />
 <br />
 - Watchmen<br />
 <br />
@@ -4289,7 +4413,10 @@ Fiction:<br />
 <br />
 - Zoey Ashe series<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Futuristic Violence and Fancy Suits<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Zoey Punches the Future in the Dick
+&nbsp;&nbsp;&nbsp;&nbsp;- Zoey Punches the Future in the Dick<br />
+
+</div>
+
 ]]>
 </content>
 </entry>
@@ -4306,6 +4433,7 @@ Fiction:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -4347,6 +4475,8 @@ I use notes.txt to capture:<br />
 - Features I want to add<br />
 - The bug list<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- For a simple side-project a text bug list embedded in my notes is much easier than a full bug tracker
+</div>
+
 ]]>
 </content>
 </entry>
@@ -4363,6 +4493,7 @@ I use notes.txt to capture:<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -4397,6 +4528,8 @@ Sometimes I want to savor every moment. For example, I won't speed up a TV show 
 <br />
 I've built my own tools for doing this which I won't be sharing today. But you don't need my tools to get started! There's a useful bookmarklet called <a href="http://www.yuptude.com/">yuptude</a>. There's more info on that website. In case it goes down some day, here's the raw bookmarklet:<br />
 <div id='code'>javascript:(function()%7Bfunction%20dg(t)%7Breturn%20document.getElementById(t)%7Dfunction%20yte_in()%7Bs=dg(%22yptd-in%22).value%7Dfunction%20yte_off()%7Byti_in.removeEventListener(%22input%22,yte_in),yti_off.removeEventListener(%22click%22,yte_off),yti_pit.removeEventListener(%22click%22,yte_pit),yti_up.removeEventListener(%22click%22,yte_up),yti_dwn.removeEventListener(%22click%22,yte_dwn),ytw.parentNode.removeChild(ytw),yts.parentNode.removeChild(yts),clearInterval(interval),s=1,pitch(1)%7Dfunction%20yte_pit()%7Bp=dg(%22yptd-pin%22).checked%7Dfunction%20yte_up()%7Binputval=document.getElementById(%22yptd-in%22).value,inputval=inputval%3FparseFloat(inputval):1,inputval=3.9%3E=inputval%3Finputval+.1:inputval,s=dg(%22yptd-in%22).value=inputval.toFixed(1)%7Dfunction%20yte_dwn()%7Binputval=dg(%22yptd-in%22).value,inputval=inputval%3FparseFloat(inputval):1,inputval=inputval%3E=.6%3Finputval-.1:inputval,s=dg(%22yptd-in%22).value=inputval.toFixed(1)%7Dfunction%20pitch(t)%7Bfor(var%20e=0;videos.length%3Ee;e++)v=videos%5Be%5D,v%26%26v.readyState%3E=2%26%26(v.playbackRate=t%7C%7Cs%7C%7C1,v.mozPreservesPitch=v.webkitPreservesPitch=v.preservePitch=!p)%7Dvar%20s=1,p=!1,videos=document.querySelectorAll(%22video,audio%22),v,inputval,ytw=document.createElement(%22div%22);ytw.innerHTML=&#039;%3Cstyle%20id=%22yptd-style%22%3E%20%20%20%20%20%20%20%20%20%20%20%20%23yptd%20span,%23yptd-box%7Bfloat:left;padding:0%20.5em;display:block%7D%23yptd%20span%20em,%23yptd-bottom,%23yptd-in%7Bvertical-align:middle%7D%23yptd-pit,%23yptd-pit%20input%7Bfloat:right%7D%23yptd%20a,%23yptd-bar%7Bbackground-color:%23fd0d5d%7D%23yptd%7Bz-index:9999999999;position:fixed;bottom:0;left:6px;font:16px%20Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%25;-ms-text-size-adjust:100%25%7D%23yptd%20*%7Bmargin:0%7D%23yptd%20a%7Bborder-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;float:left;margin:0%20.5em%200%200;padding:.25em%201em;font-weight:700;color:%23FFF%7D%23yptd%20a%20em%7Bfont-size:.9em%7D%23yptd%20a:active,%23yptd%20a:focus,%23yptd%20a:hover%7Boutline:0;color:%23fd0d5d;background-color:%23FFF;text-decoration:none%7D%23yptd%20span%7Bborder-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;margin:.5em;width:2.5em;border-bottom:2px%20solid%20rgba(0,0,0,.25);text-decoration:none;color:%23000;background-color:%23FFF;cursor:pointer;text-align:center%7D%23yptd%20span%20em%7Bfont-size:.75em%7D%23yptd%20span:active,%23yptd%20span:focus,%23yptd%20span:hover%7Bcolor:%23fd0d5d%7D%23yptd-bar%7Bborder-radius:3px%203px%200%200;-moz-border-radius:3px%203px%200%200;-webkit-border-radius:3px%203px%200%200;height:2.25em%7D%23yptd-bar:after,%23yptd-bottom:after%7Bcontent:%22%22;display:block;clear:both%7D%23yptd-controls%7Bfloat:right;height:2.25em;border-left:2px%20solid%20rgba(0,0,0,.33)%7D%23yptd-box%7B-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;width:4em;min-width:4em;height:100%25;background-color:rgba(0,0,0,.15)%7D%23yptd-in%7Bwidth:100%25;height:100%25;border:0;text-align:center;font:14px%20Helvetica,Arial,sans-serif;font-family:Helvetica,Arial,sans-serif;font-size:14px;color:%23FFF;background-color:transparent%7D%23yptd-bottom%7Bpadding:.75em;font-size:.75em;background-color:rgba(0,0,0,.8)%7D%23yptd-pit%7Bposition:relative;padding:.25em%200%7D%23yptd-pit%20label%7Bmargin-right:.5em;color:%23FFF%7D%23yptd-pit%20em%7Bdisplay:none%7D%23yptd-pit:active%20em,%23yptd-pit:focus%20em,%23yptd-pit:hover%20em%7Bdisplay:block;position:absolute;top:-2.5em;left:0;padding:.5em;white-space:pre;font-size:.8em;background-color:%23fd0d5d%7D%20%20%20%20%20%20%20%20%20%20%20%20%3C/style%3E%20%20%20%20%20%20%20%20%3Cdiv%20id=%22yptd%22%3E%20%3Cdiv%20id=%22yptd-bar%22%3E%20%3Cspan%20id=%22yptd-off%22%3E%3Cem%3EOff%3C/em%3E%3C/span%3E%20%3Cdiv%20id=%22yptd-controls%22%3E%20%3Cspan%20id=%22yptd-dwn%22%3E-%3C/span%3E%20%3Cdiv%20id=%22yptd-box%22%3E%20%3Cinput%20id=%22yptd-in%22%20type=%22text%22%20value=%22&#039;+s+&#039;%22%3E%20%3C/div%3E%20%3Cspan%20id=%22yptd-up%22%3E+%3C/span%3E%20%3C/div%3E%20%3C/div%3E%20%3Cdiv%20id=%22yptd-bottom%22%3E%20%3Ca%20href=%22http://yuptude.com%22%3E%3Cem%3Eyuptude%3C/em%3E%3C/a%3E%20%3Cdiv%20id=%22yptd-pit%22%3E%20%3Clabel%20for=%22yptd-pin%22%3E%20Shift%20Pitch%20%3Cem%3E(Firefox%20%26amp;%20Safari%20only)%3C/em%3E%3C/label%3E%20%3Cinput%20type=%22checkbox%22%20name=%22yptd-pin%22%20id=%22yptd-pin%22%20value=%221%22%20&#039;+(p%3F&#039;checked=%22checked%22%20&#039;:%22%20%22)+%22%3E%20%3C/div%3E%20%3C/div%3E%20%3C/div%3E%22,document.body.appendChild(ytw);var%20ytw=dg(%22yptd%22),yts=dg(%22yptd-style%22),yti_in=dg(%22yptd-in%22),yti_off=dg(%22yptd-off%22),yti_pit=dg(%22yptd-pin%22),yti_up=dg(%22yptd-up%22),yti_dwn=dg(%22yptd-dwn%22);yti_in.addEventListener(%22input%22,yte_in),yti_off.addEventListener(%22click%22,yte_off),yti_pit.addEventListener(%22click%22,yte_pit),yti_up.addEventListener(%22click%22,yte_up),yti_dwn.addEventListener(%22click%22,yte_dwn);var%20interval=setInterval(function()%7Bpitch()%7D,100);%7D)()</div>
+</div>
+
 ]]>
 </content>
 </entry>
@@ -4413,6 +4546,7 @@ I've built my own tools for doing this which I won't be sharing today. But you d
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -4994,6 +5128,8 @@ function htmlDecode(str) {<br />
 <br />
 Hopefully somebody will find these tools useful or inspiring!<br />
 
+</div>
+
 ]]>
 </content>
 </entry>
@@ -5010,6 +5146,7 @@ Hopefully somebody will find these tools useful or inspiring!<br />
 <uri>https://memalign.github.io/index.html</uri>
 </author>
 <content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
 
 <div id='header'>
 <h2>
@@ -5038,6 +5175,8 @@ Some helpful options to get started with source control:<br />
 Because code can often be reused, I recommend using git for nearly all the code you ever write. It's even useful to have a git repository that's just for small utilities or toying around. Use a local git repository if you want to keep it private.<br />
 <br />
 You can find my own public GitHub repositories <a href="https://github.com/memalign/">here</a>.
+</div>
+
 ]]>
 </content>
 </entry>
