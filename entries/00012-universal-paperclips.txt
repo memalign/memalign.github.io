@@ -6,6 +6,8 @@ Tags: Games, Programming
 
 [Link:https://www.decisionproblem.com/paperclips/index2.html]Universal Paperclips[/Link] ([Link:https://en.wikipedia.org/wiki/Universal_Paperclips]wikipedia article[/Link]) is an [Link:https://en.wikipedia.org/wiki/Incremental_game]incremental game[/Link] about an AI created to produce paperclips.
 
+(Backup of the game [Link:/m/universal-paperclips/index.html]here[/Link]. You can also play a slightly modified version of the game that enables cheats [Link:/m/universal-paperclips/index-cheats.html]here[/Link]. Explore the Universal Paperclips source code [Link:https://github.com/memalign/memalign.github.io/tree/master/m/universal-paperclips]here[/Link].)
+
 When I first played it several years ago, I got sucked in for an entire day. Then I felt compelled to play it again the next day.
 
 
