@@ -31,6 +31,27 @@
 - More PICO-8 games
   - Holiday Jumper by zep: https://www.lexaloffle.com/bbs/?tid=45856
   - https://www.lexaloffle.com/bbs/?tid=46495
+  - Tomb of G'Nir (hard platformer): https://www.lexaloffle.com/bbs/?tid=31258#comments
+  - UFO Swamp Odyssey: https://www.lexaloffle.com/bbs/?tid=38153#playing - very charming and fun
+  - https://www.lexaloffle.com/bbs/?tid=34047#playing - Another Paranoid Cactus game. Turn-based strategy called "Shadows of Dunwich 2.0". Good example of the mechanic but I found it tedious after a few rounds.
+  - Putrid S4nd: https://abhimonk.itch.io/putrid-s4nd - shoot-em-up with roguelike elements
+
+- JavaScript games:
+  - https://github.com/DennisBengs/envisionator
+    - https://donitz.itch.io/envisionator
+    - This is the game with a robot you control by giving movement commands
+  - https://github.com/DennisBengs/retrohaunt (by the same guy as Envisionator)
+  - http://lalo.li/ddd/
+  - http://lalo.li/lsd/
+  - Chroma Incident: https://js13kgames.com/entries/the-chroma-incident https://github.com/Rybar/js13k2018
+    - https://js13kgames.com/games/greeble/index.html
+      - I like the idea of a robot needing to rebuild itself but the implementation is buggy (too easy to get stuck and have to reload) and the game feels too incomplete
+  - Space Garden: https://js13kgames.com/entries/space-garden ; Relaxing, a lot more fun than Asteroids, but no win/end condition
+  - https://www.lessmilk.com/almost-pong/
+  - Simplified Quake: https://phoboslab.org/q1k3/
+  
+- https://1j01.github.io/pbp2d/
+  - New URL: https://1j01.github.io/pbj-sandbox/
 
 - Free game assets: https://www.kenney.nl/assets/
 
@@ -163,21 +184,6 @@ class MARunloop {
 [/Code]
 
 - Similar to interesting code snippets: these effects such as dissolving comet-like tail: https://twitter.com/blinry/status/1467112486952443907?s=20
-
-
-- https://1j01.github.io/pbp2d/
-  - New URL: https://1j01.github.io/pbj-sandbox/
-
-- JavaScript games:
-  - https://github.com/DennisBengs/envisionator
-    - https://donitz.itch.io/envisionator
-    - This is the game with a robot you control by giving movement commands
-  - https://github.com/DennisBengs/retrohaunt
-  - http://lalo.li/ddd/
-  - http://lalo.li/lsd/
-  - Chroma Incident: https://js13kgames.com/entries/the-chroma-incident https://github.com/Rybar/js13k2018
-  - Space Garden: https://js13kgames.com/entries/space-garden ; Relaxing, a lot more fun than Asteroids, but no win/end condition
-  - https://www.lessmilk.com/almost-pong/
 
 
 - List of tools for making IF:
