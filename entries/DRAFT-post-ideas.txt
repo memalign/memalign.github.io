@@ -27,6 +27,12 @@
   - https://github.com/google/deepdream/blob/master/dream.ipynb
   - https://twitter.com/sportsracer48?s=20&t=O1ABZqjOT03HXA5InI9HOQ
   - https://github.com/sportsracer48/pytti
+  - This is human-made but has a similar feel: https://zoomquilt.org/
+  - https://jxmo.notion.site/The-Weird-and-Wonderful-World-of-AI-Art-b9615a2e7278435b98380ff81ae1cf09
+    - HN post about this: https://news.ycombinator.com/item?id=31121890
+  - https://rybakov.com/project/metamorphosis/
+  - https://creator.nightcafe.studio/my-creations
+  
   
 - More PICO-8 games
   - Holiday Jumper by zep: https://www.lexaloffle.com/bbs/?tid=45856
@@ -35,6 +41,8 @@
   - UFO Swamp Odyssey: https://www.lexaloffle.com/bbs/?tid=38153#playing - very charming and fun
   - https://www.lexaloffle.com/bbs/?tid=34047#playing - Another Paranoid Cactus game. Turn-based strategy called "Shadows of Dunwich 2.0". Good example of the mechanic but I found it tedious after a few rounds.
   - Putrid S4nd: https://abhimonk.itch.io/putrid-s4nd - shoot-em-up with roguelike elements
+  - https://nusan.itch.io/flooded-caves
+  - https://www.lexaloffle.com/bbs/?tid=2514#playing
 
 - JavaScript games:
   - https://github.com/DennisBengs/envisionator
@@ -54,6 +62,11 @@
   - New URL: https://1j01.github.io/pbj-sandbox/
 
 - Free game assets: https://www.kenney.nl/assets/
+
+- Ray tracing
+  - https://github.com/iechevarria/ray-tracer-js
+  - add a rectangle (which I think just combines two triangles - see how the included scene makes its walls)
+  - add a more complex shape: cylinder or torus
 
 - https://freeicons.io/
 

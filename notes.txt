@@ -421,3 +421,11 @@ I'm adding a featured projects section to the top of the main page.
 [x]  - Index created with featured projects shows them
 [x]- Make a more favorable crop of FormulaGraph's image
 
+
+5/1/22
+
+Here's a 16x16 favicon:
+
+http://memalign.github.io/m/pceimage/index.html?w=0&s=1&t=.:#00000000%0A@:#000000%0A%0A................%0A................%0A.@@@.......@@@@.%0A@..@@.....@....@%0A@..@@.....@@@.@@%0A@..@@.....@@.@.@%0A@.@.@.....@....@%0A@.@.@.....@@..@@%0A@.@.@.....@@..@@%0A@.@.@.....@....@%0A@@..@.....@....@%0A@@..@.@.@.@.@@.@%0A@@..@..@..@....@%0A.@@@..@.@..@@@@.%0A................%0A................
+
+
