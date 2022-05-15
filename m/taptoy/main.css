@@ -1,0 +1,50 @@
+html, body, .content {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+.home, .about {
+  position: fixed;
+  z-index: 1000;
+  color: #555;
+}
+
+.home a, .about a {
+  color: #555;
+  text-decoration: none;
+}
+
+.home a:hover, .about a:hover {
+  color: #FFF;
+}
+
+.home {
+  top: 10px;
+  left: 10px;
+}
+
+.about {
+  top: 10px;
+  right: 10px;
+}
+
+.help {
+  position: fixed;
+  z-index: 1000;
+  color: #00BFFF;
+  text-align: center;
+  bottom: 60px;
+  width: 100%;
+  font-size: 30px;
+}
+

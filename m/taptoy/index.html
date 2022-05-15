@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Tap Toy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="main.css" charset="utf-8">
+
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="tap toy, toy, fidget, relax, magickeyboard, memalign, bubble wrap, pikachu, koffing, pixel, pixel art, art">
+    <meta name="description" content="Tap Toy - the catharsis of popping bubble wrap brought to your touch screen.">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="Tap Toy" />
+    <meta property="og:description" content="The catharsis of popping bubble wrap brought to your touch screen">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/taptoy/taptoy.jpg" />
+    <meta property="og:image:type" content="image/jpg" />
+    <meta property="og:url" content="https://memalign.github.io/m/taptoy/index.html" />
+    <meta name="twitter:title" content="Tap Toy">
+    <meta name="twitter:description" content="The catharsis of popping bubble wrap brought to your touch screen">
+    <meta name="twitter:image" content="https://memalign.github.io/m/taptoy/taptoy.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+    <link rel="apple-touch-icon" sizes="16x16" href="PWAImages/ios/16.png">
+    <link rel="apple-touch-icon" sizes="20x20" href="PWAImages/ios/20.png">
+    <link rel="apple-touch-icon" sizes="29x29" href="PWAImages/ios/29.png">
+    <link rel="apple-touch-icon" sizes="32x32" href="PWAImages/ios/32.png">
+    <link rel="apple-touch-icon" sizes="40x40" href="PWAImages/ios/40.png">
+    <link rel="apple-touch-icon" sizes="50x50" href="PWAImages/ios/50.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="PWAImages/ios/57.png">
+    <link rel="apple-touch-icon" sizes="58x58" href="PWAImages/ios/58.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="PWAImages/ios/60.png">
+    <link rel="apple-touch-icon" sizes="64x64" href="PWAImages/ios/64.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="PWAImages/ios/72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="PWAImages/ios/76.png">
+    <link rel="apple-touch-icon" sizes="80x80" href="PWAImages/ios/80.png">
+    <link rel="apple-touch-icon" sizes="87x87" href="PWAImages/ios/87.png">
+    <link rel="apple-touch-icon" sizes="100x100" href="PWAImages/ios/100.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="PWAImages/ios/114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="PWAImages/ios/120.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="PWAImages/ios/128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="PWAImages/ios/144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="PWAImages/ios/152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="PWAImages/ios/167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="PWAImages/ios/180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="PWAImages/ios/192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="PWAImages/ios/256.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="PWAImages/ios/512.png">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="PWAImages/ios/1024.png">
+    <link rel="manifest" href="manifest.json">
+  </head>
+
+  <body>
+    <div class='unselectable'>
+    <div class="home">
+      <a href="https://memalign.github.io">memalign.github.io</a>
+    </div>
+    <div class="about">
+      <a href="https://memalign.github.io/p/taptoy.html">about</a>
+    </div>
+    <div class="help">Tap 👆</div>
+    <div class="content"></div>
+    <script src="Utilities.js"></script>
+    <script src="BGColorAnimator.js"></script>
+    <script src="SoundEffects.js"></script>
+    <script src="PCEImage.js"></script>
+    <script src="Images.js"></script>
+    <script src="bundle.js"></script>
+    <script src="taptoy.js"></script>
+    <script>
+
+    let bgAnimator = null
+    let soundEffects = null
+    window.onload = function () {
+      bgAnimator = new BGColorAnimator(document.body)
+      bgAnimator.requestColorChange()
+
+      soundEffects = new MASounds()
+      soundEffects.loadSounds()
+
+      taptoy(exportedDependencies)
+    }
+
+    </script>
+    </div>
+  </body>
+</html>
