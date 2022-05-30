@@ -1,0 +1,38 @@
+Title: Tap Toy
+Date: 5/30/2022
+Tags: Programming, Art, Games
+[Image:/m/taptoy/taptoy.jpg]
+
+Introducing my latest project: [Link:/m/taptoy/index.html]Tap Toy[/Link]
+
+Tap Toy is a fun little web app for relaxation. Tap the screen to launch some characters which then bounce off each other. Turn on sound for satisfying sound effects and relaxing public-domain background music. In some ways, I think this toy brings the catharsis of popping bubble wrap to your touch screen.
+
+I got the idea for this project after watching my then-9-month-old's fascination with my iPhone and iPad. Note that the CDC guidelines recommend "no screen time for children younger than 2 years" ([Link:https://www.cdc.gov/obesity/downloads/15_256312-A_May_LicensingDocument_Final_508_508tagged.pdf]source[/Link], [Link:/m/cdc_screentime.pdf]backup[/Link]) but these kids will still find a way to grab your device for a fleeting moment before you take it back.
+
+I wondered if I could make an app to soothe and distract our baby if we ever became truly desperate for a moment of peace. (Fortunately, we still haven't reached this point yet!)
+
+I modeled some of the behavior after [Link:https://www.amazon.com/Baby-Einstein-Along-Tunes-Musical/dp/B000YDDF6O]Baby Einstein Take Along Tunes[/Link], one of the more pleasant sound-making toys we have:
+
+[Image:/m/babyeinsteintunes.jpg]
+
+The result, as my wife described it, is "crack". She was having a bad day when Tap Toy was first ready to play with and she ended up zoning out, addicted, tapping it for 30 minutes while some of her stress melted away.
+
+As is usual for me, this side-project is a remix of a few other projects:
+
+- [Link:http://magickeyboard.io]MagicKeyboard.io[/Link] ([Link:/m/magickeyboard/index.html]backup[/Link], [Link:https://github.com/feross/magickeyboard.io]source[/Link]) by [Link:http://feross.org]Feross Aboukhadijeh[/Link]
+    - Which in turn is inspired by a [Link:https://www.reddit.com/r/gifs/comments/3t5ssx/magic_keyboard/]reddit post[/Link] about this [Link:https://momentfactory.com/lab/keyboard-magic]art project[/Link] by Moment Factory
+    - In fact, I kept the keyboard triggers to launch sprites from the right location along the bottom of the screen
+    - I fixed the sound effect code and added background music
+    - I also added real multi-touch support
+
+- [Link:/p/pceimage.html]PCEImage[/Link] (note that the Koffing, Pikachu in Tap Toy show up in [Link:/m/pceimage/index.html]PCEImage Editor[/Link]'s list of examples)
+
+Some tips:
+
+- You can add this web page to your home screen on iOS or Android. If you do that, it'll behave more like a normal app. (I did the extra bit of work to make this a "progressive web app")
+
+- If you give this to a kid, you can use [Link:https://support.apple.com/en-us/HT202612]Guided Access[/Link] to prevent them from leaving the app
+
+An idea to take this farther:
+
+- Holiday-themed Tap Toys: Halloween, Thanksgiving, Christmas, Chanukah, New Year's Eve, etc

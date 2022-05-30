@@ -5,10 +5,71 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2022-02-13T00:00:00-08:00</updated>
+<updated>2022-05-30T00:00:00-08:00</updated>
 <rights>Copyright © 2022, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Tap Toy</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/taptoy.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/taptoy.html" />
+<id>https://memalign.github.io/p/taptoy.html</id>
+<published>2022-05-30T00:00:00-08:00</published>
+<updated>2022-05-30T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/taptoy.html'>Tap Toy</a>
+</h2>
+</div>
+<img src="/m/taptoy/taptoy.jpg">
+<div id='postdate'>Posted on 5/30/2022<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a>, <a href='/tags.html'>Games</a></div>
+Introducing my latest project: <a href="/m/taptoy/index.html">Tap Toy</a><br />
+<br />
+Tap Toy is a fun little web app for relaxation. Tap the screen to launch some characters which then bounce off each other. Turn on sound for satisfying sound effects and relaxing public-domain background music. In some ways, I think this toy brings the catharsis of popping bubble wrap to your touch screen.<br />
+<br />
+I got the idea for this project after watching my then-9-month-old's fascination with my iPhone and iPad. Note that the CDC guidelines recommend "no screen time for children younger than 2 years" (<a href="https://www.cdc.gov/obesity/downloads/15_256312-A_May_LicensingDocument_Final_508_508tagged.pdf">source</a>, <a href="/m/cdc_screentime.pdf">backup</a>) but these kids will still find a way to grab your device for a fleeting moment before you take it back.<br />
+<br />
+I wondered if I could make an app to soothe and distract our baby if we ever became truly desperate for a moment of peace. (Fortunately, we still haven't reached this point yet!)<br />
+<br />
+I modeled some of the behavior after <a href="https://www.amazon.com/Baby-Einstein-Along-Tunes-Musical/dp/B000YDDF6O">Baby Einstein Take Along Tunes</a>, one of the more pleasant sound-making toys we have:<br />
+<br />
+<img src="/m/babyeinsteintunes.jpg"><br />
+<br />
+The result, as my wife described it, is "crack". She was having a bad day when Tap Toy was first ready to play with and she ended up zoning out, addicted, tapping it for 30 minutes while some of her stress melted away.<br />
+<br />
+As is usual for me, this side-project is a remix of a few other projects:<br />
+<br />
+- <a href="http://magickeyboard.io">MagicKeyboard.io</a> (<a href="/m/magickeyboard/index.html">backup</a>, <a href="https://github.com/feross/magickeyboard.io">source</a>) by <a href="http://feross.org">Feross Aboukhadijeh</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Which in turn is inspired by a <a href="https://www.reddit.com/r/gifs/comments/3t5ssx/magic_keyboard/">reddit post</a> about this <a href="https://momentfactory.com/lab/keyboard-magic">art project</a> by Moment Factory<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- In fact, I kept the keyboard triggers to launch sprites from the right location along the bottom of the screen<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- I fixed the sound effect code and added background music<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- I also added real multi-touch support<br />
+<br />
+- <a href="/p/pceimage.html">PCEImage</a> (note that the Koffing, Pikachu in Tap Toy show up in <a href="/m/pceimage/index.html">PCEImage Editor</a>'s list of examples)<br />
+<br />
+Some tips:<br />
+<br />
+- You can add this web page to your home screen on iOS or Android. If you do that, it'll behave more like a normal app. (I did the extra bit of work to make this a "progressive web app")<br />
+<br />
+- If you give this to a kid, you can use <a href="https://support.apple.com/en-us/HT202612">Guided Access</a> to prevent them from leaving the app<br />
+<br />
+An idea to take this farther:<br />
+<br />
+- Holiday-themed Tap Toys: Halloween, Thanksgiving, Christmas, Chanukah, New Year's Eve, etc<br />
+
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>PCEImage Editor</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/pceimage-editor.html" />
@@ -5091,52 +5152,6 @@ function htmlDecode(str) {<br />
 <br />
 Hopefully somebody will find these tools useful or inspiring!<br />
 
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>Source Control</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/source-control.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/source-control.html" />
-<id>https://memalign.github.io/p/source-control.html</id>
-<published>2020-03-27T00:00:00-08:00</published>
-<updated>2020-03-27T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/source-control.html'>Source Control</a>
-</h2>
-</div>
-<img src="/m/2560px-Git-logo-black.svg.png">
-<div id='postdate'>Posted on 3/27/2020<br />
-Tags: <a href='/tags.html'>Programming</a></div>
-It's smart to have backups of important information. The best way to have backups for programming projects is <a href="https://en.wikipedia.org/wiki/Version_control">source control</a>.<br />
-<br />
-I've used source control (<a href="https://en.wikipedia.org/wiki/Git">git</a>, specifically) for personal programming projects, professional software development, journals, and websites. It works well for anything text-based.<br />
-<br />
-Source control is super useful because it tracks incremental history of changes. That makes it easy to hone in on when a change (good or bad) was made with some context of why. That's useful when tracking down a nasty bug! It's also useful when researching why specific design decisions were made.<br />
-<br />
-<br />
-Some helpful options to get started with source control:<br />
-<br />
-- Use <a href="https://github.com">https://github.com</a> to create and host repositories for free<br />
-<br />
-- Another free option is <a href="https://bitbucket.org/product">Bitbucket</a><br />
-<br />
-- Create your own local git repository that lives directly on your computer. Learn more <a href="https://git-scm.com/book/en/v2/Appendix-C%3A-Git-Commands-Getting-and-Creating-Projects">here</a>.<br />
-<br />
-<br />
-Because code can often be reused, I recommend using git for nearly all the code you ever write. It's even useful to have a git repository that's just for small utilities or toying around. Use a local git repository if you want to keep it private.<br />
-<br />
-You can find my own public GitHub repositories <a href="https://github.com/memalign/">here</a>.
 </div>
 
 ]]>
