@@ -23,7 +23,7 @@ As is usual for me, this side-project is a remix of a few other projects:
     - Which in turn is inspired by a [Link:https://www.reddit.com/r/gifs/comments/3t5ssx/magic_keyboard/]reddit post[/Link] about this [Link:https://momentfactory.com/lab/keyboard-magic]art project[/Link] by Moment Factory
     - In fact, I kept the keyboard triggers to launch sprites from the right location along the bottom of the screen
     - I fixed the sound effect code and added background music
-    - I also added real multi-touch support
+    - I also added real multi-touch and mouse support
 
 - [Link:/p/pceimage.html]PCEImage[/Link] (note that the Koffing, Pikachu in Tap Toy show up in [Link:/m/pceimage/index.html]PCEImage Editor[/Link]'s list of examples)
 
