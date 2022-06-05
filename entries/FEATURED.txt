@@ -15,7 +15,7 @@ FormulaGraph
 - /m/formulagraph/index.html
 
 Counterfeit Monkey
-- Image: /m/cm-map.jpg
+- Image: /m/cm-map-cropped.jpg
 - /m/counterfeitmonkey/index.html
 
 Dungeon Memalign
