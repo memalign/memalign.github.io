@@ -522,6 +522,7 @@ class Entry extends HTMLDocument {
     result = result.replace(/\[\/Link\]/g, "")
     result = result.replace(/\[SectionTitle:([^\]]+)\]/g, '$1')
     result = result.replace(/\[ParagraphTitle:([^\]]+)\]/g, '$1')
+    result = result.replace(/\[ContinueReadingWithURLTitle:([^\]]+)\]/g, "")    
     
     result = result.replace(/^\n+/, "")
     let origResult = result

@@ -87,7 +87,7 @@ The art in this section is generally human-made without the use of neural networ
 
 [Link:https://infinitezoom.net][Image:/m/trippyart/infinitezoom/infinitezoom.png][/Link]
 
-[ParagraphTitle:[Link:https://viz.intelligence.rocks/#mandelbrot]Zooming Mandelbrot[/Link]] by [Link:https://jason.today]Jason McGhee[/Link] ([Link:/m/trippyart/viz-studio/index.html]backup[/Link])
+[ParagraphTitle:[Link:https://viz.intelligence.rocks/#mandelbrot]Zooming Mandelbrot[/Link]] by [Link:https://jason.today]Jason McGhee[/Link] ([Link:/m/trippyart/viz-studio/index.html#mandelbrot]backup[/Link])
 
 [Link:https://viz.intelligence.rocks/#mandelbrot][Image:/m/trippyart/viz-studio/mandelbrot.png][/Link]
 
