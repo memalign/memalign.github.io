@@ -590,7 +590,7 @@ ${this.title}
       if (matches) {
         let continueReadingURLTitle = matches[1]
         htmlContents = htmlContents.split("[ContinueReadingWithURLTitle")[0]  
-        htmlContents += `[ParagraphTitle:[Link:${this.relativeURL()}]${continueReadingURLTitle}[/Link]]`
+        htmlContents += `[ParagraphTitle:[Link:${titleURL}]${continueReadingURLTitle}[/Link]]`
       }
     } else {  
       // This is the post's dedicated page. Omit the Continue Reading link.
