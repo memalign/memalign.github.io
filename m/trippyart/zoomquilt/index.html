@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Zoomquilt - The infinitely zooming image</title>
+	<meta charset="utf-8">
+	<meta name="keywords" content="zoomquilt, infinite zoom, painting, artwork, illusion">
+	<meta name="description" content="The infinitely zooming image.">
+	<meta name="robots" content="NOODP">
+	<meta property="og:title" content="Zoomquilt" />
+	<meta property="og:description" content="The infinitely zooming image." />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="http://zoomquilt.org" />
+	<meta property="og:image" content="https://memalign.github.io/m/trippyart/zoomquilt/img/zoomquilt.jpg">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+		<style>
+		body {
+			background: #000;
+			overflow: hidden;
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			font: 400 10pt/1.25 Helvetica, Arial, sans-serif;
+			color: #aaa;
+		}
+		* {
+			box-sizing: border-box;
+		}
+		#zc {
+			position: fixed;
+			left: 0;
+			top: 0;
+			margin: 0;
+			padding: 0;
+			background: #000;
+			z-index: 5;
+			opacity: 0; }
+		#status {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 200px;
+			height: 18px;
+			margin-top: -10px;
+			margin-left: -100px;
+			z-index: 100;
+			text-align: right;
+			opacity: 0;
+			border: 2px solid #aaaaaa;
+			border-radius: 3px;
+			overflow: hidden; }
+
+		#loadbar {
+			position: relative;
+			height: 18px;
+			width: 0%;
+			background: #aaa; }
+
+		#info {
+			position: fixed;
+			overflow-y: auto;
+			padding: 0;
+			top: 0px;
+			bottom: 0px;
+			width: 350px;
+			background: rgba(0,0,0,.5);
+			transition: all .7s;
+			z-index: 20;
+			display: flex;
+			flex-direction: column;
+			padding: 0 15px 0;
+			margin: 0;
+			margin-left: -255px;
+			opacity: 0;
+			pointer-events: none;
+		}
+		#info .mobilebanner {
+			display: none;
+		}
+		.topcontent {
+			flex-grow: 1;
+		}
+		.infovisible #info {
+			margin-left: 0;
+			opacity: 1;
+			pointer-events: all;
+		}
+		.adblock {
+			margin: 0 auto;
+		}
+		.sidebanner {
+			position: fixed;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			width: 350px;
+			z-index: 20;
+			margin-right: -255px;
+			transition: all .7s;
+			opacity: 0;
+			pointer-events: none;
+		}
+		.infovisible .sidebanner {
+			margin-right: 0;
+			opacity: 1;
+		}
+		.infovisible .sidebanner * {
+			pointer-events: all;
+		}
+		#info img {
+			max-width: 100%;
+		}
+		.history {
+			z-index: 100;
+			position: fixed;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			pointer-events: none;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 16pt;
+			opacity: 0;
+			transition: all .4s;
+		}
+		.history a {
+			color: cyan;
+		}
+		.historyinner {
+			position: relative;
+			max-width: 1200px;
+			background: #000000cc;
+			max-height: 100%;
+			border: 2px solid #444;
+			transition: transform .3s, opacity .7s;
+			transform: scale(0.7);
+			line-height: 1.6;
+		}
+		.historyscroll {
+			padding: 2em;
+			max-height: 100vh;
+			overflow-y: auto;
+		}
+		.inlineblock {
+			display: inline-block;
+		}
+		.close {
+			position: absolute;
+			right: .5em;
+			top: .25em;
+			color: #ccc;
+			font-size: 32pt;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		.close:hover {
+			color: white;
+		}
+		.infovisible.historyvisible .history {
+			opacity: 1;
+		}
+		.infovisible.historyvisible .historyinner {
+			pointer-events: all;
+		}
+		.historyvisible .historyinner {
+			transform: scale(1);
+		}
+	
+
+		h1 {
+			color: #ff5219;
+			font: 700 30pt "Open Sans", Helvetica, Arial, sans-serif;
+			margin: 0;
+		}
+		h2 {
+			color: #fff;
+			font: 700 30pt "Open Sans", Helvetica, Arial, sans-serif;
+			margin: 0;
+		}
+		.orange {
+			color: #ff5219;
+		}
+		.showhistory {
+			color: #ffd500;
+			cursor: pointer;
+		}
+		a.yt {
+			color: #29e057;
+		}
+		a.nb {
+			color:  cyan;
+		}
+		.social {
+			opacity: 1;
+			margin-left: .7em;
+		}
+		.social:hover {
+			opacity: 1;
+		}
+		.social img{
+			margin-top: -.5em;
+			transition: all .2s;
+			width: 20px;
+		}
+		.social:hover img{
+			transform: scale(1.35);
+		}
+		.imprint {
+			color: #aaa;
+		}
+		a {
+			color: #ff95f5;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+		.links {
+			margin: 0 -4px;
+		}
+		.links a:hover {
+			text-decoration: none;
+		}
+		p {
+			margin: 0.6em 0;
+		}
+		p:first-of-type {
+			margin-top: 0;
+		}
+		p.center {
+			text-align: center;
+		}
+		p.fullwidth {
+			margin-left: 0;
+			margin-right: 0;
+		}
+		@media (max-width: 900px) {
+			.infovisible .sidebanner {
+				display: none;
+			}
+			#info .mobilebanner {
+				display: block;
+			}
+		}
+		@media (max-width: 650px) {
+			body {
+				font-size: 9pt;
+			}
+			p {
+				margin: 1em 0;
+			}
+			#info {
+				width: 260px;
+				margin-left: -155px;
+			}
+			.orange {
+				display: none;
+			}
+			h1 {
+				font: 700 20pt Helvetica, Arial, sans-serif;
+				margin: .1em 0;
+			}
+			h2 {
+				font: 700 20pt Helvetica, Arial, sans-serif;
+			}
+			.sociallinks {
+				display: block
+			}
+			.social {
+				margin-left: .2em;
+				margin-right: 1em;
+			}
+			.social img {
+				width:  24px;
+				margin-top: .6em;
+			}
+			
+		}
+		
+
+	</style>
+</head>
+<body>
+	<div id='status'>
+		<div id='loadbar'></div>
+	</div>
+	<canvas id="zc" width="0" height="0"></canvas>
+	<div id="info" class="closed">
+		<div class="topcontent">
+			<div class="mobilebanner">				
+				
+			</div>
+
+			<h1>The Zoomquilt</h1>
+			<p data-nosnippet>A collaborative infinitely zooming painting<br>Created in 2004</p>
+			<p data-nosnippet>
+				<span class="orange"> Up and down keys to navigate</span>
+			</p>
+			<p data-nosnippet> 
+				A project by
+				<a href="https://www.nikkki.net" class="nb" target="_blank">Nikolaus Baumgarten</a><span class="sociallinks"><a target="_blank" href="https://www.instagram.com/nikolausbaumgarten" class="social"><img src="img/insta_color.png" alt=""></a><a target="_blank" href="https://twitter.com/nikbaumg" class="social"><img src="img/twitter_color.png" alt=""></a><a target="_blank" href="https://www.youtube.com/user/baumgarn" class="social"><img src="img/yt_color.png" alt=""></a>
+				</span>
+			</p>
+			<p data-nosnippet>
+			Participating illustrators: Andreas Schumann, Eero Pitk&auml;nen, Florian Biege, Jann Kerntke, 
+			Lars G&ouml;tze, Luis Felipe, Marcus Bl&auml;ttermann, Markus Neidel, Paul Painter, Oliver Schlemmer, Sonja Schneider, Thorsten Wolber, Tony Stanley, Ville Vanninen</span>
+			</p>
+			<p>
+				<!-- The Zoomquilt on YouTube: -->
+				<span class="inlineblock">
+					<!-- <a class="yt" href="https://www.youtube.com/watch?v=rwCP7opNpm8">4K Video</a> -->
+					<!-- &bull;  -->
+					<a class="yt" href="https://www.youtube.com/watch?v=RpHnKaxt_OQ">The Zoomquilt on YouTube 4K</a>
+				</span>
+			</p>
+			<p>
+				<a class="showhistory">Read about the history of this project</a>
+			</p>
+			<p class="center links" data-nosnippet>
+				<a href="https://play.google.com/store/apps/details?id=org.zoomquilt.zoomapp&referrer=utm_source%3Dzoomquilt1">
+					Get the Live Wallpaper for Android
+					<img src="img/googleplay.png" alt="Get it on Google Play">
+				</a>
+				<a href="https://arkadia.xyz" class="arkadia">
+					Arkadia Zoomquilt
+					<img alt="Arkadia" class="wide" src="img/arkadia.jpg" />
+				</a>
+
+				<a href="https://zoomquilt2.com" class="zoomquilt2">
+					Zoomquilt 2
+					<img alt="Zoomquilt 2" class="wide" src="img/zoomquilt2.jpg" />
+				</a>
+
+			</p>
+		</div>
+		<div class="bottomcontent">
+			
+			<p class="center" data-nosnippet>
+				Do not use without permission<br>
+
+			</p>
+			
+		</div>
+	</div>
+
+	<div class="sidebanner">
+
+	</div>
+
+	<div class="history">
+		<div class="historyinner">
+			<div class="historyscroll">
+				<div class="close">✕</div>
+				<h2>About the Zoomquilt</h2>
+				<p data-nosnippet>
+					The Zoomquilt was created in 2004. The project was started by <a href="http://nikkki.net" target="_blank">Nikolaus Baumgarten</a> and emerged from a scene of people creating collaborative artworks over the internet in the early 2000's surrounding the digital art group <a href="https://en.wikipedia.org/wiki/ICE_Advertisements" target="_blank">iCE</a>. On the platform <a href="https://web.archive.org/web/20060901024228/http://tiles.ice.org/index.php" target="_blank">tiles.ice.org</a> people would collaborate on digital paintings. It worked similiar to the surrealist drawing game <a href="https://en.wikipedia.org/wiki/Exquisite_corpse" target="_blank">Cadavre Exquis</a>. An artist would contribute a single tile of a patchwork painting called a "Quilt".  They would reserve a spot and get a frame with a border of the neighboring tiles they had to blend their artwork into. The fun of it was to pick up and transform what the other person left and see how the painting evolved in unexpected ways.
+				</p>
+				<p data-nosnippet>
+					One direct inspiration for the Zoomquilt was the <a href="https://www.sito.org/synergy/gridcosm/" target="_blank">Gridcosm</a> project, a similar infinite collaborative picture started in 1997 and still ongoing. On Gridcosm, anybody can contribute, which results in a very anarchic and chaotic picture. The viewer of Gridcosm also wasn't animated back then. The goal of the Zoomquilt was to create a seamlessly animated and coherent illusion. When the Zoomquilt first came out in 2004, it immediately went viral. In 2007 the successor <a href="https://zoomquilt2.com" target="_blank">Zoomquilt II</a> was released. Nikolaus Baumgarten revisited the concept again in 2015, together with Sophia Schomberg they created <a href="https://arkadia.xyz" target="_blank">Arkadia</a>, a peaceful and lush botanical fantasy plant world.
+				</p>
+				<p data-nosnippet>
+					Historically, the first infinite zoom animations can be found in the two movies <a href="https://www.youtube.com/watch?v=VgfwCrKe_Fk" target="_blank">Cosmic Zoom</a> by Eva Szasz and <a href="https://www.youtube.com/watch?v=0fKBhvDjuy0" target="_blank">Powers of Ten</a> by Ray and Charles Eames, both 1968 and both based on the 1957 children's book Cosmic View by Kees Boeke, which deals with the relative size of things in the universe.
+				</p>
+				<p data-nosnippet>
+					The Zoomquilt was originally released in Macromedia Shockwave and Flash format, and ported to modern web standarts in 2013 by Nikolaus Baumgarten. A <a href="https://www.youtube.com/watch?v=rwCP7opNpm8" target="_blank">4K Video</a> was released on YouTube in 2022.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<script src="jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	/* ZOOM */
+		var zoom=function(){function z(){k=p.getContext("2d");l();A();s();t();setTimeout(function(){m||$("#status").css({opacity:"0.6"})},1E3)}function s(){m?(u(),$("#status").animate({opacity:0},1E3)):setTimeout(function(){s()},10)}function l(a){c=$(window).width();d=$(window).height();v=c/2;w=d/2;c>1.5*d?(q=c,r=0.75*c):(q=1.5*d,r=d);$("#zc").attr("width",c);$("#zc").attr("height",d)}function B(){n=0;var a=steps.every(function(a){a.ready&&(n+=100/steps.length);return a.ready});$("#loadbar").css("width",
+		Math.floor(n)+"%");return a}function C(a){var b=this;this.ready=!1;this.img=new Image;this.img.onload=function(){b.ready=!0;B()&&(m=!0)};this.img.src=a}function A(){steps=[]; for(var a=46;a>0;a--)steps.push(new C("art/"+(((a+20)%46)+1)+".jpg"))}function t(){k.clearRect(0,0,p.width,p.height);for(var a=[],e=0;e<E;e++)a.push(steps[(Math.floor(b)+e)%steps.length]);for(var c=Math.pow(2,b%1),e=0;e<a.length;e++){var d=v-q/2*c,f=w-r/2*c,g=q*c,l=r*c;a[e].ready?k.drawImage(a[e].img,d,f,g,l):(k.fillStyle= 0===(Math.floor(b)+e)%2?F:G,k.fillRect(d,f,g,l));c*=0.5}x||(a.every(function(a){return a.ready})&&(y=n),h<y&&(h+=0.5),$("#zc").css("opacity",h/100),b=H+h/2E3,m&&($("#zc").animate({opacity:1},5*(100-h)),x=!0));setTimeout(function(){t()},1E3/60)}function u(){m&&(f<I&&(f+=1E-4),b=g.up?b+4*f:g.down?b-4*f:b+f,0>b&&(b+=steps.length),b>steps.length&&(b-=steps.length));setTimeout(function(){u()},10)}var p=document.getElementById("zc"),k,c,d,v,w,q,r,H=1,b=1,g={up:!1,down:!1},I=0.005,f=0,E=3,F="#222",G="#444", m=!1,n=0,x=!1,h=0,y=0; $(window).resize(function(){l()});$(document).keydown(function(a){38===a.which&&(g.up=!0, a.preventDefault());40===a.which&&(g.down=!0,a.preventDefault())});$(document).keyup(function(a){38===a.which&&(g.up=!1,a.preventDefault());40===a.which&&(g.down=!1,a.preventDefault())});p.getContext&&z()}(); 
+	/* UI */
+		$('#zc').mousedown(function(){$('body').toggleClass('infovisible');$('body').removeClass('historyvisible');});
+		$('.historyinner .close').mousedown(function(){$('body').removeClass('historyvisible');});
+		$('.showhistory').mousedown(function(){$('body').toggleClass('historyvisible');});
+
+	</script>
+</body>
+</html>
