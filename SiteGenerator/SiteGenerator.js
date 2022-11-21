@@ -283,10 +283,8 @@ class Index extends HTMLDocument {
     let c = 0
     for (let entry of this.entries) {
       if (c < this.entriesOnIndex) {
-        if (c > 0) {
-          // Add a visual separator between posts
-          str += "<hr />\n"
-        }
+        // Add a visual separator between posts
+        str += "<hr />\n"
         
         str += entry.htmlBody(entry.relativeURL())
         str += "\n"
@@ -584,6 +582,20 @@ ${this.title}
     
     
     var htmlContents = this.contents
+    
+    // [ContinueReadingWithURLTitle:] support
+    if (titleURL) {
+      let matches = htmlContents.match(/\[ContinueReadingWithURLTitle:([^\]]+)\]/)  
+      if (matches) {
+        let continueReadingURLTitle = matches[1]
+        htmlContents = htmlContents.split("[ContinueReadingWithURLTitle")[0]  
+        htmlContents += `[ParagraphTitle:[Link:${this.relativeURL()}]${continueReadingURLTitle}[/Link]]`
+      }
+    } else {  
+      // This is the post's dedicated page. Omit the Continue Reading link.
+      htmlContents = htmlContents.replace(/\[ContinueReadingWithURLTitle:([^\]]+)\]\n/g, '')
+    }
+    
 
     // [Code] support
     

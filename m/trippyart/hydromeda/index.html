@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hydromeda Zoomquilt</title>
+	<meta name="keywords" content="hydromeda, painting, Sophia Schomberg, zoomquilt, infinite zoom, infinity, recursion, recursive art, psychedelic, trippy">
+	<meta name="description" content="Hydromeda">
+	<meta property="og:title" content="Hydromeda Zoomquilt" />
+	<meta property="og:description" content="Hydromeda">
+	<meta property="og:type" content="website" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" type="text/css" media="all" href="zoom.css" />
+</head>
+<body class="loading uihidden">
+	<div id="nav">
+	
+		<div class="seekbar">
+			<div class="seekbar-visible">
+				<div class="marker filtered"></div>
+			</div>
+		</div>
+		<canvas id="preview" class="filtered" width="0" height="0"></canvas>
+	</div>
+	<div id="loading">
+		<img src="uiimg/hydromeda.png" id="logo" class="filtered">
+		<div id='status' class="filtered">
+			<div id='loadbar'></div>
+		</div>
+	</div>
+	<div id="credits">
+		<div class="creditsinner">
+
+			<section class="upper selectable">
+				<span class="filtered">
+					<img class="hydromedalogo" src="uiimg/hydromeda.png" alt="Hydromeda">
+				</span>
+				<p>
+					<em class="filtered">A zoom painting by </em><a href="http://sophiaschomberg.de" target="_blank"> Sophia Schomberg</a>
+					<br>
+					<br>
+					<span class="filtered">2021</span>
+					<br>
+					<br>
+					<em class="filtered">Based on the Zoomquilt<br>concept and code by </em><a href="http://nikkki.net" target="_blank">NB</a>
+				</p>
+				<br>
+				<p class="selectable link">
+					<a href="https://play.google.com/store/apps/details?id=org.zoomquilt.zoomapp&referrer=utm_source%3Darkadiaxy">
+					<span class="apptext">Coming soon to the Zoomquilt <br>Android Live Wallpaper</span><br>
+						<img class="playbadge" src="uiimg/google-play-badge.png" alt="Get it on Google Play">
+					</a>
+				</p>
+				<br>
+				<p>
+					<em class="filtered">See more zoom art</em><br>
+					<a href="http://arkadia.xyz" target="_blank">Arkadia</a><br>
+					<a href="http://cursorhome.org" target="_blank">Cursorhome</a><br>
+					<a href="http://zoomquilt2.com" target="_blank">Zoomquilt 2</a><br>
+					<a href="http://zoomquilt.org" target="_blank">Zoomquilt 1</a><br>
+					<a href="http://infinitezoom.net" target="_blank">Patterns</a><br>
+				</p>
+
+			</section>
+			<section class="lower">
+
+				<div id="speedcontrol">
+					<img src="uiimg/speed.svg">
+					<div class="handle"></div>
+				</div>
+
+				<p class="selectable filtered">
+					<em>Keyboard Up/Down to Navigate<br>Spacebar to Pause</em>
+				</p>
+
+				<div class="settings filtered">
+					FX:
+						<div class="textbutton fx" alt="unfiltered" id="nofx">original</div>
+						<div class="textbutton fx" alt="color" id="trippy">trippy</div>
+						<div class="textbutton fx" alt="sw" id="sw">grey</div>
+						<br>
+				</div>
+				<div id="fullscreen">Fullscreen</div>				
+
+			</section>
+		</div>
+		<div class="close"></div>
+	</div>
+	<canvas id="zc" class="filtered" width="0" height="0">Your need a Browser with Canvas support to view Hydromeda</canvas>
+	
+	<script src="jquery-3.6.0.min.js"></script>
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+	<script src="zoom.js" type="text/javascript"></script>
+
+</body>
+</html>
