@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Infinite Zoom by Nikolaus Baumgarten</title>
+		<meta name="description" content="zooming patterns">
+		<meta property="og:title" content="Infinitely zooming floral and geometric patterns" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://www.infinitezoom.net" />
+		<meta property="og:image" content="https://memalign.github.io/m/trippyart/infinitezoom/infinitezoom.png">
+		<link rel="stylesheet" type="text/css" href="style.css"></link>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+	</head>
+	<body>
+		<div id="nav">
+			<div id="fullscreentoggle" title="fullscreen">
+				<div class="c1"></div>	
+				<div class="c2"></div>	
+				<div class="c3"></div>	
+				<div class="c4"></div>
+			</div>
+
+			<span id="color" class="current">color</span><span id="grey">grey</span>
+			<div id="worldbuttons"><span class="current">1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
+			<a href="https://play.google.com/store/apps/details?id=net.nikkki.infinitezoom&referrer=utm_source%infinitezoomnet" target="blank">Get the Android Live Wallpaper</a>
+			<br>
+			<a href="http://nikkki.net" target="blank">
+			nikkki.net
+			</a>
+		</div>
+		<script type="text/javascript">
+			function webgl_support() { 
+			   try{
+			    var canvas = document.createElement( 'canvas' ); 
+			    return !! window.WebGLRenderingContext && ( 
+			         canvas.getContext( 'webgl' ) || canvas.getContext( 'experimental-webgl' ) );
+			   }catch( e ) { return false; } 
+			};
+			if (! webgl_support()) {
+				document.body.innerHTML = '<div class="warning">Unfortunately, WebGL is not enabled by your browser. <br>Read more: <a href="https://get.webgl.org/" target="_blank">https://get.webgl.org/</a><br><br>Get Infinite Zoom for Android on <a href="https://play.google.com/store/apps/details?id=net.nikkki.infinitezoom" target="_blank">Google Play</a></div>';
+			}
+	    </script>
+		<script src="three.min.js"></script>
+		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+		<script src="zoom.js?v3"></script>
+
+
+	</body>
+</html>

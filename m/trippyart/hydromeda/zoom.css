@@ -1,0 +1,405 @@
+
+/*	@import url(https://fonts.googleapis.com/css?family=Open+Sans:400); */
+body {
+  background: #fff;
+  background: #930af3;
+  margin: 0;
+  padding: 0;
+  font: 400 9pt/1.6 'Open Sans', Helvetica, Arial, sans-serif;
+  color: #ff9cee;
+}
+h1 {
+  color: #ff9cee;
+  font: 400 25pt/1.6 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  margin: 0 -4px 0;
+  padding: 10px 15px 0;
+}
+p {
+  padding: 0 1em;
+  margin: 8px 0;
+}
+h4 {
+  margin: 3em 0 3.7em;
+}
+em {
+  color: #ff9cee;
+}
+.apptext {
+  color: #eee;
+}
+video {
+  max-width: 100%;
+  margin: 8px 0 0;
+}
+.playbadge {
+  margin: 1em 0 0;
+  width: 100%;
+}
+.hydromedalogo {
+  width: 100%;
+  margin-top: 1em;
+}
+.patron {
+  width: 170px;
+  margin: 1.6em 0;
+}
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.selectable,
+.selectable * {
+  -webkit-touch-callout: default;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+a {
+  color: #0f0;
+  text-decoration: none;
+}
+a:hover {
+  color: #ff0;
+}
+#nav {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  pointer-events: none;
+}
+#nav > * {
+  pointer-events: auto;
+}
+a.insta:before {
+  opacity: 0.9;
+  content: '';
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  background: no-repeat center bottom/100% auto url("uiimg/insta.png");
+}
+a.insta:hover:before {
+  opacity: 0.6;
+}
+.loading #nav,
+.navfade:not(.creditsvisible) #nav {
+  display: none;
+}
+.navfade:not(.creditsvisible) * {
+  cursor: none;
+}
+#loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 10;
+}
+#zc {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000;
+  z-index: 5;
+  opacity: 0;
+}
+#status {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  width: 200px;
+  height: 18px;
+  margin-top: -10px;
+  margin-left: -100px;
+  z-index: 100;
+  text-align: right;
+  border: 2px solid #ff9cee;
+  border-radius: 3px;
+  overflow: hidden;
+  display: none;
+}
+.loading #status {
+  display: block;
+}
+#logo {
+  position: absolute;
+  width: 500px;
+  left: 50%;
+  bottom: 45%;
+  margin-left: -250px;
+  z-index: 100;
+}
+#loadbar {
+  position: relative;
+  height: 18px;
+  width: 0%;
+  background: #ff9cee;
+}
+.seekbar {
+  position: fixed;
+  height: 32px;
+  z-index: 10;
+  left: 15px;
+  right: 15px;
+  bottom: 0;
+  cursor: pointer;
+}
+.campaign {
+  text-align: center;
+  font-size: 90%;
+}
+.campaign a {
+  color: rgba(255,255,255,0.9);
+}
+.campaign a:hover {
+  text-decoration: underline;
+}
+.seekbar-visible {
+  position: absolute;
+  background: rgba(255,255,255,0.2);
+  height: 4px;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+}
+.seekbar .marker {
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  background: #fff;
+  left: 0;
+  bottom: 0;
+  margin-left: -2px;
+}
+#preview {
+  position: fixed;
+  background: #000;
+  z-index: 11;
+  bottom: 40px;
+  left: 10px;
+  display: none;
+  pointer-events: none;
+}
+.dragging .button,
+.dragging .seekbar,
+.dragging .icon {
+  pointer-events: none;
+}
+.dragging * {
+  cursor: grabbing !important;
+  cursor: -moz-grabbing !important;
+  cursor: -webkit-grabbing !important;
+}
+.buttons {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  bottom: 64px;
+}
+#fullscreen {
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  cursor: pointer;
+}
+#fullscreen:before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  opacity: 0.6;
+  width: 36px;
+  height: 36px;
+  background-size: 36px 36px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-image: url("uiimg/full.png");
+}
+#fullscreen:hover {
+  color: #fff;
+}
+#fullscreen:hover:before {
+  opacity: 1;
+}
+#speedcontrol {
+  width: 218px;
+  height: 50px;
+  margin: 0 1em 0 1.3em;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+#speedcontrol img {
+  display: block;
+  position: absolute;
+  width: 200px;
+  left: 9px;
+  bottom: 0;
+  opacity: 0.25;
+  pointer-events: none;
+}
+#speedcontrol .handle {
+  pointer-events: none;
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  height: 56px;
+  width: 2px;
+  margin-left: -1px;
+  margin-bottom: 0;
+  opacity: 0.5;
+  background: #fff;
+}
+.dragging #speedcontrol .handle {
+  opacity: 0.75;
+}
+.icon.active {
+  opacity: 1;
+}
+.button {
+  color: #fff;
+  opacity: 0.4;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.button.active {
+  opacity: 1;
+}
+.textbutton.fx {
+  padding: 0 5px;
+  opacity: 1;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+}
+.textbutton.fx.active {
+  color: #fff;
+  background: #ff9cee;
+  border-radius: 2px;
+}
+.greyfx a,
+.greyfx .textbutton.fx {
+  color: #fff;
+}
+.settings {
+  margin: 0 0 1em;
+  display: block;
+}
+#credits {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  max-width: 90vw;
+  display: block;
+  z-index: 100;
+  opacity: 1;
+  background: rgba(53,56,219,0.8);
+  transition: margin-left 0.5s, opacity 0.5s;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+}
+#credits::-webkit-scrollbar {
+  width: 2px;
+}
+#credits::-webkit-scrollbar-track {
+  box-shadow: none;
+  background: transparent;
+}
+#credits::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.5);
+  box-shadow: none;
+  outline: none;
+}
+#credits {
+  -ms-overflow-style: none;
+}
+.uihidden #credits {
+  opacity: 0;
+  margin-left: -300px;
+}
+.creditsinner {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.creditsinner .upper {
+  flex-grow: 1;
+}
+.creditsvisible .credits {
+  display: flex;
+}
+.banners {
+  font-size: 0;
+}
+.banners a {
+  display: inline-block;
+  width: 33%;
+  margin-bottom: 0.4em;
+  font-size: 11pt;
+  font-weight: bold;
+  font-style: italic;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.banners a img {
+  width: 95%;
+}
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.6;
+  background: url("./uiimg/close.png") no-repeat center/100%;
+  display: none;
+}
+@media (max-width: 800px) {
+  .keyboard {
+    display: none;
+  }
+  .buttons {
+    display: flex;
+    flex-flow: column;
+  }
+  .buttons1 {
+    order: 3;
+    display: block;
+    text-align: center;
+  }
+  .buttons1 {
+    margin-top: 1em;
+  }
+  #info {
+    padding: 0.2em;
+  }
+  .settings {
+    order: 2;
+    margin-bottom: 1em;
+    display: block;
+  }
+  .settings .button:first-child {
+    margin-left: 0;
+  }
+}

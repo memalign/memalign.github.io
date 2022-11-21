@@ -1,0 +1,163 @@
+body {
+	font:normal 16pt/1.4 sans-serif;
+	padding:0;
+	margin:0;
+	background:white;
+	color: black;
+}
+*{
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media only screen and (-moz-min-device-pixel-ratio: 2), 
+		only screen and (-o-min-device-pixel-ratio: 2/1), 
+		only screen and (-webkit-min-device-pixel-ratio: 2), 
+		only screen and (min-device-pixel-ratio: 2) {
+	*{
+		/*font-size: 36pt;*/
+	}
+}
+
+a, span {
+	display: inline-block;
+	color: black;
+	text-decoration: none;
+}
+a {
+	margin-top: .8em;
+}
+span {
+	padding-right: .45em;
+	cursor: pointer;
+}
+
+#color, #grey {
+	display: none;
+}
+
+a:hover,
+span:hover,
+span.current {
+	color: white;
+}
+canvas {
+	z-index: 0;
+	margin: 0;
+	padding: 0; 
+	position: fixed;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+
+}
+#nav {
+	z-index: 1;
+	margin: 0;
+	padding:2em 1.5em; 
+	position: absolute;
+	bottom:0;
+	pointer-events: none;
+}
+#nav * {
+	pointer-events: auto;
+}
+
+.navhidden, .navhidden * {
+	cursor: none;
+}
+.navhidden #nav {
+	display: none;
+}
+#fullscreentoggle {
+	position: relative;
+	width: 1em;
+	height: 1em;
+	margin-bottom: .8em;
+	cursor: pointer;
+}
+.c1, .c2, .c3, .c4	{
+	position: absolute;
+	width: 33.33%;
+	height: 33.33%;
+}
+.c1 {
+	border-left: 2px solid black;
+	border-top: 2px solid black;	
+}
+.c2 {
+	right: 0;
+	border-right: 2px solid black;
+	border-top: 2px solid black;	
+}
+.c3 {
+	right: 0;
+	bottom: 0;
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;	
+}
+.c4 {
+	left: 0;
+	bottom: 0;
+	border-left: 2px solid black;
+	border-bottom: 2px solid black;	
+}
+#fullscreentoggle:hover .c1 {
+	border-left: 2px solid white;
+	border-top: 2px solid white;	
+}
+#fullscreentoggle:hover .c2 {
+	right: 0;
+	border-right: 2px solid white;
+	border-top: 2px solid white;	
+}
+#fullscreentoggle:hover .c3 {
+	right: 0;
+	bottom: 0;
+	border-right: 2px solid white;
+	border-bottom: 2px solid white;	
+}
+#fullscreentoggle:hover .c4 {
+	left: 0;
+	bottom: 0;
+	border-left: 2px solid white;
+	border-bottom: 2px solid white;	
+}
+
+
+
+
+.play {
+	background: rgba(0,0,0,.45);
+	display: inline-block;
+	border-radius: 10px;
+	margin: 15px 0 20px -18px;
+	padding: 10px 16px;
+	transition: color linear 0.2s, border linear 0.2s, background linear 0.1s;
+}
+.play:hover {
+	background: black;
+	color: white;
+}
+.warning {
+	font-size: 12pt;
+	margin:20px;
+}
+.warning a {
+	text-decoration: underline;
+}
+
+
+
+
+#fullscreentoggle,
+#worldbuttons {
+	display: none
+}
