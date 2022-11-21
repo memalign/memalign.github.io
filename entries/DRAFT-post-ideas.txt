@@ -17,22 +17,13 @@
 
 - 101 Zen Stories, put in a maze like memalign dungeon: https://nkanaev.com/zen101/en/
 
+- Sporcle: 151 Pokemon
+
 - Make memes, mock up UI in Keynote
 
 - Make font in js: https://brutalita.com/
 
 - Similar Songs Jukebox: use Spotify, Apple Music, or YouTube to play similar songs back-to-back
-
-- Generated art
-  - https://github.com/google/deepdream/blob/master/dream.ipynb
-  - https://twitter.com/sportsracer48?s=20&t=O1ABZqjOT03HXA5InI9HOQ
-  - https://github.com/sportsracer48/pytti
-  - This is human-made but has a similar feel: https://zoomquilt.org/
-  - https://jxmo.notion.site/The-Weird-and-Wonderful-World-of-AI-Art-b9615a2e7278435b98380ff81ae1cf09
-    - HN post about this: https://news.ycombinator.com/item?id=31121890
-  - https://rybakov.com/project/metamorphosis/
-  - https://creator.nightcafe.studio/my-creations
-  
   
 - More PICO-8 games
   - Holiday Jumper by zep: https://www.lexaloffle.com/bbs/?tid=45856
@@ -79,124 +70,157 @@
 
 - How many unique Gregorian calendars are there? Seems to repeat every 28 years
 
-- Interesting code snippets:
-  - Seedable random number generator: https://github.com/phoboslab/underrun/blob/master/source/random.js
-[Code]
-var rand_high, rand_low;
-
-function random_int(min, max) {
-	rand_high = ((rand_high << 16) + (rand_high >> 16) + rand_low) & 0xffffffff;
-	rand_low = (rand_low + rand_high) & 0xffffffff;
-	var n = (rand_high >>> 0) / 0xffffffff;
-	return (min + n * (max-min+1))|0;
-}
-
-function random_seed(seed) {
-	rand_high = seed || 0xBADC0FFE;
-	rand_low = seed ^ 0x49616E42;
-}
-[/Code]
-  - My Runloop.js
-[Code]
-class MARunloopEvent {
-  // Properties:
-  // - fnToRun (function)
-  // - secondsToWait (float, seconds to wait (can be fractional) before executing fnToRun)
-  constructor(fnToRun, secondsToWait) {
-    this.fnToRun = fnToRun
-    this.secondsToWait = secondsToWait
-  }
-}
-
-class MARunloop {
-  // Properties:
-  // - scheduledEvents (array of MARunloopEvent instances)
-  constructor() {
-    this.scheduledEvents = []
-    this.runloopTimerScheduledTimeMillis = null
-  }
-
-  runFunctionAfterDelay(fnToRun, delayInSeconds) {
-    // The events already in the queue have a delayInSeconds value for time that has already elapsed since the runloop timer was scheduled
-    // When the timer fires, we will subtract the number of seconds that elapsed since it was scheduled
-    // To wait the full intended delayInSeconds, we need to artificially add the time that already elapsed before this event is being enqueued.
-    if (this.runloopTimerScheduledTimeMillis) {
-      let now = Date.now()
-      let delta = now - this.runloopTimerScheduledTimeMillis
-      if (delta > 0) {
-        // To have the same time basis as the other events in the queue
-        // backdate our delayInSeconds based on the timer that's already scheduled
-        delayInSeconds += delta/1000
-      }
-    }
-    let rEvent = new MARunloopEvent(fnToRun, delayInSeconds)
-    this.scheduledEvents.push(rEvent)
-    this.scheduleRunloopTimerIfNecessary()
-  }
-
-  runloopTimerFired() {
-    let eventsToRun = []
-    if (this.runloopTimerScheduledTimeMillis) {
-
-      let now = Date.now()
-      let delta = now - this.runloopTimerScheduledTimeMillis
-      if (delta > 0) {
-        for (let rEvent of this.scheduledEvents) {
-          rEvent.secondsToWait -= delta/1000
-        }
-
-        // Sort from smallest to largest seconds to wait (so most negative will be first)
-        eventsToRun = this.scheduledEvents.filter(x => x.secondsToWait <= 0).sort((a, b) => a.secondsToWait - b.secondsToWait)
-
-        this.scheduledEvents = this.scheduledEvents.filter(x => x.secondsToWait > 0)
-      }
-
-      this.runloopTimerScheduledTimeMillis = null
-    }
-
-    this.scheduleRunloopTimerIfNecessary()
-
-    for (let rEvent of eventsToRun) {
-      rEvent.fnToRun()
-    }
-  }
-
-  scheduleRunloopTimerIfNecessary() {
-    if (this.scheduledEvents.length <= 0) {
-      return
-    }
-    // Pick the smallest secondsToWait and then schedule a timer
-    // Before scheduling a new timer, I could be more clever about checking whether the timer that's already scheduled will fire soon enough for the ripest event but I figure that extra efficiency isn't worth the risk of a subtle bug
-    let smallestSecondsToWait = this.scheduledEvents[0].secondsToWait
-    for (let rEvent of this.scheduledEvents) {
-      if (rEvent.secondsToWait < smallestSecondsToWait) {
-        smallestSecondsToWait = rEvent.secondsToWait
-      }
-    }
-
-    if (this.runloopTimerScheduledTimeMillis) {
-      let now = Date.now()
-      let deltaMillis = now - this.runloopTimerScheduledTimeMillis
-      if (deltaMillis > 0) {
-        smallestSecondsToWait = Math.max(0.001, smallestSecondsToWait-deltaMillis)
-      }
-    }
-
-    // The secondsToWait are based on when the timer was originally scheduled
-    // Keep the same time basis if a timer was already scheduled
-    if (!this.runloopTimerScheduledTimeMillis) {
-      this.runloopTimerScheduledTimeMillis = Date.now()
-    }
-
-    let rl = this
-    setTimeout(function() {
-      rl.runloopTimerFired()
-    }, smallestSecondsToWait*1000)
-  }
-}
-[/Code]
+- Interesting code snippets (DRAFT-code-snippets.txt)
 
 - Similar to interesting code snippets: these effects such as dissolving comet-like tail: https://twitter.com/blinry/status/1467112486952443907?s=20
+
+
+- Trippy Mandelbrot
+[Code]
+      - I'm playing with making an infinitely zooming mandelbrot animation based on https://oneshader.net/shader/6a54c2c771
+      ===
+#version 300 es
+#define pi 3.1415926
+precision highp float;
+
+uniform float iTime;
+uniform vec2  iResolution;
+
+out vec4 fragColor;
+
+vec2 vpow2(vec2 v){
+    return vec2(v.x * v.x - v.y * v.y, 2. * v.x * v.y);
+}
+
+vec2 rv(vec2 v, float r){
+    float a = atan(v.y, v.x);
+    //a += r;
+    return vec2(cos(a), sin(a)) * length(v);
+}
+
+float itr(vec2 c, vec2 z){
+    int i = 0;
+    
+    while(length(z) < 8192. && i < 512){
+        z = vpow2(z) + c;
+        i++;
+    }
+    
+    return float(i) + 1. - log(log(length(z))) / log(2.);
+}
+
+vec3 fcol(float it){
+    if(it < 512.){
+        return vec3(.1 + .1 * sin(it / 32.), .1 + .5 * sin(it / 48.), .1 + .9 * sin(it / 64.));
+    }
+    else{
+        return vec3(0., 0., 0.);
+    }
+}
+
+void main() {
+    // Screen coordinate (from [-aspect, -1] to [aspect, 1])
+    vec2 q   = (2. * gl_FragCoord.xy - iResolution) / iResolution.y;
+    
+    float mzoom = 1.e5;
+    float ztime = log(mzoom) / log(2.);
+    float zoom = pow(2., mod(iTime, ztime));
+    float zphase = mod(iTime / ztime, 1.);
+    float r = (4. * pi - 4.04) * zphase;
+    
+    vec2 fractalCoord = vec2(-0.13791936640142570099292214925261, -0.88460568100304538057472153704150);
+    vec2 c = rv(q * (mzoom / 1.e5) / zoom, r) + fractalCoord;
+    vec2 c2 = rv(q * mzoom / zoom, r + 4.04) + fractalCoord;
+    vec2 z = vec2(0., 0.);
+    
+    float it = itr(c, z);
+    float it2 = itr(c2, z);
+    
+    // Pixel color
+    vec3 col;
+    vec3 col2;
+    float w = pow(zphase, 0.9);
+    col = fcol(it) * (1. - w) * clamp(1. - .2 * it2, 0., 1.);
+    col += fcol(it2) * w;
+    
+    // Output
+    fragColor = vec4(col, 1.);
+}
+      ===
+
+I took the color calculation from viz-intelligence's mandelbrot and got something extremely trippy:
+===
+#version 300 es
+#define pi 3.1415926
+precision highp float;
+
+uniform float iTime;
+uniform vec2  iResolution;
+
+out vec4 fragColor;
+
+vec2 vpow2(vec2 v){
+    return vec2(v.x * v.x - v.y * v.y, 2. * v.x * v.y);
+}
+
+vec2 rv(vec2 v, float r){
+    float a = atan(v.y, v.x);
+    //a += r;
+    return vec2(cos(a), sin(a)) * length(v);
+}
+
+float itr(vec2 c, vec2 z){
+    int i = 0;
+    
+    while(length(z) < 8192. && i < 512){
+        z = vpow2(z) + c;
+        i++;
+    }
+    
+    return float(i) + 1. - log(log(length(z))) / log(2.);
+}
+
+vec3 fcol(float it){
+    if(it < 512.){
+        //return vec3(.1 + .1 * sin(it / 32.), .1 + .5 * sin(it / 48.), .1 + .9 * sin(it / 64.));
+        return vec3(0.5-cos(it*12.0)/1.0,0.5-cos(it*13.0)/2.0,0.5-cos(it*23.0)/2.0);
+    }
+    else{
+        return vec3(0., 0., 0.);
+    }
+}
+
+void main() {
+    // Screen coordinate (from [-aspect, -1] to [aspect, 1])
+    vec2 q   = (2. * gl_FragCoord.xy - iResolution) / iResolution.y;
+    
+    float mzoom = 1.e5;
+    float ztime = log(mzoom) / log(2.);
+    float zoom = pow(2., mod(iTime, ztime));
+    float zphase = mod(iTime / ztime, 1.);
+    float r = (4. * pi - 4.04) * zphase;
+    
+    vec2 fractalCoord = vec2(-0.13791936640142570099292214925261, -0.88460568100304538057472153704150);
+    vec2 c = rv(q * (mzoom / 1.e5) / zoom, r) + fractalCoord;
+    vec2 c2 = rv(q * mzoom / zoom, r + 4.04) + fractalCoord;
+    vec2 z = vec2(0., 0.);
+    
+    float it = itr(c, z);
+    float it2 = itr(c2, z);
+    
+    // Pixel color
+    vec3 col;
+    vec3 col2;
+    float w = pow(zphase, 0.9);
+    col = fcol(it) * (1. - w) * clamp(1. - .2 * it2, 0., 1.);
+    col += fcol(it2) * w;
+    
+    // Output
+    fragColor = vec4(col, 1.);
+}
+===
+[/Code]
+
 
 
 - List of tools for making IF:

@@ -1,0 +1,101 @@
+Title: Trippy Art
+Date: 11/20/2022
+Tags: Art
+[Image:/m/trippyart/doorway.png]
+
+Here's a collection of trippy art from various corners of the internet. Some is generated with the help of neural networks. Some is human-made.
+
+[ContinueReadingWithURLTitle:View the collection]
+
+[SectionTitle:AI-Generated Animations]
+This technique may have started with [Link:http://ai.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html]Deep Dream[/Link] from Google ([Link:https://github.com/google/deepdream]code[/Link]).
+
+The gist of this technique: a neural network that's trained on images can be used to generate images. Iteratively generate images that are related to each other to create animations.
+<!-- Videos downloaded using: https://twittervideodownloader.com/ -->
+I'm taking artistic license in titling some of these examples. Many of these were generated using [Link:https://github.com/sportsracer48/pytti]pytti[/Link] by [Link:https://twitter.com/sportsracer48]@sportsracer48[/Link]. Some of the artists added music which you can hear in their tweets or if you view these mp4 files directly.
+
+[ParagraphTitle:[Link:https://twitter.com/tsinrong/status/1492541722290573319]Lunar Tiger[/Link]] by [Link:https://twitter.com/tsinrong]@tsinrong[/Link]
+
+[Image:/m/trippyart/1.mp4]
+
+[ParagraphTitle:[Link:https://twitter.com/NerdyRodent/status/1491202031574740993]Eyes Go Funny[/Link]] by [Link:https://twitter.com/NerdyRodent]@NerdyRodent[/Link]
+
+[Image:/m/trippyart/2.mp4]
+
+[ParagraphTitle:[Link:https://twitter.com/tom_furse/status/1487768878725926913]Aztec Ruins[/Link]] by [Link:https://twitter.com/tom_furse]@tom_furse[/Link]
+
+[Image:/m/trippyart/3.mp4]
+
+[ParagraphTitle:[Link:https://twitter.com/ArcadeKodiak/status/1486696479209275392]New Growth Rotation[/Link]] by [Link:https://twitter.com/ArcadeKodiak]@ArcadeKodiak[/Link]
+
+[Image:/m/trippyart/4.mp4]
+
+[ParagraphTitle:[Link:https://twitter.com/MagIntArt/status/1484312176034979840]Bush[/Link]] by [Link:https://twitter.com/MagIntArt]@MagIntArt[/Link]
+
+[Image:/m/trippyart/5.mp4]
+
+[ParagraphTitle:[Link:https://twitter.com/AustiinArt/status/1483581027813523459]mornings I used to remember[/Link]] by [Link:https://twitter.com/AustiinArt]@AustiinArt[/Link]
+
+[Image:/m/trippyart/6.mp4]
+
+[ParagraphTitle:[Link:https://twitter.com/Somnai_dreams/status/1483184881484333061]The Prismatic Desert[/Link]] by [Link:https://twitter.com/Somnai_dreams]@Somnai_dreams[/Link]
+
+[Image:/m/trippyart/7.mp4]
+
+[ParagraphTitle:[Link:https://rybakov.com/project/metamorphosis/]Dreams of Ecology[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
+
+[Image:/m/trippyart/ecology1.mp4]
+[Image:/m/trippyart/ecology2.mp4]
+[Image:/m/trippyart/ecology3.mp4]
+
+[ParagraphTitle:[Link:https://rybakov.com/blog/signac/]A Village For Paul Signac[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
+
+[Image:/m/trippyart/signac.mp4]
+
+[ParagraphTitle:[Link:https://rybakov.com/blog/matisse/]Henri Matisse's Home[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
+
+[Image:/m/trippyart/matisse.mp4]
+
+[ParagraphTitle:[Link:https://rybakov.com/blog/chagall/]Marc Chagall's Home[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
+
+[Image:/m/trippyart/chagall.mp4]
+
+[ParagraphTitle:[Link:https://rybakov.com/blog/octopustree/]Octopus Hugging a Tree[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
+
+[Image:/m/trippyart/octopus.mp4]
+
+[SectionTitle:Zooming Art]
+The art in this section is generally human-made without the use of neural networks. I'm only showing a still image for each entry here -- you need to visit each one to see its mesmerizing effect. I love that these perfectly loop back to the beginning.
+
+[ParagraphTitle:[Link:https://zoomquilt.org]Zoomquilt[/Link]] by [Link:https://twitter.com/nikbaumg]Nikolaus Baumgarten[/Link] ([Link:/m/trippyart/zoomquilt/index.html]backup[/Link])
+
+[Link:https://zoomquilt.org][Image:/m/trippyart/zoomquilt/img/zoomquilt.jpg][/Link]
+
+[ParagraphTitle:[Link:https://zoomquilt2.com]Zoomquilt 2[/Link]] by [Link:https://twitter.com/nikbaumg]Nikolaus Baumgarten[/Link] ([Link:/m/trippyart/zoomquilt2/index.html]backup[/Link])
+
+[Link:https://zoomquilt2.com][Image:/m/trippyart/zoomquilt2/images/z_3.jpg][/Link]
+
+[ParagraphTitle:[Link:https://arkadia.xyz]Arkadia[/Link]] by [Link:https://twitter.com/nikbaumg]Nikolaus Baumgarten[/Link] and [Link:https://sophiaschomberg.de]Sophia Schomberg[/Link] ([Link:/m/trippyart/arkadia/index.html]backup[/Link])
+
+[Link:https://arkadia.xyz][Image:/m/trippyart/arkadia/arkadia.jpg][/Link]
+
+[ParagraphTitle:[Link:http://hydromeda.org]Hydromeda[/Link]] by [Link:https://sophiaschomberg.de]Sophia Schomberg[/Link] ([Link:/m/trippyart/hydromeda/index.html]backup[/Link])
+
+[Link:http://hydromeda.org][Image:/m/trippyart/hydromeda/web/hydro20.jpg][/Link]
+
+[ParagraphTitle:[Link:https://infinitezoom.net]Infinite Zoom[/Link]] by [Link:https://twitter.com/nikbaumg]Nikolaus Baumgarten[/Link] ([Link:/m/trippyart/infinitezoom/index.html]backup[/Link])
+
+[Link:https://infinitezoom.net][Image:/m/trippyart/infinitezoom/infinitezoom.png][/Link]
+
+[ParagraphTitle:[Link:https://viz.intelligence.rocks/#mandelbrot]Zooming Mandelbrot[/Link]] by [Link:https://jason.today]Jason McGhee[/Link] ([Link:/m/trippyart/viz-studio/index.html]backup[/Link])
+
+[Link:https://viz.intelligence.rocks/#mandelbrot][Image:/m/trippyart/viz-studio/mandelbrot.png][/Link]
+
+[SectionTitle:See Also]
+Some links to explore and learn more:
+
+- [Link:https://www.youtube.com/watch?v=ornXZGEFcds]Rick and Morty Exquisite Corpse[/Link]
+- [Link:https://rybakov.com/project/im_sitting_in_ai/]Trippy artifacts created by AI scaling[/Link]
+- [Link:https://jxmo.notion.site/The-Weird-and-Wonderful-World-of-AI-Art-b9615a2e7278435b98380ff81ae1cf09]The Weird and Wonderful World of AI Art[/Link] ([Link:https://news.ycombinator.com/item?id=31121890]discussion[/Link])
+- [Link:https://moultano.wordpress.com/2021/08/23/doorways/]Ryan Moulton's Doorways[/Link] (Source of the image at the top of this post)
+- The books Zoom & Re-Zoom by István Bányai

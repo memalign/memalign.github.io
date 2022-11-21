@@ -1,0 +1,234 @@
+- Interesting code snippets:
+  - Seedable random number generator: https://github.com/phoboslab/underrun/blob/master/source/random.js
+[Code]
+var rand_high, rand_low;
+
+function random_int(min, max) {
+	rand_high = ((rand_high << 16) + (rand_high >> 16) + rand_low) & 0xffffffff;
+	rand_low = (rand_low + rand_high) & 0xffffffff;
+	var n = (rand_high >>> 0) / 0xffffffff;
+	return (min + n * (max-min+1))|0;
+}
+
+function random_seed(seed) {
+	rand_high = seed || 0xBADC0FFE;
+	rand_low = seed ^ 0x49616E42;
+}
+[/Code]
+  - My Runloop.js
+[Code]
+class MARunloopEvent {
+  // Properties:
+  // - fnToRun (function)
+  // - secondsToWait (float, seconds to wait (can be fractional) before executing fnToRun)
+  constructor(fnToRun, secondsToWait) {
+    this.fnToRun = fnToRun
+    this.secondsToWait = secondsToWait
+  }
+}
+
+class MARunloop {
+  // Properties:
+  // - scheduledEvents (array of MARunloopEvent instances)
+  constructor() {
+    this.scheduledEvents = []
+    this.runloopTimerScheduledTimeMillis = null
+  }
+
+  runFunctionAfterDelay(fnToRun, delayInSeconds) {
+    // The events already in the queue have a delayInSeconds value for time that has already elapsed since the runloop timer was scheduled
+    // When the timer fires, we will subtract the number of seconds that elapsed since it was scheduled
+    // To wait the full intended delayInSeconds, we need to artificially add the time that already elapsed before this event is being enqueued.
+    if (this.runloopTimerScheduledTimeMillis) {
+      let now = Date.now()
+      let delta = now - this.runloopTimerScheduledTimeMillis
+      if (delta > 0) {
+        // To have the same time basis as the other events in the queue
+        // backdate our delayInSeconds based on the timer that's already scheduled
+        delayInSeconds += delta/1000
+      }
+    }
+    let rEvent = new MARunloopEvent(fnToRun, delayInSeconds)
+    this.scheduledEvents.push(rEvent)
+    this.scheduleRunloopTimerIfNecessary()
+  }
+
+  runloopTimerFired() {
+    let eventsToRun = []
+    if (this.runloopTimerScheduledTimeMillis) {
+
+      let now = Date.now()
+      let delta = now - this.runloopTimerScheduledTimeMillis
+      if (delta > 0) {
+        for (let rEvent of this.scheduledEvents) {
+          rEvent.secondsToWait -= delta/1000
+        }
+
+        // Sort from smallest to largest seconds to wait (so most negative will be first)
+        eventsToRun = this.scheduledEvents.filter(x => x.secondsToWait <= 0).sort((a, b) => a.secondsToWait - b.secondsToWait)
+
+        this.scheduledEvents = this.scheduledEvents.filter(x => x.secondsToWait > 0)
+      }
+
+      this.runloopTimerScheduledTimeMillis = null
+    }
+
+    this.scheduleRunloopTimerIfNecessary()
+
+    for (let rEvent of eventsToRun) {
+      rEvent.fnToRun()
+    }
+  }
+
+  scheduleRunloopTimerIfNecessary() {
+    if (this.scheduledEvents.length <= 0) {
+      return
+    }
+    // Pick the smallest secondsToWait and then schedule a timer
+    // Before scheduling a new timer, I could be more clever about checking whether the timer that's already scheduled will fire soon enough for the ripest event but I figure that extra efficiency isn't worth the risk of a subtle bug
+    let smallestSecondsToWait = this.scheduledEvents[0].secondsToWait
+    for (let rEvent of this.scheduledEvents) {
+      if (rEvent.secondsToWait < smallestSecondsToWait) {
+        smallestSecondsToWait = rEvent.secondsToWait
+      }
+    }
+
+    if (this.runloopTimerScheduledTimeMillis) {
+      let now = Date.now()
+      let deltaMillis = now - this.runloopTimerScheduledTimeMillis
+      if (deltaMillis > 0) {
+        smallestSecondsToWait = Math.max(0.001, smallestSecondsToWait-deltaMillis)
+      }
+    }
+
+    // The secondsToWait are based on when the timer was originally scheduled
+    // Keep the same time basis if a timer was already scheduled
+    if (!this.runloopTimerScheduledTimeMillis) {
+      this.runloopTimerScheduledTimeMillis = Date.now()
+    }
+
+    let rl = this
+    setTimeout(function() {
+      rl.runloopTimerFired()
+    }, smallestSecondsToWait*1000)
+  }
+}
+[/Code]
+
+
+
+https://gist.github.com/mikkun/6388508
+[Code]
+#!/usr/bin/perl -w
+
+use 5.005;
+use strict;
+
+BEGIN { unshift @INC, '.' }
+
+use HTTP::Daemon;
+use HTTP::Status;
+use IPC::Open2;
+
+sub SERVER_NAME ()   { 'localhost' }
+sub HTTP_PORT ()     { 8000        }
+sub PERL_DIR ()      { '/usr/bin'  }
+sub DOCUMENT_ROOT () { '.'         }
+
+*STDOUT->autoflush();
+
+my $daemon
+    = HTTP::Daemon->new( LocalAddr => SERVER_NAME, LocalPort => HTTP_PORT )
+      or die "Internal error: $!";
+
+print "Press Ctrl+C to send a quit signal.\n";
+
+$ENV{'PATH'} = PERL_DIR;
+delete @ENV{ qw( IFS CDPATH ENV BASH_ENV ) };
+
+while (my $client = $daemon->accept) {
+    $client->autoflush();
+
+    my $pid;
+
+    REQUEST:
+    while (my $request = $client->get_request) {
+        if ($request->method ne 'GET' && $request->method ne 'POST') {
+            $client->send_error(RC_NOT_IMPLEMENTED);
+            next REQUEST;
+        }
+        if ($request->url->path =~ m{ [./\\]{2} }xms) {
+            $client->send_error(RC_FORBIDDEN);
+            next REQUEST;
+        }
+
+        my $filename = $request->url->path =~ m{ / \Z }xms
+            ? DOCUMENT_ROOT . $request->url->path . 'index.html'
+            : DOCUMENT_ROOT . $request->url->path
+            ;
+        if (-d $filename) {
+            $filename .= '/index.html';
+        }
+
+        if ($filename =~ m{ [.] cgi \Z }ixms) {
+            my $content = $request->content;
+            my ($port, $ip_addr) = sockaddr_in(getpeername $client);
+
+            $ENV{'CONTENT_LENGTH' } = length $content;
+            $ENV{'CONTENT_TYPE'   } = $request->header('Content-Type');
+            $ENV{'HTTP_COOKIE'    } = $request->header('Cookie');
+            $ENV{'HTTP_REFERRER'  } = $request->header('Referer');
+            $ENV{'HTTP_USER_AGENT'} = $request->header('User-Agent');
+            $ENV{'QUERY_STRING'   } = $request->url->query;
+            $ENV{'REMOTE_ADDR'    } = inet_ntoa($ip_addr);
+            $ENV{'REMOTE_HOST'    } = gethostbyaddr $ip_addr, AF_INET;
+            $ENV{'REQUEST_METHOD' } = $request->method;
+
+            local *CGI_REQUEST;
+            local *CGI_RESPONSE;
+
+            $pid = open2(
+                       \*CGI_RESPONSE,
+                       \*CGI_REQUEST,
+                       'perl',
+                       '-T',
+                       '-w',
+                       $filename
+                   );
+
+            *CGI_REQUEST->autoflush();
+            *CGI_RESPONSE->autoflush();
+
+            binmode *CGI_REQUEST;
+            print {*CGI_REQUEST} $content;
+            *CGI_REQUEST->close;
+
+            binmode *CGI_RESPONSE;
+            my $response = do { local $/; <CGI_RESPONSE> };
+            *CGI_RESPONSE->close;
+
+            waitpid $pid, 0;
+            if ($?) {
+                $client->send_error(RC_INTERNAL_SERVER_ERROR);
+                next REQUEST;
+            }
+
+            $client->send_basic_header;
+            print {$client} $response;
+            $client->force_last_request;
+        }
+        else {
+            $client->send_file_response($filename);
+            $client->force_last_request;
+        }
+    }
+
+    $client->close;
+    undef $client;
+}
+
+exit 0;
+
+1;
+__END__
+[/Code]
