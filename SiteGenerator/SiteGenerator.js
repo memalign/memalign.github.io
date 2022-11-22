@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = true
+const UNIT_TEST = false
 
 
 // Utilities
@@ -1145,6 +1145,86 @@ More posts:<br />
   
     assertEqual(index.toHTML(), expectation)
   }
+  
+  test_Index_toHTML_oneEntryIncludesContinueReading() {
+    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3\nMy nice entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nNext line goes here.")
+    
+    let index = new Index([entry2, entry1, entry3])  
+    
+    index.entriesOnIndex = 2
+    
+    let expectation = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>memalign.github.io</title>
+<meta property="og:title" content="memalign.github.io" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/index.html" />
+<meta property="og:image" content="https://memalign.github.io/m/test3.jpg" />
+<meta property="og:description" content="text3 text3 My nice entry. Next line goes here. …" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<div id='feeds'>
+<a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
+</div><div id='header'><h1>memalign.github.io</h1></div>
+<div id='allposts'>
+<b>All posts:</b><br />
+<a href='p/some-title3.html'>This title3</a><br />
+<a href='p/some-title2.html'>This title2</a><br />
+<a href='p/some-title.html'>This title</a><br />
+</div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/some-title3.html'>This title3</a>
+</h2>
+</div>
+<img src="/m/test3.jpg">
+<div id='postdate'>Posted on 12/28/2019<br />
+Tags: <a href='/tags.html'>iTag</a>, <a href='/tags.html'>iTag2</a></div>
+text3 text3<br />
+My nice entry.<br />
+<br />
+<h4><a href="p/some-title3.html">Continue reading</a></h4>
+</div>
+
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/some-title2.html'>This title2</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 12/27/2019<br />
+Tags: <a href='/tags.html'>Tag2</a></div>
+text2 text2
+</div>
+
+<hr />
+More posts:<br />
+<a href='p/some-title.html'>This title</a><br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>
+`
+  
+    assertEqual(index.toHTML(), expectation)
+  }
 
   test_Index_toHTML_enoughPostsToListInColumns() {
     let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
@@ -1717,6 +1797,26 @@ More posts:<br />
     assertTrue(htmlBody.includes("<h3>Nice title</h3>"), "Has a h3 tag")
     assertTrue(!htmlBody.includes("[SectionTitle"), "Lacks SectionTitle")
     assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
+  }
+
+  test_Entry_htmlBody_ContinueReadingURL() {
+    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nNext line.")  
+    let htmlBody = entry.htmlBody()
+    
+    assertEqual(htmlBody, `<div id='post'>
+<div id='header'>
+<h1>
+This title
+</h1>
+</div>
+<div id='postdate'>Posted on 12/26/2019<br />
+Tags: <a href='/tags.html'>Tag1</a></div>
+test text<br />
+<br />
+<br />
+Next line.
+</div>
+`)
   }
 
   test_Entry_htmlBody_code_oneliner() {
