@@ -1627,22 +1627,22 @@ More posts:<br />
     assertTrue(caughtException, "requires four digit year")
   }
   
-  test_imageURL_noImages() {
+  test_Entry_imageURL_noImages() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\ntest text")  
     assertTrue(entry.imageURL() == null, "no imageURL")
   }
   
-  test_imageURL_oneImage() {
+  test_Entry_imageURL_oneImage() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     assertTrue(entry.imageURL() == "/m/test.jpg", "one imageURL")
   }
 
-  test_imageURL_twoImages() {
+  test_Entry_imageURL_twoImages() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2 space\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
     assertTrue(entry.imageURL() == "/m/test.jpg", "two imageURLs")
   }
 
-  test_htmlBody_imageRewriting() {
+  test_Entry_htmlBody_imageRewriting() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1651,7 +1651,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
   }
   
-  test_htmlBody_imageRewriting_mp4() {
+  test_Entry_htmlBody_imageRewriting_mp4() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.mp4]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1661,7 +1661,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
   }
 
-  test_htmlBody_linkRewriting() {
+  test_Entry_htmlBody_linkRewriting() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1670,7 +1670,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Link]"), "Lacks closing link brackets")
   }
 
-  test_htmlBody_linkRewriting_noInnerText() {
+  test_Entry_htmlBody_linkRewriting_noInnerText() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link]/m/test.jpg[/Link]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1679,7 +1679,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Link]"), "Lacks closing link brackets")
   }
 
-  test_htmlBody_linkRewriting_insideSectionTitle() {
+  test_Entry_htmlBody_linkRewriting_insideSectionTitle() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[SectionTitle:[Link:/m/test.jpg]here[/Link]]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1690,7 +1690,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
   }
 
-  test_htmlBody_linkRewriting_insideParagraphTitle() {
+  test_Entry_htmlBody_linkRewriting_insideParagraphTitle() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[ParagraphTitle:[Link:/m/test.jpg]here[/Link]]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1701,7 +1701,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
   }
   
-  test_htmlBody_ParagraphTitle() {
+  test_Entry_htmlBody_ParagraphTitle() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[ParagraphTitle:Nice title]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1710,7 +1710,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
   }
 
-  test_htmlBody_SectionTitle() {
+  test_Entry_htmlBody_SectionTitle() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[SectionTitle:Nice title]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1719,7 +1719,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("]"), "Lacks closing brackets")
   }
 
-  test_htmlBody_code_oneliner() {
+  test_Entry_htmlBody_code_oneliner() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some code[/Code]")
     let htmlBody = entry.htmlBody()
     
@@ -1728,7 +1728,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
   }
 
-  test_htmlBody_code_oneliner_withHTML() {
+  test_Entry_htmlBody_code_oneliner_withHTML() {
     // Right now HTML is only supported in multi-line code blocks
     // This unit test documents this limitation
     // When oneliner HTML support is added, this test needs to be modified
@@ -1743,7 +1743,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
   }
 
-  test_htmlBody_code_multiLine() {
+  test_Entry_htmlBody_code_multiLine() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line two\n[/Code]\nafter code")
     let htmlBody = entry.htmlBody()
     
@@ -1752,7 +1752,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
   }
 
-  test_htmlBody_code_multiLine_withHTML() {
+  test_Entry_htmlBody_code_multiLine_withHTML() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line <td> two\n[/Code]\nafter code")
     let htmlBody = entry.htmlBody()
     
@@ -1761,7 +1761,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Code]"), "Lacks closing code brackets")
   }
   
-  test_htmlBody_quote_oneliner() {
+  test_Entry_htmlBody_quote_oneliner() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Quote]some quote[/Quote]")
     let htmlBody = entry.htmlBody()
     
@@ -1770,7 +1770,7 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Quote]"), "Lacks closing quote brackets")
   }
 
-  test_htmlBody_quote_multiLine() {
+  test_Entry_htmlBody_quote_multiLine() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Quote]\nsome quote\n  line two\n[/Quote]\nafter quote")
     let htmlBody = entry.htmlBody()
     
@@ -1779,21 +1779,21 @@ More posts:<br />
     assertTrue(!htmlBody.includes("Quote]"), "Lacks closing quote brackets")
   }
 
-  test_htmlBody_title_withTitleURL() {
+  test_Entry_htmlBody_title_withTitleURL() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody("p/some-title.html")
     
     assertTrue(htmlBody.includes("<div id='header'>\n<h2>\n<a href='p/some-title.html'>This title</a>"), "Has title URL")
   }
 
-  test_htmlBody_title_withoutTitleURL() {
+  test_Entry_htmlBody_title_withoutTitleURL() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<div id='header'>\n<h1>\nThis title\n</h1>"), "Has h1 title")
   }
   
-  test_htmlBody_startsWithImage() {
+  test_Entry_htmlBody_startsWithImage() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1843,7 +1843,7 @@ test text
     assertTrue(toHTML == expectation, "toHTML matches expectation")
   }
 
-  test_htmlBody_startsWithText() {
+  test_Entry_htmlBody_startsWithText() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction, Programming\nTest text\n[Image:/m/test.jpg]\nmore text")  
     let htmlBody = entry.htmlBody()
     
@@ -1893,7 +1893,7 @@ more text
     assertTrue(toHTML == expectation, "toHTML equals expectation")
   }
   
-  test_toHTML_noImages() {
+  test_Entry_toHTML_noImages() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Test\ntest text")
     let entry2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Test\n\ntest text")
     
@@ -1920,7 +1920,7 @@ test text
     assertTrue(entry.toHTML().endsWith(expectation), "no-image entry has correct html")
   }
     
-  test_htmlBody_startsWithTwoImages() {
+  test_Entry_htmlBody_startsWithTwoImages() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Abc\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
@@ -1929,14 +1929,14 @@ test text
     assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
   }
   
-  test_htmlBody_indentation() {
+  test_Entry_htmlBody_indentation() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Image:/m/test.jpg]\ntest text\n one\n  two\n   three\n    - Four")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("test text<br />\n&nbsp;one<br />\n&nbsp;&nbsp;two<br />\n&nbsp;&nbsp;&nbsp;three<br />\n&nbsp;&nbsp;&nbsp;&nbsp;- Four"), "indentation")
   }
   
-  test_ogDescription() {
+  test_Entry_ogDescription() {
     let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: TestTag\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let entryWithLinebreak = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction\none two three four five six seven eight nine ten eleven twelve thirteen.\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
