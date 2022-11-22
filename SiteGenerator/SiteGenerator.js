@@ -1993,6 +1993,11 @@ test text
     
     let expectationParagraphTitle = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithParagraphTitle.ogDescription() == expectationParagraphTitle, "ogDescription paragraphtitle")
+
+    let entryWithContinueReadingURL = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\none two three four five six seven eight nine ten eleven twelve thirteen.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    
+    let expectationContinueReadingURL = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty…"
+    assertEqual(entryWithContinueReadingURL.ogDescription(), expectationContinueReadingURL)
   }
   
   test_Entry_ogImage() {
@@ -2134,12 +2139,13 @@ test text
     let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
     let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
     let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
+    let entry6 = new Entry("/path/0006-some-title6.txt", "Title: This title6\nDate: 11/22/2022\nTags: JSON\ntext6\nThis is my entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nThe next line.")
 
     
-    let index = new Index([entry2, entry1, entry3, entry4, entry5])
+    let index = new Index([entry2, entry1, entry3, entry4, entry5, entry6])
     
     let jsonFeed = new JSONFeed(index)
-    jsonFeed.entriesInFeed = 4
+    jsonFeed.entriesInFeed = 5
     
     let expectation = `{
    "version" : "https://jsonfeed.org/version/1",
@@ -2153,6 +2159,16 @@ test text
    "icon" : "https://memalign.github.io/apple-touch-icon.png",
    "favicon" : "https://memalign.github.io/favicon.ico",
    "items" : [
+    {
+         "title" : "This title6",
+         "date_published" : "2022-11-22T00:00:00-08:00",
+         "id" : "https://memalign.github.io/p/some-title6.html",
+         "url" : "https://memalign.github.io/p/some-title6.html",
+         "author" : {
+            "name" : "memalign"
+         },
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://memalign.github.io/p/some-title6.html'>This title6</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 11/22/2022<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext6<br />\\nThis is my entry.<br />\\n<br />\\n<h4><a href=\\"https://memalign.github.io/p/some-title6.html\\">Continue reading</a></h4>\\n</div>\\n"
+    },
     {
          "title" : "This title5",
          "date_published" : "2020-01-11T00:00:00-08:00",
@@ -2197,7 +2213,7 @@ test text
   ]
 }
 `
-    assertTrue(jsonFeed.toText() == expectation, "json expectation")
+    assertEqual(jsonFeed.toText(), expectation)
   }
 
 
@@ -2210,11 +2226,12 @@ test text
     let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
     let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
     let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
+    let entry6 = new Entry("/path/0006-some-title6.txt", "Title: This title6\nDate: 11/22/2022\nTags: JSON\ntext6\nThis is my entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nThe next line.")
     
-    let index = new Index([entry2, entry1, entry3, entry4, entry5])
+    let index = new Index([entry2, entry1, entry3, entry4, entry5, entry6])
     
     let atomFeed = new AtomFeed(index)
-    atomFeed.entriesInFeed = 4
+    atomFeed.entriesInFeed = 5
     
     let expectation = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -2223,10 +2240,40 @@ test text
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2020-01-11T00:00:00-08:00</updated>
-<rights>Copyright © 2020, memalign</rights>
+<updated>2022-11-22T00:00:00-08:00</updated>
+<rights>Copyright © 2022, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>This title6</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/some-title6.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/some-title6.html" />
+<id>https://memalign.github.io/p/some-title6.html</id>
+<published>2022-11-22T00:00:00-08:00</published>
+<updated>2022-11-22T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/some-title6.html'>This title6</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 11/22/2022<br />
+Tags: <a href='/tags.html'>JSON</a></div>
+text6<br />
+This is my entry.<br />
+<br />
+<h4><a href="https://memalign.github.io/p/some-title6.html">Continue reading</a></h4>
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>This title5</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/some-title5.html" />
@@ -2338,7 +2385,7 @@ text2 text2
 </feed><!-- THE END -->
 `
 
-    assertTrue(atomFeed.toText() == expectation, "atom expectation")
+    assertEqual(atomFeed.toText(), expectation)
   }
 
   

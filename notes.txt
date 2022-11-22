@@ -432,5 +432,7 @@ http://memalign.github.io/m/pceimage/index.html?w=0&s=1&t=.:#00000000%0A@:#00000
 11/20/22
 
 Need to unit test Continue Reading functionality
-- Gets stripped from ogDescription
-- URL is not a relative URL
+- Correctly shows up in Index page
+[x]- URL is not a relative URL in Index or Feed
+- Correctly omitted from Entry page
+[x]- Gets stripped from ogDescription
