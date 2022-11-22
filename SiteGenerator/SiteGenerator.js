@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -1108,6 +1108,7 @@ class UnitTests {
 <a href='p/some-title2.html'>This title2</a><br />
 <a href='p/some-title.html'>This title</a><br />
 </div>
+<hr />
 <div id='post'>
 <div id='header'>
 <h2>
@@ -1141,8 +1142,8 @@ More posts:<br />
 </body>
 </html>
 `
-
-    assertTrue(index.toHTML() == expectation, "index html")
+  
+    assertEqual(index.toHTML(), expectation)
   }
 
   test_Index_toHTML_enoughPostsToListInColumns() {
@@ -1214,6 +1215,7 @@ More posts:<br />
 </div>
 </div>
 </div>
+<hr />
 <div id='post'>
 <div id='header'>
 <h2>
@@ -1264,7 +1266,7 @@ More posts:<br />
     assertTrue(index.toHTML() == expectation, "index html")
   }
   
-  test_Index_toHTML_enoughPostsToListInColumns() {
+  test_Index_toHTML_enoughPostsToListInColumns_featured() {
     let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
     let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
     let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
@@ -1368,6 +1370,7 @@ Pac-Man Dungeon
 </div>
 </div>
 </div>
+<hr />
 <div id='post'>
 <div id='header'>
 <h2>
