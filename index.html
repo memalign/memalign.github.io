@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/trippyart/doorway.png" />
-<meta property="og:description" content="Here's a collection of trippy art from various corners of the internet. Some is generated with the help of neural networks. Some is human-made. AI-Generated Animations This technique may have…" />
+<meta property="og:image" content="https://memalign.github.io/m/food-sheet.png" />
+<meta property="og:description" content="With a toddler at home, we've come to rely on DoorDash as a quick way for the adults to eat tasty food. We're lucky to live in an area densely…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -71,6 +71,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/simplify-picking-restaurant.html'>Simplify Picking a Restaurant</a><br />
 <a href='p/trippy-art.html'>Trippy Art</a><br />
 <a href='p/taptoy.html'>Tap Toy</a><br />
 <a href='p/pceimage-editor.html'>PCEImage Editor</a><br />
@@ -86,8 +87,8 @@
 <a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
 <a href='p/day-and-night.html'>Day and Night</a><br />
 <a href='p/lights-off.html'>Lights Off</a><br />
-<a href='p/batman-curve.html'>Batman Curve</a><br />
 </div><div id='grid-entry'>
+<a href='p/batman-curve.html'>Batman Curve</a><br />
 <a href='p/formulagraph.html'>FormulaGraph</a><br />
 <a href='p/bouncing-ball.html'>Bouncing Ball</a><br />
 <a href='p/shape-catalog.html'>Catalog of Math Shapes</a><br />
@@ -103,8 +104,8 @@
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 <a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 <a href='p/coding-machines.html'>Coding Machines</a><br />
-<a href='p/clamps.html'>Clamps</a><br />
 </div><div id='grid-entry'>
+<a href='p/clamps.html'>Clamps</a><br />
 <a href='p/emoji-conway.html'>Emoji Simulator</a><br />
 <a href='p/universal-paperclips.html'>Universal Paperclips</a><br />
 <a href='p/rabbit-hole.html'>Fall Down the Rabbit Hole</a><br />
@@ -122,6 +123,42 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/simplify-picking-restaurant.html'>Simplify Picking a Restaurant</a>
+</h2>
+</div>
+<img src="/m/food-sheet.png">
+<div id='postdate'>Posted on 11/22/2022<br />
+Tags: <a href='/tags.html'>Food</a>, <a href='/tags.html'>Parenting</a>, <a href='/tags.html'>Tools</a></div>
+With a toddler at home, we've come to rely on DoorDash as a quick way for the adults to eat tasty food.<br />
+<br />
+We're lucky to live in an area densely packed with restaurants. Despite the wealth of options, we often struggle to choose when dinnertime arrives.<br />
+<br />
+My spouse and I will end up naming restaurants, taking turns rejecting options one-by-one. On some days, nothing sounds good. On some days, we're exhausted from a night of interrupted sleep and lack the energy to pick. Often both.<br />
+<br />
+I got the idea to make picking a restaurant more mechanical on the hard days.<br />
+<br />
+At first, I considered building a web app with a database and a nice UI for listing restaurants and saving our history. I spend most of my non-work hours taking care of the baby, exercising, or doing chores so even a simple side-project takes months and comes at the cost of precious sleep hours. I needed a lower-effort way to test the idea.<br />
+<br />
+I realized I could make this tool in a shared spreadsheet. I used Numbers on iPhone/iPad and shared the sheet with my spouse using iCloud. Google Sheets could've worked too. Spreadsheets are a great low-effort way to solve problems without writing code. I bet a lot of software engineers underutilize spreadsheets.<br />
+<br />
+Here's how it works:<br />
+- Add a row for every restaurant<br />
+- Have a column for the last time we ate there<br />
+- Have a column for each person with an estimate of how often they are willing to eat at each particular restaurant<br />
+- Have a column to note any restaurants someone is actively in the mood to eat at<br />
+- The sheet calculates a recommendation for each row:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Too soon: neither person is ready to eat there again<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Let's eat (green): both people are ready OR someone is in the mood<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Maybe eat (yellow): one person is ready<br />
+- At dinnertime, peruse the green and yellow rows to pick efficiently<br />
+<br />
+Grab my <a href="/m/Food-Example.numbers">example sheet</a> to create your own.
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -847,95 +884,8 @@ But no one was left to respond
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/lights-off.html'>Lights Off</a>
-</h2>
-</div>
-<img src="/m/lightsoff.jpg">
-<div id='postdate'>Posted on 8/14/2021<br />
-Tags: <a href='/tags.html'>Games</a>, <a href='/tags.html'>Programming</a></div>
-Tap or click and take a trip down memory lane with the historic Lights Off. Exactly fourteen years ago today Wired got the scoop: <a href="https://www.wired.com/2007/08/lights-off-first-iphone-native-game-arrives/">Lights Off: First iPhone Native Game Arrives</a>.<br />
-<br />
-And today I'm sharing a new implementation that everyone can play in their web browser:<br />
-<br />
-<a href="/m/lightsoff/index.html">Play here!</a><br />
-<br />
-<br />
-Lights Off's story begins with Tiger Electronics who launched their game <a href="https://en.wikipedia.org/wiki/Lights_Out_(game)">Lights Out</a> in 1995. Then in 2007 Lucas Newman and Adam Betts cloned the game for the iPhone's touch screen. Notably, they built the game before there was an official iPhone SDK or App Store. It was only available to jailbreakers!<br />
-<br />
-A year later, <a href="https://twitter.com/chockenberry">Craig Hockenberry</a> wrote a <a href="https://furbo.org/2008/09/19/lights-off/">post</a> to commemorate the milestone and share the <a href="https://github.com/chockenberry/LightsOffTouch/">source code</a> (<a href="/m/lightsoff-orig.zip">my backup</a>).<br />
-<br />
-Since then the app was rebuilt and modernized by <a href="https://twitter.com/stroughtonsmith">Steve Troughton-Smith</a> as possibly the <a href="https://twitter.com/bennettk/status/880175781057445888?s=20">oldest</a> <a href="https://twitter.com/gruber/status/880462796286291968?s=20">still-actively-maintained app</a> on the App Store. You can find his version <a href="https://apps.apple.com/us/app/lights-off/id292025150">here</a>.<br />
-<br />
-For more history on the App Store and its first killer apps, check out <a href="https://techcrunch.com/2018/03/06/the-day-that-changed-your-phone-forever/">this article</a> (also written by Craig Hockenberry - <a href="https://blog.iconfactory.com/2018/03/a-lot-can-happen-in-a-decade/">mirror</a> on the iconfactory website).<br />
-<br />
-<br />
-In the process of building the web version, I wrote <a href="/m/lightsoff/unitTests.html">tests</a> (<a href="/m/lightsoff/UnitTests.js">source code</a>) to ensure every level is solvable. To my surprise almost half of the original levels <a href="https://github.com/chockenberry/LightsOffTouch/issues/1">cannot be solved</a>! How cruel! This was probably a mistake in how the levels were generated - maybe by flipping certain lights on without checking that the overall puzzle was valid.<br />
-<br />
-To replace the bad levels, I generated my own levels of increasing difficulty by ramping up the minimum number of taps required to solve each puzzle. My algorithm can be found in the unit tests code in the "test_generateLevels" method. This could even be hooked into the game itself for an "endless" mode.<br />
-<br />
-If ever you can't figure out how to solve a level in the fewest taps, there's a guaranteed method to win called "light chasing" or "chase the lights":<br />
-- Start on the top row<br />
-- For every lit button in the row, turn it off by tapping the button in the row right below it<br />
-- Repeat until you get to the bottom row<br />
-- At this point, the bottom row will have one of seven patterns. Based on the pattern, tap the specific circled cells on the top row and repeat these steps. By the time you reach the bottom row again, every light will be off!<br />
-<div id='code'>⬛⬛⬛⬛⬛      ⬛⭕️⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-🟡🟡🟡⬛⬛      🟡🟡🟡⬛⬛<br />
-<br />
-<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⭕️⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛⬛🟡🟡🟡      ⬛⬛🟡🟡🟡<br />
-<br />
-<br />
-⬛⬛⬛⬛⬛      ⬛⬛⭕️⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-🟡🟡⬛🟡🟡      🟡🟡⬛🟡🟡<br />
-<br />
-<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⭕️<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-🟡⬛🟡🟡⬛      🟡⬛🟡🟡⬛<br />
-<br />
-<br />
-⬛⬛⬛⬛⬛      ⭕️⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛🟡🟡⬛🟡      ⬛🟡🟡⬛🟡<br />
-<br />
-<br />
-⬛⬛⬛⬛⬛      ⭕️⭕️⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-🟡⬛⬛⬛🟡      🟡⬛⬛⬛🟡<br />
-<br />
-<br />
-⬛⬛⬛⬛⬛      ⭕️⬛⬛⭕️⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛  =&gt;  ⬛⬛⬛⬛⬛<br />
-⬛⬛⬛⬛⬛      ⬛⬛⬛⬛⬛<br />
-⬛🟡⬛🟡⬛      ⬛🟡⬛🟡⬛</div>
-While every level can be beaten mechanically like this, it's still more fun (and often faster) to find the fewest taps needed! That's the real challenge.<br />
-<br />
-Have fun! :)<br />
-
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/lights-off.html'>Lights Off</a><br />
 <a href='p/batman-curve.html'>Batman Curve</a><br />
 <a href='p/formulagraph.html'>FormulaGraph</a><br />
 <a href='p/bouncing-ball.html'>Bouncing Ball</a><br />

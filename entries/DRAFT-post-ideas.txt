@@ -8,7 +8,7 @@
   - https://www.dwitter.net/
   - http://pixelverse.org/experiments/natsukashii/
   - https://bbcmic.ro/?experimental=true&#
-  
+
 - Graphs in JavaScript: https://github.com/vega/vega-lite
 - Syntax highlighting in JavaScript: https://prismjs.com/
 - PalmOS emulator: https://cloudpilot-emu.github.io/app/#/tab/emulation
