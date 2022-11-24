@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -1010,12 +1010,22 @@ function assertEqual(str1, str2) {
 }
 
 class UnitTests {
-
+  
+  siteConfig() {
+    return new SiteConfig("/path/to/repo", `{
+  "title":"memalign.github.io",
+  "baseURL":"https://memalign.github.io",
+  "entriesOnIndex":15,
+  "authorName":"memalign",
+  "authorURL":"https://twitter.com/memalign"
+}
+`)
+  }
 
 // HTMLDocument class
 
   test_HTMLDocument_writeHTMLDocument() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
     
     let fm = FileManager.local()
     let tempDir = fm.temporaryDirectory() + "/" + uuidv4()
@@ -1045,7 +1055,7 @@ class UnitTests {
   test_HTMLDocument_writeHTMLDocument_missingTagsLine() {
     let caughtException = false
     try {
-      let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")  
+      let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")  
     } catch (e) {
       caughtException = true
     }
@@ -1054,7 +1064,7 @@ class UnitTests {
   }
   
   test_HTMLDocument_makeFullURLFromURL() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
   
     assertTrue(entry.makeFullURLFromURL("https://example.com/m/image.jpg") == "https://example.com/m/image.jpg", "already full url")
     assertTrue(entry.makeFullURLFromURL("/m/image.jpg") == "https://memalign.github.io/m/image.jpg", "absolute url")
@@ -1064,21 +1074,21 @@ class UnitTests {
 // Index class
 
   test_Index_sortEntries() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1, Tag2\ntest text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags:\ntest text3")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
+    let entry2 = new Entry(this.siteConfig(), "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1, Tag2\ntest text2")
+    let entry3 = new Entry(this.siteConfig(), "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags:\ntest text3")
     
-    let index = new Index([entry2, entry1, entry3])
+    let index = new Index(this.siteConfig(), [entry2, entry1, entry3])
     index.sortEntries()  
     assertTrue(index.entries.map(x => x.postNumber), [3, 2, 1])
   }
 
   test_Index_ogDescription() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1, Tag2\ntest text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: Tag with spaces,Tag2\ntest text3")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")
+    let entry2 = new Entry(this.siteConfig(), "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1, Tag2\ntest text2")
+    let entry3 = new Entry(this.siteConfig(), "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: Tag with spaces,Tag2\ntest text3")
     
-    let index = new Index([entry2, entry1, entry3])
+    let index = new Index(this.siteConfig(), [entry2, entry1, entry3])
     
     assertTrue(index.ogDescription() == "test text3", "most recent description")
     
@@ -1097,11 +1107,11 @@ class UnitTests {
   }
   
   test_Index_ogImage() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Image:/m/test1.jpg]")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1\n[Image:/m/test2.jpg]")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: Tag1,Tag2\n[Image:/m/test3.jpg]")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Image:/m/test1.jpg]")
+    let entry2 = new Entry(this.siteConfig(), "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag1\n[Image:/m/test2.jpg]")
+    let entry3 = new Entry(this.siteConfig(), "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: Tag1,Tag2\n[Image:/m/test3.jpg]")
     
-    let index = new Index([entry2, entry1, entry3])
+    let index = new Index(this.siteConfig(), [entry2, entry1, entry3])
     
     assertTrue(index.ogImage() == "https://memalign.github.io/m/test3.jpg", "most recent post image")
     
@@ -1119,11 +1129,11 @@ class UnitTests {
   }
 
   test_Index_toHTML() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(this.siteConfig(), "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry(this.siteConfig(), "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
     
-    let index = new Index([entry2, entry1, entry3])  
+    let index = new Index(this.siteConfig(), [entry2, entry1, entry3])  
     
     index.entriesOnIndex = 2
     
@@ -1196,11 +1206,11 @@ More posts:<br />
   }
   
   test_Index_toHTML_oneEntryIncludesContinueReading() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3\nMy nice entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nNext line goes here.")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(this.siteConfig(), "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry(this.siteConfig(), "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3\nMy nice entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nNext line goes here.")
     
-    let index = new Index([entry2, entry1, entry3])  
+    let index = new Index(this.siteConfig(), [entry2, entry1, entry3])  
     
     index.entriesOnIndex = 2
     
@@ -1276,26 +1286,33 @@ More posts:<br />
   }
 
   test_Index_toHTML_enoughPostsToListInColumns() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry6 = new Entry("/path/0006-some-title6.txt", "Title: This title6\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry7 = new Entry("/path/0007-some-title7.txt", "Title: This title7\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry8 = new Entry("/path/0008-some-title8.txt", "Title: This title8\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry9 = new Entry("/path/0009-some-title9.txt", "Title: This title9\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry10 = new Entry("/path/0010-some-title10.txt", "Title: This title10\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry11 = new Entry("/path/0011-some-title11.txt", "Title: This title11\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry12 = new Entry("/path/0012-some-title12.txt", "Title: This title12P\nDate: 12/28/2019\nTags: iTag, iTag2, Programming\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry13 = new Entry("/path/0013-some-title13.txt", "Title: This title13L\nDate: 12/28/2019\nTags: iTag, iTag2, Leisure\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry14 = new Entry("/path/0014-some-title14.txt", "Title: This title14IF\nDate: 12/28/2019\nTags: iTag, iTag2, Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry15 = new Entry("/path/0015-some-title15.txt", "Title: This title15IF\nDate: 12/28/2019\nTags: Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+    let siteConfig = new SiteConfig("/path/to/repo", `{
+  "title":"memalign.github.io",
+  "baseURL":"https://memalign.github.io",
+  "entriesOnIndex":2,
+  "authorName":"memalign",
+  "authorURL":"https://twitter.com/memalign"
+}    
+`)
+    
+    let entry1 = new Entry(siteConfig, "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(siteConfig, "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry(siteConfig, "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry4 = new Entry(siteConfig, "/path/0004-some-title4.txt", "Title: This title4\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry5 = new Entry(siteConfig, "/path/0005-some-title5.txt", "Title: This title5\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry6 = new Entry(siteConfig, "/path/0006-some-title6.txt", "Title: This title6\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry7 = new Entry(siteConfig, "/path/0007-some-title7.txt", "Title: This title7\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry8 = new Entry(siteConfig, "/path/0008-some-title8.txt", "Title: This title8\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry9 = new Entry(siteConfig, "/path/0009-some-title9.txt", "Title: This title9\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry10 = new Entry(siteConfig, "/path/0010-some-title10.txt", "Title: This title10\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry11 = new Entry(siteConfig, "/path/0011-some-title11.txt", "Title: This title11\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry12 = new Entry(siteConfig, "/path/0012-some-title12.txt", "Title: This title12P\nDate: 12/28/2019\nTags: iTag, iTag2, Programming\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry13 = new Entry(siteConfig, "/path/0013-some-title13.txt", "Title: This title13L\nDate: 12/28/2019\nTags: iTag, iTag2, Leisure\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry14 = new Entry(siteConfig, "/path/0014-some-title14.txt", "Title: This title14IF\nDate: 12/28/2019\nTags: iTag, iTag2, Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry15 = new Entry(siteConfig, "/path/0015-some-title15.txt", "Title: This title15IF\nDate: 12/28/2019\nTags: Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
 
     
-    let index = new Index([entry2, entry1, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12, entry13, entry14, entry15])  
-    
-    index.entriesOnIndex = 2
+    let index = new Index(siteConfig, [entry2, entry1, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12, entry13, entry14, entry15])  
     
     let expectation = `<!DOCTYPE html>
 <html>
@@ -1396,21 +1413,30 @@ More posts:<br />
   }
   
   test_Index_toHTML_enoughPostsToListInColumns_featured() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry6 = new Entry("/path/0006-some-title6.txt", "Title: This title6\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry7 = new Entry("/path/0007-some-title7.txt", "Title: This title7\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry8 = new Entry("/path/0008-some-title8.txt", "Title: This title8\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry9 = new Entry("/path/0009-some-title9.txt", "Title: This title9\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry10 = new Entry("/path/0010-some-title10.txt", "Title: This title10\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry11 = new Entry("/path/0011-some-title11.txt", "Title: This title11\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry12 = new Entry("/path/0012-some-title12.txt", "Title: This title12P\nDate: 12/28/2019\nTags: iTag, iTag2, Programming\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry13 = new Entry("/path/0013-some-title13.txt", "Title: This title13L\nDate: 12/28/2019\nTags: iTag, iTag2, Leisure\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry14 = new Entry("/path/0014-some-title14.txt", "Title: This title14IF\nDate: 12/28/2019\nTags: iTag, iTag2, Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry15 = new Entry("/path/0015-some-title15.txt", "Title: This title15IF\nDate: 12/28/2019\nTags: Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+    let siteConfig = new SiteConfig("/path/to/repo", `{
+  "title":"memalign.github.io",
+  "baseURL":"https://memalign.github.io",
+  "entriesOnIndex":2,
+  "authorName":"memalign",
+  "authorURL":"https://twitter.com/memalign"
+}    
+`)
+
+    let entry1 = new Entry(siteConfig, "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(siteConfig, "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry(siteConfig, "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry4 = new Entry(siteConfig, "/path/0004-some-title4.txt", "Title: This title4\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry5 = new Entry(siteConfig, "/path/0005-some-title5.txt", "Title: This title5\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry6 = new Entry(siteConfig, "/path/0006-some-title6.txt", "Title: This title6\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry7 = new Entry(siteConfig, "/path/0007-some-title7.txt", "Title: This title7\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry8 = new Entry(siteConfig, "/path/0008-some-title8.txt", "Title: This title8\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry9 = new Entry(siteConfig, "/path/0009-some-title9.txt", "Title: This title9\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry10 = new Entry(siteConfig, "/path/0010-some-title10.txt", "Title: This title10\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry11 = new Entry(siteConfig, "/path/0011-some-title11.txt", "Title: This title11\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry12 = new Entry(siteConfig, "/path/0012-some-title12.txt", "Title: This title12P\nDate: 12/28/2019\nTags: iTag, iTag2, Programming\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry13 = new Entry(siteConfig, "/path/0013-some-title13.txt", "Title: This title13L\nDate: 12/28/2019\nTags: iTag, iTag2, Leisure\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry14 = new Entry(siteConfig, "/path/0014-some-title14.txt", "Title: This title14IF\nDate: 12/28/2019\nTags: iTag, iTag2, Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry15 = new Entry(siteConfig, "/path/0015-some-title15.txt", "Title: This title15IF\nDate: 12/28/2019\nTags: Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
 
         
   let featured = new Featured("/path/FEATURED.txt", `PCEImage Editor
@@ -1426,9 +1452,7 @@ Pac-Man Dungeon
 - https://example.com/m/index.html
 `)
     
-    let index = new Index([entry2, entry1, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12, entry13, entry14, entry15], featured)
-    
-    index.entriesOnIndex = 2
+    let index = new Index(siteConfig, [entry2, entry1, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12, entry13, entry14, entry15], featured)
     
     let expectation = `<!DOCTYPE html>
 <html>
@@ -1553,14 +1577,14 @@ More posts:<br />
   test_Index_toHTML_always3Columns() {
     let entries = []
     while (entries.length < 100) {
-      let entry = new Entry(`/path/${entries.length}-some-title.txt`, "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")  
+      let entry = new Entry(this.siteConfig(), `/path/${entries.length}-some-title.txt`, "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")  
       entries.push(entry)
       
       if (entries.length < 15) {
         continue 
       }
       
-      let index = new Index(entries)
+      let index = new Index(this.siteConfig(), entries)
       let html = index.toHTML()  
       let columnCount = html.match(/grid-entry/g).length
       assertTrue(columnCount == 3, `column count is 3 for ${entries.length} entries`)
@@ -1570,24 +1594,24 @@ More posts:<br />
 // TagsIndex class
 
   test_TagsIndex_toHTML() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry6 = new Entry("/path/0006-some-title6.txt", "Title: This title6\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry7 = new Entry("/path/0007-some-title7.txt", "Title: This title7\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry8 = new Entry("/path/0008-some-title8.txt", "Title: This title8\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry9 = new Entry("/path/0009-some-title9.txt", "Title: This title9\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry10 = new Entry("/path/0010-some-title10.txt", "Title: This title10\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry11 = new Entry("/path/0011-some-title11.txt", "Title: This title11\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry12 = new Entry("/path/0012-some-title12.txt", "Title: This title12P\nDate: 12/28/2019\nTags: iTag, iTag2, Programming\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry13 = new Entry("/path/0013-some-title13.txt", "Title: This title13L\nDate: 12/28/2019\nTags: iTag, iTag2, Leisure\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry14 = new Entry("/path/0014-some-title14.txt", "Title: This title14IF\nDate: 12/28/2019\nTags: iTag, iTag2, Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
-    let entry15 = new Entry("/path/0015-some-title15.txt", "Title: This title15IF\nDate: 12/28/2019\nTags: Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(this.siteConfig(), "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry(this.siteConfig(), "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry4 = new Entry(this.siteConfig(), "/path/0004-some-title4.txt", "Title: This title4\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry5 = new Entry(this.siteConfig(), "/path/0005-some-title5.txt", "Title: This title5\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry6 = new Entry(this.siteConfig(), "/path/0006-some-title6.txt", "Title: This title6\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry7 = new Entry(this.siteConfig(), "/path/0007-some-title7.txt", "Title: This title7\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry8 = new Entry(this.siteConfig(), "/path/0008-some-title8.txt", "Title: This title8\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry9 = new Entry(this.siteConfig(), "/path/0009-some-title9.txt", "Title: This title9\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry10 = new Entry(this.siteConfig(), "/path/0010-some-title10.txt", "Title: This title10\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry11 = new Entry(this.siteConfig(), "/path/0011-some-title11.txt", "Title: This title11\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry12 = new Entry(this.siteConfig(), "/path/0012-some-title12.txt", "Title: This title12P\nDate: 12/28/2019\nTags: iTag, iTag2, Programming\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry13 = new Entry(this.siteConfig(), "/path/0013-some-title13.txt", "Title: This title13L\nDate: 12/28/2019\nTags: iTag, iTag2, Leisure\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry14 = new Entry(this.siteConfig(), "/path/0014-some-title14.txt", "Title: This title14IF\nDate: 12/28/2019\nTags: iTag, iTag2, Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry15 = new Entry(this.siteConfig(), "/path/0015-some-title15.txt", "Title: This title15IF\nDate: 12/28/2019\nTags: Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
 
     
-    let index = new TagsIndex([entry2, entry1, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12, entry13, entry14, entry15])  
+    let index = new TagsIndex(this.siteConfig(), [entry2, entry1, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12, entry13, entry14, entry15])  
     
     let expectation = `<!DOCTYPE html>
 <html>
@@ -1673,7 +1697,7 @@ More posts:<br />
 // Entry class
     
   test_Entry_draft() {
-    let entry = new Entry("/path/DRAFT-some-title.txt", "test text")
+    let entry = new Entry(this.siteConfig(), "/path/DRAFT-some-title.txt", "test text")
     
     assertTrue(entry.isDraft, "Entry is draft")
   }
@@ -1681,7 +1705,7 @@ More posts:<br />
   test_Entry_missingTags() {
     let caughtException = false
     try {  
-      let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")  
+      let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\ntest text")  
     } catch (e) {
       caughtException = true
     }
@@ -1690,7 +1714,7 @@ More posts:<br />
   }
   
   test_Entry_regular_noTags() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\ntest text")  
     assertTrue(!entry.isDraft, "Entry isn't draft")
     assertTrue(entry.title == "This title", "entry title")
     assertTrue(entry.postLinkName == "some-title", "postLinkName")
@@ -1703,7 +1727,7 @@ More posts:<br />
   }
 
   test_Entry_regular_oneTag() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text")  
     assertTrue(!entry.isDraft, "Entry isn't draft")
     assertTrue(entry.title == "This title", "entry title")
     assertTrue(entry.postLinkName == "some-title", "postLinkName")
@@ -1717,7 +1741,7 @@ More posts:<br />
   }
 
   test_Entry_regular_twoTags() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2\ntest text")  
     assertTrue(!entry.isDraft, "Entry isn't draft")
     assertTrue(entry.title == "This title", "entry title")
     assertTrue(entry.postLinkName == "some-title", "postLinkName")
@@ -1732,7 +1756,7 @@ More posts:<br />
   }
   
   test_Entry_regular_tagWithSpace() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction, Tag2\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction, Tag2\ntest text")  
     assertTrue(!entry.isDraft, "Entry isn't draft")
     assertTrue(entry.title == "This title", "entry title")
     assertTrue(entry.postLinkName == "some-title", "postLinkName")
@@ -1749,7 +1773,7 @@ More posts:<br />
   test_Entry_requiresFourDigitYear() {
     let caughtException = false
     try {
-      let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")  
+      let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/19\ntest text")  
     } catch (exception) {
       caughtException = true
     }
@@ -1757,22 +1781,22 @@ More posts:<br />
   }
   
   test_Entry_imageURL_noImages() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\ntest text")  
     assertTrue(entry.imageURL() == null, "no imageURL")
   }
   
   test_Entry_imageURL_oneImage() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     assertTrue(entry.imageURL() == "/m/test.jpg", "one imageURL")
   }
 
   test_Entry_imageURL_twoImages() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2 space\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2 space\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
     assertTrue(entry.imageURL() == "/m/test.jpg", "two imageURLs")
   }
 
   test_Entry_htmlBody_imageRewriting() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">"), "Has img tag")
@@ -1781,7 +1805,7 @@ More posts:<br />
   }
   
   test_Entry_htmlBody_imageRewriting_mp4() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.mp4]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.mp4]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes(`<video muted loop autoplay playsinline disablepictureinpicture="" src="/m/test.mp4" type="video/mp4"></video>`), "Has video tag")
@@ -1791,7 +1815,7 @@ More posts:<br />
   }
 
   test_Entry_htmlBody_linkRewriting() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<a href=\"/m/test.jpg\">here</a>"), "Has a href tag")
@@ -1800,7 +1824,7 @@ More posts:<br />
   }
 
   test_Entry_htmlBody_linkRewriting_noInnerText() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link]/m/test.jpg[/Link]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link]/m/test.jpg[/Link]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<a href=\"/m/test.jpg\">/m/test.jpg</a>"), "Has a href tag")
@@ -1809,7 +1833,7 @@ More posts:<br />
   }
 
   test_Entry_htmlBody_linkRewriting_insideSectionTitle() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[SectionTitle:[Link:/m/test.jpg]here[/Link]]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[SectionTitle:[Link:/m/test.jpg]here[/Link]]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<h3><a href=\"/m/test.jpg\">here</a></h3>"), "Has a href tag")
@@ -1820,7 +1844,7 @@ More posts:<br />
   }
 
   test_Entry_htmlBody_linkRewriting_insideParagraphTitle() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[ParagraphTitle:[Link:/m/test.jpg]here[/Link]]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[ParagraphTitle:[Link:/m/test.jpg]here[/Link]]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<h4><a href=\"/m/test.jpg\">here</a></h4>"), "Has a href tag")
@@ -1831,7 +1855,7 @@ More posts:<br />
   }
   
   test_Entry_htmlBody_ParagraphTitle() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[ParagraphTitle:Nice title]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[ParagraphTitle:Nice title]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<h4>Nice title</h4>"), "Has a h4 tag")
@@ -1840,7 +1864,7 @@ More posts:<br />
   }
 
   test_Entry_htmlBody_SectionTitle() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[SectionTitle:Nice title]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[SectionTitle:Nice title]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<h3>Nice title</h3>"), "Has a h3 tag")
@@ -1849,7 +1873,7 @@ More posts:<br />
   }
 
   test_Entry_htmlBody_ContinueReadingURL() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nNext line.")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\ntest text\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nNext line.")  
     let htmlBody = entry.htmlBody()
     
     assertEqual(htmlBody, `<div id='post'>
@@ -1869,7 +1893,7 @@ Next line.
   }
 
   test_Entry_htmlBody_code_oneliner() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some code[/Code]")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some code[/Code]")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<div id='code'>some code</div>"), "Has code div")
@@ -1882,7 +1906,7 @@ Next line.
     // This unit test documents this limitation
     // When oneliner HTML support is added, this test needs to be modified
     
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some <html> code[/Code]")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]some <html> code[/Code]")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<div id='code'>some <html> code</div>"), "Has code div")
@@ -1893,7 +1917,7 @@ Next line.
   }
 
   test_Entry_htmlBody_code_multiLine() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line two\n[/Code]\nafter code")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line two\n[/Code]\nafter code")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("test text<br />\n<div id='code'>some code<br />\n&nbsp;&nbsp;line two</div>\nafter code"), "Has code div")
@@ -1902,7 +1926,7 @@ Next line.
   }
 
   test_Entry_htmlBody_code_multiLine_withHTML() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line <td> two\n[/Code]\nafter code")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Code]\nsome code\n  line <td> two\n[/Code]\nafter code")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("test text<br />\n<div id='code'>some code<br />\n&nbsp;&nbsp;line &lt;td&gt; two</div>\nafter code"), "Has code div")
@@ -1911,7 +1935,7 @@ Next line.
   }
   
   test_Entry_htmlBody_quote_oneliner() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Quote]some quote[/Quote]")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Quote]some quote[/Quote]")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<blockquote>some quote</blockquote>"), "Has quote div")
@@ -1920,7 +1944,7 @@ Next line.
   }
 
   test_Entry_htmlBody_quote_multiLine() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Quote]\nsome quote\n  line two\n[/Quote]\nafter quote")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Link:/m/test.jpg]here[/Link]\ntest text\n[Quote]\nsome quote\n  line two\n[/Quote]\nafter quote")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("test text<br />\n<blockquote>some quote<br />\n&nbsp;&nbsp;line two</blockquote>\nafter quote"), "Has blockquote")
@@ -1929,21 +1953,21 @@ Next line.
   }
 
   test_Entry_htmlBody_title_withTitleURL() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1, Tag2\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody("p/some-title.html")
     
     assertTrue(htmlBody.includes("<div id='header'>\n<h2>\n<a href='p/some-title.html'>This title</a>"), "Has title URL")
   }
 
   test_Entry_htmlBody_title_withoutTitleURL() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<div id='header'>\n<h1>\nThis title\n</h1>"), "Has h1 title")
   }
   
   test_Entry_htmlBody_startsWithImage() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">\n<div id='postdate'>Posted on 12/26/2019<br />"), "Date follows image")
@@ -1993,7 +2017,7 @@ test text
   }
 
   test_Entry_htmlBody_startsWithText() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction, Programming\nTest text\n[Image:/m/test.jpg]\nmore text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction, Programming\nTest text\n[Image:/m/test.jpg]\nmore text")  
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("<div id='postdate'>Posted on 12/26/2019<br />\nTags: <a href='/tags.html'>Interactive Fiction</a>, <a href='/tags.html'>Programming</a></div>\nTest text<br />\n<img src=\"/m/test.jpg\">"), "Date precedes text")
@@ -2043,8 +2067,8 @@ more text
   }
   
   test_Entry_toHTML_noImages() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Test\ntest text")
-    let entry2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Test\n\ntest text")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Test\ntest text")
+    let entry2 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Test\n\ntest text")
     
     assertTrue(entry.toHTML() == entry2.toHTML(), "Preceding newlines ignored")  
 
@@ -2070,7 +2094,7 @@ test text
   }
     
   test_Entry_htmlBody_startsWithTwoImages() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Abc\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Abc\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")  
     let htmlBody = entry.htmlBody()
     
     // This behavior isn't good. I'm writing this test to document the existing limitation. We probably want the postdate to follow all leading images in a post instead.
@@ -2079,18 +2103,18 @@ test text
   }
   
   test_Entry_htmlBody_indentation() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Image:/m/test.jpg]\ntest text\n one\n  two\n   three\n    - Four")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags:\n[Image:/m/test.jpg]\ntest text\n one\n  two\n   three\n    - Four")
     let htmlBody = entry.htmlBody()
     
     assertTrue(htmlBody.includes("test text<br />\n&nbsp;one<br />\n&nbsp;&nbsp;two<br />\n&nbsp;&nbsp;&nbsp;three<br />\n&nbsp;&nbsp;&nbsp;&nbsp;- Four"), "indentation")
   }
   
   test_Entry_ogDescription() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: TestTag\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: TestTag\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
-    let entryWithLinebreak = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction\none two three four five six seven eight nine ten eleven twelve thirteen.\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithLinebreak = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Interactive Fiction\none two three four five six seven eight nine ten eleven twelve thirteen.\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
 
-    let entryWithImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: counting\n[Image:/m/test.jpg]one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithImage = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: counting\n[Image:/m/test.jpg]one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
 
 
     let expectation = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty…"
@@ -2099,86 +2123,86 @@ test text
     assertTrue(entryWithLinebreak.ogDescription() == expectation, "Entry with linebreak truncated in correct place")
     assertTrue(entryWithImage.ogDescription() == expectation, "Description truncated in correct place")
     
-    let entrySentence = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Sentences\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty. thirtyone")
+    let entrySentence = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Sentences\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty. thirtyone")
 
     let expectation2 = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty. …"
     assertTrue(entrySentence.ogDescription() == expectation2, "Description ending with period gets correct ellipses behavior")
     
-    let entryFits = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Fitting In\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty")
+    let entryFits = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Fitting In\none two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty")
     
     let expectationFits = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty"
     assertTrue(entryFits.ogDescription() == expectationFits, "Whole entry fits")
     
-    let entryJustImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Just Image Things\n[Image:/m/test.jpg]")
+    let entryJustImage = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Just Image Things\n[Image:/m/test.jpg]")
     assertTrue(entryJustImage.ogDescription() == "", "empty desc")
     
     
-    let entryWithLink1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Link1\n[Link:/m/test.jpg]here[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithLink1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Link1\n[Link:/m/test.jpg]here[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationLink1 = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithLink1.ogDescription() == expectationLink1, "ogDescription link1")
 
-    let entryWithLink2 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Link2\n[Link]/m/test.jpg[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithLink2 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Link2\n[Link]/m/test.jpg[/Link] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationLink2 = "/m/test.jpg one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithLink2.ogDescription() == expectationLink2, "ogDescription link2")
     
-    let entryWithCode = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[Code]here[/Code] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithCode = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[Code]here[/Code] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationCode = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithCode.ogDescription() == expectationCode, "ogDescription code")
 
-    let entryWithQuote = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[Quote]here[/Quote] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithQuote = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[Quote]here[/Quote] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationQuote = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithQuote.ogDescription() == expectationQuote, "ogDescription quote")
   
-    let entryWithSectionTitle = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[SectionTitle:here] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithSectionTitle = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[SectionTitle:here] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationSectionTitle = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithSectionTitle.ogDescription() == expectationSectionTitle, "ogDescription sectiontitle")
 
-    let entryWithParagraphTitle = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[ParagraphTitle:here] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithParagraphTitle = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\n[ParagraphTitle:here] one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationParagraphTitle = "here one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine…"
     assertTrue(entryWithParagraphTitle.ogDescription() == expectationParagraphTitle, "ogDescription paragraphtitle")
 
-    let entryWithContinueReadingURL = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\none two three four five six seven eight nine ten eleven twelve thirteen.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
+    let entryWithContinueReadingURL = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\none two three four five six seven eight nine ten eleven twelve thirteen.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nfourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone")
     
     let expectationContinueReadingURL = "one two three four five six seven eight nine ten eleven twelve thirteen. fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty…"
     assertEqual(entryWithContinueReadingURL.ogDescription(), expectationContinueReadingURL)
   }
   
   test_Entry_ogImage() {
-    let entryNoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\ntest text")
+    let entryNoImages = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\ntest text")
     assertTrue(entryNoImages.ogImage() == "https://memalign.github.io/m/shiba.jpg", "default ogImage")
     
-    let entryOneImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images, Fun\n[Image:/m/test.jpg]\ntest text")
+    let entryOneImage = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images, Fun\n[Image:/m/test.jpg]\ntest text")
     assertTrue(entryOneImage.ogImage() == "https://memalign.github.io/m/test.jpg", "picks image")
 
-    let entryTwoImages = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")
+    let entryTwoImages = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.jpg]\n[Image:/m/test2.jpg]\ntest text")
     assertTrue(entryTwoImages.ogImage() == "https://memalign.github.io/m/test.jpg", "picks first image")
 
   
     // Don't pick MP4 as the ogImage
     
-    let entryOnlyMP4 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.mp4]\ntest text")
+    let entryOnlyMP4 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.mp4]\ntest text")
     assertTrue(entryOnlyMP4.ogImage() == "https://memalign.github.io/m/shiba.jpg", "default ogImage")
 
-    let entryMP4BeforeJPG = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.mp4]\n[Image:/m/test2.jpg]\ntest text")
+    let entryMP4BeforeJPG = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.mp4]\n[Image:/m/test2.jpg]\ntest text")
     assertTrue(entryMP4BeforeJPG.ogImage() == "https://memalign.github.io/m/test2.jpg", "skips mp4")
 
-    let entryMP4AfterJPG = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.jpg]\n[Image:/m/test2.mp4]\ntest text")
+    let entryMP4AfterJPG = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Images\n[Image:/m/test.jpg]\n[Image:/m/test2.mp4]\ntest text")
     assertTrue(entryMP4AfterJPG.ogImage() == "https://memalign.github.io/m/test.jpg", "picks first jpg")
   }
   
   test_Entry_fullBaseURL() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: URLs\n[Image:/m/test.jpg]\ntest text")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: URLs\n[Image:/m/test.jpg]\ntest text")
     assertTrue(entry.fullBaseURL() == "https://memalign.github.io/p/", "fullBaseURL")
   }
 
   test_Entry_dateRFC3339() {
-    let entry = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: URLs\n[Image:/m/test.jpg]\ntest text")
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: URLs\n[Image:/m/test.jpg]\ntest text")
     assertTrue(entry.dateRFC3339() == "2019-12-26T00:00:00-08:00", "dateRFC3339")    
   }
   
@@ -2186,9 +2210,9 @@ test text
 // Feed class
 
   test_Feed_writeFeedFile() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Feeds\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Feeds\n[Image:/m/test1.jpg]\ntext1 text1")
     
-    let index = new Index([entry1])
+    let index = new Index(this.siteConfig(), [entry1])
     
     let jsonFeed = new JSONFeed(index)
 
@@ -2223,9 +2247,9 @@ test text
 // JSONFeed class
 
   test_JSONFeed_escapeContent() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: JavaScript\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: JavaScript\n[Image:/m/test1.jpg]\ntext1 text1")
     
-    let index = new Index([entry1])
+    let index = new Index(this.siteConfig(), [entry1])
     
     let jsonFeed = new JSONFeed(index)
     
@@ -2235,11 +2259,11 @@ test text
   }
 
   test_JSONFeed_entryToItem() {
-    let entryWithImage = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Entries\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entryNoImage = new Entry("/path/0002-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\ntext1 text1")
-    let entryJustImage = new Entry("/path/0003-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Feeds\n[Image:/m/test1.jpg]")
+    let entryWithImage = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Entries\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entryNoImage = new Entry(this.siteConfig(), "/path/0002-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Programming\ntext1 text1")
+    let entryJustImage = new Entry(this.siteConfig(), "/path/0003-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Feeds\n[Image:/m/test1.jpg]")
     
-    let jsonFeed = new JSONFeed(new Index([entryWithImage, entryNoImage, entryJustImage]))
+    let jsonFeed = new JSONFeed(new Index(this.siteConfig(), [entryWithImage, entryNoImage, entryJustImage]))
 
     let expectationWithImage = `    {
          "title" : "This title",
@@ -2283,15 +2307,15 @@ test text
   }
 
   test_JSONFeed_toText() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\nTags: JSON\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\nTags: JSON\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
-    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
-    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
-    let entry6 = new Entry("/path/0006-some-title6.txt", "Title: This title6\nDate: 11/22/2022\nTags: JSON\ntext6\nThis is my entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nThe next line.")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\nTags: JSON\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(this.siteConfig(), "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\nTags: JSON\ntext2 text2")
+    let entry3 = new Entry(this.siteConfig(), "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
+    let entry4 = new Entry(this.siteConfig(), "/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
+    let entry5 = new Entry(this.siteConfig(), "/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
+    let entry6 = new Entry(this.siteConfig(), "/path/0006-some-title6.txt", "Title: This title6\nDate: 11/22/2022\nTags: JSON\ntext6\nThis is my entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nThe next line.")
 
     
-    let index = new Index([entry2, entry1, entry3, entry4, entry5, entry6])
+    let index = new Index(this.siteConfig(), [entry2, entry1, entry3, entry4, entry5, entry6])
     
     let jsonFeed = new JSONFeed(index)
     jsonFeed.entriesInFeed = 5
@@ -2370,14 +2394,14 @@ test text
 // AtomFeed class
 
   test_AtomFeed_toText() {
-    let entry1 = new Entry("/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\nTags: JSON\n[Image:/m/test1.jpg]\ntext1 text1")
-    let entry2 = new Entry("/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\nTags: JSON\ntext2 text2")
-    let entry3 = new Entry("/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
-    let entry4 = new Entry("/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
-    let entry5 = new Entry("/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
-    let entry6 = new Entry("/path/0006-some-title6.txt", "Title: This title6\nDate: 11/22/2022\nTags: JSON\ntext6\nThis is my entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nThe next line.")
+    let entry1 = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\nTags: JSON\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(this.siteConfig(), "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\nTags: JSON\ntext2 text2")
+    let entry3 = new Entry(this.siteConfig(), "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
+    let entry4 = new Entry(this.siteConfig(), "/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
+    let entry5 = new Entry(this.siteConfig(), "/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
+    let entry6 = new Entry(this.siteConfig(), "/path/0006-some-title6.txt", "Title: This title6\nDate: 11/22/2022\nTags: JSON\ntext6\nThis is my entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nThe next line.")
     
-    let index = new Index([entry2, entry1, entry3, entry4, entry5, entry6])
+    let index = new Index(this.siteConfig(), [entry2, entry1, entry3, entry4, entry5, entry6])
     
     let atomFeed = new AtomFeed(index)
     atomFeed.entriesInFeed = 5
