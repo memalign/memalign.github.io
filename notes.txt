@@ -436,3 +436,32 @@ http://memalign.github.io/m/pceimage/index.html?w=0&s=1&t=.:#00000000%0A@:#00000
 [x]- URL is not a relative URL in Index or Feed
 [x]- Correctly omitted from Entry page
 [x]- Gets stripped from ogDescription
+
+
+11/24/22
+
+Adding support for multiple sites:
+
+Required:
+[x] - Refactor runScript to run on a list of repositories (currently directly calls entriesPath(), htmlPostsPath(), copyCurrentScriptToRepo())
+[x] - Replace repoPath() with an array of repoPaths
+[x] - Make entriesPath(), htmlPostsPath(), repoSiteGeneratorPath(), copyCurrentScriptToRepo() take repoPath as an argument
+
+[x]- Repo config is defined as: 
+[x]  - a repo path, example: FileManager.local().bookmarkedPath("memalign.github.io")
+[x]  - a baseURL, example: "https://memalign.github.io"
+[x]  - a title, example: "memalign.github.io" (class Index, line 163)
+[x]  - A number of entriesOnIndex
+[x]  - Read these last two properties from a config file in the repo path to avoid hard coding them. 
+
+[x]- Index class should treat -1 entriesOnIndex as infinity 
+
+Nice to have:
+- Image captions
+
+
+Unit test:
+- Get existing tests passing
+- Test every siteConfig field
+- Test negative entriesOnIndex behavior
+

@@ -23,41 +23,77 @@ function currentScriptPath() {
   return FileManager.iCloud().documentsDirectory() + "/" + currentScriptFilename()
 }
 
-function repoPath() {
-  return FileManager.local().bookmarkedPath("memalign.github.io")
+function supportedRepoPaths() {
+  let ret = []
+  ret.push(FileManager.local().bookmarkedPath("memalign.github.io"))
+  return ret
 }
 
-function entriesPath() {
-  return repoPath() + "/entries"
+function entriesPath(repoPath) {
+  return repoPath + "/entries"
 }
 
 function htmlPostsSubdirectory() {
   return "p"
 }
 
-function htmlPostsPath() {
-  return repoPath() + "/" + htmlPostsSubdirectory()
+function htmlPostsPath(repoPath) {
+  return repoPath + "/" + htmlPostsSubdirectory()
 }
 
-function repoSiteGeneratorPath() {
-   return repoPath() + "/SiteGenerator"
+function repoSiteGeneratorPath(repoPath) {
+   return repoPath + "/SiteGenerator"
 }
 
-function copyCurrentScriptToRepo() {
+function copyCurrentScriptToRepo(repoPath) {
   let fm = FileManager.local()
-  let destPath = repoSiteGeneratorPath() + "/" + currentScriptFilename()
+  let destPath = repoSiteGeneratorPath(repoPath) + "/" + currentScriptFilename()
   if (fm.fileExists(destPath)) {
     fm.remove(destPath)
   }
   fm.copy(currentScriptPath(), destPath)
 }
 
+function copyCurrentScriptToRepos() {
+  let repoPaths = supportedRepoPaths()
+  for (let repoPath of repoPaths) {
+    copyCurrentScriptToRepo(repoPath)
+  }
+}
+
+
+// SiteConfig class
+
+class SiteConfig {
+  constructor(repoPath, siteConfigFileContents /* optional */) {
+    this.repoPath = repoPath
+    this.filename = repoPath + "/" + "SITECONFIG.json"
+    
+    let contents = siteConfigFileContents ? siteConfigFileContents : this.fileContents()
+    let json = JSON.parse(contents)
+
+    this.title = json.title
+    this.baseURL = json.baseURL
+    this.entriesOnIndex = json.entriesOnIndex
+    this.authorName = json.authorName
+    this.authorURL = json.authorURL
+  }
+  
+  fileContents() {
+    return FileManager.local().readString(this.filename)
+  }
+}
+
 
 // HTMLDocument abstract class
 
 class HTMLDocument {
+  constructor(siteConfig) {
+    this.siteConfig = siteConfig
+  }
+  
   baseURL() {
-    return "https://memalign.github.io"
+    return this.siteConfig.baseURL
   }
   
   fullURL() {
@@ -145,14 +181,18 @@ class HTMLDocument {
 // Index class
 
 class Index extends HTMLDocument {
-  constructor(entries, featured) {
-    super()
+  constructor(siteConfig, entries, featured) {
+    super(siteConfig)
     
     this.entries = entries
     this.featured = featured
-    this.title = "memalign.github.io"
+    this.title = this.siteConfig.title
     
-    this.entriesOnIndex = 15
+    this.entriesOnIndex = this.siteConfig.entriesOnIndex
+    // Treat -1 as effectively infinite
+    if (this.entriesOnIndex < 0) {
+      this.entriesOnIndex = Number.MAX_SAFE_INTEGER
+    }
   }
   
   ogImage() {
@@ -317,11 +357,11 @@ class Index extends HTMLDocument {
 // TagsIndex class
 
 class TagsIndex extends HTMLDocument {
-  constructor(entries) {
-    super()
+  constructor(siteConfig, entries) {
+    super(siteConfig)
     
     this.entries = entries
-    this.title = "memalign.github.io tags"
+    this.title = `${this.siteConfig.title} tags`
   }
   
   ogImage() {
@@ -342,7 +382,7 @@ class TagsIndex extends HTMLDocument {
   }
   
   ogDescription() {
-    return "memalign.github.io posts organized by tag"
+    return `${this.siteConfig.title} posts organized by tag`
   }
   
   sortEntries() {
@@ -443,8 +483,8 @@ class Featured {
 // Entry class
 
 class Entry extends HTMLDocument {
-   constructor(filename, fileContents /* optional */) {
-    super()
+   constructor(siteConfig, filename, fileContents /* optional */) {
+    super(siteConfig)
     
     this.filename = filename
     
@@ -791,7 +831,7 @@ class JSONFeed extends Feed {
          "id" : "${entry.fullURL()}",
          "url" : "${entry.fullURL()}",${imageStr}
          "author" : {
-            "name" : "memalign"
+            "name" : "${this.index.siteConfig.authorName}"
          },
          "content_html" : "${this.escapeContent(entry.htmlBody(entry.fullURL()))}"
     }`
@@ -806,8 +846,8 @@ class JSONFeed extends Feed {
    "home_page_url" : "${this.index.fullURL()}",
    "feed_url" : "${this.feedURL()}",
    "author" : {
-      "url" : "https://twitter.com/memalign",
-      "name" : "memalign"
+      "url" : "${this.index.siteConfig.authorURL}",
+      "name" : "${this.index.siteConfig.authorName}"
    },
    "icon" : "${this.index.baseURL()}/apple-touch-icon.png",
    "favicon" : "${this.index.baseURL()}/favicon.ico",
@@ -846,7 +886,7 @@ class AtomFeed extends Feed {
 <published>${entry.dateRFC3339()}</published>
 <updated>${entry.dateRFC3339()}</updated>
 <author>
-<name>memalign</name>
+<name>${this.index.siteConfig.authorName}</name>
 <uri>${this.index.fullURL()}</uri>
 </author>
 <content type="html" xml:base="${entry.fullBaseURL()}" xml:lang="en"><![CDATA[
@@ -866,12 +906,12 @@ ${entry.htmlBody(entry.fullURL())}
     let atomHeader = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>${this.index.title}</title>
-<subtitle>By memalign</subtitle>
+<subtitle>By ${this.index.siteConfig.authorName}</subtitle>
 <link rel="alternate" type="text/html" href="${this.index.fullURL()}" />
 <link rel="self" type="application/atom+xml" href="${this.feedURL()}" />
 <id>${this.feedURL()}</id>
 <updated>${lastUpdated}</updated>
-<rights>Copyright © ${updatedYear}, memalign</rights>
+<rights>Copyright © ${updatedYear}, ${this.index.siteConfig.authorName}</rights>
 <icon>${this.index.baseURL()}/apple-touch-icon.png</icon>
 <logo>${this.index.baseURL()}/apple-touch-icon.png</logo>
 `
@@ -889,52 +929,61 @@ ${entry.htmlBody(entry.fullURL())}
 
 // runScript
 
-function runScript() {  
+function generateSiteInRepo(repoPath) {
   let fm = FileManager.local()
-    
+  
+  let siteConfig = new SiteConfig(repoPath)
+
   let entries = []
   let featured = null
 
-  let entryFilenames = fm.listContents(entriesPath())
+  let entryFilenames = fm.listContents(entriesPath(repoPath))
   for (entryFilename of entryFilenames) {
     console.log("Entry filename: " + entryFilename)
-    let entryFullPath = entriesPath() + "/" + entryFilename
+    let entryFullPath = entriesPath(repoPath) + "/" + entryFilename
     
     if (entryFilename == "FEATURED.txt") {
       featured = new Featured(entryFullPath)
       continue
     }
     
-    let entry = new Entry(entryFullPath)
+    let entry = new Entry(siteConfig, entryFullPath)
     if (entry.isDraft) {
       continue
     }
     console.log("=== Post #" + entry.postNumber + " (" + entry.postLinkName + ") ===")
     console.log(entry.toHTML())
     
-    entry.writeHTMLDocument(htmlPostsPath())
+    entry.writeHTMLDocument(htmlPostsPath(repoPath))
     
     console.log("===")
     
     entries.push(entry)
   }
     
-  let index = new Index(entries, featured)
+  let index = new Index(siteConfig, entries, featured)
   
-  index.writeHTMLDocument(repoPath())
+  index.writeHTMLDocument(repoPath)
   
-  let tagsIndex = new TagsIndex(index.entries)
-  tagsIndex.writeHTMLDocument(repoPath())
+  let tagsIndex = new TagsIndex(siteConfig, index.entries)
+  tagsIndex.writeHTMLDocument(repoPath)
   
   let jsonFeed = new JSONFeed(index)
-  jsonFeed.writeFeedFile(repoPath())
+  jsonFeed.writeFeedFile(repoPath)
   
   let atomFeed = new AtomFeed(index)
-  atomFeed.writeFeedFile(repoPath())
+  atomFeed.writeFeedFile(repoPath)
+}
+
+function runScript() {
+  let repoPaths = supportedRepoPaths()
+  for (let repoPath of repoPaths) {  
+    generateSiteInRepo(repoPath)  
+  }
 }
 
 console.log("=> Backing up script")
-copyCurrentScriptToRepo()
+copyCurrentScriptToRepos()
 console.log("=> done")
 
 if (!UNIT_TEST) {
