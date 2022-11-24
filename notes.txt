@@ -461,7 +461,7 @@ Nice to have:
 
 
 Unit test:
-- Get existing tests passing
+[x]- Get existing tests passing
 - Test every siteConfig field
 - Test negative entriesOnIndex behavior
 
