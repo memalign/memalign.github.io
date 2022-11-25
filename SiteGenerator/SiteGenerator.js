@@ -26,6 +26,7 @@ function currentScriptPath() {
 function supportedRepoPaths() {
   let ret = []
   ret.push(FileManager.local().bookmarkedPath("memalign.github.io"))
+  ret.push(FileManager.local().bookmarkedPath("personal10"))
   return ret
 }
 
@@ -47,7 +48,13 @@ function repoSiteGeneratorPath(repoPath) {
 
 function copyCurrentScriptToRepo(repoPath) {
   let fm = FileManager.local()
-  let destPath = repoSiteGeneratorPath(repoPath) + "/" + currentScriptFilename()
+  let siteGenPath = repoSiteGeneratorPath(repoPath)
+  let destPath = siteGenPath + "/" + currentScriptFilename()
+  
+  if (!fm.isDirectory(siteGenPath)) {
+    fm.createDirectory(siteGenPath)
+  }
+
   if (fm.fileExists(destPath)) {
     fm.remove(destPath)
   }
@@ -171,8 +178,14 @@ class HTMLDocument {
   }
 
   writeHTMLDocument(directory) {
+    let fm = FileManager.local()
+    
+    if (!fm.isDirectory(directory)) {
+      fm.createDirectory(directory)
+    }
+    
     let filename = directory + "/" + this.htmlFilename()
-    FileManager.local().writeString(filename, this.toHTML())
+    fm.writeString(filename, this.toHTML())
     console.log("Wrote html document " + filename)
   }
 }
