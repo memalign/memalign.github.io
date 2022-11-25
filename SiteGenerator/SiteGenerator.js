@@ -1573,6 +1573,180 @@ More posts:<br />
 
     assertEqual(index.toHTML(), expectation)
   }
+  
+  test_Index_toHTML_enoughPostsToListInColumns_featured_differentSiteConfig() {
+    let siteConfig = new SiteConfig("/path/to/repo", `{
+  "title":"Example Site Title",
+  "baseURL":"https://example.com",
+  "entriesOnIndex":3,
+  "authorName":"ExamplePerson",
+  "authorURL":"https://example.com/author"
+}    
+`)
+
+    let entry1 = new Entry(siteConfig, "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(siteConfig, "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry(siteConfig, "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry4 = new Entry(siteConfig, "/path/0004-some-title4.txt", "Title: This title4\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry5 = new Entry(siteConfig, "/path/0005-some-title5.txt", "Title: This title5\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry6 = new Entry(siteConfig, "/path/0006-some-title6.txt", "Title: This title6\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry7 = new Entry(siteConfig, "/path/0007-some-title7.txt", "Title: This title7\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry8 = new Entry(siteConfig, "/path/0008-some-title8.txt", "Title: This title8\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry9 = new Entry(siteConfig, "/path/0009-some-title9.txt", "Title: This title9\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry10 = new Entry(siteConfig, "/path/0010-some-title10.txt", "Title: This title10\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry11 = new Entry(siteConfig, "/path/0011-some-title11.txt", "Title: This title11\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry12 = new Entry(siteConfig, "/path/0012-some-title12.txt", "Title: This title12P\nDate: 12/28/2019\nTags: iTag, iTag2, Programming\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry13 = new Entry(siteConfig, "/path/0013-some-title13.txt", "Title: This title13L\nDate: 12/28/2019\nTags: iTag, iTag2, Leisure\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry14 = new Entry(siteConfig, "/path/0014-some-title14.txt", "Title: This title14IF\nDate: 12/28/2019\nTags: iTag, iTag2, Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry15 = new Entry(siteConfig, "/path/0015-some-title15.txt", "Title: This title15IF\nDate: 12/28/2019\nTags: Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+
+        
+  let featured = new Featured("/path/FEATURED.txt", `PCEImage Editor
+- Image: /m/pceimage/image.png
+- /m/pceimage/index.html
+
+FormulaGraph
+- Image: /m/formulagraph-stairs.png
+- /m/formulagraph/index.html
+
+Pac-Man Dungeon
+- Image: https://example.com/m/image.jpg
+- https://example.com/m/index.html
+`)
+    
+    let index = new Index(siteConfig, [entry2, entry1, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12, entry13, entry14, entry15], featured)
+    
+    let expectation = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Example Site Title</title>
+<meta property="og:title" content="Example Site Title" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/index.html" />
+<meta property="og:image" content="https://example.com/m/test3.jpg" />
+<meta property="og:description" content="text3 text3" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<div id='feeds'>
+<a href='/feed.xml'>RSS</a> | <a href='/feed.json'>JSON Feed</a>
+</div><div id='header'><h1>Example Site Title</h1></div>
+<div id='top-header'><h3>( ( ( featured projects ) ) )</h3></div>
+<div id='projects-grid'>
+  <div id='projects-grid-entry'>
+    <a href='/m/pceimage/index.html'>
+    <div id='projects-grid-title'>PCEImage Editor</div>
+    <div class='rect-img-container'><img src='/m/pceimage/image.png'></div>
+    </a>
+  </div>
+  <div id='projects-grid-entry'>
+    <a href='/m/formulagraph/index.html'>
+    <div id='projects-grid-title'>FormulaGraph</div>
+    <div class='rect-img-container'><img src='/m/formulagraph-stairs.png'></div>
+    </a>
+  </div>
+  <div id='projects-grid-entry'>
+    <a href='https://example.com/m/index.html'>
+    <div id='projects-grid-title'>Pac-Man Dungeon</div>
+    <div class='rect-img-container'><img src='https://example.com/m/image.jpg'></div>
+    </a>
+  </div>
+</div>
+<div id='top-header'><h3>( ( ( posts ) ) )</h3></div>
+<div id='allposts'>
+<div id='grid'>
+<div id='grid-entry'>
+<a href='p/some-title15.html'>This title15IF</a><br />
+<a href='p/some-title14.html'>This title14IF</a><br />
+<a href='p/some-title13.html'>This title13L</a><br />
+<a href='p/some-title12.html'>This title12P</a><br />
+<a href='p/some-title11.html'>This title11</a><br />
+</div><div id='grid-entry'>
+<a href='p/some-title10.html'>This title10</a><br />
+<a href='p/some-title9.html'>This title9</a><br />
+<a href='p/some-title8.html'>This title8</a><br />
+<a href='p/some-title7.html'>This title7</a><br />
+<a href='p/some-title6.html'>This title6</a><br />
+</div><div id='grid-entry'>
+<a href='p/some-title5.html'>This title5</a><br />
+<a href='p/some-title4.html'>This title4</a><br />
+<a href='p/some-title3.html'>This title3</a><br />
+<a href='p/some-title2.html'>This title2</a><br />
+<a href='p/some-title.html'>This title</a><br />
+</div>
+</div>
+</div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/some-title15.html'>This title15IF</a>
+</h2>
+</div>
+<img src="/m/test3.jpg">
+<div id='postdate'>Posted on 12/28/2019<br />
+Tags: <a href='/tags.html'>Interactive Fiction</a></div>
+text3 text3
+</div>
+
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/some-title14.html'>This title14IF</a>
+</h2>
+</div>
+<img src="/m/test3.jpg">
+<div id='postdate'>Posted on 12/28/2019<br />
+Tags: <a href='/tags.html'>iTag</a>, <a href='/tags.html'>iTag2</a>, <a href='/tags.html'>Interactive Fiction</a></div>
+text3 text3
+</div>
+
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/some-title13.html'>This title13L</a>
+</h2>
+</div>
+<img src="/m/test3.jpg">
+<div id='postdate'>Posted on 12/28/2019<br />
+Tags: <a href='/tags.html'>iTag</a>, <a href='/tags.html'>iTag2</a>, <a href='/tags.html'>Leisure</a></div>
+text3 text3
+</div>
+
+<hr />
+More posts:<br />
+<a href='p/some-title12.html'>This title12P</a><br />
+<a href='p/some-title11.html'>This title11</a><br />
+<a href='p/some-title10.html'>This title10</a><br />
+<a href='p/some-title9.html'>This title9</a><br />
+<a href='p/some-title8.html'>This title8</a><br />
+<a href='p/some-title7.html'>This title7</a><br />
+<a href='p/some-title6.html'>This title6</a><br />
+<a href='p/some-title5.html'>This title5</a><br />
+<a href='p/some-title4.html'>This title4</a><br />
+<a href='p/some-title3.html'>This title3</a><br />
+<a href='p/some-title2.html'>This title2</a><br />
+<a href='p/some-title.html'>This title</a><br />
+
+</div>
+<div id="footer"></div>
+</body>
+</html>
+`
+
+    assertEqual(index.toHTML(), expectation)
+  }
 
   test_Index_toHTML_always3Columns() {
     let entries = []
@@ -1691,6 +1865,115 @@ More posts:<br />
 `
 
     assertTrue(index.toHTML() == expectation, "index html")
+  }
+
+  test_TagsIndex_toHTML_differentSiteConfig() {
+    let siteConfig = new SiteConfig("/path/to/repo", `{
+  "title":"Example Site Title",
+  "baseURL":"https://example.com",
+  "entriesOnIndex":15,
+  "authorName":"ExamplePerson",
+  "authorURL":"https://example.com/author"
+}
+`)
+
+    let entry1 = new Entry(siteConfig, "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(siteConfig, "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/27/2019\nTags: Tag2\ntext2 text2")
+    let entry3 = new Entry(siteConfig, "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry4 = new Entry(siteConfig, "/path/0004-some-title4.txt", "Title: This title4\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry5 = new Entry(siteConfig, "/path/0005-some-title5.txt", "Title: This title5\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry6 = new Entry(siteConfig, "/path/0006-some-title6.txt", "Title: This title6\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry7 = new Entry(siteConfig, "/path/0007-some-title7.txt", "Title: This title7\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry8 = new Entry(siteConfig, "/path/0008-some-title8.txt", "Title: This title8\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry9 = new Entry(siteConfig, "/path/0009-some-title9.txt", "Title: This title9\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry10 = new Entry(siteConfig, "/path/0010-some-title10.txt", "Title: This title10\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry11 = new Entry(siteConfig, "/path/0011-some-title11.txt", "Title: This title11\nDate: 12/28/2019\nTags: iTag, iTag2\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry12 = new Entry(siteConfig, "/path/0012-some-title12.txt", "Title: This title12P\nDate: 12/28/2019\nTags: iTag, iTag2, Programming\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry13 = new Entry(siteConfig, "/path/0013-some-title13.txt", "Title: This title13L\nDate: 12/28/2019\nTags: iTag, iTag2, Leisure\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry14 = new Entry(siteConfig, "/path/0014-some-title14.txt", "Title: This title14IF\nDate: 12/28/2019\nTags: iTag, iTag2, Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+    let entry15 = new Entry(siteConfig, "/path/0015-some-title15.txt", "Title: This title15IF\nDate: 12/28/2019\nTags: Interactive Fiction\n[Image:/m/test3.jpg]\ntext3 text3")
+
+    
+    let index = new TagsIndex(siteConfig, [entry2, entry1, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12, entry13, entry14, entry15])  
+    
+    let expectation = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Example Site Title tags</title>
+<meta property="og:title" content="Example Site Title tags" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/tags.html" />
+<meta property="og:image" content="https://example.com/m/test3.jpg" />
+<meta property="og:description" content="Example Site Title posts organized by tag" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a><div id='header'><h1>Example Site Title tags</h1></div>
+<div id='allposts'>
+<div id='grid'>
+<div id='grid-entry'>
+<h4>Interactive Fiction</h4><br /><a href='p/some-title15.html'>This title15IF</a><br />
+<a href='p/some-title14.html'>This title14IF</a><br />
+</div>
+<div id='grid-entry'>
+<h4>Leisure</h4><br /><a href='p/some-title13.html'>This title13L</a><br />
+</div>
+<div id='grid-entry'>
+<h4>Programming</h4><br /><a href='p/some-title12.html'>This title12P</a><br />
+</div>
+<div id='grid-entry'>
+<h4>Tag1</h4><br /><a href='p/some-title.html'>This title</a><br />
+</div>
+<div id='grid-entry'>
+<h4>Tag2</h4><br /><a href='p/some-title2.html'>This title2</a><br />
+</div>
+<div id='grid-entry'>
+<h4>iTag</h4><br /><a href='p/some-title14.html'>This title14IF</a><br />
+<a href='p/some-title13.html'>This title13L</a><br />
+<a href='p/some-title12.html'>This title12P</a><br />
+<a href='p/some-title11.html'>This title11</a><br />
+<a href='p/some-title10.html'>This title10</a><br />
+<a href='p/some-title9.html'>This title9</a><br />
+<a href='p/some-title8.html'>This title8</a><br />
+<a href='p/some-title7.html'>This title7</a><br />
+<a href='p/some-title6.html'>This title6</a><br />
+<a href='p/some-title5.html'>This title5</a><br />
+<a href='p/some-title4.html'>This title4</a><br />
+<a href='p/some-title3.html'>This title3</a><br />
+</div>
+<div id='grid-entry'>
+<h4>iTag2</h4><br /><a href='p/some-title14.html'>This title14IF</a><br />
+<a href='p/some-title13.html'>This title13L</a><br />
+<a href='p/some-title12.html'>This title12P</a><br />
+<a href='p/some-title11.html'>This title11</a><br />
+<a href='p/some-title10.html'>This title10</a><br />
+<a href='p/some-title9.html'>This title9</a><br />
+<a href='p/some-title8.html'>This title8</a><br />
+<a href='p/some-title7.html'>This title7</a><br />
+<a href='p/some-title6.html'>This title6</a><br />
+<a href='p/some-title5.html'>This title5</a><br />
+<a href='p/some-title4.html'>This title4</a><br />
+<a href='p/some-title3.html'>This title3</a><br />
+</div>
+</div>
+</div>
+
+</div>
+<div id="footer"></div>
+</body>
+</html>
+`
+
+    assertEqual(index.toHTML(), expectation)
   }
 
 
@@ -2014,6 +2297,65 @@ test text
 `
 
     assertTrue(toHTML == expectation, "toHTML matches expectation")
+  }
+  
+  test_Entry_toHTML_differentSiteConfig() {
+    let siteConfig = new SiteConfig("/path/to/repo", `{
+  "title":"Example Site Title",
+  "baseURL":"https://example.com",
+  "entriesOnIndex":15,
+  "authorName":"ExamplePerson",
+  "authorURL":"https://example.com/author"
+}
+`)
+
+    let entry = new Entry(siteConfig, "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<img src=\"/m/test.jpg\">\n<div id='postdate'>Posted on 12/26/2019<br />"), "Date follows image")
+    assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
+    let toHTML = entry.toHTML()
+    
+    let expectation = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>This title</title>
+<meta property="og:title" content="This title" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/p/some-title.html" />
+<meta property="og:image" content="https://example.com/m/test.jpg" />
+<meta property="og:description" content="test text" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a><div id='post'>
+<div id='header'>
+<h1>
+This title
+</h1>
+</div>
+<img src="/m/test.jpg">
+<div id='postdate'>Posted on 12/26/2019<br />
+Tags: <a href='/tags.html'>Tag1</a></div>
+test text
+</div>
+
+</div>
+<div id="footer"></div>
+</body>
+</html>
+`
+
+    assertEqual(toHTML, expectation)
   }
 
   test_Entry_htmlBody_startsWithText() {
