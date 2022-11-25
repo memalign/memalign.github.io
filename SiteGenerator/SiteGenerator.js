@@ -2389,6 +2389,97 @@ test text
     assertEqual(jsonFeed.toText(), expectation)
   }
 
+  test_JSONFeed_toText_differentSiteConfig() {
+    let siteConfig = new SiteConfig("/path/to/repo", `{
+  "title":"Example Site Title",
+  "baseURL":"https://example.com",
+  "entriesOnIndex":15,
+  "authorName":"ExamplePerson",
+  "authorURL":"https://example.com/author"
+}
+`)
+    
+    let entry1 = new Entry(siteConfig, "/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\nTags: JSON\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(siteConfig, "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\nTags: JSON\ntext2 text2")
+    let entry3 = new Entry(siteConfig, "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
+    let entry4 = new Entry(siteConfig, "/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
+    let entry5 = new Entry(siteConfig, "/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
+    let entry6 = new Entry(siteConfig, "/path/0006-some-title6.txt", "Title: This title6\nDate: 11/22/2022\nTags: JSON\ntext6\nThis is my entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nThe next line.")
+
+    
+    let index = new Index(siteConfig, [entry2, entry1, entry3, entry4, entry5, entry6])
+    
+    let jsonFeed = new JSONFeed(index)
+    jsonFeed.entriesInFeed = 5
+    
+    let expectation = `{
+   "version" : "https://jsonfeed.org/version/1",
+   "title" : "Example Site Title",
+   "home_page_url" : "https://example.com/index.html",
+   "feed_url" : "https://example.com/feed.json",
+   "author" : {
+      "url" : "https://example.com/author",
+      "name" : "ExamplePerson"
+   },
+   "icon" : "https://example.com/apple-touch-icon.png",
+   "favicon" : "https://example.com/favicon.ico",
+   "items" : [
+    {
+         "title" : "This title6",
+         "date_published" : "2022-11-22T00:00:00-08:00",
+         "id" : "https://example.com/p/some-title6.html",
+         "url" : "https://example.com/p/some-title6.html",
+         "author" : {
+            "name" : "ExamplePerson"
+         },
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://example.com/p/some-title6.html'>This title6</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 11/22/2022<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext6<br />\\nThis is my entry.<br />\\n<br />\\n<h4><a href=\\"https://example.com/p/some-title6.html\\">Continue reading</a></h4>\\n</div>\\n"
+    },
+    {
+         "title" : "This title5",
+         "date_published" : "2020-01-11T00:00:00-08:00",
+         "id" : "https://example.com/p/some-title5.html",
+         "url" : "https://example.com/p/some-title5.html",
+         "author" : {
+            "name" : "ExamplePerson"
+         },
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://example.com/p/some-title5.html'>This title5</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/11/2020<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext5\\n</div>\\n"
+    },
+    {
+         "title" : "This title4",
+         "date_published" : "2020-01-01T00:00:00-08:00",
+         "id" : "https://example.com/p/some-title4.html",
+         "url" : "https://example.com/p/some-title4.html",
+         "author" : {
+            "name" : "ExamplePerson"
+         },
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://example.com/p/some-title4.html'>This title4</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 1/1/2020<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext4\\n</div>\\n"
+    },
+    {
+         "title" : "This title3",
+         "date_published" : "2019-12-28T00:00:00-08:00",
+         "id" : "https://example.com/p/some-title3.html",
+         "url" : "https://example.com/p/some-title3.html",
+         "image" : "https://example.com/m/test3.jpg",
+         "author" : {
+            "name" : "ExamplePerson"
+         },
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://example.com/p/some-title3.html'>This title3</a>\\n</h2>\\n</div>\\n<img src=\\"/m/test3.jpg\\">\\n<div id='postdate'>Posted on 12/28/2019<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext3\\ttext3\\\\'\\n</div>\\n"
+    },
+    {
+         "title" : "This title2",
+         "date_published" : "2019-12-02T00:00:00-08:00",
+         "id" : "https://example.com/p/some-title2.html",
+         "url" : "https://example.com/p/some-title2.html",
+         "author" : {
+            "name" : "ExamplePerson"
+         },
+         "content_html" : "<div id='post'>\\n<div id='header'>\\n<h2>\\n<a href='https://example.com/p/some-title2.html'>This title2</a>\\n</h2>\\n</div>\\n<div id='postdate'>Posted on 12/2/2019<br />\\nTags: <a href='/tags.html'>JSON</a></div>\\ntext2 text2\\n</div>\\n"
+    }
+  ]
+}
+`
+    assertEqual(jsonFeed.toText(), expectation)
+  }
 
   
 // AtomFeed class
@@ -2545,6 +2636,183 @@ text3\ttext3\\'
 <div id='header'>
 <h2>
 <a href='https://memalign.github.io/p/some-title2.html'>This title2</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 12/2/2019<br />
+Tags: <a href='/tags.html'>JSON</a></div>
+text2 text2
+</div>
+
+]]>
+</content>
+</entry>
+</feed><!-- THE END -->
+`
+
+    assertEqual(atomFeed.toText(), expectation)
+  }
+
+  test_AtomFeed_toText_differentSiteConfig() {
+    let siteConfig = new SiteConfig("/path/to/repo", `{
+  "title":"Example Site Title",
+  "baseURL":"https://example.com",
+  "entriesOnIndex":15,
+  "authorName":"ExamplePerson",
+  "authorURL":"https://example.com/author"
+}
+`)
+
+    let entry1 = new Entry(siteConfig, "/path/0001-some-title.txt", "Title: This title\nDate: 12/1/2019\nTags: JSON\n[Image:/m/test1.jpg]\ntext1 text1")
+    let entry2 = new Entry(siteConfig, "/path/0002-some-title2.txt", "Title: This title2\nDate: 12/2/2019\nTags: JSON\ntext2 text2")
+    let entry3 = new Entry(siteConfig, "/path/0003-some-title3.txt", "Title: This title3\nDate: 12/28/2019\nTags: JSON\n[Image:/m/test3.jpg]\ntext3\ttext3\\'")
+    let entry4 = new Entry(siteConfig, "/path/0004-some-title4.txt", "Title: This title4\nDate: 1/1/2020\nTags: JSON\ntext4")
+    let entry5 = new Entry(siteConfig, "/path/0005-some-title5.txt", "Title: This title5\nDate: 1/11/2020\nTags: JSON\ntext5")
+    let entry6 = new Entry(siteConfig, "/path/0006-some-title6.txt", "Title: This title6\nDate: 11/22/2022\nTags: JSON\ntext6\nThis is my entry.\n\n[ContinueReadingWithURLTitle:Continue reading]\n\nThe next line.")
+    
+    let index = new Index(siteConfig, [entry2, entry1, entry3, entry4, entry5, entry6])
+    
+    let atomFeed = new AtomFeed(index)
+    atomFeed.entriesInFeed = 5
+    
+    let expectation = `<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>Example Site Title</title>
+<subtitle>By ExamplePerson</subtitle>
+<link rel="alternate" type="text/html" href="https://example.com/index.html" />
+<link rel="self" type="application/atom+xml" href="https://example.com/feed.xml" />
+<id>https://example.com/feed.xml</id>
+<updated>2022-11-22T00:00:00-08:00</updated>
+<rights>Copyright © 2022, ExamplePerson</rights>
+<icon>https://example.com/apple-touch-icon.png</icon>
+<logo>https://example.com/apple-touch-icon.png</logo>
+<entry>
+<title>This title6</title>
+<link rel="alternate" type="text/html" href="https://example.com/p/some-title6.html" />
+<link rel="related" type="text/html" href="https://example.com/p/some-title6.html" />
+<id>https://example.com/p/some-title6.html</id>
+<published>2022-11-22T00:00:00-08:00</published>
+<updated>2022-11-22T00:00:00-08:00</updated>
+<author>
+<name>ExamplePerson</name>
+<uri>https://example.com/index.html</uri>
+</author>
+<content type="html" xml:base="https://example.com/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://example.com/p/some-title6.html'>This title6</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 11/22/2022<br />
+Tags: <a href='/tags.html'>JSON</a></div>
+text6<br />
+This is my entry.<br />
+<br />
+<h4><a href="https://example.com/p/some-title6.html">Continue reading</a></h4>
+</div>
+
+]]>
+</content>
+</entry>
+
+<entry>
+<title>This title5</title>
+<link rel="alternate" type="text/html" href="https://example.com/p/some-title5.html" />
+<link rel="related" type="text/html" href="https://example.com/p/some-title5.html" />
+<id>https://example.com/p/some-title5.html</id>
+<published>2020-01-11T00:00:00-08:00</published>
+<updated>2020-01-11T00:00:00-08:00</updated>
+<author>
+<name>ExamplePerson</name>
+<uri>https://example.com/index.html</uri>
+</author>
+<content type="html" xml:base="https://example.com/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://example.com/p/some-title5.html'>This title5</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 1/11/2020<br />
+Tags: <a href='/tags.html'>JSON</a></div>
+text5
+</div>
+
+]]>
+</content>
+</entry>
+
+<entry>
+<title>This title4</title>
+<link rel="alternate" type="text/html" href="https://example.com/p/some-title4.html" />
+<link rel="related" type="text/html" href="https://example.com/p/some-title4.html" />
+<id>https://example.com/p/some-title4.html</id>
+<published>2020-01-01T00:00:00-08:00</published>
+<updated>2020-01-01T00:00:00-08:00</updated>
+<author>
+<name>ExamplePerson</name>
+<uri>https://example.com/index.html</uri>
+</author>
+<content type="html" xml:base="https://example.com/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://example.com/p/some-title4.html'>This title4</a>
+</h2>
+</div>
+<div id='postdate'>Posted on 1/1/2020<br />
+Tags: <a href='/tags.html'>JSON</a></div>
+text4
+</div>
+
+]]>
+</content>
+</entry>
+
+<entry>
+<title>This title3</title>
+<link rel="alternate" type="text/html" href="https://example.com/p/some-title3.html" />
+<link rel="related" type="text/html" href="https://example.com/p/some-title3.html" />
+<id>https://example.com/p/some-title3.html</id>
+<published>2019-12-28T00:00:00-08:00</published>
+<updated>2019-12-28T00:00:00-08:00</updated>
+<author>
+<name>ExamplePerson</name>
+<uri>https://example.com/index.html</uri>
+</author>
+<content type="html" xml:base="https://example.com/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://example.com/p/some-title3.html'>This title3</a>
+</h2>
+</div>
+<img src="/m/test3.jpg">
+<div id='postdate'>Posted on 12/28/2019<br />
+Tags: <a href='/tags.html'>JSON</a></div>
+text3\ttext3\\'
+</div>
+
+]]>
+</content>
+</entry>
+
+<entry>
+<title>This title2</title>
+<link rel="alternate" type="text/html" href="https://example.com/p/some-title2.html" />
+<link rel="related" type="text/html" href="https://example.com/p/some-title2.html" />
+<id>https://example.com/p/some-title2.html</id>
+<published>2019-12-02T00:00:00-08:00</published>
+<updated>2019-12-02T00:00:00-08:00</updated>
+<author>
+<name>ExamplePerson</name>
+<uri>https://example.com/index.html</uri>
+</author>
+<content type="html" xml:base="https://example.com/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://example.com/p/some-title2.html'>This title2</a>
 </h2>
 </div>
 <div id='postdate'>Posted on 12/2/2019<br />

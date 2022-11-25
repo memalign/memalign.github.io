@@ -463,5 +463,10 @@ Nice to have:
 Unit test:
 [x]- Get existing tests passing
 - Test every siteConfig field
+  - title
+  - baseURL
+  - entriesOnIndex
+[x]  - authorName
+[x]  - authorURL
 - Test negative entriesOnIndex behavior
 
