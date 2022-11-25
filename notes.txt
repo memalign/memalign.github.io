@@ -456,10 +456,6 @@ Required:
 
 [x]- Index class should treat -1 entriesOnIndex as infinity 
 
-Nice to have:
-- Image captions
-
-
 Unit test:
 [x]- Get existing tests passing
 [x]- Test every siteConfig field
@@ -468,15 +464,8 @@ Unit test:
 [x]  - entriesOnIndex (Index)
 [x]  - authorName
 [x]  - authorURL
-- Test negative entriesOnIndex behavior
+[x]- Test negative entriesOnIndex behavior
 
-
-
-    let siteConfig = new SiteConfig("/path/to/repo", `{
-  "title":"Example Site Title",
-  "baseURL":"https://example.com",
-  "entriesOnIndex":15,
-  "authorName":"ExamplePerson",
-  "authorURL":"https://example.com/author"
-}
-`)
+Nice to have:
+- Image captions
+- Image grid
