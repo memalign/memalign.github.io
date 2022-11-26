@@ -476,6 +476,6 @@ Nice to have:
 Quick implementation of image captions.
 
 Still need to:
-- Audit changes to generated HTML
-- Make sure existing unit tests pass
+[x]- Audit changes to generated HTML
+[x]- Make sure existing unit tests pass
 - Unit test captions for img and video

@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = false
+const UNIT_TEST = true
 
 
 // Utilities
@@ -2706,8 +2706,7 @@ This title
 <div id='postdate'>Posted on 12/26/2019<br />
 Tags: <a href='/tags.html'>Interactive Fiction</a>, <a href='/tags.html'>Programming</a></div>
 Test text<br />
-<img src="/m/test.jpg"><br />
-more text
+<img src="/m/test.jpg">more text
 </div>
 
 </div>
@@ -2715,7 +2714,7 @@ more text
 </body>
 </html>
 `
-    assertTrue(toHTML == expectation, "toHTML equals expectation")
+    assertEqual(toHTML, expectation)
   }
   
   test_Entry_toHTML_noImages() {
