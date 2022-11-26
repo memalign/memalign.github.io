@@ -467,7 +467,7 @@ Unit test:
 [x]- Test negative entriesOnIndex behavior
 
 Nice to have:
-- Image captions
+[x]- Image captions
 - Image grid
 
 
@@ -478,4 +478,4 @@ Quick implementation of image captions.
 Still need to:
 [x]- Audit changes to generated HTML
 [x]- Make sure existing unit tests pass
-- Unit test captions for img and video
+[x]- Unit test captions for img and video

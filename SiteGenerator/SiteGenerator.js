@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: laptop-code;
 
-const UNIT_TEST = true
+const UNIT_TEST = false
 
 
 // Utilities
@@ -2397,6 +2397,16 @@ More posts:<br />
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
   }
   
+  test_Entry_htmlBody_imageRewriting_caption() {
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.jpg caption:Here's my nice caption.]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes("<figure><img src=\"/m/test.jpg\"><figcaption>Here's my nice caption.</figcaption></figure>"), "Has img tag with figcaption")
+    assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
+    assertTrue(!htmlBody.includes("caption:"), "Lacks 'caption:'")
+    assertTrue(!htmlBody.includes("[Image:/m/test.jpg"), "Lacks Image brackets")
+  }
+  
   test_Entry_htmlBody_imageRewriting_mp4() {
     let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.mp4]\ntest text")  
     let htmlBody = entry.htmlBody()
@@ -2405,6 +2415,16 @@ More posts:<br />
     assertTrue(!htmlBody.includes("<img"), "Lacks <img tag")
     assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
     assertTrue(!htmlBody.includes("[Image:/m/test.jpg]"), "Lacks Image brackets")
+  }
+  
+  test_Entry_htmlBody_imageRewriting_mp4_caption() {
+    let entry = new Entry(this.siteConfig(), "/path/0001-some-title.txt", "Title: This title\nDate: 12/26/2019\nTags: Tag1\n[Image:/m/test.mp4 caption:Here's my nice caption.]\ntest text")  
+    let htmlBody = entry.htmlBody()
+    
+    assertTrue(htmlBody.includes(`<figure><video muted loop autoplay playsinline disablepictureinpicture="" src="/m/test.mp4" type="video/mp4"></video><figcaption>Here's my nice caption.</figcaption></figure>`), "Has video tag")
+    assertTrue(!htmlBody.includes("<img"), "Lacks <img tag")
+    assertTrue(!htmlBody.includes("</img>"), "Lacks </img> tag")
+    assertTrue(!htmlBody.includes("[Image:/m/test"), "Lacks Image brackets")
   }
 
   test_Entry_htmlBody_linkRewriting() {
