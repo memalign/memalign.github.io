@@ -24,6 +24,13 @@ img {
   border: 0;
 }
 
+figure {
+  text-align: center;
+  font-style: italic;
+  text-indent: 0;
+  margin: 0 2em;
+}
+
 h2 a,
 h3 a {
   color : #666;

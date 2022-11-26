@@ -469,3 +469,13 @@ Unit test:
 Nice to have:
 - Image captions
 - Image grid
+
+
+11/25/22
+
+Quick implementation of image captions.
+
+Still need to:
+- Audit changes to generated HTML
+- Make sure existing unit tests pass
+- Unit test captions for img and video

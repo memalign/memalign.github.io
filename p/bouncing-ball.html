@@ -48,7 +48,6 @@ Diagonal sine wave: y = x + 3 + sin(3*x)<br />
 Here's what those look like together:<br />
 <br />
 <img src="/m/mathshapes/steps-sine-wave.jpg"><br />
-<br />
 One aesthetic tweak: have the stairs go down to the right.<br />
 Adjust the sine wave to match the direction and slope of the stairs.<br />
 <br />
@@ -67,7 +66,6 @@ y = abs(sin(x))<br />
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/sine-abs.jpg"><br />
-<br />
 Looks promising! Let's try using abs on the diagonal sine wave:<br />
 <br />
 y = -x + 5 + abs(sin(3*-x))<br />
@@ -76,7 +74,6 @@ y = -x + 5 + abs(sin(3*-x))<br />
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/sine-abs-bounce.jpg"><br />
-<br />
 There are a few problems still:<br />
 <br />
 - The bounce should happen in the middle of the step (not in the corner)<br />
@@ -97,7 +94,6 @@ y = -(x-0.5) + 5 + abs(sin(PI*-(x-0.5)))<br />
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/fixed-period.jpg"><br />
-<br />
 Now let's add our bouncing ball. We want to draw a circle that's centered on the diagonal bouncing sine wave.<br />
 <br />
 From the shape catalog, here is the equation for a circle centered at (-3, 2):<br />
@@ -153,7 +149,6 @@ y = -sqrt(0.1 - (x-t)^2) + (-(t-0.7) + 5 + sqrt(.1) + abs(sin(PI*-(t-0.7))))<br 
 Looks perfect!<br />
 <br />
 <img src="/m/mathshapes/bouncing-ball-with-line.jpg"><br />
-<br />
 Bonus just for fun, here's the ball bouncing off a square wave, losing height with every bounce:<br />
 <br />
 <a href="/m/graphtoy/index.html?f1(x,t)=sign(sin(x*2*PI))/4+0.25&v1=true&f2(x,t)=((-x/5+4)%5E2/8)*(abs(sin(PI/2*-(x*2-0.5))))+0.5+sqrt(.1)&v2=true&f3(x,t)=sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v3=true&f4(x,t)=-sqrt(0.1-(x-(t-12))%5E2)%20+%20((-(t-12)/5+4)%5E2/8)*(abs(sin(PI/2*-((t-12)*2-0.5))))+0.5+sqrt(.1)&v4=true&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />

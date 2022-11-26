@@ -52,7 +52,6 @@ y = -sqrt(1 - x^2)<br />
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/circle.jpg"><br />
-<br />
 In general, we can shift formulas up/down by adding/subtracting to/from the function. Here, we shift the circle up the y-axis by 2:<br />
 y = sqrt(1 - x^2) + 2<br />
 y = -sqrt(1 - x^2) + 2<br />
@@ -85,7 +84,6 @@ y = 3*x + 1<br />
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/line.jpg"><br />
-<br />
 In general, we can flip the shape over the x-axis by making it negative (notice this is similar to the way we draw the bottom half of a circle, by flipping the formula to the top half):<br />
 <br />
 y = - (3*x + 1)<br />
@@ -105,7 +103,6 @@ y = sin(x)<br />
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/sin.jpg"><br />
-<br />
 Something special about the shape of sin(x): it's periodic, repeating infinitely.<br />
 <br />
 <br />
@@ -117,7 +114,6 @@ y = x^2<br />
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/parabola.jpg"><br />
-<br />
 If we want to turn a shape sideways (by swapping the axes), we can swap x and y.<br />
 <br />
 Sideways parabola:<br />
@@ -158,7 +154,6 @@ y = floor(x)<br />
 This looks like steps!<br />
 <br />
 <img src="/m/mathshapes/floor.jpg"><br />
-<br />
 We can make a spiky sawtooth wave by only giving y the decimal portion of x like this:<br />
 y = x - floor(x)<br />
 <a href="/m/graphtoy/index.html?f1(x,t)=x%20-%20floor(x)&v1=true&f2(x,t)=&v2=false&f3(x,t)=&v3=false&f4(x,t)=&v4=false&f5(x,t)=&v5=false&f6(x,t)=&v6=false&grid=true&coords=0,0,12">Graphtoy link</a><br />
@@ -231,7 +226,6 @@ y = mod(floor(x), 2) * (x-floor(x)) + (1-mod(floor(x), 2)) * (-x-floor(-x)))</di
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/triangle-glitch.jpg"><br />
-<br />
 Notice that there are some visible glitches. Let's check the math:<br />
 <br />
 y = mod(floor(x), 2) * (x-floor(x)) + (1-mod(floor(x), 2)) * (-x-floor(-x)))<br />
@@ -278,7 +272,6 @@ y = (mod(floor(x),2))*(x-floor(x))+(1-mod(floor(x),2))*(-x-floor(-x)) + (1-mod(f
 Here's what the fixed equation looks like:<br />
 <br />
 <img src="/m/mathshapes/triangle.jpg"><br />
-<br />
 Looks perfect! Our formula is pretty complex, though. It's possible we could come up with a <a href="/m/formulagraph/index.html?f1(x,t)=abs(1-mod(x,2))&v1=true&f2(x,t)=&v2=true&f3(x,t)=&v3=true&f4(x,t)=&v4=true&f5(x,t)=&v5=true&f6(x,t)=&v6=true&grid=true&coords=0,0,12&paused=true">simpler formula</a> by reading this <a href="https://en.wikipedia.org/wiki/Triangle_wave">Wikipedia page</a>.<br />
 <br />
 <br />
@@ -306,7 +299,6 @@ y = sign(sin(x*PI))/2 + 0.5<br />
 Here's what that looks like:<br />
 <br />
 <img src="/m/mathshapes/square.jpg"><br />
-<br />
 <br />
 How did I come up with these formulas and techniques? I remember many of these from school and others I (re)discovered by playing around. You can expand your own catalog by trying out new formulas to see what they look like and taking <a href="/p/notes-txt.html">notes</a>!<br />
 <br />

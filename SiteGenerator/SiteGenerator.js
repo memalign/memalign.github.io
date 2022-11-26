@@ -683,10 +683,12 @@ ${this.title}
 
 
     // [Image] support: mp4
-    htmlContents = htmlContents.replace(/\[Image:([^\]]+[mM][pP]4)\]/g, '<video muted loop autoplay playsinline disablepictureinpicture="" src="$1" type="video/mp4"></video>')
+    htmlContents = htmlContents.replace(/\[Image:([^\]]+[mM][pP]4) caption:([^\]]+)\]\n?/g, '<figure><video muted loop autoplay playsinline disablepictureinpicture="" src="$1" type="video/mp4"></video><figcaption>$2</figcaption></figure>')
+    htmlContents = htmlContents.replace(/\[Image:([^\]]+[mM][pP]4)\]\n?/g, '<video muted loop autoplay playsinline disablepictureinpicture="" src="$1" type="video/mp4"></video>')
 
     // [Image] support
-    htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]/g, '<img src="$1"></img>')
+    htmlContents = htmlContents.replace(/\[Image:([^\]]+) caption:([^\]]+)\]\n?/g, '<figure><img src="$1"></img><figcaption>$2</figcaption></figure>')
+    htmlContents = htmlContents.replace(/\[Image:([^\]]+)\]\n?/g, '<img src="$1"></img>')
     
     // [Link] support
     htmlContents = htmlContents.replace(/\[Link:([^\]]+)\]/g, '<a href="$1">')

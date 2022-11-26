@@ -18,51 +18,65 @@ I'm taking artistic license in titling some of these examples. Many of these wer
 
 [Image:/m/trippyart/1.mp4]
 
+
 [ParagraphTitle:[Link:https://twitter.com/NerdyRodent/status/1491202031574740993]Eyes Go Funny[/Link]] by [Link:https://twitter.com/NerdyRodent]@NerdyRodent[/Link]
 
 [Image:/m/trippyart/2.mp4]
+
 
 [ParagraphTitle:[Link:https://twitter.com/tom_furse/status/1487768878725926913]Aztec Ruins[/Link]] by [Link:https://twitter.com/tom_furse]@tom_furse[/Link]
 
 [Image:/m/trippyart/3.mp4]
 
+
 [ParagraphTitle:[Link:https://twitter.com/ArcadeKodiak/status/1486696479209275392]New Growth Rotation[/Link]] by [Link:https://twitter.com/ArcadeKodiak]@ArcadeKodiak[/Link]
 
 [Image:/m/trippyart/4.mp4]
+
 
 [ParagraphTitle:[Link:https://twitter.com/MagIntArt/status/1484312176034979840]Bush[/Link]] by [Link:https://twitter.com/MagIntArt]@MagIntArt[/Link]
 
 [Image:/m/trippyart/5.mp4]
 
+
 [ParagraphTitle:[Link:https://twitter.com/AustiinArt/status/1483581027813523459]mornings I used to remember[/Link]] by [Link:https://twitter.com/AustiinArt]@AustiinArt[/Link]
 
 [Image:/m/trippyart/6.mp4]
+
 
 [ParagraphTitle:[Link:https://twitter.com/Somnai_dreams/status/1483184881484333061]The Prismatic Desert[/Link]] by [Link:https://twitter.com/Somnai_dreams]@Somnai_dreams[/Link]
 
 [Image:/m/trippyart/7.mp4]
 
+
 [ParagraphTitle:[Link:https://rybakov.com/project/metamorphosis/]Dreams of Ecology[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
 
 [Image:/m/trippyart/ecology1.mp4]
+
 [Image:/m/trippyart/ecology2.mp4]
+
 [Image:/m/trippyart/ecology3.mp4]
+
 
 [ParagraphTitle:[Link:https://rybakov.com/blog/signac/]A Village For Paul Signac[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
 
 [Image:/m/trippyart/signac.mp4]
 
+
 [ParagraphTitle:[Link:https://rybakov.com/blog/matisse/]Henri Matisse's Home[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
 
 [Image:/m/trippyart/matisse.mp4]
+
 
 [ParagraphTitle:[Link:https://rybakov.com/blog/chagall/]Marc Chagall's Home[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
 
 [Image:/m/trippyart/chagall.mp4]
 
+
 [ParagraphTitle:[Link:https://rybakov.com/blog/octopustree/]Octopus Hugging a Tree[/Link]] by [Link:https://rybakov.com/about/]Michail Rybakov[/Link]
 
 [Image:/m/trippyart/octopus.mp4]
+
 
 [SectionTitle:Zooming Art]
 The art in this section is generally human-made without the use of neural networks. I'm only showing a still image for each entry here -- you need to visit each one to see its mesmerizing effect. I love that these perfectly loop back to the beginning.
