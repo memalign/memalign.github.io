@@ -1,0 +1,136 @@
+Title: Phrygian Music
+Date: 11/23/2022
+Tags: Music
+[Image:/m/food-sheet.png]
+**** Fix the above--^
+
+Dark, exotic
+
+
+- https://en.wikipedia.org/wiki/Phrygian_mode
+- https://en.wikipedia.org/wiki/Phrygian_dominant_scale
+
+Listened to:
+- DJ Snake, Lil Jon - Turn Down for What
+- "Unholy Confessions" by Avenged Sevenfold
+- "Things We Said Today" by The Beatles
+- Linkin Park - A Place For My Head
+
+
+Haven't listened to yet from Wikipedia:
+"Careful with That Axe, Eugene" and "Set the Controls for the Heart of the Sun" by Pink Floyd
+"Wherever I May Roam" by Metallica
+"War" by Joe Satriani
+"Sails of Charon" by Scorpions
+
+
+My own list:
+Beyoncé - naughty girl, Baby boy
+Unholy
+George Michael - Father Figure
+
+
+
+
+Haven't listened to from Reddit:
+- Sheck Wes - Mo Bamba
+- Montell Jordan - This is how we do it
+- Tool - Reflection
+- Clash - London Calling
+- Slade - Cuz I Love You
+- Britney Spears - If U Seek Amy
+
+- Beyonce - I Care
+- Nightmare Before Christmas - Sally's Song
+
+- dick dale - Misirlou - apparently not technically Phrygian according to a youtube video - it's based on the Double Harmonic scale (Hijaz Kar scale)
+
+- Jefferson Airplane - White Rabbit
+- Alicia Keys - Mr. Man
+- Metallica - Creeping Death 
+
+From youtube videos:
+zombie guitar:
+- GnR - double talkin jive
+- David Bowie - space oddity
+
+    - from this video, A harmonic minor scale might also be interesting
+
+phrygian mode video
+- Metallica - harvester of sorrow
+- Alice in Chains - would?
+- porcupune tree - the sound of muzak
+- iron maiden - remember tomorrow 
+- megadeth - symphony of destruction
+- snoop dogg - gin and juice
+- kendrick lamar - humble
+- lauryn hill - doo wop (that thing)
+- 50 cent - candy shop
+- kelis - milkshake
+- missy elliot - get ur freak on
+- slick rick - children's story
+- the clash - london calling
+   - lots of songs use phrygian but don't adhere to it 100%
+   - Also the tonal context may be ambiguous so some people may disagree about the scale used
+- Najat Aatabou - Hadi Kedba Bayna -- sampled in Chemical Brothers - Galvanize
+- Radiohead - Pyramid Song
+- Tame Impala - New Person, Same Old Mistakes
+
+    - Double harmonic scale may also be interesting; Aeolian may also be interesting
+
+*** Check comments on "Songs that use the Phrygian mode" youtube video for more songs people may have mentioned
+
+phrygian dominant video:
+- Tool - Forty Six & 2
+- Thom Yorke - Analyze
+- jeff buckley - dream brother
+- Beyonce & Shakira - Beautiful Liar
+- muse - united states of eurasia
+- the cure - killing an arab
+- Queen - Innuendo
+    - Phrygian Dominant is also common in flamenco music
+- Beach Boys - Good Vibrations
+- Del Shannon - Runaway
+- Muse - Break It To Me
+- Hava Nagila
+
+Doesn't appear to be Phrygian but it samples an Indian song which has a similar flavor:
+Britney Spears - toxic?
+
+Not sure how to confirm:
+Sonic 2 - Oil Ocean Zone
+
+
+Maybe Phrygian according to ChatGPT:
+Hotel California
+Stairway to heaven
+Michael Jackson - the way you make me feel
+
+
+
+**** Original post below this point ****
+
+With a toddler at home, we've come to rely on DoorDash as a quick way for the adults to eat tasty food.
+
+We're lucky to live in an area densely packed with restaurants. Despite the wealth of options, we often struggle to choose when dinnertime arrives.
+
+My spouse and I will end up naming restaurants, taking turns rejecting options one-by-one. On some days, nothing sounds good. On some days, we're exhausted from a night of interrupted sleep and lack the energy to pick. Often both.
+
+I got the idea to make picking a restaurant more mechanical on the hard days.
+
+At first, I considered building a web app with a database and a nice UI for listing restaurants and saving our history. I spend most of my non-work hours taking care of the baby, exercising, or doing chores so even a simple side-project takes months and comes at the cost of precious sleep hours. I needed a lower-effort way to test the idea.
+
+I realized I could make this tool in a shared spreadsheet. I used Numbers on iPhone/iPad and shared the sheet with my spouse using iCloud. Google Sheets could've worked too. Spreadsheets are a great low-effort way to solve problems without writing code. I bet a lot of software engineers underutilize spreadsheets.
+
+Here's how it works:
+- Add a row for every restaurant
+- Have a column for the last time we ate there
+- Have a column for each person with an estimate of how often they are willing to eat at each particular restaurant
+- Have a column to note any restaurants someone is actively in the mood to eat at
+- The sheet calculates a recommendation for each row:
+    - Too soon: neither person is ready to eat there again
+    - Let's eat (green): both people are ready OR someone is in the mood
+    - Maybe eat (yellow): one person is ready
+- At dinnertime, peruse the green and yellow rows to pick efficiently
+
+Grab my [Link:/m/Food-Example.numbers]example sheet[/Link] to create your own.
