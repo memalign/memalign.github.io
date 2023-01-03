@@ -194,6 +194,17 @@ blockquote {
   text-align: left;
 }
 
+.home {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.about {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 
 @media all and (orientation:portrait) {
 
