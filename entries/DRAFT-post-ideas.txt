@@ -34,6 +34,10 @@
   - Putrid S4nd: https://abhimonk.itch.io/putrid-s4nd - shoot-em-up with roguelike elements
   - https://nusan.itch.io/flooded-caves
   - https://www.lexaloffle.com/bbs/?tid=2514#playing
+  - Space Trader: https://www.lexaloffle.com/bbs/?tid=44016
+      - This guy's website: https://benjdev.fr/
+      - This guy's github: https://github.com/cyberbenj
+      - Reddit post: https://www.reddit.com/r/pico8/comments/ounyxi/space_trader/
 
 - JavaScript games:
   - https://github.com/DennisBengs/envisionator
