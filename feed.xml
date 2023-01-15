@@ -5,10 +5,145 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2022-11-22T00:00:00-08:00</updated>
-<rights>Copyright © 2022, memalign</rights>
+<updated>2023-01-15T00:00:00-08:00</updated>
+<rights>Copyright © 2023, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Emscripten on Raspberry Pi 400</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/pi-emscripten.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/pi-emscripten.html" />
+<id>https://memalign.github.io/p/pi-emscripten.html</id>
+<published>2023-01-15T00:00:00-08:00</published>
+<updated>2023-01-15T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/pi-emscripten.html'>Emscripten on Raspberry Pi 400</a>
+</h2>
+</div>
+<img src="/m/raspberry-pi-logo.png">
+<div id='postdate'>Posted on 1/15/2023<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Raspberry Pi</a></div>
+I recently completed a harrowing journey to install Emscripten on a Raspberry Pi 400. There were many hiccups along the way that brought back bad memories from the ~8 years (4 on Gentoo, 4 on Debian) that I used Linux as my daily driver OS.<br />
+<br />
+If you're running a well-trodden configuration, things work pretty smoothly. If you're running anything else, you'll spend hours, days, or even years with systems that aren't working 100%.<br />
+<br />
+For Emscripten, Raspberry Pi 400 is not a well-trodden configuration.<br />
+<br />
+Emscripten provides official binaries for many configurations and I bet the <a href="https://emscripten.org/docs/getting_started/downloads.html#sdk-download-and-install">official tutorial</a> goes really quickly and smoothly if you are running an x64 CPU.<br />
+<br />
+They even provide binaries if you're running an arm64 CPU, just install using this command (see <a href="https://github.com/emscripten-core/emsdk/issues/547">this ticket</a> for more info):<br />
+<div id='code'>./emsdk install latest-arm64-linux</div>
+But if you are running a 32-bit Intel-based (x86) or ARM CPU, then you will need to build from source.<br />
+<br />
+Raspberry Pi 400 is a 32-bit ARM CPU so I found myself needing to build from source.<br />
+<br />
+And, at least on my machine, the default commands did not work.<br />
+<br />
+(I also tried to get Emscripten installed in the iSH iOS app, which emulates an x86 CPU. The emsdk script spent hours cloning the LLVM repository and then started building form source but iSH consistently crashed early in the build process. I gave up. It's possible this will work in the future.)<br />
+<br />
+Here are the steps I followed, what failed, and how I got it working:<br />
+<br />
+My initial configuration: Raspberry Pi 400 running the Buster (Debian 10) version of Raspbian that came with the SD card. I had installed some packages for other purposes so it's possible I won't mention some packages vital to making these steps work.<br />
+<br />
+I needed to install one package:<br />
+<div id='code'>sudo apt-get install cmake</div>
+I think that the resources emscripten pulls plus the intermediate build products can end up taking tens of gigs of storage (I only checked once during build and it was 22GB). I didn't have that much free space on the Raspberry Pi's SD card so I used a USB-C external drive. My external drive is formatted exfat.<br />
+<br />
+The exfat filesystem doesn't support symlinks and building will fail hours into the process because of that:<br />
+<div id='code'>[ 50%] Linking CXX shared library ../../lib/libLTO.so<br />
+CMake Error: failed to create symbolic link &#039;../../lib/libLTO.so&#039;: operation not permitted<br />
+CMake Error: cmake_symlink_library: System Error: Operation not permitted<br />
+make[2]: *** [tools/lto/CMakeFiles/LTO.dir/build.make:168: lib/libLTO.so.16git] Error 1<br />
+make[2]: *** Deleting file &#039;lib/libLTO.so.16git&#039;<br />
+make[1]: *** [CMakeFiles/Makefile2:17719: tools/lto/CMakeFiles/LTO.dir/all] Error 2<br />
+make: *** [Makefile:152: all] Error 2<br />
+Build failed due to exception!</div>
+Instead of reformatting my external drive, I created a very large disk image on it which I formatted as ext4:<br />
+<div id='code'># 200GB image - I think this is overkill but I wasn&#039;t willing to fail because I ran out of disk space<br />
+# Some guides suggest using the fallocate command to create a disk image but I found that command does not work when writing to an exfat drive<br />
+dd if=/dev/zero of=image.iso bs=1G count=200<br />
+<br />
+# Format the image ext4<br />
+mkfs.ext4 -j image.iso</div>
+Then I mounted the disk image and gave the pi user full ownership:<br />
+<div id='code'>cd /media/<br />
+sudo mkdir emscripten-disk<br />
+sudo mount /path/to/image.iso emscripten-disk<br />
+cd emscripten-disk<br />
+sudo chown -R pi:pi .</div>
+Within that directory, I ran this:<br />
+<div id='code'>git clone https://github.com/emscripten-core/emsdk.git<br />
+cd emsdk<br />
+./emsdk install sdk-upstream-main-32bit -j1</div>
+The "-j1" argument forces build to only use one CPU. When I originally attempted to install without that argument, the build failed with very little feedback. Just this generic error, no specific compiler errors:<br />
+<div id='code'>Error 2<br />
+Build failed due to exception!</div>
+I think this is caused by the machine running out of memory (or maybe some other kind of compiler crash).<br />
+<br />
+Of course, forcing building to use only one CPU makes this whole process take much longer. It took ~16 hours for everything to build.<br />
+<br />
+When the build completes, run this:<br />
+<div id='code'>./emsdk activate sdk-upstream-main-32bit</div>
+Pay attention to the output of that command because it tells you how to add the right directories to PATH for emcc to be found.<br />
+<br />
+After all that, following the <a href="https://emscripten.org/docs/getting_started/Tutorial.html#tutorial">official tutorial</a>, I created hello_world.c and tested the compiler:<br />
+<div id='code'>emcc hello_world.c<br />
+node a.out.js</div>
+And I got this error:<br />
+<div id='code'>/path/to/a.out.js:144<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw ex;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^<br />
+ReferenceError: globalThis is not defined</div>
+This is because buster's version of nodejs is 10.24.0, a version before globalThis is supported.<br />
+<br />
+This command did produce hello.html which worked as expected in my browser:<br />
+<div id='code'>emcc hello_world.c -o hello.html</div>
+To get node working, I needed to update my Raspberry Pi to Bullseye (Debian 11). I followed <a href="https://raspberrytips.com/update-raspberry-pi-latest-version/">this guide</a>.<br />
+<br />
+This was an arduous process of running apt-get update, apt-get upgrade, rebooting, manually editing /etc/apt/sources.list, apt-get update, apt-get upgrade, rebooting, apt-get update, apt-get upgrade, apt-get install nodejs, babysitting all of these commands because some of them require user input, losing SSH access as a result of some updates (make sure to run these commands inside screen or tmux!), physically accessing the device to restart sshd, etc.<br />
+<br />
+Finally at the end of it, this command worked:<br />
+<div id='code'>node a.out.js<br />
+(output) Hello, world!</div>
+Hopefully these steps work for you!<br />
+<br />
+<br />
+<h3>Other Useful Info</h3><br />
+If at any point you need to clean build, you can do this:<br />
+<div id='code'>rm -rf llvm/git/build_main_32</div>
+I had to do this once when figuring out the workaround for the exfat symlink issue. If you change the directory emsdk is running in between attempts, the build scripts will not let you pick up where you left off.<br />
+<br />
+<br />
+Here's what got me up to the compiling phase in the iSH app on iPad:<br />
+<br />
+apk add cmake<br />
+apk add make<br />
+apk add clang<br />
+apk add binutils<br />
+apk add libc-dev<br />
+apk add gcc<br />
+apk add libstdc++6<br />
+apk add g++<br />
+git clone https://github.com/emscripten-core/emsdk.git<br />
+cd emsdk<br />
+./emsdk install sdk-upstream-master-32bit<br />
+(note that this will take HOURS to clone LLVM)<br />
+Progress compiling got to 2% and then iSH crashes.<br />
+<br />
+(I filed an <a href="https://github.com/ish-app/ish/issues/2016">issue</a>.)
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Simplify Picking a Restaurant</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/simplify-picking-restaurant.html" />
@@ -4401,6 +4536,8 @@ Fiction:<br />
 <br />
 - Death of a Salesman<br />
 <br />
+- <a href="https://qntm.org/differenc">The Difference</a><br />
+<br />
 - Dirk Gently series<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Dirk Gently's Holistic Detective Agency<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- The Long Dark Tea-Time of the Soul<br />
@@ -4483,6 +4620,9 @@ Fiction:<br />
 <br />
 - Learning to Be Me<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Unsettling and thought-provoking short story by Greg Egan. It could be a Black Mirror episode.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+- <a href="https://qntm.org/mmacevedo">Lena</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Wikipedia article about the first executable image of a human brain (fiction). In the same vein as Greg Egan's work and Black Mirror.<br />
 <br />
 - The Little Prince<br />
 <br />
@@ -4523,65 +4663,6 @@ Fiction:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Futuristic Violence and Fancy Suits<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Zoey Punches the Future in the Dick<br />
 
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>notes.txt</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/notes-txt.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/notes-txt.html" />
-<id>https://memalign.github.io/p/notes-txt.html</id>
-<published>2020-04-13T00:00:00-08:00</published>
-<updated>2020-04-13T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/notes-txt.html'>notes.txt</a>
-</h2>
-</div>
-<img src="/m/ios-notes.png">
-<div id='postdate'>Posted on 4/13/2020<br />
-Tags: <a href='/tags.html'>Programming</a></div>
-At a software engineering internship in 2006, my mentor told me that he kept a paper engineering journal that he put notes in every day as he worked on problems. He gave me one, too. I followed that habit during all of my internships.<br />
-<br />
-Then ~4 years later, I started working as a full-time software engineer. A few months into working, I stopped using a paper notebook. I think part of the reason is that I had a better tool: the bug tracker. Pretty much every assignment I got had a corresponding entry in a bug tracking database. I started keeping the notes of my investigations in bug reports directly so there would be a central and shared source of truth. A mentor at this job said "some of the best engineers" put frequent clear updates in their bugs.<br />
-<br />
-My personal projects had always been note-free, though. Unfortunately, I didn't bring the same problem-solving-and-knowledge-capturing discipline to personal projects until ~2016. That's a whole decade after learning the value of an engineering journal at work!<br />
-<br />
-Now, even for informal personal projects, I keep a notes.txt file in the <a href="/p/source-control.html">git repository</a>. <br />
-<br />
-Here's an excerpt from notes.txt for this website (which is a personal side-project of its own):<br />
-<br />
-<div id='code'>12/25/19<br />
-<br />
-I created a user page in github!<br />
-<br />
-I found that I have to publish from the master branch and the root directory of the memalign.github.io project. I also found that an index.html file with just plaintext contents wouldn&#039;t get served for https://memalign.github.io<br />
-<br />
-( I figured this out by googling and finding:<br />
-https://github.community/t5/GitHub-Pages/index-html-not-working/td-p/1266 )</div>
-(You can see the full notes.txt for the project <a href="/notes.txt">here</a>.)<br />
-<br />
-I use notes.txt to capture:<br />
-<br />
-- Problems I'm running into<br />
-- Thoughts on what might be happening<br />
-- Potential solutions to explore<br />
-- The solution that worked<br />
-- Useful links and other research<br />
-- Useful commands<br />
-- The full steps required to do something novel (for example: getting a 3rd party open source library to build and install correctly)<br />
-- Features I want to add<br />
-- The bug list<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- For a simple side-project a text bug list embedded in my notes is much easier than a full bug tracker
 </div>
 
 ]]>

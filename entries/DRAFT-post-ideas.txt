@@ -1,3 +1,8 @@
+- What's next for Similar Songs?
+  - Integrate Spotify and/or Apple Music players
+  - RSS feed for new additions
+  - Filter/search on the page
+
 - Backing everything up on SSDs, storing them in a fireproof folder, using rsync
 - JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
 - SiteGenerator
@@ -225,6 +230,9 @@ void main() {
 ===
 [/Code]
 
+- More trippy art:
+  - https://mobile.twitter.com/zozuar/status/1612919479582728232
+    - https://twigl.app/?ol=true&mode=7&source=for(float%20i,g,e,R,S%3Bi%2B%2B%3C1e2%3Bo.rgb%2B%3Dhsv(.4-.02/R,(e%3Dmax(e*R*1e4,.7)),.03/exp(e)))%7BS%3D1.%3Bvec3%20p%3Dvec3((FC.xy/r-.5)*g,g-.3)-i/2e5%3Bp.yz*%3Drotate2D(.3)%3Bfor(p%3Dvec3(log(R%3Dlength(p))-t,e%3Dasin(-p.z/R)-.1/R,atan(p.x,p.y)*3.)%3BS%3C1e2%3BS%2B%3DS)e%2B%3Dpow(abs(dot(sin(p.yxz*S),cos(p*S))),.2)/S%3Bg%2B%3De*R*.1%3B%7D
 
 
 - List of tools for making IF:

@@ -1,0 +1,152 @@
+Title: Emscripten on Raspberry Pi 400
+Date: 1/15/2023
+Tags: Programming, Raspberry Pi
+[Image:/m/raspberry-pi-logo.png]
+
+I recently completed a harrowing journey to install Emscripten on a Raspberry Pi 400. There were many hiccups along the way that brought back bad memories from the ~8 years (4 on Gentoo, 4 on Debian) that I used Linux as my daily driver OS.
+
+If you're running a well-trodden configuration, things work pretty smoothly. If you're running anything else, you'll spend hours, days, or even years with systems that aren't working 100%.
+
+For Emscripten, Raspberry Pi 400 is not a well-trodden configuration.
+
+Emscripten provides official binaries for many configurations and I bet the [Link:https://emscripten.org/docs/getting_started/downloads.html#sdk-download-and-install]official tutorial[/Link] goes really quickly and smoothly if you are running an x64 CPU.
+
+They even provide binaries if you're running an arm64 CPU, just install using this command (see [Link:https://github.com/emscripten-core/emsdk/issues/547]this ticket[/Link] for more info):
+[Code]
+./emsdk install latest-arm64-linux
+[/Code]
+
+But if you are running a 32-bit Intel-based (x86) or ARM CPU, then you will need to build from source.
+
+Raspberry Pi 400 is a 32-bit ARM CPU so I found myself needing to build from source.
+
+And, at least on my machine, the default commands did not work.
+
+(I also tried to get Emscripten installed in the iSH iOS app, which emulates an x86 CPU. The emsdk script spent hours cloning the LLVM repository and then started building form source but iSH consistently crashed early in the build process. I gave up. It's possible this will work in the future.)
+
+Here are the steps I followed, what failed, and how I got it working:
+
+My initial configuration: Raspberry Pi 400 running the Buster (Debian 10) version of Raspbian that came with the SD card. I had installed some packages for other purposes so it's possible I won't mention some packages vital to making these steps work.
+
+I needed to install one package:
+[Code]
+sudo apt-get install cmake
+[/Code]
+
+I think that the resources emscripten pulls plus the intermediate build products can end up taking tens of gigs of storage (I only checked once during build and it was 22GB). I didn't have that much free space on the Raspberry Pi's SD card so I used a USB-C external drive. My external drive is formatted exfat.
+
+The exfat filesystem doesn't support symlinks and building will fail hours into the process because of that:
+[Code]
+[ 50%] Linking CXX shared library ../../lib/libLTO.so
+CMake Error: failed to create symbolic link '../../lib/libLTO.so': operation not permitted
+CMake Error: cmake_symlink_library: System Error: Operation not permitted
+make[2]: *** [tools/lto/CMakeFiles/LTO.dir/build.make:168: lib/libLTO.so.16git] Error 1
+make[2]: *** Deleting file 'lib/libLTO.so.16git'
+make[1]: *** [CMakeFiles/Makefile2:17719: tools/lto/CMakeFiles/LTO.dir/all] Error 2
+make: *** [Makefile:152: all] Error 2
+Build failed due to exception!
+[/Code]
+
+Instead of reformatting my external drive, I created a very large disk image on it which I formatted as ext4:
+[Code]
+# 200GB image - I think this is overkill but I wasn't willing to fail because I ran out of disk space
+# Some guides suggest using the fallocate command to create a disk image but I found that command does not work when writing to an exfat drive
+dd if=/dev/zero of=image.iso bs=1G count=200
+
+# Format the image ext4
+mkfs.ext4 -j image.iso
+[/Code]
+
+Then I mounted the disk image and gave the pi user full ownership:
+[Code]
+cd /media/
+sudo mkdir emscripten-disk
+sudo mount /path/to/image.iso emscripten-disk
+cd emscripten-disk
+sudo chown -R pi:pi .
+[/Code]
+
+Within that directory, I ran this:
+[Code]
+git clone https://github.com/emscripten-core/emsdk.git
+cd emsdk
+./emsdk install sdk-upstream-main-32bit -j1
+[/Code]
+
+The "-j1" argument forces build to only use one CPU. When I originally attempted to install without that argument, the build failed with very little feedback. Just this generic error, no specific compiler errors:
+[Code]
+Error 2
+Build failed due to exception!
+[/Code]
+
+I think this is caused by the machine running out of memory (or maybe some other kind of compiler crash).
+
+Of course, forcing building to use only one CPU makes this whole process take much longer. It took ~16 hours for everything to build.
+
+When the build completes, run this:
+[Code]
+./emsdk activate sdk-upstream-main-32bit
+[/Code]
+
+Pay attention to the output of that command because it tells you how to add the right directories to PATH for emcc to be found.
+
+After all that, following the [Link:https://emscripten.org/docs/getting_started/Tutorial.html#tutorial]official tutorial[/Link], I created hello_world.c and tested the compiler:
+[Code]
+emcc hello_world.c
+node a.out.js
+[/Code]
+
+And I got this error:
+[Code]
+/path/to/a.out.js:144
+      throw ex;
+            ^
+ReferenceError: globalThis is not defined
+[/Code]
+
+This is because buster's version of nodejs is 10.24.0, a version before globalThis is supported.
+
+This command did produce hello.html which worked as expected in my browser:
+[Code]
+emcc hello_world.c -o hello.html
+[/Code]
+
+To get node working, I needed to update my Raspberry Pi to Bullseye (Debian 11). I followed [Link:https://raspberrytips.com/update-raspberry-pi-latest-version/]this guide[/Link].
+
+This was an arduous process of running apt-get update, apt-get upgrade, rebooting, manually editing /etc/apt/sources.list, apt-get update, apt-get upgrade, rebooting, apt-get update, apt-get upgrade, apt-get install nodejs, babysitting all of these commands because some of them require user input, losing SSH access as a result of some updates (make sure to run these commands inside screen or tmux!), physically accessing the device to restart sshd, etc.
+
+Finally at the end of it, this command worked:
+[Code]
+node a.out.js
+(output) Hello, world!
+[/Code]
+
+Hopefully these steps work for you!
+
+
+[SectionTitle:Other Useful Info]
+If at any point you need to clean build, you can do this:
+[Code]
+rm -rf llvm/git/build_main_32
+[/Code]
+
+I had to do this once when figuring out the workaround for the exfat symlink issue. If you change the directory emsdk is running in between attempts, the build scripts will not let you pick up where you left off.
+
+
+Here's what got me up to the compiling phase in the iSH app on iPad:
+
+apk add cmake
+apk add make
+apk add clang
+apk add binutils
+apk add libc-dev
+apk add gcc
+apk add libstdc++6
+apk add g++
+git clone https://github.com/emscripten-core/emsdk.git
+cd emsdk
+./emsdk install sdk-upstream-master-32bit
+(note that this will take HOURS to clone LLVM)
+Progress compiling got to 2% and then iSH crashes.
+
+(I filed an [Link:https://github.com/ish-app/ish/issues/2016]issue[/Link].)

@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/food-sheet.png" />
-<meta property="og:description" content="With a toddler at home, we've come to rely on DoorDash as a quick way for the adults to eat tasty food. We're lucky to live in an area densely…" />
+<meta property="og:image" content="https://memalign.github.io/m/raspberry-pi-logo.png" />
+<meta property="og:description" content="I recently completed a harrowing journey to install Emscripten on a Raspberry Pi 400. There were many hiccups along the way that brought back bad memories from the ~8 years…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -77,6 +77,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/pi-emscripten.html'>Emscripten on Raspberry Pi 400</a><br />
 <a href='p/simplify-picking-restaurant.html'>Simplify Picking a Restaurant</a><br />
 <a href='p/trippy-art.html'>Trippy Art</a><br />
 <a href='p/taptoy.html'>Tap Toy</a><br />
@@ -92,8 +93,8 @@
 <a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
 <a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
 <a href='p/day-and-night.html'>Day and Night</a><br />
-<a href='p/lights-off.html'>Lights Off</a><br />
 </div><div id='grid-entry'>
+<a href='p/lights-off.html'>Lights Off</a><br />
 <a href='p/batman-curve.html'>Batman Curve</a><br />
 <a href='p/formulagraph.html'>FormulaGraph</a><br />
 <a href='p/bouncing-ball.html'>Bouncing Ball</a><br />
@@ -109,8 +110,8 @@
 <a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 <a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
-<a href='p/coding-machines.html'>Coding Machines</a><br />
 </div><div id='grid-entry'>
+<a href='p/coding-machines.html'>Coding Machines</a><br />
 <a href='p/clamps.html'>Clamps</a><br />
 <a href='p/emoji-conway.html'>Emoji Simulator</a><br />
 <a href='p/universal-paperclips.html'>Universal Paperclips</a><br />
@@ -129,6 +130,126 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/pi-emscripten.html'>Emscripten on Raspberry Pi 400</a>
+</h2>
+</div>
+<img src="/m/raspberry-pi-logo.png">
+<div id='postdate'>Posted on 1/15/2023<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Raspberry Pi</a></div>
+I recently completed a harrowing journey to install Emscripten on a Raspberry Pi 400. There were many hiccups along the way that brought back bad memories from the ~8 years (4 on Gentoo, 4 on Debian) that I used Linux as my daily driver OS.<br />
+<br />
+If you're running a well-trodden configuration, things work pretty smoothly. If you're running anything else, you'll spend hours, days, or even years with systems that aren't working 100%.<br />
+<br />
+For Emscripten, Raspberry Pi 400 is not a well-trodden configuration.<br />
+<br />
+Emscripten provides official binaries for many configurations and I bet the <a href="https://emscripten.org/docs/getting_started/downloads.html#sdk-download-and-install">official tutorial</a> goes really quickly and smoothly if you are running an x64 CPU.<br />
+<br />
+They even provide binaries if you're running an arm64 CPU, just install using this command (see <a href="https://github.com/emscripten-core/emsdk/issues/547">this ticket</a> for more info):<br />
+<div id='code'>./emsdk install latest-arm64-linux</div>
+But if you are running a 32-bit Intel-based (x86) or ARM CPU, then you will need to build from source.<br />
+<br />
+Raspberry Pi 400 is a 32-bit ARM CPU so I found myself needing to build from source.<br />
+<br />
+And, at least on my machine, the default commands did not work.<br />
+<br />
+(I also tried to get Emscripten installed in the iSH iOS app, which emulates an x86 CPU. The emsdk script spent hours cloning the LLVM repository and then started building form source but iSH consistently crashed early in the build process. I gave up. It's possible this will work in the future.)<br />
+<br />
+Here are the steps I followed, what failed, and how I got it working:<br />
+<br />
+My initial configuration: Raspberry Pi 400 running the Buster (Debian 10) version of Raspbian that came with the SD card. I had installed some packages for other purposes so it's possible I won't mention some packages vital to making these steps work.<br />
+<br />
+I needed to install one package:<br />
+<div id='code'>sudo apt-get install cmake</div>
+I think that the resources emscripten pulls plus the intermediate build products can end up taking tens of gigs of storage (I only checked once during build and it was 22GB). I didn't have that much free space on the Raspberry Pi's SD card so I used a USB-C external drive. My external drive is formatted exfat.<br />
+<br />
+The exfat filesystem doesn't support symlinks and building will fail hours into the process because of that:<br />
+<div id='code'>[ 50%] Linking CXX shared library ../../lib/libLTO.so<br />
+CMake Error: failed to create symbolic link &#039;../../lib/libLTO.so&#039;: operation not permitted<br />
+CMake Error: cmake_symlink_library: System Error: Operation not permitted<br />
+make[2]: *** [tools/lto/CMakeFiles/LTO.dir/build.make:168: lib/libLTO.so.16git] Error 1<br />
+make[2]: *** Deleting file &#039;lib/libLTO.so.16git&#039;<br />
+make[1]: *** [CMakeFiles/Makefile2:17719: tools/lto/CMakeFiles/LTO.dir/all] Error 2<br />
+make: *** [Makefile:152: all] Error 2<br />
+Build failed due to exception!</div>
+Instead of reformatting my external drive, I created a very large disk image on it which I formatted as ext4:<br />
+<div id='code'># 200GB image - I think this is overkill but I wasn&#039;t willing to fail because I ran out of disk space<br />
+# Some guides suggest using the fallocate command to create a disk image but I found that command does not work when writing to an exfat drive<br />
+dd if=/dev/zero of=image.iso bs=1G count=200<br />
+<br />
+# Format the image ext4<br />
+mkfs.ext4 -j image.iso</div>
+Then I mounted the disk image and gave the pi user full ownership:<br />
+<div id='code'>cd /media/<br />
+sudo mkdir emscripten-disk<br />
+sudo mount /path/to/image.iso emscripten-disk<br />
+cd emscripten-disk<br />
+sudo chown -R pi:pi .</div>
+Within that directory, I ran this:<br />
+<div id='code'>git clone https://github.com/emscripten-core/emsdk.git<br />
+cd emsdk<br />
+./emsdk install sdk-upstream-main-32bit -j1</div>
+The "-j1" argument forces build to only use one CPU. When I originally attempted to install without that argument, the build failed with very little feedback. Just this generic error, no specific compiler errors:<br />
+<div id='code'>Error 2<br />
+Build failed due to exception!</div>
+I think this is caused by the machine running out of memory (or maybe some other kind of compiler crash).<br />
+<br />
+Of course, forcing building to use only one CPU makes this whole process take much longer. It took ~16 hours for everything to build.<br />
+<br />
+When the build completes, run this:<br />
+<div id='code'>./emsdk activate sdk-upstream-main-32bit</div>
+Pay attention to the output of that command because it tells you how to add the right directories to PATH for emcc to be found.<br />
+<br />
+After all that, following the <a href="https://emscripten.org/docs/getting_started/Tutorial.html#tutorial">official tutorial</a>, I created hello_world.c and tested the compiler:<br />
+<div id='code'>emcc hello_world.c<br />
+node a.out.js</div>
+And I got this error:<br />
+<div id='code'>/path/to/a.out.js:144<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw ex;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^<br />
+ReferenceError: globalThis is not defined</div>
+This is because buster's version of nodejs is 10.24.0, a version before globalThis is supported.<br />
+<br />
+This command did produce hello.html which worked as expected in my browser:<br />
+<div id='code'>emcc hello_world.c -o hello.html</div>
+To get node working, I needed to update my Raspberry Pi to Bullseye (Debian 11). I followed <a href="https://raspberrytips.com/update-raspberry-pi-latest-version/">this guide</a>.<br />
+<br />
+This was an arduous process of running apt-get update, apt-get upgrade, rebooting, manually editing /etc/apt/sources.list, apt-get update, apt-get upgrade, rebooting, apt-get update, apt-get upgrade, apt-get install nodejs, babysitting all of these commands because some of them require user input, losing SSH access as a result of some updates (make sure to run these commands inside screen or tmux!), physically accessing the device to restart sshd, etc.<br />
+<br />
+Finally at the end of it, this command worked:<br />
+<div id='code'>node a.out.js<br />
+(output) Hello, world!</div>
+Hopefully these steps work for you!<br />
+<br />
+<br />
+<h3>Other Useful Info</h3><br />
+If at any point you need to clean build, you can do this:<br />
+<div id='code'>rm -rf llvm/git/build_main_32</div>
+I had to do this once when figuring out the workaround for the exfat symlink issue. If you change the directory emsdk is running in between attempts, the build scripts will not let you pick up where you left off.<br />
+<br />
+<br />
+Here's what got me up to the compiling phase in the iSH app on iPad:<br />
+<br />
+apk add cmake<br />
+apk add make<br />
+apk add clang<br />
+apk add binutils<br />
+apk add libc-dev<br />
+apk add gcc<br />
+apk add libstdc++6<br />
+apk add g++<br />
+git clone https://github.com/emscripten-core/emsdk.git<br />
+cd emsdk<br />
+./emsdk install sdk-upstream-master-32bit<br />
+(note that this will take HOURS to clone LLVM)<br />
+Progress compiling got to 2% and then iSH crashes.<br />
+<br />
+(I filed an <a href="https://github.com/ish-app/ish/issues/2016">issue</a>.)
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -853,37 +974,8 @@ But don't take my word for it - check it out yourself!<br />
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/day-and-night.html'>Day and Night</a>
-</h2>
-</div>
-<img src="/m/FullMoon2010.jpg">
-<div id='postdate'>Posted on 9/18/2021<br />
-Tags: <a href='/tags.html'>Writing</a>, <a href='/tags.html'>Poetry</a></div>
-Saul made a friend or two<br />
-A friend was successful, Saul celebrated<br />
-A friend had misfortune, Saul felt their pain and supported them with kindness<br />
-Saul had success, the friends celebrated<br />
-Saul had misfortune, they came to the rescue<br />
-Sometimes they didn't see each other but could always pick up where they left off<br />
-Friendships were sometimes superficial and sometimes deep<br />
-They looked past the worst in each other and focused on the best<br />
-Consciously managing impulses, starving envy, amplifying empathy<br />
-Their warmth welcomed others and their circle grew<br />
-<br />
-Luna had some friends<br />
-A friend had professional success, but Luna could have done that job better<br />
-A friend had a relationship, but their partner wasn't very intelligent or funny or interesting or attractive or...<br />
-A friend tried to stay in touch, but it was just superficial. Why are they even bothering?<br />
-A friend was happy to catch up and chat, but they were never the one to initiate. Forget them.<br />
-Luna and a friend had an argument. Luna was still upset later and said some hurtful things, as hurtful as possible. Later, with regret, Luna asked, "Why can't we pick back up where we left off? Can't you see I need you? Can't you see I need compassion?"<br />
-But no one was left to respond
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/day-and-night.html'>Day and Night</a><br />
 <a href='p/lights-off.html'>Lights Off</a><br />
 <a href='p/batman-curve.html'>Batman Curve</a><br />
 <a href='p/formulagraph.html'>FormulaGraph</a><br />

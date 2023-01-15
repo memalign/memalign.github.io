@@ -75,6 +75,8 @@ Fiction:
 
 - Death of a Salesman
 
+- [Link:https://qntm.org/differenc]The Difference[/Link]
+
 - Dirk Gently series
     - Dirk Gently's Holistic Detective Agency
     - The Long Dark Tea-Time of the Soul
@@ -157,6 +159,9 @@ Fiction:
 
 - Learning to Be Me
     - Unsettling and thought-provoking short story by Greg Egan. It could be a Black Mirror episode.
+    
+- [Link:https://qntm.org/mmacevedo]Lena[/Link]
+    - Wikipedia article about the first executable image of a human brain (fiction). In the same vein as Greg Egan's work and Black Mirror.
 
 - The Little Prince
 
