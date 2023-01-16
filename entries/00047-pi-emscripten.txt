@@ -3,7 +3,7 @@ Date: 1/15/2023
 Tags: Programming, Raspberry Pi
 [Image:/m/raspberry-pi-logo.png]
 
-I recently completed a harrowing journey to install Emscripten on a Raspberry Pi 400. There were many hiccups along the way that brought back bad memories from the ~8 years (4 on Gentoo, 4 on Debian) that I used Linux as my daily driver OS.
+I recently completed a harrowing journey to install Emscripten on a Raspberry Pi 400. There were many hiccups along the way that brought back bad memories from the ~8 years that I used Linux (4 on Gentoo, 4 on Debian) as my daily driver OS.
 
 If you're running a well-trodden configuration, things work pretty smoothly. If you're running anything else, you'll spend hours, days, or even years with systems that aren't working 100%.
 
@@ -22,7 +22,7 @@ Raspberry Pi 400 is a 32-bit ARM CPU so I found myself needing to build from sou
 
 And, at least on my machine, the default commands did not work.
 
-(I also tried to get Emscripten installed in the iSH iOS app, which emulates an x86 CPU. The emsdk script spent hours cloning the LLVM repository and then started building form source but iSH consistently crashed early in the build process. I gave up. It's possible this will work in the future.)
+(I also tried to get Emscripten installed in the iSH iOS app, which emulates an x86 CPU. The emsdk script spent hours cloning the LLVM repository and then started building from source but iSH consistently crashed early in the build process. I gave up. It's possible this will work in the future.)
 
 Here are the steps I followed, what failed, and how I got it working:
 
@@ -49,7 +49,7 @@ Build failed due to exception!
 
 Instead of reformatting my external drive, I created a very large disk image on it which I formatted as ext4:
 [Code]
-# 200GB image - I think this is overkill but I wasn't willing to fail because I ran out of disk space
+# 200GB image - I think this is overkill but I wasn't willing to fail because of insufficient disk space
 # Some guides suggest using the fallocate command to create a disk image but I found that command does not work when writing to an exfat drive
 dd if=/dev/zero of=image.iso bs=1G count=200
 
@@ -73,7 +73,7 @@ cd emsdk
 ./emsdk install sdk-upstream-main-32bit -j1
 [/Code]
 
-The "-j1" argument forces build to only use one CPU. When I originally attempted to install without that argument, the build failed with very little feedback. Just this generic error, no specific compiler errors:
+The "-j1" argument forces the build to use only one CPU. When I originally attempted to install without that argument, the build failed with very little feedback. Just this generic error, no specific compiler errors:
 [Code]
 Error 2
 Build failed due to exception!
@@ -81,7 +81,7 @@ Build failed due to exception!
 
 I think this is caused by the machine running out of memory (or maybe some other kind of compiler crash).
 
-Of course, forcing building to use only one CPU makes this whole process take much longer. It took ~16 hours for everything to build.
+Of course, building with only one CPU makes this whole process take much longer. It took ~16 hours for everything to build.
 
 When the build completes, run this:
 [Code]
@@ -104,7 +104,7 @@ And I got this error:
 ReferenceError: globalThis is not defined
 [/Code]
 
-This is because buster's version of nodejs is 10.24.0, a version before globalThis is supported.
+This is because Buster's version of nodejs is 10.24.0, a version before globalThis is supported.
 
 This command did produce hello.html which worked as expected in my browser:
 [Code]

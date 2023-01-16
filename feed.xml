@@ -30,7 +30,7 @@
 <img src="/m/raspberry-pi-logo.png">
 <div id='postdate'>Posted on 1/15/2023<br />
 Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Raspberry Pi</a></div>
-I recently completed a harrowing journey to install Emscripten on a Raspberry Pi 400. There were many hiccups along the way that brought back bad memories from the ~8 years (4 on Gentoo, 4 on Debian) that I used Linux as my daily driver OS.<br />
+I recently completed a harrowing journey to install Emscripten on a Raspberry Pi 400. There were many hiccups along the way that brought back bad memories from the ~8 years that I used Linux (4 on Gentoo, 4 on Debian) as my daily driver OS.<br />
 <br />
 If you're running a well-trodden configuration, things work pretty smoothly. If you're running anything else, you'll spend hours, days, or even years with systems that aren't working 100%.<br />
 <br />
@@ -46,7 +46,7 @@ Raspberry Pi 400 is a 32-bit ARM CPU so I found myself needing to build from sou
 <br />
 And, at least on my machine, the default commands did not work.<br />
 <br />
-(I also tried to get Emscripten installed in the iSH iOS app, which emulates an x86 CPU. The emsdk script spent hours cloning the LLVM repository and then started building form source but iSH consistently crashed early in the build process. I gave up. It's possible this will work in the future.)<br />
+(I also tried to get Emscripten installed in the iSH iOS app, which emulates an x86 CPU. The emsdk script spent hours cloning the LLVM repository and then started building from source but iSH consistently crashed early in the build process. I gave up. It's possible this will work in the future.)<br />
 <br />
 Here are the steps I followed, what failed, and how I got it working:<br />
 <br />
@@ -66,7 +66,7 @@ make[1]: *** [CMakeFiles/Makefile2:17719: tools/lto/CMakeFiles/LTO.dir/all] Erro
 make: *** [Makefile:152: all] Error 2<br />
 Build failed due to exception!</div>
 Instead of reformatting my external drive, I created a very large disk image on it which I formatted as ext4:<br />
-<div id='code'># 200GB image - I think this is overkill but I wasn&#039;t willing to fail because I ran out of disk space<br />
+<div id='code'># 200GB image - I think this is overkill but I wasn&#039;t willing to fail because of insufficient disk space<br />
 # Some guides suggest using the fallocate command to create a disk image but I found that command does not work when writing to an exfat drive<br />
 dd if=/dev/zero of=image.iso bs=1G count=200<br />
 <br />
@@ -82,12 +82,12 @@ Within that directory, I ran this:<br />
 <div id='code'>git clone https://github.com/emscripten-core/emsdk.git<br />
 cd emsdk<br />
 ./emsdk install sdk-upstream-main-32bit -j1</div>
-The "-j1" argument forces build to only use one CPU. When I originally attempted to install without that argument, the build failed with very little feedback. Just this generic error, no specific compiler errors:<br />
+The "-j1" argument forces the build to use only one CPU. When I originally attempted to install without that argument, the build failed with very little feedback. Just this generic error, no specific compiler errors:<br />
 <div id='code'>Error 2<br />
 Build failed due to exception!</div>
 I think this is caused by the machine running out of memory (or maybe some other kind of compiler crash).<br />
 <br />
-Of course, forcing building to use only one CPU makes this whole process take much longer. It took ~16 hours for everything to build.<br />
+Of course, building with only one CPU makes this whole process take much longer. It took ~16 hours for everything to build.<br />
 <br />
 When the build completes, run this:<br />
 <div id='code'>./emsdk activate sdk-upstream-main-32bit</div>
@@ -101,7 +101,7 @@ And I got this error:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw ex;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^<br />
 ReferenceError: globalThis is not defined</div>
-This is because buster's version of nodejs is 10.24.0, a version before globalThis is supported.<br />
+This is because Buster's version of nodejs is 10.24.0, a version before globalThis is supported.<br />
 <br />
 This command did produce hello.html which worked as expected in my browser:<br />
 <div id='code'>emcc hello_world.c -o hello.html</div>
