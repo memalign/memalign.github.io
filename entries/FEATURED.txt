@@ -27,5 +27,5 @@ Pac-Man Dungeon
 - /m/pacmandungeon/index.html
 
 Similar Songs
-- Image: /m/airpodsmax.jpg
+- Image: /m/appleheadphones.png
 - /m/similarsongs.html
