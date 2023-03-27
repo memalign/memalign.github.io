@@ -116,6 +116,8 @@ class MARunloop {
 [/Code]
 
 
+https://github.com/evanw/rand.js/blob/master/rand.js
+
 
 https://gist.github.com/mikkun/6388508
 [Code]

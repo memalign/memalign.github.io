@@ -14,6 +14,19 @@
   - http://pixelverse.org/experiments/natsukashii/
   - https://bbcmic.ro/?experimental=true&#
 
+- Follow-up to FormulaGraph: this project uses a different solution to graph arbitrary formulas: it compiles the formula into a GL shader which can then run on the GPU for every pixel. It results in a high performance experience. https://github.com/evanw/theta
+  - Made by one of the co-founders of Figma
+  - Interesting source files include:
+    - Here's where the formula is "compiled" into a function called eq: https://github.com/evanw/theta/blob/master/src/core/compiler.sk
+    - Here's where eq is used to compute fragColor: https://github.com/evanw/theta/blob/master/glslx/shaders.glslx
+  - Interesting example formulas:
+    - http://thetamath.com/app/abs(x%5E(2)-1)=abs(y%5E(2)-1)
+    - http://thetamath.com/app/sin(x-cosπy)≤sin(y+cosπx)
+    - http://thetamath.com/app/sin(2lnr+θ)≥0
+    - http://thetamath.com/app/cos(x-sin2y)≤cos(y-sin2x)
+    - http://thetamath.com/app/x-sinπy≤y+sinπx
+    - More listed here: https://github.com/evanw/theta/blob/master/src/core/app.sk
+
 - Graphs in JavaScript: https://github.com/vega/vega-lite
 - Syntax highlighting in JavaScript: https://prismjs.com/
 - PalmOS emulator: https://cloudpilot-emu.github.io/app/#/tab/emulation
