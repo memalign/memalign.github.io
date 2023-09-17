@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/space-alphabet.jpg" />
-<meta property="og:description" content="I use this trick when I can't remember a name I used to know. It works for names of actors, teachers, friends of friends, etc. The trick: First, try to…" />
+<meta property="og:image" content="https://memalign.github.io/m/fireworks/fireworks.png" />
+<meta property="og:description" content="Introducing my latest project: Fireworks Tap Toy On this year's Fourth of July, my toddler son discovered a love of fireworks. With Fireworks Tap Toy, I'm trying to bring some…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -24,6 +24,12 @@
 </div><div id='header'><h1>memalign.github.io</h1></div>
 <div id='top-header'><h3>( ( ( featured projects ) ) )</h3></div>
 <div id='projects-grid'>
+  <div id='projects-grid-entry'>
+    <a href='/m/fireworks/index.html'>
+    <div id='projects-grid-title'>Fireworks Tap Toy</div>
+    <div class='rect-img-container'><img src='/m/fireworks/fireworks.png'></div>
+    </a>
+  </div>
   <div id='projects-grid-entry'>
     <a href='/m/taptoy/index.html'>
     <div id='projects-grid-title'>Tap Toy</div>
@@ -77,6 +83,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/fireworks.html'>Fireworks Tap Toy</a><br />
 <a href='p/remember.html'>Remember Forgotten Names</a><br />
 <a href='p/pi-emscripten.html'>Emscripten on Raspberry Pi 400</a><br />
 <a href='p/simplify-picking-restaurant.html'>Simplify Picking a Restaurant</a><br />
@@ -93,8 +100,8 @@
 <a href='p/zen-sleep.html'>Fall Asleep</a><br />
 <a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
 <a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
-<a href='p/day-and-night.html'>Day and Night</a><br />
 </div><div id='grid-entry'>
+<a href='p/day-and-night.html'>Day and Night</a><br />
 <a href='p/lights-off.html'>Lights Off</a><br />
 <a href='p/batman-curve.html'>Batman Curve</a><br />
 <a href='p/formulagraph.html'>FormulaGraph</a><br />
@@ -111,8 +118,8 @@
 <a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 <a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
-<a href='p/coding-machines.html'>Coding Machines</a><br />
 </div><div id='grid-entry'>
+<a href='p/coding-machines.html'>Coding Machines</a><br />
 <a href='p/clamps.html'>Clamps</a><br />
 <a href='p/emoji-conway.html'>Emoji Simulator</a><br />
 <a href='p/universal-paperclips.html'>Universal Paperclips</a><br />
@@ -131,6 +138,41 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/fireworks.html'>Fireworks Tap Toy</a>
+</h2>
+</div>
+<img src="/m/fireworks/fireworks.png">
+<div id='postdate'>Posted on 9/17/2023<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a>, <a href='/tags.html'>Games</a></div>
+Introducing my latest project: <a href="/m/fireworks/index.html">Fireworks Tap Toy</a><br />
+<br />
+On this year's Fourth of July, my toddler son discovered a love of fireworks. With Fireworks Tap Toy, I'm trying to bring some of that magic to the touch screen.<br />
+<br />
+Tap, click, type, or go into "auto launch" mode.<br />
+<br />
+This project is a remix of a few other projects:<br />
+<br />
+- <a href="/m/taptoy/index.html">Tap Toy</a>, which has its own <a href="/p/taptoy.html">story</a><br />
+&nbsp;&nbsp;- I copied and modified index.html and progressive web app pieces<br />
+&nbsp;&nbsp;- I copied over touch, mouse, and keyboard support<br />
+&nbsp;&nbsp;- I copied over sound effects and music utilities<br />
+<br />
+- An old <a href="https://codepen.io/whqet/pen/abooRX">codepen</a> (<a href="/m/fireworks/codepen.html">backup</a>) someone created to teach others how to animate fireworks using JavaScript canvas<br />
+&nbsp;&nbsp;- I chose this over fireworks JavaScript frameworks people have shared because it's so much simpler. I don't like the hassle of dependencies. I don't want to install some tool or import an opaque blob. I just want to write some (ideally self-contained, vanilla) code for fun. Here's the <a href="https://github.com/crashmax-dev/fireworks-js/">top hit</a> for 'fireworks javascript' which I looked into and chose not to use. Where even is the code??<br />
+<br />
+<br />
+Some tips:<br />
+<br />
+- You can add Fireworks Tap Toy to your home screen on iOS or Android. If you do that, it'll behave more like a normal app. (I did the extra bit of work to make this a "progressive web app")<br />
+<br />
+- If you give this to a kid, you can use <a href="https://support.apple.com/en-us/HT202612">Guided Access</a> to prevent them from leaving the app<br />
+
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -935,42 +977,8 @@ Is the key to enlightenment learning to notice your thoughts and then clear your
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/shape-your-destiny.html'>Shape Your Destiny</a>
-</h2>
-</div>
-<img src="/m/brain.jpg">
-<div id='postdate'>Posted on 10/3/2021<br />
-Tags: <a href='/tags.html'>Writing</a>, <a href='/tags.html'>Brain Hacking</a></div>
-A friend of ours shared the eulogy he gave for his dad. In it, he quoted a lesson his father taught him as a kid:<br />
-<blockquote>Watch your thoughts, they become words;<br />
-watch your words, they become actions;<br />
-watch your actions, they become habits;<br />
-watch your habits, they become character;<br />
-watch your character, for it becomes your destiny.</blockquote>
-(This quote and ones with a similar sentiment are often attributed to many different sources. Ultimately, the original is by Frank Outlaw based on <a href="https://quoteinvestigator.com/2013/01/10/watch-your-thoughts/">Quote Investigator</a>'s research.)<br />
-<br />
-I don't think I was taught to watch my thoughts as a kid. At least not in a way that was effective for me.<br />
-<br />
-I was taught that particular actions are bad and why they are bad.<br />
-<br />
-I was taught that jealousy, intolerance, hate, etc are bad.<br />
-<br />
-But I didn't realize that the way I choose to think about things can have a big impact on long-term happiness and fulfillment in life. On friendships and relationships too.<br />
-<br />
-I realized in adulthood that being happy is a choice much of the time. A choice made every day. Focusing on the positive (and even helping to amplify it) can do a lot to diminish the negative: disappointment, annoyance, frustration, misfortune.<br />
-<br />
-Of course, really bad things happen sometimes and you can't just ignore them. It wouldn't be healthy to try to force yourself to be happy when you're truly hurting. But for all the small bad things, with practice it's possible to decide how much energy to spend thinking about them -- and whether to think about them at all. Sometimes negativity can be self-fulfilling: expecting to have a bad time can lead to having a bad time.<br />
-<br />
-This is similar to what I'm trying to say in <a href="/p/day-and-night.html">Day and Night</a>. Thinking envious thoughts leads to envious actions. Comparing yourself to others leads to unempathetic behaviors. And envious actions, unempathetic behaviors lead to a lonely life.<br />
-<br />
-On the other hand, looking for the good and trying to be truly empathetic can lead to happiness, more positivity, and supportive friendships.
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
 <a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
 <a href='p/day-and-night.html'>Day and Night</a><br />
 <a href='p/lights-off.html'>Lights Off</a><br />

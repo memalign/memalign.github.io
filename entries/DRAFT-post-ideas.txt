@@ -57,6 +57,7 @@
       - This guy's website: https://benjdev.fr/
       - This guy's github: https://github.com/cyberbenj
       - Reddit post: https://www.reddit.com/r/pico8/comments/ounyxi/space_trader/
+   - https://sic-benson.itch.io/runaways 
 
 - JavaScript games:
   - https://github.com/DennisBengs/envisionator

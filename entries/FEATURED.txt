@@ -1,3 +1,7 @@
+Fireworks Tap Toy
+- Image: /m/fireworks/fireworks.png
+- /m/fireworks/index.html
+
 Tap Toy
 - Image: /m/taptoy/taptoy.jpg
 - /m/taptoy/index.html

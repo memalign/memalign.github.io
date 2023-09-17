@@ -1,0 +1,27 @@
+Title: Fireworks Tap Toy
+Date: 9/17/2023
+Tags: Programming, Art, Games
+[Image:/m/fireworks/fireworks.png]
+
+Introducing my latest project: [Link:/m/fireworks/index.html]Fireworks Tap Toy[/Link]
+
+On this year's Fourth of July, my toddler son discovered a love of fireworks. With Fireworks Tap Toy, I'm trying to bring some of that magic to the touch screen.
+
+Tap, click, type, or go into "auto launch" mode.
+
+This project is a remix of a few other projects:
+
+- [Link:/m/taptoy/index.html]Tap Toy[/Link], which has its own [Link:/p/taptoy.html]story[/Link]
+  - I copied and modified index.html and progressive web app pieces
+  - I copied over touch, mouse, and keyboard support
+  - I copied over sound effects and music utilities
+
+- An old [Link:https://codepen.io/whqet/pen/abooRX]codepen[/Link] ([Link:/m/fireworks/codepen.html]backup[/Link]) someone created to teach others how to animate fireworks using JavaScript canvas
+  - I chose this over fireworks JavaScript frameworks people have shared because it's so much simpler. I don't like the hassle of dependencies. I don't want to install some tool or import an opaque blob. I just want to write some (ideally self-contained, vanilla) code for fun. Here's the [Link:https://github.com/crashmax-dev/fireworks-js/]top hit[/Link] for 'fireworks javascript' which I looked into and chose not to use. Where even is the code??
+
+
+Some tips:
+
+- You can add Fireworks Tap Toy to your home screen on iOS or Android. If you do that, it'll behave more like a normal app. (I did the extra bit of work to make this a "progressive web app")
+
+- If you give this to a kid, you can use [Link:https://support.apple.com/en-us/HT202612]Guided Access[/Link] to prevent them from leaving the app
