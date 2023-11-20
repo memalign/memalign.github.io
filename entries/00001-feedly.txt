@@ -1,6 +1,6 @@
 Title: RSS and Feedly
 Date: 3/22/2020
-Tags: Programming
+Tags: Programming, RSS
 
 [Image:/m/feedly.jpg]
 

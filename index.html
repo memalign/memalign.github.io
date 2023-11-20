@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/fireworks/fireworks.png" />
-<meta property="og:description" content="Introducing my latest project: Fireworks Tap Toy On this year's Fourth of July, my toddler son discovered a love of fireworks. With Fireworks Tap Toy, I'm trying to bring some…" />
+<meta property="og:image" content="https://memalign.github.io/m/FreshRSS-logo.png" />
+<meta property="og:description" content="This year has been rocky for free APIs I've enjoyed adopting in personal projects. Twitter (now X) killed 3rd party clients, Reddit made similarly killer API pricing changes, and now…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -83,6 +83,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/freshrss.html'>FreshRSS</a><br />
 <a href='p/fireworks.html'>Fireworks Tap Toy</a><br />
 <a href='p/remember.html'>Remember Forgotten Names</a><br />
 <a href='p/pi-emscripten.html'>Emscripten on Raspberry Pi 400</a><br />
@@ -99,8 +100,8 @@
 <a href='p/fussy-checklist.html'>Fussy Baby Checklist</a><br />
 <a href='p/zen-sleep.html'>Fall Asleep</a><br />
 <a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
-<a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
 </div><div id='grid-entry'>
+<a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
 <a href='p/day-and-night.html'>Day and Night</a><br />
 <a href='p/lights-off.html'>Lights Off</a><br />
 <a href='p/batman-curve.html'>Batman Curve</a><br />
@@ -117,8 +118,8 @@
 <a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
 <a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
-<a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 </div><div id='grid-entry'>
+<a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 <a href='p/coding-machines.html'>Coding Machines</a><br />
 <a href='p/clamps.html'>Clamps</a><br />
 <a href='p/emoji-conway.html'>Emoji Simulator</a><br />
@@ -138,6 +139,84 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/freshrss.html'>FreshRSS</a>
+</h2>
+</div>
+<img src="/m/FreshRSS-logo.png">
+<div id='postdate'>Posted on 11/19/2023<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>RSS</a></div>
+This year has been rocky for free APIs I've enjoyed adopting in personal projects. Twitter (now X) killed 3rd party clients, Reddit made similarly killer API pricing changes, and now Feedly has started charging too.<br />
+<br />
+Fortunately, Feedly's API pricing is very reasonable right now: $8/mo or $72/year!<br />
+<br />
+Feedly provides a great service, as I <a href="/p/feedly.html">wrote</a> in March 2020. It's worth paying for at this price.<br />
+<br />
+I've depended on Feedly ever since Google Reader shut down in 2013. I seamlessly migrated and never had problems for 10 years of use. Feedly is a great way to keep up to date with RSS feeds and there are several great RSS reader apps that support it. Feedly is very reliable and "just works".<br />
+<br />
+But this is an era of paid subscription overload. Even though the price is reasonable, I sought out alternatives that wouldn't carry the risk of incremental price increases over the coming years.<br />
+<br />
+And I found one that, for the past few weeks, has proven to be good enough to replace Feedly for me: <a href="https://www.freshrss.org">FreshRSS</a> (<a href="https://github.com/FreshRSS/FreshRSS">GitHub</a>).<br />
+<br />
+It's a free and open source project but using it came with the cost of time. I spent the past few weeks writing a bunch of code, finding a reliable host, and cross-checking with Feedly to ensure I'm getting good results.<br />
+<br />
+Here are some notes on adopting FreshRSS in a personal project. The complexity and uncertainty are the downsides of using this instead of Feedly. The benefits include its price (free), that it is open source, and the option to self-host.<br />
+<br />
+- Export existing feeds from Feedly as an OPML file. <a href="https://docs.feedly.com/article/52-how-can-i-export-my-sources-and-feeds-through-opml">Instructions</a>.<br />
+<br />
+- Find a FreshRSS host or host it yourself. Here's a list of <a href="https://freshrss.org/cloud-providers.html">official hosts</a>. I tried one, but found it to be unreliable -- it seemed to purge my history after ~1 week. I switched to a different one and have had better results.<br />
+<br />
+- Once logged into the FreshRSS host, update some settings:<br />
+&nbsp;&nbsp;- Profile: create an Authentication token. This will be used to automate updating all feeds. Create an API password. This will be used when you adopt the API to load feed information, news entries, and mark them as read. Take note of the API URL (example: https://host.tld/p/api/).<br />
+&nbsp;&nbsp;- Archiving: change settings to keep longer history. I think this helps avoid old articles reappearing as unread in your feeds. These settings do not appear to be honored by all hosts.<br />
+<br />
+- Import OPML file into FreshRSS: In the web UI, click the folder icon, then Subscription Management, then the folder icon (again), then Import / Export. Then you can pick a file to upload to import.<br />
+<br />
+- To reliably refresh all feeds from the source, I've found it necessary to set up a cron job on a server I own to force FreshRSS to refresh. I'm running this every 4 minutes, but FreshRSS will only honor it every ~15-20 minutes. Use your username and the authentication token configured in FreshRSS settings. Make sure to URL encode them (space will need to be replaced by +, special characters will need to be %-encoded).<br />
+<div id='code'>*/4 * * * * /usr/bin/sh /path/to/updateFreshRSS.sh</div>
+updateFreshRSS.sh:<br />
+<div id='code'>/usr/bin/curl &#039;https://host.tld/p/i/?c=feed&amp;a=actualize&amp;ajax=1&amp;force=1&amp;user=YOURUSERNAME&amp;token=AUTHENTICATIONTOKENSETABOVE&#039;</div>
+&nbsp;&nbsp;- Most RSS feeds keep enough history that you won't miss entries even if you refresh infrequently. For me, one feed in particular lost entries in FreshRSS compared to Feedly: the unofficial Hacker News front page feed from <a href="https://hnrss.github.io/">hnrss.org</a>. Because this feed seems to provide a current snapshot rather than full history, FreshRSS's less frequent refreshes ended up missing entries that Feedly would catch. My frequent cron job plus changing the feed url from https://hnrss.org/frontpage to https://hnrss.org/frontpage?count=100 worked well enough to nearly match Feedly's results (and any discrepancies were actually desirable, like missing posts that were quickly flagged to death).<br />
+<br />
+- Now, you're ready to adopt the API. FreshRSS's API is identical to Google Reader's! The official documentation even links to old web pages that detail the Google Reader API. I found a few docs helpful:<br />
+&nbsp;&nbsp;- The <a href="http://freshrss.github.io/FreshRSS/en/developers/06_GoogleReader_API.html">official documentation</a><br />
+&nbsp;&nbsp;- The server-side <a href="https://github.com/FreshRSS/FreshRSS/blob/edge/p/api/greader.php">code</a> that implements the API<br />
+&nbsp;&nbsp;- This <a href="https://web.archive.org/web/20130710044440/http://undoc.in/api.html">old archived webpage</a> that details the Google Reader API<br />
+<br />
+Some important requests:<br />
+<br />
+<div id='code'>Authenticate:<br />
+curl &#039;https://host.tld/p/api/greader.php/accounts/ClientLogin?Email=YOURUSERNAME&amp;Passwd=YOURAPIPASSWORD&#039;<br />
+<br />
+This gives a response that looks like:<br />
+SID=YOURUSERNAME/123456123456123456abcdefabcdef1234561234<br />
+LSID=null<br />
+Auth=YOURUSERNAME/123456123456123456abcdefabcdef1234561234<br />
+<br />
+Save the string that comes after &quot;Auth=&quot;. I&#039;ll call that YOURAUTH below.<br />
+<br />
+Get a &quot;write token&quot; that will allow you to mark entries as read:<br />
+curl -H &quot;Authorization:GoogleLogin auth=YOURAUTH&quot; &#039;https://host.tld/p/api/greader.php/reader/api/0/token&#039;<br />
+<br />
+The response is a string. Use the string as WRITETOKEN below.<br />
+<br />
+Get all news entries in JSON form:<br />
+curl -H &quot;Authorization:GoogleLogin auth=YOURAUTH&quot; &#039;https://host.tld/p/api/greader.php/reader/api/0/stream/contents/reading-list&#039;<br />
+<br />
+Get all unread news entries in JSON form:<br />
+curl -H &quot;Authorization:GoogleLogin auth=YOURAUTH&quot; &#039;https://host.tld/p/api/greader.php/reader/api/0/stream/contents/reading-list?xt=user/-/state/com.google/read&#039;<br />
+<br />
+Mark an entry (or multiple entries) as read using their entry IDs. In this example, I&#039;ve put ENTRYID1, ENTRYID2, and ENTRYID3 as example placeholders:<br />
+curl -H &quot;Authorization:GoogleLogin auth=YOURAUTH&quot; &#039;https://host.tld/p/api/greader.php/reader/api/0/edit-tag&#039; -X POST -d &#039;T=WRITETOKEN&amp;a=user/-/state/com.google/read&amp;i=ENTRYID1&amp;i=ENTRYID2&amp;i=ENTRYID3&#039;<br />
+<br />
+Get your subscription list, which gives you an icon image URL for each feed:<br />
+curl -H &quot;Authorization:GoogleLogin auth=YOURAUTH&quot; &#039;https://host.tld/p/api/greader.php/reader/api/0/subscription/list?output=json&#039;</div>
+
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -938,46 +1017,8 @@ Here's my checklist for trying to resolve fussiness:<br />
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/zen-sleep.html'>Fall Asleep</a>
-</h2>
-</div>
-<img src="/m/japan-men-bridge.jpg">
-<div id='postdate'>Posted on 11/13/2021<br />
-Tags: <a href='/tags.html'>Brain Hacking</a></div>
-I've always had a hard time <a href="/p/emoji-conway.html">falling asleep</a>. Closing my eyes invites a whirlwind of thoughts. I can't stop thinking so I can't fall asleep.<br />
-<br />
-Then I found a way to clear my head and fall asleep quickly. It's been working for months now!<br />
-<br />
-Here's what I do:<br />
-<br />
-As I shower and brush my teeth before bed, I spend that ~30 minutes clearing my head. When I notice a thought, I think "ah" and let the thought go, let it dissipate and fade. This isn't the time for thinking and problem solving, it's the time to empty my mind so I can fall asleep.<br />
-<br />
-I repeat this for every thought that creeps in. I've found it also helps to focus on my immediate senses to keep my head emptier: the sound of the toothbrush, the soap/water/friction on my hands. I'm grounded in the present. I'm not thinking about these sounds and feelings; I'm just experiencing them without commentary.<br />
-<br />
-Sometimes this helps me notice a feeling of muscle tightness. Maybe I'm furrowing my brow or frowning. Maybe I have tightness in my shoulders. I release the tension and physically relax.<br />
-<br />
-I continue this meditation as I slide into bed until I fall asleep. And I continue it if I wake up in the middle of the night.<br />
-<br />
-<img src="/m/horizontalseparator.png"><br />
-I don't know if this technique is real "meditation" in the Zen Buddhism sense but I was inspired to try it after, months ago, stumbling upon <a href="https://nkanaev.com/zen101/en/">101 Zen Stories</a> (<a href="https://en.wikipedia.org/wiki/101_Zen_Stories">Wikipedia</a>). (Warning: these are old and may contain antiquated or even racist terms)<br />
-<br />
-I don't understand them even though they are simple. I tried to search for answers about one of the more famous stories: <a href="https://nkanaev.com/zen101/en/021/">The Sound of One Hand</a> (<a href="/m/sound-of-one-hand.html">mirror</a>).<br />
-<br />
-I found a <a href="https://www.quora.com/What-is-the-meaning-behind-What-is-the-sound-of-one-hand-clapping">Quora thread</a> with some discussion. No answer was perfectly satisfying but two similar posts stood out:<br />
-<br />
-Khiêm Bảo Thiện:<br />
-<blockquote>However, when one asks you about one hand clapping - which is extraordinary, uncommon, unseen, not understandable - your mind starts to set on a quest for answer, which raises a lot of noises, like you throw a big rock into a tranquil lake. ... So, using this koan and similar, for certain situations, helps the learner realize his/her mind's activities.</blockquote>
-Chris Peters:<br />
-<blockquote>The idea behind this phrase is not literal, but is meant to "blend" your mind Matrix-style and hopefully trick you into observing your mind as it kinda freaks out.</blockquote>
-Is the key to enlightenment learning to notice your thoughts and then clear your head? Who knows. I certainly feel lighter when my head is clear, my muscles are relaxed, and I float off to sleep.<br />
-
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/zen-sleep.html'>Fall Asleep</a><br />
 <a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
 <a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
 <a href='p/day-and-night.html'>Day and Night</a><br />

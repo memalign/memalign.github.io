@@ -1,0 +1,78 @@
+Title: FreshRSS
+Date: 11/19/2023
+Tags: Programming, RSS
+[Image:/m/FreshRSS-logo.png]
+
+This year has been rocky for free APIs I've enjoyed adopting in personal projects. Twitter (now X) killed 3rd party clients, Reddit made similarly killer API pricing changes, and now Feedly has started charging too.
+
+Fortunately, Feedly's API pricing is very reasonable right now: $8/mo or $72/year!
+
+Feedly provides a great service, as I [Link:/p/feedly.html]wrote[/Link] in March 2020. It's worth paying for at this price.
+
+I've depended on Feedly ever since Google Reader shut down in 2013. I seamlessly migrated and never had problems for 10 years of use. Feedly is a great way to keep up to date with RSS feeds and there are several great RSS reader apps that support it. Feedly is very reliable and "just works".
+
+But this is an era of paid subscription overload. Even though the price is reasonable, I sought out alternatives that wouldn't carry the risk of incremental price increases over the coming years.
+
+And I found one that, for the past few weeks, has proven to be good enough to replace Feedly for me: [Link:https://www.freshrss.org]FreshRSS[/Link] ([Link:https://github.com/FreshRSS/FreshRSS]GitHub[/Link]).
+
+It's a free and open source project but using it came with the cost of time. I spent the past few weeks writing a bunch of code, finding a reliable host, and cross-checking with Feedly to ensure I'm getting good results.
+
+Here are some notes on adopting FreshRSS in a personal project. The complexity and uncertainty are the downsides of using this instead of Feedly. The benefits include its price (free), that it is open source, and the option to self-host.
+
+- Export existing feeds from Feedly as an OPML file. [Link:https://docs.feedly.com/article/52-how-can-i-export-my-sources-and-feeds-through-opml]Instructions[/Link].
+
+- Find a FreshRSS host or host it yourself. Here's a list of [Link:https://freshrss.org/cloud-providers.html]official hosts[/Link]. I tried one, but found it to be unreliable -- it seemed to purge my history after ~1 week. I switched to a different one and have had better results.
+
+- Once logged into the FreshRSS host, update some settings:
+  - Profile: create an Authentication token. This will be used to automate updating all feeds. Create an API password. This will be used when you adopt the API to load feed information, news entries, and mark them as read. Take note of the API URL (example: https://host.tld/p/api/).
+  - Archiving: change settings to keep longer history. I think this helps avoid old articles reappearing as unread in your feeds. These settings do not appear to be honored by all hosts.
+
+- Import OPML file into FreshRSS: In the web UI, click the folder icon, then Subscription Management, then the folder icon (again), then Import / Export. Then you can pick a file to upload to import.
+
+- To reliably refresh all feeds from the source, I've found it necessary to set up a cron job on a server I own to force FreshRSS to refresh. I'm running this every 4 minutes, but FreshRSS will only honor it every ~15-20 minutes. Use your username and the authentication token configured in FreshRSS settings. Make sure to URL encode them (space will need to be replaced by +, special characters will need to be %-encoded).
+[Code]
+*/4 * * * * /usr/bin/sh /path/to/updateFreshRSS.sh
+[/Code]
+
+updateFreshRSS.sh:
+[Code]
+/usr/bin/curl 'https://host.tld/p/i/?c=feed&a=actualize&ajax=1&force=1&user=YOURUSERNAME&token=AUTHENTICATIONTOKENSETABOVE'
+[/Code]
+
+  - Most RSS feeds keep enough history that you won't miss entries even if you refresh infrequently. For me, one feed in particular lost entries in FreshRSS compared to Feedly: the unofficial Hacker News front page feed from [Link:https://hnrss.github.io/]hnrss.org[/Link]. Because this feed seems to provide a current snapshot rather than full history, FreshRSS's less frequent refreshes ended up missing entries that Feedly would catch. My frequent cron job plus changing the feed url from https://hnrss.org/frontpage to https://hnrss.org/frontpage?count=100 worked well enough to nearly match Feedly's results (and any discrepancies were actually desirable, like missing posts that were quickly flagged to death).
+
+- Now, you're ready to adopt the API. FreshRSS's API is identical to Google Reader's! The official documentation even links to old web pages that detail the Google Reader API. I found a few docs helpful:
+  - The [Link:http://freshrss.github.io/FreshRSS/en/developers/06_GoogleReader_API.html]official documentation[/Link]
+  - The server-side [Link:https://github.com/FreshRSS/FreshRSS/blob/edge/p/api/greader.php]code[/Link] that implements the API
+  - This [Link:https://web.archive.org/web/20130710044440/http://undoc.in/api.html]old archived webpage[/Link] that details the Google Reader API
+
+Some important requests:
+
+[Code]
+Authenticate:
+curl 'https://host.tld/p/api/greader.php/accounts/ClientLogin?Email=YOURUSERNAME&Passwd=YOURAPIPASSWORD'
+
+This gives a response that looks like:
+SID=YOURUSERNAME/123456123456123456abcdefabcdef1234561234
+LSID=null
+Auth=YOURUSERNAME/123456123456123456abcdefabcdef1234561234
+
+Save the string that comes after "Auth=". I'll call that YOURAUTH below.
+
+Get a "write token" that will allow you to mark entries as read:
+curl -H "Authorization:GoogleLogin auth=YOURAUTH" 'https://host.tld/p/api/greader.php/reader/api/0/token'
+
+The response is a string. Use the string as WRITETOKEN below.
+
+Get all news entries in JSON form:
+curl -H "Authorization:GoogleLogin auth=YOURAUTH" 'https://host.tld/p/api/greader.php/reader/api/0/stream/contents/reading-list'
+
+Get all unread news entries in JSON form:
+curl -H "Authorization:GoogleLogin auth=YOURAUTH" 'https://host.tld/p/api/greader.php/reader/api/0/stream/contents/reading-list?xt=user/-/state/com.google/read'
+
+Mark an entry (or multiple entries) as read using their entry IDs. In this example, I've put ENTRYID1, ENTRYID2, and ENTRYID3 as example placeholders:
+curl -H "Authorization:GoogleLogin auth=YOURAUTH" 'https://host.tld/p/api/greader.php/reader/api/0/edit-tag' -X POST -d 'T=WRITETOKEN&a=user/-/state/com.google/read&i=ENTRYID1&i=ENTRYID2&i=ENTRYID3'
+
+Get your subscription list, which gives you an icon image URL for each feed:
+curl -H "Authorization:GoogleLogin auth=YOURAUTH" 'https://host.tld/p/api/greader.php/reader/api/0/subscription/list?output=json'
+[/Code]
