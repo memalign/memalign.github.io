@@ -58,6 +58,9 @@
       - This guy's github: https://github.com/cyberbenj
       - Reddit post: https://www.reddit.com/r/pico8/comments/ounyxi/space_trader/
    - https://sic-benson.itch.io/runaways 
+   - https://cheesemug.itch.io/breakthrough
+   - https://joeamericagayms.itch.io/rpg-scoll-1k
+   - https://unikotoast.itch.io/buns-bunny-survivor
 
 - JavaScript games:
   - https://github.com/DennisBengs/envisionator

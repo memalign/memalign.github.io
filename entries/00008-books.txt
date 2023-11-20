@@ -16,110 +16,112 @@ Here’s a list of some books and short stories I’ve read. I’ll try to updat
 
 Non-Fiction:
 
-- After Steve
+- After Steve by Tripp Mickle
 
-- The Art of Leadership: Small Things Done Well
+- The Art of Leadership: Small Things Done Well by Michael Lopp
 
-- Becoming Steve Jobs
+- Becoming Steve Jobs by Brent Schlender and Rick Tetzeli
 
-- Black Like Me
+- Black Like Me by John Howard Griffin
 
-- The Checklist Manifesto
+- The Checklist Manifesto by Atul Gawande
 
-- Creative Selection
+- Creative Selection by Ken Kocienda
 
-- Extreme Ownership
+- Extreme Ownership by Jocko Willink and Leif Babin
     - The lessons in this book directly apply to engineering management and leadership. I highly recommend it.
 
-- Getting to Yes
+- Getting to Yes by Roger Fisher and William Ury
 
-- The Hard Thing About Hard Things
+- The Hard Thing About Hard Things by Ben Horowitz
 
-- How to Win Friends and Influence People
+- How to Win Friends and Influence People by Dale Carnegie
     - Useful lessons include: show sincere appreciation for people, take authentic interest, understand their perspective, admit when you're wrong
     - The bad: racist and sexist commentary and advice; a passive aggressive approach to giving feedback. For feedback, I much prefer the advice in Radical Candor. I find that's a more authentic and less manipulative way to interact with others.
 
-- Make Something Wonderful
+- Make Something Wonderful by the Steve Jobs Archive
 
-- Punished by Rewards
+- Punished by Rewards by Alfie Kohn
 
-- Radical Candor
+- Radical Candor by Kim Scott
     - This is another great book for leaders and managers.
 
-- Steve Jobs
+- Steve Jobs by Walter Isaacson
 
-- Thinking Fast and Slow
+- Thinking Fast and Slow by Daniel Kahnemant
 
 
 
 Fiction:
 
-- The Alchemist
+- The Alchemist by Paulo Coelho
 
-- '--All You Zombies--'
+- '--All You Zombies--' by Robert A. Heinlein
 
-- American Gods
+- American Gods by Neil Gaiman
 
-- Atlas Shrugged
+- Antibodies by Charlie Stross
 
-- The Bicentennial Man
+- Atlas Shrugged by Ayn Rand
 
-- Brave New World
+- The Bicentennial Man by Isaac Asimov
 
-- Breakfast of Champions
+- Brave New World by Aldous Huxley
 
-- Cat’s Cradle
+- Breakfast of Champions by Kurt Vonnegut
+
+- Cat’s Cradle by Kurt Vonnegut
     - I like Vonnegut’s writing for its humor, depth, and straightforwardness. He’s one of the few authors with more than one book on my list.
 
-- The Catcher in the Rye
+- The Catcher in the Rye by J. D. Salinger
 
-- Choke
+- Choke by Chuck Palahniuk
 
-- Death of a Salesman
+- Death of a Salesman by Arthur Miller
 
 - [Link:https://qntm.org/differenc]The Difference[/Link]
 
-- Dirk Gently series
+- Dirk Gently series by Douglas Adams
     - Dirk Gently's Holistic Detective Agency
     - The Long Dark Tea-Time of the Soul
 
-- Dune
+- Dune by Frank Herbert
     - The writing is dense and not usually what I would choose to read. I’m still glad I read it because it’s one of the classics which gets a lot of references.
 
 - [Link:http://www.galactanet.com/oneoff/theegg_mod.html]The Egg[/Link]
     - Wonderful short story by Andy Weir
 
-- Ender’s Game
+- Ender’s Game by Orson Scott Card
     - One of my favorite books. It’s an interesting story which also influences my own thoughts about leadership in the real world.
 
-- Ender’s Shadow
+- Ender’s Shadow by Orson Scott Card
     - A sort-of-sequel to Ender’s Game. I enjoyed how it layers extra depth onto a story I already loved.
 
-- Fahrenheit 451
+- Fahrenheit 451 by Ray Bradbury
 
-- Fight Club
+- Fight Club by Chuck Palahniuk
 
-- Foundation trilogy
+- Foundation trilogy by Isaac Asimov
     - Foundation
     - Foundation and Empire
     - Second Foundation
 
     - Asimov is another author with many books on my list. I think about these stories a lot today (in the year 2020) when things feel out of control.
 
-- Girl with the Dragon Tattoo series
+- Girl with the Dragon Tattoo series by Stieg Larsson
     - The Girl with the Dragon Tattoo
     - The Girl Who Played with Fire
     - The Girl Who Kicked the Hornets’ Nest
 
-- The Gods Themselves
+- The Gods Themselves by Isaac Asimov
 
-- Good Omens
+- Good Omens by Terry Pratchett and Neil Gaiman
 
-- The Graduate
+- The Graduate by Charles Webb
 
-- The Great Gatsby
+- The Great Gatsby by F. Scott Fitzgerald
 
-- Harry Potter series
+- Harry Potter series by J. K. Rowling
     - Harry Potter and the Sorcerer’s Stone
     - Harry Potter and the Chamber of Secrets
     - Harry Potter and the Prisoner of Azkaban
@@ -130,7 +132,7 @@ Fiction:
 
     - A series core to my childhood and young adulthood. I got the first book as a present from my grandmother for graduating 5th grade.
 
-- Hitchhiker’s Guide to the Galaxy trilogy
+- Hitchhiker’s Guide to the Galaxy trilogy by Douglas Adams
     - The Hitchhiker’s Guide to the Galaxy
     - The Restaurant at the End of the Universe
     - Life, the Universe and Everything
@@ -141,14 +143,14 @@ Fiction:
 
     - Funny and light while still carrying depth. Some of my favorites.
 
-- Hyperion
+- Hyperion by Dan Simmons
     - Interesting stories though I wish I had known up-front that there would be no ending to tie off loose ends and plot-lines.
 
-- The Illustrated Man
+- The Illustrated Man by Ray Bradbury
 
-- I Have No Mouth, and I Must Scream
+- I Have No Mouth, and I Must Scream by Harlan Ellison
 
-- John Dies at the End series
+- John Dies at the End series by David Wong (Jason Pargin)
     - John Dies at the End
     - This Book is Full of Spiders
     - What the Hell Did I Just Read
@@ -163,13 +165,13 @@ Fiction:
     - Unsettling and thought-provoking short story by Greg Egan. It could be a Black Mirror episode.
     
 - [Link:https://qntm.org/mmacevedo]Lena[/Link]
-    - Wikipedia article about the first executable image of a human brain (fiction). In the same vein as Greg Egan's work and Black Mirror.
+    - Fictional Wikipedia article about the first executable image of a human brain. In the same vein as Greg Egan's work and Black Mirror.
 
-- The Little Prince
+- The Little Prince by Antoine de Saint-Exupéry
 
-- Lord of the Flies
+- Lord of the Flies by William Golding
 
-- Lord of the Rings
+- Lord of the Rings by J. R. R. Tolkien
     - The Hobbit
     - The Fellowship of the Ring
     - The Two Towers
@@ -177,31 +179,35 @@ Fiction:
 
     - Dense fantasy classics. I’m glad I’ve read them but I don’t love them. I tried to read the Silmarillion but that was way too far in the wrong direction for me (even more dense and way less story).
 
-- The Perks of Being a Wallflower
+- The Perks of Being a Wallflower by Stephen Chbosky
     - Really resonated with my angsty teenager self
 
-- Permutation City
+- Permutation City by Greg Egan
 
-- The Red Pony
+- The Red Pony by John Steinbeck
 
-- Replay
+- Replay by Ken Grimwood
     - One of my favorite books: fun, fast, thought-provoking
 
-- Slaughterhouse-Five
+- Slaughterhouse-Five by Kurt Vonnegut
 
-- Snow Crash
+- Snow Crash by Neal Stephenson
 
-- The Terminal Experiment
+- The Terminal Experiment by Robert J. Sawyer
+
+- Understand by Ted Chiang
 
 - Wang's Carpets
     - Another short story by Greg Egan
 
-- Watchmen
+- Watchmen by Alan Moore, Dave Gibbons, and John Higgins
 
-- Watership Down
+- Watership Down by Richard Adams
 
-- [Link:https://www.nature.com/articles/436150a]What's expected of us[/Link]
+- [Link:https://www.nature.com/articles/436150a]What's expected of us[/Link] by Ted Chiang
 
-- Zoey Ashe series
+- William and Mary by Roald Dahl
+
+- Zoey Ashe series by Jason Pargin
     - Futuristic Violence and Fancy Suits
     - Zoey Punches the Future in the Dick
