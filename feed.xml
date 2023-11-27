@@ -5,10 +5,53 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2023-11-19T00:00:00-08:00</updated>
+<updated>2023-11-26T00:00:00-08:00</updated>
 <rights>Copyright © 2023, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>AirDesk</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/airdesk.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/airdesk.html" />
+<id>https://memalign.github.io/p/airdesk.html</id>
+<published>2023-11-26T00:00:00-08:00</published>
+<updated>2023-11-26T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/airdesk.html'>AirDesk</a>
+</h2>
+</div>
+<img src="/m/airdesk.jpg">
+<div id='postdate'>Posted on 11/26/2023<br />
+Tags: <a href='/tags.html'>Parenting</a>, <a href='/tags.html'>Tools</a>, <a href='/tags.html'>Leisure</a></div>
+There's not enough time in the day for everything I want and need to do. Parenting, work, exercise, hobbies, sleep, etc.<br />
+<br />
+I've found that even optimizing a few minutes here and there can add up to make life easier and more enjoyable. I still use tools for consuming <a href="/p/tts-download-into-brain.html">text</a> and <a href="/p/speed-up-av.html">audio/video</a> faster.<br />
+<br />
+Here's one of the biggest new optimizations I was able to make this year.<br />
+<br />
+I had a bunch of work time and a bunch of hobby time I wanted to spend in front of a keyboard. This is thoughtful writing or programming time that couldn't be stolen a few minutes at a time while waiting in line, walking between meetings, etc.<br />
+<br />
+I also had a bunch of underutilized time on a stationary exercise bike. I mostly spent that time reading news feeds or watching TV/movies. I enjoyed that a lot, but it wasn't the right balance of time spent doing that when I had other things I wanted to prioritize.<br />
+<br />
+I searched for a product that would let me use a laptop or iPad + keyboard case while exercising on the stationary bike.<br />
+<br />
+I came across <a href="https://airdesks.com">airdesks.com</a> and bought their <a href="https://airdesks.com/products/laptop/laptop-desk/">laptop desk</a>. I got the 64" tall, "Average Size Laptop", No AirShelves config. It's been awesome. I use it on the bike every day and occasionally as a standing desk.<br />
+<br />
+Right now, I'm writing this post while exercising on the bike while my son is napping -- something I couldn't have squeezed in without this desk!<br />
+
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>FreshRSS</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/freshrss.html" />
@@ -3993,63 +4036,6 @@ function runEventLoop() {<br />
 <br />
 var pauseAI = 0<br />
 runEventLoop()</div>
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>Fall Down the Rabbit Hole</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/rabbit-hole.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/rabbit-hole.html" />
-<id>https://memalign.github.io/p/rabbit-hole.html</id>
-<published>2020-05-15T00:00:00-08:00</published>
-<updated>2020-05-15T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/rabbit-hole.html'>Fall Down the Rabbit Hole</a>
-</h2>
-</div>
-<img src="/m/whiterabbit.jpg">
-<div id='postdate'>Posted on 5/15/2020<br />
-Tags: <a href='/tags.html'>Leisure</a></div>
-I enjoy following my interests and making connections that take me on tangents. This is a hobby that's supercharged by the internet.<br />
-<br />
-<br />
-A recent example:<br />
-<br />
-I was in the mood to read a good book so I asked my coworkers for recommendations. While reading the most enticing one, I had the idea to write about <a href="/p/books.html">notable books I've read</a>. While I wrote that, I did a little research into those books on Wikipedia and I discovered that, after Douglas Adams died, a concluding Hitchhiker's Guide book was published that I hadn't heard about. I read <a href="https://en.wikipedia.org/wiki/And_Another_Thing..._(novel)">that book</a> next. I refreshed my memory on his other work and saw that there was a 2016 TV series for <a href="https://www.imdb.com/title/tt4047038/">Dirk Gently's Holistic Detective Agency</a>. I watched the first episode and liked it so I binged its two seasons over the following days. I haven't read the original Dirk Gently books (and my impression is that the TV series is only loosely based on them) so I'm going to read those next. Who knows where those will take me!<br />
-<br />
-<br />
-A similar activity that can also be fun is to realize, deep into a conversation with people, that a chain of tangentially connected ideas led you to the current topic. Then you can work backwards together to figure out how you got there.<br />
-<br />
-For example:<br />
-<br />
-- What the heck led us to talking about Trader Joe's Everything but the Bagel Sesame Seasoning?<br />
-<br />
-- We were talking about having avocado toast and that seasoning goes great on it<br />
-<br />
-- Before that, we were talking about how your neighbor has an avocado tree<br />
-<br />
-- Before that, we were talking about fruit trees<br />
-<br />
-- Before that, we were talking about how Silicon Valley was largely covered in orchards before the tech boom. It was called the <a href="https://en.wikipedia.org/wiki/Santa_Clara_Valley">Valley of Heart's Delight</a>.<br />
-<br />
-- Before that, I mentioned how the first thing I noticed when I landed in the Bay Area for my first job interview is that it wasn't a frozen wasteland like upstate New York where I had just departed. The second thing I noticed is how many iconic tech companies I saw while driving down 101 from SFO to the South Bay.<br />
-<br />
-- Before that, we were fake complaining about the lack of seasons in the Bay Area... because none of us actually miss winter<br />
-<br />
-- Before that, we were talking about how time is blurring together while we're all sheltering in place<br />
-<br />
-- And now we're back to the beginning of our FaceTime call when I asked how you're doing in these crazy times<br />
-
 </div>
 
 ]]>
