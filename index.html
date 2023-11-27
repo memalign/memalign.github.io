@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/airdesk.jpg" />
-<meta property="og:description" content="There's not enough time in the day for everything I want and need to do. Parenting, work, exercise, hobbies, sleep, etc. I've found that even optimizing a few minutes here…" />
+<meta property="og:image" content="https://memalign.github.io/m/mastodon-wordmark-black-text.svg" />
+<meta property="og:description" content="In the same vein as FreshRSS, another open source project with a cool API is Mastodon. Many users I followed on Twitter (now X) have migrated to Mastodon. I found…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -83,6 +83,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/mastodon.html'>Mastodon API</a><br />
 <a href='p/airdesk.html'>AirDesk</a><br />
 <a href='p/freshrss.html'>FreshRSS</a><br />
 <a href='p/fireworks.html'>Fireworks Tap Toy</a><br />
@@ -100,8 +101,8 @@
 <a href='p/pico8.html'>PICO-8</a><br />
 <a href='p/fussy-checklist.html'>Fussy Baby Checklist</a><br />
 <a href='p/zen-sleep.html'>Fall Asleep</a><br />
-<a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
 </div><div id='grid-entry'>
+<a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
 <a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
 <a href='p/day-and-night.html'>Day and Night</a><br />
 <a href='p/lights-off.html'>Lights Off</a><br />
@@ -119,8 +120,8 @@
 <a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
 <a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
-<a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 </div><div id='grid-entry'>
+<a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 <a href='p/coding-machines.html'>Coding Machines</a><br />
 <a href='p/clamps.html'>Clamps</a><br />
 <a href='p/emoji-conway.html'>Emoji Simulator</a><br />
@@ -140,6 +141,88 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/mastodon.html'>Mastodon API</a>
+</h2>
+</div>
+<img src="/m/mastodon-wordmark-black-text.svg">
+<div id='postdate'>Posted on 11/27/2023<br />
+Tags: <a href='/tags.html'>Programming</a></div>
+In the same vein as <a href="/p/freshrss.html">FreshRSS</a>, another open source project with a cool API is Mastodon.<br />
+<br />
+Many users I followed on Twitter (now X) have migrated to Mastodon. I found that the Mastodon apps I tried didn't perfect the one thing I want: to read a chronological timeline of posts and reblogs from the accounts I follow - always keeping my spot since the last time I checked.<br />
+<br />
+I had already written my own Twitter client for this, which I've been using for many years, and just finished adapting that for Mastodon.<br />
+<br />
+The Mastodon API made this really easy! I can tell that a lot of care went into making this core use case straightforward. Thank you Mastodon developers!<br />
+<br />
+Here's the short list of requests needed to make a simple Mastodon timeline viewer app:<br />
+<br />
+<div id='code'>Below, I&#039;m using https://mstdn.party but you should substitute the Mastodon server you use.<br />
+<br />
+1. Register your app.<br />
+- Docs: <a href="https://docs.joinmastodon.org/methods/apps/#create">https://docs.joinmastodon.org/methods/apps/#create</a><br />
+- Replace YOURAPPNAME and YOURWEBSITE below. YOURWEBSITE should be a full url starting with &quot;https://&quot;<br />
+<br />
+curl -X POST -F &#039;client_name=YOURAPPNAME&#039; -F &#039;redirect_uris=urn:ietf:wg:oauth:2.0:oob&#039; -F &#039;website=YOURWEBSITE&#039; https://mstdn.party/api/v1/apps<br />
+<br />
+The response is JSON and includes important fields you will need in later steps: client_id and client_secret. I&#039;ll refer to these as YOURCLIENTID and YOURCLIENTSECRET below.<br />
+<br />
+<br />
+2. Give your app permission to read your account information. Open this URL in your browser and authorize it. You&#039;ll be shown an authorization code which I&#039;ll refer to as YOURAUTHCODE below.<br />
+- Docs: <a href="https://docs.joinmastodon.org/methods/oauth/#authorize">https://docs.joinmastodon.org/methods/oauth/#authorize</a><br />
+<br />
+https://mstdn.party/oauth/authorize?response_type=code&amp;client_id=YOURCLIENTID&amp;redirect_uri=urn:ietf:wg:oauth:2.0:oob<br />
+<br />
+<br />
+3. Get an access token for your app to use to request your account&#039;s timeline (and make any other helpful API requests).<br />
+- Docs: <a href="https://docs.joinmastodon.org/methods/oauth/#token">https://docs.joinmastodon.org/methods/oauth/#token</a><br />
+<br />
+curl -X POST \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;client_id=YOURCLIENTID&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;client_secret=YOURCLIENTSECRET&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;redirect_uri=urn:ietf:wg:oauth:2.0:oob&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;grant_type=authorization_code&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;code=YOURAUTHCODE&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;scope=read&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://mstdn.party/oauth/token<br />
+<br />
+The response is JSON and includes the access_token. I&#039;ll refer to that as YOURACCESSTOKEN below.<br />
+<br />
+<br />
+4. Now your app can load your timeline.<br />
+- Docs: <a href="https://docs.joinmastodon.org/methods/timelines/#home">https://docs.joinmastodon.org/methods/timelines/#home</a><br />
+<br />
+curl &#039;https://mstdn.party/api/v1/timelines/home&#039; -H &#039;Authorization: Bearer YOURACCESSTOKEN&#039;<br />
+<br />
+The result is JSON with everything you need to display the timeline in full. I love that it&#039;s all included in a single API request! This even includes account information (display name, username, the image URL for the poster&#039;s avatar, and more) for the people you follow and the people whose posts they have reblogged.<br />
+<br />
+One helpful argument to include is &quot;limit&quot;. I like to request the max number of posts supported by the API, 40.<br />
+<br />
+curl &#039;https://mstdn.party/api/v1/timelines/home?limit=40&#039; -H &#039;Authorization: Bearer YOURACCESSTOKEN&#039;<br />
+<br />
+When refreshing my app, I want to request all posts that are new since the last time I refreshed. I accomplish this by using the max_id argument.<br />
+<br />
+I start by requesting the most recent 40 posts:<br />
+<br />
+curl &#039;https://mstdn.party/api/v1/timelines/home?limit=40&#039; -H &#039;Authorization: Bearer YOURACCESSTOKEN&#039;<br />
+<br />
+I check if this includes the last post my app is aware of. If not, I request farther back by including &quot;max_id=&quot; the id of the oldest post in the response I just got. Example:<br />
+<br />
+curl &#039;https://mstdn.party/api/v1/timelines/home?limit=40&amp;max_id=123456789&#039; -H &#039;Authorization: Bearer YOURACCESSTOKEN&#039;<br />
+<br />
+I continue loading back like this until any of these conditions are true:<br />
+- I find posts that my app already knows about<br />
+- I get no posts in response<br />
+- I get posts older than 1 month (I don&#039;t want to accidentally load back too far)<br />
+- I&#039;ve made more than 5 requests (I don&#039;t want to create excess traffic)</div>
+And that's it! My app only needs to use a single API to refresh my timeline. I did steps 1 through 3 manually and hard-coded the access token into my app, using it to perform step 4 every time I want to refresh. This is ok because this app is just for me so I don't need a more dynamic authentication flow.<br />
+
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -803,219 +886,8 @@ It's interesting to know we can't replicate store-bought Chex Mix at home becaus
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/pico8.html'>PICO-8</a>
-</h2>
-</div>
-<img src="/m/pico8/celeste/celesterevenge1.gif">
-<div id='postdate'>Posted on 12/12/2021<br />
-Tags: <a href='/tags.html'>Games</a></div>
-<a href="https://www.lexaloffle.com/pico-8.php">PICO-8</a> is a way to make "retro"-style games and then play them anywhere, including on the web.<br />
-<br />
-PICO-8 initially caught my eye with a few beautiful pixelated games and graphics. Just look at the delightful screen capture of <a href="https://www.lexaloffle.com/bbs/?tid=2145">Celeste</a> above.<br />
-<br />
-Here's what I love about this platform:<br />
-<br />
-- Thanks to web technologies, these games can be played anywhere. They work great on touchscreens on iOS and Android. They work great with keyboard and mouse.<br />
-<br />
-- I love the aesthetic of these games: the low resolution, the 16-color palette. It's inspiring to see how expressive people have been despite (and thanks to) these limitations.<br />
-<br />
-- Another limitation is code size. This usually means the games are bite-sized and can be played and beaten in a sitting.<br />
-<br />
-- These limitations are chosen on purpose and are part of the magic. From the <a href="https://www.lexaloffle.com/info.php">about</a> page for PICO-8's website: "Lexaloffle is the home of computer games and fantasy consoles made by <a href="https://www.lexaloffle.com/bbs/?uid=1">Joseph White</a>, whose principle mission is to seek out and explore mathematically cute sets of rules that somehow give rise to thematically cute game worlds."<br />
-<br />
-- My taste in games is trapped in the past, probably the SNES era. Even though SNES was slightly before my time, I've had a blast playing those games. In comparison, games that push the limits of today's hardware are impressive but they are too complex for me. What truly brings me joy are simple "retro"-style games.<br />
-<br />
-- PICO-8 introduced me to the concept of a game "<a href="https://en.wikipedia.org/wiki/Video_game_remake#Demakes">demake</a>". When creating a demake, people boil a game down to its essence. They create a game with the same feel or personality as the original game but smaller and much simpler, usually with simpler graphics. My favorite right now is <a href="https://www.lexaloffle.com/bbs/?tid=29590">Picopolis</a>, a demake of Sim City.<br />
-<br />
-- PICO-8 games are distributed as PNG "virtual cartridges" with the code embedded in the cartridge image itself. The images look like the physical game cartridges of the 1980s and 90s. How delightful! You can see examples below.<br />
-<br />
-- The creator of PICO-8, <a href="https://www.lexaloffle.com/bbs/?uid=1">Joseph White</a> aka "zep" (<a href="https://twitter.com/lexaloffle">twitter</a>), is a prolific software developer. He came up with the idea for PICO-8 and then built all of the development tools for editing code, music, sound effects, graphics, etc. In addition to creating PICO-8, he also built the BBS website where users post, comment on, and collaborate on games. The community is very creative and positive. He's made his own games such as <a href="https://www.lexaloffle.com/bbs/?tid=40058">Wobblepaint</a>. He has other projects too, which you can learn about on <a href="https://www.lexaloffle.com/">lexaloffle.com</a>.<br />
-<br />
-Learn more about PICO-8:<br />
-<br />
-- <a href="https://en.wikipedia.org/wiki/PICO-8">PICO-8</a> on Wikipedia<br />
-- Official <a href="https://www.lexaloffle.com/pico-8.php?page=faq">FAQ</a><br />
-- <a href="https://www.lexaloffle.com/bbs/?cat=7&carts_tab=1&#sub=2&mode=carts&orderby=featured">Featured cartridges</a><br />
-- <a href="https://www.lexaloffle.com/bbs/?cat=7#sub=2">Cartridge BBS</a><br />
-<br />
-Here are some of my favorite games so far:<br />
-<br />
-<h3>Demakes and Remakes</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=29590"><img src="/m/pico8/picopolis/42427.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=29590">Picopolis</a></h4> (<a href="/m/pico8/picopolis/index.html">backup</a>)<br />
-Demake of Sim City. Usually Sim City has no win condition and I like how the author gave us some way to declare victory: by building a $10 million "Victory Monument". Playing this scratched the itch I had to play classic Sim City. Picopolis is made by <a href="https://en.wikipedia.org/wiki/Jens_Bergensten">Jens Bergensten</a> (aka Jeb) who's best known for significant contributions to Minecraft.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=mb_advent2019"><img src="/m/pico8/snowfight/mb_advent2019-2.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=mb_advent2019">Snowfight</a></h4> (<a href="/m/pico8/snowfight/index.html">backup</a>)<br />
-This is a remake of an old Flash game winter holidays greeting card. Even the same winning strategy works as it did on the original game. Major nostalgic fun :)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=97365"><img src="/m/pico8/sonic16x16/8JwsJq.gif"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=97365">Sonic16x16</a></h4> (<a href="/m/pico8/sonic16x16/index.html">backup</a>)<br />
-I love this! Great example of a demake. Sonic is only 2 pixels and yet anyone who's played a side-scrolling Sonic game will recognize the feel of the game, the music, and the iconic <a href="https://en.wikipedia.org/wiki/Green_Hill_Zone">Green Hill Zone</a>.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=98070"><img src="/m/pico8/rtype/rtype-2.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=98070">R-Type</a></h4> (<a href="/m/pico8/rtype/index.html">backup</a>)<br />
-Intensely challenging remake of the classic side-scrolling shoot'em up game. Fortunately there's a cheat mode! <br />
-&nbsp;&nbsp;<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=11437"><img src="/m/pico8/picoman/22937.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=11437">Pico-Man</a></h4> (<a href="/m/pico8/picoman/index.html">backup</a>)<br />
-A clone of Pac-Man. Thoroughly enjoyable just like the original. One user commented, "more proof that games just look cuter on the PICO :3".<br />
-<br />
-<br />
-<a href="https://pahammond.itch.io/phoenix"><img src="/m/pico8/phoenix/phoenix08-0.p8.png"></a><br />
-<h4><a href="https://pahammond.itch.io/phoenix">Phoenix</a></h4> (<a href="/m/pico8/phoenix/index.html">backup</a>)<br />
-My introduction to Phoenix-style games was in <a href="/p/draw-shapes.html">MirageOS on a TI calculator</a>. It turns out Phoenix was originally an arcade game and this is a more faithful remake.<br />
-<br />
-<br />
-<a href="https://pahammond.itch.io/lode-runner"><img src="/m/pico8/loderunner/loderunner08-1.p8.png"></a><br />
-<h4><a href="https://pahammond.itch.io/lode-runner">Lode Runner</a></h4> (<a href="/m/pico8/loderunner/index.html">backup</a>)<br />
-A clone of Lode Runner. Classic :)<br />
-<br />
-<br />
-<a href="https://freds72.itch.io/poom"><img src="/m/pico8/poom/poom.png"></a><br />
-<h4><a href="https://freds72.itch.io/poom">Poom</a></h4> (<a href="/m/pico8/poom/index.html">backup</a>)<br />
-A port of Doom. No platform is complete without one of these! This port really pushes the limits of PICO-8 and works around some of the limitations by splitting its code across several cartridges and then seamlessly jumping between them.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=43692"><img src="/m/pico8/picones/picones_0_0_1-0.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=43692">Picones</a></h4> (<a href="/m/pico8/picones/index.html">backup</a>)<br />
-This is a work-in-progress demake of Lumines. The mechanics aren't perfect and the iconic and addictive music and sound effects are missing but this still satisfied my craving for some Lumines action! That's particularly helpful because Lumines is one of those games that has been released several times as a new iOS app only to be abandoned and broken a few years later.<br />
-<br />
-<br />
-<a href="https://twitter.com/johanpeitz/status/1438898759484780547?s=20"><video muted loop autoplay playsinline disablepictureinpicture="" src="/m/pico8/pico8_metroid.mp4" type="video/mp4"></video></a><br />
-<h4>Teaser: <a href="https://twitter.com/johanpeitz/status/1438898759484780547?s=20">Metroid</a></h4><br />
-This demake isn't available to play (yet?) but it looks SO GOOD!<br />
-<br />
-<br />
-<h3>Platformer/Metroidvania</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=81448"><img src="/m/pico8/meascastle/meas_castle-12.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=81448">Mea's Castle</a></h4> (<a href="/m/pico8/meascastle/index.html">backup</a>)<br />
-Really fun Metroid-style game. I played through in one sitting and had a blast :) There were some jumps that were tricky (and frustrating) using the touch controls which might be easier with a keyboard.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=38333"><img src="/m/pico8/spellouttahere/witchescape3-5.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=38333">Get Me the Spell Outta Here!!</a></h4> (<a href="/m/pico8/spellouttahere/index.html">backup</a>)<br />
-Another fun Metroid-style game. You're a witch who uses a growing repertoire of spells to navigate a castle.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=2145"><img src="/m/pico8/celeste/15133.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=2145">Celeste</a></h4> (<a href="/m/pico8/celeste/index.html">backup</a>)<br />
-Hardcore platformer that was made in four days as part of a game jam. Very impressive! It was ultimately fleshed out into a <a href="https://en.wikipedia.org/wiki/Celeste_(video_game)">full commercially successful game</a>.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=86783"><img src="/m/pico8/celeste2/celeste_classic_2-5.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=86783">Celeste 2</a></h4> (<a href="/m/pico8/celeste2/index.html">backup</a>)<br />
-A follow-up game with slightly different mechanics. Also tricky and fun like the original.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=48475"><img src="/m/pico8/metrocubevania/cubevania12-0.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=48475">MetroCUBEvania</a></h4> (<a href="/m/pico8/metrocubevania/index.html">backup</a>)<br />
-Play as a bouncing cube gaining new abilities as the game progresses.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=34088"><img src="/m/pico8/blocksforlife/blocks_for_life-0.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=34088">Blocks For Life</a></h4> (<a href="/m/pico8/blocksforlife/index.html">backup</a>)<br />
-Made by zep, the creator of PICO-8!<br />
-<br />
-<br />
-<h3>Fast platformer</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=40717"><img src="/m/pico8/sprintagift/eyn_sprintagift-2.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=40717">Sprint'a'Gift</a></h4> (<a href="/m/pico8/sprintagift/index.html">backup</a>)<br />
-Endless runner. Made for the 2020 PICO-8 Advent Calendar.<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=3421"><img src="/m/pico8/mistigri/21603.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=3421">Mistigri</a></h4> (<a href="/m/pico8/mistigri/index.html">backup</a>)<br />
-Super polished graphics with many different enemies. Fun to play but hard to beat!<br />
-<br />
-<br />
-<a href="https://eggnog.itch.io/u-dead"><img src="/m/pico8/udead/udead.gif"></a><br />
-<h4><a href="https://eggnog.itch.io/u-dead">U Dead</a></h4> (<a href="/m/pico8/udead/index.html">backup</a>)<br />
-Not technically a platformer but requires precise reaction time. Reminds me of Flappy Bird. The first game like this I ever played was <a href="http://www.sunflat.net">SFCave</a> in black and white on PalmOS (made in <a href="http://www.sunflat.net/android/app/sfcave/?lang=en">1998</a>!).<br />
-<br />
-<br />
-<h3>RPG</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=88259"><img src="/m/pico8/lostnight/the_lost_night-5.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=88259">The Lost Night</a></h4> (<a href="/m/pico8/lostnight/index.html">backup</a>)<br />
-Fairly complete RPG! I like the world and the quests. I don't like how many times I had to play the mini-game. I almost gave up when I was just about to beat the game because I found the mini-game so tedious. It reminded me of how many Zubat you have to fight in Pokémon caves. Grind through and you'll beat the game.<br />
-<br />
-<br />
-<h3>Turn-based</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=38236"><img src="/m/pico8/virush/virush-3.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=38236">Virush</a></h4> (<a href="/m/pico8/virush/index.html">backup</a>)<br />
-With some tower-defense mechanics too. Fun!<br />
-<br />
-<br />
-<h3>Dungeon Crawler</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=29788"><img src="/m/pico8/fourtoparty/43288.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=29788">It Takes Four to Party</a></h4> (<a href="/m/pico8/fourtoparty/index.html">backup</a>)<br />
-Another game made by Jens Bergensten. This one has a similar feel to the dungeons in classic <a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Link%27s_Awakening">Zelda</a> games with <a href="https://en.wikipedia.org/wiki/Roguelike">roguelike</a> flavor.<br />
-<br />
-<br />
-<h3>3D</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=mot_grandprix-3"><img src="/m/pico8/motgrandprix/mot_grandprix-8.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=mot_grandprix-3">Mot's Grand Prix</a></h4> (<a href="/m/pico8/motgrandprix/index.html">backup</a>)<br />
-Beautiful in low-res 3D. Amazing this is possible in PICO-8!<br />
-<br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=43833"><img src="/m/pico8/trialofthesorcerer/mot_sorcerer-9.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=43833">Trial of the Sorcerer</a></h4> (<a href="/m/pico8/trialofthesorcerer/index.html">backup</a>)<br />
-3D dungeon crawler. Reminiscent of the old Windows 95 3D Maze screensaver (recreated by someone in JavaScript <a href="https://ibid-11962.github.io/Windows-95-3D-Maze-Screensaver/maze.html">here</a> (<a href="/m/Windows3DMaze/maze.html">backup</a>)). I remember watching this on the PCs in <a href="https://en.wikipedia.org/wiki/CompUSA">CompUSA</a>.<br />
-<br />
-&nbsp;&nbsp;<br />
-<h3>App</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=40058"><img src="/m/pico8/wobblepaint/wobblekirb.gif"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=40058">Wobblepaint</a></h4> (<a href="/m/pico8/wobblepaint/index.html">backup</a>)<br />
-This is a charming drawing app. The wobble effect adds a lot of personality to the drawings. Another cartridge made by zep -- he has a knack for coming up with charming ideas! Some <a href="https://news.ycombinator.com/item?id=24927001">interesting discussion</a>.<br />
-<br />
-<br />
-<a href="https://johanpeitz.itch.io/picocad"><video muted loop autoplay playsinline disablepictureinpicture="" src="/m/pico8/picoCAD_gastly.mp4" type="video/mp4"></video></a><br />
-<h4><a href="https://johanpeitz.itch.io/picocad">picoCAD</a></h4><br />
-3D modeling! This cartridge is available on itch.io as "name your own price" so I didn't grab a backup. Really impressive work and I love the aesthetic. The Gastly above was posted by an artist <a href="https://twitter.com/RadioFlower/status/1437838558463598592">here<a href=".<br />
-<br />
-<br />
-">.<br />
-<br />
-<br />
-<h3>Simple</h3><br />
-<br />
-<a href="https://www.lexaloffle.com/bbs/?pid=11111"><img src="/m/pico8/froggleoid/11253.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?pid=11111">Froggleoid</a></h4> (<a href="/m/pico8/froggleoid/index.html">backup</a>)<br />
-A cute little mini-game by zep. Supports multiple players!<br />
-<br />
-<br />
-<a href="https://soundole.itch.io/spoider-boi"><img src="/m/pico8/spoiderboi/spoiderboi.png"></a><br />
-<h4><a href="https://soundole.itch.io/spoider-boi">Spoiderboi</a></h4> (<a href="/m/pico8/spoiderboi/index.html">backup</a>)<br />
-A one-button Spider-Man-inspired game. I like the feel of the game!<br />
-<br />
-<br />
-<a href="https://joeschmoeish.itch.io/falling-balls"><img src="/m/pico8/fallingballs/fallingballs.png"></a><br />
-<h4><a href="https://joeschmoeish.itch.io/falling-balls">Falling Balls</a></h4> (<a href="/m/pico8/fallingballs/index.html">backup</a>)<br />
-I find this concept really funny!<br />
-<br />
-&nbsp;&nbsp;&nbsp;<br />
-<a href="https://www.lexaloffle.com/bbs/?tid=35349"><img src="/m/pico8/dungeonguy/dungeonguy-1.p8.png"></a><br />
-<h4><a href="https://www.lexaloffle.com/bbs/?tid=35349">Dungeon Guy</a></h4> (<a href="/m/pico8/dungeonguy/index.html">backup</a>)<br />
-A work-in-progress with a similar feel to Lode Runner. It's really cool that these levels are procedurally generated.
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/pico8.html'>PICO-8</a><br />
 <a href='p/fussy-checklist.html'>Fussy Baby Checklist</a><br />
 <a href='p/zen-sleep.html'>Fall Asleep</a><br />
 <a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />

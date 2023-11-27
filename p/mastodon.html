@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Mastodon API</title>
+<meta property="og:title" content="Mastodon API" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/mastodon.html" />
+<meta property="og:image" content="https://memalign.github.io/m/mastodon-wordmark-black-text.svg" />
+<meta property="og:description" content="In the same vein as FreshRSS, another open source project with a cool API is Mastodon. Many users I followed on Twitter (now X) have migrated to Mastodon. I found…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a><div id='post'>
+<div id='header'>
+<h1>
+Mastodon API
+</h1>
+</div>
+<img src="/m/mastodon-wordmark-black-text.svg">
+<div id='postdate'>Posted on 11/27/2023<br />
+Tags: <a href='/tags.html'>Programming</a></div>
+In the same vein as <a href="/p/freshrss.html">FreshRSS</a>, another open source project with a cool API is Mastodon.<br />
+<br />
+Many users I followed on Twitter (now X) have migrated to Mastodon. I found that the Mastodon apps I tried didn't perfect the one thing I want: to read a chronological timeline of posts and reblogs from the accounts I follow - always keeping my spot since the last time I checked.<br />
+<br />
+I had already written my own Twitter client for this, which I've been using for many years, and just finished adapting that for Mastodon.<br />
+<br />
+The Mastodon API made this really easy! I can tell that a lot of care went into making this core use case straightforward. Thank you Mastodon developers!<br />
+<br />
+Here's the short list of requests needed to make a simple Mastodon timeline viewer app:<br />
+<br />
+<div id='code'>Below, I&#039;m using https://mstdn.party but you should substitute the Mastodon server you use.<br />
+<br />
+1. Register your app.<br />
+- Docs: <a href="https://docs.joinmastodon.org/methods/apps/#create">https://docs.joinmastodon.org/methods/apps/#create</a><br />
+- Replace YOURAPPNAME and YOURWEBSITE below. YOURWEBSITE should be a full url starting with &quot;https://&quot;<br />
+<br />
+curl -X POST -F &#039;client_name=YOURAPPNAME&#039; -F &#039;redirect_uris=urn:ietf:wg:oauth:2.0:oob&#039; -F &#039;website=YOURWEBSITE&#039; https://mstdn.party/api/v1/apps<br />
+<br />
+The response is JSON and includes important fields you will need in later steps: client_id and client_secret. I&#039;ll refer to these as YOURCLIENTID and YOURCLIENTSECRET below.<br />
+<br />
+<br />
+2. Give your app permission to read your account information. Open this URL in your browser and authorize it. You&#039;ll be shown an authorization code which I&#039;ll refer to as YOURAUTHCODE below.<br />
+- Docs: <a href="https://docs.joinmastodon.org/methods/oauth/#authorize">https://docs.joinmastodon.org/methods/oauth/#authorize</a><br />
+<br />
+https://mstdn.party/oauth/authorize?response_type=code&amp;client_id=YOURCLIENTID&amp;redirect_uri=urn:ietf:wg:oauth:2.0:oob<br />
+<br />
+<br />
+3. Get an access token for your app to use to request your account&#039;s timeline (and make any other helpful API requests).<br />
+- Docs: <a href="https://docs.joinmastodon.org/methods/oauth/#token">https://docs.joinmastodon.org/methods/oauth/#token</a><br />
+<br />
+curl -X POST \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;client_id=YOURCLIENTID&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;client_secret=YOURCLIENTSECRET&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;redirect_uri=urn:ietf:wg:oauth:2.0:oob&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;grant_type=authorization_code&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;code=YOURAUTHCODE&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-F &#039;scope=read&#039; \<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://mstdn.party/oauth/token<br />
+<br />
+The response is JSON and includes the access_token. I&#039;ll refer to that as YOURACCESSTOKEN below.<br />
+<br />
+<br />
+4. Now your app can load your timeline.<br />
+- Docs: <a href="https://docs.joinmastodon.org/methods/timelines/#home">https://docs.joinmastodon.org/methods/timelines/#home</a><br />
+<br />
+curl &#039;https://mstdn.party/api/v1/timelines/home&#039; -H &#039;Authorization: Bearer YOURACCESSTOKEN&#039;<br />
+<br />
+The result is JSON with everything you need to display the timeline in full. I love that it&#039;s all included in a single API request! This even includes account information (display name, username, the image URL for the poster&#039;s avatar, and more) for the people you follow and the people whose posts they have reblogged.<br />
+<br />
+One helpful argument to include is &quot;limit&quot;. I like to request the max number of posts supported by the API, 40.<br />
+<br />
+curl &#039;https://mstdn.party/api/v1/timelines/home?limit=40&#039; -H &#039;Authorization: Bearer YOURACCESSTOKEN&#039;<br />
+<br />
+When refreshing my app, I want to request all posts that are new since the last time I refreshed. I accomplish this by using the max_id argument.<br />
+<br />
+I start by requesting the most recent 40 posts:<br />
+<br />
+curl &#039;https://mstdn.party/api/v1/timelines/home?limit=40&#039; -H &#039;Authorization: Bearer YOURACCESSTOKEN&#039;<br />
+<br />
+I check if this includes the last post my app is aware of. If not, I request farther back by including &quot;max_id=&quot; the id of the oldest post in the response I just got. Example:<br />
+<br />
+curl &#039;https://mstdn.party/api/v1/timelines/home?limit=40&amp;max_id=123456789&#039; -H &#039;Authorization: Bearer YOURACCESSTOKEN&#039;<br />
+<br />
+I continue loading back like this until any of these conditions are true:<br />
+- I find posts that my app already knows about<br />
+- I get no posts in response<br />
+- I get posts older than 1 month (I don&#039;t want to accidentally load back too far)<br />
+- I&#039;ve made more than 5 requests (I don&#039;t want to create excess traffic)</div>
+And that's it! My app only needs to use a single API to refresh my timeline. I did steps 1 through 3 manually and hard-coded the access token into my app, using it to perform step 4 every time I want to refresh. This is ok because this app is just for me so I don't need a more dynamic authentication flow.<br />
+
+</div>
+
+</div>
+<div id="footer"></div>
+</body>
+</html>
