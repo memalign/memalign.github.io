@@ -1,0 +1,123 @@
+{
+  "url": "https://api.github.com/gists/11e4b70206715622bc03cc5cae16e650",
+  "forks_url": "https://api.github.com/gists/11e4b70206715622bc03cc5cae16e650/forks",
+  "commits_url": "https://api.github.com/gists/11e4b70206715622bc03cc5cae16e650/commits",
+  "id": "11e4b70206715622bc03cc5cae16e650",
+  "node_id": "MDQ6R2lzdDExZTRiNzAyMDY3MTU2MjJiYzAzY2M1Y2FlMTZlNjUw",
+  "git_pull_url": "https://gist.github.com/11e4b70206715622bc03cc5cae16e650.git",
+  "git_push_url": "https://gist.github.com/11e4b70206715622bc03cc5cae16e650.git",
+  "html_url": "https://gist.github.com/JackLance/11e4b70206715622bc03cc5cae16e650",
+  "files": {
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/11e4b70206715622bc03cc5cae16e650/raw/b05dda173399406b4af45892cebd541a84c45ce0/script.txt",
+      "size": 7572,
+      "truncated": false,
+      "content": "title Botsket Ball\n\nagain_interval 0.05\n========\nOBJECTS\n========\n\nbackground\nlightgrey\n\nplayer\nwhite\n00.00\n0...0\n.....\n0...0\n00.00\n\n\nplay\nlightgreen\n..0..\n..00.\n..000\n..00.\n..0..\n\nplayu\ndarkgreen lightgreen\n11.11\n1.0.1\n.0.0.\n1...1\n11.11\n\nplayl\ndarkgreen lightgreen\n11.11\n1.0.1\n.0...\n1.0.1\n11.11\n\nplayd\ndarkgreen lightgreen\n11.11\n1...1\n.0.0.\n1.0.1\n11.11\n\nplayr\ndarkgreen lightgreen\n11.11\n1.0.1\n...0.\n1.0.1\n11.11\n\nabot\ngrey yellow\n11011\n10001\n00000\n10001\n11011\n\nuper\ngrey yellow\n.000.\n00100\n01010\n00000\n.000.\n\ndowner\ngrey yellow\n.000.\n00000\n01010\n00100\n.000.\n\nlefter\ngrey yellow\n.000.\n00100\n01000\n00100\n.000.\n\nrighter\ngrey yellow\n.000.\n00100\n00010\n00100\n.000.\n\nwall\ndarkgrey\n\nbox\nbrown darkbrown\n.111.\n10001\n10001\n10001\n.111.\n\nball\norange black\n.101.\n00100\n11111\n00100\n.101.\n\nnet\nbrown\n.000.\n0...0\n0...0\n0...0\n.000.\n\ncant\ntransparent\n\nmovin\nlightgrey\n00.00\n0...0\n.....\n0...0\n00.00\n\nconnectl\nbrown darkbrown\n1.... \n0....\n0....\n0....\n1....\n\nconnectr\nbrowndarkbrown\n....1\n....0\n....0\n....0\n....1\nconnectu\nbrown darkbrown\n10001\n.....\n.....\n.....\n.....\n\nconnectd\nbrown darkbrown\n.....\n.....\n.....\n.....\n10001\n\ndrawing\nlightbrown\n00.00\n0...0\n.....\n0...0\n00.00\n\ndestroy\ntransparent\n\nhole \nblack\n\nwont\ntransparent\n\nfail\ndarkbrown yellow\n.010.\n00100\n00100\n00000\n.010.\n\nfell\ndarkbrown black\n10001\n00000\n00000\n00000\n10001\n\nfellu\ndarkbrown\n0...0\n.....\n.....\n.....\n.....\n\nfelll\ndarkbrown\n0....\n.....\n.....\n.....\n0....\n\nfelld\ndarkbrown\n.....\n.....\n.....\n.....\n0...0\n\nfellr\ndarkbrown\n....0\n.....\n.....\n.....\n....0\nSt\ngrey\n.000.\n.0...\n.00..\n.0...\n.0...\n\nft\ngrey\n..00.\n.0...\n..0..\n...0.\n.00..\n\ntrack\ngrey\n.....\n.....\n00000\n.....\n.....\n\ndial\nblack\n.....\n..0..\n..0..\n..0..\n.....\n\nmarker\ntransparent\n=======\nLEGEND\n=======\n\n. = Background\nO = Player\np = play and wall\nx = wall\nh = hole\nplaying = playl or playr or playd or playu\nb = ball\nn = net\nbot = uper or downer or lefter or righter\nmovable = ball or box or bot\nconnect = connectu or connectd or connectl or connectr\ni = hole and player\ns = st and wall\nf = ft and wall\nt = track and wall\nd = track and dial and wall\n=======\nSOUNDS\n=======\n\nSFX0 42784502\nSFX1 62665907\nSFX2 10733904\nSFX3 97500904\nSFX4 12102703\nSFX5 15668904\nSFX6 81418106\nSFX7 68221707\nSFX8 27212708\n================\nCOLLISIONLAYERS\n================\n\nBackground\nnet\nfell\nfellu\nfelld\nfellr\nfelll\nhole\nwall, uper, downer, lefter, righter, box, ball, \nplay, st, track, ft\ndial, \nmarker\n\nconnectu\nconnectl\nconnectd\nconnectr\nPlayer, \nmovin\nplaying\nabot\ncant\nwont\ndestroy\nfail\ndrawing\n======\nRULES\n======\n\n[moving player movin dial] -> [moving player moving movin moving dial]\n[> movin | no track] -> [|] SFX4\n[> dial | no track] -> [dial | ]\n\n[marker] -> [left marker]\n\n[wall] -> [wall cant]\n[drawing no player] -> [] \n\n[connectu] -> [up connectu] \n[connectl] -> [left connectl]\n[connectr] -> [right connectr]\n[connectd] -> [down connectd]\n\nlate up [drawing connectu | player] -> [connectu | drawing player]\nlate down [drawing connectd | player] -> [connectd | drawing player]\nlate left [drawing connectl | player] -> [connectl | drawing player]\nlate right [drawing connectr | player] -> [connectr | drawing player]\n\nlate up [drawing | player no wall no bot no box no ball no net no hole] -> [connectu |drawing  player connectd box] \nlate down [drawing | player no wall no bot no box no ball no net no hole] -> [ connectd |drawing  player connectu box]\nlate left [drawing | player no wall no bot no box no ball no net no hole] -> [ connectl |drawing  player connectr box]\nlate right [drawing | player no wall no bot no box no ball no net no hole] -> [ connectr |drawing  player connectl box]\n\n[hole bot] -> [hole fail] SFX3\n[hole ball] -> [hole fail] SFX3\n[fail][playing player] -> [fail][play]\n\nlate [ball net] -> SFX8\n\nlate [drawing no player] -> [] SFX4\n\n[box no hole] -> [box wont] \n[wont | < connect] -> [wont | wont < connect] \n\n[box no wont hole] -> [fell] SFX2\n[connectu no box] -> [fellu]\n[connectr no box] -> [fellr]\n[connectl no box] -> [felll]\n[connectd no box] -> [felld]\n\ndown [playd][movable | cant] -> [playd][cant movable | cant]\n+ left [playl][movable | cant] -> [playl][cant movable | cant]\n+ up [playu][movable | cant] -> [playu][cant movable | cant]\n+ right [playr][movable | cant] -> [playr][cant movable | cant]\n+ [cant | < connect] -> [cant | cant < connect]\n\n\n\n[playd ][marker dial][downer no cant] -> [playd ][marker dial][down downer]  SFX7\n[playl ][marker dial][lefter no cant] -> [playl][marker dial][ left lefter] SFX7\n[playr ][marker dial][righter no cant] -> [playr ][marker dial][right righter] SFX7\n[playu ][marker dial][uper no cant] -> [playu ][marker dial][up uper] SFX7\n\n[playing][> movable | movable ] -> [playing][> movable | > movable]\n+ [moving movable | < connect movable] -> [moving movable | < connect moving movable]\n\n[action player no movin dial] -> [player movin dial]  SFX6\n[action player movin] -> [ player] SFX4\n[action player drawing] -> [player] SFX4\n[action player box] -> [player destroy box] SFX5\n[action player no hole no wall no box no play no bot no ball no net no abot] -> [player abot] SFX6\n[action player abot] -> [player box drawing] SFX6\n[action player bot] -> [player] SFX5\n\n[abot left player] -> [lefter left player] SFX4\n[abot right player] -> [righter right player] SFX4\n[abot up player] -> [uper up player] SFX4\n[abot down player] -> [downer down player] SFX4\n\n[destroy | < connect] -> [destroy | < connect destroy]\n\n[destroy box] -> [destroy]\n[destroy connect] -> [destroy]\n[destroy] -> []\n\n[action player play][dial] -> [action player playl][dial marker] SFX0\n\n[moving connect] -> [stationary connect]\n[connect moving movable] -> [moving connect moving movable]\n[cant] -> []\n[wont] -> []\n\n\n\n[playu] -> again\n[playl] -> again\n[playr] -> again\n[playd] -> again\n\n\nlate [marker st][dial][playl] -> [st][marker dial][playu] again\nlate [marker st][dial][playd] -> [st][marker dial][playl] again\nlate [marker st][dial][playr] -> [st][marker dial][playd] again\nlate [marker st][dial][playu] -> [st][marker dial][playr] again\n\n\n==============\nWINCONDITIONS\n==============\n\nall ball on net\nno fail\n\n=======\nLEVELS\n=======\n\n\n\n\n\nmessage MISSION: GET BALL TO NET.\nmessage PRESS ACTION ONCE AND ONE DIRECTION TO DRAW A BOT THAT WILL MOVE IN THAT DIRECTION.\nmessage PRESS ACTION AT THE GREEN PLAY BUTTON TO START THE GAME!\n\n\nxxxxxxxxxxx\nx.........x\nx.........x\nx.........x\nx.........x\nx.b.....n.x\nx.........x\nx.........x\nx....o....x\nx.........x\nxpxsttdttfx\n\n\nmessage PRESS ACTION TWICE AND AND ANY NUMBER OF DIRECTIONS TO DRAW A BOX.\nmessage PRESS ACTION ON ANY ALREADY DRAWN ITEM TO DELETE IT\nmessage PRESS ACTION AND LEFT OR RIGHT ON THE SLIDER ON THE BOTTOM TO CHANGE THE SIMULATION SPEED\n\nxxxxxxxxxxx\nx.........x\nx.........x\nx.........x\nx...b.....x\nx....o....x\nx.....n...x\nx.........x\nx.........x\nx.........x\nxpxsttdttfx\n\nmessage BOXES CAN BE USED TO BRIDGE GAPS. \nmessage PLEASE DO NOT DROP BOTS OR THE BALL INTO THE GAP. THEY ARE HARD TO RETRIEVE.\n\nxxxxxxxxxxx\nx....h....x\nx....h....x\nx....h....x\nx....h....x\nx.b..h..n.x\nx....h....x\nx....h....x\nx....i....x\nx....h....x\nxpxsttdttfx\n\nxxxxxxxxxxx\nx.........x\nx.b.....o.x\nx.........x\nxhhhhhh...x\nxhhhhhh...x\nxhhhhhh...x\nxhhhhhh...x\nxhhhhhh.n.x\nxhhhhhh...x\nxpxsttdttfx\n\n\nxxxxxxxxxxx\nx....h....x\nx....h....x\nx....h....x\nx....h....x\nx...bin...x\nx....h....x\nx....h....x\nx....h....x\nx....h....x\nxpxsttdttfx\n\nxxxxxxxxxxx\nxhhhhhhhhhx\nx....b....x\nx.........x\nx.........x\nx....o....x\nx.........x\nx.........x\nx....n....x\nx.........x\nxpxsttdttfx\n\nxxxxxxxxxxx\nx...hhh...x\nx...hhh...x\nx...hhh...x\nx...hhh...x\nx.b.hih.n.x\nx...hhh...x\nx...hhh...x\nx...hhh...x\nx...hhh...x\nxpxsttdttfx\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2018-04-13T22:42:56Z",
+  "updated_at": "2018-05-11T05:12:10Z",
+  "description": "",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/11e4b70206715622bc03cc5cae16e650/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "forks": [
+    {
+      "url": "https://api.github.com/gists/28dd900c53cfd0d97d042a6167f80442",
+      "user": {
+        "login": "philschatz",
+        "id": 253202,
+        "node_id": "MDQ6VXNlcjI1MzIwMg==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/253202?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/philschatz",
+        "html_url": "https://github.com/philschatz",
+        "followers_url": "https://api.github.com/users/philschatz/followers",
+        "following_url": "https://api.github.com/users/philschatz/following{/other_user}",
+        "gists_url": "https://api.github.com/users/philschatz/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/philschatz/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/philschatz/subscriptions",
+        "organizations_url": "https://api.github.com/users/philschatz/orgs",
+        "repos_url": "https://api.github.com/users/philschatz/repos",
+        "events_url": "https://api.github.com/users/philschatz/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/philschatz/received_events",
+        "type": "User",
+        "site_admin": false,
+        "name": "Philip Schatz",
+        "company": "@OpenStax",
+        "blog": "https://philschatz.com",
+        "location": "pale blue dot",
+        "email": null,
+        "hireable": null,
+        "bio": "open source developer, manager, and architect for @openstax (free textbooks for everyone!)",
+        "twitter_username": null,
+        "public_repos": 278,
+        "public_gists": 167,
+        "followers": 192,
+        "following": 11,
+        "created_at": "2010-04-26T15:20:07Z",
+        "updated_at": "2023-11-06T19:04:04Z"
+      },
+      "id": "28dd900c53cfd0d97d042a6167f80442",
+      "created_at": "2018-05-11T05:12:10Z",
+      "updated_at": "2018-05-11T05:12:10Z"
+    }
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "b58f7250e82f072b24b5e08bda66d7dc8b6eed43",
+      "committed_at": "2018-04-13T22:42:56Z",
+      "change_status": {
+        "total": 543,
+        "additions": 543,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/11e4b70206715622bc03cc5cae16e650/b58f7250e82f072b24b5e08bda66d7dc8b6eed43"
+    }
+  ],
+  "truncated": false
+}

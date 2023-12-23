@@ -1,0 +1,203 @@
+{
+  "url": "https://api.github.com/gists/ef9e3bf2eb459b52ba91f155f7b18480",
+  "forks_url": "https://api.github.com/gists/ef9e3bf2eb459b52ba91f155f7b18480/forks",
+  "commits_url": "https://api.github.com/gists/ef9e3bf2eb459b52ba91f155f7b18480/commits",
+  "id": "ef9e3bf2eb459b52ba91f155f7b18480",
+  "node_id": "MDQ6R2lzdGVmOWUzYmYyZWI0NTliNTJiYTkxZjE1NWY3YjE4NDgw",
+  "git_pull_url": "https://gist.github.com/ef9e3bf2eb459b52ba91f155f7b18480.git",
+  "git_push_url": "https://gist.github.com/ef9e3bf2eb459b52ba91f155f7b18480.git",
+  "html_url": "https://gist.github.com/JackLance/ef9e3bf2eb459b52ba91f155f7b18480",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/ef9e3bf2eb459b52ba91f155f7b18480/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/ef9e3bf2eb459b52ba91f155f7b18480/raw/30594128d17e36cd3e605d804966a153a51f51a5/script.txt",
+      "size": 7958,
+      "truncated": false,
+      "content": "title Autumn\nrun_rules_on_level_start\nbackground_color #C84202\ntext_color #620\nagain_interval 0.1\n========\nOBJECTS\n========\n\nBackground 1\ngrey\n\n\nlit\n#FFFB66\n\nit\n#FEB047\n\nautumn \n#E45305 #6A2402\n.000.\n00000\n01010\n00000\n.000.\n\nsummer\n#f41010 #600404 #FFB008\n.000.\n00000\n01010\n00000\n.000.\n\nl3\n#FF9800\n.....\n..0..\n.0...\n..0..\n.....\n\nbird m\ndarkblue #4040FF lightblue black\n..1..\n2.1.2\n11111\n.010.\n..1..\n\nblock w\n#C84202\n\n\nbunnyl <\nbrown black pink white \n.....\n.100.\n20003\n.100.\n.....\n\nbunnyr >\nbrown black pink white\n.....\n.001.\n30002\n.001.\n.....\n\nnest ;\nbrown lightbrown\n.000.\n01110\n01110\n01110\n.000.\n\n\nfella \n#7E2D00\n.000.\n00000\n00000\n00000\n.000.\n\nfellb\n#9A0501\n.000.\n00000\n00000\n00000\n.000.\n\nfellc\n#CD0601\n.000.\n00000\n00000\n00000\n.000.\n\nfelld\n#CCC926\n.000.\n00000\n00000\n00000\n.000.\n\nfelle\n#F7C709\n.000.\n00000\n00000\n00000\n.000.\n\nfellf\n#F45305\n.000.\n00000\n00000\n00000\n.000.\n\n\n\nbloomed\ngreen\n.000.\n00000\n00000\n00000\n.000.\n\ndoor e\n#FD712D #C84202\n00011\n00001\n00000\n00001\n00011\n\nwater\nblue\n\nlose\nblue brown\n00000\n00100\n01110\n00100\n00000\n\nhor\n#704418 blue\n11111\n00000\n00000\n00000\n11111\n\nver\n#704418 blue\n10001\n10001\n10001\n10001\n10001\n\n\nnodoor\ntransparent\n\nwins\ntransparent\n\nstart\ntransparent\n\nconnected\ntransparent\n\nvert\ntransparent\n\nmoved \ntransparent\n\nfirst\ntransparent\n\nnotfirst\ntransparent\n\none\ntransparent\n\ntwo\ntransparent\n\nthree\ntransparent\n\nbmoved\ntransparent\n\n=======\nLEGEND\n=======\nbunny = bunnyl or bunnyr\nfell =  fella or fellb or fellc or felld  or felle or fellf\nfloor = lit or it\ncrate =  block or water or nest \ny =  lit\ng = bloomed\nf = autumn and start \nk = water\nplayer = autumn\nx = summer\nz = l3\n\n=======\nSOUNDS\n=======\n\nSFX1 80425104\nSFX2 9697905\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\nfella, felle\nfloor\nvert\nnodoor, wins\nconnected\nbmoved\nbloomed , moved\nstart\nfirst, notfirst\nhor, ver\nwater\nplayer, block, door, fell, bird, bunny , lose, nest, summer, l3\none, two, three\n\n\n\n======\nRULES\n======\n\n\n\n[three] -> win\n[two] -> [three] again\n[one] -> [two] again\n[summer no one no two no three] -> [summer one] again\n\n\n[player][first] -> [player notfirst][]\n\n[no floor no door no block no first] -> [first]\n\n[> autumn|water] -> [autumn|water]\n[autumn][no floor no door no nodoor no block no water no hor no ver] -> [autumn][lit]\n[nest floor] -> [nest it]\n[no vert] -> [vert]\ndown[vert|...|no block] -> [|...|]\nhorizontal[vert|...|no vert] -> [|...|]\n\ndown [nest no moved|] -> [nest moved|bird moved]\n\n[> player | bird|no bloomed no door no crate no fell no bird] -> [> player| > bird|]\n\n\n[> autumn|bloomed|no bloomed  no door no crate no fell no bird no bunny] -> [> autumn|random fell start|]\nhorizontal [> autumn|bloomed|no bloomed  no door water no fell no bird no bunny] -> [|autumn|hor]\nvertical [> autumn|bloomed|no bloomed  no door water no fell no bird no bunny] -> [|autumn|ver]\n[> autumn|start fell] -> [> autumn|> fell]\n[> autumn|bloomed] -> cancel\n\n\nlate [autumn][fell floor] -> [autumn][fell it]\nlate [autumn floor] -> [autumn it]\n\n\n\nlate [lose] -> restart\nlate [moved no nest no bird] -> []\nlate [bmoved] -> [moved]\nlate right [notfirst][player|...|no bloomed  no bird no bunny no block no fell water|bunny no moved] -> [notfirst][player|...|lose|]\nlate left [notfirst][player|...|no bloomed  no bird no bunny no block no fell water|bunny no moved] -> [notfirst][player|...|lose|]\nlate right [notfirst][player|...|no bloomed  no bird no bunny no block no fell|bunny no moved] -> [notfirst][player|...|bunnyl moved|]\nlate left [notfirst][player|...|no bloomed  no bird no bunny no block no fell|bunny no moved] -> [notfirst][player|...|bunnyr moved|]\n\nlate down [bird no moved|no door no fell no block no bloomed  no player no bird no bunny] -> [|bird moved]\nlate [bird vert] -> [] \n\nlate [connected] -> []\nlate [player no connected] -> [player connected]\nlate [connected][bird moved] -> [][bird moved]\n\n+ late [connected|no connected no fell no bird no crate no door no bloomed no lose no bunny no ver no hor] -> [connected|connected]\n\nlate [floor connected] -> [it connected]\n\nlate [bird moved][bunny moved] -> [bird moved][bunny bmoved]\nlate [bird moved] -> [bird] again\n\n\nlate [autumn][door] -> [autumn][nodoor it]\nlate [nodoor it][lit] -> [door][lit]\nlate [nodoor it][bird] -> [door][bird]\n\nlate [player nodoor] -> [wins player]\n\nlate [wins][lose] -> [][lose]\n\nlate [start][autumn wins floor] -> win\n\n\n==============\nWINCONDITIONS\n==============\n\n=======\nLEVELS\n=======\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmessage Oh, is it time again already?\n\nfg1ww\nwgg1w\nw1g1w\nww11e\n\nmessage Well then, I guess I'll get to it.\n\nmessage After all, all these leaves aren't going to color themselves.\n\n\n111www\n11111e\n1ggwww\n1g1111\nwwwgg1\nf11g11\nwww111\n\nmessage And I don't think the bunnies are going to help anytime soon.\n\nmessage Unless the goal was to be as fluffy as possible, that is.\n\nmessage [BUNNIES MOVE LEFT OR RIGHT TOWARDS AUTUMN]\n\nwf11111111<e\nwwwww111wwww\n\n\n\nw1g11g1w\nw1g11g1w\nf1g11gzx\nw1g11g1w\nw1g11g1w\n\n\nmessage \"She probably doesn't even have any idea how ANNOYING she is!\"\n\nw1g11g1w\nw1g11g1w\nf1g11g1e\nw1g11g1w\nw1g11g1w\n\nmessage What? What was -- or rather, Who was that?\n\nmessage Am I not... \n\nmessage Am I not the only one?\n\n\n\nw11111<w\nf11111<e\nw11111<w\n\nmessage And who was \"she\"?\n\nmessage Are there are a whole tribe of us?\n\nmessage [TREES CAN BE PUSHED IN THE RIVER TO MAKE A BRIDGE]\n\nw11g1kg1w\nwgggkk11w\nf11gk111e\n\nmessage Hmmmm. This is a lot to process all at once.\n\n\nf11k11k11w\nw1gk1gk11w\nwkkkkkkkkw\nw11kg1k11w\nw1gk1gk11w\nwkkkkkkkkw\nw11kg1k1gw\nw11k1gk11e\n\nmessage I just have so many questions.\n\nmessage I'm uncertain about everything I thought I knew now.\n\nmessage [BIRDS MUST MIGRATE SOUTH FOR WINTER]\n\nwww;ww\nwww1ww\nwwfg1w\nwww11e\nw1111w\n111www\nw1g1ww\nww1www\nwwwwww\n\nmessage I thought that I'm the one meant to make order from the chaos.\n\nmessage If there are many of us, what does that say about my role in life?\n\nwwww;;;;ww\nf1111111<e\nww11111<ww\nww1111<yww\nww111<yyww\nww11<yyyww\n\n\n\n\n\nmessage And should I try to join the others?\n\nmessage I've lived in serenity alone for so long, It's hard to even consider.\nwwww;wwww\nww11111ww\nw111111<w\nw1111111w\nw111g111w\nf1wwwww1e\n\n\n\n\nmessage I've never had a desire for accompaniment before now.\n\nmessage Just because now I know it's available, why should that make a difference?\n\nw111111w\nw1ggg11w\nf1g11g1e\nw11ggg1w\nw111111w\n\nmessage The beauty of nature surrounding me is all I need to be happy.\n\nmessage And besides, from the one I heard, it doesn't sound like their lives are improved from being together.\n\nww;;;;;ww\nw1111111w\nw111g111w\nf1g111g1e\nw11g1g11w\n\n\nmessage I don't think I need approval from others to be able to find meaning in life.\n\nmessage So for now I'll continue trying to find tranquility with the world.\n\nwwww1g111wwww\nwwww1g111wwww\nwww11g1111www\nf111kg1<k111e\nwww11g1111www\nwwww1g111wwww\nwwww1g111wwww\n\n\n\n\nmessage On the other hand...\n\nwwwwwww;ww\nwwwwwww1ww\nw11g111g1e\nw1g111g11w\nw111g1g1ww\nwg11gg1www\nw1g111wwww\nw1111wwwww\nfg11wwwwww\nw11wwwwwww\nw1wwwwwwww\n\nmessage If I join the tribe and dislike it,\n\nmessage I can always leave back into the wild, and nothing would change.\n\n\nwwww;w;wwww\nw111111111w\nf111111111w\nw111g1g111w\nw1111kkkkkw\nw>111k1111e\nw>111k1111w\n\n\nmessage After all, I can't know what I'm missing until I try.\n\nmessage For all I know, the tribe could be a very positive experience for me.\n\nf111111111<\nw1ww1ww1www\n>111111111<\nww1ww1ww1ww\n>111111111e\n\n\n\nmessage Wait a second...\n\nmessage Which way did she go?\n\nf111111111111e\nw111111111111w\nw1kkkkkk11111w\nw1k1<wwk11111w\nw>11111k1g1g1w\nw>11111k1g1g1w\nw>11111k1g1g1w\nw>11111k1g1g1w\nw>11111k1g1g1w\nw>11111k1g1g1w\n\n\nmessage Oh well.\n\nmessage Scratch that plan then.\n\nww;ww;ww\nw111111e\nw111111w\nw1gggg1w\nw111111w\nw1gggg1w\nw111111w\nwggggggw\nw111111w\nf111111w\n\nmessage I guess I'll continue to live as I used to,\n\nmessage but if I ever see another like me, I'll make my presence known.\n\nw1111g1111www\nf111g<g1111ww\nw1111g<g1111w\nww1111g<g111e\nwww1111g1111w\n\nmessage END OF PART THREE\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2016-11-21T00:47:50Z",
+  "updated_at": "2016-11-21T04:48:20Z",
+  "description": "title",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/ef9e3bf2eb459b52ba91f155f7b18480/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "fork_of": {
+    "url": "https://api.github.com/gists/7e357e8d8263abf559ab49eb6545ec3b",
+    "forks_url": "https://api.github.com/gists/7e357e8d8263abf559ab49eb6545ec3b/forks",
+    "commits_url": "https://api.github.com/gists/7e357e8d8263abf559ab49eb6545ec3b/commits",
+    "id": "7e357e8d8263abf559ab49eb6545ec3b",
+    "node_id": "MDQ6R2lzdDdlMzU3ZThkODI2M2FiZjU1OWFiNDllYjY1NDVlYzNi",
+    "git_pull_url": "https://gist.github.com/7e357e8d8263abf559ab49eb6545ec3b.git",
+    "git_push_url": "https://gist.github.com/7e357e8d8263abf559ab49eb6545ec3b.git",
+    "html_url": "https://gist.github.com/anonymous/7e357e8d8263abf559ab49eb6545ec3b",
+    "files": {
+
+    },
+    "public": true,
+    "created_at": "2016-11-21T00:47:14Z",
+    "updated_at": "2016-11-21T00:47:51Z",
+    "description": "title",
+    "comments": 0,
+    "user": null,
+    "comments_url": "https://api.github.com/gists/7e357e8d8263abf559ab49eb6545ec3b/comments"
+  },
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "9eb227318067feac84426ee42232ea1df6312139",
+      "committed_at": "2016-11-21T04:48:20Z",
+      "change_status": {
+        "total": 2,
+        "additions": 2,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/ef9e3bf2eb459b52ba91f155f7b18480/9eb227318067feac84426ee42232ea1df6312139"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "83131791e645934d764e649fbdfac40d0cde3eeb",
+      "committed_at": "2016-11-21T01:05:47Z",
+      "change_status": {
+        "total": 2,
+        "additions": 1,
+        "deletions": 1
+      },
+      "url": "https://api.github.com/gists/ef9e3bf2eb459b52ba91f155f7b18480/83131791e645934d764e649fbdfac40d0cde3eeb"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "675075e61a73d5cc04107455fc93d883a6bf849c",
+      "committed_at": "2016-11-21T01:04:28Z",
+      "change_status": {
+        "total": 8,
+        "additions": 7,
+        "deletions": 1
+      },
+      "url": "https://api.github.com/gists/ef9e3bf2eb459b52ba91f155f7b18480/675075e61a73d5cc04107455fc93d883a6bf849c"
+    },
+    {
+      "user": {
+        "login": "invalid-email-address",
+        "id": 148100,
+        "node_id": "MDQ6VXNlcjE0ODEwMA==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/148100?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/invalid-email-address",
+        "html_url": "https://github.com/invalid-email-address",
+        "followers_url": "https://api.github.com/users/invalid-email-address/followers",
+        "following_url": "https://api.github.com/users/invalid-email-address/following{/other_user}",
+        "gists_url": "https://api.github.com/users/invalid-email-address/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/invalid-email-address/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/invalid-email-address/subscriptions",
+        "organizations_url": "https://api.github.com/users/invalid-email-address/orgs",
+        "repos_url": "https://api.github.com/users/invalid-email-address/repos",
+        "events_url": "https://api.github.com/users/invalid-email-address/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/invalid-email-address/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "60e6f5d923cd28bfdda93eeda615d8145a2c0980",
+      "committed_at": "2016-11-21T00:47:14Z",
+      "change_status": {
+        "total": 597,
+        "additions": 597,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/ef9e3bf2eb459b52ba91f155f7b18480/60e6f5d923cd28bfdda93eeda615d8145a2c0980"
+    }
+  ],
+  "truncated": false
+}

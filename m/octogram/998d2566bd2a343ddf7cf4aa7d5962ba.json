@@ -1,0 +1,143 @@
+{
+  "url": "https://api.github.com/gists/998d2566bd2a343ddf7cf4aa7d5962ba",
+  "forks_url": "https://api.github.com/gists/998d2566bd2a343ddf7cf4aa7d5962ba/forks",
+  "commits_url": "https://api.github.com/gists/998d2566bd2a343ddf7cf4aa7d5962ba/commits",
+  "id": "998d2566bd2a343ddf7cf4aa7d5962ba",
+  "node_id": "MDQ6R2lzdDk5OGQyNTY2YmQyYTM0M2RkZjdjZjRhYTdkNTk2MmJh",
+  "git_pull_url": "https://gist.github.com/998d2566bd2a343ddf7cf4aa7d5962ba.git",
+  "git_push_url": "https://gist.github.com/998d2566bd2a343ddf7cf4aa7d5962ba.git",
+  "html_url": "https://gist.github.com/JackLance/998d2566bd2a343ddf7cf4aa7d5962ba",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/998d2566bd2a343ddf7cf4aa7d5962ba/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/998d2566bd2a343ddf7cf4aa7d5962ba/raw/779e09be73259201d2c47fd668d0983ac953a91f/script.txt",
+      "size": 14191,
+      "truncated": false,
+      "content": "title Summer\nrun_rules_on_level_start\nbackground_color #14D0D0\nagain_interval 0.06\ntext_color #FFFF50\n\n========\nOBJECTS\n========\n\nBackground 1\ndarkgrey\n\nunlit\n#70F044\n\nlit \n#FBFB68\n\n\nsummer\n#f41010 #600404 #FFB008\n.000.\n00000\n01010\n00000\n.000.\n\nspring ?\n#109010 #041904\n.000.\n00000\n01010\n00000\n.000.\n\n\n\nlightu \n#FFC008\n.....\n..0..\n.0.0.\n.....\n.....\n\n\n\nlightr \n#FFC008\n.....\n..0..\n...0.\n..0..\n.....\n\nlightl \n#FFC008\n.....\n..0..\n.0...\n..0..\n.....\n\nlightd \n#FFC008\n.....\n.....\n.0.0.\n..0..\n.....\n\n\nu1\n#FF5800\n.....\n..0..\n.0.0.\n.....\n.....\n\nr1\n#FF5800\n.....\n..0..\n...0.\n..0..\n.....\n\nl1\n#FF5800\n.....\n..0..\n.0...\n..0..\n.....\n\nd1\n#FF5800\n.....\n.....\n.0.0.\n..0..\n.....\n\nu2\n#FF7800\n.....\n..0..\n.0.0.\n.....\n.....\n\nr2\n#FF7800\n.....\n..0..\n...0.\n..0..\n.....\n\nl2\n#FF7800\n.....\n..0..\n.0...\n..0..\n.....\n\nd2\n#FF7800\n.....\n.....\n.0.0.\n..0..\n.....\n\nu3\n#FF9800\n.....\n..0..\n.0.0.\n.....\n.....\n\nr3\n#FF9800\n.....\n..0..\n...0.\n..0..\n.....\n\nl3\n#FF9800\n.....\n..0..\n.0...\n..0..\n.....\n\nd3\n#FF9800\n.....\n.....\n.0.0.\n..0..\n.....\n\nu4\n#FFA800\n.....\n..0..\n.0.0.\n.....\n.....\n\nr4\n#FFA800\n.....\n..0..\n...0.\n..0..\n.....\n\nl4\n#FFA800\n.....\n..0..\n.0...\n..0..\n.....\n\nd4\n#FFA800\n.....\n.....\n.0.0.\n..0..\n.....\n\nx0\ntransparent\n\nx1\ntransparent\n\nx2\ntransparent\n\nx3\ntransparent\n\nx4\ntransparent\n\nx5\ntransparent\n\nplusone\ntransparent\n\nux\ntransparent\n\ndx\ntransparent\n\nlx\ntransparent\n\nrx\ntransparent\n\n\nblock w\n#14D0D0\n\n\n\nglass q\nbrown lightbrown white\n.000.\n02110\n02120\n01120\n.000.\n\nwater\n#1040E0\n\nver\n#1040E0 #A07004\n01110\n01110\n01110\n01110\n01110\n\nhor\n#1040E0 #A07004\n00000\n11111\n11111\n11111\n00000\n\nbloomed [\n#209A00\n.000.\n00000\n00000\n00000\n.000.\n\nflower >\n#209A00 #20BA00\n.....\n..0..\n.010.\n..0..\n.....\n\ndoor e\n#80F4F4 #14D0D0\n00011\n00001\n00000\n00001\n00011\n\n\n\nbad .\n#985000 white #ff5064\n..2..\n.000.\n.000.\n.000.\n..1..\n\n\n\n\nlose\n#985000 white #ff5064 black\n..2..\n.303.\n.000.\n.000.\n..1..\n\nnemir z\n#985000 #14D0D0\n0....\n00...\n0.0..\n0..0.\n00000\n\nsemir x\n#985000 #14D0D0\n00000\n0..0.\n0.0..\n00...\n0....\n\nnwmir c\n#985000 #14D0D0\n....0\n...00\n..0.0\n.0..0\n00000\nswmir v\n#985000 #14D0D0\n00000\n.0..0\n..0.0\n...00\n....0\n\ndiag b\n#985000 #14D0D0\n00000\n00..0\n0.0.0\n0..00\n00000\n\ndiago n\n#985000 #14D0D0\n00000\n0..00\n0.0.0\n00..0\n00000\n\n\nnodoor\ntransparent\n\nwins\ntransparent\n\nstart\ntransparent\n\nvert\ntransparent\n\nnew\ntransparent\n\nmore\ntransparent\n=======\nLEGEND\n=======\n\nmirror = swmir or semir or nwmir or nemir\nfloor = lit or unlit\ndiags = diag or diago\nlight = lightu or lightd or lightr or lightl \n\n\n\nflow = flower or bloomed\ncre =  block or mirror or diags or door\ncrae = block or glass or bad or flow\ncrate =  block or glass or mirror or bad or diags or summer or flow\npush =  mirror or diags\nt = bad and lit\nfir = u1 or d1 or l1 or r1\nsec = u2 or d2 or l2 or r2\nthi = u3 or d3 or l3 or r3\nfou = u4 or d4 or l4 or r4\nxs = x0 or x1 or x2 or x3 or x4 or x5\n\n2 = summer and start\n\nk= water \n\nplayer = summer\n\n=======\nSOUNDS\n=======\n\nSFX1 71317504\nSFX2 54283103\nSFX3 32265107\nSFX4 3967707\nSFX5 25216505\nSFX6 37188907\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\n\nfloor\nvert\nwater, hor, ver\nlightu\nlightr\nlightd\nlightl\n\nmore\nnodoor, wins, lose\nbad\nflow\nstart, new\n\nplayer, glass, block, door, mirror, diags, spring\nplusone\nx0\nx1\nx2\nx3\nx4\nx5\nu1, u2, u3, u4\nd1, d2, d3, d4\nl1, l2, l3, l4\nr1, r2, r3, r4\nux\nlx\nrx\ndx\n\n\n\n\n======\nRULES\n======\n\n\n[spring new] -> [spring]\n\nup [spring no new|no block] -> [|spring new] again\nright [spring no new|no block] -> [|spring new] again\n[spring no new] -> win\n\n[xs] -> []\n[fir] -> []\n[sec] -> []\n[thi] -> []\n[fou] -> []\n\n\n[summer][no floor no door no nodoor no block] -> [summer][unlit]\n\n\n[new] -> []\n[light]->[]\n\n\n\n\n\n\n[> summer| water] -> cancel\n[> summer| flow] -> cancel\n[> summer| push| no crae no water] -> [> summer|> push|] SFX6\nstartloop\nright [> nemir| swmir] -> [|stationary diag]\nup [> nemir| swmir] -> [|stationary diag]\ndown [> swmir| nemir] -> [|stationary diag]\nleft [> swmir| nemir] -> [|stationary diag]\nleft [> nwmir| semir] -> [|stationary diago]\nup [> nwmir| semir] -> [|stationary diago]\ndown [> semir| nwmir] -> [|stationary diago]\nright [> semir| nwmir] -> [|stationary diago]\n[> push|push| no crae no water] -> [> push|> push|]\nendloop\n[> push| stationary push] -> cancel\n[> summer| stationary push] -> cancel\n\nlate [summer] -> [summer lightu lightr lightd lightl x0]\n\n\n\nstartloop \n\nlate [light more] -> [light]\n\nlate up [lightu xs no flow  no more|no lightu no cre no door ] -> [lightu xs| lightu more xs plusone]\nlate down [lightd xs no flow  no more|no lightd no cre no door  ] -> [lightd xs| lightd more xs plusone]\nlate left [lightl xs no flow  no more|no lightl no cre no door  ] -> [lightl xs| lightl more xs plusone]\nlate right [lightr xs no flow  no more|no lightr no cre no door  ] -> [lightr xs| lightr more xs plusone]\n\n\nlate up[lightu no more no flow xs|semir no lightr] -> [lightu xs|lightr more semir xs plusone]\nlate up[lightu no more no flow xs|swmir no lightl] -> [lightu xs|lightl more swmir xs plusone]\nlate down[lightd no more no flow xs|nemir no lightr] -> [lightd xs|lightr more nemir xs plusone]\nlate down[lightd no more no flow xs|nwmir no lightl] -> [lightd xs|lightl more nwmir xs plusone]\nlate left[lightl no more no flow xs|semir no lightd] -> [lightl xs|lightd more semir xs plusone]\nlate left[lightl no more no flow xs|nemir no lightu] -> [lightl xs|lightu more nemir xs plusone]\nlate right[lightr no more no flow xs|swmir no lightd] -> [lightr xs|lightd more swmir xs plusone]\nlate right[lightr no more no flow xs|nwmir no lightu] -> [lightr xs|lightu more nwmir xs plusone]\n\nlate up [lightu no crae mirror|light flow no new] -> [lightu mirror|bloomed new] \nlate down [lightd no crae mirror|light flow no new] -> [lightd mirror|bloomed new]  \nlate left [lightl no crae mirror|light flow no new] -> [lightl mirror|bloomed new]  \nlate right [lightr no crae mirror|light flow no new] -> [lightr mirror|bloomed new] \nlate up [lightu no crae mirror|flow no new] -> [lightu mirror|bloomed new]  \nlate down [lightd no crae mirror|flow no new] -> [lightd mirror|bloomed new] \nlate left [lightl no crae mirror|flow no new] -> [lightl mirror| bloomed new] \nlate right [lightr no crae mirror|flow no new] -> [lightr mirror|bloomed new] \nlate up [lightu no crae mirror|light flow no new] -> [lightu summer|bloomed new] \nlate down [lightd no crae summer|light flow no new] -> [lightd  summer|bloomed new]  \nlate left [lightl no crae summer|light flow no new] -> [lightl  summer|bloomed new]  \nlate right [lightr no crae summer|light flow no new] -> [lightr  summer|bloomed new] \nlate up [lightu no crae summer|flow no new] -> [lightu summer|bloomed new]  \nlate down [lightd no crae summer|flow no new] -> [lightd summer|bloomed new]  \nlate left [lightl no crae summer|flow no new] -> [lightl summer| bloomed new] \nlate right [lightr no crae summer|flow no new] -> [lightr summer|bloomed new]\n\nlate up [lightu no crate water|light flow no new floor] -> [ver|lit] SFX1 again\nlate down [lightd no crate water|light flow no new floor] -> [ver|lit] SFX1 again\nlate left [lightl no crate water|light flow no new floor] -> [hor|lit] SFX1 again\nlate right [lightr no crate water|light flow no new floor] -> [hor|lit] SFX1 again\nlate up [lightu no crate water|flow no new floor] -> [ver|lit] SFX1 again\nlate down [lightd no crate water|flow no new floor] -> [ver|lit] SFX1 again\nlate left [lightl no crate water|flow no new floor] -> [hor|lit] SFX1 again\nlate right [lightr no crate water|flow no new floor] -> [hor|lit] SFX1 again\n\nlate up [lightu no crate no water no hor no ver|light flow no new floor ux] -> [bloomed new ux|lit] again SFX3\nlate down [lightd no crate no water  no hor no ver|light flow no new floor dx] -> [bloomed new dx|lit] again SFX3\nlate left [lightl no crate no water  no hor no ver|light flow no new floor lx] -> [bloomed new lx|lit] again SFX3\nlate right [lightr no crate no water  no hor no ver|light flow no new floor rx] -> [bloomed new rx|lit] again SFX3\nlate up [lightu no crate no water no hor no ver|flow no new floor ux] -> [bloomed  ux new|lit] again SFX3\nlate down [lightd no crate no water  no hor no ver|flow no new floor dx] -> [bloomed dx new|lit] again SFX3\nlate left [lightl no crate no water  no hor no ver|flow no new floor lx] -> [bloomed lx new|lit] again SFX3\nlate right [lightr no crate no water  no hor no ver|flow no new floor rx] -> [bloomed rx new|lit] again SFX3\n\nlate up [lightu no crate no water no hor no ver|light flow no new floor no ux] -> [lightu |light flow floor ux] again\nlate down [lightd no crate no water  no hor no ver|light flow no new floor no dx] -> [lightd |light flow floor dx] again\nlate left [lightl no crate no water  no hor no ver|light flow no new floor no lx] -> [lightl |light flow floor lx] again\nlate right [lightr no crate no water  no hor no ver|light flow no new floor no rx] -> [lightr |light flow floor rx] again\nlate up [lightu no crate no water no hor no ver|flow no new floor no ux] -> [lightu |flow floor ux] again\nlate down [lightd no crate no water  no hor no ver|flow no new floor no dx] -> [lightd |flow floor dx] again\nlate left [lightl no crate no water  no hor no ver|flow no new floor no lx] -> [lightl |flow floor lx] again\nlate right [lightr no crate no water  no hor no ver|flow no new floor no rx] -> [lightr |flow floor rx] again\n\nlate [x0 plusone] -> [x1]\nlate [x1 plusone] -> [x2]\nlate [x2 plusone] -> [x3]\nlate [x3 plusone] -> [x4]\nlate [x4 plusone] -> [x5]\n\n\nendloop\n\nlate [summer unlit] -> [summer lit]\nlate [light unlit] -> [light lit]\nlate [summer|flower] -> [summer| bloomed]\nlate [light flow] -> [bloomed]\n\n\nlate [lightu x4] -> [lightu u4 x4]\nlate [lightd x4] -> [lightd d4 x4]\nlate [lightl x4] -> [lightl l4 x4]\nlate [lightr x4] -> [lightr r4 x4]\nlate [lightu x3] -> [lightu u3 x3]\nlate [lightd x3] -> [lightd d3 x3]\nlate [lightl x3] -> [lightl l3 x3]\nlate [lightr x3] -> [lightr r3 x3]\nlate [lightu x2] -> [lightu u2 x2]\nlate [lightd x2] -> [lightd d2 x2]\nlate [lightl x2] -> [lightl l2 x2]\nlate [lightr x2] -> [lightr r2 x2]\n\nlate [lightu x1] -> [lightu u1 x1]\nlate [lightd x1] -> [lightd d1 x1]\nlate [lightl x1] -> [lightl l1 x1]\nlate [lightr x1] -> [lightr r1 x1]\n\n\n\n\n\nlate [summer][door] -> [summer][nodoor new lit]\n\nlate [nodoor new lit][unlit no water] -> [door][unlit no water]\nlate [lose]->restart\nlate [light bad] -> [light lose] SFX5\nlate [nodoor new] -> [nodoor] SFX2\nlate [player nodoor] -> [wins player]\n\n\nlate [start][summer wins floor] -> win\n\n\n==============\nWINCONDITIONS\n==============\n\n=======\nLEVELS\n=======\n\n\n\nmessage Ughh. Not again.\n\nw1111111e\nw111w1w1w\nw1111111w\nw1w111w1w\nw1111111w\nw1w1w111w\n21111111w\n\nmessage Millenium in and millenium out,\n\nmessage It's always the same.\n\nmessage I'm SO BOOOOOORED.\n\nmessage [TREES GROW AND MOVE TOWARDS SUNLIGHT]\n\nw>>>>w\nw1111w\nw1111w\nw1111w\n21111e\nw1111w\nw1111w\nw1111w\nw>>>>w\n\n\nmessage And all these stupid rabbits do is sleep.\n\nmessage Whatever.\n\nmessage I guess they're more trouble when they're awake anyway.\n\nmessage [DON'T WAKE BUNNIES UP BY SHINING LIGHT IN THEIR EYES]\n\n21111111w\nw1111111w\nw1w1t1w1w\nw11www11w\nw1111111e\n\nmessage UGHHH.\n\nmessage Why do rabbits always have to find the least convenient places to rest?\n\n\nw1111111w\nw1w111>1w\n21w1t111e\nw1w111>1w\nw1111111w\n\nmessage Who keeps replacing my healthy grown trees with these totally WIMPY plants, anyways?\n\nwwwwwww\n2111www\nw1111ww\nw1111>w\nww11>1w\nwww>11e\n\nmessage Obviously someone with bad taste.\n\nmessage The bigger trees clearly look way better.\n\nmessage [WHEN TREES FALL IN THE WATER, THEY CAN BE USED AS BRIDGES]\n\nwkkk1>w\n211k11e\nw11k11w\nw11k11w\nwkkkkkw\nw11k11w\nw1>k11w\nw11k>1w\nw11kkkw\n\n\n\nw11111111\nw1111kkkw\nwkk1kk11w\nw1k?k111w\nw1kkk111w\nw11>1111w\nw1111111w\n21111111w\n\nmessage WHO THE HELL?\n\nmessage Get BACK here!\n\nw1111111e\nw1111kkkw\nwkk1kk11w\nw1k1k111w\nw1kkk111w\nw11>1111w\nw1111111w\n21111111w\n\nmessage She looks so similar to me.\n\nmessage It was almost like looking in a mirror or something.\n\nmessage Although much less blinding, of course!\n\nmessage [MIRRORS REFLECT LIGHT]\n\nwx1111e\nw11v1ww\nw1w1w1w\nwwx1v1w\n2c1111w\n\nmessage I'm going to go find her to tell her to stop getting rid of my grown trees.\n\nmessage What the HECK is her problem!?\n\nw1111111w\n21111111w\nw111c1c1w\nw1111111w\nw1v1t111w\nw1111111e\nw1111111w\n\nmessage I bet she's also the one who keeps getting rid of all the fruit I make each year.\n\nmessage She probably doesn't even have any idea how ANNOYING she is!\n\nmessage [SUMMER CAN JUMP OVER GAPS OF WATER WHEN BRIDGES DON'T CONNECT]\n\nw1kkk1k1>e\nw1k>kk>k1w\nw1kk1k>kkw\nwk1k>kk>kw\nwk1kk1k1kw\nw1k>k1k1kw\n21kkk1kkkw\n\n\n\nmessage Maybe she's also the one who makes it so cold whenever I start to come around.\n\nmessage I'm going to go find her and get her to stop!\n\nw1k>>>>e\nw1k>>>>w\nw1k>>>>w\nw1k>>>>w\nw1kkkkkw\n2111111w\n\n\n\n\nmessage GAHH!\n\nmessage Why is she rushing away so fast?\n\nmessage Where could she even be going!?\n\n\nwx111>e\nw1x11>w\nw11x1>w\nw111x>w\n21111ww\n\nmessage She must be intentionally trying to AGGREVATE me.\n\nmessage And doesn't want me to catch her.\n\n\nw11>111w\nw1>111ke\nw>111k1w\nw111k11w\nw11k111w\nw1k111>w\n2k111>1w\nw111>11w\n\n\nmessage Well that just makes me want to get to her EVEN MORE!\n\nmessage YOU CAN RUN, BUT YOU CAN'T HIDE!\n\n\nwwwwww1>w\nwwwwww11e\nwww1111cw\nw11x1v11w\nw11c1z11w\nw11111www\n2xcwwwwww\nw11wwwwww\n\n\n\nmessage These set ups seem to be getting more and more complicated.\n\n\nw1111111e\nw11>1>11w\nw11111>1w\nw111t111w\nw11111>1w\nw1111111w\n21111111w\n\n\n\n\n\nmessage She must be putting these traps in my way to stop me from getting to her.\n\n\nwwtwtwtwtwtww\nw11111111111w\nw11111111111w\nw1111v111111w\n2z1x1c1c1111e\nw11111111111w\n\n\n\n\n\n\n\nmessage Whatever.\n\nmessage She's an idiot if she ACTUALLY BELIEVES she can stop me.\n\n211111111111e\nww1111v1111ww\n[w11v1w1z11w1\n[wx111w111vw1\n1111w111w11k1\nkkkkkkkkkkkk1\n[1w1111111w11\nw11111111111w\n\n\nmessage If I catch her, maybe I can get her to stop resetting everything I do.\n\n\nww111wwww\n211111www\nw>1>1>1ww\nww111111w\nwww>1>1>e\nwwww111ww\nwwwwwwwww\n\n\n\nmessage Then everything will finally stay the way it SHOULD be.\n\nw11111w\nw11111w\nw1xxv1w\n21ztv1e\nw1zcc1w\nw11111w\nw11111w\n\n\n\nmessage So then summer will last ETERNALLY!\n\nmessage You can't run forever!\n\nwww11111www\nwww11111www\nwww11111www\nw1111w1111t\nw1xv1w1111t\nw1zc1w1111w\n21111w1111e\nwwwwwwttwww\n\n\nmessage END OF PART TWO\n"
+    }
+  },
+  "public": true,
+  "created_at": "2016-11-13T18:08:37Z",
+  "updated_at": "2016-11-14T01:12:00Z",
+  "description": "title",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/998d2566bd2a343ddf7cf4aa7d5962ba/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "fork_of": {
+    "url": "https://api.github.com/gists/fd4c03ffb5a5de0dac7a0aee1a1ca203",
+    "forks_url": "https://api.github.com/gists/fd4c03ffb5a5de0dac7a0aee1a1ca203/forks",
+    "commits_url": "https://api.github.com/gists/fd4c03ffb5a5de0dac7a0aee1a1ca203/commits",
+    "id": "fd4c03ffb5a5de0dac7a0aee1a1ca203",
+    "node_id": "MDQ6R2lzdGZkNGMwM2ZmYjVhNWRlMGRhYzdhMGFlZTFhMWNhMjAz",
+    "git_pull_url": "https://gist.github.com/fd4c03ffb5a5de0dac7a0aee1a1ca203.git",
+    "git_push_url": "https://gist.github.com/fd4c03ffb5a5de0dac7a0aee1a1ca203.git",
+    "html_url": "https://gist.github.com/anonymous/fd4c03ffb5a5de0dac7a0aee1a1ca203",
+    "files": {
+
+    },
+    "public": true,
+    "created_at": "2016-11-13T18:04:35Z",
+    "updated_at": "2016-11-13T18:08:37Z",
+    "description": "title",
+    "comments": 0,
+    "user": null,
+    "comments_url": "https://api.github.com/gists/fd4c03ffb5a5de0dac7a0aee1a1ca203/comments"
+  },
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "a2c3739f5b0423f9ea24bf0b8b8413663f60ceb4",
+      "committed_at": "2016-11-14T01:12:00Z",
+      "change_status": {
+        "total": 4,
+        "additions": 2,
+        "deletions": 2
+      },
+      "url": "https://api.github.com/gists/998d2566bd2a343ddf7cf4aa7d5962ba/a2c3739f5b0423f9ea24bf0b8b8413663f60ceb4"
+    },
+    {
+      "user": {
+        "login": "invalid-email-address",
+        "id": 148100,
+        "node_id": "MDQ6VXNlcjE0ODEwMA==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/148100?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/invalid-email-address",
+        "html_url": "https://github.com/invalid-email-address",
+        "followers_url": "https://api.github.com/users/invalid-email-address/followers",
+        "following_url": "https://api.github.com/users/invalid-email-address/following{/other_user}",
+        "gists_url": "https://api.github.com/users/invalid-email-address/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/invalid-email-address/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/invalid-email-address/subscriptions",
+        "organizations_url": "https://api.github.com/users/invalid-email-address/orgs",
+        "repos_url": "https://api.github.com/users/invalid-email-address/repos",
+        "events_url": "https://api.github.com/users/invalid-email-address/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/invalid-email-address/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "90bffe23a1b19b1f104e3714269c075d02e98192",
+      "committed_at": "2016-11-13T18:04:35Z",
+      "change_status": {
+        "total": 918,
+        "additions": 918,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/998d2566bd2a343ddf7cf4aa7d5962ba/90bffe23a1b19b1f104e3714269c075d02e98192"
+    }
+  ],
+  "truncated": false
+}

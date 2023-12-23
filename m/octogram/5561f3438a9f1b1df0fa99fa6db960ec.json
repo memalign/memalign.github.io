@@ -1,0 +1,372 @@
+{
+  "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec",
+  "forks_url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/forks",
+  "commits_url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/commits",
+  "id": "5561f3438a9f1b1df0fa99fa6db960ec",
+  "node_id": "MDQ6R2lzdDU1NjFmMzQzOGE5ZjFiMWRmMGZhOTlmYTZkYjk2MGVj",
+  "git_pull_url": "https://gist.github.com/5561f3438a9f1b1df0fa99fa6db960ec.git",
+  "git_push_url": "https://gist.github.com/5561f3438a9f1b1df0fa99fa6db960ec.git",
+  "html_url": "https://gist.github.com/JackLance/5561f3438a9f1b1df0fa99fa6db960ec",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/5561f3438a9f1b1df0fa99fa6db960ec/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/5561f3438a9f1b1df0fa99fa6db960ec/raw/941645f330780c0425d12ded35a430a86b75b1ac/script.txt",
+      "size": 28733,
+      "truncated": false,
+      "content": "title Gating\nauthor Jack Lance\n\nmouse_left\nmouse_right\nmouse_drag\nmouse_rdrag\n\nflickscreen 15x15\n\nrealtime_interval 0.001\n\n========\nOBJECTS\n========\nPlayer\ntransparent\n\nBackground\n#aaeeee\n\nsavemousea\ntransparent\n\nsavemouseb\ntransparent\n\n\nsavemousec\ntransparent\n\nsavemetal\ntransparent\n\nsavewall\ntransparent\n\nsaveup\ntransparent\n\nsaveleft\ntransparent\n\nsavedown\ntransparent\n\nsaveright\ntransparent\n\none\ntransparent\n\ntwo\ntransparent\n\nthree\ntransparent\n\nfour\ntransparent\n\nfive\ntransparent\n\nsix\ntransparent\n\nseven\ntransparent\n\ngoalone\ntransparent\n\ngoalzero\ntransparent\n\ngoaltwo\ntransparent\n\ngottwo\norange\n\ngotone\nyellow\n\ngotzero\ngreen\n\nmousea\n#008888 #003333\n.....\n.....\n.000.\n00010\n00000\n\nmouseb\n#008888 #003333\n.....\n.....\n.000.\n00010\n00000\n\nmousec\n#008888 #003333\n.....\n.....\n.000.\n00010\n00000\n\nnomousea\n#66bbbb #33aaaa\n.....\n.....\n.000.\n00010\n00000\n\nnomouseb\n#66bbbb #33aaaa\n.....\n.....\n.000.\n00010\n00000\n\nnomousec\n#66bbbb #33aaaa\n.....\n.....\n.000.\n00010\n00000\n\nPermaWall\n#002222\n\nWall\n#002222\n\nmetal\n#44bbbb #002222\n..1..\n.101.\n10001\n.101.\n..1..\n\nupmetal\n#44bbbb #002222\n.000.\n.000.\n.....\n.....\n.....\n\ndownmetal\n#44bbbb #002222\n.....\n.....\n.....\n.000.\n.000.\n\n\nleftmetal\n#44bbbb #002222\n.....\n00...\n00...\n00...\n.....\n\nrightmetal\n#44bbbb #002222\n.....\n...00\n...00\n...00\n.....\n\nupnoleft\n#002222\n0....\n0....\n.....\n.....\n.....\n\nleftnoup\n#002222\n00...\n.....\n.....\n.....\n.....\n\nupleft\n#44bbbb\n0....\n.....\n.....\n.....\n.....\n\nupnoright\n#002222\n....0\n....0\n.....\n.....\n.....\n\nrightnoup\n#002222\n...00\n.....\n.....\n.....\n.....\n\nupright\n#44bbbb\n....0\n.....\n.....\n.....\n.....\n\n\ndownnoleft\n#002222\n.....\n.....\n.....\n0....\n0....\n\nleftnodown\n#002222\n.....\n.....\n.....\n.....\n00...\n\ndownleft\n#44bbbb\n.....\n.....\n.....\n.....\n0....\n\ndownnoright\n#002222\n.....\n.....\n.....\n....0\n....0\n\nrightnodown\n#002222\n.....\n.....\n.....\n.....\n...00\n\ndownright\n#44bbbb\n.....\n.....\n.....\n.....\n....0\n\nplay\n#22cccc\n.0...\n.00..\n.000.\n.00..\n.0...\n\nstop1\n#22cccc\n.000.\n.000.\n..0..\n.000.\n.000.\n\nstop2\n#22cccc\n..00.\n..000\n00000\n000..\n.00..\n\nstop3\n#22cccc\n.....\n00.00\n00000\n00.00\n.....\n\nstop4\n#22cccc\n.00..\n000..\n00000\n..000\n..00.\n\nlmb\ntransparent\n\nrmb\ntransparent\n\ndrag\ntransparent\n\nrdrag\ntransparent\n\nprev\ntransparent\n\ncant\ntransparent\n\ntemp\ntransparent\n\nsupp\ntransparent\n\npermanowall\ntransparent\n\nmouseinput\ntransparent\n\nfinished\ntransparent\n\nalldone\ntransparent\n\narrow\n#66bbbb\n.0...\n..0..\n0000.\n..0..\n.0...\n\nfailure\nred\n\nmessagepartone\ntransparent\n\nmessageparttwo\ntransparent\n\nmessagepartthree\ntransparent\n\noneinput\ntransparent\n\ntwoinputs\ntransparent\n\nthreeinputs\ntransparent\n\nmousagepartone\ntransparent\n\nmousageparttwo\ntransparent\n\ngoalafirst\ntransparent\n\ngoalbsecond\ntransparent\n\nstop5\n#22cccc\n.000.\n00000\n00000\n00000\n.000.\n=======\nLEGEND\n=======\na = oneinput and permawall\nb = twoinputs and permawall\nc = threeinputs and permawall\n. = Background\n# = PermaWall\n? = goalafirst and goalbsecond and goaltwo and arrow and permanowall\nu = mousea and permanowall and mouseinput\nj = mouseb and permanowall and mouseinput\nm = mousea and permanowall and mouseinput\nmouse = mousea or mouseb or mousec\nnomouse = nomousea or nomouseb or nomousec\nw = nomousea and permanowall and mouseinput\ns = nomouseb and permanowall and mouseinput\nx = nomousec and permanowall and mouseinput\ne = arrow and permanowall\n> = play and permawall\n1 = one and permawall\n2 = two and permawall\n3 = three and permawall\n4 = four and permawall\n5 = five and permawall\n6 = six and permawall\n7 = seven and permawall\n- = goalzero and arrow and permanowall\n+ = goalone and arrow and permanowall\n@ = goaltwo and arrow and permanowall\nnumber = one or two or three or four or five or six or seven\nxmetal = rightmetal or leftmetal or downmetal or upmetal\nmetalextra = upnoleft or leftnoup or upleft or upnoright or rightnoup or upright or downnoleft or leftnodown or downleft or downnoright or rightnodown or downright\nstop = stop1 or stop2 or stop3 or stop4\nmxxxx = metal or mouse\nsavemouse = savemousea or savemouseb or savemousec\nsavex = savemouse  or savemetal or savewall or saveup or savedown or saveleft or saveright\ngoalx = goalzero or goalone or goaltwo\ngotx = gotzero or gotone or gottwo\nitem = wall or mouse or metal or xmetal\nmpx = messagepartone or messageparttwo or messagepartthree or mousagepartone or mousageparttwo\nstopx = stop or stop5\n=======\nSOUNDS\n=======\n\n\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\nPlayer\npermanowall\nmouseinput\nwall, metal, , permawall\nmousec\nmousea\nmouseb\narrow\nsavewall, savemetal, savemouse\nupmetal\ndownmetal\nrightmetal\nleftmetal\nsaveup\nsaveleft\nsavedown\nsaveright\nupnoleft leftnoup upleft\nupnoright rightnoup upright\ndownnoleft leftnodown downleft\ndownnoright rightnodown downright\nlmb, rmb, drag, rdrag\nplay, stop, temp\nprev\ncant\nsupp\nnomouse\nnumber\ngoalzero, goalone, goaltwo\ngotzero, gotone, gottwo\nfinished\nalldone\nmpx\noneinput, twoinputs, threeinputs\nfailure\nstop5\ngoalafirst\ngoalbsecond\n======\nRULES\n======\n[rdrag] -> [rmb]\n\n\n\nright [number | no number] -> [number | number]\ndown [number | no number] -> [number | number]\n\ndown [mousea no number mouseinput||...|mousea no number mouseinput] -> [mousea mouseinput||...|mouseb mouseinput]\ndown [mouseb no number mouseinput||...|mouseb no number mouseinput] -> [mouseb mouseinput||...|mousec mouseinput]\ndown [mousea three mouseinput||...|mousea three mouseinput] -> [mousea three mouseinput||...|mouseb three mouseinput]\ndown [mousea five mouseinput||...|mousea five mouseinput] -> [mousea five mouseinput||...|mouseb five mouseinput]\ndown [mousea six mouseinput||...|mousea six mouseinput] -> [mousea six mouseinput||...|mouseb six mouseinput]\ndown [mousea seven mouseinput||...|mousea seven mouseinput] -> [mousea seven mouseinput||...|mouseb seven mouseinput]\ndown [mouseb seven mouseinput||...|mouseb seven mouseinput] -> [mouseb seven mouseinput||...|mousec seven mouseinput]\n\nup [play][drag no PermaWall no permanowall| prev metal] -> [play][upmetal metal prev| downmetal metal]\ndown [play][drag no PermaWall no permanowall| prev metal] -> [play][downmetal metal prev| upmetal metal]\nleft [play][drag no PermaWall no permanowall| prev metal] -> [play][leftmetal metal prev| rightmetal metal]\nright [play][drag no PermaWall no permanowall| prev metal] -> [play][rightmetal metal prev| leftmetal metal]\n\n[drag] -> [lmb]\n\n\n[play][lmb no prev][prev] -> [play][lmb prev][]\n[play][rmb no prev][prev] -> [play][rmb prev][]\n[play][lmb no prev] -> [play][lmb prev]\n[play][rmb no prev] -> [play][rmb prev]\n\n[play][rmb wall] -> [play][]\n[play][rmb no permawall no permanowall] -> [play][wall]\n\n[play][lmb metal] -> [play][]\n[play][lmb no permawall no permanowall] -> [play][metal]\n[play][lmb mouseinput mousea] -> [play][mouseinput nomousea]\n[play][lmb mouseinput mouseb] -> [play][mouseinput nomouseb]\n[play][lmb mouseinput mousec] -> [play][mouseinput nomousec]\n[play][lmb mouseinput nomousea] -> [play][mouseinput mousea]\n[play][lmb mouseinput nomouseb] -> [play][mouseinput mouseb]\n[play][lmb mouseinput nomousec] -> [play][mouseinput mousec]\n\ndown [play][item no mouse| | | | | | | | | | | | | | | ] -> [play][item| | | | | | | | | | | | | | |item]\ndown [play][no item| | | | | | | | | | | | | | |item no mouse] -> [play][| | | | | | | | | | | | | | |]\n\n[lmb play][arrow number] -> [lmb play][arrow number gotzero]\n\n[play][mouse no mouseinput] -> [play][]\n[lmb play][savex] -> [lmb play][]\n[lmb play][wall] -> [lmb play][wall savewall]\n[lmb play][mousea] -> [lmb play][mousea savemousea]\n[lmb play][mouseb] -> [lmb play][mouseb savemouseb]\n[lmb play][mousec] -> [lmb play][mousec savemousec]\n[lmb play][metal] -> [lmb play][metal savemetal]\n[lmb play][upmetal] -> [lmb play][saveup upmetal]\n[lmb play][downmetal] -> [lmb play][savedown downmetal]\n[lmb play][leftmetal] -> [lmb play][saveleft leftmetal]\n[lmb play][rightmetal] -> [lmb play][saveright rightmetal]\n[lmb play] -> [stop1]\n[lmb stopx][gotx] -> [lmb stopx][]\n[lmb stopx][item] -> [lmb stopx][]\n[lmb stopx][metalextra] -> [lmb stopx][]\n\n[lmb stopx][savewall] -> [lmb stopx][wall]\n[lmb stopx][savemousea] -> [lmb stopx][mousea]\n[lmb stopx][savemouseb] -> [lmb stopx][mouseb]\n[lmb stopx][savemousec] -> [lmb stopx][mousec]\n[lmb stopx][savemetal] -> [lmb stopx][metal]\n[lmb stopx][saveup] -> [lmb stopx][upmetal]\n[lmb stopx][savedown] -> [lmb stopx][downmetal]\n[lmb stopx][saveleft] -> [lmb stopx][leftmetal]\n[lmb stopx][saveright] -> [lmb stopx][rightmetal]\n[lmb stopx] -> [play]\n[stop1] -> [temp]\n[stop4] -> [stop1]\n[stop3] -> [stop4]\n[stop2] -> [stop3]\n[temp] -> [stop2]\n\n[supp] -> []\n[cant] -> []\n[stop][wall] -> [stop][wall supp]\n[stop][permawall] -> [stop][permawall supp]\ndown [stop][mxxxx|supp] -> [stop][mxxxx supp|supp]\n+ up [stop][upmetal | supp] -> [stop][upmetal supp | supp]\n+ left [stop][leftmetal | supp] -> [stop][leftmetal supp | supp]\n+ down [stop][downmetal | supp] -> [stop][downmetal supp | supp]\n+ right [stop][rightmetal | supp] -> [stop][rightmetal supp | supp]\n\ndown [mouse supp| mouse] -> [mouse|mouse] \n\n[stop][mxxxx no supp] -> [stop][down mxxxx]\n\n[stop][no number mxxxx no supp][no number mxxxx no cant] -> [stop][no number mxxxx][no number mxxxx cant]\n[stop][one mxxxx no supp][one mxxxx no cant] -> [stop][one mxxxx][one mxxxx cant]\n[stop][two mxxxx no supp][two mxxxx no cant] -> [stop][two mxxxx][two mxxxx cant]\n[stop][three mxxxx no supp][three mxxxx no cant] -> [stop][three mxxxx][three mxxxx cant]\n[stop][four mxxxx no supp][four mxxxx no cant] -> [stop][four mxxxx][four mxxxx cant]\n[stop][five mxxxx no supp][five mxxxx no cant] -> [stop][five mxxxx][five mxxxx cant]\n[stop][six mxxxx no supp][six mxxxx no cant] -> [stop][six mxxxx][six mxxxx cant]\n[stop][seven mxxxx no supp][seven mxxxx no cant] -> [stop][seven mxxxx][seven mxxxx cant]\n\n[stop][wall] -> [stop][wall cant]\n[stop][metal arrow] -> [stop][metal arrow cant]\n[stop][permawall] -> [stop][permawall cant]\nright [stop][mxxxx|cant] -> [stop][mxxxx cant|cant]\n+ up [stop][upmetal | cant] -> [stop][upmetal cant | cant]\n+ left [stop][leftmetal | cant] -> [stop][leftmetal cant | cant]\n+ down [stop][downmetal | cant] -> [stop][downmetal cant | cant]\n+ right [stop][rightmetal | cant] -> [stop][rightmetal cant | cant]\n\n\n[stop][mouse no cant] -> [stop][right mouse]\nright [stop][right mxxxx | mxxxx] -> [stop][right mxxxx| right mxxxx]\n+ right [stop][rightmetal metal| right metal] -> [stop][rightmetal right metal | right metal]\n+ left [stop][leftmetal metal| right metal] -> [stop][leftmetal right metal | right metal]\n+ down [stop][downmetal metal| right metal] -> [stop][downmetal right metal | right metal]\n+ up [stop][upmetal metal| right metal] -> [stop][upmetal right metal | right metal]\n\n\n[moving metal xmetal] -> [moving metal moving xmetal]\nup [upmetal | no metal] -> [|]\ndown [downmetal | no metal] -> [|]\nleft [leftmetal | no metal] -> [|]\nright [rightmetal | no metal] -> [|]\n[xmetal no metal] -> []\n\n\n[mouse arrow] -> [stationary mouse arrow]\n\n[failure][moving mxxxx] -> [failure][stationary mxxxx]\n\n\n[stop][number arrow] -> [stop][number arrow finished]\n[stop][one finished][one moving mxxxx] -> [stop][one][one moving mxxxx]\n[stop][two finished][two moving mxxxx ] -> [stop][two][two moving mxxxx]\n[stop][three finished][three moving mxxxx ] -> [stop][three][three moving mxxxx]\n[stop][four finished][four moving mxxxx ] -> [stop][four][four moving mxxxx]\n[stop][five finished][five moving mxxxx] -> [stop][five][five moving mxxxx]\n[stop][six finished][six moving mxxxx ] -> [stop][six][six moving mxxxx]\n[stop][seven finished][seven moving mxxxx] -> [stop][seven][seven moving mxxxx]\n\nrandom [stop][finished goalafirst gotzero mouseb mousea no failure] -> [stop][finished goalafirst gotzero mouseb failure] message ERROR ON INPUT [1, 1], EXPECTED X FIRST BUT RECEIVED X AND Y CONCURRENTLY\n[failure][gotx no failure] -> [failure][]\nrandom [stop][finished goalafirst gotzero mouseb no failure] -> [stop][finished goalafirst gotzero mouseb failure] message ERROR ON INPUT [1, 1], EXPECTED X FIRST BUT RECEIVED Y\n[failure][gotx no failure] -> [failure][]\nrandom [stop][finished goalbsecond gotone mousea no failure] -> [stop][finished goalbsecond gotone mousea failure] message ERROR ON INPUT [1, 1], EXPECTED Y SECOND BUT RECEIVED X\n[failure][gotx no failure] -> [failure][]\n\n\n\n[stop][mouse arrow gotzero] -> [stop][ arrow gotone]\n[stop][mouse arrow gotone] -> [stop][ arrow gottwo]\n\nrandom [stop][finished goalzero gotx no gotzero no failure] -> [stop][finished gotx goalzero failure messagepartone]\n[failure][gotx no failure] -> [failure][]\nrandom [stop][finished goalone gotx no gotone no failure] ->[stop][finished gotx goalone failure messagepartone]\n[failure][gotx no failure] -> [failure][]\nrandom [stop][finished goaltwo gotx no gottwo no failure] ->[stop][finished gotx goaltwo failure messagepartone]\n[failure][gotx no failure] -> [failure][]\n\n\n\n\n[failure gotzero messagepartthree] -> [failure gotzero] message ...BUT RECEIVED NONE\n[failure gotone messagepartthree] -> [failure gotone] message ...BUT RECEIVED 1\n[failure gottwo messagepartthree] -> [failure gottwo] message ...BUT RECEIVED MULTIPLE\n\n\n[failure goalzero messageparttwo] -> [failure goalzero messagepartthree] message ...EXPECTED NO OUTPUT...\n[failure goalone messageparttwo] -> [failure goalone messagepartthree] message ...EXPECTED 1 OUTPUT...\n[failure goaltwo messageparttwo] -> [failure goaltwo messagepartthree] message ...EXPECTED 2 OUTPUTS...\n\n[oneinput][failure one messagepartone] -> [oneinput][failure one messageparttwo] message ERROR ON INPUT [1]...\n\n[twoinputs][failure one messagepartone] -> [twoinputs][failure one messageparttwo] message ERROR ON INPUT [0, 1]...\n[twoinputs][failure two messagepartone] -> [twoinputs][failure two messageparttwo] message ERROR ON INPUT [1, 0]...\n[twoinputs][failure three messagepartone] -> [twoinputs][failure three messageparttwo] message ERROR ON INPUT [1, 1]...\n\n[threeinputs][failure one messagepartone] -> [threeinputs][failure one messageparttwo] message ERROR ON INPUT [0, 0, 1]...\n[threeinputs][failure two messagepartone] -> [threeinputs][failure two messageparttwo] message ERROR ON INPUT [0, 1, 0]...\n[threeinputs][failure three messagepartone] -> [threeinputs][failure three messageparttwo] message ERROR ON INPUT [0, 1, 1]...\n[threeinputs][failure four messagepartone] -> [threeinputs][failure four messageparttwo] message ERROR ON INPUT [1, 0, 0]...\n[threeinputs][failure five messagepartone] -> [threeinputs][failure five messageparttwo] message ERROR ON INPUT [1, 0, 1]...\n[threeinputs][failure six messagepartone] -> [threeinputs][failure six messageparttwo] message ERROR ON INPUT [1, 1, 0]...\n[threeinputs][failure seven messagepartone] -> [threeinputs][failure seven messageparttwo] message ERROR ON INPUT [1, 1, 1]...\n\n\n\n([failure no mpx][gotx] -> [failure no mpx][]\n[failure no mpx][item] -> [failure no mpx][]\n[failure no mpx][metalextra] -> [failure no mpx][]\n[failure no mpx][savewall] -> [failure][wall]\n[failure no mpx][savemouse] -> [failure][mouse]\n[failure no mpx][savemetal] -> [failure][metal]\n[failure no mpx][saveup] -> [failure][upmetal]\n[failure no mpx][savedown] -> [failure][downmetal]\n[failure no mpx][saveleft] -> [failure][leftmetal]\n[failure no mpx][saveright] -> [failure][rightmetal])\n[failure no mpx][stop]-> [][stop5]\n\n[alldone] -> win\n\n[stop][arrow no number] -> [stop][arrow alldone]\n[stop][alldone][arrow number no finished] -> [stop][][arrow number]\n[failure][alldone] -> [failure][]\n\n\nlate [metalextra] -> []\nlate [upmetal no leftmetal] -> [upmetal upnoleft]\nlate [leftmetal no upmetal] -> [leftmetal leftnoup]\nlate [upmetal leftmetal] -> [upmetal leftmetal upleft]\nlate [upmetal no rightmetal] -> [upmetal upnoright]\nlate [rightmetal no upmetal] -> [rightmetal rightnoup]\nlate [upmetal rightmetal] -> [upmetal rightmetal upright]\nlate [downmetal no leftmetal] -> [downmetal downnoleft]\nlate [leftmetal no downmetal] -> [leftmetal leftnodown]\nlate [downmetal leftmetal] -> [downmetal leftmetal downleft]\nlate [downmetal no rightmetal] -> [downmetal downnoright]\nlate [rightmetal no downmetal] -> [rightmetal rightnodown]\nlate [downmetal rightmetal] -> [downmetal rightmetal downright]\n\n[drag] -> []\n[lmb] -> []\n[rdrag] -> []\n[rmb] -> []\n\n==============\nWINCONDITIONS\n==============\n\n\n\n=======\nLEVELS\n=======\nmessage [right click = static]\nmessage [left click + drag = kinetic]\nmessage [left click play to test]\n\nmessage GOAL: [X] -> 1 IF X\n\na##############\n#.............#\n#.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n\nmessage [left click inputs to toggle, for personal tests]\n\nmessage GOAL: [X,Y] -> 1 IF (X OR Y)\n\nb##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n2##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n3##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n\n\nmessage GOAL: [X,Y] -> 1 IF (X AND Y)\n\nb##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n2##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n3##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n\nmessage GOAL: [X,Y,Z] -> 1 IF (X AND Y AND Z)\n\nc##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n2##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n3##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n4##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n5##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n6##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n7##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n\nmessage GOAL: [X,Y] -> 1 IF (X XOR Y)\n\nb##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n2##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n3##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n\n\n\nmessage GOAL: [X,Y,Z] -> 1 IF (X OR Y OR Z)\n\nc##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n2##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n3##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n4##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n5##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n6##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n7##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n\nmessage GOAL: [X,Y] -> Y THEN X\n\nb##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n2##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n3##############\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............?\n###############\n\nmessage GOAL: [X,Y,Z] -> 1 IF (Y OR (X AND Z))\n\nc##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n2##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n3##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n4##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n5##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n6##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n7##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n\n\nmessage GOAL: [X,Y,Z] -> 1 IF (X + Y + Z = 2)\n\nc##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............e\n############>##\n1##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n2##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n3##############\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n4##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n5##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n6##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nw.............#\n#.............#\n#.............#\n#.............#\n#.............+\n###############\n7##############\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\nm.............#\n#.............#\n#.............#\n#.............#\n#.............-\n###############\n\n\n\n\n\n\n\n\n\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2019-07-18T18:19:54Z",
+  "updated_at": "2020-01-21T20:43:09Z",
+  "description": "Lab Rats (PuzzleScript Script)",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "forks": [
+    {
+      "url": "https://api.github.com/gists/22d08d623dc5b6427709d57cd9a9f28e",
+      "user": {
+        "login": "maxflav",
+        "id": 3537692,
+        "node_id": "MDQ6VXNlcjM1Mzc2OTI=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/3537692?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxflav",
+        "html_url": "https://github.com/maxflav",
+        "followers_url": "https://api.github.com/users/maxflav/followers",
+        "following_url": "https://api.github.com/users/maxflav/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxflav/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxflav/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxflav/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxflav/orgs",
+        "repos_url": "https://api.github.com/users/maxflav/repos",
+        "events_url": "https://api.github.com/users/maxflav/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxflav/received_events",
+        "type": "User",
+        "site_admin": false,
+        "name": null,
+        "company": null,
+        "blog": "",
+        "location": "San Francisco",
+        "email": null,
+        "hireable": null,
+        "bio": null,
+        "twitter_username": null,
+        "public_repos": 27,
+        "public_gists": 15,
+        "followers": 2,
+        "following": 2,
+        "created_at": "2013-02-12T01:43:26Z",
+        "updated_at": "2023-12-02T04:01:59Z"
+      },
+      "id": "22d08d623dc5b6427709d57cd9a9f28e",
+      "created_at": "2020-01-21T20:43:09Z",
+      "updated_at": "2020-01-22T00:20:21Z"
+    }
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "b28250c90d6c5642440e893fe8a92171ff0e7711",
+      "committed_at": "2019-07-18T21:54:41Z",
+      "change_status": {
+        "total": 0,
+        "additions": 0,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/b28250c90d6c5642440e893fe8a92171ff0e7711"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "b4a134c8fdb370e187d20726aa2ee9b8d5f45498",
+      "committed_at": "2019-07-18T21:54:35Z",
+      "change_status": {
+        "total": 10,
+        "additions": 5,
+        "deletions": 5
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/b4a134c8fdb370e187d20726aa2ee9b8d5f45498"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "df7a0ae1d3cef68c1b5b1a2e62c1b9f4eeca1968",
+      "committed_at": "2019-07-18T21:53:48Z",
+      "change_status": {
+        "total": 1,
+        "additions": 1,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/df7a0ae1d3cef68c1b5b1a2e62c1b9f4eeca1968"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "cfe596e50fc8c616aea6491a189d2382c0cce930",
+      "committed_at": "2019-07-18T20:44:50Z",
+      "change_status": {
+        "total": 7,
+        "additions": 7,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/cfe596e50fc8c616aea6491a189d2382c0cce930"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "2d168b045898d4e2dd68b90ae590d86c1bd54bd9",
+      "committed_at": "2019-07-18T18:43:23Z",
+      "change_status": {
+        "total": 8,
+        "additions": 4,
+        "deletions": 4
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/2d168b045898d4e2dd68b90ae590d86c1bd54bd9"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "93754acd2f79a47a3aae896c58b33b978d06b094",
+      "committed_at": "2019-07-18T18:28:46Z",
+      "change_status": {
+        "total": 79,
+        "additions": 39,
+        "deletions": 40
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/93754acd2f79a47a3aae896c58b33b978d06b094"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "dfeb566eb2a6b24db93ad71aa0720b60b5f708aa",
+      "committed_at": "2019-07-18T18:26:27Z",
+      "change_status": {
+        "total": 62,
+        "additions": 0,
+        "deletions": 62
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/dfeb566eb2a6b24db93ad71aa0720b60b5f708aa"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "bad1f8b24415ced704624987706d279fabafbbc8",
+      "committed_at": "2019-07-18T18:21:16Z",
+      "change_status": {
+        "total": 3,
+        "additions": 3,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/bad1f8b24415ced704624987706d279fabafbbc8"
+    },
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "26efdf9934a8a97de4c7ac9d5bd41e810a7c34e0",
+      "committed_at": "2019-07-18T18:19:53Z",
+      "change_status": {
+        "total": 1580,
+        "additions": 1580,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/5561f3438a9f1b1df0fa99fa6db960ec/26efdf9934a8a97de4c7ac9d5bd41e810a7c34e0"
+    }
+  ],
+  "truncated": false
+}

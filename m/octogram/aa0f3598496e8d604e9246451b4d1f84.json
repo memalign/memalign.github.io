@@ -1,0 +1,113 @@
+{
+  "url": "https://api.github.com/gists/aa0f3598496e8d604e9246451b4d1f84",
+  "forks_url": "https://api.github.com/gists/aa0f3598496e8d604e9246451b4d1f84/forks",
+  "commits_url": "https://api.github.com/gists/aa0f3598496e8d604e9246451b4d1f84/commits",
+  "id": "aa0f3598496e8d604e9246451b4d1f84",
+  "node_id": "MDQ6R2lzdGFhMGYzNTk4NDk2ZThkNjA0ZTkyNDY0NTFiNGQxZjg0",
+  "git_pull_url": "https://gist.github.com/aa0f3598496e8d604e9246451b4d1f84.git",
+  "git_push_url": "https://gist.github.com/aa0f3598496e8d604e9246451b4d1f84.git",
+  "html_url": "https://gist.github.com/JackLance/aa0f3598496e8d604e9246451b4d1f84",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/aa0f3598496e8d604e9246451b4d1f84/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/aa0f3598496e8d604e9246451b4d1f84/raw/05ddf58d98a16eed6bc0237a08fa612ac0e4779f/script.txt",
+      "size": 9973,
+      "truncated": false,
+      "content": "title Winter\nrun_rules_on_level_start\nagain_interval 0.01\nbackground_color #6094B2\ntext_color #336\n\n========\nOBJECTS\n========\n\nBackground 1\ngrey\n\nit u\n#EFC040\n\nnlit p\n#C0FFEE\n\nwater s\n#101080\n\nice\n#A0A0FF\n\nwinter\n#1010B0 #101030\n.000.\n00000\n01010\n00000\n.000.\n\nautumn\norange brown\n.000.\n00000\n01010\n00000\n.000.\n\n\nblock w\n#6094B2\n\ncrat 7\ndarkbrown brown\n.000.\n01110\n01110\n01110\n.000.\n\ntreea\nlightgreen\n.000.\n00000\n00000\n00000\n.000.\n\n\ntreeb\ndarkbrown\n.000.\n00000\n00000\n00000\n.000.\n\n\ntreec\nred\n.000.\n00000\n00000\n00000\n.000.\n\n\ntreed\norange\n.000.\n00000\n00000\n00000\n.000.\n\ntreee\nbrown\n.000.\n00000\n00000\n00000\n.000.\n\n\n\ndead\nbrown\n..0..\n..0..\n00000\n..0..\n..0..\n\nbunnyu\npink brown white black\n..0..\n.313.\n.111.\n.111.\n..2..\n\nbunnyd\npink brown white black\n..2..\n.111.\n.111.\n.313.\n..0..\n\nbunnyl\npink brown white black\n.....\n.311.\n01112\n.311.\n.....\n\nbunnyr\npink brown white black\n.....\n.113.\n21110\n.113.\n.....\n\n\ndoor e\n#6094B2 #5074A2\n11100\n11110\n11111\n11110\n11100\n\nnemir z\ndarkgrey\n0....\n00...\n0.0..\n0..0.\n00000\n\nsemir x\ndarkgrey\n00000\n0..0.\n0.0..\n00...\n0....\n\nnwmir c\ndarkgrey\n....0\n...00\n..0.0\n.0..0\n00000\nswmir v\ndarkgrey\n00000\n.0..0\n..0.0\n...00\n....0\n\ndiag b\ndarkgrey\n00000\n00..0\n0.0.0\n0..00\n00000\n\ndiago n\ndarkgrey\n00000\n0..00\n0.0.0\n00..0\n00000\n\nlose\n#101080 brown\n00000\n00100\n01110\n00100\n00000\n\nnodoor\ntransparent\n\nwins\ntransparent\n\nstart\ntransparent\n\nvert\ntransparent\n\ntemp\ntransparent\n\ntemp2\ntransparent\n\nlef\ntransparent\n\nrigh\ntransparent\n\ndow\ntransparent\n\nuq\ntransparent\n\nmoved\ntransparent\n\nrtree \ntransparent\n\nbunn\ntransparent\n\niffy \ntransparent\n\nnew\ntransparent\n\none\ntransparent\n\ntwo\ntransparent\n\nthree\ntransparent\n\nfour\ntransparent\n\nfive\ntransparent\n\n=======\nLEGEND\n=======\n\nfloor =  it or nlit\nmirror = swmir or semir or nwmir or nemir\ndiags = diag or diago\nbunny = bunnyu or bunnyl or bunnyr or bunnyd\nflow =dead\ntree = treea or treeb or treec or treed or treee\ncrate = crat or block or tree or dead\ncra = crat or block  or mirror or diags or tree or dead or bunny\ncre = crat or diags or mirror or tree \n0 = bunnyu\n- = rtree\n\no = winter and start\nf = start\nl= dead and nlit\n, = autumn\n\n\nplayer =  winter\n\n=======\nSOUNDS\n=======\n\nSFX1 76816100\nSFX2 80022107\nSFX3 69745307\nSFX4 54283103\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\n\nfloor, \nwater, ice\nvert\nnodoor, wins\nflow\nstart\ntemp, temp2\nplayer,  crat, block, door,  mirror, diags, tree, bunny, autumn\nlef, righ, dow, uq\nmoved, rtree, new, one, two, three, four, five\nbunn\niffy\nlose\n======\nRULES\n======\n\n\n[rtree] -> [random tree]\n[winter][no floor no door no nodoor no block no flow] -> [winter][it]\n\n([> player | crat|no flower] -> [> player| > crat|]\n[> player | diags|no flower] -> [> player| > diags|])\n[> winter][ lose] -> restart\n[uq] [winter] -> [] [up winter]\n[dow] [winter] -> [] [down winter]\n[righ] [winter] -> [] [right winter]\n[lef] [winter] -> [] [left winter]\n\n[moved] -> []\nright [autumn no moved three|no block] -> [|autumn moved] again\n\n\ndown [autumn no moved three|no block] -> [|autumn moved] again\n\n\n\n[autumn no moved three] -> win\n\n\n[autumn no moved two] -> [autumn three] again\n[autumn no moved one] -> [autumn two] again\n[autumn no moved no one no two no three no four no five] -> [autumn one] again\n\n\n[moved] -> []\n[bunn] -> []\n[bunny] -> [bunny bunn]\n\n\n\n[> winter floor no moved|no flow no door no cra ] -> [nlit |> winter moved] \n\n\n\nright [> winter floor no moved| stationary swmir] -> [> temp2 nlit|v temp swmir]\nup [> winter floor no moved| stationary swmir] -> [> temp2 nlit|^ temp swmir]\ndown [> winter floor no moved| stationary  nwmir] -> [> temp2 nlit|v temp nwmir]\nright [> winter floor no moved| stationary  nwmir] -> [> temp2 nlit|^ temp nwmir]\nleft [> winter floor no moved| stationary  nemir] -> [> temp2 nlit|v temp nemir]\ndown [> winter floor no moved| stationary  nemir] -> [> temp2 nlit|^ temp nemir]\nup [> winter floor no moved| stationary  semir] -> [> temp2 nlit|v temp semir]\nleft [> winter floor no moved| stationary  semir] -> [> temp2 nlit|^ temp semir]\n\nstartloop \nright [> temp floor no moved| stationary swmir] -> [ nlit iffy|v temp swmir]\nup [> temp floor no moved| stationary swmir] -> [ nlit iffy|^ temp swmir]\ndown [> temp floor no moved| stationary  nwmir] -> [ nlit iffy|v temp nwmir]\nright [> temp floor no moved| stationary  nwmir] -> [ nlit iffy|^ temp nwmir]\nleft [> temp floor no moved| stationary  nemir] -> [ nlit iffy|v temp nemir]\ndown [> temp floor no moved| stationary  nemir] -> [ nlit iffy|^ temp nemir]\nup [> temp floor no moved| stationary  semir] -> [ nlit iffy|v temp semir]\nleft [> temp floor no moved| stationary  semir] -> [ nlit iffy |^ temp semir]\n\nendloop\n\n[> temp floor|no flow no door no cra ] -> [nlit|> winter moved] SFX1\n[temp][temp2][nlit iffy] -> [temp][temp2][it]\n[temp][> temp2] -> [][> winter]\n[temp] -> []\n[temp2] -> []\n\n[iffy] -> []\n\n[> winter floor no moved|cre|no flow no door no block ] -> [nlit > winter| > cre|]\n\n[winter it] -> [winter nlit]\n[> winter no moved| door] -> [winter moved| temp door] \n[temp door][it] -> [door][it]\n[temp door][winter] -> [winter nodoor nlit][]\n\n\n[ winter| bunny] -> [winter|> bunny] \n[> bunny| bunny] -> [> bunny| > bunny]\n[left bunny] -> [left bunnyl]\n[right bunny] -> [right bunnyr]\n[down bunny] -> [down bunnyd]\n[up bunny] -> [up bunnyu]\n\n[> bunny|water] -> [|lose]\n[> bunny|ice] -> [bunny|ice]\n\n\n\nlate [bunny no bunn] -> SFX3\n\n\n[left winter moved] -> [lef winter] again\n[right winter moved] -> [righ winter] again\n[down winter moved] -> [dow winter] again\n[up winter moved] -> [uq winter] again\n\n[winter water uq] -> [winter ice]\n[winter water lef] -> [winter ice]\n[winter water dow] -> [winter ice]\n[winter water righ] -> [winter ice]\n[winter water] -> [winter ice]\n\n[moved] -> [] again\n\n\n\n\n\nright [> nemir| swmir] -> [|diag]\nup [> nemir| swmir] -> [|diag]\ndown [> swmir| nemir] -> [|diag]\nleft [> swmir| nemir] -> [|diag]\nleft [> nwmir| semir] -> [|diago]\nup [> nwmir| semir] -> [|diago]\ndown [> semir| nwmir] -> [|diago]\nright [> semir| nwmir] -> [|diago]\n[> cre| cre| no flow no door no block] -> [> cre| > cre| ]\n\n[> cre|stationary cra] -> [cre|cra]\n[> player| tree floor] -> [player|dead nlit] SFX2\n[> player|stationary cra] -> [player|cra]\n\nlate [winter it] -> [winter nlit]\nlate [winter][door] -> [winter][nodoor new nlit]\nlate [nodoor new nlit][it] -> [door][it]\nlate [nodoor new] -> [nodoor] SFX4\nlate [player nodoor] -> [wins player]\nlate [start][winter wins floor] -> win\n\n\n==============\nWINCONDITIONS\n==============\n\n=======\nLEVELS\n=======\n\n\nmessage I am sorry.\n\nw11ww\no111w\nw111e\nww11w\n\n\n\nmessage I am sorry trees, I must now make you dormant.\n\nmessage It is not to be destructive. It is necessary so that you may survive.\n\n\nw1111ww\no11-1ww\nww1-11e\nww1111w\n\nmessage I am sorry bunnies, but I do not know why you fear me.\n\nmessage I never intended to harm you.\n\nmessage [BUNNIES DISLIKE THE COLD AND MOVE AWAY]\n\nww111e\nww111w\nw101ww\no111ww\n\nmessage I apologize for any transgression I may have made,\n\nmessage for I know not what I have done.\n\nw11111e\nw10101w\nw11011w\nw10101w\no11111w\n\nmessage I believe the creatures who constructed these are also afraid of me, \n\nmessage but were able to flee faster than the bunnies.\n\nmessage [EMPTY NESTS CAN BE PUSHED]\n\no17111e\nw11111w\nw1---1w\nw11111w\n\n\nmessage I hope they do not mind that I moved their basket.\n\n\no11v1w\nw1111w\nw1111w\nw1111e\n\nwwwwwww\nwwu,uww\nwuuuuuw\nouu7uuu\nwuuuuuw\nwwuuuww\nwwwwwww\n\nmessage Oh, there is the one who calls himself Autumn again.\n\nmessage I assume that he fears me as well, as every time I have seen him, he has been moving away.\n\nwwwwwww\nwwuuuww\nwuuuuuw\nouu7uue\nwuuuuuw\nwwuuuww\nwwwwwww\n\nmessage Because of this, I have only heard him a few times, and have never spoken back.\n\nmessage[WINTER DOES NOT SLIDE ON WATER, BUT DOES ONCE HE HAS TURNED IT INTO ICE]\n\nw111e\nw1w1w\nws1sw\nw1w1w\no111w\n\nmessage Perhaps it is possible I have a malicious lookalike.\n\nmessage It would explain why so many creatures avoid me before I have even met them.\n\nwxsssssvw\nws11111sw\nws11111sw\nos11111se\nws11111sw\nws11111sw\nwzssssscw\n\nmessage If I could only expain that I am not he who they believe me to be.\n\nw1s111w\no1s111w\nw1sss1w\nw111s1e\nw111s1w\n\nmessage It is also concievable that animals see me remove leaves from the trees, which are unable to run away,\n\nmessage and make the assumption that I will harm them if they too do not run.\n\no11111w\nw11111w\nw71117w\nw11111w\nw11111e\n\nmessage Perhaps if I could contact Autumn, I could gain insight into why he flees from me.\n\n\nwsssssswsw\nwwsssswssw\nwswssssssw\nossssswsse\nwssssssssw\nwsswswswsw\nwssswssssw\n\nmessage Although I do not wish to risk appearing threatening by pursuing Autumn,\n\nmessage I think that it may be the only way for me to know what I have done wrong.\n\nwuuuuuuuue\nwusssuusuw\nwuuususuuw\nwuususssuw\nwususuuuuw\nwuusuusuuw\nwusussusuw\no1suuuuuuw\n\nmessage Conversely, it may be possible that he knows not of my existence at all.\n\n\nww-------ww\nw-1111111-w\nw-sssssss1e\nw-sususus-w\no1sssssss-w\nw-uuuuu11-w\nww-------ww\n\nmessage I can not be certain he knows of me. I have never directly heard him mention me.\n\nmessage Although it could be the case that this is solely because I have only heard him speak in rare cases.\n\nou1ux1uvu1uw\nwu1uu11uu11w\nwx1uu1uuu1cw\nw11uu11uu1uw\nwu1uz1ucu1ue\n\n\nmessage From the fragments of speaking that I have heard from Autumn, \n\nmessage it seems he knows of many creatures I have never encountered, such as \"Ground-Hogs\" or \"Clore-O-Fills\"\n\n\nw1s1111w\nw1s1111e\nw1ssss1w\nw1111s1w\nwsss1s1w\nw11s0s1w\nw1ss1s1w\nw1s11s1w\nw1ssss1w\no111111w\nw111111w\n\nmessage I think that he may also have a purpose such as mine.\n\nwwwuwww\nwwuuuww\nwuuuuuw\nou777ue\nwuuuuuw\nwwuuuww\nwwwuwww\n\nmessage No matter what the case may be,\n\nmessage I believe that communication may be beneficial to the both of us....\n\n\n\nwuusuw\nwussu-\n-usuuw\nwussue\n-uusuw\nwussuw\nousuuw\nwussu-\nwuusuw\n-ussuw\nwusuuw\n\nmessage ...or perhaps I should say, \"all of us\"?\n\nw11111s111w\nw111sss1w1e\nw1sss11111w\nwss11111ssw\nw10111sss1w\no1w1sss111w\nw111s11111w\n\nmessage END OF PART FOUR\n\n\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2016-11-28T01:06:01Z",
+  "updated_at": "2016-11-28T01:06:01Z",
+  "description": "title",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/aa0f3598496e8d604e9246451b4d1f84/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "fork_of": {
+    "url": "https://api.github.com/gists/cdc7f389692071710e6a38ba0d411f2c",
+    "forks_url": "https://api.github.com/gists/cdc7f389692071710e6a38ba0d411f2c/forks",
+    "commits_url": "https://api.github.com/gists/cdc7f389692071710e6a38ba0d411f2c/commits",
+    "id": "cdc7f389692071710e6a38ba0d411f2c",
+    "node_id": "MDQ6R2lzdGNkYzdmMzg5NjkyMDcxNzEwZTZhMzhiYTBkNDExZjJj",
+    "git_pull_url": "https://gist.github.com/cdc7f389692071710e6a38ba0d411f2c.git",
+    "git_push_url": "https://gist.github.com/cdc7f389692071710e6a38ba0d411f2c.git",
+    "html_url": "https://gist.github.com/anonymous/cdc7f389692071710e6a38ba0d411f2c",
+    "files": {
+
+    },
+    "public": true,
+    "created_at": "2016-10-26T19:58:53Z",
+    "updated_at": "2016-11-28T01:06:01Z",
+    "description": "title",
+    "comments": 0,
+    "user": null,
+    "comments_url": "https://api.github.com/gists/cdc7f389692071710e6a38ba0d411f2c/comments"
+  },
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "invalid-email-address",
+        "id": 148100,
+        "node_id": "MDQ6VXNlcjE0ODEwMA==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/148100?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/invalid-email-address",
+        "html_url": "https://github.com/invalid-email-address",
+        "followers_url": "https://api.github.com/users/invalid-email-address/followers",
+        "following_url": "https://api.github.com/users/invalid-email-address/following{/other_user}",
+        "gists_url": "https://api.github.com/users/invalid-email-address/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/invalid-email-address/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/invalid-email-address/subscriptions",
+        "organizations_url": "https://api.github.com/users/invalid-email-address/orgs",
+        "repos_url": "https://api.github.com/users/invalid-email-address/repos",
+        "events_url": "https://api.github.com/users/invalid-email-address/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/invalid-email-address/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "1978a2cad5e3d019fc276dec4aaff6dbd33c12d4",
+      "committed_at": "2016-10-26T19:58:53Z",
+      "change_status": {
+        "total": 682,
+        "additions": 682,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/aa0f3598496e8d604e9246451b4d1f84/1978a2cad5e3d019fc276dec4aaff6dbd33c12d4"
+    }
+  ],
+  "truncated": false
+}

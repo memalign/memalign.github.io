@@ -1,0 +1,93 @@
+{
+  "url": "https://api.github.com/gists/6f30db6b3c3011093f343006f1c8f12c",
+  "forks_url": "https://api.github.com/gists/6f30db6b3c3011093f343006f1c8f12c/forks",
+  "commits_url": "https://api.github.com/gists/6f30db6b3c3011093f343006f1c8f12c/commits",
+  "id": "6f30db6b3c3011093f343006f1c8f12c",
+  "node_id": "MDQ6R2lzdDZmMzBkYjZiM2MzMDExMDkzZjM0MzAwNmYxYzhmMTJj",
+  "git_pull_url": "https://gist.github.com/6f30db6b3c3011093f343006f1c8f12c.git",
+  "git_push_url": "https://gist.github.com/6f30db6b3c3011093f343006f1c8f12c.git",
+  "html_url": "https://gist.github.com/JackLance/6f30db6b3c3011093f343006f1c8f12c",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/6f30db6b3c3011093f343006f1c8f12c/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/6f30db6b3c3011093f343006f1c8f12c/raw/75e081dbe5904304e7e9db8cfaea516d0372b3ce/script.txt",
+      "size": 9468,
+      "truncated": false,
+      "content": "title VRPS\nauthor Jack Lance\nrun_rules_on_level_start\n========\nOBJECTS\n========\n\nBackground\nwhite\n\ngrass\n#5f5 #8f8 #afa\n12111\n11101\n01111\n11121\n11011\n\nbrick\n#808 #b0b #f0f\n22222\n22111\n21110\n11100\n10000\n\ncrate\n#f40  #f60 #d20\n.110.\n11.00\n0...0\n00.22\n.022.\n\ngoal\n#44f #88f\n.....\n..1..\n.101.\n..1..\n.....\n\nscooterup\n#f00 #f44 #f88\n00000\n.111.\n.212.\n.212.\n.212.\n\nscooterdown\n#f00 #f44 #f88\n.212.\n.212.\n.212.\n.111.\n00000\n\nscooterleft\n#f00 #f44 #f88\n0....\n01222\n01111\n01222\n0....\n\nscooterright\n#f00 #f44 #f88\n....0\n22210\n11110\n22210\n....0\n\nascooterup\n#f00 #f44 #f88\n00000\n.....\n.....\n.....\n.....\n\nascooterdown\n#f00 #f44 #f88\n.....\n.....\n.....\n.....\n00000\n\nascooterleft\n#f00 #f44 #f88\n0....\n0....\n0....\n0....\n0....\n\nascooterright\n#f00 #f44 #f88\n....0\n....0\n....0\n....0\n....0\n\navatarup\n #008 #88f #00f      \n.010.\n11111\n22222\n.222.\n.....\n\navatardown\n #008 #88f #00f      \n.....\n.222.\n22222\n11111\n.010.\n\navatarright\n #008 #88f #00f    \n..21.\n.2210\n.2211\n.2210\n..21.\n\navatarleft\n #008 #88f #00f      \n.12..\n0122.\n1122.\n0122.\n.12..\n\nscavatarup\n #008 #88f #00f #f00 #8f8\n33333\n40104\n11111\n22222\n42224\n\n\nscavatardown\n #008 #88f #00f   #f00 #8f8   \n42224\n22222\n11111\n40104\n33333\n\nscavatarright\n #008 #88f #00f  #f00 #8f8  \n42143\n22103\n22113\n22103\n42143\n\nscavatarleft\n #008 #88f #00f #f00 #8f8    \n34124\n30122\n31122\n30122\n34124\n\n\nworld\n#aab\n\nwall\n#211\n\nplayerup\nblack #666666 #555555 #778877\n00000\n00000\n03330\n33333\n.333.\n\nplayerdown\nblack #666666 #555555 #778877\n.333.\n33333\n03330\n00000\n00000\n\nplayerleft\nblack #666666 #555555 #778877\n0003.\n00333\n00333\n00333\n0003.\n\nplayerright\nblack #666666 #555555 #778877\n.3000\n33300\n33300\n33300\n.3000\n\nboundarydown\n#644\n.....\n.....\n.....\n.....\n00000\n\nboundaryup\n#644\n00000\n.....\n.....\n.....\n.....\n\n\nboundaryright\n#644\n....0\n....0\n....0\n....0\n....0\n\nboundaryleft\n#644\n0....\n0....\n0....\n0....\n0....\n\n1warningdown\n#ff0 #ee0\n.....\n.....\n.....\n.....\n1.0.1\n\n1warningup\n#ff0 #ee0\n1.0.1\n.....\n.....\n.....\n.....\n\n\n1warningleft\n#ff0 #ee0\n1....\n.....\n0....\n.....\n1....\n\n1warningright\n#ff0 #ee0\n....1\n.....\n....0\n.....\n....1\n\n2warningdown\n#000 #222\n.....\n.....\n.....\n.....\n1.0.1\n\n2warningup\n#000 #222\n1.0.1\n.....\n.....\n.....\n.....\n\n\n2warningleft\n#000 #222\n1....\n.....\n0....\n.....\n1....\n\n2warningright\n#000 #222\n....1\n.....\n....0\n.....\n....1\n\n1warningdown2\n#cc0 #cc8888\n.....\n.....\n.....\n.....\n.0.0.\n\n1warningup2\n#cc0 #cc8888\n.0.0.\n.....\n.....\n.....\n.....\n\n1warningleft2\n#cc0 #cc8888\n.....\n0....\n.....\n0....\n.....\n\n1warningright2\n#cc0 #cc8888\n.....\n....0\n.....\n....0\n.....\n\n2warningdown2\n#444 #cc8888\n.....\n.....\n.....\n.....\n.0.0.\n\n2warningup2\n#444 #cc8888\n.0.0.\n.....\n.....\n.....\n.....\n\n2warningleft2\n#444 #cc8888\n.....\n0....\n.....\n0....\n.....\n\n2warningright2\n#444 #cc8888\n.....\n....0\n.....\n....0\n.....\n\n=======\nLEGEND\n=======\n\n- = Background\n. = grass\n, = world\np = playerup and world\nq = avatarup and grass\no = crate and grass\n! = grass and goal\n^ = scooterup and grass\nv = scooterdown and grass\n< = scooterleft and grass\n> = scooterright and grass\nx = brick\n# = wall\n\nplayer = playerup or playerdown or playerright or playerleft\navatar = avatarup or avatardown or avatarright or avatarleft\nscooter = scooterup or scooterdown or scooterleft or scooterright\nscavatar = scavatarup or scavatardown or scavatarright or scavatarleft\nascooter = ascooterup or ascooterdown or ascooterright or ascooterleft\nwarningup = 1warningup or 2warningup or 1warningup2 or 2warningup2\nwarningleft = 1warningleft or 2warningleft or 1warningleft2 or 2warningleft2\nwarningdown = 1warningdown or 2warningdown or 1warningdown2 or 2warningdown2\nwarningright = 1warningright or 2warningright or 1warningright2 or 2warningright2\n\nwarningver = warningdown or warningup\nwarninghor = warningleft or warningright\nwarning = warningdown or warningup or warningleft or warningright\n\nitem = crate or scooter\nblockable = item or avatar\n=======\nSOUNDS\n=======\n\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\ngrass\ngoal\nscooter\nbrick, avatar, crate\nworld\nplayer, wall\nboundarydown, boundaryup, boundaryright, boundaryleft\nascooter\nscavatar\nwarningver\nwarninghor\n\n======\nRULES\n======\n[warning] -> []\n\n\n\ndown [wall | world] -> [wall boundarydown | world]\nup [wall | world] -> [wall boundaryup | world]\nright [wall | world] -> [wall boundaryright | world]\nleft [wall | world] -> [wall boundaryleft | world]\n\nlate down [player | boundaryup][avatar| ] -> [player | boundaryup][avatar| 1warningup]\nlate up [player | boundarydown][avatar| ] -> [player | boundarydown][avatar| 1warningdown]\nlate right [player | boundaryleft][avatar| ] -> [player | boundaryleft][avatar| 1warningleft]\nlate left [player | boundaryright][avatar| ] -> [player | boundaryright][avatar| 1warningright]\n\nlate right  [1warningup  | ] -> [1warningup | 1warningup2]\nlate left  [1warningup  | ] -> [1warningup | 1warningup2]\nlate right  [1warningdown  | ] -> [1warningdown | 1warningdown2]\nlate left  [1warningdown  | ] -> [1warningdown | 1warningdown2]\nlate up  [1warningleft  | ] -> [1warningleft | 1warningleft2]\nlate down  [1warningleft  | ] -> [1warningleft | 1warningleft2]\nlate up  [1warningright  | ] -> [1warningright | 1warningright2]\nlate down  [1warningright | ] -> [1warningright | 1warningright2]\n\n\nlate [1warningup no brick] -> [2warningup]\nlate [1warningup2 no brick] -> [2warningup2]\nlate [1warningdown no brick] -> [2warningdown]\nlate [1warningdown2 no brick] -> [2warningdown2]\nlate [1warningleft no brick] -> [2warningleft]\nlate [1warningleft2 no brick] -> [2warningleft2]\nlate [1warningright no brick] -> [2warningright]\nlate [1warningright2 no brick] -> [2warningright2]\n\nlate [warningver warninghor] -> []\n\nlate [warning brick] -> [brick]\n\n[moving player][avatar] -> [moving player][moving avatar]\n\nup[up avatar scooterup]-> [up avatar up scooterup]\ndown[down avatar scooterdown] -> [down avatar down scooterdown]\nleft[left avatar scooterleft] -> [left avatar left scooterleft]\nright[right avatar scooterright]-> [right avatar right scooterright]\n\n[> avatar | crate ] -> [> avatar | > crate ]\n[> item | item ] -> [> item | > item]\n\n\n\n[> blockable | brick] -> [stationary blockable | brick]\n[> blockable | stationary crate] -> [stationary blockable | stationary crate]\n+ [> item | stationary item] -> [stationary item | stationary item]\n\nup[up avatar up scooterup][up player] -> [up avatar up scooterup][stationary player]\ndown[down avatar down scooterdown][down player] -> [down avatar down scooterdown][stationary player]\nleft[left avatar left scooterleft][left player] -> [left avatar left scooterleft][stationary player]\nright[right avatar right scooterright][right player] -> [right avatar right scooterright][stationary player]\n\n\n[stationary avatar][player] -> [stationary avatar][stationary player]\n\n\n\n[left player][avatar] -> [left playerleft][avatarleft]\n[right player][avatar] -> [right playerright][avatarright]\n[up player][avatar] -> [up playerup][avatarup]\n[down player][avatar] -> [down playerdown][avatardown]\n\n[ player][left avatar scooterleft] -> [playerleft][left avatarleft scooterleft]\n[ player][right avatar scooterright] -> [playerright][right avatarright scooterright]\n[ player][up avatar scooterup] -> [playerup][up avatarup scooterup]\n[ player][down avatar scooterdown] -> [playerdown][down avatardown scooterdown]\n\n[> player | wall] -> cancel\n\nlate [scavatar] -> []\nlate [ascooter] -> []\nlate [avatarup scooterup] -> [avatarup scooterup scavatarup]\nlate [avatardown scooterdown] -> [avatardown scooterdown scavatardown]\nlate [avatarleft scooterleft] -> [avatarleft scooterleft scavatarleft]\nlate [avatarright scooterright] -> [avatarright scooterright scavatarright]\n(looks worse:\nlate [scooterup] -> [scooterup ascooterup]\nlate [scooterdown] -> [scooterdown ascooterdown]\nlate [scooterleft] -> [scooterleft ascooterleft]\nlate [scooterright] -> [scooterright ascooterright])\n==============\nWINCONDITIONS\n==============\n\nall goal on crate\n\n=======\nLEVELS\n=======\n \nmessage VIRTUAL REALITY PUZZLE SCRIPT\n\nxxxxxx######\nxx!o.x#,,,,#\nx.xx.x#,,,,#\nxqxx.x#p,,,#\nx....x#,,,,#\nxxxxxx######\n\nmessage The device simulates an immersive virtual reality environment. Take precaution to be aware of your surroundings at all times while using the headset and stay in a cleared area free of any obstacles.\n\nxxxxxxxx######\nx......x######\nx.!....x######\nx...o..x#,,,,#\nx..o...x#,,,,#\nx.oq...x#,p,,#\nx!.....x#,,,,#\nx...!..x######\nx......x######\nxxxxxxxx######\n\nmessage To use a scooter, hold one foot firmly in place, and slide the other backwards to \"push off\"\n\nxxxxxxxxxxxx######\nx..........x######\nx.q........x#,,p,#\nx..o....!..x#,,,,#\nx>.........x#,,,,#\nx..........x#,,,,#\nx..........x######\nxxxxxxxxxxxx######\n\nxxxxxxxx######\nx......x######\nx......x######\nx!..o..x#,,,,#\nx..o.^.x#,,,,#\nx.o.q..x#,,p,#\nx!.....x#,,,,#\nx...!..x######\nx......x######\nxxxxxxxx######\n\nxxxxxxxxxxxx######\nx..........x######\nx.q........x#,,p,#\nx..o.....!.x#,,,,#\nx>...x.....x#,,,,#\nx..........x#,,,,#\nx..........x######\nxxxxxxxxxxxx######\n\n\n\nxxxxxxxxxx######\nx........x######\nx.....V..x######\nx......<.x#,,,,#\nx.>q.....x#,,,,#\nx..^.....x#,p,,#\nx........x#,,,,#\nx...xxxxxx######\nx.....o.!x######\nxxxxxxxxxx######\n\n\nxxxxxxxxxxxx######\nx..........x######\nx.q........x#,,p,#\nx..o....!..x#,,,,#\nx>...x.....x#,,,,#\nx....x.....x#,,,,#\nx..........x######\nxxxxxxxxxxxx######\n\nmessage [next level is the last level]\n\nxxxxxxxxxxx######\nxq.v......x######\nx.o.......x######\nx>.o.....!x######\nx.........x#,,,,#\nx.........x#,,p,#\nx.........x#,,,,#\nx.........x#,,,,#\nx.........x######\nx..!......x######\nxxxxxxxxxxx######"
+    }
+  },
+  "public": true,
+  "created_at": "2020-03-26T21:47:43Z",
+  "updated_at": "2020-03-26T21:47:44Z",
+  "description": "VRPS (PuzzleScript Script)",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/6f30db6b3c3011093f343006f1c8f12c/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "0f4782f97f9e6f0b8635cab5298a65268ef29b3e",
+      "committed_at": "2020-03-26T21:47:43Z",
+      "change_status": {
+        "total": 618,
+        "additions": 618,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/6f30db6b3c3011093f343006f1c8f12c/0f4782f97f9e6f0b8635cab5298a65268ef29b3e"
+    }
+  ],
+  "truncated": false
+}

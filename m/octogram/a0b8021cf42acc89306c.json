@@ -1,0 +1,73 @@
+{
+  "url": "https://api.github.com/gists/a0b8021cf42acc89306c",
+  "forks_url": "https://api.github.com/gists/a0b8021cf42acc89306c/forks",
+  "commits_url": "https://api.github.com/gists/a0b8021cf42acc89306c/commits",
+  "id": "a0b8021cf42acc89306c",
+  "node_id": "MDQ6R2lzdGEwYjgwMjFjZjQyYWNjODkzMDZj",
+  "git_pull_url": "https://gist.github.com/a0b8021cf42acc89306c.git",
+  "git_push_url": "https://gist.github.com/a0b8021cf42acc89306c.git",
+  "html_url": "https://gist.github.com/anonymous/a0b8021cf42acc89306c",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/anonymous/a0b8021cf42acc89306c/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/anonymous/a0b8021cf42acc89306c/raw/d780bded2c2e08014a3451a3eb3bdb09dc9ef9be/script.txt",
+      "size": 10144,
+      "truncated": false,
+      "content": "title Snakeoban\nauthor Jack Lance\n\n\nrun_rules_on_level_start\n\n========\nOBJECTS\n========\n\nBackground1\nblack\n00000\n00000\n00000\n00000\n00000\n\nTarget\npurple\n.....\n.000.\n.0.0.\n.000.\n.....\n\nGhostTarget\n#720018\n.....\n.000.\n.0.0.\n.000.\n.....\n\nWall\nGrey DarkGrey\n00010\n11111\n01000\n11111\n00010\n\nPlayer\norange #880000  darkBlue #880000 #880000 #550000 #DD0000\n.555.\n53316\n53246\n51446\n.666.\n\nPlayerBody\norange #880000  darkBlue #880000 #880000 #550000 #DD0000\n.555.\n53316\n53146\n51446\n.666.\n\nPlayerTail\norange #880000  darkBlue #880000 #880000 #550000 #DD0000\n.555.\n53316\n53146\n51446\n.666.\n\nPlayerUp\norange #880000  darkBlue #880000 #880000 #550000 #DD0000\n53146\n.314.\n.....\n.....\n.....\n\nPlayerDown\norange #880000  darkBlue #880000 #880000 #550000 #DD0000\n.....\n.....\n.....\n.314.\n53146\n\nPlayerLeft\norange #880000  darkBlue #880000 #880000 #550000 #DD0000\n5....\n33...\n11...\n44...\n6....\n\nPlayerRight\norange #880000  darkBlue #880000 #880000 #550000 #DD0000\n....5\n...33\n...11\n...44\n....6\n\nCrate1\nBrown darkbrown lightbrown\n.111.\n10002\n10002\n10002\n.222.\n\nCrate2\nBrown darkbrown lightbrown blue\n.111.\n13332\n13032\n13332\n.222.\n\nCrateup\nBrown darkbrown lightbrown\n10002\n.....\n.....\n.....\n.....\n\nCratedown\nBrown darkbrown lightbrown\n.....\n.....\n.....\n.....\n10002\n\nCrateright\nBrown darkbrown lightbrown\n....1\n....0\n....0\n....0\n....2\n\nCrateleft\nBrown darkbrown lightbrown\n1....\n0....\n0....\n0....\n2....\n\nApple\nRed Green LightRed\n..1..\n.000.\n00020\n00000\n.000.\n\n\nUpMarker\npurple\n..0..\n.000.\n0.0.0\n..0..\n..0..\n\nLeftMarker\npurple\n..0..\n.0...\n00000\n.0...\n..0..\n\nRightMarker\npurple\n..0..\n...0.\n00000\n...0.\n..0..\n\nDownMarker\npurple\n..0..\n..0..\n0.0.0\n.000.\n..0..\n\nCantUp\npink\n..0..\n.000.\n0.0.0\n..0..\n..0..\n\nCantleft\npink\n..0..\n.0...\n00000\n.0...\n..0..\n\nCantright\npink\n..0..\n...0.\n00000\n...0.\n..0..\n\nCantdown\npink\n..0..\n..0..\n0.0.0\n.000.\n..0..\n\nact\ntransparent\n\n\n\n\n=======\nLEGEND\n=======\n(If you are reading this, sorry. I just used the \"Level editor\" because I didn't want to try and find suitable symbols for everything.)\n\n1 = Background1\n3 = Wall\n4 = Player and Background1 and PlayerRight\ng = Player and Background1 and PlayerLeft\nh = Player and Background1 and PlayerUp\nj = Player and Background1 and PlayerDown\nk = Player and Background1\n\n5 = PlayerTail and RightMarker and PlayerRight and Background1\n6 = PlayerTail and LeftMarker and PlayerLeft and Background1\n7 = PlayerTail and UpMarker and PlayerUp and Background1\n8 = PlayerTail and DownMarker and PlayerDown and Background1\n\n9 = PlayerBody and RightMarker and Background1\n0 = PlayerBody and LeftMarker and Background1\nq = PlayerBody and UpMarker and Background1\nw = PlayerBody and DownMarker and Background1\n\ne = Crate1 and Crateup and Background1\nr = Crate1 and Crateright and Background1\nt = Crate1 and Crateup and Crateright and Background1\ny = Crate2 and Crateup and Background1 and Target\nu = Crate2 and Crateright and Background1 and Target \ni = Crate2 and Crateup and Crateright and Background1 and Target\n\n\n\n\na = Crate1 and Background1\ns = Crate2 and Target and Background1\nd = Target and Background1\nf = Apple and Background1\n\nMarker = UpMarker or LeftMarker or RightMarker or DownMarker\nBody = PlayerUp or PlayerDown or PlayerLeft or PlayerRight\nPlayerPart = Player or PlayerBody or PlayerTail\nCrate = Crate1 or Crate2\nBackground = Background1\nCrateBody=CrateUp or CrateDown or CrateLeft or CrateRight\ncant=cantup or cantdown or cantleft or cantright\n\n=======\nSOUNDS\n=======\n\nUndo 50721302\nRestart 31950301\nPlayer MOVE 71013707\nSFX0 88208701  (Eat apple)\nendlevel 90267708  (Win, but where to bind it?)\nSFX2 23251107\nSFX3 27612707\n\n================\nCOLLISIONLAYERS\n================\nact\ncantleft\ncantright\ncantup\ncantdown\nMarker\nBackground\nTarget\nPlayer, PlayerBody, PlayerTail, Wall, Crate, Apple\nPlayerLeft, Crateleft\nPlayerRight, Crateright\nPlayerUp, Crateup\nPlayerDown, cratedown\nGhostTarget\n\n\n\n\n\n\n======\nRULES\n======\n[action player act] -> win\n[action player] -> [player act]\n\n[cant]->[]\n[ > Player | Crate ] -> [ > Player | > Crate ]\nleft [ > Player | Apple | ] -> [ PlayerBody Leftmarker | Player | SFX0]\nright [ > Player | Apple | ] -> [ PlayerBody Rightmarker | Player | SFX0 ]\nup [ > Player | Apple | ] -> [ PlayerBody Upmarker | Player | SFX0 ]\ndown [ > Player | Apple | ] -> [ PlayerBody Downmarker | Player | SFX0 ]\n\n\n\n[ left Player ] -> [ left Player Leftmarker ]\n[ right Player ] -> [ right Player Rightmarker ]\n[ up Player ] -> [ up Player Upmarker ]\n[ down Player ] -> [ down Player Downmarker ]\n\n\nleft [crate|playerpart] -> [crate cantleft| playerpart]\nleft [crate|wall] -> [crate cantleft|wall]\nleft [crate|apple] -> [crate cantleft |apple]\nright [crate|playerpart] -> [crate cantright| playerpart]\nright [crate|wall] -> [crate cantright|wall]\nright [crate|apple] -> [crate cantright |apple]\nup [crate|playerpart] -> [crate cantup| playerpart]\nup [crate|wall] -> [crate cantup|wall]\nup [crate|apple] -> [crate cantup |apple]\ndown [crate|playerpart] -> [crate cantdown| playerpart]\ndown [crate|wall] -> [crate cantdown|wall]\ndown [crate|apple] -> [crate cantdown |apple]\n\nstartloop\nleft[crate crateleft cant|crate] -> [crate crateleft cant| crate cant]\nright[crate crateright cant|crate] -> [crate crateright cant|crate cant]\nup[crate crateup cant|crate] -> [crate crateup cant| crate cant]\ndown[crate cratedown cant|crate] -> [crate cratedown cant| crate cant]\n\n\n\nright[crate cantleft|crate] -> [crate cantleft|crate cantleft]\nleft[crate cantright|crate] -> [crate cantright|crate cantright]\ndown[crate cantup|crate] -> [crate cantup|crate cantup]\nup[crate cantdown|crate] -> [crate cantdown|crate cantdown]\n\nendloop\n\n[left crate cantleft] -> [stationary crate cantleft]\n[right crate cantright] -> [stationary crate cantright]\n[up crate cantup] -> [stationary crate cantup]\n[down crate cantdown] -> [stationary crate cantdown]\n\nstartloop\n\nleft[moving crate crateleft|crate] -> [moving crate crateleft|moving crate]\nright[moving crate crateright|crate] -> [moving crate crateright|moving crate]\nup[moving crate crateup|crate] -> [moving crate crateup|moving crate]\ndown[moving crate cratedown|crate] -> [moving crate cratedown|moving crate]\n[moving crate cratebody] -> [moving crate moving cratebody]\n[> crate|crate] -> [> crate|> crate]\nendloop\n\n\n[> Player|playerpart] -> [player|playerpart]\n[> Player|stationary crate] -> [player|crate] \n\n\n\n\n\nstartloop\nlate left [ PlayerBody Leftmarker | No PlayerPart ] -> [ Leftmarker | PlayerBody ]\nlate right [ PlayerBody Rightmarker | No PlayerPart ] -> [ Rightmarker | PlayerBody ]\nlate up [ PlayerBody Upmarker | No PlayerPart ] -> [ Upmarker | PlayerBody ]\nlate down [ PlayerBody Downmarker | No PlayerPart ] -> [ Downmarker | PlayerBody ]\nendloop\n\nlate left [ PlayerTail Leftmarker | No PlayerPart ] -> [ | PlayerTail ]\nlate right [ PlayerTail Rightmarker | No PlayerPart ] -> [ | PlayerTail ]\nlate up [ PlayerTail Upmarker | No PlayerPart ] -> [ | PlayerTail ]\nlate down [ PlayerTail Downmarker | No PlayerPart ] -> [ | PlayerTail ]\n\nlate [ Crate1 Target ] -> [ Crate2 Target] SFX2\nlate [ Crate2 No Target ] -> [ Crate1 ] SFX3\nlate [ Playerpart Target ] -> [ playerpart ghosttarget Target]\nlate [ ghosttarget No playerpart ] -> [ ]\n\nlate [marker player] -> [player]\n\nlate [Body] -> []\nlate down [Downmarker|no PlayerUp] -> [Downmarker PlayerDown|PlayerUp]\nlate left [Leftmarker|no PlayerRight] -> [Leftmarker PlayerLeft|PlayerRight]\nlate up [Upmarker|no PlayerDown] -> [Upmarker PlayerUp|PlayerDown]\nlate right [Rightmarker|no PlayerLeft] -> [Rightmarker PlayerRight|PlayerLeft]\n\nlate up [CrateUp|no CrateDown] -> [CrateUp|CrateDown]\nlate right [CrateRight|no CrateLeft] -> [CrateRight|CrateLeft]\n\n\n==============\nWINCONDITIONS\n==============\n\nAll Target on Crate\nNo Apple\n\n=======\nLEVELS\n=======\n\nmessage Thanks to Wayne Myers and Aidan Sun\n\n\n(9aq an awwl9)\n\n3333333\n359g1f3\n3333333\n\n(dqn'q g9q q0aww9d)\n\n33333333333\n31131113113\n3f1f15gf1f3\n31131113113\n33333333333\n\n(qn9 0s f00sq qn9 0s lasq)\n\n33333333\n35g131f3\n311f1113\n31111f33\n33f11113\n3111f113\n3f131113\n33333333\n\n\n(w9sh sqm9 bqx9s)\n\n3333333333333\n359g1aaa1ddd3\n3333333333333\n\n(c9q9 c0qss)\n\n3333333\n3311133\n311s113\n31sfs13\n311s113\n3340633\n3333333\n\n(w9sh qwq bqx9s)\n\n333333333\n3111d5w13\n311a1ah13\n313131313\n3111d1113\n333333333\n\n333333333\n35gfffff3\n3f3f3f3f3\n3ff111ff3\n3f31313f3\n3ff111ff3\n3f3f3f3f3\n3fffffff3\n333333333\n\n333333333\n31f111d13\n3da133af3\n313j11113\n313q11313\n311q61313\n3fa331ad3\n31d111f13\n333333333\n\n33333333\n38131113\n3hafd113\n31131113\n31afdf33\n31131113\n31afd113\n31131113\n33333333\n\n333333333\n35gfffff3\n3fdfffff3\n31fffff13\n3fffffff3\n3fffffff3\n3fffffff3\n31fffff13\n3fffffaf3\n3fffffff3\n333333333\n\n3333333333333\n3111311131113\n31a1d11111a13\n3111311131113\n331333j333d33\n311138q031113\n31111w1q11113\n3111399q31113\n33d3331333133\n3111311131113\n31a11111d1a13\n3111311131113\n3333333333333\n\n\n33333333333\n35g1111adf3\n31111111113\n35g1111adf3\n33333333333\n\n\n3333333333333\n35ga111111d83\n3d333333333h3\n31311111d13a3\n313d111111313\n31311aja11313\n313111q111313\n31311a7a11313\n313111111d313\n3a31d11111313\n3j333333333d3\n37d111111a463\n3333333333333\n\n13333333331\n13111111131\n13113111131\n1311ad31131\n13113111j31\n1311ad33731\n1311311f331\n1311ad33831\n13113111h31\n1311ad31131\n13113111131\n13111111131\n13333333331\n\n3333333333333\n35g1133133333\n311113111ad13\n311111f333113\n31fff11111113\n33333ff3ffff3\n35g1133133333\n31111311ad113\n311111f333113\n3ffff11111113\n33333ff3fff13\n3333333333333\n\n\n\n\n\n\n3333333333333\n383115g1s1113\n3h333s333j313\n31313146373f3\n3s3s313333333\n313f11sf38313\n3j3333313h3s3\n37315g11s13f3\n3333333s31313\n35g11fs13f313\n3333s3333s3j3\n31sf114631373\n3333333333333\n\n333333333\n31d11d113\n31jaaaa13\n317eeee13\n311d11d13\n333333333\n\n333333333333333333\n3333333111113331f3\n3d1111118111311113\n31111111h113311133\n333333111111311113\n3111131111a1311113\n3111131111trrra113\n311rrrra1111311113\n3111131e1111311113\n311113111111333333\n331113311j11111113\n3111131117111111d3\n3f1333111113333333\n333333333333333333\n\n33333333333\n3j1111111f3\n3q1uars1133\n3qdy1fyd133\n3qdsf1sd133\n3q1iary1133\n37111111133\n33333333333\n\n\n3333333333333\n31111111111d3\n3111111111d13\n3111111111113\n3111rrrrrrra3\n3111e111e11e3\n3111e5w3111e3\n3111e399w11e3\n3111tra1w1ae3\n3111ew00011e3\n3111e999g11e3\n3111trrrrrre3\n3333333333333\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2015-09-01T18:20:59Z",
+  "updated_at": "2015-09-01T18:20:59Z",
+  "description": "title",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/a0b8021cf42acc89306c/comments",
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "invalid-email-address",
+        "id": 148100,
+        "node_id": "MDQ6VXNlcjE0ODEwMA==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/148100?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/invalid-email-address",
+        "html_url": "https://github.com/invalid-email-address",
+        "followers_url": "https://api.github.com/users/invalid-email-address/followers",
+        "following_url": "https://api.github.com/users/invalid-email-address/following{/other_user}",
+        "gists_url": "https://api.github.com/users/invalid-email-address/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/invalid-email-address/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/invalid-email-address/subscriptions",
+        "organizations_url": "https://api.github.com/users/invalid-email-address/orgs",
+        "repos_url": "https://api.github.com/users/invalid-email-address/repos",
+        "events_url": "https://api.github.com/users/invalid-email-address/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/invalid-email-address/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "72218cb5aa132e50f8953398ff8af1d3bac63ae2",
+      "committed_at": "2015-09-01T18:20:59Z",
+      "change_status": {
+        "total": 679,
+        "additions": 679,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/a0b8021cf42acc89306c/72218cb5aa132e50f8953398ff8af1d3bac63ae2"
+    }
+  ],
+  "truncated": false
+}

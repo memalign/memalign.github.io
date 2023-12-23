@@ -1,0 +1,123 @@
+{
+  "url": "https://api.github.com/gists/cbdb2df1e843449b8aec56b7cdae036a",
+  "forks_url": "https://api.github.com/gists/cbdb2df1e843449b8aec56b7cdae036a/forks",
+  "commits_url": "https://api.github.com/gists/cbdb2df1e843449b8aec56b7cdae036a/commits",
+  "id": "cbdb2df1e843449b8aec56b7cdae036a",
+  "node_id": "MDQ6R2lzdGNiZGIyZGYxZTg0MzQ0OWI4YWVjNTZiN2NkYWUwMzZh",
+  "git_pull_url": "https://gist.github.com/cbdb2df1e843449b8aec56b7cdae036a.git",
+  "git_push_url": "https://gist.github.com/cbdb2df1e843449b8aec56b7cdae036a.git",
+  "html_url": "https://gist.github.com/JackLance/cbdb2df1e843449b8aec56b7cdae036a",
+  "files": {
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/cbdb2df1e843449b8aec56b7cdae036a/raw/c3dea26ec453dc1ebd1d1c543cff6738322d9bdd/script.txt",
+      "size": 8179,
+      "truncated": false,
+      "content": "title Dangerous Dungeon\n\nrun_rules_on_level_start\nagain_interval 0.05\n========\nOBJECTS\n========\n\nBackground\n#222 #BBBBBB #CCCCCC\n01110\n12221\n12221\n12221\n01110\n\n\nwall\ndarkgrey\n\nwu\n#222\n00000\n.....\n.....\n.....\n.....\n\nwd\n#222\n.....\n.....\n.....\n.....\n00000\n\nwl\n#222\n0....\n0....\n0....\n0....\n0....\n\nwr\n#222\n....0\n....0\n....0\n....0\n....0\n\n\nbu\ndarkbrown lightbrown darkbrown\n.....\n.212.\n.111.\n.111.\n.....\n\nbl\ndarkbrown lightbrown darkbrown\n.....\n.211.\n.111.\n.211.\n.....\n\nbr\ndarkbrown lightbrown darkbrown\n.....\n.112.\n.111.\n.112.\n.....\n\nbd\ndarkbrown lightbrown darkbrown\n.....\n.111.\n.111.\n.212.\n.....\n\ngu\nblack green darkblue\n.....\n.212.\n.111.\n.111.\n.....\n\ngl\nblack green darkblue\n.....\n.211.\n.111.\n.211.\n.....\ngr\nblack green darkblue\n.....\n.112.\n.111.\n.112.\n.....\n\ngd\nblack green darkblue\n.....\n.111.\n.111.\n.212.\n.....\n\nau\ntransparent\n\nad\ntransparent\n\nal\ntransparent\n\nar\ntransparent\n\n\n\nag\ntransparent\n\nvt\ntransparent\n\nht\ntransparent\n\nspikes\ndarkgrey\n.....\n..0..\n.0.0.\n..0..\n.....\n\nru\nred grey\n..1..\n.111.\n..0..\n..0..\n..0..\nrr\nred grey\n.....\n...1.\n00011\n...1.\n.....\n\nrd\nred grey\n..0..\n..0..\n..0..\n.111.\n..1..\nrl\nred grey\n.....\n.1...\n11000\n.1...\n.....\n\ngoal\ngreen\n\ntag \ntransparent\n\ntut1\ntransparent\n\ntut2\ntransparent\n\nblood1\nred\n..0..\n...0.\n00...\n.0..0\n.0...\n\nblood2\nred\n...0.\n...0.\n.0..0\n0..0.\n.0...\n\nblood3\nred\n..0..\n0.0.0\n...0.\n.0...\n...0.\nblood4\nred\n.0...\n...0.\n0.0..\n..0.0\n..0..\n\nblood5\nred\n..0..\n.0..0\n.0.0.\n0....\n.0...\n\nsu1\n#9999FF\n.000.\n.....\n.....\n.....\n.....\n\nsl1\n#9999FF\n.....\n0....\n0....\n0....\n.....\n\nsd1\n#9999FF\n.....\n.....\n.....\n.....\n.000.\n\nsr1\n#9999FF\n.....\n....0\n....0\n....0\n.....\n\ns1\n#9999FF\n.....\n.000.\n.000.\n.000.\n.....\n\nsu2\n#FF9999\n.000.\n.....\n.....\n.....\n.....\n\nsl2\n#FF9999\n.....\n0....\n0....\n0....\n.....\n\nsd2\n#FF9999\n.....\n.....\n.....\n.....\n.000.\n\nsr2\n#FF9999\n.....\n....0\n....0\n....0\n.....\n\ns2\n#FF9999\n.....\n.000.\n.000.\n.000.\n.....\n\ntemp\ntransparent\n\ntogg1\ntransparent\n\ntogg2\ntransparent\n\nstay\ntransparent\n\nendspot\ntransparent\n\nnoarrow\ntransparent\n\nbulls\ntransparent\n\nbulls2\ntransparent\n\nendspot2\ntransparent\n\n=======\nLEGEND\n=======\n\n. = Background\n# = Wall\nblood = blood1 or blood2 or blood3 or blood4 or blood5\nbx = bu or br or bd or bl\nplayer = bx\ngx = gu or gr or gd or gl\nax = au or al or ad or ar\nrx = ru or rl or rd or rr\nsx1 = su1 or sd1 or sl1 or sr1\n\ns = spikes\n1 = bu\n2 = bd\n3 = bl\n4 = br\n5 = gu\n6 = gd\n7 = gl\n8 = gr\n! = wu\n@ = wd\n$ = wl\n% = wr\n~ = s and wu\n- = tut1\n_ = tut2\n^ = su1 and wu\n& = sl1 and wl\n* = sr1 and wr\n+ = sd1 and wd\n: = su2 and wu\n; = sl2 and wl\n\" = sr2 and wr\n' = sd2 and wd\n\\ = su1 and wr\n[ = s1\n] = s1 and s\n{ = s2\n} = s2 and s\n? = gl and wu\n/ = s1 and s and wu\ne = s1  and wu\n> = endspot\n< = 8 and wu \nx = noarrow and wall\ny = bulls and wall\nq = s1 and spikes and wd\nw = s1 and wd\nr = endspot2 and s\n\n=======\nSOUNDS\n=======\nSFX0 28968702\nSFX1 36492501\nSFX2 10918307\nSFX3 33819107\nSFX4 36751101\nSFX5 21509902\nSFX6 97185102\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\nblood1\nblood2\nblood3\nblood4\nblood5\ntag\nag\nau\nal\nar\nad\ns1\ns2\nbx, \nWall, \nwu\nwd\nwl\nwr\n\nsl1\nsr1\nsd1\nsu1\nsl2\nsr2\nsu2\nsd2\ngx\n\ngoal\nspikes\nrx\nht\nvt\ntut1\ntut2\ntemp\ntogg1\ntogg2\nstay\nendspot\nnoarrow\nbulls\nbulls2\nendspot2\n======\nRULES\n======\n\nlate [bx tut1] -> [bx] message Watch out! If that monster sees you, you're a goner for sure!\nlate [bx tut2] -> [bx] message Make sure not to step on those sharp spikes either!\n\nup [no wall|wall] -> [|wall wd]\ndown [no wall|wall] -> [|wall wu]\nright [no wall|wall] -> [|wall wl]\nleft [no wall|wall] -> [|wall wr]\n\ndown [|wu] -> [wd|wu]\nup [|wd] -> [wu|wd]\nright [| wl] -> [wr|wl]\nleft [| wr] -> [wl|wr]\n\n[ax] -> []\n[bx] -> [bx au ad al ar]\n\n[noarrow][action bx] -> [noarrow][bx]\n\n [action bu ] -> [action bu ru]\n [action bl ] -> [action bl rl]\n [action bd ] -> [action bd rd]\n [action br ] -> [action br rr]\n \n \n   \nup [au  no wu no gx| no wd] -> [au|au]\ndown [ad  no wd no gx| no wu] -> [ad|ad]\nleft [al no wl no gx| no wr] -> [al|al]\nright [ar  no wr no gx| no wl] -> [ar|ar]\n\n[tag][stationary ru] -> [tag][up ru]\n[tag][stationary rl] -> [tag][left rl]\n[tag][stationary rd] -> [tag][down rd]\n[tag][stationary rr] -> [tag][right rr]\n\n[au gx] -> [au gd]\n[al gx] -> [al gr]\n[ar gx] -> [ar gl]\n[ad gx] -> [ad gu]\n(late [au gx] -> [au gd]\nlate [al gx] -> [al gr]\nlate [ar gx] -> [ar gl]\nlate [ad gx] -> [ad gu]\n)\n[ag][gu] -> [ag ][up gu] \n[ag][gl] -> [ag][left gl] \n[ag ][gr] -> [ag ][right gr] \n[ag ][gd] -> [ag ][down gd] \n\n\n[up gx wu] -> [stationary gx wu]\n[left gx wl] -> [stationary gx wl]\n[right gx wr] -> [stationary gx wr]\n[down gx wd] -> [stationary gx wd]\n\n[left bx] -> [left bl] \n[right bx] -> [right br] \n[down bx] -> [down bd] \n[up bx] -> [up bu] \n\n[ag] -> []\n[tag] -> [ag] again\n[moving player] -> [tag moving player] again \n[action player] -> [tag action player] again SFX1\n\n\n[up bx wu] -> [stationary bx wu]\n[left bx wl] -> [stationary bx wl]\n[right bx wr] -> [stationary bx wr]\n[down bx wd] -> [stationary bx wd]\n[ >  bx | rx ] -> [  stationary bx | rx  ]\n\n\n[moving gx stay] -> [stationary gx stay] \n\n[moving gx] -> SFX2\n[moving bx] -> SFX3\n[moving rx] -> SFX4\n\n([> bx | gx] -> cancel)\n[> gx| | < gx] -> [|random blood|] SFX5\nvertical [> gx|] -> [> gx | vt]\nhorizontal [> gx|] -> [> gx | ht]\nvertical [> gx | ht] -> [|random blood ht] SFX5\nhorizontal [> gx | vt] -> [|random blood vt] SFX5\n[ht] -> []\n[vt] -> []\n\n[up rx su1] -> [up rx su1 togg1] SFX6\n[left rx sl1] -> [left rx sl1 togg1] SFX6\n[down rx sd1] -> [down rx sd1 togg1] SFX6\n[right rx sr1] -> [right rx sr1 togg1] SFX6\n\n[s1 spikes][togg1] -> [s1 temp][togg1]\n[s1 no spikes no temp][togg1] -> [s1 spikes][togg1]\n\n[up rx su2] -> [up rx su2 togg2] SFX6\n[left rx sl2] -> [left rx sl2 togg2] SFX6\n[down rx sd2] -> [down rx sd2 togg2] SFX6\n[right rx sr2] -> [right rx sr2 togg2] SFX6\n\n[s2 spikes][togg2] -> [s2 temp][togg2]\n[s2 no spikes no temp][togg2] -> [s2 spikes][togg2]\n\n[togg1][ bulls2] -> [togg1] []message I can't hit the switch with my hand, because... uh.... that just wouldn't look nearly as cool!\n[togg1][ bulls] -> [togg1] [bulls2]message Bullseye!\n\n\n\n[temp] -> []\n[togg1] -> []\n[togg2] -> []\n\n[up rx wu] -> [ wu]\n[left rx wl] -> [ wl]\n[right rx wr] -> [ wr]\n[down rx wd] -> [ wd]\n\n\n\nlate [bx s] -> [s random blood stay] SFX0\nlate [bx gx] -> [gx random  blood stay] SFX0\nlate [gx s] -> [s random blood] SFX5\nlate [gx rx] -> [random blood] SFX5\n==============\nWINCONDITIONS\n==============\nall endspot2 on blood\nall endspot on player\nno gx\n\n\n=======\nLEVELS\n=======\n\n\n\n\n\n\n\n\n(\n\n#########\n#@.!%~@.#\n#.@~@.@_#\n#$s.@.5$#\n#@!%4-!@#\n#########\n)\n\nmessage I'd better watch out, those look like some really sharp spikes, and definitely not just like four squares on the ground\n\n\nmessage This dungeon sure is dangerous... but it will all pay off!\n\n\n\n#######\n#.@.s>#\n#%s%!.#\n#1%%@!#\n#%!.s.#\n#s.!!.#\nx######\n\nmessage I've heard a legend that if I get to the end of this dungeon and defeat the ultimate monster, there'll be a huge treasure!\n\nmessage And there better not be some \"The treasure was me the whole time\" twist...\n\nmessage Uh oh. Speaking of monsters, there's one now. It'll probably chase after me if it sees me.\n\nmessage I've gotta make sure to kill all the monsters, so they won't fight me on my way out\n\n####\n##7#\n##$#\n#4%#\n#%s#\n#.@#\nx###\n\n\n\n\n#####\n#8@.#\n#8!%#\n###$#\n#!!%#\n#4!.#\nx####\n\nmessage Hah! Killed two monsters with one stone!\n\nmessage I don't care how tough you think you are \"ultimate monster\", I'm coming for you!\n\nmessage Press action to fire an arrow! How do you like a piece of that!\n\n########\n#.@@@@.#\n#@@6@@.#\n#4.!..7#\n########\n\n########\n#!!!...#\n#$.....#\n#4..%#7#\n#....!.#\n#.....%#\n#....@@#\n########\n\nmessage I think if I fire an arrow, I might be able to hit that switch\n\n\n \n#######\n#4@].*#\n#!6/!.#\ny######\n\n#############\n#6!!!/![!e!!#\n#!!4!??7???*#\n#######7#####\n#############\n\n#######\n#5s...#\n#!:!^$#\n#$..%$#\n#$..*$#\n#&3.%]#\n#$..\"}#\n#;..{[#\n#@@'+.#\n#######\n\n########\n#^%5@..#\n#.%!^].#\n#].&..##\n#.2$]*##\n#...6.##\n########\n\nmessage \"Why are you killing us off!?\"\n\nmessage \"I have a family!\"\n\nmessage Oh...\n\nmessage Oh god...\n\nmessage The treasure wasn't me the whole time...\n\nmessage The ultimate monster was...\n\nmessage I've gotta make sure to kill all the monsters\n\n#############\n#4.........r#\n#############\n\n\n\n\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2018-04-20T02:59:35Z",
+  "updated_at": "2018-05-11T05:12:15Z",
+  "description": "",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/cbdb2df1e843449b8aec56b7cdae036a/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "forks": [
+    {
+      "url": "https://api.github.com/gists/519d5c81e1009562690a8e3a44a9a5a0",
+      "user": {
+        "login": "philschatz",
+        "id": 253202,
+        "node_id": "MDQ6VXNlcjI1MzIwMg==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/253202?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/philschatz",
+        "html_url": "https://github.com/philschatz",
+        "followers_url": "https://api.github.com/users/philschatz/followers",
+        "following_url": "https://api.github.com/users/philschatz/following{/other_user}",
+        "gists_url": "https://api.github.com/users/philschatz/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/philschatz/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/philschatz/subscriptions",
+        "organizations_url": "https://api.github.com/users/philschatz/orgs",
+        "repos_url": "https://api.github.com/users/philschatz/repos",
+        "events_url": "https://api.github.com/users/philschatz/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/philschatz/received_events",
+        "type": "User",
+        "site_admin": false,
+        "name": "Philip Schatz",
+        "company": "@OpenStax",
+        "blog": "https://philschatz.com",
+        "location": "pale blue dot",
+        "email": null,
+        "hireable": null,
+        "bio": "open source developer, manager, and architect for @openstax (free textbooks for everyone!)",
+        "twitter_username": null,
+        "public_repos": 278,
+        "public_gists": 167,
+        "followers": 192,
+        "following": 11,
+        "created_at": "2010-04-26T15:20:07Z",
+        "updated_at": "2023-11-06T19:04:04Z"
+      },
+      "id": "519d5c81e1009562690a8e3a44a9a5a0",
+      "created_at": "2018-05-11T05:12:15Z",
+      "updated_at": "2018-05-11T05:12:15Z"
+    }
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "c66016aeff4c41cce065364df1163967d6b1ccdd",
+      "committed_at": "2018-04-20T02:59:34Z",
+      "change_status": {
+        "total": 727,
+        "additions": 727,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/cbdb2df1e843449b8aec56b7cdae036a/c66016aeff4c41cce065364df1163967d6b1ccdd"
+    }
+  ],
+  "truncated": false
+}

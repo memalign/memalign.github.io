@@ -1,0 +1,123 @@
+{
+  "url": "https://api.github.com/gists/b9ee2473a92586a8d0dc32f27a5f38f3",
+  "forks_url": "https://api.github.com/gists/b9ee2473a92586a8d0dc32f27a5f38f3/forks",
+  "commits_url": "https://api.github.com/gists/b9ee2473a92586a8d0dc32f27a5f38f3/commits",
+  "id": "b9ee2473a92586a8d0dc32f27a5f38f3",
+  "node_id": "MDQ6R2lzdGI5ZWUyNDczYTkyNTg2YThkMGRjMzJmMjdhNWYzOGYz",
+  "git_pull_url": "https://gist.github.com/b9ee2473a92586a8d0dc32f27a5f38f3.git",
+  "git_push_url": "https://gist.github.com/b9ee2473a92586a8d0dc32f27a5f38f3.git",
+  "html_url": "https://gist.github.com/ThatScar/b9ee2473a92586a8d0dc32f27a5f38f3",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/ThatScar/b9ee2473a92586a8d0dc32f27a5f38f3/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/ThatScar/b9ee2473a92586a8d0dc32f27a5f38f3/raw/786e7b2a22c5ed2fd9ce72694e0384c43c66f738/script.txt",
+      "size": 16173,
+      "truncated": false,
+      "content": "title Coping Mechanisms\nauthor Jack Lance\nrun_rules_on_level_start\n\nmouse_left\nmouse_drag\nmouse_right\nmouse_rdrag\n\nverbose_logging\n========\nOBJECTS\n========\nbackground\nwhite\n\nselect\ntransparent\n\nduring\ndarkbrown\n00.00\n0...0\n.....\n0...0\n00.00\n\ndestroy\nred\n00.00\n0...0\n.....\n0...0\n00.00\n\nhinge\ngrey\n00.00\n0...0\n.....\n0...0\n00.00\n\nmake\nblue\n00.00\n0...0\n.....\n0...0\n00.00\n\nmove\npurple\n00.00\n0...0\n.....\n0...0\n00.00\n\nbad\nblack\n.....\n..0..\n..0..\n.000.\n.000.\n\nzone\nlightblue\n\n\nactive\nyellow LIGHTBROWN orange brown\n.000.\n01112\n01112\n01112\n.222.\n\nad\nyellow LIGHTBROWN orange brown\n.....\n.....\n.....\n.....\n01112\n\nau\nyellow LIGHTBROWN orange brown\n01112\n.....\n.....\n.....\n.....\n\nar\nyellow LIGHTBROWN orange brown\n....0\n....1\n....1\n....1\n....2\n\nal\nyellow LIGHTBROWN orange brown\n0....\n1....\n1....\n1....\n2....\n\nblob\nLIGHTBROWN orange brown\n.000.\n01112\n01112\n01112\n.222.\n\ncd\nLIGHTBROWN orange brown\n.....\n.....\n.....\n.....\n01112\n\ncu\nLIGHTBROWN orange brown\n01112\n.....\n.....\n.....\n.....\n\ncr\nLIGHTBROWN orange brown\n....0\n....1\n....1\n....1\n....2\n\ncl\nLIGHTBROWN orange brown\n0....\n1....\n1....\n1....\n2....\n\nsblob\ntransparent\n\nscd\ntransparent\n\nscu\ntransparent\n\nscr\ntransparent\n\nscl\ntransparent\n\nshd\ntransparent\n\nshl\ntransparent\n\nshr\ntransparent\n\nshu\ntransparent\n\nmd\ngreen\n.....\n.....\n.....\n.....\n00000\n\nmu\ngreen\n00000\n.....\n.....\n.....\n.....\n\nmr\ngreen\n....0\n....0\n....0\n....0\n....0\n\nml\ngreen\n0....\n0....\n0....\n0....\n0....\n\nhd\ndarkgrey\n.....\n.....\n.....\n.....\n.000.\n\nhu\ndarkgrey\n.000.\n.....\n.....\n.....\n.....\n\nhr\ndarkgrey\n.....\n....0\n....0\n....0\n.....\n\nhl\ndarkgrey\n.....\n0....\n0....\n0....\n.....\n\nblock x\nblack\n\nunsupported\ntransparent\n\ncant\ntransparent\n\ngoal g\nred\n..0..\n.0.0.\n0...0\n.0.0.\n..0..\n\n(checka\ntransparent\n\ncheckb\ntransparent\n\nfroma\ntransparent\n\nfromb\ntransparent)\n\nsaving\ntransparent\n\ntryinga\ntransparent\n\ntryingb\ntransparent\n\nlmb\nRed\n\ndrag\nGreen\n\nrmb\nBlue\n\n=======\nLEGEND\n=======\n\n. = Background\nplayer = select or make or move or during or hinge or destroy\nP = move\n\n\n0 = blob\n1 = blob and cd\n2 = blob and hd\n3 = blob and cr\n4 = blob and cd and cr\n5 = blob and hd and cr\n6 = blob and hr\n7 = blob and cd and hr\n8 = blob and hd and hr\n\nxu = cu or hu\nxd = cd or hd\nxl = cl or hl\nxr = cr or hr\n\n\n\ncx = cu or cl or cd or cr\nhx = hu or hl or hd or hr\nmx = mu or ml or md or mr\nax = au or al or ad or ar\n\nz = zone\nq = make\n\n- = bad\n\ntrying = tryinga or tryingb\n\nrdrag = rmb\n\n=======\nSOUNDS\n=======\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\nzone\nblob\ncd, \ncl, \ncr,\ncu, \nscd,\nscl,\nscr,\nscu,\nshd\nshl\nshr\nshu\nsblob\nsaving\nactive\nal\nar\nad\nau\nhd, md\nhl, ml\nhr, mr\nhu, mu\nselect, block\nmake, move, during, hinge, destroy\ngoal\nunsupported\ncant\nbad\ntryinga\ntryingb\n\nlmb\ndrag\nrmb\n======\nRULES\n======\n\n([ lmb during ] -> [ during ])\n[ lmb block ] -> [ block ]\n[ lmb no player ][ player ] -> [ lmb player ][ ]\n\n[ lmb select ] -> [ lmb move ]\n[ lmb during ] -> [ lmb make ]\n[ lmb hinge ] -> [ lmb make ]\n[ lmb destroy ] -> [ lmb make ]\n[ lmb player ] -> [ action player ]\n\n[ rmb no player ][ player no move no select ] -> [ destroy ][ ]\n[ rmb player no move no select ] -> [ destroy ]\n[ rmb ] -> [ ]\n\n[ player | drag ] -> [ > player | ]\n[ drag ] -> [ ]\n\n\n[action make no zone][blob] -> [move saving][blob]\n\n[saving][blob no sblob] -> [saving][blob sblob]\n[saving][hu no shu] -> [saving][hu shu]\n[saving][hd no shd] -> [saving][hd shd]\n[saving][hl no shl] -> [saving][hl shl]\n[saving][hr no shr] -> [saving][hr shr]\n[saving][cu no scu] -> [saving][cu scu]\n[saving][cd no scd] -> [saving][cd scd]\n[saving][cl no scl] -> [saving][cl scl]\n[saving][cr no scr] -> [saving][cr scr]\n\n[saving] -> []\n\n[action move zone no blob][blob] -> [action move zone][]\n[action move zone no blob][hx] -> [action move zone][]\n[action move zone no blob][cx] -> [action move zone][]\n\n[action move zone no blob][shu] -> [action move zone][hu]\n[action move zone no blob][shl] -> [action move zone][hl]\n[action move zone no blob][shd] -> [action move zone][hd]\n[action move zone no blob][shr] -> [action move zone][hr]\n[action move zone no blob][scu] -> [action move zone][cu]\n[action move zone no blob][scl] -> [action move zone][cl]\n[action move zone no blob][scd] -> [action move zone][cd]\n[action move zone no blob][scr] -> [action move zone][cr]\n[action move zone no blob][sblob no move] -> [action move zone][blob]\n[action move zone no blob][sblob] -> [ make zone][blob]\n\n[action move zone no blob] -> [make zone]\n\n[action make zone no blob] -> [during blob zone]\n\n[action make zone blob] -> [hinge zone blob]\n\n\n[> hinge | no zone ] -> [ | make]\n[> during | no zone ] -> [ | make] \n\nup [up hinge cu| ] -> [ cu |hinge ]\ndown [down hinge cd| ] -> [ cd |hinge ]\nleft [left hinge cl| ] -> [ cl |hinge ]\nright [right hinge cr| ] -> [ cr |hinge ]\n\nup [up hinge | blob] -> [ > tryinga |make < tryingb blob]\ndown [down hinge | blob] -> [ > tryinga |make < tryingb blob]\nleft [left hinge | blob] -> [ > tryinga |make < tryingb blob]\nright [right hinge | blob] -> [ > tryinga |make < tryingb blob]\n\nup [up hinge | no blob] -> [ hu |during hd blob]\ndown [down hinge | no blob] -> [ hd |during hu blob]\nleft [left hinge | no blob] -> [ hl |during hr blob]\nright [right hinge | no blob] -> [ hr |during hl blob]\n\n[action hinge] -> [destroy]\n[action destroy] -> [make]\n\n\n\nup [up during blob no cu| blob] -> [ blob > tryinga| < tryingb make blob]\ndown [down during blob no cd| blob] -> [ blob > tryinga| < tryingb make blob]\nleft [left during blob no cl| blob] -> [ blob > tryinga| < tryingb make blob]\nright [right during blob no cr| blob] -> [ blob > tryinga| < tryingb make blob]\n\nup [up during | no blob no block zone] -> [cu | cd blob during zone]\ndown [down during | no blob no block zone] -> [cd | cu blob during zone]\nleft [left during | no blob no block zone] -> [cl | cr blob during zone]\nright [right during | no blob no block zone] -> [cr | cl blob  during zone]\n\n\n[tryinga][xu] -> [tryinga][up xu]\n[tryinga][xl] -> [tryinga][left xl]\n[tryinga][xr] -> [tryinga][right xr]\n[tryinga][xd] -> [tryinga][down xd]\n\nstartloop\n\n[ blob > hx | blob trying] -> [ blob > hx trying| blob trying]\n[ blob > cx | blob trying] -> [ blob > cx trying| blob trying]\n\nendloop\n\n[cx] -> [stationary cx]\n[hx] -> [stationary hx]\n\n[moving tryinga][tryinga tryingb][moving tryingb] -> [stationary tryinga][tryinga tryingb][stationary tryingb]\n\n[up trying] -> [hu]\n[down trying] -> [hd]\n[left trying] -> [hl]\n[right trying] -> [hr]\n\n[trying] -> []\n\nlate [destroy blob] -> [destroy]\nlate [destroy hx] -> [destroy]\nlate [destroy cx] -> [destroy]\nlate right [xr | destroy] -> [ | destroy]\nlate left [xl | destroy] -> [ | destroy]\nlate down [xd | destroy] -> [ | destroy]\nlate up [xu | destroy] -> [ | destroy]\nlate [during no zone] -> [make]\n\n[action during] -> [make]\n\n[action select blob] -> [move blob]\n[action move blob] -> [select blob]\n\n\n[select blob unsupported] -> [down select blob unsupported]\n\n[select][blob unsupported] -> [select ][down blob]\n\n[move][blob unsupported] -> [move ][down blob]\n\n\nup [hu | ] -> [hu | hd]\ndown [hd | ] -> [hd | hu]\nleft [hl | ] -> [hl | hr]\nright [hr | ] -> [hr | hl]\nup [cu | ] -> [cu | cd]\ndown [cd | ] -> [cd | cu]\nleft [cl | ] -> [cl | cr]\nright [cr | ] -> [cr | cl]\n\n[xu] -> [up xu]\n[xl] -> [left xl]\n[xr] -> [right xr]\n[xd] -> [down xd]\n\n[cant] -> []\n\nup [up select][blob | block] -> [up select][blob cant | block]\nleft [left select][blob | block] -> [left select][blob cant | block]\ndown [down select][blob | block] -> [down select][blob cant | block]\nright [right select][blob | block] -> [right select][blob cant | block]\n\nstartloop\n\n[ blob > cx | blob cant] -> [ blob > cx cant| blob cant]\nup [up select][blob | cant] -> [up select][blob cant | cant]\nleft [left select][blob | cant] -> [left select][blob cant | cant]\ndown [down select][blob | cant] -> [down select][blob cant | cant]\nright [right select][blob | cant] -> [right select][blob cant | cant]\n\nendloop\n\n[> select blob no cant] -> [> select > blob]\n\n[select cant] -> [stationary select cant]\n\n\n\nstartloop\n\n[moving blob > cx | blob] -> [moving blob > cx| moving blob]\n\n[> blob > hu | blob] -> [> blob > mu | > blob]\n+[> blob > hl | blob] -> [> blob > ml | > blob]\n+[> blob > hd | blob] -> [> blob > md | > blob]\n+[> blob > hr | blob] -> [> blob > mr | > blob]\n[> blob  | blob] -> [> blob | > blob]\n[< blob > hu | blob] -> [< blob > mu | < blob]\n[< blob > hl | blob] -> [< blob > ml | < blob]\n[< blob > hd | blob] -> [< blob > md | < blob]\n[< blob > hr | blob] -> [< blob > mr | < blob]\n\n\n[no cl right blob up hu] -> [right blob up mu]\n[no cl right blob down hd] -> [right blob down md]\n[no cr left blob up hu] -> [left blob up mu]\n[no cr left blob down hd] -> [left blob down md]\n[no cd up blob left hl] -> [up blob left ml]\n[no cd up blob right hr] -> [up blob right mr]\n[no cu down blob left hl] -> [down blob left ml]\n[no cu down blob right hr] -> [down blob right mr]\n\n[> mx | < hl] -> [> mx | < ml]\n[> mx | < hd] -> [> mx | < md]\n[> mx | < hr] -> [> mx | < mr]\n[> mx | < hu] -> [> mx | < mu]\n\n[right select][stationary blob mx no cr] -> [right select][right blob mx]\n[left select][stationary blob mx no cl] -> [left select][left blob mx]\n[down select][stationary blob mx no cd] -> [down select][down blob mx]\n[up select][stationary blob mx no cu] -> [up select][up blob mx]\nendloop\n\n[> blob | block] -> cancel\n\n[hx] -> [stationary hx]\n\n[moving select][md] -> [moving select][moving hd]\n[moving select][mu] -> [moving select][moving hu]\n[moving select][ml] -> [moving select][moving hl]\n[moving select][mr] -> [moving select][moving hr]\n\n[stationary select][md] -> [stationary select][down hd]\n[stationary select][mu] -> [stationary select][down hu]\n[stationary select][ml] -> [stationary select][down hl]\n[stationary select][mr] -> [stationary select][down hr]\n\n[stationary move][md] -> [stationary move][down hd]\n[stationary move][mu] -> [stationary move][down hu]\n[stationary move][ml] -> [stationary move][down hl]\n[stationary move][mr] -> [stationary move][down hr]\n\n[cx] -> [stationary cx]\n\n\n[moving blob cx] -> [moving blob moving cx]\n\nlate [blob] -> [blob unsupported]\nlate down [blob unsupported|block] -> [blob | block]\n\nstartloop\nlate up [blob xu unsupported | no unsupported] -> [blob xu | ]\nlate down [blob xd unsupported | no unsupported] -> [blob xd | ]\nlate left [blob xl unsupported | no unsupported] -> [blob xl | ]\nlate right [blob xr unsupported | no unsupported] -> [blob xr | ]\n\n\nlate down [blob unsupported|blob no unsupported] -> [blob | blob]\nendloop\n\nlate [blob unsupported] -> again\n\nlate [ax] -> []\nlate [active] -> []\n\nlate [select blob] -> [select blob active]\nstartloop\nlate [active cl] -> [active cl al]\nlate [active cr] -> [active cr ar]\nlate [active cd] -> [active cd ad]\nlate [active cu] -> [active cu au]\nlate up [au | blob] -> [au | blob active]\nlate down [ad | blob] -> [ad | blob active]\nlate left [al | blob] -> [al | blob active]\nlate right [ar | blob] -> [ar | blob active]\nendloop\n\nlate [blob bad][blob no bad][zone] -> [blob bad][][zone]\nlate [blob bad][hx][zone] -> [blob bad][][zone]\nlate [blob bad][cx][zone] -> [blob bad][][zone]\nlate [blob bad][ax][zone] -> [blob bad][][zone]\nlate [blob bad][select][zone] -> [blob bad][][zone]\nlate [blob bad][active][zone] -> [blob bad][][zone]\n\nlate [blob bad][shu] -> [blob bad][hu]\nlate [blob bad][shl] -> [blob bad][hl]\nlate [blob bad][shd] -> [blob bad][hd]\nlate [blob bad][shr] -> [blob bad][hr]\nlate [blob bad][scu] -> [blob bad][cu]\nlate [blob bad][scl] -> [blob bad][cl]\nlate [blob bad][scd] -> [blob bad][cd]\nlate [blob bad][scr] -> [blob bad][cr]\nlate [blob bad][sblob] -> [blob bad][blob]\n\n late [blob bad][zone] -> [bad][zone make]\n (late [blob bad][zone] -> [bad][zone])\n\n\n\n[blob bad] -> restart\n\nlate [make][move] -> [make][]\n\nlate [unsupported no blob] -> []\n\n==============\nWINCONDITIONS\n==============\nall goal on blob\nno unsupported\n\n=======\nLEVELS\n======= \n\nmessage WARMUP 1/3\n\nmessage Press action to select the robot, then move it to the exit without hitting any spikes\n\nxxxxxxxxx\nx.......x\nx1..p...x\nx0......x\nxxxxx...x\nx.......x\nx.......x\nx.......x\nxx.xxx.xx\nx.......x\nx....g..x\nx.....--x\nxxxxxxxxx\n\nmessage WARMUP 2/3\n\nmessage Select which component you would like to move, and action to deselect\n\nxxxxxxxxxxxxxx\nxp.1x........x\nx.71x........x\nx.10x........x\nx.0xx........x\nx..x.........x\nx..x..xxxxxx.x\nx..x........gx\nx..xx........x\nx...x........x\nx...xxx......x\nx.....xxx....x\nx............x\nx.........xxxx\nx.........xxxx\nxxxxxxxxxxxxxx\n\nmessage WARMUP 3/3\n\nmessage In levels with multiple bots, you only need to get one to the exit\n\nxxxxxxxxxxxxxxx\nx.............x\nx...p.........x\nx...........g.x\nx.............x\nx.11...x......x\nx.2630.x......x\nx.30..1x......x\nxxx.360x....xxx\nxxxxxxxxxxxxxxx\n\nmessage LEVEL 1/8\n\nmessage Draw your robot's design in the blue zone\n\nmessage Press action and move around to start drawing a component, and action again to finish\n\nmessage Press action on a component and move to draw a hinge\n\nmessage Lastly, press action OUTSIDE THE BLUE ZONE TO PLAY with your designed robot\n\nmessage You can also press action in hinge mode to go to erase mode...\n\nmessage Basically, whatever you want to do, press action a bunch and you'll probably get to it. (It'll be easier once you get used to it.)\n\nxxxxxxxxxxx\nx.........x\nx...q...g.x\nx.........x\nxzzzz.....x\nxzzzz.....x\nxzzzz.....x\nxzzzz.....x\nxxxxxxxxxxx\n\nmessage If you are in play mode, you can return to make mode by pressing action IN THE BLUE ZONE\n\nmessage LEVEL 2/8\n\nxxxxxxxxxxxxx\nx.....zzzzzzx\nx...q.zzzzzzx\nx.....zzzzzzx\nx.....zzzzzzx\nx.....xxxxxxx\nx..........gx\nx...........x\nx...........x\nx...........x\nx...........x\nx------.....x\nxxxxxxxxxxxxx\n\n(xxxxxxxxxxxxxxx\nxxxxxxxxxx....x\nxxxxxxxxxx..x.x\nxxxxxxxxxx..x.x\nxxxxxxxxxx..x.x\nxzzzzz.q....x.x\nxzzzzz......x.x\nxzzzzz......x.x\nxzzzzz......x.x\nxzzzzz------xgx\nxxxxxxxxxxxxxxx)\n\nmessage LEVEL 3/8\n\nxxxxxxxxxx\nx..zzzzzzx\nx..zzzzzzx\nx..zzzzzzx\nxq.zzzzzzx\nx..zzzzzzx\nx..xxxxxxx\nx..xx....x\nx..xx..x.x\nx..xx..x.x\nx..xx..x.x\nx......x.x\nx......x.x\nx......xgx\nxxxxxxxxxx\n\nmessage LEVEL 4/8\n\n\nxxxxxxxxx\nxzzzzz..x\nxzzzzz..x\nxzzzzzq.x\nxzzzzz..x\nxzzzzz..x\nxxxxxx..x\nx.......x\nxxxxxx..x\nx.......x\nxxxxxx..x\nx.......x\nxxxxxx..x\nx.......x\nxxxxxx..x\nx.......x\nxxxxxx..x\nx.......x\nxxxxxx..x\nx....g..x\nxxxxxx--x\n\n\n\n\nmessage LEVEL 5/8\n\nxxxxxxxxxxx\nx....z....x\nx...zzz...x\nx..zzzzz..x\nx.zzzzzzz.x\nxzzzzzzzzzx\nx.zzzzzzz.x\nx-.zzzzz..x\nxx..zzz...x\nx....z....x\nx..-.x....x\nx..x...q..x\nx.........x\nx....-....x\nx....x....x\nx.-.......x\nx.x....-..x\nx......x..x\nx...-.....x\nx...x....-x\nx........xx\nx.....-...x\nx.g...x...x\nx.........x\nx.......-.x\nx.......x.x\nx.........x\nxxxxxxxxxxx\n\nmessage LEVEL 6/8\n\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxx..........gx\nxxxxxxxxxx...........x\nxxxxxxxxxx...........x\nxxxxxxxxxx...........x\nxxxxxxxxxx...........x\nxxxxxxxxxx...........x\nxxxxxxxxxx...........x\nx....................x\nx....................x\nx....................x\nx....................x\nx.........----.......x\nx....xxxxxxxxxxxxxxxxx\nx.........xxxxxxxxxxxx\nx.........xxxxxxxxxxxx\nx.........xxxxxxxxxxxx\nxzzz.q.zzzxxxxxxxxxxxx\nxzzz...zzzxxxxxxxxxxxx\nxzzz...zzzxxxxxxxxxxxx\nxzzz...zzzxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\n\n\n\n\n(xxxxxxxxxxxxxx\nxzzzzzzzxxxxxx\nxzzzzzzzxxxxxx\nxzzzzzzzxxxxxx\nxzzzzzzzxxxxxx\nxzzzzzzz....xx\nxzzzzzzzq...xx\nxxxxxxxxx...xx\nxxxxxxxxx...xx\nxxxxxxxxx...xx\nxxxxxxxxx...xx\nxxxxxxxxx...xx\nxxxxxxxxx...xx\nxxxxxxxxx....x\nxxxxxxxxx...gx\nxxxxxxxxx---xx\nxxxxxxxxxxxxxx)\n\n\nmessage LEVEL 7/8\n\nxxxxxxxxxxxxxxxxxxxxxxx\nx......x......x.......x\nx......x......x.......x\nx......x......x.......x\nx.............x.......x\nx...q.........x.......x\nx......-......x.......x\nx......x......x.......x\nx......x..............x\nx......x..............x\nxzzzzzzx......-.......x\nxzzzzzzx......x.......x\nxzzzzzz.......x.......x\nxzzzzzz-......x.......x\nxzzzzzzx......x......gx\nxzzzzzzx......x.......x\nxzzzzzzx------x.......x\nxxxxxxxxxxxxxxxxxxxxxxx\n\n\nmessage LEVEL 8/8\n\nxxxxxxxxxxxxxxxxxxxxxxx\nx..q..zzzzzx..........x\nx.....zzzzzx..........x\nx.....zzzzzx..........x\nx.....zzzzzx..........x\nx.....zzzzzx..........x\nx.....zzzzzx..........x\nx.....zzzzzx..........x\nx.....zzzzzx..........x\nx.....zzzzzxg.........x\nx.....xxxxxxxxxxx.....x\nx.....................x\nx.....................x\nx.....................x\nx---------------------x\n\n\n\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2018-10-12T12:04:35Z",
+  "updated_at": "2018-10-12T12:34:55Z",
+  "description": "Coping Mechanisms (PuzzleScript Script)",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/b9ee2473a92586a8d0dc32f27a5f38f3/comments",
+  "owner": {
+    "login": "ThatScar",
+    "id": 23432554,
+    "node_id": "MDQ6VXNlcjIzNDMyNTU0",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23432554?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/ThatScar",
+    "html_url": "https://github.com/ThatScar",
+    "followers_url": "https://api.github.com/users/ThatScar/followers",
+    "following_url": "https://api.github.com/users/ThatScar/following{/other_user}",
+    "gists_url": "https://api.github.com/users/ThatScar/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/ThatScar/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/ThatScar/subscriptions",
+    "organizations_url": "https://api.github.com/users/ThatScar/orgs",
+    "repos_url": "https://api.github.com/users/ThatScar/repos",
+    "events_url": "https://api.github.com/users/ThatScar/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/ThatScar/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "ThatScar",
+        "id": 23432554,
+        "node_id": "MDQ6VXNlcjIzNDMyNTU0",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23432554?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ThatScar",
+        "html_url": "https://github.com/ThatScar",
+        "followers_url": "https://api.github.com/users/ThatScar/followers",
+        "following_url": "https://api.github.com/users/ThatScar/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ThatScar/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ThatScar/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ThatScar/subscriptions",
+        "organizations_url": "https://api.github.com/users/ThatScar/orgs",
+        "repos_url": "https://api.github.com/users/ThatScar/repos",
+        "events_url": "https://api.github.com/users/ThatScar/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ThatScar/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "d48c4fc3e4d2a5b963db211d4796d518c936b92a",
+      "committed_at": "2018-10-12T12:34:54Z",
+      "change_status": {
+        "total": 4,
+        "additions": 2,
+        "deletions": 2
+      },
+      "url": "https://api.github.com/gists/b9ee2473a92586a8d0dc32f27a5f38f3/d48c4fc3e4d2a5b963db211d4796d518c936b92a"
+    },
+    {
+      "user": {
+        "login": "ThatScar",
+        "id": 23432554,
+        "node_id": "MDQ6VXNlcjIzNDMyNTU0",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23432554?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ThatScar",
+        "html_url": "https://github.com/ThatScar",
+        "followers_url": "https://api.github.com/users/ThatScar/followers",
+        "following_url": "https://api.github.com/users/ThatScar/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ThatScar/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ThatScar/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ThatScar/subscriptions",
+        "organizations_url": "https://api.github.com/users/ThatScar/orgs",
+        "repos_url": "https://api.github.com/users/ThatScar/repos",
+        "events_url": "https://api.github.com/users/ThatScar/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ThatScar/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "ccbfc79d6ef66197030e4ec0ad824e3a6d84aec4",
+      "committed_at": "2018-10-12T12:04:34Z",
+      "change_status": {
+        "total": 953,
+        "additions": 953,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/b9ee2473a92586a8d0dc32f27a5f38f3/ccbfc79d6ef66197030e4ec0ad824e3a6d84aec4"
+    }
+  ],
+  "truncated": false
+}

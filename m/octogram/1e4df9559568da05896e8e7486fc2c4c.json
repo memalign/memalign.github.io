@@ -1,0 +1,143 @@
+{
+  "url": "https://api.github.com/gists/1e4df9559568da05896e8e7486fc2c4c",
+  "forks_url": "https://api.github.com/gists/1e4df9559568da05896e8e7486fc2c4c/forks",
+  "commits_url": "https://api.github.com/gists/1e4df9559568da05896e8e7486fc2c4c/commits",
+  "id": "1e4df9559568da05896e8e7486fc2c4c",
+  "node_id": "MDQ6R2lzdDFlNGRmOTU1OTU2OGRhMDU4OTZlOGU3NDg2ZmMyYzRj",
+  "git_pull_url": "https://gist.github.com/1e4df9559568da05896e8e7486fc2c4c.git",
+  "git_push_url": "https://gist.github.com/1e4df9559568da05896e8e7486fc2c4c.git",
+  "html_url": "https://gist.github.com/JackLance/1e4df9559568da05896e8e7486fc2c4c",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/1e4df9559568da05896e8e7486fc2c4c/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/1e4df9559568da05896e8e7486fc2c4c/raw/fee33ae6923faffaeae76ad6543a5b51b5d69541/script.txt",
+      "size": 9248,
+      "truncated": false,
+      "content": "title Spring\nrun_rules_on_level_start\nbackground_color #043804\ntext_color #7b7\nagain_interval 0.001\nnorepeat_action\n========\nOBJECTS\n========\n\nBackground 1\nblack\n\nunlit \n#78D448\n\nnlit \n#58BBE0\n\nit !\n#EFC040\n\nspring\n#109010 #041904\n.000.\n00000\n01010\n00000\n.000.\n\nwinter ?\n#1010B0 #101030\n.000.\n00000\n01010\n00000\n.000.\n\nbunnyd  ,\n#745004  black pink white\n..3..\n.000.\n.000.\n.101.\n..2..\n\nbunnyl <\n#745004  black pink white \n.....\n.100.\n20003\n.100.\n.....\n\nbunnyu .\n#745004  black pink white\n..2..\n.101.\n.000.\n.000.\n..3..\n\nbunnyr >\n#745004  black pink white\n.....\n.001.\n30002\n.001.\n.....\n\nblock w\n #043804\n\ncrat 7\n#745004 #C47004\n.000.\n01110\n01110\n01110\n.000.\n\nglass q\n#745004 #C47004 white\n.000.\n02110\n02120\n01120\n.000.\n\nflower\n#043804 #109010\n.....\n..1..\n.101.\n..1..\n.....\n\nwater o\nblue \n\nice p\nlightblue \n\ndoor e\n#109010 #043804\n00011\n00001\n00000\n00001\n00011\n\ndrowned\nblue #745004 \n00000\n00100\n01110\n00100\n00000\n\nnodoor\ntransparent\n\nstart\ntransparent\n\nvert\ntransparent\n\nmoved\ntransparent\n\nnomoved\ntransparent\n\n\n\neaten\ntransparent\n\nwatermark\ntransparent\n\nwinning\ntransparent\n\n\nleftm\ntransparent\n\nrightm\ntransparent\n\nupm\ntransparent\n\ndownm\ntransparent\n\n\n=======\nLEGEND\n=======\n\n\nbunny = bunnyl or bunnyr or bunnyd or bunnyu\naqua = water or ice\ncre = spring or block or crat or glass or door or bunny or ice \ncrate = crat or block or glass or aqua\nflow = flower \na = flower and nlit\ni = spring and start\nl= nlit\nplayer = spring\nfloor = unlit or nlit\nm = upm or leftm or downm or rightm\n\n\n=======\nSOUNDS\n=======\n\nSFX1 80425104\nSFX2 16467501\nSFX3 80127507\nSFX4 73784102\nSFX5 3862504\nSFX6 16917301\nSFX7 92204307\nSFX8 54283103\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\nvert\nnodoor,\nwatermark\nfloor, ice\nmoved, nomoved\nflow, eaten\nplayer, glass, crat, block, door, bunny, water\nwinning\nstart, drowned\nit,winter\nm\n\n\n======\nRULES\n======\n\n\nright [winter no moved| floor] -> [|winter moved nlit] again\nright [winter no moved| water] -> [|winter moved ice] again\nright [winter no moved| block] -> right [winter no moved winning| block]\n\n[start watermark] -> restart\n[drowned][start] -> [drowned][start watermark]\n\n[action spring no unlit no flower no aqua] -> [spring flower] SFX1\n[action spring flower] -> [spring eaten]\n\n[floor] -> []\n\n[> spring | crat| no cre no aqua flower] -> [|spring|crat] SFX3\n[> spring | crat| no cre no aqua] -> [|spring|crat] SFX7\n\n[vert] -> []\n[eaten]->[]\n[nomoved] -> []\n\nlate [spring ice] -> [spring ice watermark]\nlate [no spring ice watermark] -> [water watermark] SFX2\n\nlate [bunny watermark] -> [drowned] SFX6\n\nlate up [bunnyu no moved |no cre flower] -> [|bunnyu moved eaten] SFX3 \nlate left [bunnyl no moved |no cre flower] -> [|bunnyl moved eaten] SFX3 \nlate right [bunnyr no moved |no cre flower] -> [|bunnyr moved eaten] SFX3 \nlate down [bunnyd no moved |no cre flower] -> [|bunnyd moved eaten] SFX3\n\n\nlate up [bunnyu no moved |no cre no flower] -> [|bunnyu moved] \nlate left [bunnyl no moved |no cre no flower] -> [|bunnyl moved] \nlate right [bunnyr no moved |no cre no flower] -> [|bunnyr moved] \nlate down [bunnyd no moved |no cre no flower] -> [|bunnyd moved] \n\nlate right [|nodoor  player][eaten] -> [player|door][eaten]\nlate [nodoor][eaten] -> [door][eaten]\n\nlate [spring] -> [spring nomoved]\nlate [nomoved spring][moved] -> [spring][moved]\nlate [moved]->[] again\n\nlate [no block no aqua] -> [nlit]\nlate [nodoor floor] -> [nodoor unlit]\nlate [start floor] -> [start unlit]\n\nlate [flow nlit] -> [flow unlit]\nlate [flow |nlit] -> [flow|unlit]\nlate [flow |ice] -> [flow |water watermark]\nlate vertical [flower|] -> [flower|vert]\nlate horizontal [vert|nlit] -> [vert|unlit]\nlate horizontal [vert|ice] -> [vert|water watermark]\n\n[m] -> []\n[bunnyu] -> [bunnyu upm]\n[bunnyd] -> [bunnyd downm]\n[bunnyl] -> [bunnyl leftm]\n[bunnyr] -> [bunnyr rightm]\nlate up [nomoved][bunnyu | cre] -> [nomoved][bunnyr|cre]\nlate right [nomoved][bunnyr|cre] -> [nomoved][bunnyd| cre]\nlate down [nomoved][bunnyd| cre] -> [nomoved][bunnyl| cre]\nlate left [nomoved][bunnyl| cre] -> [nomoved][bunnyu| cre]\nlate up [nomoved][bunnyu | cre] -> [nomoved][bunnyr|cre]\nlate right [nomoved][bunnyr|cre] -> [nomoved][bunnyd| cre]\nlate down [nomoved][bunnyd| cre] -> [nomoved][bunnyl| cre]\nlate left [nomoved][bunnyl| cre] -> [nomoved][bunnyu| cre]\nlate up [nomoved][bunnyu | cre] -> [nomoved][bunnyr|cre]\nlate right [nomoved][bunnyr|cre] -> [nomoved][bunnyd| cre]\nlate down [nomoved][bunnyd| cre] -> [nomoved][bunnyl| cre]\nlate left [nomoved][bunnyl| cre] -> [nomoved][bunnyu| cre]\nlate up [nomoved][bunnyu no upm| cre] -> [nomoved][bunnyr|cre]\nlate right [nomoved][bunnyr no rightm|cre] -> [nomoved][bunnyd| cre]\nlate down [nomoved][bunnyd no downm| cre] -> [nomoved][bunnyl| cre]\nlate left [nomoved][bunnyl no leftm| cre] -> [nomoved][bunnyu| cre]\n\nlate [door] -> [nodoor vert unlit]\nlate [nodoor vert floor no player][nlit] -> [door][nlit]\nlate [nodoor vert floor no player][ice] -> [door][ice]\nlate [nodoor floor no player][nlit] -> [door][nlit]\nlate [nodoor floor no player][ice] -> [door][ice]\nlate [nodoor vert] -> [nodoor] SFX8\n\nlate [drowned][spring nodoor] -> [drowned][spring nodoor watermark]\nlate [drowned][start] -> [drowned][start watermark]\nlate [spring nodoor no watermark nomoved] -> [spring nodoor no watermark nomoved winning]\n\n\n\n\n\n\n\n\n==============\nWINCONDITIONS\n==============\nsome winning\n=======\nLEVELS\n=======\n\n\n\nmessage This is going to be the best year ever!\n\n\nmessage [X TO PLANT OR UN-PLANT]\n\n\nw11111w\nw11111w\ni11111e\nw11111w\nw11111w\n\n\nmessage I know I've said the same thing for the past 4,518,620,189 years...\n\nmessage ...But that doesn't mean it can't be true!\n\nmessage [NESTS WITH EGGS CANNOT BE PUSHED]\nwq11111e\nwqqqq1qw\nw11111qw\ni1qqqqqw\n\n\n\n\nmessage Look at all these bird eggs that will soon be gorgeous little baby birds.\n\nmessage I can't wait to meet and be friends with them all!\n\nmessage [NESTS WITHOUT EGGS CAN BE PUSHED]\nwlqlw\nilqle\nwlqlw\nwl7lw\nwl7lw\nwl7lw\n\nmessage Ooh look, what an adorable bunny!\n\nmessage Wait!\n\nmessage Bunny, no!\n\nmessage Please don't eat my garden!\n\nwwwwwww\nwww.www\nww111ww\nwi1a1ew\nww111ww\nwww1www\nwwwwwww\n\nmessage I can't stay mad at bunnies.\n\nmessage They're way too cute!\n\nwqqqqqww\nilqlllqw\nwlllqlqw\nwqqqllqw\nwqlllqle\nwqlqqllw\nwqllllqw\nwwqqqqqw\n\n\nw1p111ww\nw?o!!!!w\nw1p1ppww\ni1ppp1ww\nw11111ww\n\nmessage WHAT!?!?\n\nmessage What the heck was that???\n\nmessage [ICE MELTS INTO WATER]\n\nmessage [SPRING CAN WALK ON ICE, BUT NOT ON WATER]\n\nw1p111w\nw1p111e\nw1p1ppw\ni1ppp1w\nw11111w\n\nmessage Maybe it's another type of animal I can meet!\n\n\n\nmessage [BUNNIES ALWAYS ROTATE CLOCKWISE UPON HITTING A WALL]\n\nwwwwwwwwwww\nwwww111wwww\nww111111.ww\nwi1w1w1w1ew\nww1111111ww\nwwww111wwww\nwwwwwwwwwww\n\nmessage I thought I already knew all 9,361,245 species...\n\nmessage I don't know how I could have missed one!\n\nwlllllllw\nwlppppplw\nwlp77lple\nilpl77plw\nwlppppplw\nwlllllllw\n\nmessage It must be rare, probably even endangered.\n\nmessage I barely even got a chance to see one, though...\n\nmessage I have to try to save it!\n\nwppwppppww\nwpppppppww\nwpppppwp1e\nwpwpppppww\nipppppppww\nwpppppppww\nwpppwpppww\n\nmessage Please come back mystery animal!\n\nmessage I can give you love and affection!\n\nwwqqqqww\nwlll1llw\nill11llw\nwlqqqqlw\nwl111lle\nw111111w\nwwqqwqww\n\nmessage Where did it go!?\n\nmessage [ICE IS COLD, SO BUNNIES WON'T WALK ON IT]\n\nmessage [WATER IS DEEP, SO BUNNIES WILL DROWN IN IT]\n\nwwwwwwwww\nww111p1ww\nww111p1ww\nwi111p1ew\nww111p1ww\nww.11p1ww\nwwwwwwwww\n\nmessage I didn't get a good glimpse of it...\n\nmessage but I bet it was adorable!\n\nwlplpllww\nwlplpppww\nwlpllllew\nwlpppppww\nwlllllpww\nipppplpww\nwlllplpww\nwpplplpww\n\nmessage Maybe it's a relative of a mountain bluebird or indigo bunting?\n\nmessage Tweet Twe-twee-ee-tweet Twee-tweet Tweet!\n\nwwwwwwwwww\nwi11111,ww\nww1w1111ww\nww111111ww\nwwww1111ww\nww111111ww\nww1111w1ew\nwwwwwwwwww\n\nmessage Did it go this way?\n\nmessage Oh no.\n\nmessage I think I'm lost.\n\nwwwqwwwqwww\nwwwlllllwww\nwwwlllllwww\nippl7l7lple\nwwwlllllwww\nwwwllll<www\nwwwqwwwqwww\n\nmessage I can't be lost! I'm going to run behind schedule!\n\nmessage I've never been behind schedule in the entire history of the world!\n\ni11p11e\nw1ppp1w\nwpppppw\nwpp1ppw\nwpp1ppw\nwpppppw\nw1ppp1w\nw11p11w\n\n\nmessage Bunny, please be still!\n\nmessage I don't have time for this!\n\nwwwwwwwww\nww1111,ww\nww1w111ww\nwi11111ew\nww111w1ww\nww11111ww\nwwwwwwwww\n\nmessage I have no idea where it went now, but at least I know where I am...\n\nmessage I'll hopefully be able to meet it someday!\n\nmessage Maybe it could also lead me to even more new species I've never seen!\n\nmessage I wonder how many of them there are!\n\n\n\nwwwwwwwwww\nwwww1lwwww\nwww11llwww\nww11.111ww\nwillplllew\nwwlllllwww\nwwwlllwwww\nwwww1wwwww\nwwwwwwwwww\n\nmessage That animal that made me lose focus...\n\nmessage I think it didn't really look like any animal I've seen before...\n\n\ni1wpppppwww\nw1pplllppww\nwpp>llllppw\nwplll7lllpw\nwpllqlqllpw\nwplll7lllpw\nwpplllllppw\nwwpplllpp1w\nwwwpppppw1e\n\nmessage Come to think of it...\n\nmessage It... It...\n\nwwwwwwwwwwwww\nwi1111111<1ww\nwwww111111www\nww11111ww11ww\nww11ww11111ww\nwww111111wwww\nww1111111<1ew\nwwwwwwwwwwwww\n\n\nmessage ...it kind of looked like me!\n\nwwwpppppppppwww\nwwwp>llllllpwww\nwwwplllllllpwww\nwwwplll7lllpwww\ni11pllqlqllp11e\nwwwplll7lllpwww\nwwwplllllllpwww\nwwwplllllllpwww\nwwwpppppppppwww\n\nmessage END OF PART ONE\n\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2016-11-06T18:09:44Z",
+  "updated_at": "2016-11-06T18:20:28Z",
+  "description": "title",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/1e4df9559568da05896e8e7486fc2c4c/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "fork_of": {
+    "url": "https://api.github.com/gists/c64f8ac8ce99825d3eefddba228dd8b1",
+    "forks_url": "https://api.github.com/gists/c64f8ac8ce99825d3eefddba228dd8b1/forks",
+    "commits_url": "https://api.github.com/gists/c64f8ac8ce99825d3eefddba228dd8b1/commits",
+    "id": "c64f8ac8ce99825d3eefddba228dd8b1",
+    "node_id": "MDQ6R2lzdGM2NGY4YWM4Y2U5OTgyNWQzZWVmZGRiYTIyOGRkOGIx",
+    "git_pull_url": "https://gist.github.com/c64f8ac8ce99825d3eefddba228dd8b1.git",
+    "git_push_url": "https://gist.github.com/c64f8ac8ce99825d3eefddba228dd8b1.git",
+    "html_url": "https://gist.github.com/anonymous/c64f8ac8ce99825d3eefddba228dd8b1",
+    "files": {
+
+    },
+    "public": true,
+    "created_at": "2016-11-06T18:09:14Z",
+    "updated_at": "2016-11-06T18:09:44Z",
+    "description": "title",
+    "comments": 0,
+    "user": null,
+    "comments_url": "https://api.github.com/gists/c64f8ac8ce99825d3eefddba228dd8b1/comments"
+  },
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "109472967f629bd4dc6806fea512d9fa90fbe1af",
+      "committed_at": "2016-11-06T18:20:28Z",
+      "change_status": {
+        "total": 2,
+        "additions": 1,
+        "deletions": 1
+      },
+      "url": "https://api.github.com/gists/1e4df9559568da05896e8e7486fc2c4c/109472967f629bd4dc6806fea512d9fa90fbe1af"
+    },
+    {
+      "user": {
+        "login": "invalid-email-address",
+        "id": 148100,
+        "node_id": "MDQ6VXNlcjE0ODEwMA==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/148100?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/invalid-email-address",
+        "html_url": "https://github.com/invalid-email-address",
+        "followers_url": "https://api.github.com/users/invalid-email-address/followers",
+        "following_url": "https://api.github.com/users/invalid-email-address/following{/other_user}",
+        "gists_url": "https://api.github.com/users/invalid-email-address/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/invalid-email-address/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/invalid-email-address/subscriptions",
+        "organizations_url": "https://api.github.com/users/invalid-email-address/orgs",
+        "repos_url": "https://api.github.com/users/invalid-email-address/repos",
+        "events_url": "https://api.github.com/users/invalid-email-address/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/invalid-email-address/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "794278b9da747a80e0c00b1c64052a9c679c28bc",
+      "committed_at": "2016-11-06T18:09:14Z",
+      "change_status": {
+        "total": 600,
+        "additions": 600,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/1e4df9559568da05896e8e7486fc2c4c/794278b9da747a80e0c00b1c64052a9c679c28bc"
+    }
+  ],
+  "truncated": false
+}

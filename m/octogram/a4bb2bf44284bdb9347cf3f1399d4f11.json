@@ -1,0 +1,93 @@
+{
+  "url": "https://api.github.com/gists/a4bb2bf44284bdb9347cf3f1399d4f11",
+  "forks_url": "https://api.github.com/gists/a4bb2bf44284bdb9347cf3f1399d4f11/forks",
+  "commits_url": "https://api.github.com/gists/a4bb2bf44284bdb9347cf3f1399d4f11/commits",
+  "id": "a4bb2bf44284bdb9347cf3f1399d4f11",
+  "node_id": "MDQ6R2lzdGE0YmIyYmY0NDI4NGJkYjkzNDdjZjNmMTM5OWQ0ZjEx",
+  "git_pull_url": "https://gist.github.com/a4bb2bf44284bdb9347cf3f1399d4f11.git",
+  "git_push_url": "https://gist.github.com/a4bb2bf44284bdb9347cf3f1399d4f11.git",
+  "html_url": "https://gist.github.com/JackLance/a4bb2bf44284bdb9347cf3f1399d4f11",
+  "files": {
+    "readme.txt": {
+      "filename": "readme.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/a4bb2bf44284bdb9347cf3f1399d4f11/raw/d42dec442088e2f67826cc7bcfd2e02883e31dfe/readme.txt",
+      "size": 79,
+      "truncated": false,
+      "content": "Play this game by pasting the script in http://www.puzzlescript.net/editor.html"
+    },
+    "script.txt": {
+      "filename": "script.txt",
+      "type": "text/plain",
+      "language": "Text",
+      "raw_url": "https://gist.githubusercontent.com/JackLance/a4bb2bf44284bdb9347cf3f1399d4f11/raw/6a6bf5d854734dbfe1f486477a6a144a496a5bd2/script.txt",
+      "size": 6317,
+      "truncated": false,
+      "content": "title I'm too far gone\n\n\nzoomscreen 11x11\nrun_rules_on_level_start\n========\nOBJECTS\n========\n\nBackground\nwhite\n\nb1\nwhite #dddddd\n00000\n00010\n00000\n10000\n00000\n\nb2\nwhite #dddddd\n00000\n00000\n00100\n00000\n00000\n\nb3\nwhite #dddddd\n01000\n00000\n00000\n00100\n00000\n\nb4\nwhite #dddddd\n00000\n00000\n00000\n00000\n00001\n\nb5\nwhite #dddddd\n00000\n10000\n00000\n00100\n00000\n\nfloor\ndarkgrey\n\nEe\ndarkgrey yellow\n01110\n01000\n01110\n01000\n01110\n\nNn\ndarkgrey yellow\n00000\n01110\n01010\n01010\n00000\n\nDd\ndarkgrey yellow\n01100\n01010\n01010\n01010\n01100\n\nwall\ngrey\n\nredgen\nred lightgrey\n11011\n11011\n01010\n10001\n11011\n\nbluegen\nblue lightgrey\n11011\n10001\n01010\n11011\n11011\n\nred\nlightred red\n.111.\n10001\n10001\n10001\n.111.\n\nblue\nlightblue blue\n.111.\n10001\n10001\n10001\n.111.\n\nred1\nred darkred\n11111\n10001\n10001\n10001\n11111\n\nblue1\nblue darkblue\n11111\n10001\n10001\n10001\n11111\n\nru\nlightred red\n10001\n.....\n.....\n.....\n.....\n\nrd\nlightred red\n.....\n.....\n.....\n.....\n10001\n\nrr\nlightred red\n....1\n....0\n....0\n....0\n....1\n\nrl\nlightred red\n1....\n0....\n0....\n0....\n1....\n\nbu\nlightblue blue\n10001\n.....\n.....\n.....\n.....\n\nbd\nlightblue blue\n.....\n.....\n.....\n.....\n10001\n\nbr\nlightblue blue\n....1\n....0\n....0\n....0\n....1\n\nbl\nlightblue blue\n1....\n0....\n0....\n0....\n1....\n\nded\nbrown\n.....\n.000.\n.000.\n.000.\n.....\n\nru1\nred darkred\n10001\n.....\n.....\n.....\n.....\n\nrd1\nred darkred\n.....\n.....\n.....\n.....\n10001\n\nrr1\nred darkred\n....1\n....0\n....0\n....0\n....1\n\nrl1\nred darkred\n1....\n0....\n0....\n0....\n1....\n\nbu1\nblue darkblue\n10001\n.....\n.....\n.....\n.....\n\nbd1\nblue darkblue\n.....\n.....\n.....\n.....\n10001\n\nbr1\nblue darkblue\n....1\n....0\n....0\n....0\n....1\n\nbl1\nblue darkblue\n1....\n0....\n0....\n0....\n1....\n\n\nplayer\nyellow\n.....\n.000.\n.000.\n.000.\n.....\n\nsupp\ntransparent\n\nmovee\ntransparent\n\nmoven\ntransparent\n\nmoved\ntransparent\n\nmem\ntransparent\n\n=======\nLEGEND\n=======\n\n. = Background\n# = Wall and floor\nr = redgen and wall\nb = bluegen and wall\n- = floor\np = player and floor\nE = Ee\nN = Nn \nD = Dd \ncol = red or blue\ncol1 = red1 or blue1\nxx = rr or rl or ru or rd or br or bl or bd or bu\nxx1 = rr1 or rl1 or ru1 or rd1 or br1 or bl1 or bd1 or bu1\nend = ee or nn or dd\n! = red and floor\n? = mem\nbx = b1 or b2 or b3 or b4 or b5\n=======\nSOUNDS\n=======\nSFX1 9924503\nSFX2 79825304\nSFX3 17145902\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\nbx\nfloor, red1, blue1, ded\nrr1\nrl1\nru1\nrd1\nbr1\nbl1\nbd1\nbu1\nPlayer, Wall, red, blue, \nrr\nrl\nru\nrd\nbr\nbl\nbd\nbu\nredgen, bluegen, Ee, Nn, Dd\nsupp\nmovee\nmoven\nmoved\nmem\n======\nRULES\n======\n[background no bx] -> [background random bx]\nlate down [redgen|no player no red no blue] -> [redgen|red movee moven moved] SFX1\nlate up [bluegen|no player no red no blue] -> [bluegen|blue movee moven moved] SFX1\n\nlate right[movee][ee|] -> [][|ee]\nlate right[moven][nn|] -> [][|nn]\nlate right[moved][dd|] -> [][|dd]\n\n[> player | red] -> [> player| > red]\n[> player | blue] -> [> player| > blue]\n\n[moving red | red] -> [moving red | moving red]\n+[moving blue | blue] -> [moving blue | moving blue]\n+[moving red1 | red1] -> [moving red1 | moving red1]\n+[moving blue1 | blue1] -> [moving blue1 | moving blue1]\n+[moving red red1] -> [moving red moving red1]\n+[moving blue blue1] -> [moving blue moving blue1]\n+[ red moving red1] -> [moving red moving red1]\n+[ blue moving blue1] -> [moving blue moving blue1]\n+[> red | blue] -> [> red | > blue]\n+[> blue | red] -> [> blue | > red]\n+[> red1 | blue1] -> [> red1 | > blue1]\n+[> blue1 | red1] -> [> blue1 | > red1]\n\n[player moving col1] -> cancel\n[> col | wall] -> cancel\n[> col1 | floor] -> cancel\n\nlate [supp] -> []\nlate [col floor] -> [col supp floor]\nlate [col col1] -> [col supp col1]\nlate [red supp | red] -> [red supp | red supp]\nlate [blue supp | blue] -> [blue supp | blue supp]\n\nlate [red no supp] -> [red1] SFX2\nlate [blue no supp] -> [blue1] SFX2\nlate [player no col1 no floor] -> [ded] SFX3\n\nlate [xx] -> []\nlate [xx1] -> []\n\nlate up [red | red] -> [red ru | red rd]\nlate left [red | red] -> [red rl | red rr]\nlate up [blue | blue] -> [blue bu | blue bd]\nlate left [blue | blue] -> [blue bl | blue br]\nlate up [red1 | red1] -> [red1 ru1 | red1 rd1]\nlate left [red1 | red1] -> [red1 rl1 | red1 rr1]\nlate up [blue1 | blue1] -> [blue1 bu1 | blue1 bd1]\nlate left [blue1 | blue1] -> [blue1 bl1 | blue1 br1]\n\nlate [nn mem][player] -> [nn mem][ded] message YOU'VE GONE TOO FAR (THIS IS NOT A WIN)\n==============\nWINCONDITIONS\n==============\n\nall player on end\nno ded\n=======\nLEVELS\n=======\n\n\nmessage Level 25 of 25\n\n##########################################################################################################################################################################\n#.........................................................................................................................................................................\n#.-------.................................................................................................................................................................\n#.---r---.................................................................................................................................................................\n#.---!---E................................................................................................................................................................\n#.-----p-N...............................................................................................................................................................?\n#.-------D................................................................................................................................................................\n#.---b---.................................................................................................................................................................\n#.-------.................................................................................................................................................................\n#.........................................................................................................................................................................\n##########################################################################################################################################################################\n\n\n"
+    }
+  },
+  "public": true,
+  "created_at": "2019-05-09T02:49:34Z",
+  "updated_at": "2019-05-09T02:49:34Z",
+  "description": "I'm too far gone (PuzzleScript Script)",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/a4bb2bf44284bdb9347cf3f1399d4f11/comments",
+  "owner": {
+    "login": "JackLance",
+    "id": 23206203,
+    "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/JackLance",
+    "html_url": "https://github.com/JackLance",
+    "followers_url": "https://api.github.com/users/JackLance/followers",
+    "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+    "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+    "organizations_url": "https://api.github.com/users/JackLance/orgs",
+    "repos_url": "https://api.github.com/users/JackLance/repos",
+    "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/JackLance/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "JackLance",
+        "id": 23206203,
+        "node_id": "MDQ6VXNlcjIzMjA2MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23206203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/JackLance",
+        "html_url": "https://github.com/JackLance",
+        "followers_url": "https://api.github.com/users/JackLance/followers",
+        "following_url": "https://api.github.com/users/JackLance/following{/other_user}",
+        "gists_url": "https://api.github.com/users/JackLance/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/JackLance/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/JackLance/subscriptions",
+        "organizations_url": "https://api.github.com/users/JackLance/orgs",
+        "repos_url": "https://api.github.com/users/JackLance/repos",
+        "events_url": "https://api.github.com/users/JackLance/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/JackLance/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "e4ca4b719ed308fe1d5406dcede14cbeb032363e",
+      "committed_at": "2019-05-09T02:49:33Z",
+      "change_status": {
+        "total": 429,
+        "additions": 429,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/a4bb2bf44284bdb9347cf3f1399d4f11/e4ca4b719ed308fe1d5406dcede14cbeb032363e"
+    }
+  ],
+  "truncated": false
+}
