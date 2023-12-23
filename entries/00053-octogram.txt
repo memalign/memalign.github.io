@@ -27,7 +27,7 @@ More resources:
 - A [Link:https://joelthefox.github.io/2023-05-04-Jack-Lance/]blog post[/Link] about Jack's work
 - Another [Link:https://www.puzzlesforprogress.net/post/the-puzzling-xlnc-of-jack-lance-1997-2023]blog post[/Link] about Jack's work
 - [Link:/m/octogram/jacklance.github.io.zip]Backup[/Link] of jacklance.github.io
-  - Due to some technical details of PuzzleScript, none of his PuzzleScript games are in this repo. Instead, they are stored as GitHub gists. I've grabbed a separate backup of every gist linked to by his games page for posterity.
+  - Due to some technical details of PuzzleScript, none of his PuzzleScript games are in this repo. Instead, they are stored as GitHub gists. I've grabbed a separate [Link:https://github.com/memalign/memalign.github.io/tree/master/m/octogram]backup[/Link] of every gist linked to by his games page for posterity.
 - A YouTube [Link:https://www.youtube.com/watch?v=v_xdEIPZ2Po]video[/Link] where Jonathan Blow mentions Jack's death. "...he was 25... he was already one of the best game designers in the world and was on track to be even better"
 - [Link:https://www.douglassfh.com/obituary/zachary-polansky]Obituary[/Link] under his real name
 
