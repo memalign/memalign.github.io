@@ -61,6 +61,7 @@
    - https://cheesemug.itch.io/breakthrough
    - https://joeamericagayms.itch.io/rpg-scoll-1k
    - https://unikotoast.itch.io/buns-bunny-survivor
+   - https://tommulgrew.itch.io/whiplash-taxi-co
 
 - JavaScript games:
   - https://github.com/DennisBengs/envisionator
@@ -257,6 +258,7 @@ void main() {
 
 - List of tools for making IF:
   https://adventuron.io/
+    - Games made with Adventuron: https://itch.io/c/790679/adventuron-games
   Quest (and its peer made by the same group)
   Twine
   TADS
@@ -264,6 +266,7 @@ void main() {
   Linus Akesson’s system
   Custom engine (like mine) 
   Swords
+  https://itch.io/tools/tag-interactive-fiction
   Browse r/interactivefiction for others 
   Look at development systems section: https://en.wikipedia.org/wiki/Interactive_fiction
   https://tajmone.github.io/awesome-interactive-fiction/
@@ -274,6 +277,7 @@ void main() {
   https://emshort.blog/2021/03/31/end-of-march-link-assortment-5/
   
   - Also check out Gruescript:
+    - Makes LAIF, example: https://versificator.itch.io/the-party-line
     https://versificator.itch.io/gruescript
     https://ifdb.org/viewgame?id=zke2u3fliyl2151
     https://intfiction.org/t/announce-gruescript/52104/54
