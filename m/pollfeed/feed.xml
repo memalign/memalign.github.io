@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>Diff Feed</title>
+<link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
+<id>https://memalign.github.io/pollfeed/feed.xml</id>
+<updated>2024-01-05T09:37:15Z</updated>
+<rights>Copyright © 2024, memalign</rights>
+<icon>https://memalign.github.io/apple-touch-icon.png</icon>
+<logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 01/05/24 01:37</title>
+<published>2024-01-05T09:37:15Z</published>
+<updated>2024-01-05T09:37:15Z</updated>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<img
+src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/meteoplanet/screenshot.gif"
+  alt="METEO PLANET"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">METEO PLANET</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          <a
+            href="https://abagames.github.io/crisp-game-lib-11-games/?meteoplanet"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">Browser</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+
+]]>
+</content>
+</entry>
+
+<entry>
+<title>asahi-net.or.jp at 01/05/24 01:35</title>
+<published>2024-01-05T09:35:43Z</published>
+<updated>2024-01-05T09:35:43Z</updated>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<img
+src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/pakupaku/screenshot.gif"
+  alt="PAKU PAKU"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">PAKU PAKU</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          <a
+            href="https://abagames.github.io/crisp-game-lib-11-games/?pakupaku"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">Browser</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+
+]]>
+</content>
+</entry>
+
+</feed>
