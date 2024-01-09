@@ -2,6 +2,10 @@
   - Integrate Spotify and/or Apple Music players
   - RSS feed for new additions
   - Filter/search on the page
+  - Similar Songs Jukebox: use Spotify, Apple Music, or YouTube to play similar songs back-to-back
+
+- Bret Victor's Magic Ink: http://worrydream.com/MagicInk/
+  - The good parts: information software as graphic design. The case studies: Amazon, Southwest. Using sentences to let the user change settings in the BART widget.
 
 - Backing everything up on SSDs, storing them in a fireproof folder, using rsync
 - JavaScriptCore, Scriptable, little utilities, useful for a Swiss Army knife app
@@ -40,8 +44,6 @@
 - Make memes, mock up UI in Keynote
 
 - Make font in js: https://brutalita.com/
-
-- Similar Songs Jukebox: use Spotify, Apple Music, or YouTube to play similar songs back-to-back
   
 - More PICO-8 games
   - Holiday Jumper by zep: https://www.lexaloffle.com/bbs/?tid=45856
@@ -287,3 +289,6 @@ void main() {
     https://ifdb.org/search?searchbar=seltani
     http://seltani.net/about
   
+  - More LAIF tools
+    - http://ratfactor.com/hiss/log
+    - http://nitku.net/blog/2014/11/introducing-texture/
