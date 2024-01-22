@@ -4,6 +4,41 @@
   - Filter/search on the page
   - Similar Songs Jukebox: use Spotify, Apple Music, or YouTube to play similar songs back-to-back
 
+- Cool web apps
+  - https://github.com/vikrum/kidpix
+  - White noise PWAs
+    - https://github.com/ralexander-phi/relax
+    - https://ambiph.one/
+
+- JavaScript games:
+  - https://github.com/DennisBengs/envisionator
+    - https://donitz.itch.io/envisionator
+    - This is the game with a robot you control by giving movement commands
+  - https://github.com/DennisBengs/retrohaunt (by the same guy as Envisionator)
+  - http://lalo.li/ddd/
+  - http://lalo.li/lsd/
+  - Chroma Incident: https://js13kgames.com/entries/the-chroma-incident https://github.com/Rybar/js13k2018
+    - https://js13kgames.com/games/greeble/index.html
+      - I like the idea of a robot needing to rebuild itself but the implementation is buggy (too easy to get stuck and have to reload) and the game feels too incomplete
+  - Space Garden: https://js13kgames.com/entries/space-garden ; Relaxing, a lot more fun than Asteroids, but no win/end condition
+  - https://www.lessmilk.com/almost-pong/
+  - Simplified Quake: https://phoboslab.org/q1k3/
+    - Typing game by the same developer: https://zty.pe/
+  - https://osgameclones.com/?tag=javascript
+  - LodeRunner: https://loderunnerwebgame.com/LodeRunner/
+  - SkiFree: https://github.com/basicallydan/skifree.js
+  - Toddler games (for example: find the pig) https://alexsci.com/games/
+  - https://abagames.github.io/crisp-game-lib-11-games/?pakupaku
+  - https://abagames.github.io/crisp-game-lib-11-games/?invincibleman
+
+- More trippy art:
+  - https://mobile.twitter.com/zozuar/status/1612919479582728232
+    - https://twigl.app/?ol=true&mode=7&source=for(float%20i,g,e,R,S%3Bi%2B%2B%3C1e2%3Bo.rgb%2B%3Dhsv(.4-.02/R,(e%3Dmax(e*R*1e4,.7)),.03/exp(e)))%7BS%3D1.%3Bvec3%20p%3Dvec3((FC.xy/r-.5)*g,g-.3)-i/2e5%3Bp.yz*%3Drotate2D(.3)%3Bfor(p%3Dvec3(log(R%3Dlength(p))-t,e%3Dasin(-p.z/R)-.1/R,atan(p.x,p.y)*3.)%3BS%3C1e2%3BS%2B%3DS)e%2B%3Dpow(abs(dot(sin(p.yxz*S),cos(p*S))),.2)/S%3Bg%2B%3De*R*.1%3B%7D
+  - https://genart.social/@ylegall/109905874394139047
+  - https://bleuje.com/randomanimations/
+  - https://bleuje.com/animationsite/2021_2/
+
+
 - Bret Victor's Magic Ink: http://worrydream.com/MagicInk/
   - The good parts: information software as graphic design. The case studies: Amazon, Southwest. Using sentences to let the user change settings in the BART widget.
 
@@ -64,20 +99,6 @@
    - https://joeamericagayms.itch.io/rpg-scoll-1k
    - https://unikotoast.itch.io/buns-bunny-survivor
    - https://tommulgrew.itch.io/whiplash-taxi-co
-
-- JavaScript games:
-  - https://github.com/DennisBengs/envisionator
-    - https://donitz.itch.io/envisionator
-    - This is the game with a robot you control by giving movement commands
-  - https://github.com/DennisBengs/retrohaunt (by the same guy as Envisionator)
-  - http://lalo.li/ddd/
-  - http://lalo.li/lsd/
-  - Chroma Incident: https://js13kgames.com/entries/the-chroma-incident https://github.com/Rybar/js13k2018
-    - https://js13kgames.com/games/greeble/index.html
-      - I like the idea of a robot needing to rebuild itself but the implementation is buggy (too easy to get stuck and have to reload) and the game feels too incomplete
-  - Space Garden: https://js13kgames.com/entries/space-garden ; Relaxing, a lot more fun than Asteroids, but no win/end condition
-  - https://www.lessmilk.com/almost-pong/
-  - Simplified Quake: https://phoboslab.org/q1k3/
   
 - https://1j01.github.io/pbp2d/
   - New URL: https://1j01.github.io/pbj-sandbox/
@@ -88,6 +109,11 @@
   - https://github.com/iechevarria/ray-tracer-js
   - add a rectangle (which I think just combines two triangles - see how the included scene makes its walls)
   - add a more complex shape: cylinder or torus
+
+- Ray marching: https://ch-st.de/its-ray-marching-march/
+  - Library of SDFs: http://iquilezles.org/articles/distfunctions/
+  - https://www.rykap.com/2020/09/23/distance-fields/
+
 
 - https://freeicons.io/
 
@@ -251,11 +277,6 @@ void main() {
 ===
 [/Code]
 
-- More trippy art:
-  - https://mobile.twitter.com/zozuar/status/1612919479582728232
-    - https://twigl.app/?ol=true&mode=7&source=for(float%20i,g,e,R,S%3Bi%2B%2B%3C1e2%3Bo.rgb%2B%3Dhsv(.4-.02/R,(e%3Dmax(e*R*1e4,.7)),.03/exp(e)))%7BS%3D1.%3Bvec3%20p%3Dvec3((FC.xy/r-.5)*g,g-.3)-i/2e5%3Bp.yz*%3Drotate2D(.3)%3Bfor(p%3Dvec3(log(R%3Dlength(p))-t,e%3Dasin(-p.z/R)-.1/R,atan(p.x,p.y)*3.)%3BS%3C1e2%3BS%2B%3DS)e%2B%3Dpow(abs(dot(sin(p.yxz*S),cos(p*S))),.2)/S%3Bg%2B%3De*R*.1%3B%7D
-  - https://genart.social/@ylegall/109905874394139047
-
 
 
 - List of tools for making IF:
@@ -292,3 +313,4 @@ void main() {
   - More LAIF tools
     - http://ratfactor.com/hiss/log
     - http://nitku.net/blog/2014/11/introducing-texture/
+    - Maybe: https://www.interactive-story.com/is/?login

@@ -1,5 +1,12 @@
 - Interesting code snippets:
   - Seedable random number generator: https://github.com/phoboslab/underrun/blob/master/source/random.js
+  
+  I searched for the 0x49616E42 constant to figure out the origins of this function. That led me to this:
+- https://stackoverflow.com/questions/1046714/what-is-a-good-random-number-generator-for-a-game
+  - Which links to: https://web.archive.org/web/20091209122817/http://ianbullard.squarespace.com/journal/2009/4/28/why-you-should-never-use-rand.html
+  - And this, which is seemingly from the author of the original function: http://www.flipcode.com/archives/07-15-2002.shtml
+
+
 [Code]
 var rand_high, rand_low;
 
