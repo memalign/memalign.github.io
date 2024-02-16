@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="UnitTests.js"></script>
+<script src="Utilities.js"></script>
+<script src="PCEImage.js"></script>
+<script src="GameRand.js"></script>
+<script src="main.js"></script>
+
+<script>
+
+window.onload = function () {
+
+  let ut = new UnitTests()
+  
+  try {
+    ut.run()
+  } catch(err) {
+      console.log("unitTests.html caught exception with stack:\n"+err.stack)
+    throw err
+  } finally {
+    let outputDiv = document.getElementById("testOutput")
+    let content = document.createTextNode(MALog.logs.join("\n"))
+    outputDiv.appendChild(content)
+  }
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput"></div>
+</pre>
+</body>
+
+</html>

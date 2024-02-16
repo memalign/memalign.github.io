@@ -1,0 +1,265 @@
+body {
+  background: white;
+  color: black;
+  font-size: 11pt;
+  margin: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+  touch-action: manipulation;
+  user-scalable: no;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-callout: none;
+  -webkit-user-drag: none;
+  -webkit-user-modify: none;
+  -webkit-highlight: none;
+}
+
+img {
+  border-radius: 3px;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.content {
+  margin: auto;
+  max-width: 850px;
+  text-align: center;
+}
+
+#fullscreenBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0;
+  background: white;
+}
+
+#c {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-style: italic;
+  text-indent: 0;
+  max-width: 100%;
+  max-height: 70vh; /* 70% of viewport height */
+  height: auto;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 3px;
+}
+
+.invertedCanvas {
+  filter: invert(0.93);
+}
+
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+.copied-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* let user interaction pass through */
+  background-color: rgba(255, 255, 255, 0.9);
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: center;
+  border-radius: 3px;
+}
+
+table.replayTable {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-callout: none;
+  -webkit-user-drag: none;
+  -webkit-user-modify: none;
+  -webkit-highlight: none;
+}
+
+.trophyColumn {
+  vertical-align: center;
+  text-align: right;
+}
+
+.scoreColumn {
+  vertical-align: top;
+  text-align: right;
+  border-right: 1px solid #ddd;
+  width: 1%; /* Allow content to determine width */
+  white-space: nowrap; /* Prevent text from wrapping */
+  padding: 8px;
+}
+
+.nameColumn {
+  vertical-align: top;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.timeColumn {
+  vertical-align: top;
+  text-align: center;
+  width: 1%; /* Allow content to determine width */
+  white-space: nowrap; /* Prevent text from wrapping */
+  padding: 8px;
+}
+
+.actionsColumn {
+  text-align: center;
+  position: relative;
+  width: 1%; /* Allow content to determine width */
+  white-space: nowrap; /* Prevent text from wrapping */
+  padding: 4px;
+}
+
+.nameSpan {
+  height: 100%;
+}
+
+.actionSpanContainer {
+  margin-left: auto;
+  text-align: right;
+}
+
+.actionSpan {
+  display: inline-block;
+  position: relative;
+}
+
+.replayTableBottomWideCell {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+}
+
+.bottomWideCellDiv {
+  position: relative;
+  text-align: center;
+}
+
+.deleteAllDiv {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.showMoreDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.disabledLink {
+  text-decoration: none;
+  color: #999999;
+  pointer-events: none;
+}
+
+#musicDiv {
+  margin-top: 20px;
+}
+
+#currentReplayDiv {
+  margin-top: 20px;
+}
+
+.nameInputDiv {
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+.replayTableTitle {
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 40px;
+}
+
+.replayTableTitle h4 {
+  margin: 0;
+}
+
+@media all and (orientation:portrait) {
+
+body, p, li { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:17.000000px + 1.0vw; font-weight: normal; }
+
+h3, h4 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:20.000000px + 1.0vw; font-weight: bold; }
+
+}
+
+
+@media all and (orientation:landscape) {
+
+body, p, li { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:8.500000px + 1.0vw; font-weight: normal; }
+
+h3, h4 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:10.000000px + 1.0vw; font-weight: bold; }
+
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #121212;
+    color: #eee;
+  }
+
+  #fullscreenBackground {
+    background: #121212;
+  }
+
+  .disabledLink {
+    color: #666666;
+  }
+
+  input[type="text"], textarea {
+    background-color : #121212; 
+    color: #eee;
+  }
+}
+

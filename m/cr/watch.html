@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CaveRibbon</title>
+  <link rel="stylesheet" href="style.css" charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="caveribbon, cave ribbon, sfcave, palmos, palm os, tap toy, toy, javascript, memalign">
+    <meta name="description" content="CaveRibbon - tap to swim and dodge to get a high score. Love letter to Palm OS SFCave.">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="CaveRibbon" />
+    <meta property="og:description" content="Tap to swim and dodge to get a high score. Love letter to Palm OS SFCave.">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/cr/CaveRibbon.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://memalign.github.io/m/cr/index.html" />
+    <meta name="twitter:title" content="CaveRibbon">
+    <meta name="twitter:description" content="Tap to swim and dodge to get a high score. Love letter to Palm OS SFCave.">
+    <meta name="twitter:image" content="https://memalign.github.io/m/cr/CaveRibbon.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/m/cr/favicon-32x32.png">
+
+    <link rel="apple-touch-icon" sizes="16x16" href="PWAImages/ios/16.png">
+    <link rel="apple-touch-icon" sizes="20x20" href="PWAImages/ios/20.png">
+    <link rel="apple-touch-icon" sizes="29x29" href="PWAImages/ios/29.png">
+    <link rel="apple-touch-icon" sizes="32x32" href="PWAImages/ios/32.png">
+    <link rel="apple-touch-icon" sizes="40x40" href="PWAImages/ios/40.png">
+    <link rel="apple-touch-icon" sizes="50x50" href="PWAImages/ios/50.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="PWAImages/ios/57.png">
+    <link rel="apple-touch-icon" sizes="58x58" href="PWAImages/ios/58.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="PWAImages/ios/60.png">
+    <link rel="apple-touch-icon" sizes="64x64" href="PWAImages/ios/64.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="PWAImages/ios/72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="PWAImages/ios/76.png">
+    <link rel="apple-touch-icon" sizes="80x80" href="PWAImages/ios/80.png">
+    <link rel="apple-touch-icon" sizes="87x87" href="PWAImages/ios/87.png">
+    <link rel="apple-touch-icon" sizes="100x100" href="PWAImages/ios/100.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="PWAImages/ios/114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="PWAImages/ios/120.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="PWAImages/ios/128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="PWAImages/ios/144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="PWAImages/ios/152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="PWAImages/ios/167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="PWAImages/ios/180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="PWAImages/ios/192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="PWAImages/ios/256.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="PWAImages/ios/512.png">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="PWAImages/ios/1024.png">
+    <link rel="manifest" href="manifest.json">
+
+
+  <script src="Utilities.js"></script>
+  <script src="GameRand.js"></script>
+  <script src="SoundEffects.js"></script>
+  <script src="PCEImage.js"></script>
+  <script src="Images.js"></script>
+  <script src="highScores.js"></script>
+  <script src="main.js"></script>
+  <script src="watchmode.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('CacheServiceWorker.js').then((registration) => {
+        console.log('Service Worker registered with scope:', registration.scope)
+      }).catch((error) => {
+        console.error('Service Worker registration failed:', error)
+      })
+    }
+
+
+    window.onload = function() {
+      caveRibbonMain()
+    }
+  </script>
+</head>
+<body>
+  <div class='bg'></div>
+  <canvas id='fullscreenBackground'></canvas>
+  <div class='content unselectable'>
+    <nav>
+      <div class="home">
+        <a href="https://memalign.github.io">memalign.github.io</a>
+      </div>
+      <div class="about">
+        <a href="https://memalign.github.io/p/caveribbon.html">about</a>
+      </div>
+    </nav>
+    <canvas id="c" width="500" height="640"></canvas>
+    <div id="musicDiv"></div>
+    <div id="currentReplayDiv" class="replay-list"></div>
+    <div id="replayDiv"></div>
+    <div id="highScoresDiv"></div>
+  </div>
+</body>
+</html>
