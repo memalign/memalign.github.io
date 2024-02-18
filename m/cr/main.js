@@ -748,11 +748,11 @@ class MAGameRenderer {
     c.style.height = c.height + "px"
     let ctx = c.getContext("2d")
 
-    let scale = window.devicePixelRatio
+    // Using this scale looks right to me across iPad/Mac (where devicePixelRatio is 2) and iPhone/Android phone (where devicePixelRatio is 3)
+    let scale = 2 // window.devicePixelRatio
     c.width = c.width * scale
     c.height = c.height * scale
     ctx.scale(scale, scale)
-
 
     ctx.fillStyle = "black"
 
