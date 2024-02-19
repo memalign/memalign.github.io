@@ -1,0 +1,61 @@
+Title: CaveRibbon
+Date: 2/19/2024
+Tags: Programming, Games
+[Image:/m/cr/CaveRibbon-gameplay.png]
+
+Introducing my latest game, playable right in your web browser: [Link:/m/cr/index.html]CaveRibbon[/Link]
+
+CaveRibbon is a one-button game where you control a ribbon gliding through a shrinking cavern. Avoid the walls and obstacles as long as you can. Compete with yourself and your friends by sharing a replay. Submit your high scores to get into the hall of fame!
+
+CaveRibbon can be saved to your home screen as a PWA (Progressive Web App).
+
+
+This game is a tribute to [Link:http://www.sunflat.net]Sunflat[/Link]'s SFCave for Palm OS. You can play the [Link:https://archive.org/details/palm3_sfcave]original[/Link] on archive.org.
+
+In fact, it was archive.org that stirred up my nostalgia [Link:https://www.theverge.com/2022/11/25/23478396/internet-archive-palm-pilot-emulation-games-apps-dope-wars]over a year ago[/Link] by publishing a [Link:https://archive.org/details/softwarelibrary_palm]collection of 565 Palm OS apps[/Link], all usable on the web thanks to a Palm OS emulator.
+
+When I was in middle school, I would play SFCave on a Palm m130 at night when I was supposed to go to bed. My dad and I had an ongoing competition to see who could get the highest score.
+
+This was my inspiration to add the replay and share features which let you replay the exact same round, with your previous playthrough visible as a head-to-head competitor.
+
+
+Some technical details:
+
+- I used [Link:/m/pceimage/index.html]PCEImage Editor[/Link] to create the pixel font and many graphics. I created the PCEImage format and tools so I could simply store and edit graphics as ASCII art. See them [Link:/m/cr/Images.js]here[/Link].
+
+- This game is entirely static files. There's no server-side backend. To create replay URLs, I need to serialize the entire game state into the URL itself. This proved to be challenging because there are URL size limits in browsers and messaging apps. In my first approach, I wrote a bunch of code to serialize all of the wall, obstacle, and player positions. This proved to be too much data. I came up with a few tricks to significantly shrink the data:
+
+  - I compress player positions lossily and then interpolate them as part of deserialization. I keep only positions at the top of a peak, bottom of a valley, and when the user is close to an obstacle. I only have to keep ~4% of the original data.
+
+  - I use a deterministic random number generator called [Link:/m/cr/GameRand.js]GameRand[/Link]. As long as I reuse the random number generator's seed and don't change the code to use random numbers differently I will get the exact same wall and obstacle positions in a replay.
+
+    - I first came across GameRand in [Link:https://phoboslab.org/]phoboslab[/Link]'s game [Link:https://phoboslab.org/underrun/]underrun[/Link] ([Link:https://github.com/phoboslab/underrun/blob/master/source/random.js]source[/Link]).
+
+    - I searched for the constant 0x49616E42 to find the origins of this function. This led me down a rabbit hole: a [Link:https://stackoverflow.com/questions/1046714/what-is-a-good-random-number-generator-for-a-game]StackOverflow post[/Link] which links to a [Link:https://web.archive.org/web/20091209122817/http://ianbullard.squarespace.com/journal/2009/4/28/why-you-should-never-use-rand.html]blog post[/Link] (now only available on archive.org) which links to this [Link:http://www.flipcode.com/archives/07-15-2002.shtml]post from 2002[/Link] introducing a faster rand function by Stephan Schaem, who appears to be the original author.
+
+  - I couldn't just serialize the replay as JSON. That's not nearly compact enough (every digit is stored as a character!). Instead, I packed raw bytes into a buffer and serialized that into Base64. I did some tweaks to squeeze some additional efficiency (such as replacing characters that need to be percent-encoded in URLs).
+
+  - Replay URLs for scores of 700 or higher get a nice image preview (Open Graph image) that includes the score. I generated all of these files statically using PCEImage and a script.
+
+- This is the first project where I've made use of an LLM to help. I used ChatGPT and it had great positive impact:
+
+  - It helped me do some things faster, such as writing boilerplate or example code that I would have had to write myself while wading through documentation.
+
+  - It helped me do some things I wasn't willing to do myself. I don't have time to learn the right way to get specific UI behaviors using HTML and CSS. I would have compromised the UI design to fit within my current skills. With ChatGPT's help, I was able to get exactly what I wanted much faster than having to learn how to do this on my own.
+
+  - In general, I'm energized to work on more projects with these tools. I found the accuracy to be far above what I expected. It's more than good enough for a non-mission-critical side project.
+
+- I'm trying out some design ideas from [Link:https://worrydream.com/]Bret Victor[/Link]'s [Link:https://worrydream.com/MagicInk/]Magic Ink paper[/Link] ([Link:/m/MagicInk.pdf]backup[/Link]). My favorite insights:
+
+  - Most software design should focus on information graphic design, not interaction design
+
+  - The case study of Amazon's book listings drives that point home
+
+  - Try using sentences to describe settings rather than have a list of toggles (illustrated with his BART widget). I use this concept for sound effects settings in CaveRibbon.
+
+  - Instead of requiring interaction, make decisions for the user based on context. I use this idea in CaveRibbon by fading out the rest of the UI during gameplay instead of having a "full screen" button.
+
+
+See also:
+
+- Sunflat's latest games for [Link:http://www.sunflat.net/iphone/]iOS[/Link] and [Link:http://www.sunflat.net/android/]Android[/Link]

@@ -1,3 +1,7 @@
+CaveRibbon
+- Image: /m/cr/CaveRibbon.png
+- /m/cr/index.html
+
 Fireworks Tap Toy
 - Image: /m/fireworks/fireworks.png
 - /m/fireworks/index.html

@@ -5,10 +5,94 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2023-12-23T00:00:00-08:00</updated>
-<rights>Copyright © 2023, memalign</rights>
+<updated>2024-02-19T00:00:00-08:00</updated>
+<rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>CaveRibbon</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/caveribbon.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/caveribbon.html" />
+<id>https://memalign.github.io/p/caveribbon.html</id>
+<published>2024-02-19T00:00:00-08:00</published>
+<updated>2024-02-19T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/caveribbon.html'>CaveRibbon</a>
+</h2>
+</div>
+<img src="/m/cr/CaveRibbon-gameplay.png">
+<div id='postdate'>Posted on 2/19/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Games</a></div>
+Introducing my latest game, playable right in your web browser: <a href="/m/cr/index.html">CaveRibbon</a><br />
+<br />
+CaveRibbon is a one-button game where you control a ribbon gliding through a shrinking cavern. Avoid the walls and obstacles as long as you can. Compete with yourself and your friends by sharing a replay. Submit your high scores to get into the hall of fame!<br />
+<br />
+CaveRibbon can be saved to your home screen as a PWA (Progressive Web App).<br />
+<br />
+<br />
+This game is a tribute to <a href="http://www.sunflat.net">Sunflat</a>'s SFCave for Palm OS. You can play the <a href="https://archive.org/details/palm3_sfcave">original</a> on archive.org.<br />
+<br />
+In fact, it was archive.org that stirred up my nostalgia <a href="https://www.theverge.com/2022/11/25/23478396/internet-archive-palm-pilot-emulation-games-apps-dope-wars">over a year ago</a> by publishing a <a href="https://archive.org/details/softwarelibrary_palm">collection of 565 Palm OS apps</a>, all usable on the web thanks to a Palm OS emulator.<br />
+<br />
+When I was in middle school, I would play SFCave on a Palm m130 at night when I was supposed to go to bed. My dad and I had an ongoing competition to see who could get the highest score.<br />
+<br />
+This was my inspiration to add the replay and share features which let you replay the exact same round, with your previous playthrough visible as a head-to-head competitor.<br />
+<br />
+<br />
+Some technical details:<br />
+<br />
+- I used <a href="/m/pceimage/index.html">PCEImage Editor</a> to create the pixel font and many graphics. I created the PCEImage format and tools so I could simply store and edit graphics as ASCII art. See them <a href="/m/cr/Images.js">here</a>.<br />
+<br />
+- This game is entirely static files. There's no server-side backend. To create replay URLs, I need to serialize the entire game state into the URL itself. This proved to be challenging because there are URL size limits in browsers and messaging apps. In my first approach, I wrote a bunch of code to serialize all of the wall, obstacle, and player positions. This proved to be too much data. I came up with a few tricks to significantly shrink the data:<br />
+<br />
+&nbsp;&nbsp;- I compress player positions lossily and then interpolate them as part of deserialization. I keep only positions at the top of a peak, bottom of a valley, and when the user is close to an obstacle. I only have to keep ~4% of the original data.<br />
+<br />
+&nbsp;&nbsp;- I use a deterministic random number generator called <a href="/m/cr/GameRand.js">GameRand</a>. As long as I reuse the random number generator's seed and don't change the code to use random numbers differently I will get the exact same wall and obstacle positions in a replay.<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- I first came across GameRand in <a href="https://phoboslab.org/">phoboslab</a>'s game <a href="https://phoboslab.org/underrun/">underrun</a> (<a href="https://github.com/phoboslab/underrun/blob/master/source/random.js">source</a>).<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- I searched for the constant 0x49616E42 to find the origins of this function. This led me down a rabbit hole: a <a href="https://stackoverflow.com/questions/1046714/what-is-a-good-random-number-generator-for-a-game">StackOverflow post</a> which links to a <a href="https://web.archive.org/web/20091209122817/http://ianbullard.squarespace.com/journal/2009/4/28/why-you-should-never-use-rand.html">blog post</a> (now only available on archive.org) which links to this <a href="http://www.flipcode.com/archives/07-15-2002.shtml">post from 2002</a> introducing a faster rand function by Stephan Schaem, who appears to be the original author.<br />
+<br />
+&nbsp;&nbsp;- I couldn't just serialize the replay as JSON. That's not nearly compact enough (every digit is stored as a character!). Instead, I packed raw bytes into a buffer and serialized that into Base64. I did some tweaks to squeeze some additional efficiency (such as replacing characters that need to be percent-encoded in URLs).<br />
+<br />
+&nbsp;&nbsp;- Replay URLs for scores of 700 or higher get a nice image preview (Open Graph image) that includes the score. I generated all of these files statically using PCEImage and a script.<br />
+<br />
+- This is the first project where I've made use of an LLM to help. I used ChatGPT and it had great positive impact:<br />
+<br />
+&nbsp;&nbsp;- It helped me do some things faster, such as writing boilerplate or example code that I would have had to write myself while wading through documentation.<br />
+<br />
+&nbsp;&nbsp;- It helped me do some things I wasn't willing to do myself. I don't have time to learn the right way to get specific UI behaviors using HTML and CSS. I would have compromised the UI design to fit within my current skills. With ChatGPT's help, I was able to get exactly what I wanted much faster than having to learn how to do this on my own.<br />
+<br />
+&nbsp;&nbsp;- In general, I'm energized to work on more projects with these tools. I found the accuracy to be far above what I expected. It's more than good enough for a non-mission-critical side project.<br />
+<br />
+- I'm trying out some design ideas from <a href="https://worrydream.com/">Bret Victor</a>'s <a href="https://worrydream.com/MagicInk/">Magic Ink paper</a> (<a href="/m/MagicInk.pdf">backup</a>). My favorite insights:<br />
+<br />
+&nbsp;&nbsp;- Most software design should focus on information graphic design, not interaction design<br />
+<br />
+&nbsp;&nbsp;- The case study of Amazon's book listings drives that point home<br />
+<br />
+&nbsp;&nbsp;- Try using sentences to describe settings rather than have a list of toggles (illustrated with his BART widget). I use this concept for sound effects settings in CaveRibbon.<br />
+<br />
+&nbsp;&nbsp;- Instead of requiring interaction, make decisions for the user based on context. I use this idea in CaveRibbon by fading out the rest of the UI during gameplay instead of having a "full screen" button.<br />
+<br />
+<br />
+See also:<br />
+<br />
+- Sunflat's latest games for <a href="http://www.sunflat.net/iphone/">iOS</a> and <a href="http://www.sunflat.net/android/">Android</a><br />
+
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Octogram</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/octogram.html" />
@@ -3366,47 +3450,6 @@ Back when I discovered the website about <a href="/p/clamps.html">clamps</a>, I 
 <br />
 You can check it out <a href="https://www.teamten.com/lawrence/writings/coding-machines/">here</a>.<br />
 (My backup of the story is <a href="/m/coding-machines/index.html">here</a>.)<br />
-
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>Clamps</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/clamps.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/clamps.html" />
-<id>https://memalign.github.io/p/clamps.html</id>
-<published>2020-11-02T00:00:00-08:00</published>
-<updated>2020-11-02T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/clamps.html'>Clamps</a>
-</h2>
-</div>
-<img src="/m/clamps/clamps.jpg">
-<div id='postdate'>Posted on 11/2/2020<br />
-Tags: <a href='/tags.html'>Leisure</a></div>
-Many years ago, I stumbled upon some cool personal websites made by software engineers back in the 1990s/early-2000s.<br />
-<br />
-I liked the websites because they shared interesting projects, essays, stories, and pictures. Some of them peppered in personality and humor unique to the author.<br />
-<br />
-In a way, they inspired me to eventually make this website.<br />
-<br />
-A simple yet intruiging post was about clamps. You can find my backup of the page <a href="/m/clamps/index.html">here</a>.<br />
-<br />
-It's got some humor (including that poor Pillsbury doughboy) and it opened my eyes to how handy clamps can be around the home and office. (By the way, I also find binder clips and zip ties to be useful fasteners for quick projects/fixes!)<br />
-<br />
-This is a glimpse into a more fun era of the web.<br />
-<br />
-The author eventually took the website down and replaced it with a much more professional one. Normally I would give full attribution but since he removed all the content, I decided to scrub his full name and web address from this post and my backup of the page. I'm assuming he intentionally wants to have a less personal presence on the web. (Drew, if you want attribution or want me to remove this post, please let me know via GitHub.)<br />
 
 </div>
 
