@@ -166,7 +166,7 @@ Fiction:
 - Learning to Be Me
     - Unsettling and thought-provoking short story by Greg Egan. It could be a Black Mirror episode.
     
-- [Link:https://qntm.org/mmacevedo]Lena[/Link]
+- [Link:https://qntm.org/mmacevedo]Lena[/Link] by qntm
     - Fictional Wikipedia article about the first executable image of a human brain. In the same vein as Greg Egan's work and Black Mirror.
 
 - The Little Prince by Antoine de Saint-Exupéry
@@ -187,6 +187,8 @@ Fiction:
     - Really resonated with my angsty teenager self
 
 - Permutation City by Greg Egan
+
+- [Link:https://qntm.org/ra]Ra[/Link] by qntm
 
 - The Red Pony by John Steinbeck
 
