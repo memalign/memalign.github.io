@@ -42,6 +42,14 @@ class PCEImage {
     }
   }
 
+  imageStrLineAtPixelRow(pixelRow) {
+    if (pixelRow >= this.height) {
+      return null
+    }
+
+    return this.imageStrLines[this.firstPixelLineIndex + pixelRow]
+  }
+
   usesTransparency() {
     let ret = false
 
@@ -92,6 +100,109 @@ class PCEImage {
         ctx.fillRect(xOffset+pixelXOffset, yOffset+pixelYOffset, pixelDimension, pixelDimension)
       }
     }
+  }
+
+  // Returns base64 data URL
+  generatePNG(scale) {
+    let canvas = document.createElement("canvas")
+    canvas.width = this.width * scale
+    canvas.height = this.height * scale
+
+    let ctx = canvas.getContext("2d")
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    this.drawInCanvas(canvas, scale)
+
+    return canvas.toDataURL()
+  }
+
+  // Returns a new PCEImage instance which combines `this` and `other`
+  // by appending `other` to the right of `this`. `separator` is added
+  // to every line between the two images.
+  // If the images are not the same height, `blankSpaceFiller` will be used
+  // to make them the same height.
+  // Example:
+  //
+  // pceImageA:
+  //.:#00000000
+  //a:#000000
+  //
+  //aaa
+  //aaa
+  //aaa
+  //aaa
+  //aaa
+  //
+  // pceImageB:
+  //.:#00000000
+  //b:#FFFFFF
+  //
+  //bbb
+  //bbb
+  //bbb
+  //bbb
+  //
+  // pceImageA.newPCEImageByAppendingOnRight(pceImageB, ".", "a"):
+  //.:#00000000
+  //a:#000000
+  //b:#FFFFFF
+  //
+  //aaa.bbb
+  //aaa.bbb
+  //aaa.bbb
+  //aaa.bbb
+  //aaa.aaa
+  //
+  // Currently unhandled edge cases:
+  // - Color tables where a character is mapped to different colors in the two images
+  // - blankSpaceFiller that is longer than one character
+  // - separator or blankSpaceFiller which are not already in the color table of at least one of this, other
+  newPCEImageByAppendingOnRight(other, separator, blankSpaceFiller) {
+    // Union the color tables
+    let unionedCharToColor = {}
+
+    for (let colorChar of Object.keys(this.charToColor)) {
+      let colorStr = this.charToColor[colorChar]
+      unionedCharToColor[colorChar] = colorStr
+    }
+
+    for (let colorChar of Object.keys(other.charToColor)) {
+      let colorStr = other.charToColor[colorChar]
+      unionedCharToColor[colorChar] = colorStr
+    }
+
+    // Make the new combined string representation, making the images the same height
+    let unionedHeight = Math.max(this.height, other.height)
+
+    let unionedImageStrLines = []
+
+    for (let i = 0; i < unionedHeight; ++i) {
+      let leftLine = this.imageStrLineAtPixelRow(i)
+      let rightLine = other.imageStrLineAtPixelRow(i)
+
+      if (!leftLine) {
+        leftLine = blankSpaceFiller.repeat(this.width)
+      }
+
+      if (!rightLine) {
+        rightLine = blankSpaceFiller.repeat(other.width)
+      }
+
+      let combinedLine = leftLine + separator + rightLine
+
+      unionedImageStrLines.push(combinedLine)
+    }
+
+    // Add the color table to the beginning of unionedImageStrLines
+    let colorTableStr = ""
+    for (let colorChar of Object.keys(unionedCharToColor).sort()) {
+      let colorStr = unionedCharToColor[colorChar]
+      colorTableStr += colorChar + ":" + colorStr + "\n"
+    }
+
+    let imageStr = colorTableStr + "\n" + unionedImageStrLines.join("\n")
+
+    // Create the new PCEImage
+    return new PCEImage(imageStr)
   }
 }
 
@@ -261,6 +372,49 @@ class PCEWobbleImage extends PCEImage {
         MAUtils.roundRect(ctx, xOffset+pixelXOffset-wobbleMagnitude, yOffset+pixelYOffset-wobbleMagnitude, pixelDimension+2*wobbleMagnitude, pixelDimension+2*wobbleMagnitude, 2, true, false)
       }
     }
+  }
+
+  // Generates GIF synchronously - this can be slow!
+  // Returns base64 data URL
+  generateGIF(scale) {
+    let canvas = document.createElement("canvas")
+    canvas.width = this.width * scale
+    canvas.height = this.height * scale
+
+    if (canvas.width === 0 || canvas.height === 0) {
+      console.log("Skipping GIFGeneration because dimension is 0")
+      return
+    }
+
+    let ctx = canvas.getContext("2d")
+
+    let encoder = new GIFEncoder()
+    encoder.setRepeat(0)
+    encoder.setDelay(150)
+    encoder.start()
+    let usesTransparency = this.usesTransparency()
+    if (usesTransparency) {
+      encoder.setTransparent(0xFFFFF1)
+    }
+
+    for (let i = 0; i < this.maxTicks; i++) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.fillStyle = "#FFFFF1"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      this.drawInCanvas(canvas, scale)
+      this.tick()
+
+      let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      encoder.addFrame(imageData, true)
+    }
+
+    encoder.finish()
+
+    let gifData = encoder.stream().getData()
+
+    let base64GIFStr = 'data:image/gif;base64,' + encode64(gifData)
+    return base64GIFStr
   }
 }
 

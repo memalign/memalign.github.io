@@ -315,6 +315,114 @@ xxxxxxxxx
     assertEqual(img.usesTransparency(), true)
   }
 
+  test_PCEImage_newPCEImageByAppendingOnRight() {
+    // right image is shorter
+    let aStr = `.:#00000000
+a:#000000
+
+aaa
+aaa
+aaa
+aaa
+aaa`
+
+    let bStr = `.:#00000000
+b:#FFFFFF
+
+bbb
+bbb
+bbb
+bbb`
+
+    let a = new PCEImage(aStr)
+    let b = new PCEImage(bStr)
+
+    let ret = a.newPCEImageByAppendingOnRight(b, ".", "a")
+
+    let exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+
+aaa.bbb
+aaa.bbb
+aaa.bbb
+aaa.bbb
+aaa.aaa`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    // left image is shorter
+    ret = b.newPCEImageByAppendingOnRight(a, ".", "a")
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+
+bbb.aaa
+bbb.aaa
+bbb.aaa
+bbb.aaa
+aaa.aaa`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    // test images are same height
+    bStr = `.:#00000000
+b:#FFFFFF
+
+bbb
+bbb
+bbb
+bbb
+bbb`
+
+    b = new PCEImage(bStr)
+
+    ret = b.newPCEImageByAppendingOnRight(a, ".", "a")
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+
+bbb.aaa
+bbb.aaa
+bbb.aaa
+bbb.aaa
+bbb.aaa`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    // empty str separator
+    ret = b.newPCEImageByAppendingOnRight(a, "", "a")
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+
+bbbaaa
+bbbaaa
+bbbaaa
+bbbaaa
+bbbaaa`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    // two char separator
+    ret = b.newPCEImageByAppendingOnRight(a, "ab", "a")
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+
+bbbabaaa
+bbbabaaa
+bbbabaaa
+bbbabaaa
+bbbabaaa`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+  }
+
 
 // PCEWobbleImage
   test_PCEWobbleImage_basicStringParsing() {
