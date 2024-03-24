@@ -3,10 +3,177 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2024-01-19T16:00:02Z</updated>
+<updated>2024-03-14T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 03/14/24 08:00</title>
+<published>2024-03-14T15:00:01Z</published>
+<updated>2024-03-14T15:00:01Z</updated>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<a
+            href="https://abagames.github.io/crisp-game-lib-11-games/?magnetblocks"
+src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/pakupaku/screenshot.gif"
+  alt="PAKU PAKU"
+      <p class="card-text">PAKU PAKU</p>
+            href="https://abagames.github.io/crisp-game-lib-11-games/?pakupaku"
+  src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/fracave/screenshot.gif"
+  alt="FRACAVE"
+      <p class="card-text">FRACAVE</p>
+            href="https://abagames.github.io/claude-one-button-game-creation/?fracave"
+  src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/windpower/screenshot.gif"
+  alt="WIND POWER"
+      <p class="card-text">WIND POWER</p>
+            href="https://abagames.github.io/claude-one-button-game-creation/?windpower"
+  src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/fallbounce/screenshot.gif"
+  alt="FALL BOUNCE"
+      <p class="card-text">FALL BOUNCE</p>
+            href="https://abagames.github.io/claude-one-button-game-creation/?fallbounce"
+  src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/bridgecross/screenshot.gif"
+  alt="BRIDGE CROSS"
+      <p class="card-text">BRIDGE CROSS</p>
+            href="https://abagames.github.io/claude-one-button-game-creation/?bridgecross"
+  src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/timbertest/screenshot.gif"
+  alt="TIMBER TEST"
+      <p class="card-text">TIMBER TEST</p>
+            href="https://abagames.github.io/crisp-game-lib-11-games/?timbertest"
+  src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/invincibleman/screenshot.gif"
+  alt="INVINCIBLE MAN"
+      <p class="card-text">INVINCIBLE MAN</p>
+            href="https://abagames.github.io/crisp-game-lib-11-games/?invincibleman"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">Browser</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+<img
+  src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/rbdrive/screenshot.gif"
+  alt="RB DRIVE"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">RB DRIVE</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          <a
+            href="https://abagames.github.io/crisp-game-lib-11-games/?rbdrive"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">Browser</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+<img
+  src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/skygolf/screenshot.gif"
+  alt="SKY GOLF"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">SKY GOLF</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          <a
+            href="https://abagames.github.io/crisp-game-lib-11-games/?skygolf"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">Browser</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+<img
+  src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/clockturret/screenshot.gif"
+  alt="CLOCK TURRET"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">CLOCK TURRET</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          <a
+            href="https://abagames.github.io/crisp-game-lib-11-games/?clockturret"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">Browser</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+<img
+  src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/magnetblocks/screenshot.gif"
+  alt="MAGNET BLOCKS"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">MAGNET BLOCKS</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 01/19/24 08:00</title>
 <published>2024-01-19T16:00:02Z</published>
