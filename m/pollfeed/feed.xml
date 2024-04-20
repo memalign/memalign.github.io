@@ -3,10 +3,117 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2024-03-31T15:00:01Z</updated>
+<updated>2024-04-20T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 04/20/24 08:00</title>
+<published>2024-04-20T15:00:01Z</published>
+<updated>2024-04-20T15:00:01Z</updated>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<img
+src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/grapplingh/screenshot.gif"
+  alt="GRAPPLING H"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">GRAPPLING H</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          <a
+            href="https://abagames.github.io/claude-one-button-game-creation/?grapplingh"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">One button</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+<img
+  src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/feedingfrenzy/screenshot.gif"
+  alt="FEEDING FRENZY"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">FEEDING FRENZY</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          <a
+            href="https://abagames.github.io/claude-one-button-game-creation/?feedingfrenzy"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">One button</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+<img
+  src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/monkeyt/screenshot.gif"
+  alt="MONKEY T"
+  class="bd-placeholder-img card-img-top"
+  height="225"
+  style="object-fit: contain"
+  loading="lazy"
+/>
+
+    <div class="card-body">
+      <p class="card-text">MONKEY T</p>
+      <div
+        class="d-flex justify-content-between align-items-center"
+      >
+        <div class="btn-group">
+          
+          <a
+            href="https://abagames.github.io/claude-one-button-game-creation/?monkeyt"
+            class="btn btn-primary my-2"
+            >Play</a
+          >
+
+        </div>
+        <small class="text-muted">One button</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm">
+    
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 03/31/24 08:00</title>
 <published>2024-03-31T15:00:01Z</published>
