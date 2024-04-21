@@ -315,6 +315,184 @@ xxxxxxxxx
     assertEqual(img.usesTransparency(), true)
   }
 
+  test_PCEImage_pceImageFromCanvas() {
+    // test basic with colors
+    let sourceStr = `.:#000000
+o:#FFFF00
+
+.o
+o.`
+
+    let sourceImg = new PCEImage(sourceStr)
+
+    let scale = 10
+
+    let canvas = document.createElement('canvas')
+    canvas.width = sourceImg.width * scale
+    canvas.height = sourceImg.height * scale
+    sourceImg.drawInCanvas(canvas, scale)
+
+    let resultImg = PCEImage.pceImageFromCanvas(canvas, scale)
+
+    let resultStr = resultImg.imageStrLines.join("\n")
+
+    let expStr= `@:#000000
+A:#FFFF00
+
+@A
+A@`
+    assertEqual(resultStr, expStr)
+
+
+
+    // test transparent and white get the right character
+    sourceStr = `.:#00000000
+x:#FFFFFF
+o:#FFFF00
+
+x.o
+o.x`
+
+    sourceImg = new PCEImage(sourceStr)
+
+    scale = 10
+
+    canvas.width = sourceImg.width * scale
+    canvas.height = sourceImg.height * scale
+    sourceImg.drawInCanvas(canvas, scale)
+
+    resultImg = PCEImage.pceImageFromCanvas(canvas, scale)
+    resultStr = resultImg.imageStrLines.join("\n")
+
+    expStr= `.:#FFFFFF
+@:#FFFF00
+_:#00000000
+
+._@
+@_.`
+    assertEqual(resultStr, expStr)
+
+
+
+
+    // test partial transparency
+    sourceStr = `.:#00000088
+x:#FFFFFF
+o:#FFFF00
+
+x.o
+o.x`
+
+    sourceImg = new PCEImage(sourceStr)
+
+    scale = 10
+
+    canvas.width = sourceImg.width * scale
+    canvas.height = sourceImg.height * scale
+    sourceImg.drawInCanvas(canvas, scale)
+
+    resultImg = PCEImage.pceImageFromCanvas(canvas, scale)
+    resultStr = resultImg.imageStrLines.join("\n")
+
+    expStr= `.:#FFFFFF
+@:#00000088
+A:#FFFF00
+
+.@A
+A@.`
+    assertEqual(resultStr, expStr)
+
+
+
+    // test scale = 1
+    sourceStr = `.:#00000088
+x:#FFFFFF
+o:#FFFF00
+
+x.o
+o.x`
+
+    sourceImg = new PCEImage(sourceStr)
+
+    scale = 1
+
+    canvas.width = sourceImg.width * scale
+    canvas.height = sourceImg.height * scale
+    sourceImg.drawInCanvas(canvas, scale)
+
+    resultImg = PCEImage.pceImageFromCanvas(canvas, scale)
+    resultStr = resultImg.imageStrLines.join("\n")
+
+    expStr= `.:#FFFFFF
+@:#00000088
+A:#FFFF00
+
+.@A
+A@.`
+    assertEqual(resultStr, expStr)
+
+
+    // test scale = 5
+    sourceStr = `.:#00000088
+x:#FFFFFF
+o:#FFFF00
+
+x.o
+o.x`
+
+    sourceImg = new PCEImage(sourceStr)
+
+    scale = 5
+
+    canvas.width = sourceImg.width * scale
+    canvas.height = sourceImg.height * scale
+    sourceImg.drawInCanvas(canvas, scale)
+
+    resultImg = PCEImage.pceImageFromCanvas(canvas, scale)
+    resultStr = resultImg.imageStrLines.join("\n")
+
+    expStr= `.:#FFFFFF
+@:#00000088
+A:#FFFF00
+
+.@A
+A@.`
+    assertEqual(resultStr, expStr)
+
+
+    // test color similarity threshold
+    sourceStr = `.:#00000088
+x:#FFFFFF
+y:#FFFFFE
+z:#FFFFF8
+a:#F8F8F8
+b:#F8F8EF
+o:#FFFF00
+
+x.oyzab
+o.xyzab`
+
+    sourceImg = new PCEImage(sourceStr)
+
+    scale = 10
+
+    canvas.width = sourceImg.width * scale
+    canvas.height = sourceImg.height * scale
+    sourceImg.drawInCanvas(canvas, scale)
+
+    resultImg = PCEImage.pceImageFromCanvas(canvas, scale)
+    resultStr = resultImg.imageStrLines.join("\n")
+
+    expStr= `.:#FFFFFF
+@:#00000088
+A:#FFFF00
+B:#F8F8EF
+
+.@A...B
+A@....B`
+    assertEqual(resultStr, expStr)
+  }
+
   test_PCEImage_newPCEImageByAppendingOnRight() {
     // right image is shorter
     let aStr = `.:#00000000
@@ -421,6 +599,139 @@ bbbabaaa
 bbbabaaa`
 
     assertEqual(ret.imageStrLines.join("\n"), exp)
+  }
+
+  test_PCEImage_newPCEImageByCropping() {
+    let imgStr = `.:#00000000
+a:#000000
+b:#FFFFFF
+c:#888888
+d:#555555
+
+.bbabaaa
+bbbcbaaa
+bbbabaaa
+bbbabaaa
+bbbabaad`
+
+    let a = new PCEImage(imgStr)
+
+    let ret = a.newPCEImageByCropping(-1, 0, 1, 1)
+    assertEqual(ret, null)
+
+    ret = a.newPCEImageByCropping(0, -1, 1, 1)
+    assertEqual(ret, null)
+
+    ret = a.newPCEImageByCropping(0, 0, 9, 1)
+    assertEqual(ret, null)
+
+    ret = a.newPCEImageByCropping(0, 0, 1, 6)
+    assertEqual(ret, null)
+
+    ret = a.newPCEImageByCropping(7, 0, 2, 1)
+    assertEqual(ret, null)
+
+    ret = a.newPCEImageByCropping(0, 4, 1, 2)
+    assertEqual(ret, null)
+
+
+    ret = a.newPCEImageByCropping(0, 0, 1, 1)
+    let exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+c:#888888
+d:#555555
+
+.`
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    ret = a.newPCEImageByCropping(7, 4, 1, 1)
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+c:#888888
+d:#555555
+
+d`
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    ret = a.newPCEImageByCropping(0, 0, 8, 5)
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+c:#888888
+d:#555555
+
+.bbabaaa
+bbbcbaaa
+bbbabaaa
+bbbabaaa
+bbbabaad`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    ret = a.newPCEImageByCropping(0, 0, 4, 5)
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+c:#888888
+d:#555555
+
+.bba
+bbbc
+bbba
+bbba
+bbba`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    ret = a.newPCEImageByCropping(0, 0, 4, 3)
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+c:#888888
+d:#555555
+
+.bba
+bbbc
+bbba`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    ret = a.newPCEImageByCropping(4, 0, 4, 5)
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+c:#888888
+d:#555555
+
+baaa
+baaa
+baaa
+baaa
+baad`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
+
+    ret = a.newPCEImageByCropping(4, 2, 4, 3)
+    exp = `.:#00000000
+a:#000000
+b:#FFFFFF
+c:#888888
+d:#555555
+
+baaa
+baaa
+baad`
+
+    assertEqual(ret.imageStrLines.join("\n"), exp)
+
   }
 
 

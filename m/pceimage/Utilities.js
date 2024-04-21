@@ -82,6 +82,7 @@ const MAUtils = {
 
 
   // From https://stackoverflow.com/questions/6735470/get-pixel-color-from-canvas-on-mousemove
+  // r, g, b range 0-255
   rgbToHex(r, g, b) {
     if (r > 255 || g > 255 || b > 255) {
       throw "Invalid color component"
@@ -89,6 +90,13 @@ const MAUtils = {
     let str = "000000" + ((r << 16) | (g << 8) | b).toString(16)
     str = str.slice(-6)
     return "#" + str.toUpperCase()
+  },
+
+  // r, g, b range 0-255; a range 0-1
+  rgbaToHex(r, g, b, a) {
+    let rgbHex = MAUtils.rgbToHex(r, g, b)
+    const alphaHex = a >= 1 ? "" : Math.round(a * 255).toString(16).padStart(2, '0').toUpperCase()
+    return rgbHex + alphaHex
   },
 }
 Object.freeze(MAUtils)

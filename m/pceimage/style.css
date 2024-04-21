@@ -50,6 +50,20 @@ a {
   color: #3b5998;
 }
 
+#submitExampleDiv {
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
+#convertImageDiv {
+  background: #EEE;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
 #body {
   margin: auto;
   max-width: 850px;

@@ -25,9 +25,10 @@ class PCEImage {
         continue
       }
 
-      let charAndColor = line.split(":")
-      if (charAndColor.length == 2) {
-        this.charToColor[charAndColor[0]] = charAndColor[1]
+      if (line.length > 3 && line.charAt(1) == ":") {
+        let charStr = line.charAt(0)
+        let colorStr = line.substring(2)
+        this.charToColor[charStr] = colorStr
       }
     }
 
@@ -40,6 +41,91 @@ class PCEImage {
       this.width = 0
       this.height = 0
     }
+  }
+
+
+  static pceImageFromCanvas(canvas, scale) {
+    let colorMap = new Map() // hex value -> PCEColor instance
+
+    // Always use these characters for these colors
+    let white = new PCEColor(255, 255, 255, 1)
+    white.c = "."
+    colorMap.set(white.hexStr(), white)
+
+    let transparent = new PCEColor(0, 0, 0, 0)
+    transparent.c = "_"
+    colorMap.set(transparent.hexStr(), transparent)
+
+    // Sorted by my preference from most to least desirable to use
+    let pceChars = "@ABDQG#%XO8&+=~!$^*()-|{}[]\";:CEFHIJKLMNPRSTUVWYZabcdefghijklmnopqrstuvwxyz1234567890'<>"
+
+    let usedColorsHexStrs = new Set()
+
+    const colorSimilarityThreshold = 15
+
+    const ctx = canvas.getContext('2d')
+
+    let height = canvas.height
+    let width = canvas.width
+
+    let imageStr = ""
+
+    let rowSeparator = ""
+    for (let y = 0; y < height; y += scale) {
+      imageStr += rowSeparator
+      rowSeparator = "\n"
+
+      for (let x = 0; x < width; x += scale) {
+        const pixelData = ctx.getImageData(x, y, 1, 1).data
+        let c = new PCEColor(pixelData[0], pixelData[1], pixelData[2], pixelData[3]/255.0)
+
+        let hexStr = c.hexStr()
+        let existingC = colorMap.get(hexStr)
+
+        // If we don't already have this specific color cached, see
+        // if there's a color that's visually close enough.
+        // This is needed because lossy image formats will have slightly
+        // different colors for pixels that the image creator intended
+        // to be the same.
+        if (!existingC) {
+          // Search for a similar-enough color
+          for (const [key, value] of colorMap) {
+            if (value.colorIsSameWithinThreshold(c, colorSimilarityThreshold)) {
+              // Cache this similar-enough color for the current pixel's hexStr
+              existingC = value
+              colorMap.set(hexStr, existingC)
+
+              break
+            }
+          }
+        }
+
+
+        if (!existingC) {
+          // Assign this color a PCE character
+          c.c = pceChars.substring(0, 1)
+          if (pceChars.length >= 2) {
+            // Remove the character we just used
+            // If we run out of characters to assign to colors, we
+            // aren't able to encode this as a PCEImage accurately.
+            // Right now, this code will just keep reusing the last
+            // available character which will make the image look corrupt.
+            pceChars = pceChars.substring(1)
+          }
+          colorMap.set(hexStr, c)
+          existingC = c
+        }
+
+        usedColorsHexStrs.add(existingC.hexStr())
+        imageStr += existingC.c
+      }
+    }
+
+    let colorsStr = Array.from(usedColorsHexStrs).map(hexStr => `${colorMap.get(hexStr).c}:${hexStr}`).sort().join("\n")
+
+    let pceImageStr = colorsStr + "\n\n" + imageStr
+
+    return new PCEImage(pceImageStr)
   }
 
   imageStrLineAtPixelRow(pixelRow) {
@@ -77,7 +163,8 @@ class PCEImage {
     return ret
   }
 
-  drawInCanvas(canvas, scale, xOffset /* default: 0 */, yOffset /* default: 0 */) {
+  // colorTransformFn(hexColorStr) => transformedHexColorStr
+  drawInCanvas(canvas, scale, xOffset /* default: 0 */, yOffset /* default: 0 */, colorTransformFn /* default: null */) {
     if (!xOffset) {
       xOffset = 0
     }
@@ -95,6 +182,9 @@ class PCEImage {
 
         let character = this.imageStrLines[this.firstPixelLineIndex+y].charAt(x)
         let color = this.charToColor[character]
+        if (colorTransformFn) {
+          color = colorTransformFn(color)
+        }
 
         ctx.fillStyle = color
         ctx.fillRect(xOffset+pixelXOffset, yOffset+pixelYOffset, pixelDimension, pixelDimension)
@@ -202,6 +292,40 @@ class PCEImage {
     let imageStr = colorTableStr + "\n" + unionedImageStrLines.join("\n")
 
     // Create the new PCEImage
+    return new PCEImage(imageStr)
+  }
+
+  // Returns a new PCEImage instance with the image data in the
+  // the specified rectangular area
+  // Returns null if the rectangle is out of bounds
+  newPCEImageByCropping(xOrigin, yOrigin, width, height) {
+    if (width < 1 || height < 1) {
+      return null
+    }
+
+    if (xOrigin < 0 || xOrigin + width > this.width) {
+      return null
+    }
+
+    if (yOrigin < 0 || yOrigin + height > this.height) {
+      return null
+    }
+
+    let imageStr = ""
+    let comma = ""
+    for (let y = 0; y < height; ++y) {
+      let line = this.imageStrLineAtPixelRow(yOrigin+y)
+      let retLine = line.substring(xOrigin, xOrigin+width)
+      imageStr += comma + retLine
+      comma = "\n"
+    }
+
+    // Faster but sloppy: just keep the same color table as the full image
+    // instead of removing any colors that don't appear in the result image
+    let colorLines = this.imageStrLines.slice(0, this.firstPixelLineIndex)
+
+    imageStr = colorLines.join("\n") + "\n" + imageStr
+
     return new PCEImage(imageStr)
   }
 }
@@ -418,3 +542,31 @@ class PCEWobbleImage extends PCEImage {
   }
 }
 
+class PCEColor {
+  // Properties:
+  // r - int ranging 0-255
+  // g - int ranging 0-255
+  // b - int ranging 0-255
+  // a - float ranging 0-1
+  //
+  // c - string, PCEImage character
+  constructor(r, g, b, a) {
+    this.r = r
+    this.g = g
+    this.b = b
+    this.a = a
+  }
+
+  hexStr() {
+    return MAUtils.rgbaToHex(this.r, this.g, this.b, this.a)
+  }
+
+  colorIsSameWithinThreshold(other, threshold) {
+    let isTransparent = (this.a === 0 && other.a === 0)
+    return isTransparent ||
+      (this.a === other.a &&
+      Math.abs(this.r-other.r) <= threshold &&
+      Math.abs(this.g-other.g) <= threshold &&
+      Math.abs(this.b-other.b) <= threshold)
+  }
+}
