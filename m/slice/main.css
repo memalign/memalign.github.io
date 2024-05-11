@@ -1,0 +1,100 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+.content {
+  margin: 0;
+  background: radial-gradient(#FFFFFFAA, #444444AA);
+  height: 100vh;
+  width: 100vw;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+.overlay-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  padding: 10px;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  z-index: 999; /* On top of everything else */
+  pointer-events: none; /* Do not capture user input */
+  opacity: 0;
+}
+
+body {
+  background-repeat: repeat;
+}
+
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+.home, .about {
+  position: fixed;
+  z-index: 1000;
+}
+
+.home a, .about a {
+  color: #DDDDDD;
+  text-decoration: none;
+  text-shadow: 0 0 10px black;
+}
+
+.home a:hover, .about a:hover {
+  color: #FFF;
+}
+
+.home {
+  top: 10px;
+  left: 10px;
+}
+
+.about {
+  top: 10px;
+  right: 10px;
+}
+
+.sliceCount {
+  position: fixed;
+  z-index: 1000;
+  bottom: 15px;
+  left: 10px;
+}
+
+.sliceCount img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.help {
+  position: fixed;
+  z-index: 1000;
+  color: #00BFFF;
+  text-align: center;
+  bottom: 60px;
+  width: 100%;
+  font-size: 30px;
+}
+
