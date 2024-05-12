@@ -4,10 +4,14 @@ Tags: Leisure
 
 [Image:/m/book.svg]
 
+Updated 5/11/2024
+
 I know some people who are always reading a book. I’m not an avid book reader like them.
 
 I enjoy reading, though. When reading, I get attached to the characters and the plot. When I finish a book, I feel melancholy, a mild mourning for my fictional companions.
+
 I try to pick books that will be fun to read while also sticking with me for years to come.
+
 In some ways, I treat TV, movies, and books similarly: I don’t always need to be consuming something and I try to pick meaningful ones. I like to think about what I watched/read for weeks or months before picking up something else.
 
 Here’s a list of some books and short stories I’ve read. I’ll try to update this periodically.
@@ -27,6 +31,8 @@ Non-Fiction:
 - The Checklist Manifesto by Atul Gawande
 
 - Creative Selection by Ken Kocienda
+
+- Creativity, Inc. by Edwin Catmull and Amy Wallace
 
 - Extreme Ownership by Jocko Willink and Leif Babin
     - The lessons in this book directly apply to engineering management and leadership. I highly recommend it.
@@ -76,6 +82,8 @@ Fiction:
 - The Catcher in the Rye by J. D. Salinger
 
 - Choke by Chuck Palahniuk
+
+- Cloud Atlas by David Mitchell
 
 - Death of a Salesman by Arthur Miller
 
@@ -165,7 +173,7 @@ Fiction:
 
 - Learning to Be Me
     - Unsettling and thought-provoking short story by Greg Egan. It could be a Black Mirror episode.
-    
+
 - [Link:https://qntm.org/mmacevedo]Lena[/Link] by qntm
     - Fictional Wikipedia article about the first executable image of a human brain. In the same vein as Greg Egan's work and Black Mirror.
 
@@ -213,6 +221,7 @@ Fiction:
 - Watchmen by Alan Moore, Dave Gibbons, and John Higgins
 
 - Watership Down by Richard Adams
+    - Tales From Watership Down by Richard Adams
 
 - [Link:https://www.nature.com/articles/436150a]What's expected of us[/Link] by Ted Chiang
 

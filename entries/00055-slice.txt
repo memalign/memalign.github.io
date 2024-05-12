@@ -1,0 +1,24 @@
+Title: Slice Tap Toy
+Date: 5/13/2024
+Tags: Programming, Games
+[Image:/m/slice/slice.jpg]
+
+Introducing my latest project, playable right in your web browser: [Link:/m/slice/index.html]Slice Tap Toy[/Link]
+
+Slice Tap Toy can also be saved to your home screen as a PWA (Progressive Web App).
+
+This project is my spin on the touch screen swipe-to-slice concept. Every pizza can be sliced multiple times, down to tiny slivers. Can you unlock the whole menu?
+
+Swiping across a touch screen to slice objects is a delightful and fun mechanic. You might remember some of the best early games for iPhone: Fruit Ninja and Cut The Rope.
+
+Unfortunately, these formerly wonderful games are no longer delightful, now with constant interruptions and ads. Go try them and see for yourself. These games have been ruined.
+
+Slice Tap Toy is a simple passion project so it can be light, fun, and pristine.
+
+Development details:
+
+I was inspired to make Slice Tap Toy when I came across [Link:https://js13kgames.com/entries/samurai-sam]Samurai Sam[/Link], an entry to the 2023 JS13KGames competition. This got me thinking about slicing games.
+
+I decided to do some quick prototyping by hacking on [Link:/m/taptoy/index.html]Tap Toy[/Link]'s source code. I vetted that I could track slices from touch and mouse input, draw the slices, and detect collisions without much work. Like the original Tap Toy, I use [Link:/m/pceimage/index.html]PCEImage[/Link] for the art.
+
+Like [Link:/m/cr/index.html]CaveRibbon[/Link] ([Link:/p/caveribbon.html]project details[/Link]), I used LLMs to help. I could do some things faster, I was able to get the website to look how I wanted without becoming an expert on CSS, and (new to this project) I was able to get artistic inspiration for the art. I asked DALL-E to generate pizza pixel art. What I got were grotesque abominations that, to this day, have eroded some of my enjoyment of pizza. I stared at flesh colored cheese and glitchy toppings and turned them into my own cleaner pixel art pizzas. I'll spare you the examples.

@@ -5,10 +5,57 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2024-02-19T00:00:00-08:00</updated>
+<updated>2024-05-13T00:00:00-08:00</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Slice Tap Toy</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/slice.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/slice.html" />
+<id>https://memalign.github.io/p/slice.html</id>
+<published>2024-05-13T00:00:00-08:00</published>
+<updated>2024-05-13T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/slice.html'>Slice Tap Toy</a>
+</h2>
+</div>
+<img src="/m/slice/slice.jpg">
+<div id='postdate'>Posted on 5/13/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Games</a></div>
+Introducing my latest project, playable right in your web browser: <a href="/m/slice/index.html">Slice Tap Toy</a><br />
+<br />
+Slice Tap Toy can also be saved to your home screen as a PWA (Progressive Web App).<br />
+<br />
+This project is my spin on the touch screen swipe-to-slice concept. Every pizza can be sliced multiple times, down to tiny slivers. Can you unlock the whole menu?<br />
+<br />
+Swiping across a touch screen to slice objects is a delightful and fun mechanic. You might remember some of the best early games for iPhone: Fruit Ninja and Cut The Rope.<br />
+<br />
+Unfortunately, these formerly wonderful games are no longer delightful, now with constant interruptions and ads. Go try them and see for yourself. These games have been ruined.<br />
+<br />
+Slice Tap Toy is a simple passion project so it can be light, fun, and pristine.<br />
+<br />
+Development details:<br />
+<br />
+I was inspired to make Slice Tap Toy when I came across <a href="https://js13kgames.com/entries/samurai-sam">Samurai Sam</a>, an entry to the 2023 JS13KGames competition. This got me thinking about slicing games.<br />
+<br />
+I decided to do some quick prototyping by hacking on <a href="/m/taptoy/index.html">Tap Toy</a>'s source code. I vetted that I could track slices from touch and mouse input, draw the slices, and detect collisions without much work. Like the original Tap Toy, I use <a href="/m/pceimage/index.html">PCEImage</a> for the art.<br />
+<br />
+Like <a href="/m/cr/index.html">CaveRibbon</a> (<a href="/p/caveribbon.html">project details</a>), I used LLMs to help. I could do some things faster, I was able to get the website to look how I wanted without becoming an expert on CSS, and (new to this project) I was able to get artistic inspiration for the art. I asked DALL-E to generate pizza pixel art. What I got were grotesque abominations that, to this day, have eroded some of my enjoyment of pizza. I stared at flesh colored cheese and glitchy toppings and turned them into my own cleaner pixel art pizzas. I'll spare you the examples.<br />
+
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>CaveRibbon</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/caveribbon.html" />
@@ -3418,38 +3465,6 @@ That's the case with <a href="https://meyerweb.com/ui/about.html">Eric Meyer</a>
 Eric shared his experiences as they happened. You can find them <a href="https://meyerweb.com/eric/thoughts/category/personal/rebecca/?order=asc">here</a>. His family's story is tragic and emotional and wonderfully written.<br />
 <br />
 (I normally try to keep a backup of external sites but I'm not grabbing one here. I want to be respectful of Eric and his family's potential future choices to remove their story.)<br />
-
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>Coding Machines</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/coding-machines.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/coding-machines.html" />
-<id>https://memalign.github.io/p/coding-machines.html</id>
-<published>2020-11-03T00:00:00-08:00</published>
-<updated>2020-11-03T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/coding-machines.html'>Coding Machines</a>
-</h2>
-</div>
-<img src="/m/coding-machines/coding_machines.jpg">
-<div id='postdate'>Posted on 11/3/2020<br />
-Tags: <a href='/tags.html'>Leisure</a></div>
-Back when I discovered the website about <a href="/p/clamps.html">clamps</a>, I pored over that and similar personal websites (which sometimes linked me to even more interesting personal websites of their friends). I stumbled on a cool story about debugging, compilers, and viruses written by <a href="https://www.teamten.com/lawrence/">Lawrence Kesteloot</a>.<br />
-<br />
-You can check it out <a href="https://www.teamten.com/lawrence/writings/coding-machines/">here</a>.<br />
-(My backup of the story is <a href="/m/coding-machines/index.html">here</a>.)<br />
 
 </div>
 

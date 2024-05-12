@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/cr/CaveRibbon-gameplay.png" />
-<meta property="og:description" content="Introducing my latest game, playable right in your web browser: CaveRibbon CaveRibbon is a one-button game where you control a ribbon gliding through a shrinking cavern. Avoid the walls and…" />
+<meta property="og:image" content="https://memalign.github.io/m/slice/slice.jpg" />
+<meta property="og:description" content="Introducing my latest project, playable right in your web browser: Slice Tap Toy Slice Tap Toy can also be saved to your home screen as a PWA (Progressive Web App). …" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -24,6 +24,12 @@
 </div><div id='header'><h1>memalign.github.io</h1></div>
 <div id='top-header'><h3>( ( ( featured projects ) ) )</h3></div>
 <div id='projects-grid'>
+  <div id='projects-grid-entry'>
+    <a href='/m/slice/index.html'>
+    <div id='projects-grid-title'>Slice Tap Toy</div>
+    <div class='rect-img-container'><img src='/m/slice/slice.jpg'></div>
+    </a>
+  </div>
   <div id='projects-grid-entry'>
     <a href='/m/cr/index.html'>
     <div id='projects-grid-title'>CaveRibbon</div>
@@ -89,6 +95,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/slice.html'>Slice Tap Toy</a><br />
 <a href='p/caveribbon.html'>CaveRibbon</a><br />
 <a href='p/octogram.html'>Octogram</a><br />
 <a href='p/mastodon.html'>Mastodon API</a><br />
@@ -107,8 +114,8 @@
 <a href='p/puzzlescript.html'>PuzzleScript</a><br />
 <a href='p/wheat-chex.html'>Wheat Chex</a><br />
 <a href='p/pico8.html'>PICO-8</a><br />
-<a href='p/fussy-checklist.html'>Fussy Baby Checklist</a><br />
 </div><div id='grid-entry'>
+<a href='p/fussy-checklist.html'>Fussy Baby Checklist</a><br />
 <a href='p/zen-sleep.html'>Fall Asleep</a><br />
 <a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
 <a href='p/tims-vermeer.html'>Tim's Vermeer</a><br />
@@ -127,8 +134,8 @@
 <a href='p/product-reviews.html'>Product Review Writing Prompts</a><br />
 <a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
 <a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
-<a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 </div><div id='grid-entry'>
+<a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 <a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 <a href='p/coding-machines.html'>Coding Machines</a><br />
 <a href='p/clamps.html'>Clamps</a><br />
@@ -149,6 +156,38 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/slice.html'>Slice Tap Toy</a>
+</h2>
+</div>
+<img src="/m/slice/slice.jpg">
+<div id='postdate'>Posted on 5/13/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Games</a></div>
+Introducing my latest project, playable right in your web browser: <a href="/m/slice/index.html">Slice Tap Toy</a><br />
+<br />
+Slice Tap Toy can also be saved to your home screen as a PWA (Progressive Web App).<br />
+<br />
+This project is my spin on the touch screen swipe-to-slice concept. Every pizza can be sliced multiple times, down to tiny slivers. Can you unlock the whole menu?<br />
+<br />
+Swiping across a touch screen to slice objects is a delightful and fun mechanic. You might remember some of the best early games for iPhone: Fruit Ninja and Cut The Rope.<br />
+<br />
+Unfortunately, these formerly wonderful games are no longer delightful, now with constant interruptions and ads. Go try them and see for yourself. These games have been ruined.<br />
+<br />
+Slice Tap Toy is a simple passion project so it can be light, fun, and pristine.<br />
+<br />
+Development details:<br />
+<br />
+I was inspired to make Slice Tap Toy when I came across <a href="https://js13kgames.com/entries/samurai-sam">Samurai Sam</a>, an entry to the 2023 JS13KGames competition. This got me thinking about slicing games.<br />
+<br />
+I decided to do some quick prototyping by hacking on <a href="/m/taptoy/index.html">Tap Toy</a>'s source code. I vetted that I could track slices from touch and mouse input, draw the slices, and detect collisions without much work. Like the original Tap Toy, I use <a href="/m/pceimage/index.html">PCEImage</a> for the art.<br />
+<br />
+Like <a href="/m/cr/index.html">CaveRibbon</a> (<a href="/p/caveribbon.html">project details</a>), I used LLMs to help. I could do some things faster, I was able to get the website to look how I wanted without becoming an expert on CSS, and (new to this project) I was able to get artistic inspiration for the art. I asked DALL-E to generate pizza pixel art. What I got were grotesque abominations that, to this day, have eroded some of my enjoyment of pizza. I stared at flesh colored cheese and glitchy toppings and turned them into my own cleaner pixel art pizzas. I'll spare you the examples.<br />
+
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -908,27 +947,8 @@ I also watched the movies <a href="https://en.wikipedia.org/wiki/Yesterday_(2019
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/soundsjustlike.html'>SoundsJustLike</a>
-</h2>
-</div>
-<img src="/m/appleheadphones.png">
-<div id='postdate'>Posted on 12/26/2021<br />
-Tags: <a href='/tags.html'>Music</a></div>
-I still enjoy <a href="/p/similar-songs.html">finding songs that sound similar</a>.<br />
-<br />
-I recently listened to <a href="https://www.youtube.com/watch?v=wQA59IkCF5I">Dear Prudence</a> by The Beatles and could've sworn I had heard the chord progression somewhere before. I searched online and found that I probably heard it in <a href="https://www.youtube.com/watch?v=eAfyFTzZDMM">Beautiful</a> by Christina Aguilera. The website that gave me this connection is <a href="https://www.soundsjustlike.com/">SoundsJustLike.com</a>.<br />
-<br />
-SoundsJustLike.com is pretty cool with a long list of user-submitted song connections. Unfortunately, it's hard to search for a specific song. To make it easier, I created <a href="/m/similarsongs.html">this one-page snapshot</a> of all the songs users have submitted.<br />
-<br />
-There are a lot of great songs on there to explore!<br />
-
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/soundsjustlike.html'>SoundsJustLike</a><br />
 <a href='p/puzzlescript.html'>PuzzleScript</a><br />
 <a href='p/wheat-chex.html'>Wheat Chex</a><br />
 <a href='p/pico8.html'>PICO-8</a><br />
