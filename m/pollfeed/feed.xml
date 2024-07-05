@@ -3,10 +3,126 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2024-07-01T15:00:01Z</updated>
+<updated>2024-07-05T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 07/05/24 08:00</title>
+<published>2024-07-05T15:00:01Z</published>
+<updated>2024-07-05T15:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:cc45061145b9f223296e7b35ee7d05df</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<a href="https://abagames.github.io/claude-one-button-game-creation/?hoardspout">https://abagames.github.io/claude-one-button-game-creation/?hoardspout</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/pakupaku/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?pakupaku">https://abagames.github.io/crisp-game-lib-11-games/?pakupaku</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-12-games/raw/main/docs/boxsnake/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-12-games/?boxsnake">https://abagames.github.io/crisp-game-lib-12-games/?boxsnake</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/grapplingh/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?grapplingh">https://abagames.github.io/claude-one-button-game-creation/?grapplingh</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/stompingbubbles/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?stompingbubbles">https://abagames.github.io/claude-one-button-game-creation/?stompingbubbles</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/wavybird/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?wavybird">https://abagames.github.io/claude-one-button-game-creation/?wavybird</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/windpower/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?windpower">https://abagames.github.io/claude-one-button-game-creation/?windpower</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/gravitywell/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?gravitywell">https://abagames.github.io/claude-one-button-game-creation/?gravitywell</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/pulsepiper/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?pulsepiper">https://abagames.github.io/claude-one-button-game-creation/?pulsepiper</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/fallbounce/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?fallbounce">https://abagames.github.io/claude-one-button-game-creation/?fallbounce</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/up1way/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?up1way">https://abagames.github.io/crisp-game-lib-11-games/?up1way</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/thunder/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?thunder">https://abagames.github.io/crisp-game-lib-11-games/?thunder</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/chargebeam/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?chargebeam">https://abagames.github.io/crisp-game-lib-11-games/?chargebeam</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/lightdark/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?lightdark">https://abagames.github.io/crisp-game-lib-games/?lightdark</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/intow/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?intow">https://abagames.github.io/crisp-game-lib-games/?intow</a><br />
+<img src="https://www.asahi-net.or.jp/~cs8k-cyu/blog/images/dc_capture.gif"><br />
+<a href="https://abagames.sakura.ne.jp/html5/dc/">https://abagames.sakura.ne.jp/html5/dc/</a><br />
+<img src="https://www.asahi-net.or.jp/~cs8k-cyu/blog/images/foe_capture.gif"><br />
+<a href="https://abagames.sakura.ne.jp/html5/foe/">https://abagames.sakura.ne.jp/html5/foe/</a><br />
+<img src="https://abagames.github.io/one-button-for-all/refrev/screenshot.gif"><br />
+<a href="https://abagames.github.io/one-button-for-all/refrev/index.html">https://abagames.github.io/one-button-for-all/refrev/index.html</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/froooog/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?froooog">https://abagames.github.io/crisp-game-lib-games/?froooog</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/colorroll/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?colorroll">https://abagames.github.io/crisp-game-lib-games/?colorroll</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/reflector/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?reflector">https://abagames.github.io/crisp-game-lib-games/?reflector</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/upshot/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?upshot">https://abagames.github.io/crisp-game-lib-games/?upshot</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/shiny/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?shiny">https://abagames.github.io/crisp-game-lib-11-games/?shiny</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/flipo/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?flipo">https://abagames.github.io/crisp-game-lib-11-games/?flipo</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/timbertest/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?timbertest">https://abagames.github.io/crisp-game-lib-11-games/?timbertest</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/survivor/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?survivor">https://abagames.github.io/crisp-game-lib-11-games/?survivor</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/growth/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?growth">https://abagames.github.io/crisp-game-lib-11-games/?growth</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/rebirth/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?rebirth">https://abagames.github.io/crisp-game-lib-games/?rebirth</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/castn/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?castn">https://abagames.github.io/crisp-game-lib-games/?castn</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/cywall/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?cywall">https://abagames.github.io/crisp-game-lib-games/?cywall</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/lland/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?lland">https://abagames.github.io/crisp-game-lib-games/?lland</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/numberball/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?numberball">https://abagames.github.io/crisp-game-lib-games/?numberball</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/orbitman/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?orbitman">https://abagames.github.io/crisp-game-lib-games/?orbitman</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/tapej/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?tapej">https://abagames.github.io/crisp-game-lib-games/?tapej</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/bamboo/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?bamboo">https://abagames.github.io/crisp-game-lib-games/?bamboo</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/descents/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?descents">https://abagames.github.io/crisp-game-lib-games/?descents</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/rwheel/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?rwheel">https://abagames.github.io/crisp-game-lib-games/?rwheel</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-games/raw/main/docs/scrambird/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-games/?scrambird">https://abagames.github.io/crisp-game-lib-games/?scrambird</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/cleanrobo/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-11-games/?cleanrobo">https://abagames.github.io/crisp-game-lib-11-games/?cleanrobo</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/fracave/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?fracave">https://abagames.github.io/claude-one-button-game-creation/?fracave</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/periscopeping/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?periscopeping">https://abagames.github.io/claude-one-button-game-creation/?periscopeping</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/fishgrill/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?fishgrill">https://abagames.github.io/claude-one-button-game-creation/?fishgrill</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/quantumleaper/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?quantumleaper">https://abagames.github.io/claude-one-button-game-creation/?quantumleaper</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/monkeyt/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?monkeyt">https://abagames.github.io/claude-one-button-game-creation/?monkeyt</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/outpostpatrol/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?outpostpatrol">https://abagames.github.io/claude-one-button-game-creation/?outpostpatrol</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/cleaner/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?cleaner">https://abagames.github.io/claude-one-button-game-creation/?cleaner</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/feedingfrenzy/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?feedingfrenzy">https://abagames.github.io/claude-one-button-game-creation/?feedingfrenzy</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/hoppinhazards/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?hoppinhazards">https://abagames.github.io/claude-one-button-game-creation/?hoppinhazards</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/turtletide/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?turtletide">https://abagames.github.io/claude-one-button-game-creation/?turtletide</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/bridgecross/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?bridgecross">https://abagames.github.io/claude-one-button-game-creation/?bridgecross</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/hoardspout/screenshot.gif"><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 07/01/24 08:00</title>
 <published>2024-07-01T15:00:01Z</published>
