@@ -31,15 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
-    const saveToIndexedDB = (fileData, currentTime, playbackRate) => {
+    const saveFileToIndexedDB = (fileData) => {
         const transaction = db.transaction([storeName], 'readwrite');
         const store = transaction.objectStore(storeName);
         store.put({
             id: 1,
-            fileData,
-            currentTime,
-            playbackRate
+            fileData
         });
+    };
+
+    const savePlaybackInfoToLocalStorage = (currentTime, playbackRate) => {
+        localStorage.setItem('audioPlayerCurrentTime', currentTime);
+        localStorage.setItem('audioPlayerPlaybackRate', playbackRate);
     };
 
     const loadFromIndexedDB = () => {
@@ -53,9 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const blob = new Blob([data.fileData], { type: 'audio/mpeg' });
                 const url = URL.createObjectURL(blob);
                 audioPlayer.src = url;
-                audioPlayer.currentTime = data.currentTime;
-                audioPlayer.playbackRate = data.playbackRate;
-                speedSelect.value = data.playbackRate;
+                audioPlayer.load();
             }
         };
 
@@ -65,10 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleFile = (file) => {
+        if (!file.type.startsWith('audio/')) {
+            alert('Please select a valid audio file.');
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = (event) => {
             const fileData = event.target.result;
-            saveToIndexedDB(fileData, 0, 1);
+            saveFileToIndexedDB(fileData);
             const blob = new Blob([fileData], { type: file.type });
             const url = URL.createObjectURL(blob);
             audioPlayer.src = url;
@@ -114,31 +120,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     speedSelect.addEventListener('change', () => {
         audioPlayer.playbackRate = speedSelect.value;
-        const transaction = db.transaction([storeName], 'readwrite');
-        const store = transaction.objectStore(storeName);
-        store.get(1).onsuccess = (event) => {
-            const data = event.target.result;
-            if (data) {
-                saveToIndexedDB(data.fileData, audioPlayer.currentTime, audioPlayer.playbackRate);
-            }
-        };
+        savePlaybackInfoToLocalStorage(audioPlayer.currentTime, audioPlayer.playbackRate);
     });
 
     audioPlayer.addEventListener('timeupdate', () => {
-        const transaction = db.transaction([storeName], 'readwrite');
-        const store = transaction.objectStore(storeName);
-        store.get(1).onsuccess = (event) => {
-            const data = event.target.result;
-            if (data) {
-                saveToIndexedDB(data.fileData, audioPlayer.currentTime, audioPlayer.playbackRate);
-            }
-        };
+        const timeToSave = Math.max(0, audioPlayer.currentTime - 2);
+        savePlaybackInfoToLocalStorage(timeToSave, audioPlayer.playbackRate);
     });
+
+
+
+    audioPlayer.addEventListener('loadeddata', () => {
+        const currentTime = localStorage.getItem('audioPlayerCurrentTime');
+        const playbackRate = localStorage.getItem('audioPlayerPlaybackRate');
+
+        if (currentTime) {
+            console.log("Setting currentTime to " + parseFloat(currentTime));
+            audioPlayer.currentTime = parseFloat(currentTime);
+        }
+
+        if (playbackRate) {
+            audioPlayer.playbackRate = parseFloat(playbackRate);
+            speedSelect.value = playbackRate;  // Update the speed UI element
+        }
+    }, { once: true });
+
 
     clearButton.addEventListener('click', () => {
         audioPlayer.src = '';
         audioPlayer.currentTime = 0;
         audioPlayer.playbackRate = 1;
+        speedSelect.value = 1;  // Reset the speed UI element
+        localStorage.removeItem('audioPlayerCurrentTime');
+        localStorage.removeItem('audioPlayerPlaybackRate');
         const transaction = db.transaction([storeName], 'readwrite');
         const store = transaction.objectStore(storeName);
         store.delete(1);
