@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemPlayer</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="memplayer, memalign, audio player, restore playback position">
+    <meta name="description" content="MemPlayer - Audio player that restores playback position">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="MemPlayer" />
+    <meta property="og:description" content="Audio player that stores file locally and restores playback position and speed">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/memplayer/memplayer.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://memalign.github.io/m/memplayer/index.html" />
+    <meta name="twitter:title" content="MemPlayer">
+    <meta name="twitter:description" content="Audio player that stores file locally and restores playback position and speed">
+    <meta name="twitter:image" content="https://memalign.github.io/m/memplayer/memplayer.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+
+    <link rel="apple-touch-icon" sizes="16x16" href="PWAImages/ios/16.png">
+    <link rel="apple-touch-icon" sizes="20x20" href="PWAImages/ios/20.png">
+    <link rel="apple-touch-icon" sizes="29x29" href="PWAImages/ios/29.png">
+    <link rel="apple-touch-icon" sizes="32x32" href="PWAImages/ios/32.png">
+    <link rel="apple-touch-icon" sizes="40x40" href="PWAImages/ios/40.png">
+    <link rel="apple-touch-icon" sizes="50x50" href="PWAImages/ios/50.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="PWAImages/ios/57.png">
+    <link rel="apple-touch-icon" sizes="58x58" href="PWAImages/ios/58.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="PWAImages/ios/60.png">
+    <link rel="apple-touch-icon" sizes="64x64" href="PWAImages/ios/64.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="PWAImages/ios/72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="PWAImages/ios/76.png">
+    <link rel="apple-touch-icon" sizes="80x80" href="PWAImages/ios/80.png">
+    <link rel="apple-touch-icon" sizes="87x87" href="PWAImages/ios/87.png">
+    <link rel="apple-touch-icon" sizes="100x100" href="PWAImages/ios/100.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="PWAImages/ios/114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="PWAImages/ios/120.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="PWAImages/ios/128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="PWAImages/ios/144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="PWAImages/ios/152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="PWAImages/ios/167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="PWAImages/ios/180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="PWAImages/ios/192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="PWAImages/ios/256.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="PWAImages/ios/512.png">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="PWAImages/ios/1024.png">
+    <link rel="manifest" href="manifest.json">
+
+</head>
+<body>
+    <div class="container">
+        <h1>MemPlayer</h1>
+        <p id="filenameDisplay"></p>
+        <input type="file" id="fileInput" accept="*/*">
+        <div id="dropZone">Drag &amp; Drop Audio File Here</div>
+        <audio id="audioPlayer" preload="auto" controls></audio>
+        <div class="controls">
+            <button id="playPauseButton">Play/Pause</button>
+            <button id="skipBackButton">-10s</button>
+            <button id="skipForwardButton">+10s</button>
+            <br />
+            <label for="speedSelect">Speed:</label>
+            <select id="speedSelect">
+                <option value="0.5">0.5x</option>
+                <option value="0.6">0.6x</option>
+                <option value="0.7">0.7x</option>
+                <option value="0.8">0.8x</option>
+                <option value="0.9">0.9x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.2">1.2x</option>
+                <option value="1.3">1.3x</option>
+                <option value="1.4">1.4x</option>
+                <option value="1.5">1.5x</option>
+                <option value="1.6">1.6x</option>
+                <option value="1.7">1.7x</option>
+                <option value="1.8">1.8x</option>
+                <option value="1.9">1.9x</option>
+                <option value="2">2x</option>
+                <option value="2.1">2.1x</option>
+                <option value="2.2">2.2x</option>
+                <option value="2.3">2.3x</option>
+                <option value="2.4">2.4x</option>
+                <option value="2.5">2.5x</option>
+                <option value="2.6">2.6x</option>
+                <option value="2.7">2.7x</option>
+                <option value="2.8">2.8x</option>
+                <option value="2.9">2.9x</option>
+                <option value="3">3x</option>
+                <option value="4">4x</option>
+            </select>
+            <button id="clearButton">Clear</button>
+        </div>
+        <p><i>Pick up where you left off. MemPlayer stores file locally and restores playback position and speed. <a href="https://memalign.github.io/p/memplayer.html">About.</a></i></p>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

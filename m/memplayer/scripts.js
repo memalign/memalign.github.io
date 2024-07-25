@@ -1,4 +1,3 @@
-// scripts.js
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('fileInput');
     const dropZone = document.getElementById('dropZone');
@@ -8,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const skipForwardButton = document.getElementById('skipForwardButton');
     const speedSelect = document.getElementById('speedSelect');
     const clearButton = document.getElementById('clearButton');
+    const filenameDisplay = document.getElementById('filenameDisplay');
 
     const dbName = 'audioPlayerDB';
     const storeName = 'audioFiles';
@@ -31,12 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
-    const saveFileToIndexedDB = (fileData) => {
+    const saveFileToIndexedDB = (fileData, filename) => {
         const transaction = db.transaction([storeName], 'readwrite');
         const store = transaction.objectStore(storeName);
         store.put({
             id: 1,
-            fileData
+            fileData,
+            filename
         });
     };
 
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const url = URL.createObjectURL(blob);
                 audioPlayer.src = url;
                 audioPlayer.load();
+                filenameDisplay.textContent = `${data.filename}`;
             }
         };
 
@@ -66,19 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleFile = (file) => {
-        if (!file.type.startsWith('audio/')) {
-            alert('Please select a valid audio file.');
-            return;
-        }
-
         const reader = new FileReader();
         reader.onload = (event) => {
             const fileData = event.target.result;
-            saveFileToIndexedDB(fileData);
+            saveFileToIndexedDB(fileData, file.name);
             const blob = new Blob([fileData], { type: file.type });
             const url = URL.createObjectURL(blob);
             audioPlayer.src = url;
             audioPlayer.play();
+            filenameDisplay.textContent = `${file.name}`;
         };
         reader.readAsArrayBuffer(file);
     };
@@ -128,8 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
         savePlaybackInfoToLocalStorage(timeToSave, audioPlayer.playbackRate);
     });
 
-
-
     audioPlayer.addEventListener('loadeddata', () => {
         const currentTime = localStorage.getItem('audioPlayerCurrentTime');
         const playbackRate = localStorage.getItem('audioPlayerPlaybackRate');
@@ -145,12 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { once: true });
 
-
     clearButton.addEventListener('click', () => {
         audioPlayer.src = '';
         audioPlayer.currentTime = 0;
         audioPlayer.playbackRate = 1;
         speedSelect.value = 1;  // Reset the speed UI element
+        filenameDisplay.textContent = '';  // Clear the filename display
         localStorage.removeItem('audioPlayerCurrentTime');
         localStorage.removeItem('audioPlayerPlaybackRate');
         const transaction = db.transaction([storeName], 'readwrite');
