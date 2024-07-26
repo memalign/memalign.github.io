@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>MemPlayer</title>
+<meta property="og:title" content="MemPlayer" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/memplayer.html" />
+<meta property="og:image" content="https://memalign.github.io/m/memplayer/memplayer.png" />
+<meta property="og:description" content="I recently whipped up a simple audio player dedicated to listening to long audio files across multiple listening sessions. It's called MemPlayer and you can try it here. The problem…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a><div id='post'>
+<div id='header'>
+<h1>
+MemPlayer
+</h1>
+</div>
+<img src="/m/memplayer/memplayer.png">
+<div id='postdate'>Posted on 7/25/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Tools</a></div>
+I recently whipped up a simple audio player dedicated to listening to long audio files across multiple listening sessions.<br />
+<br />
+It's called MemPlayer and you can try it <a href="/m/memplayer/index.html">here</a>.<br />
+<br />
+<br />
+The problem MemPlayer solves:<br />
+<br />
+I listen to most audiobooks in the excellent Libby app. It nails the core use case: remembers playback position, gives easy controls for jumping back/forward, and gives granular control over playback speed.<br />
+<br />
+Sometimes, though, I have a book (or other long audio recording) as a single standalone audio file. I still need all of those features for easy listening across multiple days.<br />
+<br />
+Instead of finding an existing app with exactly what I need, I experimented to see how quickly I could whip up a simple utility app using ChatGPT. I found the low overhead of web development plus ChatGPT to be a killer combination.<br />
+<br />
+I started with this prompt:<br />
+<div id='code'>Generate HTML, JavaScript, and CSS for a simple web app with these requirements:<br />
+- The user can browse their local disk to select an audio file<br />
+- Alternatively, the user can drag and drop an audio file onto the web app<br />
+- The web app allows the user to play the audio file, change playback speed, and skip forward and back by 10 seconds<br />
+- The web app stores the file in local storage and restores it when the page is refreshed<br />
+- The web app stores the current playback position and restores it when the page is refreshed. This way the user can load the page and resume what they were listening to.<br />
+- There is a clear button which causes the web app to forget the current audio file and playback position</div>
+This produced code for index.html, scripts.js, and styles.css that gave me 90% of what I needed. The UI was good, but the web app did not work perfectly.<br />
+<br />
+I steered it with a few specific suggestions in subsequent prompts, mainly to use IndexedDB to store the audio file because its original choice, localStorage, can't handle big files. I also needed to fix a bug in restoring playback position. I then made some minor style and user experience tweaks, added PWA metadata and icons, and was done!<br />
+<br />
+Overall, I was able to whip this up in about an hour, with some of the fixes and tweaks done on the go.<br />
+<br />
+I think there's a lot of potential to make custom tiny tool web apps with low effort this way. And one of the best parts of the web is that nearly everyone can use these tools without any setup across their phones, tablets, computers, etc. And they will hopefully continue working for decades to come without any developer intervention.<br />
+
+</div>
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

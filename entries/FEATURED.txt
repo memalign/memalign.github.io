@@ -1,3 +1,7 @@
+MemPlayer
+- Image: /m/memplayer/memplayer.png
+- /m/memplayer/index.html
+
 Slice Tap Toy
 - Image: /m/slice/slice.jpg
 - /m/slice/index.html

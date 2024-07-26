@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/slice/slice.jpg" />
-<meta property="og:description" content="Introducing my latest project, playable right in your web browser: Slice Tap Toy Slice Tap Toy can also be saved to your home screen as a PWA (Progressive Web App). …" />
+<meta property="og:image" content="https://memalign.github.io/m/memplayer/memplayer.png" />
+<meta property="og:description" content="I recently whipped up a simple audio player dedicated to listening to long audio files across multiple listening sessions. It's called MemPlayer and you can try it here. The problem…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -24,6 +24,12 @@
 </div><div id='header'><h1>memalign.github.io</h1></div>
 <div id='top-header'><h3>( ( ( featured projects ) ) )</h3></div>
 <div id='projects-grid'>
+  <div id='projects-grid-entry'>
+    <a href='/m/memplayer/index.html'>
+    <div id='projects-grid-title'>MemPlayer</div>
+    <div class='rect-img-container'><img src='/m/memplayer/memplayer.png'></div>
+    </a>
+  </div>
   <div id='projects-grid-entry'>
     <a href='/m/slice/index.html'>
     <div id='projects-grid-title'>Slice Tap Toy</div>
@@ -95,6 +101,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/memplayer.html'>MemPlayer</a><br />
 <a href='p/slice.html'>Slice Tap Toy</a><br />
 <a href='p/caveribbon.html'>CaveRibbon</a><br />
 <a href='p/octogram.html'>Octogram</a><br />
@@ -113,8 +120,8 @@
 <a href='p/soundsjustlike.html'>SoundsJustLike</a><br />
 <a href='p/puzzlescript.html'>PuzzleScript</a><br />
 <a href='p/wheat-chex.html'>Wheat Chex</a><br />
-<a href='p/pico8.html'>PICO-8</a><br />
 </div><div id='grid-entry'>
+<a href='p/pico8.html'>PICO-8</a><br />
 <a href='p/fussy-checklist.html'>Fussy Baby Checklist</a><br />
 <a href='p/zen-sleep.html'>Fall Asleep</a><br />
 <a href='p/shape-your-destiny.html'>Shape Your Destiny</a><br />
@@ -133,8 +140,8 @@
 <a href='p/andrew-plotkin.html'>Andrew Plotkin's Zarfhome</a><br />
 <a href='p/product-reviews.html'>Product Review Writing Prompts</a><br />
 <a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
-<a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
 </div><div id='grid-entry'>
+<a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 <a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 <a href='p/coding-machines.html'>Coding Machines</a><br />
@@ -156,6 +163,47 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/memplayer.html'>MemPlayer</a>
+</h2>
+</div>
+<img src="/m/memplayer/memplayer.png">
+<div id='postdate'>Posted on 7/25/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Tools</a></div>
+I recently whipped up a simple audio player dedicated to listening to long audio files across multiple listening sessions.<br />
+<br />
+It's called MemPlayer and you can try it <a href="/m/memplayer/index.html">here</a>.<br />
+<br />
+<br />
+The problem MemPlayer solves:<br />
+<br />
+I listen to most audiobooks in the excellent Libby app. It nails the core use case: remembers playback position, gives easy controls for jumping back/forward, and gives granular control over playback speed.<br />
+<br />
+Sometimes, though, I have a book (or other long audio recording) as a single standalone audio file. I still need all of those features for easy listening across multiple days.<br />
+<br />
+Instead of finding an existing app with exactly what I need, I experimented to see how quickly I could whip up a simple utility app using ChatGPT. I found the low overhead of web development plus ChatGPT to be a killer combination.<br />
+<br />
+I started with this prompt:<br />
+<div id='code'>Generate HTML, JavaScript, and CSS for a simple web app with these requirements:<br />
+- The user can browse their local disk to select an audio file<br />
+- Alternatively, the user can drag and drop an audio file onto the web app<br />
+- The web app allows the user to play the audio file, change playback speed, and skip forward and back by 10 seconds<br />
+- The web app stores the file in local storage and restores it when the page is refreshed<br />
+- The web app stores the current playback position and restores it when the page is refreshed. This way the user can load the page and resume what they were listening to.<br />
+- There is a clear button which causes the web app to forget the current audio file and playback position</div>
+This produced code for index.html, scripts.js, and styles.css that gave me 90% of what I needed. The UI was good, but the web app did not work perfectly.<br />
+<br />
+I steered it with a few specific suggestions in subsequent prompts, mainly to use IndexedDB to store the audio file because its original choice, localStorage, can't handle big files. I also needed to fix a bug in restoring playback position. I then made some minor style and user experience tweaks, added PWA metadata and icons, and was done!<br />
+<br />
+Overall, I was able to whip this up in about an hour, with some of the fixes and tweaks done on the go.<br />
+<br />
+I think there's a lot of potential to make custom tiny tool web apps with low effort this way. And one of the best parts of the web is that nearly everyone can use these tools without any setup across their phones, tablets, computers, etc. And they will hopefully continue working for decades to come without any developer intervention.<br />
+
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -873,81 +921,8 @@ Read more about the editor <a href="/p/pceimage-editor.html">here</a>.<br />
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/beatles.html'>My Beatles Picks</a>
-</h2>
-</div>
-<img src="/m/applerecords.jpg">
-<div id='postdate'>Posted on 2/10/2022<br />
-Tags: <a href='/tags.html'>Music</a></div>
-I've had the Beatles on my mind recently thanks to the buzz around Peter Jackson's "<a href="https://en.wikipedia.org/wiki/The_Beatles:_Get_Back">The Beatles: Get Back</a>" documentary.<br />
-<br />
-I grew up long after the Beatles had broken up and I had never listened to a full Beatles album despite liking a lot of their songs. I decided to listen to every album in order, looking up interesting details about the albums and songs on Wikipedia along the way. (I wish there were more <a href="https://en.wikipedia.org/wiki/Pop-Up_Video">pop-up videos</a>!)<br />
-<br />
-I now have a lot more appreciation for the Beatles members as people, how hard-working they were, and how their music evolved.<br />
-<br />
-Here are my Beatles picks (in no particular order). Many of these songs are so popular that I already knew them; others I heard for the first time during this listen-through. I left off some songs (Hey Jude, Lucy in the Sky With Diamonds, and many more) that are objectively good but that I don't like enough to consider "my picks". Some of these songs are funny (such as Norwegian Wood, Michelle, Girl (how a pained John Lennon sucks in air through his teeth), Getting Better), some are just fun, and others are among the most beautiful songs I've ever heard.<br />
-<br />
-- In My Life<br />
-- Here Comes the Sun<br />
-- Something<br />
-- All My Loving<br />
-- Love Me Do<br />
-- Please Please Me<br />
-- I'm So Tired<br />
-- Dear Prudence<br />
-- While My Guitar Gently Weeps<br />
-- You Never Give Me Your Money<br />
-- And I Love Her<br />
-- Eight Days a Week<br />
-- Help!<br />
-- The Night Before<br />
-- Yesterday<br />
-- You've Got to Hide Your Love Away<br />
-- Drive My Car<br />
-- Norwegian Wood<br />
-- The Word<br />
-- Michelle<br />
-- Girl<br />
-- Eleanor Rigby<br />
-- Sgt. Pepper's Lonely Hearts Club Band<br />
-- With a Little Help From My Friends<br />
-- Lucy In the Sky with Diamonds<br />
-- Getting Better<br />
-- Fixing a Hole<br />
-- Lovely Rita<br />
-- I Am the Walrus<br />
-- Strawberry Fields Forever<br />
-- Penny Lane<br />
-- The Continuing Story of Bungalow Bill<br />
-- Sexy Sadie<br />
-- I Want You (She's So Heavy)<br />
-- Because<br />
-- Across the Universe<br />
-- A Day In The Life (the version from "The Beatles / 1967-1970"; the original has creepy audio at the end that's not pleasant in a playlist)<br />
-<br />
-Post-Beatles honorable mentions:<br />
-<br />
-- John Lennon - How Do You Sleep?<br />
-- John Lennon - Jealous Guy<br />
-- Paul McCartney - Maybe I'm Amazed<br />
-- Paul McCartney & Michael Jackson - Say Say Say<br />
-- Paul McCartney & Wings - Live and Let Die<br />
-- Paul McCartney & Kanye West - Only One<br />
-- Rihanna & Kanye West & Paul McCartney - FourFiveSeconds<br />
-- George Harrison - My Sweet Lord<br />
-- George Harrison - Got My Mind Set On You<br />
-- George Harrison - Marwa Blues<br />
-- Traveling Wilburys - Handle with Care<br />
-<br />
-I also watched the movies <a href="https://en.wikipedia.org/wiki/Yesterday_(2019_film)">Yesterday</a> and <a href="https://en.wikipedia.org/wiki/Across_the_Universe_(film)">Across the Universe</a> and enjoyed them more than I could've if I hadn't heard these albums and learned some of the history beforehand.<br />
-
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/beatles.html'>My Beatles Picks</a><br />
 <a href='p/soundsjustlike.html'>SoundsJustLike</a><br />
 <a href='p/puzzlescript.html'>PuzzleScript</a><br />
 <a href='p/wheat-chex.html'>Wheat Chex</a><br />

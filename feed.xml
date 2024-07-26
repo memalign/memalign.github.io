@@ -5,10 +5,66 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2024-05-13T00:00:00-08:00</updated>
+<updated>2024-07-25T00:00:00-08:00</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>MemPlayer</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/memplayer.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/memplayer.html" />
+<id>https://memalign.github.io/p/memplayer.html</id>
+<published>2024-07-25T00:00:00-08:00</published>
+<updated>2024-07-25T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/memplayer.html'>MemPlayer</a>
+</h2>
+</div>
+<img src="/m/memplayer/memplayer.png">
+<div id='postdate'>Posted on 7/25/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Tools</a></div>
+I recently whipped up a simple audio player dedicated to listening to long audio files across multiple listening sessions.<br />
+<br />
+It's called MemPlayer and you can try it <a href="/m/memplayer/index.html">here</a>.<br />
+<br />
+<br />
+The problem MemPlayer solves:<br />
+<br />
+I listen to most audiobooks in the excellent Libby app. It nails the core use case: remembers playback position, gives easy controls for jumping back/forward, and gives granular control over playback speed.<br />
+<br />
+Sometimes, though, I have a book (or other long audio recording) as a single standalone audio file. I still need all of those features for easy listening across multiple days.<br />
+<br />
+Instead of finding an existing app with exactly what I need, I experimented to see how quickly I could whip up a simple utility app using ChatGPT. I found the low overhead of web development plus ChatGPT to be a killer combination.<br />
+<br />
+I started with this prompt:<br />
+<div id='code'>Generate HTML, JavaScript, and CSS for a simple web app with these requirements:<br />
+- The user can browse their local disk to select an audio file<br />
+- Alternatively, the user can drag and drop an audio file onto the web app<br />
+- The web app allows the user to play the audio file, change playback speed, and skip forward and back by 10 seconds<br />
+- The web app stores the file in local storage and restores it when the page is refreshed<br />
+- The web app stores the current playback position and restores it when the page is refreshed. This way the user can load the page and resume what they were listening to.<br />
+- There is a clear button which causes the web app to forget the current audio file and playback position</div>
+This produced code for index.html, scripts.js, and styles.css that gave me 90% of what I needed. The UI was good, but the web app did not work perfectly.<br />
+<br />
+I steered it with a few specific suggestions in subsequent prompts, mainly to use IndexedDB to store the audio file because its original choice, localStorage, can't handle big files. I also needed to fix a bug in restoring playback position. I then made some minor style and user experience tweaks, added PWA metadata and icons, and was done!<br />
+<br />
+Overall, I was able to whip this up in about an hour, with some of the fixes and tweaks done on the go.<br />
+<br />
+I think there's a lot of potential to make custom tiny tool web apps with low effort this way. And one of the best parts of the web is that nearly everyone can use these tools without any setup across their phones, tablets, computers, etc. And they will hopefully continue working for decades to come without any developer intervention.<br />
+
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Slice Tap Toy</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/slice.html" />
@@ -3430,41 +3486,6 @@ I eventually found more inspiring takeaways:<br />
 - Beth was able to break free from the trouble in her past when she finally let herself face it directly. She had a breakthrough by realizing her troubles weren't the same as her biological mother's. She also needed to see that other people had cared for her and followed her story from the beginning.<br />
 <br />
 In the end, the story resonates with me and the series is great entertainment.<br />
-
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>Rebecca Meyer</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/rebecca-meyer.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/rebecca-meyer.html" />
-<id>https://memalign.github.io/p/rebecca-meyer.html</id>
-<published>2020-11-04T00:00:00-08:00</published>
-<updated>2020-11-04T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/rebecca-meyer.html'>Rebecca Meyer</a>
-</h2>
-</div>
-<img src="/m/meyerweb.png">
-<div id='postdate'>Posted on 11/4/2020<br />
-Tags: <a href='/tags.html'>Other</a></div>
-Browsing interesting personal websites is often fun (as in <a href="/p/clamps.html">clamps</a> and <a href="/p/coding-machines.html">Coding Machines</a>). But sometimes it can break your heart.<br />
-<br />
-That's the case with <a href="https://meyerweb.com/ui/about.html">Eric Meyer</a>'s open grieving after losing a child. I found his website when I learned about <a href="https://meyerweb.com/eric/thoughts/2014/06/19/rebeccapurple/">rebeccapurple</a>, a special color added to the CSS specification as a tribute to his daughter. As I read his family's experiences, I found myself crying and feeling an aching pain for these people I've never met.<br />
-<br />
-Eric shared his experiences as they happened. You can find them <a href="https://meyerweb.com/eric/thoughts/category/personal/rebecca/?order=asc">here</a>. His family's story is tragic and emotional and wonderfully written.<br />
-<br />
-(I normally try to keep a backup of external sites but I'm not grabbing one here. I want to be respectful of Eric and his family's potential future choices to remove their story.)<br />
 
 </div>
 
