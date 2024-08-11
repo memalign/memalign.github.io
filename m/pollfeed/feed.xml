@@ -3,10 +3,32 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2024-07-15T15:00:01Z</updated>
+<updated>2024-08-11T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 08/11/24 08:00</title>
+<published>2024-08-11T15:00:01Z</published>
+<updated>2024-08-11T15:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:27378370af51d960e7f2806f45aa259f</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<a href="https://abagames.github.io/claude-one-button-game-creation/?zipfall">https://abagames.github.io/claude-one-button-game-creation/?zipfall</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/blockstacker/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?blockstacker">https://abagames.github.io/claude-one-button-game-creation/?blockstacker</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/stageseparation/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?stageseparation">https://abagames.github.io/claude-one-button-game-creation/?stageseparation</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/zipfall/screenshot.gif"><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 07/15/24 08:00</title>
 <published>2024-07-15T15:00:01Z</published>
