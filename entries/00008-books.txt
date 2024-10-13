@@ -4,7 +4,7 @@ Tags: Leisure
 
 [Image:/m/book.svg]
 
-Updated 5/11/2024
+Updated 10/13/2024
 
 I know some people who are always reading a book. I’m not an avid book reader like them.
 
@@ -85,6 +85,8 @@ Fiction:
 
 - Cloud Atlas by David Mitchell
 
+- Dark Matter by Blake Crouch
+
 - Death of a Salesman by Arthur Miller
 
 - [Link:https://qntm.org/differenc]The Difference[/Link]
@@ -93,14 +95,14 @@ Fiction:
     - Dirk Gently's Holistic Detective Agency
     - The Long Dark Tea-Time of the Soul
 
-- Dune by Frank Herbert
-    - The writing is dense and not usually what I would choose to read. I’m still glad I read it because it’s one of the classics which gets a lot of references.
+- Dune series by Frank Herbert
+  - Dune
+  - Dune Messiah
 
 - [Link:http://www.galactanet.com/oneoff/theegg_mod.html]The Egg[/Link]
     - Wonderful short story by Andy Weir
 
 - Ender’s Game by Orson Scott Card
-    - One of my favorite books. It’s an interesting story which also influences my own thoughts about leadership in the real world.
 
 - Ender’s Shadow by Orson Scott Card
     - A sort-of-sequel to Ender’s Game. I enjoyed how it layers extra depth onto a story I already loved.
@@ -160,6 +162,8 @@ Fiction:
 
 - The Illustrated Man by Ray Bradbury
 
+- I'm Starting to Worry About This Black Box of Doom by Jason Pargin
+
 - John Dies at the End series by David Wong (Jason Pargin)
     - John Dies at the End
     - This Book is Full of Spiders
@@ -190,6 +194,8 @@ Fiction:
     - Dense fantasy classics. I’m glad I’ve read them but I don’t love them. I tried to read the Silmarillion but that was way too far in the wrong direction for me (even more dense and way less story).
 
 - The Nine Billion Names of God by Arthur C. Clarke
+
+- The Peripheral by William Gibson
 
 - The Perks of Being a Wallflower by Stephen Chbosky
     - Really resonated with my angsty teenager self
