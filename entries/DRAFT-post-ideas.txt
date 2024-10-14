@@ -4,6 +4,16 @@
   - Filter/search on the page
   - Similar Songs Jukebox: use Spotify, Apple Music, or YouTube to play similar songs back-to-back
 
+- How do I fit into the economy?
+  - Start with people who grow food, lumber, cotton 
+  - How do knowledge workers fit in?
+  - Maybe use a fairly standard list of sectors of the economy; healthcare, transportation, etc 
+
+- Techniques for:
+  - Problem solving: enumerate all possible options methodically
+  - Creativity: write down any idea you have in a note. Remix/combine ideas. Demake. Origin story for lode runner.
+  - Creativity: Jon Cleese’s insight that creative endeavors get better and better with more time. Need as much time as possible.
+
 - Cool web apps
   - https://github.com/vikrum/kidpix
   - White noise PWAs
