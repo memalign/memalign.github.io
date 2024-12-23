@@ -3,10 +3,50 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2024-10-12T15:00:01Z</updated>
+<updated>2024-11-22T16:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 11/22/24 08:00</title>
+<published>2024-11-22T16:00:01Z</published>
+<updated>2024-11-22T16:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:8cd8448d7f2525609e8b965b821ab36e</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<a href="https://abagames.itch.io/">https://abagames.itch.io/</a><br />
+<a href="https://bsky.app/profile/abagames.bsky.social">https://bsky.app/profile/abagames.bsky.social</a><br />
+<a href="https://x.com/abagames">https://x.com/abagames</a><br />
+
+]]>
+</content>
+</entry>
+
+<entry>
+<title>asahi-net.or.jp at 11/14/24 08:00</title>
+<published>2024-11-14T16:00:01Z</published>
+<updated>2024-11-14T16:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:a0aef094e643080743b043025e1e0413</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<a href="https://abagames.itch.io/thunder">https://abagames.itch.io/thunder</a><br />
+<a href="https://abagames.itch.io/1x111">https://abagames.itch.io/1x111</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/pakupaku/screenshot.gif"><br />
+<a href="https://abagames.itch.io/paku-paku">https://abagames.itch.io/paku-paku</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/thunder/screenshot.gif"><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 10/12/24 08:00</title>
 <published>2024-10-12T15:00:01Z</published>
