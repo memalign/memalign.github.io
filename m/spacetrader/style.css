@@ -1,0 +1,694 @@
+body {
+  background: white;
+  color: black;
+  font-size: 11pt;
+  margin: 10px;
+  margin-top: 5px;
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  margin-bottom: 10px;
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+  touch-action: manipulation;
+  user-scalable: no;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-callout: none;
+  -webkit-user-drag: none;
+  -webkit-user-modify: none;
+  -webkit-highlight: none;
+}
+
+#game {
+  width: 600px;
+  margin: auto;
+}
+
+@media (max-width: 600px) {
+  #game {
+    width: 100%;
+  }
+}
+
+.main-title {
+  font-size: 2em;
+}
+
+h1 {
+  font-size: 1.3em;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+img {
+  border-radius: 3px;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.battle-opponent {
+	font-size: 0; /* Remove extra space for inline-block children  */
+	text-align: center;
+}
+
+.battle-opponent-crossfade {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* System landing buttons */
+
+.systemLandingButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.button-item {
+  margin: 0;
+}
+
+.button-link {
+  display: flex;
+  align-items: center;
+  padding: 0px 2px; /* height width */
+  padding-right: 3px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  margin-top: 2px;
+  margin-bottom: 0px;
+  margin-right: 1px;
+  margin-left: 1px;
+}
+
+.active {
+  background-color: #ccc;
+  border: 1px solid #aaa;
+}
+
+.landing-page-icon {
+  display: block;
+	width: 150px;
+	height: 150px;
+	margin: auto;
+}
+
+.table-row-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px; /* Achieve visual centering relative to text with this manual adjustment */
+}
+
+.crew-skill-table {
+	margin-left: 20px;
+}
+
+.roster-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-right: 2px;
+  vertical-align: middle;
+  padding-bottom: 5px; /* Achieve visual centering relative to text with this manual adjustment */
+}
+
+.roster-icon-box {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-right: 2px;
+  vertical-align: middle;
+  padding-bottom: 3px; /* Achieve visual centering relative to text with this manual adjustment */
+}
+
+.button-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-right: 2px;
+  vertical-align: middle;
+  padding-bottom: 2px; /* Achieve visual centering relative to text with this manual adjustment */
+}
+
+.button-icon-chart {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+
+.button-title {
+  font-size: 10px;
+}
+
+/* Battle buttons */
+
+.battleButtons {
+  list-style-type: none;
+  padding: 0;
+	margin: 0 auto;
+  width: 100%;
+}
+
+.battle-button-item {
+  margin: 0;
+}
+
+.battle-button-link {
+  display: flex;
+  align-items: center;
+  padding: 2px 2px; /* height width */
+  padding-right: 3px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  margin-right: 1px;
+  margin-left: 1px;
+}
+
+.battle-button-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-left: 8px;
+  margin-right: 10px;
+  vertical-align: middle;
+  padding-bottom: 2px; /* Achieve visual centering relative to text with this manual adjustment */
+}
+
+.battle-button-title {
+  font-size: 10px;
+}
+
+#eVC_dialog {
+	display: flex;
+	align-items: center;
+	line-height: 1.5em;
+	min-height: calc(1.5em * 6); /* Ensure the div is at least 6 lines tall */
+	width: 95%;
+	margin: 0 auto;
+}
+
+#travelProgressView {
+	margin-top: 5px;
+}
+
+.flipped {
+  transform: scaleX(-1);
+}
+
+#battleViewsContainer {
+	position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+	height: 75px;
+  margin-top: 3px;
+}
+
+.shipYardCommanderShip {
+  width: 100%;
+}
+
+.crossfade-container {
+  position: relative;
+  width: 40%;
+	text-align: center;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+}
+
+#repairDiv {
+  text-align: center;
+}
+
+.centered-text {
+  display: block;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.full-width-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hp-container {
+	display: block;
+  width: 100px;
+  height: 3px;
+  background-color: #ccc;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 3px;
+  margin-bottom: 0px;
+	padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hp-bar {
+  height: 100%;
+  background-color: green;
+  width: 100%;
+}
+
+.shield-container {
+	display: inline-block;
+  width: 100px;
+  height: 3px;
+  background-color: #ccc;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 3px;
+  margin-bottom: 0px;
+	padding: 0px;
+}
+
+.shield-bar {
+  height: 100%;
+  background-color: #FFD829;
+  width: 100%;
+}
+
+.bar-width-transition {
+  transition: width 0.2s ease-in-out;
+}
+
+.hidden {
+  display: none;
+}
+
+.system-info {
+  padding-top: 10px;
+}
+
+.system-info-header {
+  padding-top: 10px;
+}
+
+.news-header {
+  padding-top: 10px;
+}
+
+.gv-system-info {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, calc(-100% - 0.3em));
+  pointer-events: none; /* let user interaction pass through */
+  color: #D8F0FF;
+  text-shadow: 1px 1px 2px black, -1px -1px 2px black, 0px 1px 2px black, 1px 0px 2px black, 0px -1px 2px black, -1px 0px 2px black, 1px -1px 2px black, -1px 1px 2px black;
+  width: 100%;
+  text-align: center;
+	font-size: 0.8em;
+  line-height: 1.0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0px;
+}
+
+#debug {
+  margin-top: 50px;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+table tr.section-label td {
+  background-color: transparent;
+  font-weight: bold;
+}
+
+.preserve-whitespace {
+  white-space: pre-line;
+}
+
+.tight-table {
+  border-collapse: separate;
+  border-spacing: 2px;
+  width: 100%;
+}
+
+.tight-table-collapse {
+  border-collapse: collapse;
+  border-spacing: 2px;
+  width: 100%;
+}
+
+.tight-table td {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 1px;
+  padding-right: 1px;
+  background-color: #f9f9f9;
+}
+
+.tight-table-collapse td {
+  padding: 1px;
+  background-color: #f9f9f9;
+}
+
+.skill-table {
+  border-collapse: collapse;
+  border-spacing: 2px;
+	margin: auto;
+}
+
+.skill-value-cell {
+  text-align: right;
+	width: 20px;
+}
+
+.skill-label-cell {
+  text-align: right;
+	padding-right: 10px;
+}
+
+.points {
+	padding-top: 5px;
+	padding-bottom: 15px;
+}
+
+.difficulty {
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.new-commander-title {
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.commanderTable {
+  text-align: center;
+  margin: auto;
+}
+
+.left-aligned-cell {
+  text-align: left;
+}
+
+.right-aligned-cell {
+  text-align: right;
+}
+
+.centered-cell {
+  text-align: center;
+}
+
+.centered {
+  text-align: center;
+}
+
+.centered-div {
+  margin: auto;
+  width: fit-content;
+}
+
+#newsStrDiv {
+  border: 1px solid black; /* Black border */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Drop shadow */
+  padding: 15px; /* Optional: space inside the border */
+  width: fit-content;
+  max-width: 90%;
+  margin: auto;
+}
+
+.bankTable {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+h4 {
+  margin: 0;
+}
+
+.header-with-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-row {
+  display: flex;
+}
+
+.bays-credits {
+  display: flex;
+  justify-content: space-between;  /* Left-aligns the first item, right-aligns the second */
+}
+
+/* Styling for the backdrop (overlay) */
+.alert-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 9999;
+}
+
+/* Styling for the alert box */
+.alert-box {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	width: 80%;
+	max-width: 400px;
+	text-align: center;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.alert-box-default {
+  top: 30%;
+}
+
+.alert-box-high {
+  top: 5%;
+}
+
+/* Title styling */
+.alert-title {
+	font-size: 1.1em;
+	margin-bottom: 10px;
+}
+
+/* Container for the action buttons */
+.alert-actions {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+/* Styling for the buttons */
+.alert-action-button {
+	padding: 10px 20px;
+	margin: 5px;
+	font-size: 1em;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.alert-action-button.destructive {
+  color: red;
+}
+
+/* Simple hover effect for buttons */
+.alert-action-button:hover {
+	background: #f0f0f0;
+}
+
+/* Styling for two buttons: display side by side */
+.alert-actions.two-buttons .alert-action-button {
+	flex: 1 1 45%;
+}
+
+/* For more than two buttons, display them in a list */
+.alert-actions.more-buttons .alert-action-button {
+	flex: 1 1 100%;
+}
+
+#zoomedGalaxyViewCanvasContainer {
+  position: relative;
+  text-align: center;
+  height: 20vh;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+#galaxyViewCanvasContainer {
+  position: relative;
+  text-align: center;
+  height: 50vh;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+#zoomedGalaxyViewCanvas {
+  border-radius: 3px;
+}
+
+#galaxyViewCanvas {
+  border-radius: 3px;
+}
+
+#travelProgressViewCanvasContainer {
+  position: relative;
+  text-align: center;
+  height: 50px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+#travelProgressViewCanvas {
+  border-radius: 3px;
+}
+
+@media all and (orientation:portrait) {
+
+body, p, li { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:17.000000px + 1.0vw; font-weight: normal; }
+
+h3, h4 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:20.000000px + 1.0vw; font-weight: bold; }
+
+}
+
+
+@media all and (orientation:landscape) {
+
+body, p, li { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:8.500000px + 1.0vw; font-weight: normal; }
+
+h3, h4 { font-family: "Helvetica Neue", Helvetica, sans-serif; font-size:10.000000px + 1.0vw; font-weight: bold; }
+
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #1C1C1C;
+    color: #F0F0F0;
+  }
+
+  input[type="text"], textarea {
+    background-color : #121212; 
+    color: #eee;
+  }
+
+  .battle-button-link {
+    border: 1px solid #475569;
+    background-color: #7C8BA1;
+    color: #000;
+  }
+
+  .button-link {
+    border: 1px solid #475569;
+    background-color: #7C8BA1;
+    color: #000;
+  }
+
+  .active {
+    background-color: #B4C3D8;
+    border: 1px solid #555;
+  }
+
+  a {
+    color: #64748B;
+  }
+
+  .tight-table td {
+    background-color: #2E2E2E;
+  }
+
+  .tight-table-collapse td {
+    background-color: #2E2E2E;
+  }
+
+  #newsStrDiv {
+    border: 1px solid white;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.4); /* Drop shadow */
+  }
+
+  .alert-box {
+    background: #1C1C1C;
+    color: #F0F0F0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .alert-action-button {
+    background-color: #7C8BA1;
+    color: #000;
+  }
+
+  .alert-action-button:hover {
+    background-color: #B4C3D8;
+  }
+
+  .alert-action-button.destructive {
+    color: #A7120C;
+  }
+
+  button {
+    border: 1px solid #475569;
+    border-radius: 999px;
+    padding: 1px 9px;
+    margin: 0 1px;
+    background-color: #7C8BA1;
+    color: #000;
+  }
+  
+  button:disabled {
+    background-color: #6B7280;
+    color: #9ca3af;
+  }
+}
+

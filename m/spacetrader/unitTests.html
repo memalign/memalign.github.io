@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css" charset="utf-8">
+<script src="GameRand.js"></script>
+<script src="SSSTActionLogger.js"></script>
+<script src="Utilities.js"></script>
+<script src="SSSTViewController.js"></script>
+<script src="SSSTAlertViewController.js"></script>
+<script src="SSSTNewCommanderViewController.js"></script>
+<script src="SSSTSystemLandingViewController.js"></script>
+<script src="SSSTPersonnelRosterViewController.js"></script>
+<script src="SSSTBankViewController.js"></script>
+<script src="SSSTNewsViewController.js"></script>
+<script src="SSSTCommanderStatusViewController.js"></script>
+<script src="SSSTBuySellCargoViewController.js"></script>
+<script src="SSSTEquipmentViewController.js"></script>
+<script src="SSSTShipYardViewController.js"></script>
+<script src="SSSTWarpViewController.js"></script>
+<script src="SSSTTravelViewController.js"></script>
+<script src="SSSTEncounterController.js"></script>
+<script src="SSSTEncounterViewController.js"></script>
+<script src="SSSTEndGameViewController.js"></script>
+<script src="SSSTPlunderViewController.js"></script>
+<script src="SSSTGalacticChartViewController.js"></script>
+<script src="SSSTGalaxyView.js"></script>
+<script src="SSSTTravelProgressView.js"></script>
+<script src="SSSTBattleOpponentView.js"></script>
+<script src="SSSTCrewMember.js"></script>
+<script src="SSSTCommander.js"></script>
+<script src="SSSTOpponent.js"></script>
+<script src="SSSTGame.js"></script>
+<script src="SSSTSolarSystem_h.js"></script>
+<script src="SSSTSolarSystem.js"></script>
+<script src="SSSTTradeItem_h.js"></script>
+<script src="SSSTTradeItem.js"></script>
+<script src="SSSTPolitics.js"></script>
+<script src="SSSTSpecialEventSpecifier.js"></script>
+<script src="SSSTAccessory.js"></script>
+<script src="SSSTShip.js"></script>
+<script src="PCEImage.js"></script>
+<script src="Images.js"></script>
+<script src="main.js"></script>
+<script src="UnitTests.js"></script>
+
+<script>
+
+const debugMode = MADebugMode.Assert
+let actionLog = null
+let gameRand = null
+let ut = null
+let stLocalStorage = null
+
+function _runUTBlock(runBlock) {
+  try {
+    MALog.clear()
+    assertionCount = 0
+    runBlock()
+  } catch(err) {
+      console.log("unitTests.html caught exception " + err + " with stack:\n"+err.stack)
+    throw err
+  } finally {
+    let outputDiv = document.getElementById("testOutput")
+    let content = document.createTextNode(MALog.logs.join("\n") + "\n\n")
+    outputDiv.appendChild(content)
+    let gameDiv = document.getElementById("game")
+    gameDiv.innerHTML = ''
+    SSSTAlertViewController.clearAlerts()
+  }
+}
+
+function runUTTests() {
+  _runUTBlock(() => {
+    ut.run()
+  })
+}
+
+function runUTStress() {
+  document.getElementById("stressButton").disabled = true
+
+  setTimeout(() => {
+    _runUTBlock(() => {
+      ut.runStress()
+    })
+  }, 100);
+}
+
+
+let caughtError = null
+window.onerror = function (message, source, lineno, colno, error) {
+  console.log(`on error called. ${message} ${source} ${lineno} ${colno} ${error}`)
+  MALog.log(`on error called. ${message} ${source} ${lineno} ${colno} ${error.toString().replace(/\n/g, "<br>")}`)
+  caughtError = error
+  window.onerror = null
+  return false
+}
+
+window.onload = function () {
+  ut = new UnitTests()
+  
+  runUTTests()
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput"></div>
+</pre>
+
+<button id="stressButton" onclick="runUTStress()">Run Stress Tests</button>
+<div id="game"></div>
+<div id="cheats" class="hidden"></div>
+
+<br />
+<br />
+</body>
+
+</html>

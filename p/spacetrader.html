@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Space Trader</title>
+<meta property="og:title" content="Space Trader" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/spacetrader.html" />
+<meta property="og:image" content="https://memalign.github.io/m/spacetrader/spacetrader-1000.png" />
+<meta property="og:description" content="Introducing my latest game, playable right in your web browser: Space Trader In Space Trader, you can trade goods, hunt bounties, amass a fortune, buy a moon and retire. Space…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a><div id='post'>
+<div id='header'>
+<h1>
+Space Trader
+</h1>
+</div>
+<img src="/m/spacetrader/spacetrader-1000.png">
+<div id='postdate'>Posted on 12/24/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Games</a></div>
+Introducing my latest game, playable right in your web browser: <a href="/m/spacetrader/index.html">Space Trader</a><br />
+<br />
+In Space Trader, you can trade goods, hunt bounties, amass a fortune, buy a moon and retire.<br />
+<br />
+Space Trader can be saved to your home screen as a PWA (Progressive Web App).<br />
+<br />
+<br />
+Space Trader started as a game written by Pieter Spronck for Palm OS, released in 2002. <a href="https://en.wikipedia.org/wiki/Space_Trader_(Palm_OS)">Wikipedia page</a>. <a href="https://www.spronck.net/spacetrader/index.html">Official website</a> (<a href="/m/spacetrader-official-site-mirror/index.html">mirror</a>).<br />
+<br />
+You can play the <a href="https://archive.org/details/palm3_SpaceTrader">original</a> on archive.org.<br />
+<br />
+As one of my favorites, this game holds a special place in my heart. I played a ton in middle school and high school. This is the second port of the game I've made.<br />
+<br />
+Like SFCave (recreated as <a href="/m/cr/index.html">CaveRibbon</a>), I decided to recreate Space Trader as a web app to feed my nostalgia and give the game new life. I hope this version of Space Trader can survive long into the future thanks to the universal availability of web browsers and their devotion to compatibility.<br />
+<br />
+<br />
+Some technical details:<br />
+<br />
+- As usual, I used <a href="/m/pceimage/index.html">PCEImage Editor</a> to create many graphics. I created the PCEImage format and tools so I could simply store and edit graphics as ASCII art. See them <a href="/m/spacetrader/Images.js">here</a>.<br />
+<br />
+- To aid debugging and unit testing, I use a deterministic random number generator called <a href="/m/spacetrader/GameRand.js">GameRand</a>. In debug mode, I can capture the random seed and log of every action taken in the game. Then I can replay that to reproduce a bug or create a test.<br />
+&nbsp;&nbsp;- I've written many unit / integration tests for Space Trader. See them <a href="/m/spacetrader/UnitTests.js">here</a>.<br />
+&nbsp;&nbsp;- Learn more about GameRand in the <a href="/p/caveribbon.html">post</a> for CaveRibbon.<br />
+&nbsp;&nbsp;- A major downside to this technique for testing is that tests become invalid if a bug fix (or a new feature) changes the amount of random numbers consumed. I ended up remaking many tests one or two times. This added a few days of extra work to the project.<br />
+&nbsp;&nbsp;- You can play the game with cheats and access the replay log on a special version of the game: <a href="/m/spacetrader/cheats.html">cheats.html</a>.<br />
+<br />
+- I translated an existing implementation of this game to vanilla JavaScript using ChatGPT. I could translate ~300 lines at a time. I audited every line produced. This worked pretty well and saved me a huge amount of time compared to manually translating the code. This was a somewhat zen activity for me because it was mechanical; tedious but rewarding to see how quickly I could progress through the whole codebase. This was the kind of programming I could do after an exhausting day at work. Major differences/difficulties:<br />
+&nbsp;&nbsp;- The original code relies on integer math, but JavaScript uses float math. I needed to ensure all uses of numbers yielded an expected result. I ended up adding exhaustive runtime asserts and writing automated stress tests to catch problems.<br />
+&nbsp;&nbsp;- ChatGPT would sometimes produce inconsistent translations, especially for enum names. These could lurk, waiting to cause a crash at runtime. I hunted these with stress tests, manual tests, nearly exhaustive code coverage, and replayable game logs (which I turned into tests).<br />
+&nbsp;&nbsp;- Similarly, ChatGPT would inconsistently translate properties and their setters/getters. I left many awkward translations in place to save myself time, even though it makes the code worse.<br />
+&nbsp;&nbsp;- The UI needed to be tailored to the web. I ended up writing almost all new code for the UI.<br />
+&nbsp;&nbsp;- The original code had no tests. I wrote all new tests and a quick-and-dirty system for measuring code coverage. I even discovered several longstanding bugs in the original code.<br />
+<br />
+- Before translating the whole codebase, I investigated using emscripten to reuse as much of the original C code as possible. I decided I wouldn't be satisfied with the result. There wasn't separation of UI and business logic that would have let me easily build new UI tailored to web. There were a lot of Palm OS platform-specific functions that would need to be replaced. I didn't want to struggle to change the existing code where it became necessary.<br />
+
+</div>
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

@@ -5,10 +5,72 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2024-07-25T00:00:00-08:00</updated>
+<updated>2024-12-24T00:00:00-08:00</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Space Trader</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/spacetrader.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/spacetrader.html" />
+<id>https://memalign.github.io/p/spacetrader.html</id>
+<published>2024-12-24T00:00:00-08:00</published>
+<updated>2024-12-24T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/spacetrader.html'>Space Trader</a>
+</h2>
+</div>
+<img src="/m/spacetrader/spacetrader-1000.png">
+<div id='postdate'>Posted on 12/24/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Games</a></div>
+Introducing my latest game, playable right in your web browser: <a href="/m/spacetrader/index.html">Space Trader</a><br />
+<br />
+In Space Trader, you can trade goods, hunt bounties, amass a fortune, buy a moon and retire.<br />
+<br />
+Space Trader can be saved to your home screen as a PWA (Progressive Web App).<br />
+<br />
+<br />
+Space Trader started as a game written by Pieter Spronck for Palm OS, released in 2002. <a href="https://en.wikipedia.org/wiki/Space_Trader_(Palm_OS)">Wikipedia page</a>. <a href="https://www.spronck.net/spacetrader/index.html">Official website</a> (<a href="/m/spacetrader-official-site-mirror/index.html">mirror</a>).<br />
+<br />
+You can play the <a href="https://archive.org/details/palm3_SpaceTrader">original</a> on archive.org.<br />
+<br />
+As one of my favorites, this game holds a special place in my heart. I played a ton in middle school and high school. This is the second port of the game I've made.<br />
+<br />
+Like SFCave (recreated as <a href="/m/cr/index.html">CaveRibbon</a>), I decided to recreate Space Trader as a web app to feed my nostalgia and give the game new life. I hope this version of Space Trader can survive long into the future thanks to the universal availability of web browsers and their devotion to compatibility.<br />
+<br />
+<br />
+Some technical details:<br />
+<br />
+- As usual, I used <a href="/m/pceimage/index.html">PCEImage Editor</a> to create many graphics. I created the PCEImage format and tools so I could simply store and edit graphics as ASCII art. See them <a href="/m/spacetrader/Images.js">here</a>.<br />
+<br />
+- To aid debugging and unit testing, I use a deterministic random number generator called <a href="/m/spacetrader/GameRand.js">GameRand</a>. In debug mode, I can capture the random seed and log of every action taken in the game. Then I can replay that to reproduce a bug or create a test.<br />
+&nbsp;&nbsp;- I've written many unit / integration tests for Space Trader. See them <a href="/m/spacetrader/UnitTests.js">here</a>.<br />
+&nbsp;&nbsp;- Learn more about GameRand in the <a href="/p/caveribbon.html">post</a> for CaveRibbon.<br />
+&nbsp;&nbsp;- A major downside to this technique for testing is that tests become invalid if a bug fix (or a new feature) changes the amount of random numbers consumed. I ended up remaking many tests one or two times. This added a few days of extra work to the project.<br />
+&nbsp;&nbsp;- You can play the game with cheats and access the replay log on a special version of the game: <a href="/m/spacetrader/cheats.html">cheats.html</a>.<br />
+<br />
+- I translated an existing implementation of this game to vanilla JavaScript using ChatGPT. I could translate ~300 lines at a time. I audited every line produced. This worked pretty well and saved me a huge amount of time compared to manually translating the code. This was a somewhat zen activity for me because it was mechanical; tedious but rewarding to see how quickly I could progress through the whole codebase. This was the kind of programming I could do after an exhausting day at work. Major differences/difficulties:<br />
+&nbsp;&nbsp;- The original code relies on integer math, but JavaScript uses float math. I needed to ensure all uses of numbers yielded an expected result. I ended up adding exhaustive runtime asserts and writing automated stress tests to catch problems.<br />
+&nbsp;&nbsp;- ChatGPT would sometimes produce inconsistent translations, especially for enum names. These could lurk, waiting to cause a crash at runtime. I hunted these with stress tests, manual tests, nearly exhaustive code coverage, and replayable game logs (which I turned into tests).<br />
+&nbsp;&nbsp;- Similarly, ChatGPT would inconsistently translate properties and their setters/getters. I left many awkward translations in place to save myself time, even though it makes the code worse.<br />
+&nbsp;&nbsp;- The UI needed to be tailored to the web. I ended up writing almost all new code for the UI.<br />
+&nbsp;&nbsp;- The original code had no tests. I wrote all new tests and a quick-and-dirty system for measuring code coverage. I even discovered several longstanding bugs in the original code.<br />
+<br />
+- Before translating the whole codebase, I investigated using emscripten to reuse as much of the original C code as possible. I decided I wouldn't be satisfied with the result. There wasn't separation of UI and business logic that would have let me easily build new UI tailored to web. There were a lot of Palm OS platform-specific functions that would need to be replaced. I didn't want to struggle to change the existing code where it became necessary.<br />
+
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>MemPlayer</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/memplayer.html" />
@@ -3431,61 +3493,6 @@ Other notes:<br />
 <br />
 - The game source source code can be found <a href="https://github.com/memalign/memalign.github.io/tree/master/m/pacmandungeon">here</a><br />
 - I wrote a simple <a href="https://github.com/memalign/memalign.github.io/blob/master/m/pacmandungeon/UnitTests.js">unit test harness</a>. Run the tests <a href="/m/pacmandungeon/unitTests.html">here</a>.<br />
-
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>The Queen's Gambit</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/queens-gambit.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/queens-gambit.html" />
-<id>https://memalign.github.io/p/queens-gambit.html</id>
-<published>2020-11-21T00:00:00-08:00</published>
-<updated>2020-11-21T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/queens-gambit.html'>The Queen's Gambit</a>
-</h2>
-</div>
-<img src="/m/queensgambit.jpg">
-<div id='postdate'>Posted on 11/21/2020<br />
-Tags: <a href='/tags.html'>Leisure</a></div>
-I recently watched <a href="https://en.wikipedia.org/wiki/The_Queen%27s_Gambit_(miniseries)">The Queen's Gambit</a>, a 7-episode miniseries on Netflix. It's based on a <a href="https://en.wikipedia.org/wiki/The_Queen%27s_Gambit_(novel)">novel</a> that I haven't read.<br />
-<br />
-The story drew me in and, though I originally planned to watch one episode per day, I ended up needing more and more. I watched one on Sunday, one on Monday, two on Tuesday, and the last three on Wednesday.<br />
-<br />
-As <a href="/p/books.html">often happens</a> when I finish a story, I was excited to see how it ended but I also felt a pensive sadness at the loss of characters I had grown to care for.<br />
-<br />
-I have some thoughts on the story below. If you haven't watched it yet, I recommend that you stop here and go experience it yourself! I hope you like it.<br />
-<br />
-.<br />
-.<br />
-.<br />
-<br />
-<img src="/m/bethharmon.jpg"><br />
-.<br />
-.<br />
-.<br />
-<br />
-I kept thinking about the plot and characters, especially the main character, Beth Harmon. At first, I was a little disappointed that Beth had so many people helping her yet she had not been good or kind to them. They supported her because she was so brilliant that they wanted her to succeed. Part of their support and her success also came from being physically attractive and stylish. This happens in the real world, too, but it's not inspiring.<br />
-<br />
-I eventually found more inspiring takeaways:<br />
-<br />
-- Beth overcame her struggle with addiction thanks to people caring about her<br />
-- Beth found success by following her passions and developing her talents<br />
-- Beth's success required more than raw talent or learning on her own. Friendship and mentors made a huge difference.<br />
-- Beth was able to break free from the trouble in her past when she finally let herself face it directly. She had a breakthrough by realizing her troubles weren't the same as her biological mother's. She also needed to see that other people had cared for her and followed her story from the beginning.<br />
-<br />
-In the end, the story resonates with me and the series is great entertainment.<br />
 
 </div>
 

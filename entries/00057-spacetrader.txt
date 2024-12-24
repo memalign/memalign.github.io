@@ -1,0 +1,39 @@
+Title: Space Trader
+Date: 12/24/2024
+Tags: Programming, Games
+[Image:/m/spacetrader/spacetrader-1000.png]
+
+Introducing my latest game, playable right in your web browser: [Link:/m/spacetrader/index.html]Space Trader[/Link]
+
+In Space Trader, you can trade goods, hunt bounties, amass a fortune, buy a moon and retire.
+
+Space Trader can be saved to your home screen as a PWA (Progressive Web App).
+
+
+Space Trader started as a game written by Pieter Spronck for Palm OS, released in 2002. [Link:https://en.wikipedia.org/wiki/Space_Trader_(Palm_OS)]Wikipedia page[/Link]. [Link:https://www.spronck.net/spacetrader/index.html]Official website[/Link] ([Link:/m/spacetrader-official-site-mirror/index.html]mirror[/Link]).
+
+You can play the [Link:https://archive.org/details/palm3_SpaceTrader]original[/Link] on archive.org.
+
+As one of my favorites, this game holds a special place in my heart. I played a ton in middle school and high school. This is the second port of the game I've made.
+
+Like SFCave (recreated as [Link:/m/cr/index.html]CaveRibbon[/Link]), I decided to recreate Space Trader as a web app to feed my nostalgia and give the game new life. I hope this version of Space Trader can survive long into the future thanks to the universal availability of web browsers and their devotion to compatibility.
+
+
+Some technical details:
+
+- As usual, I used [Link:/m/pceimage/index.html]PCEImage Editor[/Link] to create many graphics. I created the PCEImage format and tools so I could simply store and edit graphics as ASCII art. See them [Link:/m/spacetrader/Images.js]here[/Link].
+
+- To aid debugging and unit testing, I use a deterministic random number generator called [Link:/m/spacetrader/GameRand.js]GameRand[/Link]. In debug mode, I can capture the random seed and log of every action taken in the game. Then I can replay that to reproduce a bug or create a test.
+  - I've written many unit / integration tests for Space Trader. See them [Link:/m/spacetrader/UnitTests.js]here[/Link].
+  - Learn more about GameRand in the [Link:/p/caveribbon.html]post[/Link] for CaveRibbon.
+  - A major downside to this technique for testing is that tests become invalid if a bug fix (or a new feature) changes the amount of random numbers consumed. I ended up remaking many tests one or two times. This added a few days of extra work to the project.
+  - You can play the game with cheats and access the replay log on a special version of the game: [Link:/m/spacetrader/cheats.html]cheats.html[/Link].
+
+- I translated an existing implementation of this game to vanilla JavaScript using ChatGPT. I could translate ~300 lines at a time. I audited every line produced. This worked pretty well and saved me a huge amount of time compared to manually translating the code. This was a somewhat zen activity for me because it was mechanical; tedious but rewarding to see how quickly I could progress through the whole codebase. This was the kind of programming I could do after an exhausting day at work. Major differences/difficulties:
+  - The original code relies on integer math, but JavaScript uses float math. I needed to ensure all uses of numbers yielded an expected result. I ended up adding exhaustive runtime asserts and writing automated stress tests to catch problems.
+  - ChatGPT would sometimes produce inconsistent translations, especially for enum names. These could lurk, waiting to cause a crash at runtime. I hunted these with stress tests, manual tests, nearly exhaustive code coverage, and replayable game logs (which I turned into tests).
+  - Similarly, ChatGPT would inconsistently translate properties and their setters/getters. I left many awkward translations in place to save myself time, even though it makes the code worse.
+  - The UI needed to be tailored to the web. I ended up writing almost all new code for the UI.
+  - The original code had no tests. I wrote all new tests and a quick-and-dirty system for measuring code coverage. I even discovered several longstanding bugs in the original code.
+
+- Before translating the whole codebase, I investigated using emscripten to reuse as much of the original C code as possible. I decided I wouldn't be satisfied with the result. There wasn't separation of UI and business logic that would have let me easily build new UI tailored to web. There were a lot of Palm OS platform-specific functions that would need to be replaced. I didn't want to struggle to change the existing code where it became necessary.

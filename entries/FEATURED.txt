@@ -1,3 +1,7 @@
+Space Trader
+- Image: /m/spacetrader/spacetrader.png
+- /m/spacetrader/index.html
+
 MemPlayer
 - Image: /m/memplayer/memplayer.png
 - /m/memplayer/index.html

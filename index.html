@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/memplayer/memplayer.png" />
-<meta property="og:description" content="I recently whipped up a simple audio player dedicated to listening to long audio files across multiple listening sessions. It's called MemPlayer and you can try it here. The problem…" />
+<meta property="og:image" content="https://memalign.github.io/m/spacetrader/spacetrader-1000.png" />
+<meta property="og:description" content="Introducing my latest game, playable right in your web browser: Space Trader In Space Trader, you can trade goods, hunt bounties, amass a fortune, buy a moon and retire. Space…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -24,6 +24,12 @@
 </div><div id='header'><h1>memalign.github.io</h1></div>
 <div id='top-header'><h3>( ( ( featured projects ) ) )</h3></div>
 <div id='projects-grid'>
+  <div id='projects-grid-entry'>
+    <a href='/m/spacetrader/index.html'>
+    <div id='projects-grid-title'>Space Trader</div>
+    <div class='rect-img-container'><img src='/m/spacetrader/spacetrader.png'></div>
+    </a>
+  </div>
   <div id='projects-grid-entry'>
     <a href='/m/memplayer/index.html'>
     <div id='projects-grid-title'>MemPlayer</div>
@@ -101,6 +107,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/spacetrader.html'>Space Trader</a><br />
 <a href='p/memplayer.html'>MemPlayer</a><br />
 <a href='p/slice.html'>Slice Tap Toy</a><br />
 <a href='p/caveribbon.html'>CaveRibbon</a><br />
@@ -140,8 +147,8 @@
 <a href='p/andrew-plotkin.html'>Andrew Plotkin's Zarfhome</a><br />
 <a href='p/product-reviews.html'>Product Review Writing Prompts</a><br />
 <a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
-</div><div id='grid-entry'>
 <a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
+</div><div id='grid-entry'>
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 <a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
 <a href='p/coding-machines.html'>Coding Machines</a><br />
@@ -163,6 +170,53 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/spacetrader.html'>Space Trader</a>
+</h2>
+</div>
+<img src="/m/spacetrader/spacetrader-1000.png">
+<div id='postdate'>Posted on 12/24/2024<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Games</a></div>
+Introducing my latest game, playable right in your web browser: <a href="/m/spacetrader/index.html">Space Trader</a><br />
+<br />
+In Space Trader, you can trade goods, hunt bounties, amass a fortune, buy a moon and retire.<br />
+<br />
+Space Trader can be saved to your home screen as a PWA (Progressive Web App).<br />
+<br />
+<br />
+Space Trader started as a game written by Pieter Spronck for Palm OS, released in 2002. <a href="https://en.wikipedia.org/wiki/Space_Trader_(Palm_OS)">Wikipedia page</a>. <a href="https://www.spronck.net/spacetrader/index.html">Official website</a> (<a href="/m/spacetrader-official-site-mirror/index.html">mirror</a>).<br />
+<br />
+You can play the <a href="https://archive.org/details/palm3_SpaceTrader">original</a> on archive.org.<br />
+<br />
+As one of my favorites, this game holds a special place in my heart. I played a ton in middle school and high school. This is the second port of the game I've made.<br />
+<br />
+Like SFCave (recreated as <a href="/m/cr/index.html">CaveRibbon</a>), I decided to recreate Space Trader as a web app to feed my nostalgia and give the game new life. I hope this version of Space Trader can survive long into the future thanks to the universal availability of web browsers and their devotion to compatibility.<br />
+<br />
+<br />
+Some technical details:<br />
+<br />
+- As usual, I used <a href="/m/pceimage/index.html">PCEImage Editor</a> to create many graphics. I created the PCEImage format and tools so I could simply store and edit graphics as ASCII art. See them <a href="/m/spacetrader/Images.js">here</a>.<br />
+<br />
+- To aid debugging and unit testing, I use a deterministic random number generator called <a href="/m/spacetrader/GameRand.js">GameRand</a>. In debug mode, I can capture the random seed and log of every action taken in the game. Then I can replay that to reproduce a bug or create a test.<br />
+&nbsp;&nbsp;- I've written many unit / integration tests for Space Trader. See them <a href="/m/spacetrader/UnitTests.js">here</a>.<br />
+&nbsp;&nbsp;- Learn more about GameRand in the <a href="/p/caveribbon.html">post</a> for CaveRibbon.<br />
+&nbsp;&nbsp;- A major downside to this technique for testing is that tests become invalid if a bug fix (or a new feature) changes the amount of random numbers consumed. I ended up remaking many tests one or two times. This added a few days of extra work to the project.<br />
+&nbsp;&nbsp;- You can play the game with cheats and access the replay log on a special version of the game: <a href="/m/spacetrader/cheats.html">cheats.html</a>.<br />
+<br />
+- I translated an existing implementation of this game to vanilla JavaScript using ChatGPT. I could translate ~300 lines at a time. I audited every line produced. This worked pretty well and saved me a huge amount of time compared to manually translating the code. This was a somewhat zen activity for me because it was mechanical; tedious but rewarding to see how quickly I could progress through the whole codebase. This was the kind of programming I could do after an exhausting day at work. Major differences/difficulties:<br />
+&nbsp;&nbsp;- The original code relies on integer math, but JavaScript uses float math. I needed to ensure all uses of numbers yielded an expected result. I ended up adding exhaustive runtime asserts and writing automated stress tests to catch problems.<br />
+&nbsp;&nbsp;- ChatGPT would sometimes produce inconsistent translations, especially for enum names. These could lurk, waiting to cause a crash at runtime. I hunted these with stress tests, manual tests, nearly exhaustive code coverage, and replayable game logs (which I turned into tests).<br />
+&nbsp;&nbsp;- Similarly, ChatGPT would inconsistently translate properties and their setters/getters. I left many awkward translations in place to save myself time, even though it makes the code worse.<br />
+&nbsp;&nbsp;- The UI needed to be tailored to the web. I ended up writing almost all new code for the UI.<br />
+&nbsp;&nbsp;- The original code had no tests. I wrote all new tests and a quick-and-dirty system for measuring code coverage. I even discovered several longstanding bugs in the original code.<br />
+<br />
+- Before translating the whole codebase, I investigated using emscripten to reuse as much of the original C code as possible. I decided I wouldn't be satisfied with the result. There wasn't separation of UI and business logic that would have let me easily build new UI tailored to web. There were a lot of Palm OS platform-specific functions that would need to be replaced. I didn't want to struggle to change the existing code where it became necessary.<br />
+
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -865,63 +919,8 @@ If you create any cool PCEImages, I hope you'll consider <a href="https://github
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/pceimage.html'>PCEImage</a>
-</h2>
-</div>
-<img src="/m/pceimage/koffing.gif">
-<div id='postdate'>Posted on 2/13/2022<br />
-Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a></div>
-I recently needed to make pixel art for a game and wanted to define the images in code rather than having separate image asset files.<br />
-<br />
-Defining the images in code comes with some benefits:<br />
-- I don't need separate versions of the images for different resolutions. I can easily scale them up automatically.<br />
-- I can easily slice the <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a> to animate them programmatically<br />
-- I can make minor tweaks with a text editor (my tool of choice! I am much more at home in a text editor than image editing software)<br />
-- I get useful diffs when changing images in <a href="/p/source-control.html">source control</a><br />
-<br />
-To achieve this, I created a simple format I'm calling "PCEImage" (which is short for "Pixel-Character Encoded Image"). Here's what it looks like:<br />
-<br />
-<div id='code'>.:#00000000<br />
-@:#444444<br />
-#:#5555FF<br />
-<br />
-.......<br />
-.@.@...<br />
-.@.@...<br />
-.@.@...<br />
-.@@@.#.<br />
-.@.@...<br />
-.@.@.#.<br />
-.@.@.#.<br />
-.@.@.#.<br />
-.......</div>
-Here's that image as a PNG (drawn with scale 10):<br />
-<img src="/m/pceimage/hi.png">A neat benefit of this encoding is that the images are also ASCII art -- it's easy to see what a PCEImage looks like even without coloring. In fact, this format is a combination of ASCII art and <a href="https://en.wikipedia.org/wiki/Indexed_color">indexed color</a>.<br />
-<br />
-<br />
-<h3>PCEImage Format Specification</h3><br />
-The first section of a PCEImage defines what color each character represents. Each line in this section looks like: CHARACTER:HEXCOLOR<br />
-Then there's one blank line.<br />
-Then the second section is the image itself. Every character in this section (except for the newline at the end of each line) represents a pixel in the image. Every line in this section should be the same length (the width of the image).<br />
-There should not be a newline character after the last pixel character on the last line.<br />
-<br />
-<br />
-<h3>PCEImage Reference Implementation</h3><br />
-I wrote a reference implementation of this specification in JavaScript <a href="/m/pceimage/PCEImage.js">here</a>.<br />
-<br />
-I had a little fun and also added a wobble mode (similar to <a href="https://www.lexaloffle.com/bbs/?tid=40058">Wobblepaint</a>, mentioned in my <a href="/p/pico8.html">PICO-8 post</a>).<br />
-<br />
-See it in action in my <a href="/m/pceimage/index.html">PCEImage Editor</a>.<br />
-<br />
-Read more about the editor <a href="/p/pceimage-editor.html">here</a>.<br />
-
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/pceimage.html'>PCEImage</a><br />
 <a href='p/beatles.html'>My Beatles Picks</a><br />
 <a href='p/soundsjustlike.html'>SoundsJustLike</a><br />
 <a href='p/puzzlescript.html'>PuzzleScript</a><br />
