@@ -51,3 +51,5 @@ I had a little fun and also added a wobble mode (similar to [Link:https://www.le
 See it in action in my [Link:/m/pceimage/index.html]PCEImage Editor[/Link].
 
 Read more about the editor [Link:/p/pceimage-editor.html]here[/Link].
+
+Related: [Link:https://en.wikipedia.org/wiki/X_PixMap]The X PixMap (XPM) format[/Link].
