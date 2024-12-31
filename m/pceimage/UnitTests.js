@@ -734,6 +734,123 @@ baad`
 
   }
 
+  test_overwritePixelsWithPCEImage() {
+    let baseImgStr = `.:#000000
+o:#FFFFFF
+
+.....
+.....
+.....
+.....
+.....`
+
+    let baseImg = new PCEImage(baseImgStr)
+
+    let rImg = new PCEImage(`.:#000000
+o:#FFFFFF
+
+ooo
+ooo`)
+
+    baseImg.overwritePixelsWithPCEImage(2, 3, rImg)
+
+    let exp = `.:#000000
+o:#FFFFFF
+
+.....
+.....
+.....
+..ooo
+..ooo`
+
+    assertEqual(baseImg.imageStr, exp)
+
+
+    baseImg = new PCEImage(baseImgStr)
+    baseImg.overwritePixelsWithPCEImage(0, 0, rImg)
+    exp = `.:#000000
+o:#FFFFFF
+
+ooo..
+ooo..
+.....
+.....
+.....`
+
+    assertEqual(baseImg.imageStr, exp)
+
+
+    baseImg = new PCEImage(baseImgStr)
+    baseImg.overwritePixelsWithPCEImage(-1, 0, rImg)
+    exp = `.:#000000
+o:#FFFFFF
+
+.....
+.....
+.....
+.....
+.....`
+
+    assertEqual(baseImg.imageStr, exp)
+
+
+    baseImg = new PCEImage(baseImgStr)
+    baseImg.overwritePixelsWithPCEImage(0, -1, rImg)
+    exp = `.:#000000
+o:#FFFFFF
+
+.....
+.....
+.....
+.....
+.....`
+
+    assertEqual(baseImg.imageStr, exp)
+
+
+    baseImg = new PCEImage(baseImgStr)
+    baseImg.overwritePixelsWithPCEImage(3, 0, rImg)
+    exp = `.:#000000
+o:#FFFFFF
+
+.....
+.....
+.....
+.....
+.....`
+
+    assertEqual(baseImg.imageStr, exp)
+
+
+
+    baseImg = new PCEImage(baseImgStr)
+    baseImg.overwritePixelsWithPCEImage(0, 4, rImg)
+    exp = `.:#000000
+o:#FFFFFF
+
+.....
+.....
+.....
+.....
+.....`
+
+    assertEqual(baseImg.imageStr, exp)
+
+
+    baseImg = new PCEImage(baseImgStr)
+    baseImg.overwritePixelsWithPCEImage(3, 4, rImg)
+    exp = `.:#000000
+o:#FFFFFF
+
+.....
+.....
+.....
+.....
+.....`
+
+    assertEqual(baseImg.imageStr, exp)
+  }
+
 
 // PCEWobbleImage
   test_PCEWobbleImage_basicStringParsing() {

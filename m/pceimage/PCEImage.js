@@ -1,3 +1,6 @@
+
+const sPCEImageCache = {}
+
 // Pixel-Character Encoded Image
 class PCEImage {
 
@@ -8,6 +11,7 @@ class PCEImage {
   // width - integer, width of image in pixels
   // height - integer, height of image in pixels
   constructor(imageStr) {
+    this._imageStr = imageStr
     this.imageStrLines = imageStr.split("\n")
 
     // Parse the color table
@@ -43,6 +47,9 @@ class PCEImage {
     }
   }
 
+  get imageStr() {
+    return this._imageStr
+  }
 
   static pceImageFromCanvas(canvas, scale) {
     let colorMap = new Map() // hex value -> PCEColor instance
@@ -136,6 +143,16 @@ class PCEImage {
     return this.imageStrLines[this.firstPixelLineIndex + pixelRow]
   }
 
+  updateImageStrLineAtPixelRow(pixelRow, newValue) {
+    if (pixelRow >= this.height || newValue.length != this.width) {
+      return
+    }
+
+    this.imageStrLines[this.firstPixelLineIndex + pixelRow] = newValue
+
+    this._imageStr = this.imageStrLines.join("\n")
+  }
+
   usesTransparency() {
     let ret = false
 
@@ -174,6 +191,10 @@ class PCEImage {
 
     let ctx = canvas.getContext("2d")
 
+    // Work around visible horizontal lines caused by a yOffset that's
+    // not aligned with a whole pixel value
+    yOffset = Math.floor(yOffset)
+
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         let pixelDimension = scale
@@ -194,6 +215,13 @@ class PCEImage {
 
   // Returns base64 data URL
   generatePNG(scale) {
+    const cacheKey = this._imageStr + "_" + scale
+    const cachedImg = sPCEImageCache[cacheKey]
+
+    if (cachedImg) {
+      return cachedImg
+    }
+
     let canvas = document.createElement("canvas")
     canvas.width = this.width * scale
     canvas.height = this.height * scale
@@ -202,7 +230,10 @@ class PCEImage {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     this.drawInCanvas(canvas, scale)
 
-    return canvas.toDataURL()
+    const result = canvas.toDataURL()
+    sPCEImageCache[cacheKey] = result
+
+    return result
   }
 
   // Returns a new PCEImage instance which combines `this` and `other`
@@ -293,6 +324,46 @@ class PCEImage {
 
     // Create the new PCEImage
     return new PCEImage(imageStr)
+  }
+
+  // Replace the rectangle with top left corner (x, y)
+  // and replacementImg.width, replacementImg.height
+  overwritePixelsWithPCEImage(x, y, replacementImg) {
+    // Example to work through the math:
+    //
+    //   0 1 2 3 4
+    // 0 . . . . .
+    // 1 . . . . .
+    // 2 . . . . .
+    // 3 . . o o o
+    // 4 . . o o o
+    //
+    // this.width is 5
+    // this.height is 5
+    // replacementImg.width is 3
+    // replacementImg.height is 2
+    // x is 2
+    // y is 3
+
+    if (x < 0 || (x + replacementImg.width > this.width)) {
+      console.log("PCEImage overwitePixelsWithPCEImage failed: replacementImg does not fit within width")
+      return
+    }
+
+    if (y < 0 || (y + replacementImg.height > this.height)) {
+      console.log("PCEImage overwitePixelsWithPCEImage failed: replacementImg does not fit within height")
+      return
+    }
+
+    for (let j = 0; j < replacementImg.height; ++j) {
+      let replacementLine = replacementImg.imageStrLineAtPixelRow(j)
+
+      let oldLine = this.imageStrLineAtPixelRow(y+j)
+
+      let newLine = oldLine.substring(0, x) + replacementLine + oldLine.substring(x + replacementLine.length)
+
+      this.updateImageStrLineAtPixelRow(y+j, newLine)
+    }
   }
 
   // Returns a new PCEImage instance with the image data in the
