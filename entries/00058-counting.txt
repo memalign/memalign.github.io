@@ -1,0 +1,32 @@
+Title: Counting Tap Toy
+Date: 1/1/2025
+Tags: Programming, Art, Games, Parenting
+[Image:/m/counting/counting.png]
+
+Introducing [Link:/m/counting/index.html]Counting Tap Toy[/Link], the latest addition to the Tap Toy series.
+
+(See also: [Link:/m/slice/index.html]Slice Tap Toy[/Link], [Link:/m/fireworks/index.html]Fireworks Tap Toy[/Link], [Link:/m/taptoy/index.html]Tap Toy[/Link])
+
+In Counting Tap Toy, you can tap to count various fish and aquatic creatures. The count is displayed and announced.
+
+I built this game for my 3-year-old son. He's pretty good at counting with one exception: he always skips "14". My hope is that seeing and hearing the numbers will reinforce 14's existence and teach the pattern of the teens and beyond.
+
+
+Some technical details:
+
+- I whipped this game up in my spare hours during winter break after shipping [Link:/m/spacetrader/index.html]Space Trader[/Link].
+
+- The count is announced using the [Link:https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis]SpeechSynthesis API[/Link]
+
+- Unlike the prior Tap Toys which use Matter.js, I picked [Link:https://github.com/KilledByAPixel/LittleJS]LittleJS[/Link] by [Link:https://frankforce.com]Frank Force[/Link]. I've admired Frank's work for a long time and I was dissatisfied with Matter.js's inconsistent behavior on devices with different screen refresh rates. I wasn't able to fix that to my satisfaction in Slice Tap Toy -- frame drops are still sometimes noticeable.
+
+- I'm generally pleased with LittleJS in this project. The example projects gave much of what I needed and the engine provides a lot of cool stuff, including systems for creating sound effects and particle effects.
+
+- I needed to hack in a few behavior changes which were tricky to achieve: a full-screen canvas, simultaneous mouse and touch support, direct callbacks for handling user input (since the SpeechSynthesis API seems to ignore calls without that direct tie to input), support for links overlaid on top of the game canvas. Fortunately, the code is straightforward and easy to modify.
+
+- One quirk: image tiles had a weird "bleeding" glitch where I would sometimes see a sliver of the other side of the tile wrapping around. I saw that LittleJS has a hack to solve this (tileFixBleedScale), but that causes other visual glitchiness (to me, it made the tiles look like they were under water, slight stretching and shrinking as the game object moves around). I picked a different solution: having at least a few pixels of padding baked into the image assets.
+
+- As usual, I used [Link:/m/pceimage/index.html]PCEImage Editor[/Link] to create many graphics. I created the PCEImage format and tools so I could simply store and edit graphics as ASCII art. See them [Link:/m/counting/Images.js]here[/Link].
+  - I got the [Link:https://rapidpunches.itch.io/megamarinepack]image assets[/Link] from someone who posted them with a permissive license on itch.io. Then I used PCEImage Editor to import and convert them.
+
+- Music came from [Link:https://www.chosic.com/free-music/classical/]chosic.com[/Link]. [Link:/m/counting/songs/README.txt]Credits[/Link] for the songs I used.

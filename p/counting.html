@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>Counting Tap Toy</title>
+<meta property="og:title" content="Counting Tap Toy" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/counting.html" />
+<meta property="og:image" content="https://memalign.github.io/m/counting/counting.png" />
+<meta property="og:description" content="Introducing Counting Tap Toy, the latest addition to the Tap Toy series. (See also: Slice Tap Toy, Fireworks Tap Toy, Tap Toy) In Counting Tap Toy, you can tap to…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a><div id='post'>
+<div id='header'>
+<h1>
+Counting Tap Toy
+</h1>
+</div>
+<img src="/m/counting/counting.png">
+<div id='postdate'>Posted on 1/1/2025<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a>, <a href='/tags.html'>Games</a>, <a href='/tags.html'>Parenting</a></div>
+Introducing <a href="/m/counting/index.html">Counting Tap Toy</a>, the latest addition to the Tap Toy series.<br />
+<br />
+(See also: <a href="/m/slice/index.html">Slice Tap Toy</a>, <a href="/m/fireworks/index.html">Fireworks Tap Toy</a>, <a href="/m/taptoy/index.html">Tap Toy</a>)<br />
+<br />
+In Counting Tap Toy, you can tap to count various fish and aquatic creatures. The count is displayed and announced.<br />
+<br />
+I built this game for my 3-year-old son. He's pretty good at counting with one exception: he always skips "14". My hope is that seeing and hearing the numbers will reinforce 14's existence and teach the pattern of the teens and beyond.<br />
+<br />
+<br />
+Some technical details:<br />
+<br />
+- I whipped this game up in my spare hours during winter break after shipping <a href="/m/spacetrader/index.html">Space Trader</a>.<br />
+<br />
+- The count is announced using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis">SpeechSynthesis API</a><br />
+<br />
+- Unlike the prior Tap Toys which use Matter.js, I picked <a href="https://github.com/KilledByAPixel/LittleJS">LittleJS</a> by <a href="https://frankforce.com">Frank Force</a>. I've admired Frank's work for a long time and I was dissatisfied with Matter.js's inconsistent behavior on devices with different screen refresh rates. I wasn't able to fix that to my satisfaction in Slice Tap Toy -- frame drops are still sometimes noticeable.<br />
+<br />
+- I'm generally pleased with LittleJS in this project. The example projects gave much of what I needed and the engine provides a lot of cool stuff, including systems for creating sound effects and particle effects.<br />
+<br />
+- I needed to hack in a few behavior changes which were tricky to achieve: a full-screen canvas, simultaneous mouse and touch support, direct callbacks for handling user input (since the SpeechSynthesis API seems to ignore calls without that direct tie to input), support for links overlaid on top of the game canvas. Fortunately, the code is straightforward and easy to modify.<br />
+<br />
+- One quirk: image tiles had a weird "bleeding" glitch where I would sometimes see a sliver of the other side of the tile wrapping around. I saw that LittleJS has a hack to solve this (tileFixBleedScale), but that causes other visual glitchiness (to me, it made the tiles look like they were under water, slight stretching and shrinking as the game object moves around). I picked a different solution: having at least a few pixels of padding baked into the image assets.<br />
+<br />
+- As usual, I used <a href="/m/pceimage/index.html">PCEImage Editor</a> to create many graphics. I created the PCEImage format and tools so I could simply store and edit graphics as ASCII art. See them <a href="/m/counting/Images.js">here</a>.<br />
+&nbsp;&nbsp;- I got the <a href="https://rapidpunches.itch.io/megamarinepack">image assets</a> from someone who posted them with a permissive license on itch.io. Then I used PCEImage Editor to import and convert them.<br />
+<br />
+- Music came from <a href="https://www.chosic.com/free-music/classical/">chosic.com</a>. <a href="/m/counting/songs/README.txt">Credits</a> for the songs I used.<br />
+
+</div>
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

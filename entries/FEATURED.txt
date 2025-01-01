@@ -2,17 +2,13 @@ Space Trader
 - Image: /m/spacetrader/spacetrader.png
 - /m/spacetrader/index.html
 
-MemPlayer
-- Image: /m/memplayer/memplayer.png
-- /m/memplayer/index.html
+Counting Tap Toy
+- Image: /m/counting/counting.png
+- /m/counting/index.html
 
 Slice Tap Toy
 - Image: /m/slice/slice.jpg
 - /m/slice/index.html
-
-CaveRibbon
-- Image: /m/cr/CaveRibbon.png
-- /m/cr/index.html
 
 Fireworks Tap Toy
 - Image: /m/fireworks/fireworks.png
@@ -22,17 +18,13 @@ Tap Toy
 - Image: /m/taptoy/taptoy.jpg
 - /m/taptoy/index.html
 
-PCEImage Editor
-- Image: /m/pceimage/koffing-code.png
-- /m/pceimage/index.html
+CaveRibbon
+- Image: /m/cr/CaveRibbon.png
+- /m/cr/index.html
 
 Lights Off
 - Image: /m/lightsoff.jpg
 - /m/lightsoff/index.html
-
-FormulaGraph
-- Image: /m/formulagraph-stairs.png
-- /m/formulagraph/index.html
 
 Counterfeit Monkey
 - Image: /m/cm-map-cropped.jpg
@@ -45,6 +37,18 @@ Dungeon Memalign
 Pac-Man Dungeon
 - Image: /m/pacman.jpg
 - /m/pacmandungeon/index.html
+
+PCEImage Editor
+- Image: /m/pceimage/koffing-code.png
+- /m/pceimage/index.html
+
+FormulaGraph
+- Image: /m/formulagraph-stairs.png
+- /m/formulagraph/index.html
+
+MemPlayer
+- Image: /m/memplayer/memplayer.png
+- /m/memplayer/index.html
 
 Similar Songs
 - Image: /m/appleheadphones.png

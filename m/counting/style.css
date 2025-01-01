@@ -1,0 +1,101 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  image-rendering: pixelated;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none; /* prevent mobile pinch to resize */
+  -webkit-touch-callout: none;
+  background: linear-gradient(to bottom, #234DA8 1%, #1D418F 10%, #071E50 70%);
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#home, #about {
+  position: fixed;
+  z-index: 1000;
+}
+
+#home a, #about a {
+  color: orange;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px black, -1px -1px 2px black, 0px 1px 2px black, 1px 0px 2px black, 0px -1px 2px black, -1px 0px 2px black, 1px -1px 2px black, -1px 1px 2px black;
+}
+
+#home a:hover, #about a:hover {
+  color: white;
+}
+
+#home {
+  top: 10px;
+  left: 10px;
+}
+
+#about {
+  top: 10px;
+  right: 10px;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+#soundControlOverlay {
+  font-size: 15px;
+  color: #FFFFFF; 
+  margin-top: 20px;
+  pointer-events: auto;
+}
+
+#soundControlOverlay a {
+  text-decoration: none;
+  color: orange;
+}
+
+#lifetimeScoreContainer {
+  font-size: 15px;
+  color: #FFFFFF; 
+  margin-top: 20px;
+  pointer-events: auto;
+}
+
+#lifetimeScoreContainer a {
+  text-decoration: none;
+  color: orange;
+}
+
+#scoreOverlayContainer {
+  display: inline-block;
+  width: 95%;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  text-align: center;
+  position: absolute; 
+  top: 40%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-shadow: 1px 1px 2px black, -1px -1px 2px black, 0px 1px 2px black, 1px 0px 2px black, 0px -1px 2px black, -1px 0px 2px black, 1px -1px 2px black, -1px 1px 2px black;
+}
+
+.scoreOverlayText {
+  font-size: 30px;
+  color: #FFFFFF; 
+  pointer-events: none;
+}
+
+.scoreOverlayNumbers {
+  font-size: 100px;
+  color: #FFFFFF; 
+  pointer-events: none;
+}
+
+.hidden {
+  display: none;
+}
+
