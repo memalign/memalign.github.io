@@ -4,7 +4,7 @@ Tags: Leisure
 
 [Image:/m/book.svg]
 
-Updated 10/13/2024
+Updated 1/1/2025
 
 I know some people who are always reading a book. I’m not an avid book reader like them.
 
@@ -117,6 +117,8 @@ Fiction:
     - Second Foundation
 
     - Asimov is another author with many books on my list. I think about these stories a lot today (in the year 2020) when things feel out of control.
+    
+- The Fountainhead by Ayn Rand 
 
 - Girl with the Dragon Tattoo series by Stieg Larsson
     - The Girl with the Dragon Tattoo
@@ -158,7 +160,7 @@ Fiction:
 
 - I Have No Mouth, and I Must Scream by Harlan Ellison
 
-- [Link:https://qntm.org/responsibility]I don't know, Timmy, being God is a big responsibility[/Link]
+- [Link:https://qntm.org/responsibility]I don't know, Timmy, being God is a big responsibility[/Link] by qntm
 
 - The Illustrated Man by Ray Bradbury
 
@@ -215,11 +217,19 @@ Fiction:
 
 - The Star by Arthur C. Clarke
 
+- Stories of Your Life and Others by Ted Chiang
+  - Tower of Babylon
+  - Understand
+  - Division by Zero
+  - Story of Your Life
+  - Seventy-Two Letters
+  - The Evolution of Human Science
+  - Hell Is the Absence of God
+  - Liking What You See: A Documentary
+
 - The Terminal Experiment by Robert J. Sawyer
 
 - [Link:https://web.archive.org/web/20190501130711/http://www.terrybisson.com/theyre-made-out-of-meat-2/]They're Made Out of Meat[/Link] by Terry Bisson
-
-- Understand by Ted Chiang
 
 - Wang's Carpets
     - Another short story by Greg Egan

@@ -41,7 +41,7 @@ I built this game for my 3-year-old son. He's pretty good at counting with one e
 <br />
 Some technical details:<br />
 <br />
-- I whipped this game up in my spare hours during winter break after shipping <a href="/m/spacetrader/index.html">Space Trader</a>.<br />
+- I whipped this game up in my spare hours during winter break after shipping <a href="/m/spacetrader/index.html">Space Trader</a><br />
 <br />
 - The count is announced using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis">SpeechSynthesis API</a><br />
 <br />
