@@ -74,6 +74,10 @@ class Fish extends EngineObject {
   }
 
   ma_handleMouseDown() {
+    // This special callback occurs outside a normal update callback so
+    // being destroyed from a tap/click may not be fully handled yet.
+    if (this.destroyed) { return }
+
     if (mouseWasPressed(0)) {
       if (this.ma_containsPoint(mousePos)) {
         this.onClick()
@@ -82,6 +86,10 @@ class Fish extends EngineObject {
   }
 
   ma_handleTouchEnd() {
+    // This special callback occurs outside a normal update callback so
+    // being destroyed from a tap/click may not be fully handled yet.
+    if (this.destroyed) { return }
+
     if (mouseWasReleased(0)) {
       if (this.ma_containsPoint(mousePos)) {
         this.onClick()
@@ -108,25 +116,21 @@ class Fish extends EngineObject {
 
     updateScore(score+1)
 
-    // This can probably be done synchronously, but it's convenient to
-    // be able to experiment with different delays.
-    setTimeout(() => {
-      // make explosion effect
-      const color1 = new Color(1, 1, 1)
-      const color2 = color1.lerp(rgb(1, 1, 1, 0), .5);
-      new ParticleEmitter(
-        this.pos, 0, // pos, angle
-        this.size.scale(0.5), .1, 200, PI, // emitSize, emitTime, emitRate, emiteCone
-        tile(0, vec2(40, 40)),     // tileIndex, tileSize
-        color1, color2,            // colorStartA, colorStartB
-        color1.scale(1,0), color2.scale(1,0), // colorEndA, colorEndB
-        .3, .8 * 30, .3, .05, .05, // time, sizeStart, sizeEnd, speed, angleSpeed
-        .99, .95, .4, PI,          // damp, angleDamp, gravity, cone
-        .1, .8, 0, 1               // fade, randomness, collide, additive
-      );
+    // make explosion effect
+    const color1 = new Color(1, 1, 1)
+    const color2 = color1.lerp(rgb(1, 1, 1, 0), .5);
+    new ParticleEmitter(
+      this.pos, 0, // pos, angle
+      this.size.scale(0.5), .1, 200, PI, // emitSize, emitTime, emitRate, emiteCone
+      tile(0, vec2(40, 40)),     // tileIndex, tileSize
+      color1, color2,            // colorStartA, colorStartB
+      color1.scale(1,0), color2.scale(1,0), // colorEndA, colorEndB
+      .3, .8 * 30, .3, .05, .05, // time, sizeStart, sizeEnd, speed, angleSpeed
+      .99, .95, .4, PI,          // damp, angleDamp, gravity, cone
+      .1, .8, 0, 1               // fade, randomness, collide, additive
+    );
 
-      this.destroy()
-    }, 0)
+    this.destroy()
   }
 }
 
