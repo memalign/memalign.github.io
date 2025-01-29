@@ -1,0 +1,35 @@
+Title: Mandarin Communication Board
+Date: 1/29/2025
+Tags: Programming, Tools, Parenting
+[Image:/m/mandarin/mcb.png]
+
+Happy Lunar New Year!
+
+Introducing the [Link:/m/mandarin/index.html]Mandarin Communication Board[/Link], a tool for learning and communicating in Mandarin Chinese.
+
+My son recently started showing interest in learning Mandarin thanks to some [Link:https://www.baobaolearnschinese.com/]singing books[/Link] sent by a friend of ours.
+
+I made this tool to help us expand our vocabulary and enable us to communicate about every day stuff.
+
+My favorite part as I dabble in Mandarin is that there is no verb conjugation! Grammar tends to be fairly simple, too, which means that you can start saying intelligible sentences quickly by picking up common words.
+
+The toughest part so far is hearing and producing words with the right tones. To my untrained American ears, I often can't tell the difference between words that differ only in their tone. It's been helpful to see the words written in pinyin and spoken aloud using this communication board.
+
+
+Some technical details:
+
+- I'm using the built-in SpeechSynthesis browser API, which produces audio that's good enough with the voices in Safari. I'm considering using higher quality TTS, like [Link:https://cloud.google.com/text-to-speech]Google's[/Link], which appears to have a generous free tier.
+
+- I used ChatGPT to do much of the hard work, including producing a lot of the vocabulary list. ChatGPT also contributed many of the word-to-emoji pairings. I had to remove many that were too abstract or a bad fit, though.
+
+- For some images, I used iOS's new Genmoji feature. I'm happy with the results!
+
+- There are many images I haven't filled in yet...
+
+- I want to look into adding the full set of HSK1 and HSK2 vocabulary
+
+- I am targeting Apple devices so it's likely that TTS or the full set of emoji may not show up on other operating systems
+
+- This website can be added to your home screen as a PWA. I'm considering hooking it up to launch when I press the action button on my iPhone for quick reference.
+
+- As a follow-on project, I might use this dataset to create flash cards to use with spaced repetition

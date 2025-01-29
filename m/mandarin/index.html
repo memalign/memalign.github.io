@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandarin Communication Board</title>
+    <link rel="stylesheet" href="style.css" charset="utf-8">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#6200EA">
+
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="mandarin, chinese, learn mandarin, learn chinese, communication board">
+    <meta name="description" content="Mandarin Communication Board">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="Mandarin Communication Board" />
+    <meta property="og:description" content="Learn Mandarin Chinese">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/mandarin/mcb.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://memalign.github.io/m/mandarin/index.html" />
+    <meta name="twitter:title" content="Mandarin Communication Board">
+    <meta name="twitter:description" content="Learn Mandarin Chinese">
+    <meta name="twitter:image" content="https://memalign.github.io/m/mandarin/mcb.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+
+    <link rel="apple-touch-icon" sizes="16x16" href="PWAImages/ios/16.png">
+    <link rel="apple-touch-icon" sizes="20x20" href="PWAImages/ios/20.png">
+    <link rel="apple-touch-icon" sizes="29x29" href="PWAImages/ios/29.png">
+    <link rel="apple-touch-icon" sizes="32x32" href="PWAImages/ios/32.png">
+    <link rel="apple-touch-icon" sizes="40x40" href="PWAImages/ios/40.png">
+    <link rel="apple-touch-icon" sizes="50x50" href="PWAImages/ios/50.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="PWAImages/ios/57.png">
+    <link rel="apple-touch-icon" sizes="58x58" href="PWAImages/ios/58.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="PWAImages/ios/60.png">
+    <link rel="apple-touch-icon" sizes="64x64" href="PWAImages/ios/64.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="PWAImages/ios/72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="PWAImages/ios/76.png">
+    <link rel="apple-touch-icon" sizes="80x80" href="PWAImages/ios/80.png">
+    <link rel="apple-touch-icon" sizes="87x87" href="PWAImages/ios/87.png">
+    <link rel="apple-touch-icon" sizes="100x100" href="PWAImages/ios/100.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="PWAImages/ios/114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="PWAImages/ios/120.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="PWAImages/ios/128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="PWAImages/ios/144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="PWAImages/ios/152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="PWAImages/ios/167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="PWAImages/ios/180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="PWAImages/ios/192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="PWAImages/ios/256.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="PWAImages/ios/512.png">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="PWAImages/ios/1024.png">
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Mandarin Communication Board</h1>
+      </header>
+
+      <div id="categories"></div>
+
+      <div id="search-container" style="position: relative; margin: 10px;">
+        <input 
+                                 type="text" 
+                                 id="search-bar" 
+                                 placeholder="Search..." 
+                                 onfocus="handleSearchFocus()"
+                                 oninput="filterTiles()">
+        <button 
+                                 id="clear-button" 
+                                 onclick="clearSearch()" 
+                                 style="
+                                        display: none;
+                                        position: absolute; 
+                                        right: 10px; 
+                                        top: 50%; 
+                                        transform: translateY(-50%);
+                                        background: transparent; 
+                                        border: none; 
+                                        cursor: pointer; 
+                                        font-size: 16px;
+                                        color: #888;
+                                        ">&times;</button>
+      </div>
+
+      <div id="words" class="hidden">
+        <div id="word-tiles"></div>
+        <button id="toggle-english" onclick="toggleEnglish()" 
+                                    style="margin-top: 10px; padding: 10px; font-size: 16px;">
+          Show English
+        </button>
+        <button id="show-all" onclick="showAll()" 
+                              style="margin-top: 10px; padding: 10px; font-size: 16px;">
+          Show All
+        </button>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

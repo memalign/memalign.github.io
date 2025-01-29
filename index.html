@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/counting/counting.png" />
-<meta property="og:description" content="Introducing Counting Tap Toy, the latest addition to the Tap Toy series. (See also: Slice Tap Toy, Fireworks Tap Toy, Tap Toy) In Counting Tap Toy, you can tap to…" />
+<meta property="og:image" content="https://memalign.github.io/m/mandarin/mcb.png" />
+<meta property="og:description" content="Happy Lunar New Year! Introducing the Mandarin Communication Board, a tool for learning and communicating in Mandarin Chinese. My son recently started showing interest in learning Mandarin thanks to some…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -97,6 +97,12 @@
     </a>
   </div>
   <div id='projects-grid-entry'>
+    <a href='/m/mandarin/index.html'>
+    <div id='projects-grid-title'>Mandarin Board</div>
+    <div class='rect-img-container'><img src='/m/mandarin/mcb.png'></div>
+    </a>
+  </div>
+  <div id='projects-grid-entry'>
     <a href='/m/memplayer/index.html'>
     <div id='projects-grid-title'>MemPlayer</div>
     <div class='rect-img-container'><img src='/m/memplayer/memplayer.png'></div>
@@ -113,6 +119,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/mandarin.html'>Mandarin Communication Board</a><br />
 <a href='p/counting.html'>Counting Tap Toy</a><br />
 <a href='p/spacetrader.html'>Space Trader</a><br />
 <a href='p/memplayer.html'>MemPlayer</a><br />
@@ -132,8 +139,8 @@
 <a href='p/pceimage.html'>PCEImage</a><br />
 <a href='p/beatles.html'>My Beatles Picks</a><br />
 <a href='p/soundsjustlike.html'>SoundsJustLike</a><br />
-<a href='p/puzzlescript.html'>PuzzleScript</a><br />
 </div><div id='grid-entry'>
+<a href='p/puzzlescript.html'>PuzzleScript</a><br />
 <a href='p/wheat-chex.html'>Wheat Chex</a><br />
 <a href='p/pico8.html'>PICO-8</a><br />
 <a href='p/fussy-checklist.html'>Fussy Baby Checklist</a><br />
@@ -153,8 +160,8 @@
 <a href='p/listed-action-if.html'>Listed Action Interactive Fiction</a><br />
 <a href='p/andrew-plotkin.html'>Andrew Plotkin's Zarfhome</a><br />
 <a href='p/product-reviews.html'>Product Review Writing Prompts</a><br />
-<a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
 </div><div id='grid-entry'>
+<a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
 <a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 <a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
@@ -177,6 +184,49 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/mandarin.html'>Mandarin Communication Board</a>
+</h2>
+</div>
+<img src="/m/mandarin/mcb.png">
+<div id='postdate'>Posted on 1/29/2025<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Tools</a>, <a href='/tags.html'>Parenting</a></div>
+Happy Lunar New Year!<br />
+<br />
+Introducing the <a href="/m/mandarin/index.html">Mandarin Communication Board</a>, a tool for learning and communicating in Mandarin Chinese.<br />
+<br />
+My son recently started showing interest in learning Mandarin thanks to some <a href="https://www.baobaolearnschinese.com/">singing books</a> sent by a friend of ours.<br />
+<br />
+I made this tool to help us expand our vocabulary and enable us to communicate about every day stuff.<br />
+<br />
+My favorite part as I dabble in Mandarin is that there is no verb conjugation! Grammar tends to be fairly simple, too, which means that you can start saying intelligible sentences quickly by picking up common words.<br />
+<br />
+The toughest part so far is hearing and producing words with the right tones. To my untrained American ears, I often can't tell the difference between words that differ only in their tone. It's been helpful to see the words written in pinyin and spoken aloud using this communication board.<br />
+<br />
+<br />
+Some technical details:<br />
+<br />
+- I'm using the built-in SpeechSynthesis browser API, which produces audio that's good enough with the voices in Safari. I'm considering using higher quality TTS, like <a href="https://cloud.google.com/text-to-speech">Google's</a>, which appears to have a generous free tier.<br />
+<br />
+- I used ChatGPT to do much of the hard work, including producing a lot of the vocabulary list. ChatGPT also contributed many of the word-to-emoji pairings. I had to remove many that were too abstract or a bad fit, though.<br />
+<br />
+- For some images, I used iOS's new Genmoji feature. I'm happy with the results!<br />
+<br />
+- There are many images I haven't filled in yet...<br />
+<br />
+- I want to look into adding the full set of HSK1 and HSK2 vocabulary<br />
+<br />
+- I am targeting Apple devices so it's likely that TTS or the full set of emoji may not show up on other operating systems<br />
+<br />
+- This website can be added to your home screen as a PWA. I'm considering hooking it up to launch when I press the action button on my iPhone for quick reference.<br />
+<br />
+- As a follow-on project, I might use this dataset to create flash cards to use with spaced repetition<br />
+
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -890,52 +940,8 @@ Here's a collection of trippy art from various corners of the internet. Some is 
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/taptoy.html'>Tap Toy</a>
-</h2>
-</div>
-<img src="/m/taptoy/taptoy.jpg">
-<div id='postdate'>Posted on 5/30/2022<br />
-Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Art</a>, <a href='/tags.html'>Games</a></div>
-Introducing my latest project: <a href="/m/taptoy/index.html">Tap Toy</a><br />
-<br />
-Tap Toy is a fun little web app for relaxation. Tap the screen to launch some characters which then bounce off each other. Turn on sound for satisfying sound effects and relaxing public-domain background music. In some ways, I think this toy brings the catharsis of popping bubble wrap to your touch screen.<br />
-<br />
-I got the idea for this project after watching my then-9-month-old's fascination with my iPhone and iPad. Note that the CDC guidelines recommend "no screen time for children younger than 2 years" (<a href="https://www.cdc.gov/obesity/downloads/15_256312-A_May_LicensingDocument_Final_508_508tagged.pdf">source</a>, <a href="/m/cdc_screentime.pdf">backup</a>) but these kids will still find a way to grab your device for a fleeting moment before you take it back.<br />
-<br />
-I wondered if I could make an app to soothe and distract our baby if we ever became truly desperate for a moment of peace. (Fortunately, we still haven't reached this point yet!)<br />
-<br />
-I modeled some of the behavior after <a href="https://www.amazon.com/Baby-Einstein-Along-Tunes-Musical/dp/B000YDDF6O">Baby Einstein Take Along Tunes</a>, one of the more pleasant sound-making toys we have:<br />
-<br />
-<img src="/m/babyeinsteintunes.jpg"><br />
-The result, as my wife described it, is "crack". She was having a bad day when Tap Toy was first ready to play with and she ended up zoning out, addicted, tapping it for 30 minutes while some of her stress melted away.<br />
-<br />
-As is usual for me, this side-project is a remix of a few other projects:<br />
-<br />
-- <a href="http://magickeyboard.io">MagicKeyboard.io</a> (<a href="/m/magickeyboard/index.html">backup</a>, <a href="https://github.com/feross/magickeyboard.io">source</a>) by <a href="http://feross.org">Feross Aboukhadijeh</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Which in turn is inspired by a <a href="https://www.reddit.com/r/gifs/comments/3t5ssx/magic_keyboard/">reddit post</a> about this <a href="https://momentfactory.com/lab/keyboard-magic">art project</a> by Moment Factory<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- In fact, I kept the keyboard triggers to launch sprites from the right location along the bottom of the screen<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- I fixed the sound effect code and added background music<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- I also added real multi-touch and mouse support<br />
-<br />
-- <a href="/p/pceimage.html">PCEImage</a> (note that the Koffing, Pikachu in Tap Toy show up in <a href="/m/pceimage/index.html">PCEImage Editor</a>'s list of examples)<br />
-<br />
-Some tips:<br />
-<br />
-- You can add this web page to your home screen on iOS or Android. If you do that, it'll behave more like a normal app. (I did the extra bit of work to make this a "progressive web app")<br />
-<br />
-- If you give this to a kid, you can use <a href="https://support.apple.com/en-us/HT202612">Guided Access</a> to prevent them from leaving the app<br />
-<br />
-An idea to take this further:<br />
-<br />
-- Holiday-themed Tap Toys: Halloween, Thanksgiving, Christmas, Chanukah, New Year's Eve, etc<br />
-
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/taptoy.html'>Tap Toy</a><br />
 <a href='p/pceimage-editor.html'>PCEImage Editor</a><br />
 <a href='p/pceimage.html'>PCEImage</a><br />
 <a href='p/beatles.html'>My Beatles Picks</a><br />
