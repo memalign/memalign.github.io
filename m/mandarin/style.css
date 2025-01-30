@@ -73,6 +73,10 @@ h1 {
   transition: transform 0.2s ease;
 }
 
+.small-font {
+  font-size: 0.8rem;
+}
+
 .category-tile {
   background-color: #03a9f4;
   color: white;

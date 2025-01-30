@@ -193,6 +193,10 @@ function showCategories(categoryKeys) {
 			tile.dataset.word = item.word
 			tile.dataset.english = item.english
 
+      if (item.english.length > 25) {
+        tile.classList.add('small-font')
+      }
+
 			let imgStr = ""
 			if (item.image && item.image !== "NONE") {
 				imgStr = `<div class='emojiImage'>${item.image || "<>"}</div>`
