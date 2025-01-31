@@ -428,6 +428,9 @@ const data = {
       { word: "可以吃", pinyin: "Kěyǐ chī", image: "NONE", english: "You can eat" },
       { word: "一点点", pinyin: "Yīdiǎn diǎn", image: "NONE", english: "A little bit" },
       { word: "很多", pinyin: "Hěn duō", image: "NONE", english: "A lot" },
+      { word: "我做的", pinyin: "Wǒ zuò de", image: "NONE", english: "I made this" },
+      { word: "这个蛋糕是我做的", pinyin: "Zhège dàngāo shì wǒ zuò de", image: "NONE", english: "I made this cake" },
+      { word: "这是你做的吗？", pinyin: "Zhè shì nǐ zuò de ma?", image: "NONE", english: "Did you make that?" },
     ]
   },
   pronouns: {
