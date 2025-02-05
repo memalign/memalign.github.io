@@ -1,0 +1,30 @@
+Title: Mandarin Flashcards
+Date: 2/5/2025
+Tags: Programming, Tools, Parenting
+[Image:/m/mandarin/cards/cards.png]
+
+Introducing [Link:/m/mandarin/cards/index.html]Mandarin Flashcards[/Link]!
+
+I'm expanding on [Link:/m/mandarin/index.html]Mandarin Communication Board[/Link] by using the same data to create a set of flashcards.
+
+These flashcards use spaced repetition, a memorization method where cards you don't know yet will appear frequently and cards you know well will appear less often. This technique has been popularized by the Anki flashcards app.
+
+When you review each card, you indicate whether you don't know it, you recalled it with effort, or it was easy to recall. The web app then calculates and schedules the next time it should be reviewed. Over time, well-known cards will be scheduled several days into the future.
+
+With this technique, you can spend ~10 minutes a day reviewing cards to learn hundreds of words.
+
+
+Some technical details:
+
+- Learn more about its companion project's development details: [Link:/p/mandarin.html]About Mandarin Communication Board[/Link]
+  - I reused almost everything from this project
+
+- I implemented a swipe left/up/right UI that should feel great on iPhone. I find it a lot of fun to play with the cards!
+
+- I originally tried to have ChatGPT implement the swipe UI. After several rounds of iteration, I had an 80% working implementation but it was so tangled that I started looking for another option. I found this great and simple [Link:https://codepen.io/rudtjd2548/pen/qBodXzO]codepen[/Link] with no dependencies which I switched to as my starting point.
+
+- Click the settings gear to see your learning statistics!
+
+- Unmute your device and turn up the volume if you don't hear anything when clicking the "Speak" button
+
+- This website can be added to your home screen as a PWA

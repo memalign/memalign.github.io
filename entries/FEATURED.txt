@@ -50,6 +50,10 @@ Mandarin Board
 - Image: /m/mandarin/mcb.png
 - /m/mandarin/index.html
 
+Mandarin Flashcards
+- Image: /m/mandarin/cards/cards.png
+- /m/mandarin/cards/index.html
+
 MemPlayer
 - Image: /m/memplayer/memplayer.png
 - /m/memplayer/index.html

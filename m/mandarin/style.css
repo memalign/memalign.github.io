@@ -16,7 +16,6 @@ header {
   background-color: #6200ea;
   color: white;
   padding: 10px 0;
-  margin-bottom: 10px;
 }
 
 h1 {
@@ -24,11 +23,21 @@ h1 {
   font-size: 1.4rem;
 }
 
+#categories {
+  margin-top: 10px;
+}
+
 #categories, #word-tiles {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px;
+}
+
+.wordImageLarge {
+	height: 88px;
+	width: 88px;
+  border-radius: 5px;
 }
 
 .wordImage {
@@ -47,6 +56,13 @@ h1 {
 	height: 30px;
 	width: 30px;
   border-radius: 2px;
+}
+
+.emojiImageLarge {
+	font-size: 5rem;
+	line-height: 1;
+	text-align: center;
+	margin-bottom: 5px;
 }
 
 .emojiImage {
@@ -154,3 +170,8 @@ h1 {
 .hidden {
   display: none;
 }
+
+#flashcards {
+  margin-top: 60px;
+}
+
