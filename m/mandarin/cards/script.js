@@ -174,7 +174,25 @@ const smallData = {
 
 const wordList = Object.values(smallData).map(category => category.words).flat()
 */
-const wordList = Object.values(data).map(category => category.words).flat()
+
+
+const wordList = (() => {
+  const words = Object.values(data).map(category => category.words).flat()
+
+  // Deduplicate while maintaining sort order
+  function removeDuplicateWords(arr) {
+    const seen = new Set();
+    return arr.filter(item => {
+      if (seen.has(item.word)) {
+        return false;
+      }
+      seen.add(item.word);
+      return true;
+    });
+  }
+
+  return removeDuplicateWords(words)
+})()
 
 
 // Load or initialize review data

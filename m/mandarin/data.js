@@ -33,6 +33,9 @@ const data = {
       { word: "披萨", pinyin: "Pīsà", image: "🍕", english: "Pizza" },
       { word: "意大利面", pinyin: "Yìdàlì miàn", image: "🍝", english: "Spaghetti" },
       { word: "四季豆", pinyin: "Sìjìdòu", image: "NONE", english: "Green bean" },
+      { word: "西瓜", pinyin: "Xīguā", image: "🍉", english: "Watermelon" },
+      { word: "糖", pinyin: "Táng", image: "NONE", english: "Sugar" },
+      { word: "三明治", pinyin: "Sānmíngzhì", image: "🥪", english: "Sandwich" },
     ]
   },
   utensils: {
@@ -79,6 +82,7 @@ const data = {
       { word: "电视", pinyin: "Diànshì", image: "📺", english: "TV" },
       { word: "电视节目", pinyin: "Diànshì Jiémù", imageURL: "img/tvshow.png", english: "TV Show" },
       { word: "歌", pinyin: "Gē", image: "🎵", english: "Song" },
+      { word: "篮子", pinyin: "Lánzi", image: "🧺", english: "Basket" },
     ]
   },
 	routines: {
@@ -101,6 +105,7 @@ const data = {
       { word: "乳液", pinyin: "Rǔyè", image: "🧴", english: "Lotion" },
       { word: "洗衣服", pinyin: "Xǐ yīfu", imageURL: "img/laundry.png", english: "Laundry" },
       { word: "脏衣服", pinyin: "Zāng yīfu", imageURL: "img/dirtylaundry.png", english: "Dirty laundry" },
+      { word: "闪卡", pinyin: "Shǎnkǎ", image: "NONE", english: "Flashcard" },
 		]
 	},
   emotions: {
@@ -189,6 +194,7 @@ const data = {
       { word: "老虎", pinyin: "Lǎohǔ", image: "🐯", english: "Tiger" },
       { word: "鱼", pinyin: "Yú", image: "🐟", english: "Fish" },
       { word: "仓鼠", pinyin: "Cāngshǔ", image: "🐹", english: "Hamster" },
+      { word: "猴子", pinyin: "Hóuzi", image: "🐒", english: "Monkey" },
     ]
   },
   colors: {
@@ -207,6 +213,19 @@ const data = {
       { word: "粉色", pinyin: "Fěnsè", imageURL: "img/pink.png", english: "Pink" },
       { word: "灰色", pinyin: "Huīsè", image: "⬜", english: "Gray" },
     ]
+  },
+  shapes: {
+    label: "Shapes",
+      pinyinLabel: "Xíngzhuàng",
+      chinese: "形状",
+      words: [
+        { word: "圆形", pinyin: "Yuánxíng", image: "🔵", english: "Circle" },
+        { word: "方形", pinyin: "Fāngxíng", image: "◼️", english: "Square" },
+        { word: "三角形", pinyin: "Sānjiǎoxíng", image: "🔺", english: "Triangle" },
+        { word: "菱形", pinyin: "Língxíng", image: "♦️", english: "Diamond" },
+        { word: "心形", pinyin: "Xīnxíng", image: "❤️", english: "Heart" },
+        { word: "长方形", pinyin: "Chángfāngxíng", image: "NONE", english: "Rectangle" },
+      ]
   },
   adjectives: {
     label: "Adjectives",
@@ -232,6 +251,8 @@ const data = {
       { word: "健康", pinyin: "Jiànkāng", image: "NONE", english: "Healthy" },
       { word: "聪明", pinyin: "Cōngmíng", image: "NONE", english: "Smart" },
       { word: "笨", pinyin: "Bèn", image: "NONE", english: "Dumb" },
+      { word: "黏", pinyin: "Nián", image: "NONE", english: "Sticky" },
+      { word: "圆", pinyin: "Yuán", image: "⭕", english: "Round" },
     ]
   },
   locationDirection: {
@@ -262,6 +283,8 @@ const data = {
       { word: "朋友", pinyin: "Péngyǒu", image: "👫", english: "Friend" },
       { word: "老师", pinyin: "Lǎoshī", image: "👩‍🏫", english: "Teacher" },
       { word: "学生", pinyin: "Xuéshēng", image: "👩‍🎓", english: "Student" },
+      { word: "女人", pinyin: "Nǚrén", image: "👩", english: "Woman" },
+      { word: "女士", pinyin: "Nǚshì", image: "💁‍♀️", english: "Lady" },
       { word: "人", pinyin: "Rén", image: "👤", english: "Person" },
       { word: "名字", pinyin: "Míngzi", image: "NONE", english: "Name" },
     ]
@@ -281,6 +304,7 @@ const data = {
       { word: "图书馆", pinyin: "Túshūguǎn", image: "NONE", english: "Library" },
       { word: "餐厅", pinyin: "Cāntīng", image: "NONE", english: "Restaurant" },
       { word: "机场", pinyin: "Jīchǎng", image: "NONE", english: "Airport" },
+      { word: "飞机", pinyin: "Fēijī", image: "✈️", english: "Airplane" },
       { word: "超市", pinyin: "Chāoshì", image: "NONE", english: "Supermarket" },
       { word: "电影院", pinyin: "Diànyǐngyuàn", image: "NONE", english: "Cinema" },
     ]
@@ -302,6 +326,7 @@ const data = {
       { word: "棍子", pinyin: "Gùnzi", image: "NONE", english: "Stick" },
       { word: "小路", pinyin: "Xiǎolù", image: "NONE", english: "Pathway" },
       { word: "球场", pinyin: "Qiúchǎng", image: "NONE", english: "Ball court" },
+      { word: "球", pinyin: "Qiú", image: "🏀", english: "Ball" },
       { word: "游乐设施", pinyin: "Yóulè shèshī", image: "NONE", english: "Play equipment" },
       { word: "桥", pinyin: "Qiáo", image: "NONE", english: "Bridge" },
       { word: "小溪", pinyin: "Xiǎoxī", image: "NONE", english: "Creek" },
@@ -356,6 +381,10 @@ const data = {
       { word: "去", pinyin: "Qù", image: "NONE", english: "To go" },
       { word: "想", pinyin: "Xiǎng", image: "🤔", english: "To think, want" },
       { word: "住", pinyin: "Zhù", image: "NONE", english: "To live" },
+      { word: "用", pinyin: "Yòng", image: "NONE", english: "Use" },
+      { word: "买", pinyin: "Mǎi", image: "NONE", english: "Buy" },
+      { word: "戳", pinyin: "Chuō", image: "NONE", english: "Poke" },
+      { word: "拉", pinyin: "Lā", image: "NONE", english: "Pull" },
     ]
   },
   nature: {
@@ -419,7 +448,7 @@ const data = {
       { word: "我想要更多", pinyin: "Wǒ xiǎng yào gèng duō", image: "NONE", english: "I want more" },
       { word: "我想要少一点", pinyin: "Wǒ xiǎng yào shǎo yīdiǎn", image: "NONE", english: "I want less" },
       { word: "你想要什么？", pinyin: "Nǐ xiǎng yào shénme?", image: "NONE", english: "What do you want?" },
-      { word: "完成了", pinyin: "Wánchéngle", image: "NONE", english: "All done" },
+      { word: "好了", pinyin: "Hǎole", image: "NONE", english: "All done" },
       { word: "我需要", pinyin: "Wǒ xūyào", image: "NONE", english: "I need" },
       { word: "这只狗", pinyin: "Zhè zhī gǒu", image: "NONE", english: "This dog" },
       { word: "我们不知道狗是否友善", pinyin: "Wǒmen bù zhīdào gǒu shìfǒu yǒushàn", image: "NONE", english: "We don’t know if the dog is nice" },
@@ -431,6 +460,8 @@ const data = {
       { word: "我做的", pinyin: "Wǒ zuò de", image: "NONE", english: "I made this" },
       { word: "这个蛋糕是我做的", pinyin: "Zhège dàngāo shì wǒ zuò de", image: "NONE", english: "I made this cake" },
       { word: "这是你做的吗？", pinyin: "Zhè shì nǐ zuò de ma?", image: "NONE", english: "Did you make that?" },
+      { word: "你几岁？", pinyin: "Nǐ jǐ suì?", image: "NONE", english: "How old are you?" },
+      { word: "我三岁", pinyin: "Wǒ sān suì", image: "NONE", english: "I am three years old" },
     ]
   },
   pronouns: {
