@@ -121,7 +121,7 @@ const data = {
       { word: "兴奋", pinyin: "Xīngfèn", imageURL: "img/excited.png", english: "Excited" },
       { word: "累", pinyin: "Lèi", image: "🥱", english: "Tired" },
       { word: "担心", pinyin: "Dānxīn", imageURL: "img/worried.png", english: "Worried" },
-      { word: "放松", pinyin: "Fàngsōng", imageURL: "img/relaxed.png", english: "Relaxed" },
+      { word: "轻松", pinyin: "Qīngsōng", imageURL: "img/relaxed.png", english: "Relaxed" },
       { word: "无聊", pinyin: "Wúliáo", imageURL: "img/bored.png", english: "Bored" },
     ]
   },
@@ -302,7 +302,7 @@ const data = {
       { word: "游乐场", pinyin: "Yóulèchǎng", imageURL: "img/playground.png", english: "Playground" },
       { word: "商店", pinyin: "Shāngdiàn", imageURL: "img/store.png", english: "Store" },
       { word: "图书馆", pinyin: "Túshūguǎn", imageURL: "img/library.png", english: "Library" },
-      { word: "餐厅", pinyin: "Cāntīng", imageURL: "img/restaurant.png", english: "Restaurant" },
+      { word: "饭店", pinyin: "Fàndiàn", imageURL: "img/restaurant.png", english: "Restaurant" },
       { word: "机场", pinyin: "Jīchǎng", imageURL: "img/airport.png", english: "Airport" },
       { word: "飞机", pinyin: "Fēijī", image: "✈️", english: "Airplane" },
       { word: "超市", pinyin: "Chāoshì", imageURL: "img/supermarket.png", english: "Supermarket" },
