@@ -102,9 +102,13 @@ Some technical details:<br />
 <br />
 - I used ChatGPT to do much of the hard work, including producing a lot of the vocabulary list. ChatGPT also contributed many of the word-to-emoji pairings. I had to remove many that were too abstract or a bad fit, though.<br />
 <br />
-- For some images, I used iOS's new Genmoji feature. I'm happy with the results!<br />
+- For some words, I used iOS's new Genmoji feature to create images. I'm happy with the results!<br />
 <br />
-- There are many images I haven't filled in yet...<br />
+- For other words, I used the wonderful and free images provided by <a href="https://arasaac.org">ARASAAC</a>. I found this organization by searching for "AAC images". AAC stands for "Augmentative and Alternative Communication".<br />
+<br />
+- For a few words, I used <a href="https://unsplash.com">Unsplash</a><br />
+<br />
+- There are ~20 words and phrases with no images and I don't think I will find good ones for them<br />
 <br />
 - I want to look into adding the full set of HSK1 and HSK2 vocabulary<br />
 <br />
