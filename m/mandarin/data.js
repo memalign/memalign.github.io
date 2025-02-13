@@ -12,6 +12,7 @@ const data = {
       { word: "面包", pinyin: "Miànbāo", image: "🍞", english: "Bread" },
       { word: "鸡蛋", pinyin: "Jīdàn", image: "🥚", english: "Egg" },
       { word: "牛奶", pinyin: "Niúnǎi", image: "🥛", english: "Milk" },
+      { word: "奶酪", pinyin: "Nǎilào", image: "🧀", english: "Cheese" },
       { word: "咖啡", pinyin: "Kāfēi", image: "☕", english: "Coffee" },
       { word: "水", pinyin: "Shuǐ", imageURL: "img/water.png", english: "Water" },
       { word: "茶", pinyin: "Chá", image: "🍵", english: "Tea" },
@@ -265,6 +266,7 @@ const data = {
       { word: "冷", pinyin: "Lěng", imageURL: "img/cold.png", english: "Cold" },
       { word: "生病", pinyin: "Shēngbìng", image: "🤒", english: "Sick" },
       { word: "健康", pinyin: "Jiànkāng", imageURL: "img/healthy.png", english: "Healthy" },
+      { word: "好笑", pinyin: "Hǎoxiào", image: "NONE", english: "Funny" },
       { word: "聪明", pinyin: "Cōngmíng", imageURL: "img/smart.png", english: "Smart" },
       { word: "笨", pinyin: "Bèn", imageURL: "img/dumb.png", english: "Dumb" },
       { word: "黏", pinyin: "Nián", imageURL: "img/sticky.png", english: "Sticky" },
@@ -496,6 +498,8 @@ const data = {
       { word: "电影", pinyin: "Diànyǐng", imageURL: "img/movie.png", english: "Movie" },
       { word: "东西", pinyin: "Dōngxi", imageURL: "img/thing.png", english: "Thing" },
       { word: "词", pinyin: "Cí", imageURL: "img/word.png", english: "Word" },
+      { word: "笑话", pinyin: "Xiàohuà", imageURL: "img/joke.png", english: "Joke" },
+      { word: "我开玩笑的", pinyin: "Wǒ kāiwánxiào de", image: "NONE", english: "I'm kidding" },
     ]
   },
   pronouns: {
