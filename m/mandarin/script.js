@@ -193,7 +193,7 @@ function showCategories(categoryKeys) {
 			tile.dataset.word = item.word
 			tile.dataset.english = item.english
 
-      if (item.english.length > 25) {
+      if (item.pinyin.length + item.english.length > 37) {
         tile.classList.add('small-font')
       }
 

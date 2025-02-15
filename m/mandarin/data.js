@@ -507,12 +507,12 @@ const data = {
       { word: "我开玩笑的", pinyin: "Wǒ kāiwánxiào de", image: "NONE", english: "I'm kidding" },
       { word: "擤鼻涕", pinyin: "Xǐng bítì", imageURL: "img/blowyournose.png", english: "Blow your nose" },
       { word: "扔掉", pinyin: "Rēngdiào", image: "🚮", english: "Throw away" },
-      { word: "请把垃圾扔掉", pinyin: "Qǐng bǎ lājī rēngdiào", imageURL: "img/throwaway.png", english: "Please throw the trash away" },
-      { word: "把门关上", pinyin: "Bǎ mén guānshàng", imageURL: "img/closethedoor.png", english: "Close the door" },
-      { word: "把窗户打开", pinyin: "Bǎ chuānghu dǎkāi", imageURL: "img/openthewindow.png", english: "Open the window" },
-      { word: "把书给我", pinyin: "Bǎ shū gěi wǒ", imageURL: "img/givebook.png", english: "Give me the book" },
-      { word: "把杯子放在桌子上", pinyin: "Bǎ bēizi fàng zài zhuōzi shàng", imageURL: "img/putcupontable.png", english: "Put the cup on the table" },
-      { word: "把书包带来", pinyin: "Bǎ shūbāo dàilái", imageURL: "img/bringbackpack.png", english: "Bring your backpack" },
+      { word: "扔掉垃圾", pinyin: "Rēngdiào lājī", imageURL: "img/throwaway.png", english: "Throw away the trash" },
+      { word: "关门", pinyin: "Guān mén", imageURL: "img/closethedoor.png", english: "Close the door" },
+      { word: "打开窗户", pinyin: "Dǎkāi chuānghu", imageURL: "img/openthewindow.png", english: "Open the window" },
+      { word: "给我书", pinyin: "Gěi wǒ shū", imageURL: "img/givebook.png", english: "Give me the book" },
+      { word: "把杯子放到桌子上", pinyin: "Bǎ bēizi fàng dào zhuōzi shàng", imageURL: "img/putcupontable.png", english: "Put the cup onto the table" },
+      { word: "带来你的书包", pinyin: "Dàilái nǐ de shūbāo", imageURL: "img/bringbackpack.png", english: "Bring your backpack" },
     ]
   },
   pronouns: {
