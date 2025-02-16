@@ -403,7 +403,7 @@ const data = {
       { word: "亲", pinyin: "Qīn", image: "💋", english: "Kiss" },
       { word: "是", pinyin: "Shì", imageURL: "img/be.png", english: "To be" },
       { word: "有", pinyin: "Yǒu", imageURL: "img/have.png", english: "To have" },
-      { word: "做", pinyin: "Zuò", imageURL: "img/do.png", english: "To do" },
+      { word: "做", pinyin: "Zuò", imageURL: "img/do.png", english: "To do/cook/make" },
       { word: "学", pinyin: "Xué", imageURL: "img/learn.png", english: "To learn" },
       { word: "叫", pinyin: "Jiào", imageURL: "img/call.png", english: "To be called" },
       { word: "来", pinyin: "Lái", imageURL: "img/come.png", english: "To come" },
@@ -518,6 +518,10 @@ const data = {
       { word: "给我书", pinyin: "Gěi wǒ shū", imageURL: "img/givebook.png", english: "Give me the book" },
       { word: "把杯子放到桌子上", pinyin: "Bǎ bēizi fàng dào zhuōzi shàng", imageURL: "img/putcupontable.png", english: "Put the cup onto the table" },
       { word: "带来你的书包", pinyin: "Dàilái nǐ de shūbāo", imageURL: "img/bringbackpack.png", english: "Bring your backpack" },
+      { word: "怎么说 _？", pinyin: "Zěnme shuō _?", image: "NONE", english: "How do you say _?" },
+      { word: "我有问题", pinyin: "Wǒ yǒu wèntí", imageURL: "img/question.png", english: "I have a question" },
+      { word: "现在几点？", pinyin: "Xiànzài jǐ diǎn?", imageURL: "img/whattimeisit.png", english: "What time is it?" },
+      { word: "现在三点", pinyin: "Xiànzài sān diǎn", imageURL: "img/threeoclock.png", english: "It's 3 o'clock" },
     ]
   },
   pronouns: {
