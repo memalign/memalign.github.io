@@ -181,12 +181,16 @@ body {
 
 #save-settings {
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 #reset-progress {
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
+#reset-count {
+  margin-top: 3px;
+}
 
 .invisible {
   /* Change this to `display: none;` to lay card out without leaving space for hidden info */
@@ -208,7 +212,7 @@ body {
 }
 
 .stats {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 0.7rem;
 }
 

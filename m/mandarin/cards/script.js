@@ -24,6 +24,7 @@ const settingsBtn = document.getElementById("settings-btn");
 const settingsPanel = document.getElementById("settings-panel");
 const saveSettingsBtn = document.getElementById("save-settings");
 const resetProgressBtn = document.getElementById("reset-progress");
+const resetCountBtn = document.getElementById("reset-count");
 
 // Checkboxes
 const showPictureCheckbox = document.getElementById("show-picture");
@@ -81,7 +82,7 @@ settingsBtn.addEventListener("click", (event) => {
 
   if (settingsPanel.classList.contains("hidden")) {
 
-    const stats = calculateStats(reviewData)
+    const stats = calculateStats(wordList, reviewData)
 
     const easyStatsEl = document.getElementById("easyStats")
     easyStatsEl.innerText = `${stats.count5} / ${wordList.length} = ${ (stats.count5 * 100 / wordList.length).toFixed(1) }% easy`
@@ -115,12 +116,16 @@ document.addEventListener("click", function (event) {
 });
 
 
-function calculateStats(reviewData) {
-  let total = 0;
+function calculateStats(wordList, reviewData) {
   let count0 = 0, count3 = 0, count5 = 0, notReviewed = 0;
 
+  const wordSet = new Set(wordList.map(element => element.word));
+
   for (const [key, wordData] of Object.entries(reviewData)) {
-    total++
+    // Ignore stats for a word that was removed from the dictionary
+    if (!wordSet.has(key)) {
+      continue
+    }
 
     if (wordData.lastReview === undefined) {
       notReviewed++
@@ -133,7 +138,7 @@ function calculateStats(reviewData) {
     }
   }
 
-  return { total, count0, count3, count5, notReviewed };
+  return { count0, count3, count5, notReviewed };
 }
 
 
@@ -141,7 +146,6 @@ function resetProgress() {
   let resetStorage = confirm("Reset Progress? All learning progress will be lost.")
 
   if (resetStorage) {
-    window.localStorage.removeItem('reviewCount')
     window.localStorage.removeItem('reviewData')
     location.reload()
     return true
@@ -150,6 +154,20 @@ function resetProgress() {
   }
 }
 resetProgressBtn.addEventListener("click", resetProgress);
+
+function resetCount() {
+  let resetStorage = confirm("Reset Count? Reviewed cards count will be reset to zero.")
+
+  if (resetStorage) {
+    window.localStorage.removeItem('reviewCount')
+    location.reload()
+    return true
+  } else {
+    return false
+  }
+}
+resetCountBtn.addEventListener("click", resetCount);
+
 
 const frame = document.body.querySelector('.frame')
 
