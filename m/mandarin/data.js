@@ -390,6 +390,7 @@ const data = {
       { word: "喝", pinyin: "Hē", imageURL: "img/drink.png", english: "Drink" },
       { word: "走", pinyin: "Zǒu", image: "🚶", english: "Walk" },
       { word: "跑", pinyin: "Pǎo", image: "🏃", english: "Run" },
+      { word: "锻炼", pinyin: "Duànliàn", imageURL: "img/exercise.png", english: "Exercise" },
       { word: "看", pinyin: "Kàn", imageURL: "img/look.png", english: "Look, See" },
       { word: "听", pinyin: "Tīng", imageURL: "img/listen.png", english: "Listen" },
       { word: "说", pinyin: "Shuō", image: "🗣️", english: "Speak" },
