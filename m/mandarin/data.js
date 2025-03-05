@@ -281,7 +281,7 @@ const data = {
       { word: "热", pinyin: "Rè", imageURL: "img/hot.png", english: "Hot" },
       { word: "冷", pinyin: "Lěng", imageURL: "img/cold.png", english: "Cold" },
       { word: "难", pinyin: "Nán", imageURL: "img/difficult.png", english: "Difficult" },
-      { word: "容易", pinyin: "Róngyì", imageURL: "img/easy.png", english: "Easy" },
+      { word: "简单", pinyin: "Jiǎndān", imageURL: "img/easy.png", english: "Simple/Easy" },
       { word: "生病", pinyin: "Shēngbìng", image: "🤒", english: "Sick" },
       { word: "健康", pinyin: "Jiànkāng", imageURL: "img/healthy.png", english: "Healthy" },
       { word: "好笑", pinyin: "Hǎoxiào", image: "NONE", english: "Funny" },
@@ -537,6 +537,7 @@ const data = {
       { word: "给我书", pinyin: "Gěi wǒ shū", imageURL: "img/givebook.png", english: "Give me the book" },
       { word: "把杯子放到桌子上", pinyin: "Bǎ bēizi fàng dào zhuōzi shàng", imageURL: "img/putcupontable.png", english: "Put the cup onto the table" },
       { word: "带来你的书包", pinyin: "Dàilái nǐ de shūbāo", imageURL: "img/bringbackpack.png", english: "Bring your backpack" },
+      { word: "拿书", pinyin: "Ná shū", imageURL: "img/grabbook.png", english: "Grab the book" },
       { word: "怎么说 _？", pinyin: "Zěnme shuō _?", image: "NONE", english: "How do you say _?" },
       { word: "我有问题", pinyin: "Wǒ yǒu wèntí", imageURL: "img/question.png", english: "I have a question" },
       { word: "现在几点？", pinyin: "Xiànzài jǐ diǎn?", imageURL: "img/whattimeisit.png", english: "What time is it?" },
@@ -544,7 +545,7 @@ const data = {
       { word: "这本书很臭", pinyin: "Zhè běn shū hěn chòu", imageURL: "img/smellybook.png", english: "This book is smelly" },
       { word: "开会", pinyin: "Kāihuì", imageURL: "img/meeting.png", english: "(Work) Meeting" },
       { word: "我要开会", pinyin: "Wǒ yào kāihuì", image: "NONE", english: "I have a (work) meeting" },
-      { word: "也许", pinyin: "Yěxǔ", image: "NONE", english: "Maybe" },
+      { word: "可能", pinyin: "Kěnéng", image: "NONE", english: "Maybe" },
     ]
   },
   pronouns: {
