@@ -13,7 +13,8 @@ const data = {
       { word: "面包", pinyin: "Miànbāo", image: "🍞", english: "Bread" },
       { word: "鸡蛋", pinyin: "Jīdàn", image: "🥚", english: "Egg" },
       { word: "果汁", pinyin: "Guǒzhī", image: "🧃", english: "Juice" },
-      { word: "咸菜", pinyin: "Xiáncài", imageURL: "img/pickle.png", english: "Pickle" },
+      { word: "咸菜", pinyin: "Xiáncài", imageURL: "img/daikon.jpg", english: "Pickled vegetables" },
+      { word: "腌黄瓜", pinyin: "Yān huángguā", imageURL: "img/pickle.png", english: "Pickle" },
       { word: "蜂蜜", pinyin: "Fēngmì", image: "🍯", english: "Honey" },
       { word: "牛奶", pinyin: "Niúnǎi", image: "🥛", english: "Milk" },
       { word: "奶酪", pinyin: "Nǎilào", image: "🧀", english: "Cheese" },
@@ -134,7 +135,7 @@ const data = {
       { word: "洗衣服", pinyin: "Xǐ yīfu", imageURL: "img/laundry.png", english: "Laundry" },
       { word: "脏衣服", pinyin: "Zāng yīfu", imageURL: "img/dirtylaundry.png", english: "Dirty laundry" },
       { word: "闪卡", pinyin: "Shǎnkǎ", imageURL: "cards/cards.png", english: "Flashcard" },
-      { word: "理发", pinyin: "Lǐfà", image: "💇", english: "Haircut" },
+      { word: "剪头发", pinyin: "Jiǎn tóufà", image: "💇", english: "Haircut" },
 		]
 	},
   emotions: {
@@ -429,6 +430,7 @@ const data = {
       { word: "有", pinyin: "Yǒu", imageURL: "img/have.png", english: "To have" },
       { word: "做", pinyin: "Zuò", imageURL: "img/do.png", english: "To do/cook/make" },
       { word: "切", pinyin: "Qiē", imageURL: "img/cut.png", english: "Cut" },
+      { word: "剪", pinyin: "Jiǎn", image: "✂️", english: "Cut (with scissors)" },
       { word: "学", pinyin: "Xué", imageURL: "img/learn.png", english: "To learn" },
       { word: "叫", pinyin: "Jiào", imageURL: "img/call.png", english: "To be called" },
       { word: "来", pinyin: "Lái", imageURL: "img/come.png", english: "To come" },
