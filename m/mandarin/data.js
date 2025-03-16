@@ -376,7 +376,7 @@ const data = {
       { word: "沙坑", pinyin: "Shākēng", imageURL: "img/sandbox.png", english: "Sandbox" },
       { word: "草地", pinyin: "Cǎodì", imageURL: "img/grass.png", english: "Grass" },
       { word: "长椅", pinyin: "Chángyǐ", imageURL: "img/bench.png", english: "Bench" },
-      { word: "棍子", pinyin: "Gùnzi", imageURL: "img/stick.png", english: "Stick" },
+      { word: "树枝", pinyin: "Shùzhī", imageURL: "img/stick.png", english: "Stick" },
       { word: "小路", pinyin: "Xiǎolù", imageURL: "img/pathway.png", english: "Pathway" },
       { word: "球场", pinyin: "Qiúchǎng", imageURL: "img/ballcourt.png", english: "Ball court" },
       { word: "球", pinyin: "Qiú", image: "🏀", english: "Ball" },
