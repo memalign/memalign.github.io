@@ -360,6 +360,9 @@ const data = {
       { word: "车", pinyin: "Chē", image: "🚗", english: "Car" },
       { word: "超市", pinyin: "Chāoshì", imageURL: "img/supermarket.png", english: "Supermarket" },
       { word: "电影院", pinyin: "Diànyǐngyuàn", imageURL: "img/cinema.png", english: "Cinema" },
+      { word: "楼梯", pinyin: "Lóutī", imageURL: "img/stairs.png", english: "Stairs" },
+      { word: "电梯", pinyin: "Diàntī", image: "🛗", english: "Elevator" },
+      { word: "扶梯", pinyin: "Fútī", imageURL: "img/escalator.png", english: "Escalator" },
     ]
   },
   park: {
