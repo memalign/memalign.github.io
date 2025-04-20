@@ -299,7 +299,7 @@ const data = {
       { word: "冷", pinyin: "Lěng", imageURL: "img/cold.png", english: "Cold" },
       { word: "软", pinyin: "Ruǎn", imageURL: "img/soft.png", english: "Soft" },
       { word: "硬", pinyin: "Yìng", imageURL: "img/hard.png", english: "Hard" },
-      { word: "很吵", pinyin: "Hěn chǎo", image: "🔊", english: "Loud" },
+      { word: "很响", pinyin: "Hěn xiǎng", image: "🔊", english: "Loud" },
       { word: "很安静", pinyin: "Hěn ānjìng", image: "🔇", english: "Quiet" },
       { word: "新的", pinyin: "Xīn de", imageURL: "img/new.png", english: "New" },
       { word: "难", pinyin: "Nán", imageURL: "img/difficult.png", english: "Difficult" },
