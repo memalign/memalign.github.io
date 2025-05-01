@@ -53,6 +53,7 @@ const data = {
       { word: "三明治", pinyin: "Sānmíngzhì", image: "🥪", english: "Sandwich" },
       { word: "饼干", pinyin: "Bǐnggān", image: "🍪", english: "Cookie" },
       { word: "水果", pinyin: "Shuǐguǒ", imageURL: "img/fruit.png", english: "Fruit" },
+      { word: "花生酱", pinyin: "Huāshēngjiàng", imageURL: "img/peanutbutter.png", english: "Peanut butter" },
     ]
   },
   utensils: {
@@ -414,6 +415,7 @@ const data = {
       { word: "短裤", pinyin: "Duǎnkù", image: "🩳", english: "Shorts" },
       { word: "裙子", pinyin: "Qúnzi", image: "👗", english: "Dress" },
       { word: "鞋子", pinyin: "Xiézi", image: "👟", english: "Shoes" },
+      { word: "拖鞋", pinyin: "Tuōxié", imageURL: "img/slippers.png", english: "Slippers" },
       { word: "帽子", pinyin: "Màozi", image: "🧢", english: "Hat" },
       { word: "衬衫", pinyin: "Chènshān", image: "👕", english: "Shirt" },
       { word: "手套", pinyin: "Shǒutào", image: "🧤", english: "Gloves" },
@@ -534,6 +536,10 @@ const data = {
       { word: "帮忙", pinyin: "Bāngmáng", imageURL: "img/help.png", english: "Help" },
       { word: "帮助我", pinyin: "Bāngzhù wǒ", image: "NONE", english: "Help me" },
       { word: "小心", pinyin: "Xiǎoxīn", imageURL: "img/careful.png", english: "Careful" },
+      { word: "我很难过", pinyin: "Wǒ hěn nánguò", image: "NONE", english: "I'm sad" },
+      { word: "我很开心", pinyin: "Wǒ hěn kāixīn", imageURL: "img/imhappy.png", english: "I'm happy" },
+      { word: "他在发脾气", pinyin: "Tā zài fā píqi", image: "😤", english: "He’s being grumpy" },
+      { word: "站起来", pinyin: "Zhàn qǐlái", imageURL: "img/standup.png", english: "Stand up" },
       { word: "我明白了", pinyin: "Wǒ míngbái le", imageURL: "img/understand.png", english: "I understand" },
       { word: "我不明白", pinyin: "Wǒ bù míngbái", imageURL: "img/idontunderstand.png", english: "I don't understand" },
       { word: "慢一点", pinyin: "Màn yīdiǎn", image: "NONE", english: "Slower" },
