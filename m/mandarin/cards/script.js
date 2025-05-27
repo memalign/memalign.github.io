@@ -16,7 +16,8 @@ const settings = JSON.parse(localStorage.getItem("flashcardSettings")) || {
   showPinyin: false,
   showChinese: false,
   showEnglish: false,
-  showSpeak: false
+  showSpeak: false,
+  speakOnReveal: false
 };
 
 // Get elements
@@ -32,6 +33,7 @@ const showPinyinCheckbox = document.getElementById("show-pinyin");
 const showChineseCheckbox = document.getElementById("show-chinese");
 const showEnglishCheckbox = document.getElementById("show-english");
 const showSpeakCheckbox = document.getElementById("show-speak");
+const speakOnRevealCheckbox = document.getElementById("speak-on-reveal");
 
 // Apply saved settings to checkboxes
 showPictureCheckbox.checked = settings.showPicture;
@@ -39,6 +41,7 @@ showPinyinCheckbox.checked = settings.showPinyin;
 showChineseCheckbox.checked = settings.showChinese;
 showEnglishCheckbox.checked = settings.showEnglish;
 showSpeakCheckbox.checked = settings.showSpeak;
+speakOnRevealCheckbox.checked = settings.speakOnReveal;
 
 function updateVisibility(elements, condition) {
   elements.forEach(element => {
@@ -57,6 +60,7 @@ function saveSettings() {
   settings.showChinese = showChineseCheckbox.checked;
   settings.showEnglish = showEnglishCheckbox.checked;
   settings.showSpeak = showSpeakCheckbox.checked;
+  settings.speakOnReveal = speakOnRevealCheckbox.checked;
 
   localStorage.setItem("flashcardSettings", JSON.stringify(settings));
   settingsPanel.classList.add("hidden"); // Hide settings panel
@@ -469,6 +473,10 @@ function handleCardClick(event) {
   updateVisibility(current.querySelectorAll(".english"), true)
   updateVisibility(current.querySelectorAll(".speakButton"), true)
   updateVisibility(current.querySelectorAll(".tapToReveal"), false)
+
+  if (settings.speakOnReveal) {
+    speakWord(`${current.dataset.chinese}`)
+  }
 }
 
 function complete(flyUp) {
