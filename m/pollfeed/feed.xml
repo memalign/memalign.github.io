@@ -3,10 +3,35 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2025-02-02T16:00:01Z</updated>
+<updated>2025-06-03T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 06/03/25 08:00</title>
+<published>2025-06-03T15:00:01Z</published>
+<updated>2025-06-03T15:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:95deb1d6418802d25243692aa700be51</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<a href="#">#</a><br />
+<a href="windows.html">windows.html</a><br />
+<a href="one_button.html">one_button.html</a><br />
+<a href="browser.html">browser.html</a><br />
+<a href="flash.html">flash.html</a><br />
+<a href="misc.html">misc.html</a><br />
+<a href="about.html">about.html</a><br />
+<img src="https://abagames.github.io/vibe-game-coding-testbed/screenshots/blasnake_screenshot.gif"><br />
+<a href="https://abagames.github.io/vibe-game-coding-testbed/blasnake/">https://abagames.github.io/vibe-game-coding-testbed/blasnake/</a><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 02/02/25 08:00</title>
 <published>2025-02-02T16:00:01Z</published>
