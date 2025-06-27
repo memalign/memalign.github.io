@@ -121,6 +121,8 @@ const data = {
       { word: "烤箱", pinyin: "Kǎoxiāng", imageURL: "img/oven.png", english: "Oven" },
       { word: "吸尘器", pinyin: "Xīchénqì", imageURL: "img/vacuum.png", english: "Vacuum" },
       { word: "钱", pinyin: "Qián", image: "💵", english: "Money" },
+      { word: "包", pinyin: "Bāo", image: "👜", english: "Bag (handbag, backpack)" },
+      { word: "袋子", pinyin: "Dàizi", image: "🛍️", english: "Bag (shopping bag, plastic bag)" },
       { word: "电视", pinyin: "Diànshì", image: "📺", english: "TV" },
       { word: "电视节目", pinyin: "Diànshì Jiémù", imageURL: "img/tvshow.png", english: "TV Show" },
       { word: "歌", pinyin: "Gē", image: "🎵", english: "Song" },
@@ -392,6 +394,7 @@ const data = {
       { word: "商店", pinyin: "Shāngdiàn", imageURL: "img/store.png", english: "Store" },
       { word: "图书馆", pinyin: "Túshūguǎn", imageURL: "img/library.png", english: "Library" },
       { word: "饭店", pinyin: "Fàndiàn", imageURL: "img/restaurant.png", english: "Restaurant" },
+      { word: "菜单", pinyin: "Càidān", imageURL: "img/menu.png", english: "Menu" },
       { word: "机场", pinyin: "Jīchǎng", imageURL: "img/airport.png", english: "Airport" },
       { word: "飞机", pinyin: "Fēijī", image: "✈️", english: "Airplane" },
       { word: "车", pinyin: "Chē", image: "🚗", english: "Car" },
@@ -649,6 +652,8 @@ const data = {
       { word: "我会说中文", pinyin: "Wǒ huì shuō zhōngwén", image: "NONE", english: "I can speak Chinese" },
       { word: "这个杯子和那个杯子都是我的", pinyin: "Zhège bēizi hé nàge bēizi dōu shì wǒ de", image: "NONE", english: "This cup and that cup are both mine" },
       { word: "我也学中文", pinyin: "Wǒ yě xué zhōngwén", image: "NONE", english: "I also study Chinese" },
+      { word: "他正在度假", pinyin: "Tā zhèngzài dùjià", image: "NONE", english: "He’s on vacation (right now)" },
+      { word: "我有一个星期的假期", pinyin: "Wǒ yǒu yí gè xīngqī de jiàqī", image: "NONE", english: "I have a one-week vacation" },
     ]
   },
   pronouns: {
