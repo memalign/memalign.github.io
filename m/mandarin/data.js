@@ -58,6 +58,9 @@ const data = {
       { word: "饼干", pinyin: "Bǐnggān", image: "🍪", english: "Cookie" },
       { word: "水果", pinyin: "Shuǐguǒ", imageURL: "img/fruit.png", english: "Fruit" },
       { word: "花生酱", pinyin: "Huāshēngjiàng", imageURL: "img/peanutbutter.png", english: "Peanut butter" },
+      { word: "酱油", pinyin: "Jiàngyóu", imageURL: "img/soysauce.png", english: "Soy sauce" },
+      { word: "醋", pinyin: "Cù", imageURL: "img/vinegar.png", english: "Vinegar" },
+      { word: "矿泉水", pinyin: "Kuàngquánshuǐ", imageURL: "img/bottledwater.png", english: "Bottled water" },
     ]
   },
   utensils: {
@@ -121,6 +124,7 @@ const data = {
       { word: "烤箱", pinyin: "Kǎoxiāng", imageURL: "img/oven.png", english: "Oven" },
       { word: "吸尘器", pinyin: "Xīchénqì", imageURL: "img/vacuum.png", english: "Vacuum" },
       { word: "钱", pinyin: "Qián", image: "💵", english: "Money" },
+      { word: "礼物", pinyin: "Lǐwù", image: "🎁", english: "Present/Gift" },
       { word: "包", pinyin: "Bāo", image: "👜", english: "Bag (handbag, backpack)" },
       { word: "袋子", pinyin: "Dàizi", image: "🛍️", english: "Bag (shopping bag, plastic bag)" },
       { word: "电视", pinyin: "Diànshì", image: "📺", english: "TV" },
@@ -339,6 +343,8 @@ const data = {
       { word: "偷偷", pinyin: "Tōutōu", imageURL: "img/sneakily.png", english: "Sneakily" },
       { word: "黏", pinyin: "Nián", imageURL: "img/sticky.png", english: "Sticky" },
       { word: "圆", pinyin: "Yuán", image: "⭕", english: "Round" },
+      { word: "好恶心", pinyin: "Hǎo ěxīn", image: "🤢", english: "Gross/Yucky" },
+      { word: "辣", pinyin: "Là", imageURL: "img/spicy.png", english: "Spicy" },
     ]
   },
   locationDirection: {
@@ -654,6 +660,8 @@ const data = {
       { word: "我也学中文", pinyin: "Wǒ yě xué zhōngwén", image: "NONE", english: "I also study Chinese" },
       { word: "他正在度假", pinyin: "Tā zhèngzài dùjià", image: "NONE", english: "He’s on vacation (right now)" },
       { word: "我有一个星期的假期", pinyin: "Wǒ yǒu yí gè xīngqī de jiàqī", image: "NONE", english: "I have a one-week vacation" },
+      { word: "但是", pinyin: "Dànshì", image: "NONE", english: "But" },
+      { word: "我很痛", pinyin: "Wǒ hěn tòng", imageURL: "img/iminpain.png", english: "I’m in pain" },
     ]
   },
   pronouns: {
