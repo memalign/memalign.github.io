@@ -3,10 +3,60 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2025-06-04T15:00:01Z</updated>
+<updated>2025-07-19T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 07/19/25 08:00</title>
+<published>2025-07-19T15:00:01Z</published>
+<updated>2025-07-19T15:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:c6d6a3c63ccc6c83b1e4a285c29844ec</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/echo-bridge/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?echo-bridge">https://abagames.github.io/claude-one-button-game-creation/?echo-bridge</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/pulse-stream/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?pulse-stream">https://abagames.github.io/claude-one-button-game-creation/?pulse-stream</a><br />
+
+]]>
+</content>
+</entry>
+
+<entry>
+<title>asahi-net.or.jp at 07/10/25 08:00</title>
+<published>2025-07-10T15:00:01Z</published>
+<updated>2025-07-10T15:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:2e9679fbf739795041db4c6f22b31a6a</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<a href="https://abagames.github.io/vibe-game-coding-testbed/hopway/">https://abagames.github.io/vibe-game-coding-testbed/hopway/</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/jet-stream/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?jet-stream">https://abagames.github.io/claude-one-button-game-creation/?jet-stream</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/pod-migration/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?pod-migration">https://abagames.github.io/claude-one-button-game-creation/?pod-migration</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/marble-bounce/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?marble-bounce">https://abagames.github.io/claude-one-button-game-creation/?marble-bounce</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/rocket-trail/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?rocket-trail">https://abagames.github.io/claude-one-button-game-creation/?rocket-trail</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/blaze-thrust/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?blaze-thrust">https://abagames.github.io/claude-one-button-game-creation/?blaze-thrust</a><br />
+<img src="https://abagames.github.io/vibe-game-coding-testbed/screenshots/labyracer.gif"><br />
+<a href="https://abagames.itch.io/labyracer">https://abagames.itch.io/labyracer</a><br />
+<img src="https://abagames.github.io/vibe-game-coding-testbed/screenshots/hopway.gif"><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 06/04/25 08:00</title>
 <published>2025-06-04T15:00:01Z</published>
