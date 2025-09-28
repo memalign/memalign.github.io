@@ -3,10 +3,30 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2025-08-24T15:00:01Z</updated>
+<updated>2025-09-28T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 09/28/25 08:00</title>
+<published>2025-09-28T15:00:01Z</published>
+<updated>2025-09-28T15:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:1287e7f65928fc397546cbeee55953c8</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/chalkboard/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?chalkboard">https://abagames.github.io/claude-one-button-game-creation/?chalkboard</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/barge-hop/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/?barge-hop">https://abagames.github.io/claude-one-button-game-creation/?barge-hop</a><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 08/24/25 08:00</title>
 <published>2025-08-24T15:00:01Z</published>
