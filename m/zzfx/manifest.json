@@ -1,0 +1,15 @@
+{
+  "short_name": "ZzFX",
+  "name": "ZzFX",
+  "description": " Zuper Zmall Zound Zynth",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
