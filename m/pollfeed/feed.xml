@@ -3,10 +3,34 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2025-09-28T15:00:01Z</updated>
+<updated>2025-10-12T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 10/12/25 08:00</title>
+<published>2025-10-12T15:00:01Z</published>
+<updated>2025-10-12T15:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:272f0672d77dd58506a9d78a675f7f9d</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<img src="https://abagames.github.io/chat-craft-click/bubble-ascent/screenshot.gif"><br />
+<a href="https://abagames.github.io/chat-craft-click/bubble-ascent/">https://abagames.github.io/chat-craft-click/bubble-ascent/</a><br />
+<img src="https://abagames.github.io/chat-craft-click/burger-stack/screenshot.gif"><br />
+<a href="https://abagames.github.io/chat-craft-click/burger-stack/">https://abagames.github.io/chat-craft-click/burger-stack/</a><br />
+<img src="https://abagames.github.io/chat-craft-click/orbit-jumper/screenshot.gif"><br />
+<a href="https://abagames.github.io/chat-craft-click/orbit-jumper/">https://abagames.github.io/chat-craft-click/orbit-jumper/</a><br />
+<img src="https://abagames.github.io/chat-craft-click/lava-surfing/screenshot.gif"><br />
+<a href="https://abagames.github.io/chat-craft-click/lava-surfing/">https://abagames.github.io/chat-craft-click/lava-surfing/</a><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 09/28/25 08:00</title>
 <published>2025-09-28T15:00:01Z</published>
