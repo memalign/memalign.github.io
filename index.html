@@ -12,8 +12,8 @@
 <meta property="og:title" content="memalign.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://memalign.github.io/index.html" />
-<meta property="og:image" content="https://memalign.github.io/m/mandarin/cards/cards.png" />
-<meta property="og:description" content="Introducing Mandarin Flashcards! I'm expanding on Mandarin Communication Board by using the same data to create a set of flashcards. These flashcards use spaced repetition, a memorization method where cards…" />
+<meta property="og:image" content="https://memalign.github.io/m/phonics/cards-1000.png" />
+<meta property="og:description" content="Introducing Phonics Flashcards! My 4-year-old son is learning the basics of reading, starting with the sounds of every alphabet letter. A friend of ours recommended cardboard flashcards by toddlersread.com. This…" />
 <link rel="stylesheet" href="/style.css">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
 </head>
@@ -97,6 +97,12 @@
     </a>
   </div>
   <div id='projects-grid-entry'>
+    <a href='/m/phonics/index.html'>
+    <div id='projects-grid-title'>Phonics Flashcards</div>
+    <div class='rect-img-container'><img src='/m/phonics/cards-1000.png'></div>
+    </a>
+  </div>
+  <div id='projects-grid-entry'>
     <a href='/m/mandarin/index.html'>
     <div id='projects-grid-title'>Mandarin Board</div>
     <div class='rect-img-container'><img src='/m/mandarin/mcb.png'></div>
@@ -125,6 +131,7 @@
 <div id='allposts'>
 <div id='grid'>
 <div id='grid-entry'>
+<a href='p/phonics.html'>Phonics Flashcards</a><br />
 <a href='p/mandarin-flashcards.html'>Mandarin Flashcards</a><br />
 <a href='p/mandarin.html'>Mandarin Communication Board</a><br />
 <a href='p/counting.html'>Counting Tap Toy</a><br />
@@ -145,8 +152,8 @@
 <a href='p/pceimage-editor.html'>PCEImage Editor</a><br />
 <a href='p/pceimage.html'>PCEImage</a><br />
 <a href='p/beatles.html'>My Beatles Picks</a><br />
-<a href='p/soundsjustlike.html'>SoundsJustLike</a><br />
 </div><div id='grid-entry'>
+<a href='p/soundsjustlike.html'>SoundsJustLike</a><br />
 <a href='p/puzzlescript.html'>PuzzleScript</a><br />
 <a href='p/wheat-chex.html'>Wheat Chex</a><br />
 <a href='p/pico8.html'>PICO-8</a><br />
@@ -167,8 +174,8 @@
 <a href='p/listed-action-if.html'>Listed Action Interactive Fiction</a><br />
 <a href='p/andrew-plotkin.html'>Andrew Plotkin's Zarfhome</a><br />
 <a href='p/product-reviews.html'>Product Review Writing Prompts</a><br />
-<a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
 </div><div id='grid-entry'>
+<a href='p/dungeon-memalign.html'>Dungeon Memalign</a><br />
 <a href='p/pacman-dungeon.html'>Pac-Man Dungeon</a><br />
 <a href='p/queens-gambit.html'>The Queen's Gambit</a><br />
 <a href='p/rebecca-meyer.html'>Rebecca Meyer</a><br />
@@ -191,6 +198,41 @@
 </div>
 </div>
 </div>
+<hr />
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='p/phonics.html'>Phonics Flashcards</a>
+</h2>
+</div>
+<img src="/m/phonics/cards-1000.png">
+<div id='postdate'>Posted on 10/27/2025<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Tools</a>, <a href='/tags.html'>Parenting</a></div>
+Introducing <a href="/m/phonics/index.html">Phonics Flashcards</a>!<br />
+<br />
+My 4-year-old son is learning the basics of reading, starting with the sounds of every alphabet letter.<br />
+<br />
+A friend of ours recommended cardboard <a href="https://www.toddlersread.com/products/fairy-tale-abc-cards">flashcards</a> by <a href="https://www.toddlersread.com">toddlersread.com</a>.<br />
+<br />
+This company shared a few helpful videos on <a href="https://youtu.be/gh0HXfgV3bs">how to use phonics flashcards effectively</a> and <a href="https://youtube.com/shorts/S3K5bwo4Djk?si=BQlDWuK-k7FhULCm">what sound to learn first for each letter</a>.<br />
+<br />
+The cards we like best are sold out so I made this web app to use in the meantime.<br />
+<br />
+Key features:<br />
+<br />
+- Focus on just a few letters at a time. When the page loads, the five letters with the weakest recall are chosen automatically. Tap into the Letters menu to customize which letters are in rotation in the current session.<br />
+<br />
+- Show uppercase and lowercase letters together. These can usually be learned at the same time. If your kid needs to focus on one at a time, this can be customized in the settings panel.<br />
+<br />
+- A fun image is behind the reveal instead of on the front of the card. We want kids to learn the sound based on the letter alone. We don't want them to memorize the sound based on a single image.<br />
+<br />
+- When there's an "easy recall" streak, there's a fun confetti animation to keep kids engaged.<br />
+<br />
+- Flashcards are chosen and sorted using a spaced repetition algorithm (the same one used in my <a href="/m/mandarin/cards/index.html">Mandarin Flashcards</a>). That's why there are three buttons (and swipe actions) to quickly indicate whether the flashcard was not-yet-known, slow to recall, or easy to recall. Not-yet-known and slow cards are shown more frequently until recall improves.<br />
+<br />
+- This web app should look good on phones, iPads, and can also be installed as a PWA on your home screen.
+</div>
+
 <hr />
 <div id='post'>
 <div id='header'>
@@ -938,43 +980,8 @@ Progress compiling got to 2% and then iSH crashes.<br />
 </div>
 
 <hr />
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='p/simplify-picking-restaurant.html'>Simplify Picking a Restaurant</a>
-</h2>
-</div>
-<img src="/m/food-sheet.png">
-<div id='postdate'>Posted on 11/22/2022<br />
-Tags: <a href='/tags.html'>Food</a>, <a href='/tags.html'>Parenting</a>, <a href='/tags.html'>Tools</a></div>
-With a toddler at home, we've come to rely on DoorDash as a quick way for the adults to eat tasty food.<br />
-<br />
-We're lucky to live in an area densely packed with restaurants. Despite the wealth of options, we often struggle to choose when dinnertime arrives.<br />
-<br />
-My spouse and I will end up naming restaurants, taking turns rejecting options one-by-one. On some days, nothing sounds good. On some days, we're exhausted from a night of interrupted sleep and lack the energy to pick. Often both.<br />
-<br />
-I got the idea to make picking a restaurant more mechanical on the hard days.<br />
-<br />
-At first, I considered building a web app with a database and a nice UI for listing restaurants and saving our history. I spend most of my non-work hours taking care of the baby, exercising, or doing chores so even a simple side-project takes months and comes at the cost of precious sleep hours. I needed a lower-effort way to test the idea.<br />
-<br />
-I realized I could make this tool in a shared spreadsheet. I used Numbers on iPhone/iPad and shared the sheet with my spouse using iCloud. Google Sheets could've worked too. Spreadsheets are a great low-effort way to solve problems without writing code. I bet a lot of software engineers underutilize spreadsheets.<br />
-<br />
-Here's how it works:<br />
-- Add a row for every restaurant<br />
-- Have a column for the last time we ate there<br />
-- Have a column for each person with an estimate of how often they are willing to eat at each particular restaurant<br />
-- Have a column to note any restaurants someone is actively in the mood to eat at<br />
-- The sheet calculates a recommendation for each row:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Too soon: neither person is ready to eat there again<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Let's eat (green): both people are ready OR someone is in the mood<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Maybe eat (yellow): one person is ready<br />
-- At dinnertime, peruse the green and yellow rows to pick efficiently<br />
-<br />
-Grab my <a href="/m/Food-Example.numbers">example sheet</a> to create your own.
-</div>
-
-<hr />
 More posts:<br />
+<a href='p/simplify-picking-restaurant.html'>Simplify Picking a Restaurant</a><br />
 <a href='p/trippy-art.html'>Trippy Art</a><br />
 <a href='p/taptoy.html'>Tap Toy</a><br />
 <a href='p/pceimage-editor.html'>PCEImage Editor</a><br />

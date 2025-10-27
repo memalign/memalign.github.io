@@ -46,6 +46,10 @@ FormulaGraph
 - Image: /m/formulagraph-stairs.png
 - /m/formulagraph/index.html
 
+Phonics Flashcards
+- Image: /m/phonics/cards-1000.png
+- /m/phonics/index.html
+
 Mandarin Board
 - Image: /m/mandarin/mcb.png
 - /m/mandarin/index.html

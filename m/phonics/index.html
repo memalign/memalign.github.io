@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonics Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="card-style.css">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#6200EA">
+
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="phonics, learn to read, learn phonics, flashcards, learning cards, word cards, spaced repetition">
+    <meta name="description" content="Phonics Flashcards">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="Phonics Flashcards" />
+    <meta property="og:description" content="Learn Phonics">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/phonics/cards-1000.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://memalign.github.io/m/phonics/index.html" />
+    <meta name="twitter:title" content="Phonics Flashcards">
+    <meta name="twitter:description" content="Learn Phonics">
+    <meta name="twitter:image" content="https://memalign.github.io/m/phonics/cards-1000.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+  </head>
+
+  <body>
+    <header class="cardsHeader">
+      <button id="letter-selection-btn">Letters</button>
+      <h1>Phonics Flashcards<a href="https://memalign.github.io/p/phonics.html" id="about-link">(about)</a></h1>
+      <button id="settings-btn">⚙️ </button>
+    </header>
+
+    <div class="app">
+      <div id="effects-container"></div>
+      <div class="frame"></div>
+      <div id="buttons">
+        <button id="again">Don't Know</button>
+        <button id="good">Slow Recall</button>
+        <button id="easy">Easy Recall</button>
+      </div>
+    </div>
+
+    <div id="letter-selection-panel" class="hidden">
+      <h2>Select Letters</h2>
+      <div id="letter-checkboxes"></div>
+      <div class="letter-panel-buttons">
+        <button id="weakest-5">Weakest</button>
+        <button id="random-5">Random</button>
+        <button id="select-all">All</button>
+        <button id="select-none">None</button>
+      </div>
+      <div class="center"><button id="apply-letter-selection">Apply</button></div>
+    </div>
+
+    <div id="settings-panel" class="hidden">
+      <h2>Settings</h2>
+      <div class="left"><label><input type="checkbox" id="show-picture" checked> Show Picture</label></div>
+      <div class="left"><label><input type="checkbox" id="show-letter" checked> Show Letter</label></div>
+      <div class="left indent"><label><input type="checkbox" id="show-uppercase" checked> Show Uppercase</label></div>
+      <div class="left indent"><label><input type="checkbox" id="show-lowercase" checked> Show Lowercase</label></div>
+      <div class="left"><label><input type="checkbox" id="show-word" checked> Show Word</label></div>
+
+
+      <div class="center"><button id="save-settings">Close</button></div>
+      <div class="stats">
+        <div class="center" id="easyStats"></div>
+        <div class="center" id="slowStats"></div>
+        <div class="center" id="dontKnowStats"></div>
+        <div class="center"><button id="reset-progress">Reset Progress</button></div>
+      </div>
+      <div class="stats">
+        <div class="center" id="reviewCount">0 cards reviewed</div>
+        <div class="center"><button id="reset-count">Reset Count</button></div>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script src="pwa.js"></script>
+  </body>
+</html>
