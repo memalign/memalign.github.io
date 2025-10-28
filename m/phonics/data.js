@@ -20,7 +20,7 @@ const data = {
       { word: "Pp", image: "🍕", english: "Pizza" },
       { word: "Qq", image: "👸", english: "Queen" },
       { word: "Rr", image: "🤖", english: "Robot" },
-      { word: "Ss", image: "☀️", english: "Sun" },
+      { word: "Ss", image: "🐍", english: "Snake" },
       { word: "Tt", image: "🐢", english: "Turtle" },
       { word: "Uu", image: "☂️", english: "Umbrella" },
       { word: "Vv", image: "🎻", english: "Violin" },
