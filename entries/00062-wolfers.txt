@@ -1,0 +1,36 @@
+Title: Wolfers
+Date: 11/3/2025
+Tags: Programming, Parenting, Games, Math
+[Image:/m/wolfer/wolfer.png]
+
+Introducing [Link:/m/wolfer/index.html]Wolfers[/Link]!
+
+Wolfers is a series of games, playable in your web browser, inspired by the iconic Word Munchers and Number Munchers games of the 1980s/1990s. Wolf down correct answers while avoiding the WoeBots! Take refuge in the Safe Space... if it appears in time!
+
+I've wanted to bring this style of educational game back to life for a long time.
+
+In the early 90s, my grandmother had a Macintosh with educational games. She was a teacher who specialized in teaching reading. She showed me how to play Word Munchers and I had a blast munching words with the right vowel sounds.
+
+Around 2021, I started building a version of this game while on new parent leave from work shortly after my son was born. I returned to work before it was complete and the game was left in stasis.
+
+After that, I got the itch to build many other projects, most of which I've shared here already. These are passion projects. I pursue what interests me the most at any given time, even when that leaves some other project on the backburner. Recently, teaching my son has inspired me to make several apps and this also revived my interest in Wolfers.
+
+These days, I don't have much time or energy for programming because of demanding work and life responsibilities. Yet I still have interest. I still have the itch to build. I also still have a desire to use cutting-edge tools. I decided to give Gemini CLI a try. Google currently offers a fairly generous free tier for Gemini. I ended up impressed. Even though Gemini could be slow, go off-track, and need correction, I was able to get a lot done on evenings when I was otherwise too tired to program.
+
+The project even ended up more sophisticated and polished as a result. I ended up with animations for game character movement that I would never have pursued had Gemini not made a quick almost-working initial implementation.
+
+One of my biggest challenges with hobby projects is regaining momentum after a break. I found that using a coding agent like Gemini made it much easier to start and rebuild momentum after stalls. And it also prevented some stalls entirely: on nights I otherwise wouldn't have had time to do anything, I could write a quick prompt and end up with a patch for a task on the TODO list.
+
+I found it vital to have unit test coverage. Gemini did a pretty good job adding coverage when I requested it. As test coverage became extensive, I was able to move quickly without breaking important game behaviors. It was great to enable Gemini to run unit tests using node to vet and fix new logic in a loop. Before using Gemini on this project, I had a backlog of tests I needed but didn't feel like writing. With Gemini, I had all of them written in a few evenings.
+
+I approach Gemini with a high level of scrutiny: I run Gemini as a separate Linux user, with filesystem permissions only for the project directory. I review and approve every command it runs. I review and often edit every patch before committing it. This is working well for me.
+
+Other useful tools:
+
+- As usual, I used [Link:/m/pceimage/index.html]PCEImage Editor[/Link] to create many graphics, including animation frames.
+
+- I used [Link:https://frankforce.com]Frank Force[/Link]'s tiny [Link:https://killedbyapixel.github.io/ZzFX/]ZzFX[/Link] library for sound effects. ([Link:/m/zzfx/index.html]backup[/Link])
+
+- I am working on an LLM prompt to make it easy to create new Wolfers game variants. I hope to make a "create your own Wolfers" page where people can create a Wolfers game and submit it. I used the work-in-progress prompt to create [Link:/m/wolfer/wolfer.html?g=phonics]Phonics Wolfer[/Link].
+
+- Wolfers games look good on phones, iPads, and can also be installed as progressive web apps on your home screen. I recently found a simpler way to make PWAs thanks to this [Link:https://github.com/chr15m/minimal-pwa]minimal-pwa[/Link] project. I made this a bit more dynamic and self-contained in Wolfer's [Link:/m/wolfer/pwa.js]pwa.js[/Link] and added offline PWA support in [Link:/m/wolfer/sw.js]sw.js[/Link].

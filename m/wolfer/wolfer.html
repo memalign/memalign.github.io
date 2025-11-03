@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css" charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover'>
+  <title>Wolfer</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#000033">
+
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="Keywords" content="wolfer, word wolfer, number wolfer, spanish wolfer, munchers, word munchers, number munchers, spanish munchers, learn, tap toy, memalign">
+  <meta name="description" content="Wolfer - Word Wolfer, Number Wolfer, and more. Play and learn.">
+  <meta name="author" content="memalign">
+  <meta property="og:title" content="Wolfer" />
+  <meta property="og:description" content="Word Wolfer, Number Wolfer, and more">
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://memalign.github.io/m/wolfer/wolfer.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:url" content="https://memalign.github.io/m/wolfer/index.html" />
+  <meta name="twitter:title" content="Wolfer">
+  <meta name="twitter:description" content="Word Wolfer, Number Wolfer, and more">
+  <meta name="twitter:image" content="https://memalign.github.io/m/wolfer/wolfer.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+
+  <script src="GameGenerators.js"></script>
+  <script src="GameGenerator.js"></script>
+
+  <script>
+    let classicMode = false;
+
+    const params = new URLSearchParams(window.location.search);
+
+    let gameName = params.get('g');
+
+    if (gameName && GameGenerators[gameName]) {
+      // Game name is valid
+    } else {
+      // Default game that will load:
+      gameName = "word";
+
+      // For testing:
+//    gameName = "number1stgrade";
+//    gameName = "number3rdgrade";
+//    gameName = "phonics";
+//    gameName = "spanishnouns";
+//    gameName = "spanishverbs";
+//    gameName = "grammar";
+    }
+
+    const script = document.createElement('script');
+    script.src = GameGenerators[gameName].className + ".js";
+    script.async = false; // ensure script is loaded before window.onload is called
+    document.head.appendChild(script);
+  </script>
+
+  <script src="ZzFX.js"></script>
+  <script src="Utilities.js"></script>
+  <script src="Events.js"></script>
+  <script src="Runloop.js"></script>
+  <script src="PCEImage.js"></script>
+  <script src="Images.js"></script>
+  <script src="GameState.js"></script>
+  <script src="GameEngine.js"></script>
+  <script src="GridViewProducer.js"></script>
+  <script src="AnimationController.js"></script>
+  <script src="TroggleController.js"></script>
+  <script src="main.js"></script>
+</head>
+
+<body class="unselectable">
+  <div id="body">
+    <div id="gameView"></div>
+    <div id="footer-container">
+      <div id='about'>
+        <a id='startOver' href='./wolfer.html'>start over</a> | <a id='soundToggle' href=''>sound is off</a>
+      </div>
+      <div id='byline'>
+        <a href='/m/wolfer/index.html'>wolfer games</a> by <a href='/index.html'>memalign</a>
+      </div>
+    </div>
+  </div>
+  <script src="pwa.js"></script>
+</body>
+
+</html>

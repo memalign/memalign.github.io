@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="Utilities.js"></script>
+<script src="Events.js"></script>
+<script src="Runloop.js"></script>
+<script src="PCEImage.js"></script>
+<script src="Images.js"></script>
+<script src="GameGenerator.js"></script>
+<script src="GameState.js"></script>
+<script src="GameEngine.js"></script>
+<script src="GridViewProducer.js"></script>
+<script src="AnimationController.js"></script>
+<script src="TroggleController.js"></script>
+<script src="main.js"></script>
+<script src="UnitTests.js"></script>
+
+<script>
+
+window.onload = function () {
+
+  let ut = new UnitTests()
+  
+  try {
+    ut.run()
+  } catch(err) {
+    throw err
+  } finally {
+    let outputDiv = document.getElementById("testOutput")
+    let content = document.createTextNode(MALog.logs.join("\n"))
+    outputDiv.appendChild(content)
+  }
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput"></div>
+</pre>
+</body>
+
+</html>

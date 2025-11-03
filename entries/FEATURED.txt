@@ -1,3 +1,7 @@
+Wolfers
+- Image: /m/wolfer/wolfer.png
+- /m/wolfer/index.html
+
 Space Trader
 - Image: /m/spacetrader/spacetrader.png
 - /m/spacetrader/index.html
