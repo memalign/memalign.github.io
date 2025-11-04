@@ -25,9 +25,9 @@ class GameGenerator_Phonics extends MAGameGenerator {
       J: ["🕹️", "🗾"],             // Joystick, Japan
       K: ["🔑", "🥝"],             // Key, Kiwi
       L: ["🍋", "🦁", "🦎"],       // Lemon, Lion, Lizard
-      M: ["🐒", "🍄", "🌝", "🌕"], // Monkey, Mushroom, Moon
+      M: ["🐒", "🍄", "🌕"],      // Monkey, Mushroom, Moon
       N: ["👃", "🪹"],             // Nose, Nest
-      O: ["🦉", "🐙"],             // Owl, Octopus, Orange
+      O: ["🐙", "🫒"],             // Octopus, Olive
       P: ["🍍", "🐷", "🥞"],       // Pineapple, Pig, Pancake
       Q: ["👸", "❓"],             // Queen, Question
       R: ["🐀", "🌈", "🤖"],       // Rat, Rainbow, Robot
