@@ -396,6 +396,8 @@ class GameController {
   }
 
   initializeGame() {
+    // Important: Ensure that all event handlers registered are cleaned up in invalidate()
+
     // Setup link handlers
     let startOverLink = this.browserEnv.document.getElementById("startOver")
     if (startOverLink) {
@@ -548,28 +550,59 @@ class GameController {
       }
 
     }
-    this.browserEnv.window.addEventListener("keydown", gameKeyDownHandler, false)
+    this.gameKeyDownHandler = gameKeyDownHandler;
+    this.browserEnv.window.addEventListener("keydown", this.gameKeyDownHandler, false)
 
-    this.browserEnv.window.addEventListener('resize', () => {
+    this.resizeHandler = () => {
       this.adjustCellFontSizes();
-    });
+    };
+    this.browserEnv.window.addEventListener('resize', this.resizeHandler);
+  }
+
+  invalidate() {
+    let startOverLink = this.browserEnv.document.getElementById("startOver")
+    if (startOverLink) {
+      startOverLink.onclick = null;
+    }
+
+    let soundToggleLink = this.browserEnv.document.getElementById("soundToggle")
+    if (soundToggleLink) {
+      soundToggleLink.onclick = null;
+    }
+
+    let gameViewDiv = this.browserEnv.document.getElementById("gameView")
+    if (gameViewDiv) {
+      gameViewDiv.onmousedown = null;
+      gameViewDiv.removeEventListener('touchstart', preventZoom);
+      gameViewDiv.innerHTML = '';
+    }
+
+    if (this.gameKeyDownHandler) {
+      this.browserEnv.window.removeEventListener("keydown", this.gameKeyDownHandler, false);
+      this.gameKeyDownHandler = null;
+    }
+
+    if (this.resizeHandler) {
+      this.browserEnv.window.removeEventListener('resize', this.resizeHandler);
+      this.resizeHandler = null;
+    }
   }
 }
 
-if (typeof window !== 'undefined') {
-  window.onload = () => {
-    let gameGenerator = null;
-    if (gameName) {
-      const className = GameGenerators[gameName].className;
-      console.log("Loading specified gameName: " + gameName + " className: " + className);
-      gameGenerator = new GameGenerators_classes[className]();
-    }
+function createGameController() {
+  let gameGenerator = null;
+  if (gameName) {
+    const className = GameGenerators[gameName].className;
+    console.log("Loading specified gameName: " + gameName + " className: " + className);
+    gameGenerator = new GameGenerators_classes[className]();
+  }
 
-    const gameEngine = new MAGameEngine(gameGenerator);
-    const gridViewProducer = new MAGridViewProducer();
-    const animationController = new AnimationController(gameEngine.runloop, browserEnv);
-    new GameController(gameEngine, gridViewProducer, animationController, browserEnv).initializeGame();
-  };
+  const gameEngine = new MAGameEngine(gameGenerator);
+  const gridViewProducer = new MAGridViewProducer();
+  const animationController = new AnimationController(gameEngine.runloop, browserEnv);
+  const gc = new GameController(gameEngine, gridViewProducer, animationController, browserEnv);
+  gc.initializeGame();
+  return gc;
 }
 
 if (typeof module !== 'undefined' && module.exports) {

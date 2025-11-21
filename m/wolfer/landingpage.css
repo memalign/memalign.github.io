@@ -23,13 +23,18 @@ a:hover {
   text-decoration: underline;
 }
 
-#projects-grid a {
+#projects-grid a, #projects-grid-others a {
   font-weight: bold;
 }
 
 #page-description {
   margin: 0 auto;
   width: 80%;
+}
+
+.centeredBold {
+  text-align: center;
+  font-weight: bold;
 }
 
 #section-description {
@@ -51,7 +56,7 @@ a:hover {
   margin-bottom: 15px;
 }
 
-#projects-grid {
+#projects-grid, #projects-grid-others {
   display: grid;
   grid-row-gap: 1rem;
   grid-column-gap: 10px;
@@ -68,6 +73,12 @@ a:hover {
   text-align: center;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+#projects-grid-subtitle {
+  text-align: center;
+  font-size: 0.8em;
+  color: #666;
 }
 
 .rect-img-container {

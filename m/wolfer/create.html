@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Your Own Wolfer</title>
+    <link rel="stylesheet" href="landingpage.css">
+    <link rel="stylesheet" href="grid.css">
+    <link rel="stylesheet" href="create.css">
+    <link rel="stylesheet" href="create/codemirror.min.css">
+    <script src="create/codemirror.min.js"></script>
+    <script src="create/javascript.min.js"></script>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="create your own, create your own wolfer, wolfer, word wolfer, phonics wolfer, number wolfer, spanish wolfer, munchers, word munchers, number munchers, spanish munchers, super munchers, phonics, literacy, multiplication, grammar, conjugation, learn, tap toy, memalign, games">
+    <meta name="description" content="Create Your Own Wolfer Game">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="Create Your Own Wolfer" />
+    <meta property="og:description" content="Make your own Wolfer game">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/wolfer/wolfer.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://memalign.github.io/m/wolfer/create.html" />
+    <meta name="twitter:title" content="Create Your Own Wolfer Game">
+    <meta name="twitter:description" content="Make your own Wolfer game">
+    <meta name="twitter:image" content="https://memalign.github.io/m/wolfer/wolfer.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+
+    <!-- Keep this in sync with wolfer.html -->
+    <script src="ZzFX.js"></script>
+    <script src="Utilities.js"></script>
+    <script src="Events.js"></script>
+    <script src="Runloop.js"></script>
+    <script src="PCEImage.js"></script>
+    <script src="Images.js"></script>
+    <script src="GameState.js"></script>
+    <script src="GameEngine.js"></script>
+    <script src="GridViewProducer.js"></script>
+    <script src="AnimationController.js"></script>
+    <script src="TroggleController.js"></script>
+    <script src="main.js"></script>
+    <script>
+      const classicMode = false;
+      const gameName = "userEntered";
+      const GameGenerators = {
+          "userEntered": {
+              className: "MyGameGenerator",
+          },
+      };
+      const GameGenerators_classes = { };
+
+      let gameController = null;
+    </script>
+</head>
+<body>
+<div id="body">
+    <script src="create.js"></script>
+    <div class='header-links'>
+        <div class='home'>
+            <a href="https://memalign.github.io">memalign.github.io</a>
+        </div>
+        <div class='about'>
+            <a href="https://memalign.github.io/p/wolfers.html">about wolfers</a>
+        </div>
+    </div>
+
+    <div id='header'><h1>Create Your Own Wolfer Game</h1></div>
+    <div id='page-description'>
+      <p>Follow these steps to create your own Wolfer game. You can submit it to be listed on the <a href="./index.html">official Wolfers page</a>.</p>
+    </div>
+    
+    <div id='top-header'><h3>1. Fill out the template to describe your game</h3></div>
+    <div id="game-description-form">
+      <label for="title">Title:</label>
+      <input type="text" id="title" placeholder="Phonics Wolfer">
+      <label for="description">Description:</label>
+      <textarea id="description" placeholder="Each level is a letter of the alphabet. The correct values are emoji that start with that letter. The incorrect values are the emoji for the other letters of the alphabet." rows="10"></textarea>
+      <label for="author">Author:</label>
+      <input type="text" id="author" placeholder="Your name">
+      <button id="reset-form-button" onclick="resetForm()">Reset</button>
+    </div>
+
+    <div id='top-header'><h3>2. Copy this LLM prompt</h3></div>
+    <div class="centered-container">
+      <textarea id="llm-prompt" class="centered-textarea" readonly></textarea>
+      <button id="copy-prompt-button">Copy Prompt</button>
+    </div>
+
+    <div id='top-header'><h3>3. Paste the prompt into a new LLM session</h3></div>
+    <div id="llm-links">
+      <p>Here are some free LLM chatbots you can use:</p>
+      <ul>
+        <li><a href="https://chat.openai.com/" target="_blank">ChatGPT</a></li>
+        <li><a href="https://copilot.microsoft.com/" target="_blank">Microsoft Copilot</a></li>
+        <li><a href="https://gemini.google.com/" target="_blank">Google Gemini</a></li>
+      </ul>
+    </div>
+
+    <div id='top-header'><h3>4. Copy the code your LLM generated</h3></div>
+    <div class="centered-container">
+      <p>Be careful to copy the code by itself without any other part of the chatbot conversation.</p>
+    </div>
+
+    <div id='top-header'><h3>5. Paste the code here</h3></div>
+    <textarea id="game-code"></textarea>
+
+    <div id='top-header'><h3>6. Load your code and test your game</h3></div>
+    <div class="centered-container">
+      <button onclick="loadCode()">Load Code</button>
+    </div>
+    <div id="error-message" class="error-message"></div>
+    <div class="unselectable">
+      <div id="gameView"></div>
+    </div>
+
+    <div id='top-header'><h3>7. Submit your code to be listed on the official Wolfers page</h3></div>
+    <div class="centered-container">
+      <button id="copy-game-code-button">Copy Game Code</button>
+      <p>Once you're happy with your game, Copy Game Code and <b><a href="https://docs.google.com/forms/d/e/1FAIpQLScyYVAFcTso8jugsU0bfuz_PQVNC_owGt0W1-Wp8SxUFbZlmg/viewform?usp=dialog" target="_blank">submit it here</a></b>.</p>
+    </div>
+
+</div>
+</body>
+</html>

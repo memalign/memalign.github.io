@@ -2,6 +2,7 @@
 <html lang="en" xml:lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="grid.css" charset="utf-8">
   <link rel="stylesheet" href="style.css" charset="utf-8">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover'>
   <title>Wolfer</title>
@@ -50,6 +51,7 @@
 //    gameName = "spanishnouns";
 //    gameName = "spanishverbs";
 //    gameName = "grammar";
+//    gameName = "pokeprescription";
     }
 
     const script = document.createElement('script');
@@ -70,6 +72,12 @@
   <script src="AnimationController.js"></script>
   <script src="TroggleController.js"></script>
   <script src="main.js"></script>
+
+  <script>
+    window.onload = () => {
+      createGameController();
+    };
+  </script>
 </head>
 
 <body class="unselectable">

@@ -1,6 +1,7 @@
 const cacheName = 'wolfer-v1';
 const appShellFiles = [
   './index.html',
+  './grid.css',
   './style.css',
   './ZzFX.js',
   './Utilities.js',
@@ -9,10 +10,13 @@ const appShellFiles = [
   './PCEImage.js',
   './Images.js',
   './GameGenerator.js',
+  './GameGenerator_Animals.js',
   './GameGenerator_Grammar.js',
+  './GameGenerator_MorseCode.js',
   './GameGenerator_Number1stGrade.js',
   './GameGenerator_Number3rdGrade.js',
   './GameGenerator_Phonics.js',
+  './GameGenerator_PokePrescription.js',
   './GameGenerator_SpanishNouns.js',
   './GameGenerator_SpanishVerbs.js',
   './GameGenerator_Word.js',

@@ -78,6 +78,44 @@ const GameGenerators = {
         description: "Spanish levels 1-2. Match pronouns to conjugated verbs.",
         displayOrder: 6,
     },
+
+
+    // User submissions:
+    "animals": {
+        className: "GameGenerator_Animals",
+        name: "Animal Wolfer",
+        shortName: "Animal Wolfer",
+        icon: "icon",
+        iconColor: "#7E2527",
+        emoji: "🐁",
+        description: "Identify birds, insects, animals with fur, etc.",
+        submitter: "anonymous",
+        displayOrder: 0,
+    },
+
+    "morsecode": {
+        className: "GameGenerator_MorseCode",
+        name: "Morse Code Wolfer",
+        shortName: "Morse Wolfer",
+        icon: "icon",
+        iconColor: "#303030",
+        emoji: "💬",
+        description: "Practice Morse Code.",
+        submitter: "anonymous",
+        displayOrder: 1,
+    },
+
+    "pokeprescription": {
+        className: "GameGenerator_PokePrescription",
+        name: "Wolfer: PokéPrescription",
+        shortName: "Poké Wolfer",
+        icon: "icon",
+        iconColor: "#F58FAD",
+        emoji: "💊",
+        description: "Is it a Pokémon or a prescription medication?",
+        submitter: "anonymous",
+        displayOrder: 2,
+    },
 };
 
 function GameGeneratorIconURLForGameName(gameName, scale=1) {
