@@ -5,10 +5,53 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2025-11-03T00:00:00-08:00</updated>
+<updated>2025-11-24T00:00:00-08:00</updated>
 <rights>Copyright © 2025, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Create Your Own Wolfer</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/create-wolfer.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/create-wolfer.html" />
+<id>https://memalign.github.io/p/create-wolfer.html</id>
+<published>2025-11-24T00:00:00-08:00</published>
+<updated>2025-11-24T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/create-wolfer.html'>Create Your Own Wolfer</a>
+</h2>
+</div>
+<img src="/m/wolfer/wolfer.png">
+<div id='postdate'>Posted on 11/24/2025<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Parenting</a>, <a href='/tags.html'>Games</a>, <a href='/tags.html'>Tools</a></div>
+In my post about <a href="/p/wolfers.html">Wolfers</a>, I mentioned working on a way to generate new game variants.<br />
+<br />
+I'm ready to share that today. Please check out the <a href="/m/wolfer/create.html">Create Your Own Wolfer</a> page!<br />
+<br />
+That page is a step-by-step guide to generate your own Wolfer game with only an English description. It also provides a way to load and test your game before submitting it to be included on the <a href="/m/wolfer/index.html">official Wolfers page</a>.<br />
+<br />
+I had the best results generating games with ChatGPT, though I provide links to additional AI chat bot choices.<br />
+<br />
+Wolfers games can be educational or just plain fun. Check out this novelty Wolfer game where you have to determine whether a name is a Pokémon or a prescription medication: <a href="/m/wolfer/wolfer.html?g=pokeprescription">Wolfer: PokéPrescription</a>.<br />
+<br />
+Some technical details:<br />
+<br />
+- Like <a href="/m/pceimage/index.html">PCEImage Editor</a>, I'm using <a href="https://codemirror.net">CodeMirror</a> for in-line code editing.<br />
+<br />
+- For user submissions, I'm using a Google Form because it's easy, free, and my projects are just statically hosted files.<br />
+
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>Wolfers</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/wolfers.html" />
@@ -58,7 +101,8 @@ Other useful tools:<br />
 <br />
 - I used <a href="https://frankforce.com">Frank Force</a>'s tiny <a href="https://killedbyapixel.github.io/ZzFX/">ZzFX</a> library for sound effects. (<a href="/m/zzfx/index.html">backup</a>)<br />
 <br />
-- I am working on an LLM prompt to make it easy to create new Wolfers game variants. I hope to make a "create your own Wolfers" page where people can create a Wolfers game and submit it. I used the work-in-progress prompt to create <a href="/m/wolfer/wolfer.html?g=phonics">Phonics Wolfer</a>.<br />
+- I am working on an LLM prompt to make it easy to create new Wolfers game variants. I hope to make a "create your own Wolfer" page where people can create a Wolfers game and submit it. I used the work-in-progress prompt to create <a href="/m/wolfer/wolfer.html?g=phonics">Phonics Wolfer</a>.<br />
+&nbsp;&nbsp;- Update: <a href="/m/wolfer/create.html">Create Your Own Wolfer</a> is now live! (<a href="/p/create-wolfer.html">Details</a>)<br />
 <br />
 - Wolfers games look good on phones, iPads, and can also be installed as progressive web apps on your home screen. I recently found a simpler way to make PWAs thanks to this <a href="https://github.com/chr15m/minimal-pwa">minimal-pwa</a> project. I made this a bit more dynamic and self-contained in Wolfer's <a href="/m/wolfer/pwa.js">pwa.js</a> and added offline PWA support in <a href="/m/wolfer/sw.js">sw.js</a>.<br />
 
@@ -3104,85 +3148,6 @@ https://api.reddit.com/r/aww+funny+jokes/best?limit=20<br />
 <br />
 https://api.reddit.com/r/aww+funny+jokes/best?limit=20&amp;after=t3_ldwt5j&amp;count=20<br />
 (when requesting the second page, include &quot;after&quot; and &quot;count&quot;)</div>
-
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>Counterfeit Monkey</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/counterfeit-monkey.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/counterfeit-monkey.html" />
-<id>https://memalign.github.io/p/counterfeit-monkey.html</id>
-<published>2021-01-09T00:00:00-08:00</published>
-<updated>2021-01-09T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/counterfeit-monkey.html'>Counterfeit Monkey</a>
-</h2>
-</div>
-<img src="/m/cm-map.jpg">
-<div id='postdate'>Posted on 1/9/2021<br />
-Tags: <a href='/tags.html'>Games</a>, <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Interactive Fiction</a></div>
-<a href="https://ifdb.tads.org/viewgame?id=aearuuxv83plclpl">Counterfeit Monkey</a> is my favorite interactive fiction game. I love its rich world, its delightful mechanics, and its clever puzzles.<br />
-<br />
-You can play it <a href="http://iplayif.com/?story=https%3A%2F%2Fgithub.com%2Fi7%2Fcounterfeit-monkey%2Freleases%2Fdownload%2Fr9%2FCounterfeitMonkey-9.gblorb">here</a> (<a href="/m/counterfeitmonkey/quixe/index.html">my backup</a>).<br />
-<br />
-But before you dive in there, I'm hoping that you'll give this a try. I've written a small demo of the first section of the game as mobile-friendly <a href="/p/listed-action-if.html">Listed Action IF</a>:<br />
-<br />
-<a href="/m/counterfeitmonkey/index.html">Counterfeit Monkey demo</a><br />
-<br />
-<br />
-To learn more about the original game and my demo, please read on!<br />
-<br />
-<br />
-Counterfeit Monkey was written by <a href="https://en.wikipedia.org/wiki/Emily_Short">Emily Short</a>. She's a brilliant author and has made huge contributions to the interactive fiction community. If you're interested in staying up-to-date on IF, I recommend checking out her <a href="https://emshort.blog">website</a> and following her blog.<br />
-<br />
-Counterfeit Monkey is a piece of traditional parser-based IF. Parser-based games create rich and immersive worlds through text. Unfortunately, the user needs to type commands to play which makes them unergonomic for touch-based devices like smartphones and tablets.<br />
-<br />
-I've <a href="/p/pacman-dungeon.html">written</a> <a href="/p/dungeon-memalign.html">recently</a> about bringing text-based games to touch-based devices and those posts even include some small games (playable in your web browser!).<br />
-<br />
-I've found that I'm not alone in exploring more touch-friendly IF games that retain the rich world model of traditional parser-based IF. I think a sub-genre of IF may be forming, one I called <a href="/p/listed-action-if.html">Listed Action IF</a> in a recent post.<br />
-<br />
-I was delighted when I saw that Emily licensed the game's <a href="https://github.com/i7/counterfeit-monkey">source code</a> using the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 license</a>, opening up opportunities to extend and transform it.<br />
-<br />
-The games I've built so far are small and designed from the beginning for the limitations of short lists of actions. Adapting the first section of Counterfeit Monkey to the listed action model is an experiment to see how well a complex and rich game works.<br />
-<br />
-I think it's still really fun!<br />
-<br />
-<br />
-Here are some things I've learned and observed during this exploration:<br />
-<br />
-- This demo is built on the same little game engine I wrote and described in the second half of this post about <a href="/p/dungeon-memalign.html">Dungeon Memalign</a><br />
-<br />
-- When I shared Dungeon Memalign on <a href="https://news.ycombinator.com/item?id=25262631">HackerNews</a>, I got helpful feedback that I've now fixed:<br />
-&nbsp;&nbsp;- The emoji map did not render well on every platform. Not every platform supports every emoji and not every platform has uniform-width emoji. To check platform support of an emoji, I search for it on <a href="https://emojipedia.org">emojipedia.org</a>. To handle non-uniform-width emoji, I put them in a transparent table.<br />
-&nbsp;&nbsp;- The Go actions would be in different positions depending on which directions were valid moves. That made the interface fiddly. To handle this, I now list every direction even when invalid.<br />
-<br />
-- I also noticed that search engines did not get useful text to index because they saw only the beginning of the game. To address this, I added a crawler mode that detects crawlers based on their user agent and gives them the text of a full play-through.<br />
-<br />
-- As Emily herself noted in an interesting <a href="https://emshort.blog/2010/06/07/so-do-we-need-this-parser-thing-anyway/">blog post from 2010</a>, it's easy to list too many actions in this style of game. I've done a few things to try to optimize and shorten the list:<br />
-&nbsp;&nbsp;- Some actions are only relevant once so I remove them from the list, especially "look" actions<br />
-&nbsp;&nbsp;- Some actions can hide behind another, such as actions specific to some items being inside Inventory (used in Dungeon Memalign for healing potions)<br />
-&nbsp;&nbsp;- You'll see that I could still have done better in some parts of the demo where the lists of actions get quite long.<br />
-<br />
-- Some puzzles become easier or obvious when a new action appears. I think that's a pro and a con depending on the situation. Fortunately, Counterfeit Monkey's word-manipulation puzzles don't lose much of their challenge.<br />
-&nbsp;&nbsp;- Pro: parser-based games can be needlessly frustrating when trying to guess the right verb to use<br />
-&nbsp;&nbsp;- Con: command exploration is sometimes part of the puzzle, immersiveness, and fun of a parser-based game<br />
-<br />
-- I have new appreciation for how challenging it must have been to create the original game. Just porting a small portion of Emily's existing content was hard work. To have created its novel ideas and puzzles from scratch while also doing all of the implementation is just amazing. I'm reminded of Hunter S. Thompson typing out pages of The Great Gatsby to know what it felt like to write a classic.<br />
-<br />
-<br />
-You can find the demo's source code <a href="https://github.com/memalign/memalign.github.io/tree/master/m/counterfeitmonkey">here</a>. Since GameSegments.js, NounRepository.js, Memories.js, and Map.js are based on the original game's content and source code, those files are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 license</a> just like their source material.<br />
-<br />
 
 </div>
 

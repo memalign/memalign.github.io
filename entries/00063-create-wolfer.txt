@@ -1,0 +1,20 @@
+Title: Create Your Own Wolfer
+Date: 11/24/2025
+Tags: Programming, Parenting, Games, Tools
+[Image:/m/wolfer/wolfer.png]
+
+In my post about [Link:/p/wolfers.html]Wolfers[/Link], I mentioned working on a way to generate new game variants.
+
+I'm ready to share that today. Please check out the [Link:/m/wolfer/create.html]Create Your Own Wolfer[/Link] page!
+
+That page is a step-by-step guide to generate your own Wolfer game with only an English description. It also provides a way to load and test your game before submitting it to be included on the [Link:/m/wolfer/index.html]official Wolfers page[/Link].
+
+I had the best results generating games with ChatGPT, though I provide links to additional AI chat bot choices.
+
+Wolfers games can be educational or just plain fun. Check out this novelty Wolfer game where you have to determine whether a name is a Pokémon or a prescription medication: [Link:/m/wolfer/wolfer.html?g=pokeprescription]Wolfer: PokéPrescription[/Link].
+
+Some technical details:
+
+- Like [Link:/m/pceimage/index.html]PCEImage Editor[/Link], I'm using [Link:https://codemirror.net]CodeMirror[/Link] for in-line code editing.
+
+- For user submissions, I'm using a Google Form because it's easy, free, and my projects are just statically hosted files.
