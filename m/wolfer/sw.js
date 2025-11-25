@@ -1,16 +1,11 @@
-const cacheName = 'wolfer-v1';
+const cacheName = 'wolfer-92e54ee819fbe811fe77420f5470103b';
 const appShellFiles = [
-  './index.html',
-  './grid.css',
-  './style.css',
-  './ZzFX.js',
-  './Utilities.js',
+  './AnimationController.js',
   './Events.js',
-  './Runloop.js',
-  './PCEImage.js',
-  './Images.js',
+  './GameEngine.js',
   './GameGenerator.js',
   './GameGenerator_Animals.js',
+  './GameGenerator_Dinosaurs.js',
   './GameGenerator_Grammar.js',
   './GameGenerator_MorseCode.js',
   './GameGenerator_Number1stGrade.js',
@@ -22,24 +17,41 @@ const appShellFiles = [
   './GameGenerator_Word.js',
   './GameGenerators.js',
   './GameState.js',
-  './GameEngine.js',
   './GridViewProducer.js',
-  './AnimationController.js',
+  './Images.js',
+  './PCEImage.js',
+  './Runloop.js',
   './TroggleController.js',
-  './main.js',
-  './pwa.js',
+  './Utilities.js',
+  './ZzFX.js',
   './classic-munchers-1668.png',
   './classic-munchers.png',
+  './grid.css',
+  './index.html',
+  './main.js',
+  './pwa.js',
+  './style.css',
   './wolfer-1110.png',
   './wolfer-1665.png',
-  './wolfer.png',
   './wolfer.html',
+  './wolfer.png',
 ];
 
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const cache = await caches.open(cacheName);
     await cache.addAll(appShellFiles);
+  })());
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    for (const key of keys) {
+      if (key !== cacheName) {
+        await caches.delete(key);
+      }
+    }
   })());
 });
 

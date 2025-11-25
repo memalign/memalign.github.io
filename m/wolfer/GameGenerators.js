@@ -81,6 +81,18 @@ const GameGenerators = {
 
 
     // User submissions:
+    "dino": {
+        className: "GameGenerator_Dinosaurs",
+        name: "Dino Wolfer",
+        shortName: "Dino Wolfer",
+        icon: "icon",
+        iconColor: "#7E2527",
+        emoji: "🦖",
+        description: "Identify dinosaurs by period, diet, and type!",
+        submitter: "Emerson",
+        displayOrder: 0,
+    },
+
     "animals": {
         className: "GameGenerator_Animals",
         name: "Animal Wolfer",
@@ -90,7 +102,7 @@ const GameGenerators = {
         emoji: "🐁",
         description: "Identify birds, insects, animals with fur, etc.",
         submitter: "anonymous",
-        displayOrder: 0,
+        displayOrder: 1,
     },
 
     "morsecode": {
@@ -102,7 +114,7 @@ const GameGenerators = {
         emoji: "💬",
         description: "Practice Morse Code.",
         submitter: "anonymous",
-        displayOrder: 1,
+        displayOrder: 2,
     },
 
     "pokeprescription": {
@@ -114,7 +126,7 @@ const GameGenerators = {
         emoji: "💊",
         description: "Is it a Pokémon or a prescription medication?",
         submitter: "anonymous",
-        displayOrder: 2,
+        displayOrder: 3,
     },
 };
 
