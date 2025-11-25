@@ -98,5 +98,16 @@
         <p><i>Pick up where you left off. MemPlayer stores file locally and restores playback position and speed. <a href="https://memalign.github.io/p/memplayer.html">About.</a></i></p>
     </div>
     <script src="scripts.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+      .then((reg) => {
+        // registration worked
+      }).catch((error) => {
+        // registration failed
+        console.log('Registration failed with ' + error);
+      });
+    }
+    </script>
 </body>
 </html>
