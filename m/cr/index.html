@@ -61,15 +61,6 @@
   <script src="main.js"></script>
 
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('CacheServiceWorker.js').then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope)
-      }).catch((error) => {
-        console.error('Service Worker registration failed:', error)
-      })
-    }
-
-
     window.onload = function() {
       caveRibbonMain()
     }
@@ -94,6 +85,17 @@
     <div id="replayDiv"></div>
     <div id="highScoresDiv"></div>
   </div>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+    .then((reg) => {
+      // registration worked
+    }).catch((error) => {
+      // registration failed
+      console.log('Registration failed with ' + error);
+    });
+  }
+  </script>
 </body>
 </html>
 
