@@ -87,5 +87,16 @@
     </script>
     </div>
     <div class="sliceCount" id="sliceCountDiv"></div>
+    <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+      .then((reg) => {
+        // registration worked
+      }).catch((error) => {
+        // registration failed
+        console.log('Registration failed with ' + error);
+      });
+    }
+    </script>
   </body>
 </html>
