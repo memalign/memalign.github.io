@@ -1,20 +1,31 @@
-const cacheName = 'phonics-v1';
+const cacheName = 'phonics-26a83d101a72dea67ccda294425aad29';
 const appShellFiles = [
-  './index.html',
   './card-style.css',
-  './style.css',
-  './data.js',
-  './script.js',
-  './pwa.js',
   './cards-1000.png',
   './cards-4000.png',
   './cards-icon-4000.png',
+  './data.js',
+  './index.html',
+  './pwa.js',
+  './script.js',
+  './style.css',
 ];
 
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const cache = await caches.open(cacheName);
     await cache.addAll(appShellFiles);
+  })());
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    for (const key of keys) {
+      if (key !== cacheName) {
+        await caches.delete(key);
+      }
+    }
   })());
 });
 
