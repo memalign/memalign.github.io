@@ -105,6 +105,27 @@
     <script src="data.js"></script>
     <script src="script.js"></script>
     <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(location.search);
+
+      if (params.get('searchfocus') !== '1') return;
+
+      const input = document.getElementById('search-bar');
+      if (!input) return;
+
+      const focusOnce = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        input.focus();
+        document.removeEventListener('touchstart', focusOnce, true);
+        document.removeEventListener('mousedown', focusOnce, true);
+      };
+
+      document.addEventListener('touchstart', focusOnce, true);
+      document.addEventListener('mousedown', focusOnce, true);
+    });
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
       .then((reg) => {
