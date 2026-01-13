@@ -62,6 +62,10 @@ Mandarin Flashcards
 - Image: /m/mandarin/cards/cards.png
 - /m/mandarin/cards/index.html
 
+MemSky
+- Image: /m/memsky/memsky.png
+- /m/memsky/index.html
+
 MemPlayer
 - Image: /m/memplayer/memplayer.png
 - /m/memplayer/index.html

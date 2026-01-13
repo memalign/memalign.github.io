@@ -1,0 +1,36 @@
+Title: MemSky
+Date: 1/13/2026
+Tags: Programming, Tools
+
+[Image:/m/memsky/memsky.png]
+
+Today, I'm sharing a web app for keeping up with your Bluesky timeline: [Link:/m/memsky/index.html]MemSky[/Link].
+
+You can use it in the browser or add it to your home screen as a progressive web app.
+
+Everything is local in the web app except for the API calls to Bluesky directly to authenticate and fetch content.
+
+You can browse in two modes:
+
+1. Prioritize Unread Posts (the default) - Keep track of which posts you've already seen and start at the place in the timeline that you left off.
+
+2. Infinite scrolling timeline - Uncheck the Prioritize Unread Posts to use this more standard mode.
+
+In Settings, you can configure Muted Words to filter out any terms you don't care to see.
+
+
+Why I built this:
+
+I added Bluesky to my collection of news feeds over a year ago. Similar to [Link:/p/mastodon.html]Mastodon[/Link], I found that the official app doesn't do the one thing I want: to read a chronological timeline of posts and reposts from accounts I follow - always keeping my spot since the last time I checked.
+
+For Mastodon, I wrote my own native app to do this in 2023. It's been great, but it's only usable by me. I don't have a developer account to publish native apps.
+
+During the recent winter break, I wondered if a Bluesky client could be built entirely as a web app. I asked ChatGPT to create a one-file web app to see what could be done quickly. It was good enough that I figured I could spend the next week building it into what I want. Why a web app? They work on all platforms and are so easy to share! And LLMs make web apps super fun to whip up regardless of the device you're developing on.
+
+
+Some technical details:
+
+The hardest part of this project was to load new posts above the posts you have already read. The strategy I landed on: create a snapshot of the page, block user input, load the posts, adjust the scroll offset to pin the posts shown in the snapshot to the exact same position, once scrolling stabilizes remove the snapshot and unblock user input.
+
+Automatic scrolling while pinning elements to the exact same visual position is not well supported by browser APIs. The APIs available let you find the current position of an element in the viewport, but that position needs to be corrected for any change in the viewport size. On iOS, Safari's UI chrome shrinks as a result of scrolling down, so the viewport changes because of the automatic scrolling the web app performs. This was tricky to get right.
+

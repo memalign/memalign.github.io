@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MemSky</title>
+
+<link rel="stylesheet" href="style.css">
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover'>
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#FFFFFF">
+
+<meta http-equiv="Content-Language" content="en">
+<meta name="Keywords" content="bsky, bluesky, memalign">
+<meta name="description" content="MemSky - Bluesky timeline viewer that remembers what you already saw">
+<meta name="author" content="memalign">
+<meta property="og:title" content="MemSky" />
+<meta property="og:description" content="Bluesky timeline viewer that remembers what you already saw">
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://memalign.github.io/m/memsky/memsky.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:url" content="https://memalign.github.io/m/memsky/index.html" />
+<meta name="twitter:title" content="MemSky">
+<meta name="twitter:description" content="Bluesky timeline viewer that remembers what you already saw">
+<meta name="twitter:image" content="https://memalign.github.io/m/memsky/memsky.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <a href="http://memalign.github.io/p/memsky.html">about</a>
+  </div>
+  <h1>MemSky</h1>
+  <div id="top-bar" class="header-right">
+    <button id="settings-button">⚙️</button>
+  </div>
+</header>
+
+<div id="settings-panel" style="display: none;">
+  <div id="settings-content">
+    <h2>Settings</h2>
+    <div id="settings">
+      <div>
+        <label>
+          <input type="checkbox" id="loadOlderPosts">
+          Load Older Posts
+        </label>
+      </div>
+      <label>
+        <input type="checkbox" id="prioritizeUnread">
+        Prioritize Unread Posts
+      </label>
+      <div id="read-posts-settings" style="display: none;">
+        <div id="remembering-count"></div>
+        <button id="resetReadPosts">Reset Read Posts</button>
+      </div>
+      <div id="muted-words-settings">
+        <label for="mutedWords">Muted Words</label>
+        <small>Each line is a separate Muted Word. Muted Words with at least one uppercase letter are enforced as case-sensitive.</small>
+        <textarea id="mutedWords"></textarea>
+      </div>
+      <button id="logout" style="display: none;">Log Out</button>
+    </div>
+    <button id="close-settings-button">Close</button>
+  </div>
+</div>
+
+<form id="loginForm">
+  <input id="handle"
+         placeholder="Handle (you.bsky.social)"
+         autocomplete="username"
+         autocapitalize="none"
+         autocorrect="off">
+  <input id="password"
+         placeholder="App password"
+         type="password"
+         autocomplete="current-password">
+  <div><small>For third-party apps, you need an <a href="https://bsky.app/settings/app-passwords" target="_blank">App Password</a> (not your regular password).</small></div>
+  <button type="submit" id="login-button">Log in</button>
+</form>
+
+<div id="timelineControls" style="display: none;">
+    <button id="refreshButton">Refresh</button>
+</div>
+
+<div id="status"></div>
+<div id="timeline"></div>
+
+<div id="unread-count-overlay"></div>
+
+<div id="dividerTemplate" style="display: none;">
+  <div class="divider" id="unread-divider">
+    <span class="divider-text">unread posts above this line</span>
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+<script src="pwa.js"></script>
+
+</body>
+</html>
