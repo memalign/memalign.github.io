@@ -59,7 +59,6 @@ Some technical details:<br />
 The hardest part of this project was to load new posts above the posts you have already read. The strategy I landed on: create a snapshot of the page, block user input, load the posts, adjust the scroll offset to pin the posts shown in the snapshot to the exact same position, once scrolling stabilizes remove the snapshot and unblock user input.<br />
 <br />
 Automatic scrolling while pinning elements to the exact same visual position is not well supported by browser APIs. The APIs available let you find the current position of an element in the viewport, but that position needs to be corrected for any change in the viewport size. On iOS, Safari's UI chrome shrinks as a result of scrolling down, so the viewport changes because of the automatic scrolling the web app performs. This was tricky to get right.<br />
-<br />
 
 </div>
 
