@@ -66,6 +66,7 @@
     const session = loadSession();
     if (!session?.refreshJwt) {
       clearSession();
+      window.location.reload();
       return;
     }
 
@@ -79,6 +80,7 @@
 
     if (!res.ok) {
       clearSession();
+      window.location.reload();
       return;
     }
 
@@ -620,6 +622,8 @@
     let lastHeight = 0;
     let stableCount = 0;
     const interval = setInterval(() => {
+      log("Stability evaluation interval handler invoked");
+
       const currentHeight = timelineEl.scrollHeight;
       if (currentHeight === lastHeight) {
         stableCount++;
@@ -629,6 +633,8 @@
       lastHeight = currentHeight;
 
       if (stableCount >= 6) {
+        log("Reached stability");
+
         clearInterval(interval);
 
         if (unreadPosts.length === 0) {
@@ -638,6 +644,8 @@
 
           const pinDividerToStablePositionUntilUserScrolls = () => {
             setTimeout(() => {
+              log("pinDividerToStablePositionUntilUserScrolls");
+
               lastDividerTop = dividerEl.getBoundingClientRect().top;
               lastScrollY = window.scrollY;
 
@@ -744,6 +752,7 @@
     let session = loadSession();
     if (!session?.accessJwt) {
       clearSession();
+      window.location.reload();
       return null;
     }
     accessToken = session.accessJwt;
@@ -760,7 +769,12 @@
       if (res.status === 401 || res.status === 400) {
         await refreshSession();
         session = loadSession();
-        if (!session?.accessJwt) return null;
+        if (!session?.accessJwt) {
+          clearSession();
+          window.location.reload();
+          return null;
+        }
+
         accessToken = session.accessJwt;
         res = await fetch(url, {
           headers: { Authorization: "Bearer " + accessToken }
@@ -768,10 +782,12 @@
 
         if (!res.ok) {
           clearSession();
+          window.location.reload();
           return null;
         }
       } else {
         clearSession();
+        window.location.reload();
         return null;
       }
     }
@@ -794,9 +810,21 @@
           const considerAllPostsAfterFirstPageAsReadBeforeDateString = localStorage.getItem(CONSIDER_ALL_POSTS_AFTER_FIRST_PAGE_AS_READ_BEFORE_DATE_KEY);
           if (considerAllPostsAfterFirstPageAsReadBeforeDateString) {
             const considerAllPostsAfterFirstPageAsReadBeforeDate = new Date(considerAllPostsAfterFirstPageAsReadBeforeDateString);
+
+            //console.log(`date str: ${considerAllPostsAfterFirstPageAsReadBeforeDateString}  date: ${considerAllPostsAfterFirstPageAsReadBeforeDate}`)
+
             newPosts = newPosts.filter(p => {
-              const postDate = new Date(p.post.indexedAt);
-              return postDate >= considerAllPostsAfterFirstPageAsReadBeforeDate;
+              // Use the repost date (p.reason.indexedAt) since that's when the item came into the user's timeline
+              const postDateStr = p.reason ? p.reason.indexedAt : p.post.indexedAt
+              const postDate = new Date(postDateStr);
+
+              const isAfterDate = postDate >= considerAllPostsAfterFirstPageAsReadBeforeDate;
+
+              //if (!isAfterDate) {
+              //  console.log(`Filtering out post that's too old - indexedAt ${p.post.indexedAt}  postDate ${postDate} - "${p?.post?.record?.text}"`)
+              //}
+
+              return isAfterDate;
             });
           }
         }
@@ -1015,6 +1043,11 @@
     }
   }
 
+  function isScrolledToTop(threshold = 2) {
+    const y = window.scrollY;
+    return y <= threshold;
+  }
+
 
   window.addEventListener("scroll", () => {
     updateUnreadCountOverlayVisibility();
@@ -1038,6 +1071,22 @@
       })();
     }
   });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === 'visible') {
+      if (prioritizeUnread) {
+        log("visibility changed, lastRefreshTime " + lastRefreshTime)
+        const TEN_MINUTES = 10 * 60 * 1000;
+        if (lastRefreshTime && ((new Date() - lastRefreshTime) > TEN_MINUTES)) {
+          if (isScrolledToTop()) {
+            log("Auto-refreshing")
+            refreshButton.click();
+          }
+        }
+      }
+    }
+  });
+
 
   prioritizeUnread = localStorage.getItem(PRIORITIZE_UNREAD_KEY) === "false" ? false : true;
   prioritizeUnreadCheckbox.checked = prioritizeUnread;
@@ -1076,6 +1125,7 @@
         blockInput();
         await fetchOlderPosts();
         renderTimelineWithReadUnread();
+        lastRefreshTime = new Date();
       })();
     } else {
       readPostsSettings.style.display = 'none';
