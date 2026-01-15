@@ -1,4 +1,4 @@
-const cacheName = 'memsky-947078ef5f4bdcbfed19f6e1099f9bd6';
+const cacheName = 'memsky-7c1489d950426bef06c5ce581b79733f';
 const appShellFiles = [
   './index.html',
   './memsky-icon-1035.png',

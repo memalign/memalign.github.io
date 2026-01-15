@@ -762,7 +762,8 @@
     if (fetchCursor) url.searchParams.set("cursor", fetchCursor);
 
     let res = await fetch(url, {
-      headers: { Authorization: "Bearer " + accessToken }
+      headers: { Authorization: "Bearer " + accessToken },
+      cache: "no-store"
     });
 
     if (!res.ok) {
@@ -777,7 +778,8 @@
 
         accessToken = session.accessJwt;
         res = await fetch(url, {
-          headers: { Authorization: "Bearer " + accessToken }
+          headers: { Authorization: "Bearer " + accessToken },
+          cache: "no-store"
         });
 
         if (!res.ok) {
@@ -894,6 +896,7 @@
       blockInput();
       await fetchOlderPosts();
       renderTimelineWithReadUnread();
+      lastRefreshTime = new Date();
     } else {
       timelineControlsEl.style.display = 'none';
       const data = await fetchAndAppend(null);
