@@ -1,4 +1,4 @@
-const cacheName = 'memsky-7c1489d950426bef06c5ce581b79733f';
+const cacheName = 'memsky-72592d16ce8129791f1bd2fe06e42e7c';
 const appShellFiles = [
   './index.html',
   './memsky-icon-1035.png',
@@ -30,9 +30,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
     const r = await caches.match(e.request);
     if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    cache.put(e.request, response.clone());
-    return response;
+    return fetch(e.request);
   })());
 });

@@ -62,6 +62,23 @@
     accessToken = null;
   }
 
+  async function handleFetchError(res) {
+    let errorHandled = false;
+    if (res.status === 401 || res.status === 403) {
+      clearSession();
+      window.location.reload();
+      errorHandled = true;
+    } else {
+      try {
+        const error = await res.json();
+        setStatus(`Error: ${error.message}`);
+      } catch {
+        setStatus(`Error: ${res.status} ${res.statusText}`);
+      }
+    }
+    return errorHandled;
+  }
+
   async function refreshSession() {
     const session = loadSession();
     if (!session?.refreshJwt) {
@@ -76,11 +93,11 @@
         "Content-Type": "application/json",
         "Authorization": "Bearer " + session.refreshJwt
       },
+      cache: "no-store"
     });
 
     if (!res.ok) {
-      clearSession();
-      window.location.reload();
+      await handleFetchError(res);
       return;
     }
 
@@ -771,8 +788,6 @@
         await refreshSession();
         session = loadSession();
         if (!session?.accessJwt) {
-          clearSession();
-          window.location.reload();
           return null;
         }
 
@@ -783,13 +798,11 @@
         });
 
         if (!res.ok) {
-          clearSession();
-          window.location.reload();
+          await handleFetchError(res);
           return null;
         }
       } else {
-        clearSession();
-        window.location.reload();
+        await handleFetchError(res);
         return null;
       }
     }
@@ -872,11 +885,17 @@
     const res = await fetch(API + "com.atproto.server.createSession", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ identifier: handle, password })
+      body: JSON.stringify({ identifier: handle, password }),
+      cache: "no-store"
     });
 
     if (!res.ok) {
-      setStatus("Login failed");
+      try {
+        const error = await res.json();
+        setStatus(`Login failed: ${error.message}`);
+      } catch {
+        setStatus(`Login failed: ${res.status} ${res.statusText}`);
+      }
       return;
     }
 
