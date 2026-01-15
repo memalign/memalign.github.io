@@ -159,7 +159,7 @@ const data = {
       { word: "洗衣服", pinyin: "Xǐ yīfu", imageURL: "img/laundry.png", english: "Laundry" },
       { word: "脏衣服", pinyin: "Zāng yīfu", imageURL: "img/dirtylaundry.png", english: "Dirty laundry" },
       { word: "闪卡", pinyin: "Shǎnkǎ", imageURL: "cards/cards.png", english: "Flashcard" },
-      { word: "剪头发", pinyin: "Jiǎn tóufà", image: "💇", english: "Haircut" },
+      { word: "剪头发", pinyin: "Jiǎn tóufa", image: "💇", english: "Haircut" },
       { word: "痒痒", pinyin: "Yǎngyang", imageURL: "img/tickles.png", english: "Tickles" },
       { word: "口罩", pinyin: "Kǒuzhào", image: "😷", english: "Mask" },
 		]
@@ -555,7 +555,7 @@ const data = {
       { word: "脚", pinyin: "Jiǎo", image: "🦶", english: "Foot" },
       { word: "手指头", pinyin: "Shǒuzhǐtou", imageURL: "img/fingers.png", english: "Fingers" },
       { word: "脚趾头", pinyin: "Jiǎozhǐtou", imageURL: "img/toes.png", english: "Toes" },
-      { word: "头发", pinyin: "Tóufǎ", imageURL: "img/hair.png", english: "Hair" },
+      { word: "头发", pinyin: "Tóufa", imageURL: "img/hair.png", english: "Hair" },
       { word: "腿", pinyin: "Tuǐ", image: "🦵", english: "Leg" },
       { word: "手臂", pinyin: "Shǒubì", image: "💪", english: "Arm" },
       { word: "牙齿", pinyin: "Yáchǐ", image: "🦷", english: "Teeth" },
