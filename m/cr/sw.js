@@ -1,4 +1,4 @@
-const cacheName = 'caveribbon-4f226f4024a0404de8d3e16c69e2b9b8';
+const cacheName = 'caveribbon-6f43fb23ef9d115d37f2af71d1cc1990';
 const appShellFiles = [
   './CaveRibbon-16.png',
   './CaveRibbon-1600.png',
@@ -157,9 +157,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
     const r = await caches.match(e.request);
     if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    cache.put(e.request, response.clone());
-    return response;
+    return fetch(e.request);
   })());
 });

@@ -1,4 +1,4 @@
-const cacheName = 'spacetrader-56a4d2ee378cbfe7dbfc168e456624f9';
+const cacheName = 'spacetrader-0914d893300d091b9bd0d3c5db97ba41';
 const appShellFiles = [
   './GameRand.js',
   './Images.js',
@@ -184,9 +184,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
     const r = await caches.match(e.request);
     if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    cache.put(e.request, response.clone());
-    return response;
+    return fetch(e.request);
   })());
 });

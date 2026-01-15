@@ -1,4 +1,4 @@
-const cacheName = 'taptoy-ed97fd963114a6408bcdeb06ca810207';
+const cacheName = 'taptoy-58a5ef82863695f2ba82be587f6c12ab';
 const appShellFiles = [
   './BGColorAnimator.js',
   './Images.js',
@@ -156,9 +156,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
     const r = await caches.match(e.request);
     if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    cache.put(e.request, response.clone());
-    return response;
+    return fetch(e.request);
   })());
 });

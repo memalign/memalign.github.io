@@ -1,4 +1,4 @@
-const cacheName = 'phonics-26a83d101a72dea67ccda294425aad29';
+const cacheName = 'phonics-6ab910c24363d65213ac7fa041df2342';
 const appShellFiles = [
   './card-style.css',
   './cards-1000.png',
@@ -33,9 +33,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
     const r = await caches.match(e.request);
     if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    cache.put(e.request, response.clone());
-    return response;
+    return fetch(e.request);
   })());
 });

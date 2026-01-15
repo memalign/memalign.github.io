@@ -1,4 +1,4 @@
-const cacheName = 'fireworks-77c7da3d2a1a6d27973879681b50210e';
+const cacheName = 'fireworks-2c7cb34fcf2151ba643fdae51ca204f4';
 const appShellFiles = [
   './Firework.js',
   './Fireworks-2505.png',
@@ -150,9 +150,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
     const r = await caches.match(e.request);
     if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    cache.put(e.request, response.clone());
-    return response;
+    return fetch(e.request);
   })());
 });

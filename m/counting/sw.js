@@ -1,4 +1,4 @@
-const cacheName = 'counting-2eb7d900175378d74bf2485b657a1233';
+const cacheName = 'counting-c8a430047967382491bf92069840e6cd';
 const appShellFiles = [
   './Images.js',
   './PCEImage.js',
@@ -153,9 +153,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
     const r = await caches.match(e.request);
     if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    cache.put(e.request, response.clone());
-    return response;
+    return fetch(e.request);
   })());
 });

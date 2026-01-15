@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-3d94469817281d143a858cadbdd33c32';
+const cacheName = 'mandarin-9d311c4b0e3ea8b0152bae2a08c792d7';
 const appShellFiles = [
   './cards/PWAImages/android/android-launchericon-144-144.png',
   './cards/PWAImages/android/android-launchericon-192-192.png',
@@ -400,9 +400,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
     const r = await caches.match(e.request);
     if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    cache.put(e.request, response.clone());
-    return response;
+    return fetch(e.request);
   })());
 });
