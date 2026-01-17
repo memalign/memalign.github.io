@@ -33,6 +33,10 @@ const weakest5Btn = document.getElementById("weakest-5");
 const random5Btn = document.getElementById("random-5");
 const selectAllBtn = document.getElementById("select-all");
 const selectNoneBtn = document.getElementById("select-none");
+const advancedWeakestBtn = document.getElementById("advanced-weakest");
+const advancedRandomBtn = document.getElementById("advanced-random");
+const advancedSelectAllBtn = document.getElementById("advanced-select-all");
+const advancedSelectNoneBtn = document.getElementById("advanced-select-none");
 
 // Checkboxes
 const showPictureCheckbox = document.getElementById("show-picture");
@@ -192,7 +196,7 @@ resetCountBtn.addEventListener("click", resetCount);
 
 const frame = document.body.querySelector('.frame')
 
-const allWords = data.alphabet.words;
+const allWords = Object.values(data).flatMap(category => category.words);
 let activeWordList = [];
 
 
@@ -333,20 +337,32 @@ function generateFlashcardContent(word) {
   }
 
   let letterStr = '';
-  if (settings.showUppercase) {
-    letterStr += word.word[0];
-  }
-  if (settings.showLowercase) {
-    letterStr += word.word[1];
+  const isBasicLetter = data.alphabet.words.some(basicWord => basicWord.word === word.word);
+  if (isBasicLetter && areAdvancedCheckboxesChecked()) {
+    letterStr += word.word[1]; // Only show lowercase for basic letters if advanced are checked
+  } else {
+    if (settings.showUppercase) {
+      letterStr += word.word[0];
+    }
+    if (settings.showLowercase) {
+      letterStr += word.word[1];
+    }
   }
 
+  let displayWord = word.english;
+  if (word.englishExamples) {
+    displayWord = word.englishExamples[Math.floor(Math.random() * word.englishExamples.length)];
+  }
+
+  let wordInImage = false;
   let imgStr = ""
   if (word.image && word.image !== "NONE") {
     imgStr = `<div class='emojiImageLarge'>${word.image}</div>`
   } else if (word.imageURL) {
     imgStr = `<img class='wordImageLarge' src=../${word.imageURL}>`
   } else {
-    imgStr = `${word.english}`
+    imgStr = `<div class='wordAsImage'>${displayWord}</div>`
+    wordInImage = true;
   }
 
   return `
@@ -354,7 +370,7 @@ function generateFlashcardContent(word) {
         <div class="${cardContentClasses.join(' ')}">
           <div class="${imageCL}">${imgStr}</div>
           <div class="${letterCL}">${letterStr}</div>
-          <div class="${wordCL}">${word.english}</div>
+          <div class="${wordCL}">${wordInImage ? '' : displayWord}</div>
           <div class="${tapCL}">Tap to Reveal</div>
         </div>
     `;
@@ -517,8 +533,10 @@ function complete(flyUp) {
   const completedWordData = allWords.find(w => w.word === current.dataset.word);
 
   if (recallRating === 5 && easyRecallStreak > 0 && easyRecallStreak % 3 === 0) {
-    if (completedWordData && completedWordData.image) {
+    if (completedWordData && completedWordData.image && completedWordData.image !== "NONE") {
       showConfetti(completedWordData.image);
+    } else {
+      showConfetti("🍇");
     }
   }
   const completedWord = current.dataset.word
@@ -565,15 +583,15 @@ function cancel() {
 // Letter Selection Panel
 function getSelectedLetters() {
   const selected = [];
-  const checkboxes = letterCheckboxesContainer.querySelectorAll('input[type="checkbox"]:checked');
+  const checkboxes = document.querySelectorAll('#letter-checkboxes input[type="checkbox"]:checked, #advanced-letter-checkboxes input[type="checkbox"]:checked');
   checkboxes.forEach(checkbox => {
     selected.push(checkbox.value);
   });
   return selected;
 }
 
-function getWeakestWords(count) {
-  const wordsWithReviewData = allWords.map(word => {
+function getWeakestWords(wordList, count) {
+  const wordsWithReviewData = wordList.map(word => {
     const review = reviewData[word.word] || { easeFactor: 2.5, lastReview: -1 };
     return { ...word, ...review };
   });
@@ -588,13 +606,33 @@ function getWeakestWords(count) {
 }
 
 function updateApplyButtonState() {
-  const checkedCheckboxes = letterCheckboxesContainer.querySelectorAll('input[type="checkbox"]:checked');
+  const checkedCheckboxes = document.querySelectorAll('#letter-checkboxes input[type="checkbox"]:checked, #advanced-letter-checkboxes input[type="checkbox"]:checked');
   applyLetterSelectionBtn.disabled = checkedCheckboxes.length === 0;
+}
+
+function updateBasicLetterLabels() {
+  const advancedChecked = areAdvancedCheckboxesChecked();
+  const basicCheckboxes = document.querySelectorAll('#letter-checkboxes label');
+  basicCheckboxes.forEach(label => {
+    const checkbox = label.querySelector('input[type="checkbox"]');
+    const word = data.alphabet.words.find(w => w.word === checkbox.value);
+    if (word) {
+      // Last child of a label is the text node
+      // We need to show only lowercase when an advanced flashcard is in
+      // rotation because the user needs to read letter combinations.
+      // E.g. Showing "Oo" for the basic "o" card would be very confusing.
+      if (advancedChecked) {
+        label.lastChild.textContent = word.word[1]; // Only lowercase
+      } else {
+        label.lastChild.textContent = word.word; // Both upper and lowercase
+      }
+    }
+  });
 }
 
 function populateLetterSelectionPanel() {
   letterCheckboxesContainer.innerHTML = '';
-  allWords.forEach(word => {
+  data.alphabet.words.forEach(word => {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = `letter-${word.word}`;
@@ -607,6 +645,36 @@ function populateLetterSelectionPanel() {
     label.appendChild(document.createTextNode(word.word));
     letterCheckboxesContainer.appendChild(label);
   });
+  updateBasicLetterLabels();
+
+  const advancedLetterCheckboxesContainer = document.getElementById('advanced-letter-checkboxes');
+  advancedLetterCheckboxesContainer.innerHTML = '';
+  for (const key in data) {
+    if (key !== 'alphabet') {
+      const category = data[key];
+      const categoryLabel = document.createElement('h4');
+      categoryLabel.textContent = category.label;
+      advancedLetterCheckboxesContainer.appendChild(categoryLabel);
+
+      const categoryWordsContainer = document.createElement('div');
+      categoryWordsContainer.className = 'letter-checkboxes';
+      category.words.forEach(word => {
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `letter-${word.word}`;
+        checkbox.value = word.word;
+        checkbox.checked = activeWordList.some(activeWord => activeWord.word === word.word);
+
+        const label = document.createElement('label');
+        label.htmlFor = `letter-${word.word}`;
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(word.word));
+        categoryWordsContainer.appendChild(label);
+      });
+      advancedLetterCheckboxesContainer.appendChild(categoryWordsContainer);
+    }
+  }
+
   updateApplyButtonState();
 }
 
@@ -628,7 +696,7 @@ letterSelectionBtn.addEventListener("click", (event) => {
 
 applyLetterSelectionBtn.addEventListener("click", () => {
   const selectedWords = [];
-  const checkboxes = letterCheckboxesContainer.querySelectorAll('input[type="checkbox"]');
+  const checkboxes = document.querySelectorAll('#letter-checkboxes input[type="checkbox"], #advanced-letter-checkboxes input[type="checkbox"]');
   checkboxes.forEach(checkbox => {
     if (checkbox.checked) {
       const wordData = allWords.find(w => w.word === checkbox.value);
@@ -644,8 +712,8 @@ applyLetterSelectionBtn.addEventListener("click", () => {
 });
 
 weakest5Btn.addEventListener("click", () => {
-  const weakest = getWeakestWords(5).map(w => w.word);
-  const checkboxes = letterCheckboxesContainer.querySelectorAll('input[type="checkbox"]');
+  const weakest = getWeakestWords(data.alphabet.words, 5).map(w => w.word);
+  const checkboxes = document.querySelectorAll('#letter-checkboxes input[type="checkbox"]');
   checkboxes.forEach(checkbox => {
     checkbox.checked = weakest.includes(checkbox.value);
   });
@@ -653,10 +721,10 @@ weakest5Btn.addEventListener("click", () => {
 });
 
 random5Btn.addEventListener("click", () => {
-  const checkboxes = letterCheckboxesContainer.querySelectorAll('input[type="checkbox"]');
+  const checkboxes = document.querySelectorAll('#letter-checkboxes input[type="checkbox"]');
   checkboxes.forEach(checkbox => checkbox.checked = false);
 
-  const shuffled = [...allWords].sort(() => 0.5 - Math.random());
+  const shuffled = [...data.alphabet.words].sort(() => 0.5 - Math.random());
   const selected = shuffled.slice(0, 5).map(w => w.word);
 
   checkboxes.forEach(checkbox => {
@@ -668,19 +736,71 @@ random5Btn.addEventListener("click", () => {
 });
 
 selectAllBtn.addEventListener("click", () => {
-  const checkboxes = letterCheckboxesContainer.querySelectorAll('input[type="checkbox"]');
+  const checkboxes = document.querySelectorAll('#letter-checkboxes input[type="checkbox"]');
   checkboxes.forEach(checkbox => checkbox.checked = true);
   updateApplyButtonState();
 });
 
 selectNoneBtn.addEventListener("click", () => {
-  const checkboxes = letterCheckboxesContainer.querySelectorAll('input[type="checkbox"]');
+  const checkboxes = document.querySelectorAll('#letter-checkboxes input[type="checkbox"]');
   checkboxes.forEach(checkbox => checkbox.checked = false);
   updateApplyButtonState();
 });
 
-letterCheckboxesContainer.addEventListener('change', updateApplyButtonState);
+const advancedWords = Object.keys(data).filter(key => key !== 'alphabet').flatMap(key => data[key].words);
+
+advancedWeakestBtn.addEventListener("click", () => {
+    const weakest = getWeakestWords(advancedWords, 5).map(w => w.word);
+    const checkboxes = document.querySelectorAll('#advanced-letter-checkboxes input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = weakest.includes(checkbox.value);
+    });
+    updateApplyButtonState();
+    updateBasicLetterLabels();
+});
+
+advancedRandomBtn.addEventListener("click", () => {
+    const checkboxes = document.querySelectorAll('#advanced-letter-checkboxes input[type="checkbox"]');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+    const shuffled = [...advancedWords].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 5).map(w => w.word);
+    checkboxes.forEach(checkbox => {
+        if (selected.includes(checkbox.value)) {
+            checkbox.checked = true;
+        }
+    });
+    updateApplyButtonState();
+    updateBasicLetterLabels();
+});
+
+advancedSelectAllBtn.addEventListener("click", () => {
+    const checkboxes = document.querySelectorAll('#advanced-letter-checkboxes input[type="checkbox"]');
+    checkboxes.forEach(checkbox => checkbox.checked = true);
+    updateApplyButtonState();
+    updateBasicLetterLabels();
+});
+
+advancedSelectNoneBtn.addEventListener("click", () => {
+    const checkboxes = document.querySelectorAll('#advanced-letter-checkboxes input[type="checkbox"]');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+    updateApplyButtonState();
+    updateBasicLetterLabels();
+});
+
+document.getElementById('letter-selection-panel').addEventListener('change', (event) => {
+  if (event.target.type === 'checkbox') {
+    updateApplyButtonState();
+    // After any change, refresh cards to reflect potential lowercase changes
+    refreshCards();
+    updateBasicLetterLabels();
+  }
+});
+
+function areAdvancedCheckboxesChecked() {
+  const advancedCheckboxes = document.querySelectorAll('#advanced-letter-checkboxes input[type="checkbox"]:checked');
+  return advancedCheckboxes.length > 0;
+}
 
 // Initial setup
-activeWordList = getWeakestWords(5);
+activeWordList = getWeakestWords(data.alphabet.words, 5);
 setupCards();

@@ -1,4 +1,4 @@
-const cacheName = 'phonics-6ab910c24363d65213ac7fa041df2342';
+const cacheName = 'phonics-be47e7f37b90e13ff7ca0753f354ce12';
 const appShellFiles = [
   './card-style.css',
   './cards-1000.png',

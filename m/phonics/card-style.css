@@ -41,6 +41,7 @@ body {
 }
 
 .card {
+  font-family: Georgia, "Courier New", "Helvetica Neue", Helvetica, serif;
   position: absolute;
   display: flex;
   align-items: flex-end;
@@ -145,7 +146,7 @@ body {
   background-color: #008751;
 }
 
-#settings-panel, #letter-selection-panel {
+#settings-panel {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -157,6 +158,21 @@ body {
   z-index: 100;
   max-height: 80vh;
   overflow-y: auto;
+}
+
+#letter-selection-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  max-height: 70vh;
+  overflow-y: auto;
+  text-align: left;
 }
 
 .left {
@@ -233,6 +249,7 @@ body {
 }
 
 .tapToReveal {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #C6D4D4;
   position: absolute;
   left: 50%;
@@ -317,6 +334,10 @@ h1 {
   font-size: 3rem;
 }
 
+.revealed .wordAsImage {
+  font-size: 5rem;
+}
+
 @media (max-width: 340px) {
   .frame {
     width: 300px;
@@ -368,6 +389,10 @@ h1 {
     font-size: 5rem;
   }
 
+  .revealed .wordAsImage {
+    font-size: 7rem;
+  }
+
   .revealed .emojiImageLarge {
     font-size: 10rem;
   }
@@ -386,3 +411,46 @@ h1 {
     font-size: 1.5rem;
   }
 }
+
+
+#letter-selection-panel h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+#letter-selection-panel h4 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#letter-checkboxes,
+#advanced-letter-checkboxes .letter-checkboxes {
+  font-family: Georgia, "Courier New", "Helvetica Neue", Helvetica, serif;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+#letter-checkboxes label,
+#advanced-letter-checkboxes .letter-checkboxes label {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  #letter-checkboxes,
+  #advanced-letter-checkboxes .letter-checkboxes {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+
+#letter-selection-panel label input[type="checkbox"] {
+  margin-right: 5px;
+}
+
