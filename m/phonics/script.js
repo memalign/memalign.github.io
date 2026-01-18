@@ -319,23 +319,9 @@ document.getElementById("easy").addEventListener("click", () => {
 })
 
 
+const countForWord = { }; // word -> integer
+
 function generateFlashcardContent(word) {
-  const imageCL = "image" + (settings.showPicture ? "" : " invisible")
-  const letterCL = "letter" + (settings.showLetter ? "" : " invisible")
-  const wordCL = "word" + (settings.showWord ? "" : " invisible")
-
-  const allShowing = settings.showPicture &&
-                     settings.showWord &&
-                     settings.showLetter
-  const tapCL = "tapToReveal" + (allShowing ? " invisible" : "")
-
-
-  const isLetterOnly = settings.showLetter && !settings.showPicture && !settings.showWord;
-  const cardContentClasses = ["card-content"];
-  if (isLetterOnly) {
-    cardContentClasses.push("letter-only");
-  }
-
   let letterStr = '';
   const isBasicLetter = data.alphabet.words.some(basicWord => basicWord.word === word.word);
   if (isBasicLetter && areAdvancedCheckboxesChecked()) {
@@ -351,7 +337,18 @@ function generateFlashcardContent(word) {
 
   let displayWord = word.english;
   if (word.englishExamples) {
-    displayWord = word.englishExamples[Math.floor(Math.random() * word.englishExamples.length)];
+    let currentCountForWord = countForWord[word.word];
+    currentCountForWord = currentCountForWord ? currentCountForWord : 0;
+
+    displayWord = word.englishExamples[currentCountForWord % word.englishExamples.length];
+
+    countForWord[word.word] = currentCountForWord + 1;
+  }
+
+
+  // My kid doesn't like the Georgia font's lowercase g, so use a different font for words that contain it
+  const additionalClassForStr = function(str) {
+    return str.includes("g") ? " GOverride" : "";
   }
 
   let wordInImage = false;
@@ -361,9 +358,25 @@ function generateFlashcardContent(word) {
   } else if (word.imageURL) {
     imgStr = `<img class='wordImageLarge' src=../${word.imageURL}>`
   } else {
-    imgStr = `<div class='wordAsImage'>${displayWord}</div>`
+    imgStr = `<div class='wordAsImage${additionalClassForStr(displayWord)}'>${displayWord}</div>`
     wordInImage = true;
   }
+
+  const imageCL = "image" + (settings.showPicture ? "" : " invisible")
+  const letterCL = "letter" + additionalClassForStr(letterStr) + (settings.showLetter ? "" : " invisible")
+  const wordCL = "word" + additionalClassForStr(displayWord) + (settings.showWord ? "" : " invisible")
+
+  const allShowing = settings.showPicture &&
+                     settings.showWord &&
+                     settings.showLetter
+  const tapCL = "tapToReveal" + (allShowing ? " invisible" : "")
+
+  const isLetterOnly = settings.showLetter && !settings.showPicture && !settings.showWord;
+  const cardContentClasses = ["card-content"];
+  if (isLetterOnly) {
+    cardContentClasses.push("letter-only");
+  }
+
 
   return `
         <div class="card-overlay"></div>
@@ -641,6 +654,7 @@ function populateLetterSelectionPanel() {
 
     const label = document.createElement('label');
     label.htmlFor = `letter-${word.word}`;
+    label.id = `letter-label-${word.word}`;
     label.appendChild(checkbox);
     label.appendChild(document.createTextNode(word.word));
     letterCheckboxesContainer.appendChild(label);
@@ -667,6 +681,7 @@ function populateLetterSelectionPanel() {
 
         const label = document.createElement('label');
         label.htmlFor = `letter-${word.word}`;
+        label.id = `letter-label-${word.word}`;
         label.appendChild(checkbox);
         label.appendChild(document.createTextNode(word.word));
         categoryWordsContainer.appendChild(label);

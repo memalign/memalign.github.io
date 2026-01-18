@@ -41,7 +41,7 @@ body {
 }
 
 .card {
-  font-family: Georgia, "Courier New", "Helvetica Neue", Helvetica, serif;
+  font-family: Georgia, "Helvetica Neue", Helvetica, serif;
   position: absolute;
   display: flex;
   align-items: flex-end;
@@ -429,7 +429,7 @@ h1 {
 
 #letter-checkboxes,
 #advanced-letter-checkboxes .letter-checkboxes {
-  font-family: Georgia, "Courier New", "Helvetica Neue", Helvetica, serif;
+  font-family: Georgia, "Helvetica Neue", Helvetica, serif;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
@@ -440,6 +440,13 @@ h1 {
 #advanced-letter-checkboxes .letter-checkboxes label {
   display: flex;
   align-items: center;
+}
+
+/* My kid does not like the "fancy" g of the Georgia font */
+#letter-label-Gg,
+#letter-label-ng,
+.GOverride {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
 @media (min-width: 768px) {
