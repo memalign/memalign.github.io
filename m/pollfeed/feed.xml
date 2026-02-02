@@ -3,10 +3,44 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2026-01-18T16:00:01Z</updated>
+<updated>2026-01-31T16:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 01/31/26 08:00</title>
+<published>2026-01-31T16:00:01Z</published>
+<updated>2026-01-31T16:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:5a44701a9e791c14af9d22c354aea57a</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<img src="https://www.asahi-net.or.jp/~cs8k-cyu/img/pongpector.gif"><br />
+<img src="https://github.com/abagames/crisp-game-lib-11-games/raw/main/docs/pakupaku/screenshot.gif"><br />
+<a href="https://abagames.itch.io/paku-paku">https://abagames.itch.io/paku-paku</a><br />
+<img src="https://github.com/abagames/crisp-game-lib-12-games/raw/main/docs/zigzagpressure/screenshot.gif"><br />
+<a href="https://abagames.github.io/crisp-game-lib-12-games/?zigzagpressure">https://abagames.github.io/crisp-game-lib-12-games/?zigzagpressure</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/-revised/ghost_hop/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/-revised/?ghost_hop">https://abagames.github.io/claude-one-button-game-creation/-revised/?ghost_hop</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/-revised/orbit-grazer/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/-revised/?orbit-grazer">https://abagames.github.io/claude-one-button-game-creation/-revised/?orbit-grazer</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/-revised/stormveil/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/-revised/?stormveil">https://abagames.github.io/claude-one-button-game-creation/-revised/?stormveil</a><br />
+<img src="https://github.com/abagames/claude-one-button-game-creation/raw/main/docs/-revised/tongue-hunter/screenshot.gif"><br />
+<a href="https://abagames.github.io/claude-one-button-game-creation/-revised/?tongue-hunter">https://abagames.github.io/claude-one-button-game-creation/-revised/?tongue-hunter</a><br />
+<img src="https://github.com/abagames/1x111/raw/main/docs/1x111.gif"><br />
+<a href="https://abagames.itch.io/1x111">https://abagames.itch.io/1x111</a><br />
+<img src="https://www.asahi-net.or.jp/~cs8k-cyu/img/snake-shift.gif"><br />
+<a href="https://github.com/abagames/snake-shift">https://github.com/abagames/snake-shift</a><br />
+<a href="https://github.com/abagames/darumatron">https://github.com/abagames/darumatron</a><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 01/18/26 08:00</title>
 <published>2026-01-18T16:00:01Z</published>
