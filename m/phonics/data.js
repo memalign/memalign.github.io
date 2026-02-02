@@ -43,8 +43,8 @@ const data = {
     label: "Sounds with H",
     words: [
       { word: "th", image: "NONE", englishExamples: ["thin", "math", "bath", "this", "that", "them"] },
-      { word: "sh", image: "NONE", englishExamples: ["ship", "shop", "fish"] },
-      { word: "ch", image: "NONE", englishExamples: ["chip", "much", "chop"] },
+      { word: "sh", image: "NONE", englishExamples: ["ship", "shop", "fish", "shut", "shed", "shell", "dish", "sheep", "shark"] },
+      { word: "ch", image: "NONE", englishExamples: ["chip", "much", "chop", "chat", "chin", "chill", "cheer"] },
       { word: "wh", image: "NONE", englishExamples: ["wham", "whip", "when", "whisk"] },
     ]
   },
@@ -57,6 +57,16 @@ const data = {
       { word: "dr", image: "NONE", englishExamples: ["drum", "drip", "drop", "drill"] },
     ]
   },
+  bossy_r: {
+    label: "Bossy R",
+    words: [
+      { word: "ar", image: "NONE", englishExamples: ["car", "far", "jar", "bar", "star", "park", "farm", "shark"] },
+      { word: "or", image: "NONE", englishExamples: ["for", "fork", "corn", "horn", "storm", "short"] },
+      { word: "ir", image: "NONE", englishExamples: ["bird", "girl", "dirt", "shirt", "first", "stir", "third"] },
+      { word: "er", image: "NONE", englishExamples: ["her", "fern", "term", "verb"] },
+      { word: "ur", image: "NONE", englishExamples: ["fur", "turn", "burn", "hurt", "surf"] },
+    ]
+  },
   vowel_teams: {
     label: "Vowel Teams",
     words: [
@@ -65,6 +75,7 @@ const data = {
       { word: "oa", image: "NONE", englishExamples: ["boat", "moat", "coat", "goat"] },
       { word: "ee", image: "NONE", englishExamples: ["see", "bee", "feed", "feet"] },
       { word: "oo", image: "NONE", englishExamples: ["moon", "zoo", "room", "book", "cook", "look"] },
+      { word: "ow", image: "NONE", englishExamples: ["cow", "now", "how", "wow", "snow", "low", "grow", "slow"] },
     ]
   }
 };

@@ -326,14 +326,17 @@ function generateFlashcardContent(word) {
   const isBasicLetter = data.alphabet.words.some(basicWord => basicWord.word === word.word);
   if (isBasicLetter && areAdvancedCheckboxesChecked()) {
     letterStr += word.word[1]; // Only show lowercase for basic letters if advanced are checked
-  } else {
+  } else if (isBasicLetter) {
     if (settings.showUppercase) {
       letterStr += word.word[0];
     }
     if (settings.showLowercase) {
       letterStr += word.word[1];
     }
+  } else {
+    letterStr = word.word;
   }
+
 
   let displayWord = word.english;
   if (word.englishExamples) {
@@ -343,6 +346,12 @@ function generateFlashcardContent(word) {
     displayWord = word.englishExamples[currentCountForWord % word.englishExamples.length];
 
     countForWord[word.word] = currentCountForWord + 1;
+  }
+
+
+  const showDisplayWordInLowercase = !settings.showUppercase || areAdvancedCheckboxesChecked()
+  if (showDisplayWordInLowercase) {
+    displayWord = displayWord.toLowerCase()
   }
 
 
@@ -624,18 +633,22 @@ function updateApplyButtonState() {
 }
 
 function updateBasicLetterLabels() {
+  // We need to show only lowercase when an advanced flashcard is in
+  // rotation because the user needs to read letter combinations.
+  // E.g. Showing "Oo" for the basic "o" card would be very confusing.
   const advancedChecked = areAdvancedCheckboxesChecked();
+  const showLowercaseOnly = advancedChecked || !settings.showUppercase;
+
   const basicCheckboxes = document.querySelectorAll('#letter-checkboxes label');
   basicCheckboxes.forEach(label => {
     const checkbox = label.querySelector('input[type="checkbox"]');
     const word = data.alphabet.words.find(w => w.word === checkbox.value);
     if (word) {
       // Last child of a label is the text node
-      // We need to show only lowercase when an advanced flashcard is in
-      // rotation because the user needs to read letter combinations.
-      // E.g. Showing "Oo" for the basic "o" card would be very confusing.
-      if (advancedChecked) {
+      if (showLowercaseOnly) {
         label.lastChild.textContent = word.word[1]; // Only lowercase
+      } else if (!settings.showLowercase) {
+        label.lastChild.textContent = word.word[0]; // Only uppercase
       } else {
         label.lastChild.textContent = word.word; // Both upper and lowercase
       }
