@@ -118,6 +118,8 @@ const data = {
       { word: "手机", pinyin: "Shǒujī", image: "📱", english: "Phone" },
       { word: "耳机", pinyin: "Ěrjī", image: "🎧", english: "Headphones" },
       { word: "耳塞", pinyin: "Ěrsāi", imageURL: "img/earprotection.png", english: "Ear Protection" },
+      { word: "玻璃", pinyin: "Bóli", imageURL: "img/glass.png", english: "Glass" },
+      { word: "车库", pinyin: "Chēkù", imageURL: "img/garage.png", english: "Garage" },
       { word: "地板", pinyin: "Dìbǎn", imageURL: "img/floor.png", english: "Floor" },
       { word: "客厅", pinyin: "Kètīng", imageURL: "img/livingroom.png", english: "Living room" },
       { word: "书房", pinyin: "Shūfáng", imageURL: "img/homeoffice.png", english: "Study/home office" },
@@ -283,6 +285,7 @@ const data = {
       { word: "蜜蜂", pinyin: "Mìfēng", image: "🐝", english: "Bee" },
       { word: "毛毛虫", pinyin: "Máomáochóng", image: "🐛", english: "Caterpillar" },
       { word: "蝴蝶", pinyin: "Húdié", image: "🦋", english: "Butterfly" },
+      { word: "猫头鹰", pinyin: "Māotóuyīng", image: "🦉", english: "Owl" },
     ]
   },
   colors: {
@@ -520,6 +523,7 @@ const data = {
       { word: "切", pinyin: "Qiē", imageURL: "img/cut.png", english: "Cut" },
       { word: "剪", pinyin: "Jiǎn", image: "✂️", english: "Cut (with scissors)" },
       { word: "学", pinyin: "Xué", imageURL: "img/learn.png", english: "To learn" },
+      { word: "教", pinyin: "Jiào", imageURL: "img/teach.png", english: "Teach" },
       { word: "叫", pinyin: "Jiào", imageURL: "img/call.png", english: "To be called" },
       { word: "来", pinyin: "Lái", imageURL: "img/come.png", english: "To come" },
       { word: "去", pinyin: "Qù", imageURL: "img/go.png", english: "To go" },
@@ -704,6 +708,7 @@ const data = {
       { word: "我想你", pinyin: "Wǒ xiǎng nǐ", imageURL: "img/missyou.png", english: "I miss you" },
       { word: "我希望", pinyin: "Wǒ xīwàng", imageURL: "img/hope.png", english: "I hope" },
       { word: "你上班忙吗？上班很忙。", pinyin: "Nǐ shàngbān máng ma? Shàngbān hěn máng.", image: "NONE", english: "Are you busy at work? Work is busy." },
+      { word: "辛苦了", pinyin: "Xīnkǔ le", image: "NONE", english: "Thanks for your hard work" },
       { word: "你睡得好吗？", pinyin: "Nǐ shuì de hǎo ma?", imageURL: "img/didyousleepwell.png", english: "Did you sleep well?" },
       { word: "我听到你了", pinyin: "Wǒ tīngdào nǐ le", image: "NONE", english: "I heard you" },
       { word: "为什么", pinyin: "Wèishénme", image: "NONE", english: "Why" },
