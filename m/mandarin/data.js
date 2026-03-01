@@ -235,6 +235,7 @@ const data = {
       { word: "昨天", pinyin: "Zuótiān", imageURL: "img/yesterday.png", english: "Yesterday" },
       { word: "明天", pinyin: "Míngtiān", imageURL: "img/tomorrow.png", english: "Tomorrow" },
       { word: "现在", pinyin: "Xiànzài", imageURL: "img/now.png", english: "Now" },
+      { word: "马上", pinyin: "Mǎshàng", image: "NONE", english: "Soon" },
       { word: "一整天", pinyin: "Yì zhěngtiān", imageURL: "img/allday.png", english: "Entire day" },
 
       // Days of the week
@@ -357,6 +358,7 @@ const data = {
       { word: "简单", pinyin: "Jiǎndān", imageURL: "img/easy.png", english: "Simple/Easy" },
       { word: "生病", pinyin: "Shēngbìng", image: "🤒", english: "Sick" },
       { word: "健康", pinyin: "Jiànkāng", imageURL: "img/healthy.png", english: "Healthy" },
+      { word: "害羞", pinyin: "Hàixiū", imageURL: "img/shy.png", english: "Shy" },
       { word: "好笑", pinyin: "Hǎoxiào", image: "NONE", english: "Funny" },
       { word: "聪明", pinyin: "Cōngmíng", imageURL: "img/smart.png", english: "Smart" },
       { word: "笨", pinyin: "Bèn", imageURL: "img/dumb.png", english: "Dumb" },
@@ -426,6 +428,7 @@ const data = {
       { word: "学校", pinyin: "Xuéxiào", imageURL: "img/school.png", english: "School" },
       { word: "公园", pinyin: "Gōngyuán", imageURL: "img/playground.png", english: "Park/Playground" },
       { word: "商店", pinyin: "Shāngdiàn", imageURL: "img/store.png", english: "Store" },
+      { word: "商场", pinyin: "Shāngchǎng", imageURL: "img/mall.png", english: "Mall" },
       { word: "图书馆", pinyin: "Túshūguǎn", imageURL: "img/library.png", english: "Library" },
       { word: "饭店", pinyin: "Fàndiàn", imageURL: "img/restaurant.png", english: "Restaurant" },
       { word: "菜单", pinyin: "Càidān", imageURL: "img/menu.png", english: "Menu" },
@@ -463,6 +466,7 @@ const data = {
       { word: "秋千", pinyin: "Qiūqiān", imageURL: "img/swing.png", english: "Swing" },
       { word: "爬", pinyin: "Pá", image: "🧗", english: "Climb" },
       { word: "泡泡", pinyin: "Pàopao", image: "🫧", english: "Bubbles" },
+      { word: "粉笔", pinyin: "Fěnbǐ", imageURL: "img/chalk.png", english: "Chalk" },
       { word: "沙坑", pinyin: "Shākēng", imageURL: "img/sandbox.png", english: "Sandbox" },
       { word: "草地", pinyin: "Cǎodì", imageURL: "img/grass.png", english: "Grass" },
       { word: "石头", pinyin: "Shítou", image: "🪨", english: "Rock" },
