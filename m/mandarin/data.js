@@ -45,6 +45,7 @@ const data = {
       { word: "胡萝卜", pinyin: "Húluóbo", image: "🥕", english: "Carrot" },
       { word: "土豆", pinyin: "Tǔdòu", image: "🥔", english: "Potato" },
       { word: "玉米", pinyin: "Yùmǐ", image: "🌽", english: "Corn" },
+      { word: "爆米花", pinyin: "Bàomǐhuā", image: "🍿", english: "Popcorn" },
       { word: "芹菜", pinyin: "Qíncài", imageURL: "img/celery.png", english: "Celery" },
       { word: "蘑菇", pinyin: "Mógū", image: "🍄‍🟫", english: "Mushroom" },
       { word: "黄瓜", pinyin: "Huángguā", image: "🥒", english: "Cucumber" },
@@ -166,8 +167,11 @@ const data = {
 			{ word: "睡觉时间", pinyin: "Shuìjiào shíjiān", imageURL: "img/bedtime.png", english: "Bedtime" },
       { word: "牙线", pinyin: "Yáxiàn", imageURL: "img/floss.png", english: "Floss" },
       { word: "漱口", pinyin: "Shùkǒu", imageURL: "img/swish.png", english: "Swish" },
+      { word: "大便", pinyin: "Dàbiàn", image: "💩", english: "Poop" },
+      { word: "小便", pinyin: "Xiǎobiàn", imageURL: "img/pee.png", english: "Pee" },
       { word: "药", pinyin: "Yào", image: "💊", english: "Medicine" },
       { word: "乳液", pinyin: "Rǔyè", image: "🧴", english: "Lotion" },
+      { word: "打扫卫生", pinyin: "Dǎsǎo wèishēng", imageURL: "img/cleaning.png", english: "Cleaning" },
       { word: "洗衣服", pinyin: "Xǐ yīfu", imageURL: "img/laundry.png", english: "Laundry" },
       { word: "脏衣服", pinyin: "Zāng yīfu", imageURL: "img/dirtylaundry.png", english: "Dirty laundry" },
       { word: "闪卡", pinyin: "Shǎnkǎ", imageURL: "cards/cards.png", english: "Flashcard" },
@@ -231,6 +235,7 @@ const data = {
       { word: "昨天", pinyin: "Zuótiān", imageURL: "img/yesterday.png", english: "Yesterday" },
       { word: "明天", pinyin: "Míngtiān", imageURL: "img/tomorrow.png", english: "Tomorrow" },
       { word: "现在", pinyin: "Xiànzài", imageURL: "img/now.png", english: "Now" },
+      { word: "一整天", pinyin: "Yì zhěngtiān", imageURL: "img/allday.png", english: "Entire day" },
 
       // Days of the week
       { word: "星期一", pinyin: "Xīngqī yī", image: "NONE", english: "Monday" },
@@ -286,6 +291,7 @@ const data = {
       { word: "毛毛虫", pinyin: "Máomáochóng", image: "🐛", english: "Caterpillar" },
       { word: "蝴蝶", pinyin: "Húdié", image: "🦋", english: "Butterfly" },
       { word: "猫头鹰", pinyin: "Māotóuyīng", image: "🦉", english: "Owl" },
+      { word: "动物", pinyin: "Dòngwù", imageURL: "img/animals.png", english: "Animals" },
     ]
   },
   colors: {
@@ -382,6 +388,7 @@ const data = {
       { word: "离很远", pinyin: "Lí hěn yuǎn", imageURL: "img/far.png", english: "Far from" },
       { word: "近", pinyin: "Jìn", imageURL: "img/near.png", english: "Near" },
       { word: "外面", pinyin: "Wàimiàn", imageURL: "img/outside.png", english: "Outside" },
+      { word: "左拐", pinyin: "Zuó guǎi", imageURL: "img/turnleft.png", english: "Turn left" },
     ],
   },
   people: {
@@ -454,6 +461,8 @@ const data = {
       { word: "木屑", pinyin: "Mùxiè", imageURL: "img/mulch.jpg", english: "Wood chips/Mulch" },
       { word: "地", pinyin: "Dì", imageURL: "img/ground.png", english: "Ground" },
       { word: "秋千", pinyin: "Qiūqiān", imageURL: "img/swing.png", english: "Swing" },
+      { word: "爬", pinyin: "Pá", image: "🧗", english: "Climb" },
+      { word: "泡泡", pinyin: "Pàopao", image: "🫧", english: "Bubbles" },
       { word: "沙坑", pinyin: "Shākēng", imageURL: "img/sandbox.png", english: "Sandbox" },
       { word: "草地", pinyin: "Cǎodì", imageURL: "img/grass.png", english: "Grass" },
       { word: "石头", pinyin: "Shítou", image: "🪨", english: "Rock" },

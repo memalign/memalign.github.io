@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-37bc7c9c37aa8df7e1d4c6bf31e1279e';
+const cacheName = 'mandarin-ae369289c65c90ecb0aa2a3a52f2bfe4';
 const appShellFiles = [
   './cards/PWAImages/android/android-launchericon-144-144.png',
   './cards/PWAImages/android/android-launchericon-192-192.png',
@@ -136,7 +136,9 @@ const appShellFiles = [
   './img/afraid.png',
   './img/airconditioning.png',
   './img/airport.png',
+  './img/allday.png',
   './img/almondmilk.png',
+  './img/animals.png',
   './img/areyouhungry.png',
   './img/badsmell.png',
   './img/ballcourt.png',
@@ -169,6 +171,7 @@ const appShellFiles = [
   './img/celery.png',
   './img/cinema.png',
   './img/clean.png',
+  './img/cleaning.png',
   './img/closethedoor.png',
   './img/cold.png',
   './img/come.png',
@@ -299,6 +302,7 @@ const appShellFiles = [
   './img/pathway.png',
   './img/peanutbutter.png',
   './img/peas.png',
+  './img/pee.png',
   './img/pickle.png',
   './img/pillow.png',
   './img/pink.png',
@@ -370,6 +374,7 @@ const appShellFiles = [
   './img/towel.png',
   './img/toy.png',
   './img/tunnel.png',
+  './img/turnleft.png',
   './img/tvshow.png',
   './img/understand.png',
   './img/use.png',
