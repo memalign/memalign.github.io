@@ -104,6 +104,15 @@ EOF
 } > sw.js
 
 # ----------------------------
+# UPDATE pwa.js TO USE CACHE_NAME AS QUERY PARAM (NO BACKUP)
+# ----------------------------
+
+if [ -f pwa.js ]; then
+  # Replace any existing sw.js registration, with or without query params
+  sed -i'' -E "s|navigator\.serviceWorker\.register\('sw\.js(\?[^']*)?'\)|navigator.serviceWorker.register('sw.js?v=${UUID}')|g" pwa.js
+fi
+
+# ----------------------------
 # SUMMARY OUTPUT
 # ----------------------------
 
@@ -113,6 +122,7 @@ echo "  ✔ Service Worker Generated"
 echo "============================================================"
 echo "  Cache name:     $CACHE_NAME"
 echo "  Files cached:   $INCLUDE_COUNT"
+echo "  pwa.js updated: $( [ -f pwa.js ] && echo "yes" || echo "no" )"
 echo ""
 
 echo "Done. 🚀"

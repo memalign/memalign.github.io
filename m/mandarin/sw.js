@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-c02ececee5efcd45c8f81a133c2ae62c';
+const cacheName = 'mandarin-8f2a0f6810771f7412e8c9d966bbf42c';
 const appShellFiles = [
   './cards/PWAImages/android/android-launchericon-144-144.png',
   './cards/PWAImages/android/android-launchericon-192-192.png',
