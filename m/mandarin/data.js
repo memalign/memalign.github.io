@@ -276,6 +276,8 @@ const data = {
       { word: "兔子", pinyin: "Tùzi", image: "🐇", english: "Rabbit" },
       { word: "熊猫", pinyin: "Xióngmāo", image: "🐼", english: "Panda" },
       { word: "老虎", pinyin: "Lǎohǔ", image: "🐯", english: "Tiger" },
+      { word: "狐狸", pinyin: "Húlí", image: "🦊", english: "Fox" },
+      { word: "蜥蜴", pinyin: "Xīyì", image: "🦎", english: "Lizard" },
       { word: "鱼", pinyin: "Yú", image: "🐟", english: "Fish" },
       { word: "仓鼠", pinyin: "Cāngshǔ", image: "🐹", english: "Hamster" },
       { word: "松鼠", pinyin: "Sōngshǔ", image: "🐿️", english: "Squirrel" },
@@ -311,6 +313,7 @@ const data = {
       { word: "粉色", pinyin: "Fěnsè", imageURL: "img/pink.png", english: "Pink" },
       { word: "灰色", pinyin: "Huīsè", image: "⬜", english: "Gray" },
       { word: "棕色", pinyin: "Zōngsè", image: "🟫", english: "Brown" },
+      { word: "颜色", pinyin: "Yánsè", imageURL: "img/color.png", english: "Color" },
     ]
   },
   shapes: {
@@ -391,6 +394,7 @@ const data = {
       { word: "近", pinyin: "Jìn", imageURL: "img/near.png", english: "Near" },
       { word: "外面", pinyin: "Wàimiàn", imageURL: "img/outside.png", english: "Outside" },
       { word: "左拐", pinyin: "Zuó guǎi", imageURL: "img/turnleft.png", english: "Turn left" },
+      { word: "往前", pinyin: "Wǎng qián", image: "NONE", english: "Move forward" },
     ],
   },
   people: {
@@ -557,6 +561,8 @@ const data = {
       { word: "认识", pinyin: "Rènshí", imageURL: "img/knowperson.png", english: "To know (person/place)" },
       { word: "偷", pinyin: "Tōu", imageURL: "img/steal.png", english: "Steal" },
       { word: "死了", pinyin: "Sǐ le", imageURL: "img/dead.png", english: "Dead" },
+      { word: "开灯", pinyin: "Kāi dēng", imageURL: "img/turnonthelight.png", english: "Turn on the light" },
+      { word: "关灯", pinyin: "Guān dēng", imageURL: "img/turnoffthelight.png", english: "Turn off the light" },
     ]
   },
   nature: {
@@ -727,11 +733,15 @@ const data = {
       { word: "为什么", pinyin: "Wèishénme", image: "NONE", english: "Why" },
       { word: "什么时候", pinyin: "Shénme shíhou", imageURL: "img/when.png", english: "When" },
       { word: "我们什么时候出发？", pinyin: "Wǒmen shénme shíhou chūfā?", imageURL: "img/whendoweleave.png", english: "When do we depart?" },
+      { word: "我走了", pinyin: "Wǒ zǒu le", image: "NONE", english: "I'm leaving" },
       { word: "我的第二只狗", pinyin: "Wǒ de dì èr zhī gǒu", imageURL: "img/seconddog.png", english: "My second dog" },
       { word: "方便", pinyin: "Fāngbiàn", image: "NONE", english: "Convenient" },
       { word: "喜欢", pinyin: "Xǐhuan", imageURL: "img/like.png", english: "Like" },
       { word: "别碰", pinyin: "Bié pèng", imageURL: "img/donttouch.png", english: "Don't touch" },
       { word: "舒服", pinyin: "Shūfu", imageURL: "img/comfortable.png", english: "Comfortable" },
+      { word: "他应该说什么", pinyin: "Tā yīnggāi shuō shénme", image: "NONE", english: "What should he say?" },
+      { word: "他在画画", pinyin: "Tā zài huàhua", imageURL: "img/heisdrawing.png", english: "He is drawing / painting" },
+      { word: "看起来好吃", pinyin: "Kàn qǐlái hǎochī", imageURL: "img/looksdelicious.png", english: "Looks delicious" },
     ]
   },
   pronouns: {
