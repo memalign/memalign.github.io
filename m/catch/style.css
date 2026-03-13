@@ -1,0 +1,201 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    background-color: #D0F4F7;
+    font-family: Helvetica, Arial, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#game-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    background-color: #333;
+}
+
+#ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#score-container {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#high-score {
+    opacity: 0.5;
+}
+
+#message-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    transition: opacity 0.5s;
+}
+
+#message-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#message-content {
+    text-align: center;
+    color: white;
+}
+
+#message-title {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+#tutorial {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.tutorial-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+    width: 190px;
+    font-size: 20px;
+}
+
+.tutorial-item img {
+    justify-self: center;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Rock (No change) */
+.tutorial-item img[alt="rock"] {
+    height: 30px;
+}
+
+/* Gem (2x of 20px) */
+.tutorial-item img[alt="gem"] {
+    height: 40px;
+}
+
+/* Character/Squirrel (1.5x of 40px) */
+.tutorial-item img[alt="character"] {
+    height: 60px;
+}
+
+.tutorial-item span {
+    text-align: center;
+    justify-self: center;
+}
+
+#start-button {
+    background: transparent;
+    border: none;
+    color: #fbf541;
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.1s;
+}
+
+#start-button:hover {
+    transform: scale(1.1);
+    background: transparent;
+}
+
+.top-link {
+    position: absolute;
+    top: 20px;
+    color: #fbf541;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: normal;
+    transition: transform 0.1s;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.top-link:hover {
+    transform: scale(1.1);
+}
+
+#home-link {
+    left: 20px;
+}
+
+#about-link {
+    right: 20px;
+}
+
+#sound-toggle {
+    margin-top: 15px;
+    font-size: 18px;
+    color: white;
+}
+
+#sound-action {
+    font-weight: bold;
+    color: #fbf541;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#game-over-info {
+    margin-bottom: 20px;
+}
+
+#taunt {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+#final-score {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+

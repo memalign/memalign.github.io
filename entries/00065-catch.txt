@@ -1,0 +1,35 @@
+Title: Catch Tap Toy
+Date: 3/13/2026
+Tags: Programming, Games
+
+[Image:/m/catch/catch.png]
+
+Introducing [Link:/m/catch/index.html]Catch Tap Toy[/Link], the latest addition to the Tap Toy series.
+
+(See also: [Link:/m/counting/index.html]Counting Tap Toy[/Link], [Link:/m/slice/index.html]Slice Tap Toy[/Link], [Link:/m/fireworks/index.html]Fireworks Tap Toy[/Link], [Link:/m/taptoy/index.html]Tap Toy[/Link])
+
+You can play it in the browser or add it to your home screen as a progressive web app.
+
+I used royalty free game assets from [Link:https://kenney.nl/]Kenney[/Link]. That site is awesome thanks to its broad selection of high quality game art.
+
+I also used royalty free [Link:https://www.free-stock-music.com/fsm-team-escp-cyber-crime-story.html]music[/Link]. Credit:
+[Code]
+Cyber Crime Story by | e s c p | https://www.escp.space
+https://escp-music.bandcamp.com
+[/Code]
+
+I built this game to satisfy my nostalgia for one of the first games I ever played on a computer, Walnuts ([Link:https://archive.org/details/WarpedForWindows-Walnuts]playable on archive.org[/Link]), which was apparently published in 1994.
+
+The basic gameplay is the same: catch the gems and avoid the spikes. I added a twist: worms you can catch for bonus points.
+
+I recently discovered that this gameplay dates back to [Link:https://en.wikipedia.org/wiki/Kaboom!_(video_game)]Kaboom! (1981)[/Link] which is itself a clone of [Link:https://en.wikipedia.org/wiki/Avalanche_(video_game)]Avalanche (1978)[/Link].
+
+I built this project using Google's Gemini CLI, starting with an old implementation of the game I wrote many years ago in Objective-C.
+
+We're at an interesting phase of AI capability. It's easier than ever to make simple games like this. Is it still worth bothering to make and share something like this?
+
+I think so. I made this for myself and to share with my son. Since I showed him the game first working (I called it a "preview" of a new game I'm making), he has frequently asked to play the "preview" again. That is special.
+
+Also, the choices I make matter. They give this project meaning to myself and maybe also others. I picked the music, the art, and the special twists. Even though the game is simple, there are enough choices to make and options for each choice that nobody else would arrive at the same end result. (I even chose to keep a behavior that could be considered a bug: try playing this game on a phone-sized screen in landscape orientation for an extra amusing challenge) This whole game has been molded and curated for the player's enjoyment.
+
+So I hope you like it!

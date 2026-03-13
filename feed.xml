@@ -5,10 +5,64 @@
 <link rel="alternate" type="text/html" href="https://memalign.github.io/index.html" />
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/feed.xml" />
 <id>https://memalign.github.io/feed.xml</id>
-<updated>2026-01-13T00:00:00-08:00</updated>
+<updated>2026-03-13T00:00:00-08:00</updated>
 <rights>Copyright © 2026, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>Catch Tap Toy</title>
+<link rel="alternate" type="text/html" href="https://memalign.github.io/p/catch.html" />
+<link rel="related" type="text/html" href="https://memalign.github.io/p/catch.html" />
+<id>https://memalign.github.io/p/catch.html</id>
+<published>2026-03-13T00:00:00-08:00</published>
+<updated>2026-03-13T00:00:00-08:00</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
+<div id='post'>
+<div id='header'>
+<h2>
+<a href='https://memalign.github.io/p/catch.html'>Catch Tap Toy</a>
+</h2>
+</div>
+<img src="/m/catch/catch.png">
+<div id='postdate'>Posted on 3/13/2026<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Games</a></div>
+Introducing <a href="/m/catch/index.html">Catch Tap Toy</a>, the latest addition to the Tap Toy series.<br />
+<br />
+(See also: <a href="/m/counting/index.html">Counting Tap Toy</a>, <a href="/m/slice/index.html">Slice Tap Toy</a>, <a href="/m/fireworks/index.html">Fireworks Tap Toy</a>, <a href="/m/taptoy/index.html">Tap Toy</a>)<br />
+<br />
+You can play it in the browser or add it to your home screen as a progressive web app.<br />
+<br />
+I used royalty free game assets from <a href="https://kenney.nl/">Kenney</a>. That site is awesome thanks to its broad selection of high quality game art.<br />
+<br />
+I also used royalty free <a href="https://www.free-stock-music.com/fsm-team-escp-cyber-crime-story.html">music</a>. Credit:<br />
+<div id='code'>Cyber Crime Story by | e s c p | https://www.escp.space<br />
+https://escp-music.bandcamp.com</div>
+I built this game to satisfy my nostalgia for one of the first games I ever played on a computer, Walnuts (<a href="https://archive.org/details/WarpedForWindows-Walnuts">playable on archive.org</a>), which was apparently published in 1994.<br />
+<br />
+The basic gameplay is the same: catch the gems and avoid the spikes. I added a twist: worms you can catch for bonus points.<br />
+<br />
+I recently discovered that this gameplay dates back to <a href="https://en.wikipedia.org/wiki/Kaboom!_(video_game)">Kaboom! (1981)</a> which is itself a clone of <a href="https://en.wikipedia.org/wiki/Avalanche_(video_game)">Avalanche (1978)</a>.<br />
+<br />
+I built this project using Google's Gemini CLI, starting with an old implementation of the game I wrote many years ago in Objective-C.<br />
+<br />
+We're at an interesting phase of AI capability. It's easier than ever to make simple games like this. Is it still worth bothering to make and share something like this?<br />
+<br />
+I think so. I made this for myself and to share with my son. Since I showed him the game first working (I called it a "preview" of a new game I'm making), he has frequently asked to play the "preview" again. That is special.<br />
+<br />
+Also, the choices I make matter. They give this project meaning to myself and maybe also others. I picked the music, the art, and the special twists. Even though the game is simple, there are enough choices to make and options for each choice that nobody else would arrive at the same end result. (I even chose to keep a behavior that could be considered a bug: try playing this game on a phone-sized screen in landscape orientation for an extra amusing challenge) This whole game has been molded and curated for the player's enjoyment.<br />
+<br />
+So I hope you like it!<br />
+
+</div>
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>MemSky</title>
 <link rel="alternate" type="text/html" href="https://memalign.github.io/p/memsky.html" />
@@ -3027,83 +3081,6 @@ Here are a few fun tools for drawing 2D shapes using math:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- Instead of implementing its own parser, Graphtoy turns the formulas into JavaScript snippets<br />
 &nbsp;&nbsp;&nbsp;&nbsp;- See the "iCompile" function which tweaks the inputted formula strings to be valid JavaScript and constructs Formula objects which can later be invoked<br />
 
-</div>
-
-]]>
-</content>
-</entry>
-
-<entry>
-<title>Similar Songs</title>
-<link rel="alternate" type="text/html" href="https://memalign.github.io/p/similar-songs.html" />
-<link rel="related" type="text/html" href="https://memalign.github.io/p/similar-songs.html" />
-<id>https://memalign.github.io/p/similar-songs.html</id>
-<published>2021-03-14T00:00:00-08:00</published>
-<updated>2021-03-14T00:00:00-08:00</updated>
-<author>
-<name>memalign</name>
-<uri>https://memalign.github.io/index.html</uri>
-</author>
-<content type="html" xml:base="https://memalign.github.io/p/" xml:lang="en"><![CDATA[
-<div id='post'>
-<div id='header'>
-<h2>
-<a href='https://memalign.github.io/p/similar-songs.html'>Similar Songs</a>
-</h2>
-</div>
-<img src="/m/whosampled.png">
-<div id='postdate'>Posted on 3/14/2021<br />
-Tags: <a href='/tags.html'>Music</a></div>
-I like listening to music. I like it even more when I discover connections between songs.<br />
-<br />
-It's cool to find out that a song is a cover of another song or that it contains samples of other songs.<br />
-<br />
-<a href="https://whosampled.com">WhoSampled.com</a> is a useful resource to find these connections. Rap songs in particular often contain a bunch of samples! Try searching for your favorites.<br />
-<br />
-Update 12/26/21: See also my <a href="/p/soundsjustlike.html">follow-up post</a> about another resource for finding similar songs. See my complete up-to-date list of similar songs <a href="/m/similarsongs.html">here</a>.<br />
-<br />
-<br />
-Here are some of my favorite connections:<br />
-<br />
-- <a href="https://www.youtube.com/watch?v=LDj8kkVwisY">My Name Is</a> by Eminem<br />
-&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=xKISdd2mKzU">I Got The...</a> by Labi Siffre<br />
-<br />
-- <a href="https://www.youtube.com/watch?v=9YpvNgCSaCU">Old Town Road</a> by Lil Nas X<br />
-&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=XF_ceFugJjQ">Ghosts IV - 34</a> by NIN<br />
-<br />
-- <a href="https://www.youtube.com/watch?v=LOZuxwVk7TU">Toxic</a> by Britney Spears<br />
-&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=oGKDBhdxn6c">Tere Mere Beech Mein</a> by Lata Mangeshkar & S. P. Balasubrahmanyam<br />
-<br />
-- <a href="https://www.youtube.com/watch?v=jPW5A_JyXCY">Sugar</a> by Robin Schulz feat. Francesco Yates<br />
-&nbsp;&nbsp;- Samples <a href="https://www.youtube.com/watch?v=6rgStv12dwA">Suga Suga</a> by Baby Bash feat. Frankie J<br />
-<br />
-- Seth Everman combining <a href="https://www.youtube.com/watch?v=Xrbqsk-21wQ">Moonlight Sonata and Still D.R.E.</a><br />
-<br />
-<br />
-Separate from direct samples, I started noting down songs that remind me of each other. Maybe the songs share a similar palette, a similar bassline, or similar instruments.<br />
-<br />
-- Shared characteristic: eerie robotic beeps and boops<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=U_qi6Zlo70o">Pure Imagination</a> by Fiona Apple<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- See also Chipotle's <a href="https://vimeo.com/98800121">Scarecrow</a> video that features the same song<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- Note that this song is a cover of Gene Wilder's <a href="https://www.youtube.com/watch?v=RZ-uV72pQKI">original rendition</a> in Willy Wonka & the Chocolate Factory<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=0MJobnhWrk4">Terry Time</a> from Pixar's Soul by Trent Reznor and Atticus Ross<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=iT2kStWiUVw">Dr. Ford</a> from Westworld Season 1 Soundtrack by Ramin Djawadi<br />
-<br />
-- Shared characteristic: late 90s alt rock<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=PiBX-ESFDF0">Sunday Morning</a> by No Doubt<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=dTFg2N97Q98">Having An Average Weekend</a> (aka the theme song to Kids in the Hall) by Shadowy Men on a Shadowy Planet<br />
-<br />
-- Similar chord progression<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=wQA59IkCF5I">Dear Prudence</a> by The Beatles<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=eAfyFTzZDMM">Beautiful</a> by Christina Aguilera<br />
-<br />
-- Similar cadence, lyrics, and Paul McCartney sound<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=wQA59IkCF5I">Dear Prudence</a> by The Beatles<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=94Ye-3C1FC8">Wonderful Christmastime</a> by Paul McCartney<br />
-<br />
-- Similar vocalization of "oooOOoohhh"<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=Hr4wz4-27PY">Oh</a> by Ciara<br />
-&nbsp;&nbsp;- <a href="https://www.youtube.com/watch?v=HPTDgfhhJ3s">Do It to It</a> by Cherish, later <a href="https://www.youtube.com/watch?v=6wwuEXlIniU">remade</a> by Acraze ft. Cherish. And there's a <a href="https://www.youtube.com/watch?v=DxzdRri8o6o">really cool mash-up</a> with an eerie song from Squid Game by Zedd.
 </div>
 
 ]]>

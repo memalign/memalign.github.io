@@ -6,6 +6,10 @@ Space Trader
 - Image: /m/spacetrader/spacetrader.png
 - /m/spacetrader/index.html
 
+Catch Tap Toy
+- Image: /m/catch/catch.png
+- /m/catch/index.html
+
 Counting Tap Toy
 - Image: /m/counting/counting.png
 - /m/counting/index.html

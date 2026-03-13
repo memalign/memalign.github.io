@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#D0F4F7">
+    <title>Catch Tap Toy</title>
+    <link rel="stylesheet" href="style.css" charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="catch tap toy, tap toy, toy, memalign, walnuts, acorns, pixel art">
+    <meta name="description" content="Catch Tap Toy">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="Catch Tap Toy" />
+    <meta property="og:description" content="Avoid the spikes, catch the gems!">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/catch/catch.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://memalign.github.io/m/catch/index.html" />
+    <meta name="twitter:title" content="Catch Tap Toy">
+    <meta name="twitter:description" content="Avoid the spikes, catch the gems!">
+    <meta name="twitter:image" content="https://memalign.github.io/m/catch/catch.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-overlay">
+            <div id="score-container">
+                <div id="score">00000</div>
+                <div id="high-score">00000</div>
+            </div>
+            <div id="message-overlay" class="hidden">
+                <a href="https://memalign.github.io" id="home-link" class="top-link hidden">memalign.github.io</a>
+                <a href="https://memalign.github.io/p/catch.html" id="about-link" class="top-link hidden">about</a>
+                <div id="message-content">
+                    <div id="tutorial" class="hidden">
+                        <h1 id="message-title">Catch Tap Toy</h1>
+                        <div class="tutorial-item">
+                            <img src="img/tile_0234.png" alt="rock">
+                            <span>(avoid)</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <img src="img/tile_0377.png" alt="gem">
+                            <span>(catch)</span>
+                        </div>
+                        <div class="tutorial-item">
+                            <img src="img/tile_0109.png" alt="character">
+                            <span>(beat)</span>
+                        </div>
+                    </div>
+                    <div id="game-over-info" class="hidden">
+                        <p id="taunt"></p>
+                        <p id="final-score"></p>
+                    </div>
+                    <button id="start-button">Tap to Play</button>
+                    <p id="sound-toggle">Sound effects will play. <span id="sound-action">Mute</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="SoundEffects.js"></script>
+    <script src="game.js"></script>
+    <script src="pwa.js"></script>
+</body>
+</html>
