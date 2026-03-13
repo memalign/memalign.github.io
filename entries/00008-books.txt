@@ -4,7 +4,7 @@ Tags: Leisure
 
 [Image:/m/book.svg]
 
-Updated 12/25/2025
+Updated 3/13/2026
 
 I know some people who are always reading a book. I’m not an avid book reader like them.
 
@@ -71,6 +71,8 @@ Fiction:
 - Antibodies by Charlie Stross
 
 - Atlas Shrugged by Ayn Rand
+
+- Bagombo Snuff Box by Kurt Vonnegut
 
 - The Bicentennial Man by Isaac Asimov
 
