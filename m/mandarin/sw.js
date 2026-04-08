@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-80e57b778860c9b5aafe1f47c74e8d9a';
+const cacheName = 'mandarin-6b4dff390caaa7744759f25a7d8bc065';
 const appShellFiles = [
   './cards/PWAImages/android/android-launchericon-144-144.png',
   './cards/PWAImages/android/android-launchericon-192-192.png',
@@ -173,6 +173,7 @@ const appShellFiles = [
   './img/celery.png',
   './img/chalk.png',
   './img/christmas.png',
+  './img/cilantro.png',
   './img/cinema.png',
   './img/clean.png',
   './img/cleaning.png',
@@ -221,6 +222,7 @@ const appShellFiles = [
   './img/finishwork.png',
   './img/floor.png',
   './img/floss.png',
+  './img/follow.png',
   './img/fork.png',
   './img/freezer.png',
   './img/fridge.png',
@@ -348,6 +350,7 @@ const appShellFiles = [
   './img/shy.png',
   './img/sing.png',
   './img/sit.png',
+  './img/sixthirty.png',
   './img/slippers.png',
   './img/small.jpg',
   './img/smart.png',
@@ -402,6 +405,7 @@ const appShellFiles = [
   './img/vacuum.png',
   './img/vinegar.png',
   './img/wakeup.png',
+  './img/wall.png',
   './img/washhands.png',
   './img/water.png',
   './img/weather.png',
