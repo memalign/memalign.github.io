@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#eee">
+    <title>TapToyPia</title>
+    <link rel="stylesheet" href="game.css" charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="taptoypia, tap toy pia, memtopia, tap toy, toy, memalign, pokopia, pixel art">
+    <meta name="description" content="TapToyPia">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="TapToyPia" />
+    <meta property="og:description" content="Explore and survive">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/taptoypia/taptoypia.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://memalign.github.io/m/taptoypia/index.html" />
+    <meta name="twitter:title" content="TapToyPia">
+    <meta name="twitter:description" content="Explore and survive">
+    <meta name="twitter:image" content="https://memalign.github.io/m/taptoypia/taptoypia.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-info">
+            <div id="story-log"></div>
+            <div id="cell-details"></div>
+            <hr>
+            <div id="click-diagnostics" class="hidden">
+                <div><strong>Click Diagnostics</strong></div>
+                <button id="copy-diagnostics" type="button">Copy diagnostics</button>
+                <pre id="diagnostics-output">Click a cell to capture diagnostics.</pre>
+            </div>
+            <hr>
+            <div id="missions-list"></div>
+            <hr>
+            <div id="inventory-info">
+                Inventory: <i>Empty</i>
+            </div>
+        </div>
+        <div id="zoom-controls">
+            <button id="debug-btn" title="Open Debug Menu">🛠️</button>
+            <button id="settings-btn" title="Open Settings">⚙️</button>
+            <button id="zoom-in">+</button>
+            <button id="zoom-out">−</button>
+        </div>
+        <div id="debug-menu" class="hidden">
+            <button id="debug-toggle-map">Toggle Map</button>
+            <button id="debug-add-wood">+10 Wood</button>
+            <button id="debug-add-ore">+10 Ore</button>
+            <button id="debug-add-carrot">+10 Carrot</button>
+        </div>
+        <div id="settings-menu" class="hidden">
+            <div class="settings-item">
+                <label><input type="checkbox" id="music-toggle" checked> Play music</label>
+            </div>
+            <hr>
+            <button id="start-over-btn" class="danger-btn">Start Over</button>
+        </div>
+        <div id="end-game-overlay" class="hidden">
+            <div id="tombstone">
+                <div id="engraving">You win!</div>
+            </div>
+            <button id="play-again-btn">Play again?</button>
+            <div id="end-links">
+                <a href="https://memalign.github.io" target="_blank">memalign.github.io</a> | 
+                <a href="https://memalign.github.io/p/taptoypia.html" target="_blank">About TapToyPia</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load scripts in dependency order -->
+    <script src="src/Utilities.js"></script>
+    <script src="src/MADocument.js"></script>
+    <script src="src/Tuning.js"></script>
+    <script src="src/Inventory.js"></script>
+    <script src="src/GameCharacter.js"></script>
+    <script src="src/Cell.js"></script>
+    <script src="src/Grid.js"></script>
+    <script src="src/Camera.js"></script>
+    <script src="src/MapProjection.js"></script>
+    <script src="src/GlobeRenderer.js"></script>
+    <script src="src/ThreeMapRenderer.js"></script>
+    <script src="src/MAStorage.js"></script>
+    <script src="src/GameState.js"></script>
+    <script src="src/UIManager.js"></script>
+    <script src="src/Reproduction.js"></script>
+    <script src="src/GameEngine.js"></script>
+    <script src="src/AppOrchestrator.js"></script>
+    <script src="src/SoundEffects.js"></script>
+    <script src="src/main.js"></script>
+    <script src="src/pwa.js"></script>
+</body>
+</html>

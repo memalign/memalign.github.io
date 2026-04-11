@@ -1,0 +1,376 @@
+:root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --hud-gap: 12px;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #111;
+    color: #eee;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#game-container {
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+    position: relative;
+    overflow: hidden;
+}
+
+#game-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #000;
+    cursor: crosshair;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#ui-info {
+    position: absolute;
+    top: calc(var(--safe-top) + var(--hud-gap));
+    left: calc(var(--safe-left) + var(--hud-gap));
+    z-index: 50;
+    width: min(360px, calc(100vw - var(--safe-left) - var(--safe-right) - (var(--hud-gap) * 2)));
+    max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - (var(--hud-gap) * 2));
+    overflow: auto;
+    background: rgba(30, 30, 30, 0.82);
+    padding: 12px 16px;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+}
+
+#cell-details {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 5px;
+}
+
+#click-diagnostics {
+    margin-top: 8px;
+    text-align: left;
+}
+
+#click-diagnostics.hidden {
+    display: none;
+}
+
+#copy-diagnostics {
+    margin: 6px 0;
+}
+
+#diagnostics-output {
+    max-width: 100%;
+    max-height: 180px;
+    overflow: auto;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 12px;
+    color: #ddd;
+}
+
+#missions-list {
+    margin: 5px 0;
+    text-align: left;
+    font-size: 14px;
+}
+
+#missions-list div {
+    margin-bottom: 3px;
+    padding-left: 15px;
+    position: relative;
+    color: #AAF;
+}
+
+#missions-list .mission-cost {
+    font-size: 11px;
+    color: #888;
+    margin-left: 5px;
+    font-style: italic;
+}
+
+#missions-list div::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #66F;
+}
+
+#missions-list .victory-mission {
+    color: #FFD700;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+#inventory-info {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #FFD700;
+}
+
+#inventory-info span {
+    margin: 0 5px 5px 0;
+    padding: 2px 6px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    display: inline-block;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 8px 0;
+}
+
+#zoom-controls {
+    position: fixed;
+    right: calc(var(--safe-right) + var(--hud-gap));
+    bottom: calc(var(--safe-bottom) + var(--hud-gap));
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#zoom-controls button {
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: rgba(68, 68, 68, 0.92);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    transition: background 0.2s, transform 0.1s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#zoom-controls button:hover {
+    background: rgba(102, 102, 102, 0.96);
+}
+
+#zoom-controls button:active {
+    transform: scale(0.95);
+    background: rgba(136, 136, 136, 0.98);
+}
+
+#debug-menu {
+    position: fixed;
+    right: calc(var(--safe-right) + 56px + var(--hud-gap));
+    bottom: calc(var(--safe-bottom) + 108px + var(--hud-gap));
+    z-index: 70;
+    background: rgba(30, 30, 30, 0.95);
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+#debug-menu.hidden, #settings-menu.hidden {
+    display: none;
+}
+
+#debug-menu button, #settings-menu button {
+    background: #555;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+#debug-menu button:hover, #settings-menu button:hover {
+    background: #777;
+}
+
+#settings-menu {
+    position: fixed;
+    right: calc(var(--safe-right) + 56px + var(--hud-gap));
+    bottom: calc(var(--safe-bottom) + 56px + var(--hud-gap));
+    z-index: 70;
+    background: rgba(30, 30, 30, 0.95);
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    min-width: 160px;
+}
+
+.settings-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.settings-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+#settings-menu .danger-btn {
+    background: #b03a2e;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+#settings-menu .danger-btn:hover {
+    background: #ec7063;
+}
+
+#story-log {
+    max-height: 120px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.story-message {
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#end-game-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    color: white;
+}
+
+#end-game-overlay.hidden {
+    display: none;
+}
+
+#tombstone {
+    width: 240px;
+    height: 320px;
+    background: #555;
+    border-radius: 120px 120px 10px 10px;
+    position: relative;
+    border: 8px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+#engraving {
+    font-family: 'Times New Roman', serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: #222;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.1);
+    transform: rotate(-2deg);
+}
+
+#play-again-btn {
+    padding: 12px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+#play-again-btn:hover {
+    background: #45a049;
+    transform: scale(1.05);
+}
+
+#end-links {
+    font-size: 16px;
+    color: #aaa;
+}
+
+#end-links a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+#end-links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 700px), (max-height: 700px) {
+    :root {
+        --hud-gap: 10px;
+    }
+
+    #ui-info {
+        width: min(280px, calc(100vw - var(--safe-left) - var(--safe-right) - 84px));
+        max-width: calc(100vw - var(--safe-left) - var(--safe-right) - 84px);
+        max-height: min(42dvh, calc(100dvh - var(--safe-top) - var(--safe-bottom) - 88px));
+        padding: 10px 12px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    #missions-list,
+    #inventory-info {
+        font-size: 13px;
+    }
+
+    #zoom-controls button {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+    }
+
+    #debug-menu {
+        max-width: calc(100vw - var(--safe-left) - var(--safe-right) - (var(--hud-gap) * 2) - 52px);
+    }
+}

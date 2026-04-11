@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../src/Utilities.js"></script>
+<script src="../src/MADocument.js"></script>
+<script src="../src/Tuning.js"></script>
+<script src="../src/Inventory.js"></script>
+<script src="../src/GameCharacter.js"></script>
+<script src="../src/Cell.js"></script>
+<script src="../src/Grid.js"></script>
+<script src="../src/Camera.js"></script>
+<script src="../src/MapProjection.js"></script>
+<script src="../src/GlobeRenderer.js"></script>
+<script src="../src/ThreeMapRenderer.js"></script>
+<script src="../src/MAStorage.js"></script>
+<script src="../src/GameState.js"></script>
+<script src="../src/UIManager.js"></script>
+<script src="../src/Reproduction.js"></script>
+<script src="../src/GameEngine.js"></script>
+<script src="../src/AppOrchestrator.js"></script>
+<script src="../src/SoundEffects.js"></script>
+
+<script src="UnitTests.js"></script>
+
+<script>
+  maDocument = new MADocument(); // fake DOM will be used in tests
+  let ut = new UnitTests()
+</script>
+
+<script src="UnitTests_Buildings.js"></script>
+<script src="UnitTests_Camera.js"></script>
+<script src="UnitTests_Engine.js"></script>
+<script src="UnitTests_Globe.js"></script>
+<script src="UnitTests_GameState.js"></script>
+<script src="UnitTests_Missions.js"></script>
+<script src="UnitTests_Priority.js"></script>
+<script src="UnitTests_Research.js"></script>
+<script src="UnitTests_Reproduction.js"></script>
+<script src="UnitTests_Persistence.js"></script>
+<script src="UnitTests_Sound.js"></script>
+<script src="UnitTests_Story.js"></script>
+<script src="UnitTests_AppOrchestrator.js"></script>
+
+<script>
+
+let actionLog = null
+let gameRand = null
+let stLocalStorage = null
+
+function _runUTBlock(runBlock) {
+  try {
+    MALog.clear()
+    assertionCount = 0
+    runBlock()
+  } catch(err) {
+    console.log("unitTests.html caught exception " + err + " with stack:\n" + err.stack)
+    throw err
+  } finally {
+    let outputDiv = document.getElementById("testOutput")
+    let content = document.createTextNode(MALog.logs.join("\n") + "\n\n")
+    outputDiv.appendChild(content)
+    let gameDiv = document.getElementById("game")
+    gameDiv.innerHTML = ''
+  }
+}
+
+function runUTTests() {
+  _runUTBlock(() => {
+    ut.run()
+  })
+}
+
+function runUTStress() {
+  document.getElementById("stressButton").disabled = true
+
+  setTimeout(() => {
+    _runUTBlock(() => {
+      ut.runStress()
+    })
+  }, 100);
+}
+
+
+let caughtError = null
+window.onerror = function (message, source, lineno, colno, error) {
+  console.log(`on error called. ${message} ${source} ${lineno} ${colno} ${error}`)
+  MALog.log(`on error called. ${message} ${source} ${lineno} ${colno} ${error.toString().replace(/\n/g, "<br>")}`)
+  caughtError = error
+  window.onerror = null
+  return false
+}
+
+window.onload = function () {
+  runUTTests()
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput"></div>
+</pre>
+
+<button id="stressButton" onclick="runUTStress()">Run Stress Tests</button>
+<div id="game"></div>
+<div id="cheats" class="hidden"></div>
+
+<br />
+<br />
+</body>
+
+</html>
