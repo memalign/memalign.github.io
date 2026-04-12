@@ -12,7 +12,7 @@ class SoundEffects {
     }
 
     this.songNames = [
-      "../song.mp3",
+      "song.mp3",
     ]
 
     this.currentPlayingSong = null

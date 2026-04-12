@@ -1,4 +1,4 @@
-const cacheName = 'taptoypia-defb5053c355ebeef8de205f81982a26';
+const cacheName = 'taptoypia-b24e8d96e3c340d54ecf4d869e66f89e';
 const appShellFiles = [
   './game.css',
   './index.html',
