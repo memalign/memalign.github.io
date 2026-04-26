@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Poop App</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="Keywords" content="poop app, tap toy, taptoy">
+    <meta name="description" content="Poop App">
+    <meta name="author" content="memalign">
+    <meta property="og:title" content="Poop App" />
+    <meta property="og:description" content="Poop">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://memalign.github.io/m/poop/poop.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://memalign.github.io/m/poop/index.html" />
+    <meta name="twitter:title" content="Poop App">
+    <meta name="twitter:description" content="Poop">
+    <meta name="twitter:image" content="https://memalign.github.io/m/poop/poop.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://memalign.github.io/favicon-32x32.png">
+
+    <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  touch-action: none;
+  background: black;
+}
+
+canvas {
+  display: block;
+}
+    </style>
+  </head>
+
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+const gravity = 0.4;
+const emojis = [];
+const icy = false;
+const emojiChoices = icy ? ["🥶", "❄️", "🍦", "🧊"] : ["💩"];
+
+// Background color transition
+let currentColor = { r: 0, g: 0, b: 0 };
+let targetColor = { r: 0, g: 0, b: 0 };
+const colorLerpSpeed = 0.03;
+
+function randomColor() {
+  return {
+    r: Math.floor(Math.random() * 256),
+    g: Math.floor(Math.random() * 256),
+    b: Math.floor(Math.random() * 256)
+  };
+}
+
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+class EmojiParticle {
+  constructor() {
+    this.x = canvas.width / 2;
+    this.y = canvas.height + 40;
+    this.vx = (Math.random() - 0.5) * 10;
+    this.vy = - (10 + Math.random() * 10);
+    this.angle = Math.random() * Math.PI * 2;
+    this.spin = (Math.random() - 0.5) * 0.3;
+    this.size = 40 + Math.random() * 40;
+    this.emoji = emojiChoices[Math.floor(Math.random() * emojiChoices.length)];
+  }
+
+  update() {
+    this.vy += gravity;
+    this.x += this.vx;
+    this.y += this.vy;
+    this.angle += this.spin;
+  }
+
+  draw() {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    ctx.font = this.size + "px serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(this.emoji, 0, 0);
+    ctx.restore();
+  }
+
+  isOffScreen() {
+    return this.y - this.size > canvas.height ||
+           this.x < -100 ||
+           this.x > canvas.width + 100;
+  }
+}
+
+function shoot() {
+  emojis.push(new EmojiParticle());
+  targetColor = randomColor();
+}
+
+window.addEventListener("pointerdown", shoot);
+
+function updateBackground() {
+  currentColor.r = lerp(currentColor.r, targetColor.r, colorLerpSpeed);
+  currentColor.g = lerp(currentColor.g, targetColor.g, colorLerpSpeed);
+  currentColor.b = lerp(currentColor.b, targetColor.b, colorLerpSpeed);
+
+  ctx.fillStyle = `rgb(${currentColor.r|0}, ${currentColor.g|0}, ${currentColor.b|0})`;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function loop() {
+  updateBackground();
+
+  for (let i = emojis.length - 1; i >= 0; i--) {
+    emojis[i].update();
+    emojis[i].draw();
+
+    if (emojis[i].isOffScreen()) {
+      emojis.splice(i, 1);
+    }
+  }
+
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+<script src="pwa.js"></script>
+</body>
+</html>
