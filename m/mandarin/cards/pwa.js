@@ -1,10 +1,10 @@
 // Based on https://github.com/chr15m/minimal-pwa/blob/main/single-file-pwa.html
 
-const PWAIconURL = './mcb-icon-1024.png';
+const PWAIconURL = './cards-icon-4000.png';
 
 const manifest = {
-  name: 'Mandarin Communication Board',
-  short_name: 'Mandarin',
+  name: 'Mandarin Flashcards',
+  short_name: 'Flashcards',
   display: 'fullscreen',
   background_color: '#f4f4f9',
   theme_color: '#6200EA',
@@ -110,7 +110,7 @@ function createStartupImage(imgURL, bgColor) {
 }
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js?v=1e59fe641cc881f41892c42f6e59f60f')
+  navigator.serviceWorker.register('../sw.js?v=1e59fe641cc881f41892c42f6e59f60f')
   .then((reg) => {
     // registration worked
   }).catch((error) => {

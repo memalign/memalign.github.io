@@ -16,6 +16,7 @@ generate-sw.sh
 notes.txt
 resources
 deploy.sh
+.codex
 "
 
 # ----------------------------
@@ -75,6 +76,18 @@ CACHE_NAME="${CACHE_PREFIX}-${UUID}"
   echo "];"
   echo ""
   cat <<'EOF'
+async function updateCache(request, response) {
+  if (response && response.ok) {
+    const cache = await caches.open(cacheName);
+    await cache.put(request, response.clone());
+  }
+}
+
+function shouldUseNetworkFirst(request) {
+  const url = new URL(request.url);
+  return request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
+}
+
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const cache = await caches.open(cacheName);
@@ -94,22 +107,46 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') {
+    return;
+  }
+
   e.respondWith((async () => {
-    const r = await caches.match(e.request);
-    if (r) { return r; }
-    return fetch(e.request);
+    const cached = await caches.match(e.request);
+    if (!cached) {
+      return fetch(e.request);
+    }
+
+    if (!shouldUseNetworkFirst(e.request)) {
+      return cached;
+    }
+
+    try {
+      const response = await fetch(e.request);
+      await updateCache(e.request, response);
+      return response;
+    } catch (error) {
+      return cached;
+    }
   })());
 });
 EOF
 } > sw.js
 
 # ----------------------------
-# UPDATE pwa.js TO USE CACHE_NAME AS QUERY PARAM (NO BACKUP)
+# UPDATE PWA SCRIPTS TO USE CACHE_NAME AS QUERY PARAM (NO BACKUP)
 # ----------------------------
 
+UPDATED_PWA_FILES=""
+
 if [ -f pwa.js ]; then
-  # Replace any existing sw.js registration, with or without query params
   sed -i'' -E "s|navigator\.serviceWorker\.register\('sw\.js(\?[^']*)?'\)|navigator.serviceWorker.register('sw.js?v=${UUID}')|g" pwa.js
+  UPDATED_PWA_FILES="${UPDATED_PWA_FILES} pwa.js"
+fi
+
+if [ -f cards/pwa.js ]; then
+  sed -i'' -E "s|navigator\.serviceWorker\.register\('\.\./sw\.js(\?[^']*)?'\)|navigator.serviceWorker.register('../sw.js?v=${UUID}')|g" cards/pwa.js
+  UPDATED_PWA_FILES="${UPDATED_PWA_FILES} cards/pwa.js"
 fi
 
 # ----------------------------
@@ -122,7 +159,7 @@ echo "  ✔ Service Worker Generated"
 echo "============================================================"
 echo "  Cache name:     $CACHE_NAME"
 echo "  Files cached:   $INCLUDE_COUNT"
-echo "  pwa.js updated: $( [ -f pwa.js ] && echo "yes" || echo "no" )"
+echo "  PWA files updated:${UPDATED_PWA_FILES:- none}"
 echo ""
 
 echo "Done. 🚀"

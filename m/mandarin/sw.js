@@ -1,123 +1,11 @@
-const cacheName = 'mandarin-6b4dff390caaa7744759f25a7d8bc065';
+const cacheName = 'mandarin-1e59fe641cc881f41892c42f6e59f60f';
 const appShellFiles = [
-  './cards/PWAImages/android/android-launchericon-144-144.png',
-  './cards/PWAImages/android/android-launchericon-192-192.png',
-  './cards/PWAImages/android/android-launchericon-48-48.png',
-  './cards/PWAImages/android/android-launchericon-512-512.png',
-  './cards/PWAImages/android/android-launchericon-72-72.png',
-  './cards/PWAImages/android/android-launchericon-96-96.png',
-  './cards/PWAImages/ios/100.png',
-  './cards/PWAImages/ios/1024.png',
-  './cards/PWAImages/ios/114.png',
-  './cards/PWAImages/ios/120.png',
-  './cards/PWAImages/ios/128.png',
-  './cards/PWAImages/ios/144.png',
-  './cards/PWAImages/ios/152.png',
-  './cards/PWAImages/ios/16.png',
-  './cards/PWAImages/ios/167.png',
-  './cards/PWAImages/ios/180.png',
-  './cards/PWAImages/ios/192.png',
-  './cards/PWAImages/ios/20.png',
-  './cards/PWAImages/ios/256.png',
-  './cards/PWAImages/ios/29.png',
-  './cards/PWAImages/ios/32.png',
-  './cards/PWAImages/ios/40.png',
-  './cards/PWAImages/ios/50.png',
-  './cards/PWAImages/ios/512.png',
-  './cards/PWAImages/ios/57.png',
-  './cards/PWAImages/ios/58.png',
-  './cards/PWAImages/ios/60.png',
-  './cards/PWAImages/ios/64.png',
-  './cards/PWAImages/ios/72.png',
-  './cards/PWAImages/ios/76.png',
-  './cards/PWAImages/ios/80.png',
-  './cards/PWAImages/ios/87.png',
-  './cards/PWAImages/windows11/LargeTile.scale-100.png',
-  './cards/PWAImages/windows11/LargeTile.scale-125.png',
-  './cards/PWAImages/windows11/LargeTile.scale-150.png',
-  './cards/PWAImages/windows11/LargeTile.scale-200.png',
-  './cards/PWAImages/windows11/LargeTile.scale-400.png',
-  './cards/PWAImages/windows11/SmallTile.scale-100.png',
-  './cards/PWAImages/windows11/SmallTile.scale-125.png',
-  './cards/PWAImages/windows11/SmallTile.scale-150.png',
-  './cards/PWAImages/windows11/SmallTile.scale-200.png',
-  './cards/PWAImages/windows11/SmallTile.scale-400.png',
-  './cards/PWAImages/windows11/SplashScreen.scale-100.png',
-  './cards/PWAImages/windows11/SplashScreen.scale-125.png',
-  './cards/PWAImages/windows11/SplashScreen.scale-150.png',
-  './cards/PWAImages/windows11/SplashScreen.scale-200.png',
-  './cards/PWAImages/windows11/SplashScreen.scale-400.png',
-  './cards/PWAImages/windows11/Square150x150Logo.scale-100.png',
-  './cards/PWAImages/windows11/Square150x150Logo.scale-125.png',
-  './cards/PWAImages/windows11/Square150x150Logo.scale-150.png',
-  './cards/PWAImages/windows11/Square150x150Logo.scale-200.png',
-  './cards/PWAImages/windows11/Square150x150Logo.scale-400.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-16.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-20.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-24.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-256.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-30.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-32.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-36.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-40.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-44.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-48.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-60.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-64.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-72.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-80.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-lightunplated_targetsize-96.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-16.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-20.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-24.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-256.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-30.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-32.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-36.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-40.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-44.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-48.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-60.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-64.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-72.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-80.png',
-  './cards/PWAImages/windows11/Square44x44Logo.altform-unplated_targetsize-96.png',
-  './cards/PWAImages/windows11/Square44x44Logo.scale-100.png',
-  './cards/PWAImages/windows11/Square44x44Logo.scale-125.png',
-  './cards/PWAImages/windows11/Square44x44Logo.scale-150.png',
-  './cards/PWAImages/windows11/Square44x44Logo.scale-200.png',
-  './cards/PWAImages/windows11/Square44x44Logo.scale-400.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-16.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-20.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-24.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-256.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-30.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-32.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-36.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-40.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-44.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-48.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-60.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-64.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-72.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-80.png',
-  './cards/PWAImages/windows11/Square44x44Logo.targetsize-96.png',
-  './cards/PWAImages/windows11/StoreLogo.scale-100.png',
-  './cards/PWAImages/windows11/StoreLogo.scale-125.png',
-  './cards/PWAImages/windows11/StoreLogo.scale-150.png',
-  './cards/PWAImages/windows11/StoreLogo.scale-200.png',
-  './cards/PWAImages/windows11/StoreLogo.scale-400.png',
-  './cards/PWAImages/windows11/Wide310x150Logo.scale-100.png',
-  './cards/PWAImages/windows11/Wide310x150Logo.scale-125.png',
-  './cards/PWAImages/windows11/Wide310x150Logo.scale-150.png',
-  './cards/PWAImages/windows11/Wide310x150Logo.scale-200.png',
-  './cards/PWAImages/windows11/Wide310x150Logo.scale-400.png',
   './cards/card-style.css',
   './cards/cards-4000.png',
   './cards/cards-icon-4000.png',
   './cards/cards.png',
   './cards/index.html',
-  './cards/manifest.json',
+  './cards/pwa.js',
   './cards/script.js',
   './data.js',
   './img/April.png',
@@ -436,6 +324,18 @@ const appShellFiles = [
   './style.css',
 ];
 
+async function updateCache(request, response) {
+  if (response && response.ok) {
+    const cache = await caches.open(cacheName);
+    await cache.put(request, response.clone());
+  }
+}
+
+function shouldUseNetworkFirst(request) {
+  const url = new URL(request.url);
+  return request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
+}
+
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const cache = await caches.open(cacheName);
@@ -455,9 +355,26 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') {
+    return;
+  }
+
   e.respondWith((async () => {
-    const r = await caches.match(e.request);
-    if (r) { return r; }
-    return fetch(e.request);
+    const cached = await caches.match(e.request);
+    if (!cached) {
+      return fetch(e.request);
+    }
+
+    if (!shouldUseNetworkFirst(e.request)) {
+      return cached;
+    }
+
+    try {
+      const response = await fetch(e.request);
+      await updateCache(e.request, response);
+      return response;
+    } catch (error) {
+      return cached;
+    }
   })());
 });
