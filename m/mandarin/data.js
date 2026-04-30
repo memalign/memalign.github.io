@@ -149,6 +149,8 @@ const data = {
       { word: "篮子", pinyin: "Lánzi", image: "🧺", english: "Basket" },
       { word: "玩具", pinyin: "Wánjù", imageURL: "img/toy.png", english: "Toy" },
       { word: "游戏", pinyin: "Yóuxì", image: "🎮", english: "Game" },
+      { word: "笔", pinyin: "Bǐ", image: "🖊️", english: "Pen" },
+      { word: "铅笔", pinyin: "Qiānbǐ", image: "✏️", english: "Pencil" },
       { word: "纸", pinyin: "Zhǐ", image: "📄", english: "Paper" },
       { word: "贴纸", pinyin: "Tiēzhǐ", imageURL: "img/stickers.png", english: "Stickers" },
       { word: "照片", pinyin: "Zhàopiàn", image: "🏞️", english: "Picture/photo" },
@@ -253,6 +255,7 @@ const data = {
       { word: "现在", pinyin: "Xiànzài", imageURL: "img/now.png", english: "Now" },
       { word: "马上", pinyin: "Mǎshàng", image: "NONE", english: "Soon" },
       { word: "一整天", pinyin: "Yì zhěngtiān", imageURL: "img/allday.png", english: "Entire day" },
+      { word: "一下", pinyin: "Yíxià", image: "NONE", english: "A moment" },
 
       // Days of the week
       { word: "星期一", pinyin: "Xīngqī yī", image: "NONE", english: "Monday" },
@@ -428,12 +431,12 @@ const data = {
     chinese: "人",
     words: [
       { word: "朋友", pinyin: "Péngyǒu", image: "👫", english: "Friend" },
-      { word: "邻居", pinyin: "Línjū", imageURL: "img/neighbor.png", english: "Neighbor" },
       { word: "老师", pinyin: "Lǎoshī", image: "👩‍🏫", english: "Teacher" },
       { word: "学生", pinyin: "Xuéshēng", image: "👩‍🎓", english: "Student" },
       { word: "女人", pinyin: "Nǚrén", image: "👩", english: "Woman" },
       { word: "女士", pinyin: "Nǚshì", image: "💁‍♀️", english: "Lady" },
       { word: "人", pinyin: "Rén", image: "👤", english: "Person" },
+      { word: "邻居", pinyin: "Línjū", imageURL: "img/neighbor.png", english: "Neighbor" },
       { word: "宝宝", pinyin: "Bǎobao", image: "🚼", english: "Baby" },
       { word: "孩子", pinyin: "Háizi", image: "🧒", english: "Child/Kid" },
       { word: "儿子", pinyin: "Érzi", imageURL: "img/son.png", english: "Son" },
@@ -446,6 +449,7 @@ const data = {
       { word: "奶奶", pinyin: "Nǎinai", image: "NONE", english: "Grandmother (father’s side)" },
       { word: "医生", pinyin: "Yīshēng", image: "👨‍⚕️", english: "Doctor" },
       { word: "名字", pinyin: "Míngzi", imageURL: "img/name.png", english: "Name" },
+      { word: "鬼", pinyin: "Guǐ", image: "👻", english: "Ghost" },
     ]
   },
   places: {
@@ -484,6 +488,7 @@ const data = {
       { word: "游泳池", pinyin: "Yóuyǒngchí", imageURL: "img/swimmingpool.png", english: "Swimming pool" },
       { word: "出差", pinyin: "Chūchāi", imageURL: "img/businesstrip.png", english: "Business trip" },
       { word: "日本", pinyin: "Rìběn", image: "🇯🇵", english: "Japan" },
+      { word: "世界", pinyin: "Shìjiè", image: "🌍", english: "World" },
     ]
   },
   park: {
@@ -799,6 +804,7 @@ const data = {
       { word: "我两点才走", pinyin: "Wǒ liǎng diǎn cái zǒu", image: "NONE", english: "I won’t leave until 2 o’clock" },
       { word: "你有几个苹果？", pinyin: "Nǐ yǒu jǐ gè píngguǒ?", image: "NONE", english: "How many apples do you have?" },
       { word: "语言", pinyin: "Yǔyán", imageURL: "img/language.png", english: "Language" },
+      { word: "等我一下", pinyin: "Děng wǒ yíxià", image: "NONE", english: "Wait a moment" },
     ]
   },
   pronouns: {
