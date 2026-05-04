@@ -192,6 +192,14 @@ body {
   margin-top: 3px;
 }
 
+#export-data {
+  margin-top: 3px;
+}
+
+#import-data-btn {
+  margin-top: 3px;
+}
+
 .invisible {
   /* Change this to `display: none;` to lay card out without leaving space for hidden info */
   visibility: hidden;

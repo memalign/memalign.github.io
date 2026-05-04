@@ -26,6 +26,9 @@ const settingsPanel = document.getElementById("settings-panel");
 const saveSettingsBtn = document.getElementById("save-settings");
 const resetProgressBtn = document.getElementById("reset-progress");
 const resetCountBtn = document.getElementById("reset-count");
+const exportDataBtn = document.getElementById("export-data");
+const importDataBtn = document.getElementById("import-data-btn");
+const importDataInput = document.getElementById("import-data-input");
 
 // Checkboxes
 const showPictureCheckbox = document.getElementById("show-picture");
@@ -171,6 +174,46 @@ function resetCount() {
   }
 }
 resetCountBtn.addEventListener("click", resetCount);
+
+function exportData() {
+  const data = {
+    flashcardSettings: JSON.parse(localStorage.getItem("flashcardSettings")),
+    reviewData: JSON.parse(localStorage.getItem("reviewData")),
+    reviewCount: localStorage.getItem("reviewCount")
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mandarin_learning_data.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+exportDataBtn.addEventListener("click", exportData);
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.flashcardSettings) localStorage.setItem("flashcardSettings", JSON.stringify(data.flashcardSettings));
+      if (data.reviewData) localStorage.setItem("reviewData", JSON.stringify(data.reviewData));
+      if (data.reviewCount !== undefined && data.reviewCount !== null) localStorage.setItem("reviewCount", data.reviewCount);
+      
+      alert("Data imported successfully. The page will now reload.");
+      location.reload();
+    } catch (err) {
+      alert("Error importing data. Please make sure the file is valid.");
+      console.error(err);
+    }
+  };
+  reader.readAsText(file);
+}
+importDataBtn.addEventListener("click", () => importDataInput.click());
+importDataInput.addEventListener("change", importData);
 
 
 const frame = document.body.querySelector('.frame')
