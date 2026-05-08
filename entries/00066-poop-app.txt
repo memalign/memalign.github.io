@@ -1,0 +1,37 @@
+Title: Poop App
+Date: 5/8/2026
+Tags: Programming, Games, Parenting
+
+[Image:/m/poop/poop.png]
+
+My 4-year-old son enjoys traveling... except for having to poop in a strange bathroom.
+
+It doesn't matter if it's a hotel or a grandparent's house, if it's not his usual environment it's uncomfortable. He'll usually say he doesn't need to poop when it's obvious that the need has indeed arisen.
+
+Fortunately, some wacky ideas have worked.
+
+On one trip, he was happy to use his travel potty while watching our home security cameras, which helped him pretend he was home.
+
+On the next trip, he was happy to use the hotel toilet while watching the home security cameras.
+
+But on a recent trip to my dad's house, that wasn't enough. We brainstormed together for 20 minutes for solutions.
+
+I finally asked him, "Do you know what would be <i>ridiculous</i>?" (he thinks "ridiculous" things are hilarious).
+
+He gave a short forced giggle and asked "What?".
+
+"What if we made a whole app just for pooping?"
+
+He knows that the apps and games I make for him take a while so he thought this sounded extra ridiculous.
+
+I suggested that we could have poops fly up from the bottom of the screen. He suggested that the background should change colors. I asked him if the poops should be all the same size; he thought they should be different sizes.
+
+Then I one-shot prompted ChatGPT to create a single-file web app, copied it into the Working Copy app, and we tried it. It was perfect.
+
+Over the following days, when it was time to poop, he would ask "do you remember that thing we made?" I'd pull it up and we'd go to the potty.
+
+Once we got home, he asked to use the poop app, but we don't want screen time on the potty in our usual routine. Instead, we made an analog version: little brown paper triangles with googly eyes in a plastic bag.
+
+If you ever need poop app, you can find it [Link:/m/poop/index.html]here[/Link]. It can be added to your home screen as a PWA (a capability I added later).
+
+Happy pooping!
