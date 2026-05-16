@@ -228,6 +228,8 @@ const data = {
       { word: "三十", pinyin: "Sānshí", image: "30", english: "30" },
       { word: "四十", pinyin: "Sìshí", image: "40", english: "40" },
       { word: "一百", pinyin: "Yìbǎi", image: "100", english: "100" },
+      { word: "一千", pinyin: "Yìqiān", image: "NONE", english: "1000" },
+      { word: "一万", pinyin: "Yíwàn", image: "NONE", english: "10000" },
     ]
   },
   time: {
@@ -386,6 +388,7 @@ const data = {
       { word: "难", pinyin: "Nán", imageURL: "img/difficult.png", english: "Difficult" },
       { word: "简单", pinyin: "Jiǎndān", imageURL: "img/easy.png", english: "Simple/Easy" },
       { word: "生病", pinyin: "Shēngbìng", image: "🤒", english: "Sick" },
+      { word: "晕车", pinyin: "Yùnchē", imageURL: "img/carsick.png", english: "Carsick" },
       { word: "健康", pinyin: "Jiànkāng", imageURL: "img/healthy.png", english: "Healthy" },
       { word: "害羞", pinyin: "Hàixiū", imageURL: "img/shy.png", english: "Shy" },
       { word: "好笑", pinyin: "Hǎoxiào", image: "NONE", english: "Funny" },
@@ -448,6 +451,7 @@ const data = {
       { word: "爷爷", pinyin: "Yéye", image: "NONE", english: "Grandfather (father’s side)" },
       { word: "奶奶", pinyin: "Nǎinai", image: "NONE", english: "Grandmother (father’s side)" },
       { word: "医生", pinyin: "Yīshēng", image: "👨‍⚕️", english: "Doctor" },
+      { word: "公主", pinyin: "Gōngzhǔ", imageURL: "img/princess.png", english: "Princess" },
       { word: "名字", pinyin: "Míngzi", imageURL: "img/name.png", english: "Name" },
       { word: "鬼", pinyin: "Guǐ", image: "👻", english: "Ghost" },
     ]
@@ -556,6 +560,7 @@ const data = {
       { word: "写", pinyin: "Xiě", image: "✍️", english: "Write" },
       { word: "玩", pinyin: "Wán", imageURL: "img/play.png", english: "Play" },
       { word: "睡觉", pinyin: "Shuìjiào", image: "🛌", english: "Sleep" },
+      { word: "休息", pinyin: "Xiūxi", imageURL: "img/rest.png", english: "Rest" },
       { word: "跳", pinyin: "Tiào", imageURL: "img/jump.png", english: "Jump" },
       { word: "游泳", pinyin: "Yóuyǒng", image: "🏊", english: "Swim" },
       { word: "穿", pinyin: "Chuān", imageURL: "img/puton.png", english: "Put on (clothing)" },
@@ -565,6 +570,7 @@ const data = {
       { word: "洗手", pinyin: "Xǐshǒu", imageURL: "img/washhands.png", english: "Wash hands" },
       { word: "擦擦", pinyin: "Cā cā", imageURL: "img/wipe.png", english: "Wipe" },
       { word: "看书", pinyin: "Kànshū", imageURL: "img/read.png", english: "Read" },
+      { word: "吹口哨", pinyin: "Chuī kǒushào", imageURL: "img/whistling.png", english: "Whistling" },
       { word: "唱歌", pinyin: "Chànggē", imageURL: "img/sing.png", english: "Sing" },
       { word: "跳舞", pinyin: "Tiàowǔ", image: "💃", english: "Dance" },
       { word: "亲", pinyin: "Qīn", image: "💋", english: "Kiss" },
@@ -599,6 +605,7 @@ const data = {
       { word: "打开", pinyin: "Dǎkāi", imageURL: "img/open.png", english: "To open" },
       { word: "认识", pinyin: "Rènshí", imageURL: "img/knowperson.png", english: "To know (person/place)" },
       { word: "偷", pinyin: "Tōu", imageURL: "img/steal.png", english: "Steal" },
+      { word: "杀", pinyin: "Shā", image: "NONE", english: "Kill" },
       { word: "死了", pinyin: "Sǐ le", imageURL: "img/dead.png", english: "Dead" },
       { word: "开灯", pinyin: "Kāi dēng", imageURL: "img/turnonthelight.png", english: "Turn on the light" },
       { word: "关灯", pinyin: "Guān dēng", imageURL: "img/turnoffthelight.png", english: "Turn off the light" },
@@ -662,6 +669,8 @@ const data = {
       { word: "没关系", pinyin: "Méi guānxi", image: "👌", english: "It's okay" },
       { word: "好的", pinyin: "Hǎo de", image: "👍", english: "Okay" },
       { word: "不要", pinyin: "Bú yào", image: "✋", english: "Don't" },
+      { word: "不行", pinyin: "Bù xíng", image: "NONE", english: "Can’t" },
+      { word: "当然", pinyin: "Dāngrán", image: "NONE", english: "Of course" },
       { word: "帮忙", pinyin: "Bāngmáng", imageURL: "img/help.png", english: "Help" },
       { word: "帮助我", pinyin: "Bāngzhù wǒ", image: "NONE", english: "Help me" },
       { word: "小心", pinyin: "Xiǎoxīn", imageURL: "img/careful.png", english: "Careful" },
@@ -805,6 +814,8 @@ const data = {
       { word: "你有几个苹果？", pinyin: "Nǐ yǒu jǐ gè píngguǒ?", image: "NONE", english: "How many apples do you have?" },
       { word: "语言", pinyin: "Yǔyán", imageURL: "img/language.png", english: "Language" },
       { word: "等我一下", pinyin: "Děng wǒ yíxià", image: "NONE", english: "Wait a moment" },
+      { word: "你要是渴了，就喝点水", pinyin: "Nǐ yàoshi kě le, jiù hē diǎn shuǐ", image: "NONE", english: "If you’re thirsty, then drink some water" },
+      { word: "如果你累了，就休息一下", pinyin: "Rúguǒ nǐ lèi le, jiù xiūxi yíxià", image: "NONE", english: "If you’re tired, then rest a moment" },
     ]
   },
   pronouns: {
