@@ -385,6 +385,8 @@ const data = {
       { word: "很安静", pinyin: "Hěn ānjìng", image: "🔇", english: "Quiet" },
       { word: "好声音", pinyin: "Hǎo shēngyīn", image: "NONE", english: "Good sound" },
       { word: "新的", pinyin: "Xīn de", imageURL: "img/new.png", english: "New" },
+      { word: "真的", pinyin: "Zhēn de", image: "NONE", english: "Real" },
+      { word: "假的", pinyin: "Jiǎ de", image: "NONE", english: "Fake" },
       { word: "难", pinyin: "Nán", imageURL: "img/difficult.png", english: "Difficult" },
       { word: "简单", pinyin: "Jiǎndān", imageURL: "img/easy.png", english: "Simple/Easy" },
       { word: "生病", pinyin: "Shēngbìng", image: "🤒", english: "Sick" },
