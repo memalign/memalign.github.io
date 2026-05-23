@@ -9,6 +9,7 @@ class GameCharacter {
         this.owned = false;
         this.movesMade = 0;
         this.isHungry = false;
+        this.facingRight = false;
 
         this.parentIds = parentIds;
         this.reproductionCount = 0;
@@ -25,6 +26,7 @@ class GameCharacter {
             owned: this.owned,
             movesMade: this.movesMade,
             isHungry: this.isHungry,
+            facingRight: this.facingRight,
             parentIds: this.parentIds,
             reproductionCount: this.reproductionCount,
             hatchesInto: this.hatchesInto,
@@ -38,6 +40,7 @@ class GameCharacter {
         char.owned = data.owned;
         char.movesMade = data.movesMade;
         char.isHungry = data.isHungry;
+        char.facingRight = !!data.facingRight;
         char.reproductionCount = data.reproductionCount;
         char.hatchesInto = data.hatchesInto;
         char.hatchTime = data.hatchTime;

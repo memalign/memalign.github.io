@@ -137,6 +137,8 @@ class UnitTests_Engine {
   test_engine_exploration_branches() {
     const gameState = new GameState();
     const uiManager = new UIManager(gameState);
+    const playedNames = [];
+    uiManager.playNamedSound = (name) => { playedNames.push(name); };
     const engine = new GameEngine(gameState, uiManager);
 
     // Clear EVERYTHING
@@ -202,6 +204,7 @@ class UnitTests_Engine {
     Math.random = () => this._pickExplorationTarget(gameState, tx, ty, dx, dy);
     engine.updateExploration();
     assertTrue(char.isHungry, "Hungry now");
+    assertTrue(playedNames.includes("animalHungry"), "Hungry transition should play animalHungry");
 
     Math.random = oldRand;
   }
@@ -246,6 +249,70 @@ class UnitTests_Engine {
     assertEqual(gameState.grid.getCell(6, 5).character, char, "Character moved to exploration target");
     assertNotNull(spawnCell.character, "Expected reproduction to spawn an egg during exploration");
     assertEqual(spawnCell.character.type, "Egg");
+  }
+
+  test_engine_exploration_updates_horizontal_facing_on_successful_move() {
+    const gameState = new GameState();
+    const uiManager = new UIManager(gameState);
+    const engine = new GameEngine(gameState, uiManager);
+
+    for (let gy = 0; gy < 40; gy++) for (let gx = 0; gx < 40; gx++) {
+      const c = gameState.grid.getCell(gx, gy);
+      c.character = null; c.item = null; c.revealed = true; c.landType = "grass";
+    }
+
+    const x = 5, y = 5;
+    const startCell = gameState.grid.getCell(x, y);
+    const char = new GameCharacter("FireAnimal");
+    char.owned = true;
+    startCell.setCharacter(char);
+
+    const oldRand = Math.random;
+
+    try {
+      Math.random = () => this._pickExplorationTarget(gameState, x, y, 6, 5);
+      engine.updateExploration();
+      assertTrue(char.facingRight, "Character should face right after exploring right");
+      assertEqual(gameState.grid.getCell(6, 5).character, char, "Character should move into the explored cell");
+      assertTrue(pLog.probeLog.has(113), "Should log probe 113 when horizontal facing is updated");
+    } finally {
+      Math.random = oldRand;
+    }
+  }
+
+  test_engine_exploration_updates_horizontal_facing_when_blocked() {
+    const gameState = new GameState();
+    const uiManager = new UIManager(gameState);
+    const engine = new GameEngine(gameState, uiManager);
+
+    for (let gy = 0; gy < 40; gy++) for (let gx = 0; gx < 40; gx++) {
+      const c = gameState.grid.getCell(gx, gy);
+      c.character = null; c.item = null; c.revealed = true; c.landType = "grass";
+    }
+
+    const x = 6, y = 5;
+    const startCell = gameState.grid.getCell(x, y);
+    const char = new GameCharacter("FireAnimal");
+    char.owned = true;
+    char.facingRight = true;
+    startCell.setCharacter(char);
+
+    const blockedTarget = gameState.grid.getCell(5, 5);
+    blockedTarget.landType = "water";
+    blockedTarget.character = null;
+    blockedTarget.revealed = false;
+
+    const oldRand = Math.random;
+
+    try {
+      Math.random = () => this._pickExplorationTarget(gameState, x, y, 5, 5);
+      engine.updateExploration();
+      assertTrue(!char.facingRight, "Character should face left after exploring left even when blocked");
+      assertEqual(startCell.character, char, "Blocked exploration should not move the character");
+      assertTrue(pLog.probeLog.has(113), "Should log probe 113 when horizontal facing is updated");
+    } finally {
+      Math.random = oldRand;
+    }
   }
 }
 

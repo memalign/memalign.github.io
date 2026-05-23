@@ -106,24 +106,52 @@ class MADocument {
     this.body = new MAHTMLElement();
 
     // Create the elements in index.html
-    this.body.appendChild(this.createElementWithId('div', 'cell-details'));
-    this.body.appendChild(this.createElementWithId('div', 'missions-list'));
-    this.body.appendChild(this.createElementWithId('div', 'inventory-info'));
+    const uiInfo = this.createElementWithId('div', 'ui-info');
+    uiInfo.scrollTop = 0;
+    this.body.appendChild(uiInfo);
+    uiInfo.appendChild(this.createElementWithId('div', 'story-log'));
+    uiInfo.appendChild(this.createElementWithId('div', 'cell-details'));
+    uiInfo.appendChild(this.createElementWithId('hr', 'hud-separator-1'));
+    const clickDiagnostics = this.createElementWithId('div', 'click-diagnostics');
+    clickDiagnostics.classList.add('hidden');
+    uiInfo.appendChild(clickDiagnostics);
+    clickDiagnostics.appendChild(this.createElement('div'));
+    clickDiagnostics.appendChild(this.createElementWithId('button', 'copy-diagnostics'));
+    clickDiagnostics.appendChild(this.createElementWithId('pre', 'diagnostics-output'));
+    uiInfo.appendChild(this.createElementWithId('hr', 'hud-separator-2'));
+    uiInfo.appendChild(this.createElementWithId('div', 'missions-list'));
+    uiInfo.appendChild(this.createElementWithId('hr', 'hud-separator-3'));
+    uiInfo.appendChild(this.createElementWithId('div', 'inventory-info'));
     this.body.appendChild(this.createElementWithId('button', 'debug-btn'));
-    this.body.appendChild(this.createElementWithId('div', 'debug-menu'));
+    const debugMenu = this.createElementWithId('div', 'debug-menu');
+    debugMenu.classList.add('hidden');
+    this.body.appendChild(debugMenu);
     this.body.appendChild(this.createElementWithId('button', 'debug-toggle-map'));
     this.body.appendChild(this.createElementWithId('button', 'debug-add-wood'));
     this.body.appendChild(this.createElementWithId('button', 'debug-add-ore'));
     this.body.appendChild(this.createElementWithId('button', 'debug-add-carrot'));
+    this.body.appendChild(this.createElementWithId('button', 'debug-beat-game'));
     this.body.appendChild(this.createElementWithId('button', 'zoom-in'));
     this.body.appendChild(this.createElementWithId('button', 'zoom-out'));
+    this.body.appendChild(this.createElementWithId('button', 'save-screenshot-btn'));
     this.body.appendChild(this.createElementWithId('button', 'settings-btn'));
-    this.body.appendChild(this.createElementWithId('div', 'settings-menu'));
+    const settingsMenu = this.createElementWithId('div', 'settings-menu');
+    settingsMenu.classList.add('hidden');
+    this.body.appendChild(settingsMenu);
     this.body.appendChild(this.createElementWithId('input', 'music-toggle'));
+    this.body.appendChild(this.createElementWithId('input', 'sound-effects-toggle'));
+    this.body.appendChild(this.createElementWithId('a', 'about-link'));
     this.body.appendChild(this.createElementWithId('button', 'start-over-btn'));
-    this.body.appendChild(this.createElementWithId('div', 'story-log'));
-    this.body.appendChild(this.createElementWithId('div', 'end-game-overlay'));
+    const endGameOverlay = this.createElementWithId('div', 'end-game-overlay');
+    endGameOverlay.classList.add('hidden');
+    this.body.appendChild(endGameOverlay);
+    this.body.appendChild(this.createElementWithId('div', 'engraving-subtitle'));
+    this.body.appendChild(this.createElementWithId('div', 'end-game-story'));
+    this.body.appendChild(this.createElementWithId('button', 'view-world-btn'));
     this.body.appendChild(this.createElementWithId('button', 'play-again-btn'));
+    const exitWorldViewBtn = this.createElementWithId('button', 'exit-world-view-btn');
+    exitWorldViewBtn.classList.add('hidden');
+    this.body.appendChild(exitWorldViewBtn);
   }
 
   createElement(elType) {

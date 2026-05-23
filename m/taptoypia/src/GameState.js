@@ -15,7 +15,11 @@ class GameState {
         this.grid = new Grid(this.gridSize, this.gridSize);
         this.inventory = new Inventory();
 
-        this.state = {
+        this.state = GameState.createDefaultState();
+    }
+
+    static createDefaultState() {
+        return {
             firstAnimalRevealed: false,
             firstAnimalOwned: false,
             firstTreeRevealed: false,
@@ -28,8 +32,17 @@ class GameState {
             isBuildingCommunicationTower: false,
             communicationTowerBuilt: false,
             victoryClaimed: false,
+            startupLandingPending: true,
             gameEnded: false,
+            worldViewActive: false,
             endGameTimer: null,
+            endGameSequence: {
+                active: false,
+                phase: null,
+                phaseElapsedMs: 0
+            },
+            playTimeMs: 0,
+            settlerLandingSites: [],
             survivalOdds: 0,
             story: {
                 introShown: false,
@@ -40,6 +53,13 @@ class GameState {
                 oreGathered: 0,
                 commTowerBuilt: false,
                 settlersArrived: false
+            },
+            stats: {
+                animalsRecruited: 0,
+                carrotsHarvested: 0,
+                woodGathered: 0,
+                seedsPlanted: 0,
+                housesBuilt: 0
             }
         };
     }
@@ -54,7 +74,11 @@ class GameState {
 
     static fromJSON(data) {
         const gameState = new GameState(true);
-        gameState.state = Object.assign({}, data.state);
+        const defaults = GameState.createDefaultState();
+        gameState.state = Object.assign({}, defaults, data.state || {});
+        gameState.state.endGameSequence = Object.assign({}, defaults.endGameSequence, (data.state && data.state.endGameSequence) || {});
+        gameState.state.story = Object.assign({}, defaults.story, (data.state && data.state.story) || {});
+        gameState.state.stats = Object.assign({}, defaults.stats, (data.state && data.state.stats) || {});
         gameState.inventory = Inventory.fromJSON(data.inventory);
         gameState.grid = Grid.fromJSON(data.grid);
         gameState.gridSize = gameState.grid.width;
@@ -72,7 +96,7 @@ class GameState {
         } else if (event === "carrot" && story.carrotsGathered < 10) {
             story.carrotsGathered++;
             this.state.survivalOdds += 1;
-            message = `Your survival odds have increased to ${this.state.survivalOdds}%`;
+            message = `Your survival odds have increased to ${this.state.survivalOdds}%.`;
             pLog.log(99);
         } else if (event === "wood" && story.woodGathered < 3) {
             story.woodGathered++;
@@ -82,12 +106,12 @@ class GameState {
                 "You're a regular Paul Bunyon.",
                 "Keep this up and you'll be able to build."
             ];
-            message = `${woodMessages[story.woodGathered - 1]} Your survival odds have increased to ${this.state.survivalOdds}%`;
+            message = `${woodMessages[story.woodGathered - 1]} Your survival odds have increased to ${this.state.survivalOdds}%.`;
             pLog.log(100);
         } else if (event === "house" && story.housesBuilt < 5) {
             story.housesBuilt++;
             this.state.survivalOdds += 4;
-            message = `It's starting to feel like home already. Your survival odds have increased to ${this.state.survivalOdds}%`;
+            message = `It's starting to feel like home already. Your survival odds have increased to ${this.state.survivalOdds}%.`;
             pLog.log(101);
         } else if (event === "animal" && story.animalsRecruited < 2) {
             story.animalsRecruited++;
@@ -96,26 +120,18 @@ class GameState {
                 "Even the fauna are helping out.",
                 "Survival is really about the friends we meet along the way."
             ];
-            message = `${animalMessages[story.animalsRecruited - 1]} Your survival odds have increased to ${this.state.survivalOdds}%`;
+            message = `${animalMessages[story.animalsRecruited - 1]} Your survival odds have increased to ${this.state.survivalOdds}%.`;
             pLog.log(102);
         } else if (event === "ore" && story.oreGathered < 2) {
             story.oreGathered++;
             this.state.survivalOdds += 6;
-            message = `You've struck ore. In your position, that's better than gold. Your survival odds have increased to ${this.state.survivalOdds}%`;
+            message = `You've struck ore. In your position, that's better than gold. Your survival odds have increased to ${this.state.survivalOdds}%.`;
             pLog.log(103);
         } else if (event === "tower" && !story.commTowerBuilt) {
             story.commTowerBuilt = true;
             this.state.survivalOdds += 10;
-            message = `Lifeline established. Your survival odds have increased to ${this.state.survivalOdds}%`;
+            message = `Lifeline established. Your survival odds have increased to ${this.state.survivalOdds}%.`;
             pLog.log(104);
-        } else if (event === "victory" && !story.settlersArrived) {
-            story.settlersArrived = true;
-            message = "Humanity now has a second home. Humanity's survival odds have increased to 81%. Congratulations on completing your mission! Unfortunately, the new settlers have not taken kindly to your benevolent dictatorship. Your survival odds have decreased to 2%.";
-            this.state.survivalOdds = 2; // User's odds
-
-            // Set timer for end game overlay
-            this.state.endGameTimer = 8000; 
-            pLog.log(105);
         }
 
         if (message && uiManager) {
@@ -176,6 +192,7 @@ class GameState {
         if (cell && cell.revealed && cell.character && !cell.character.owned && cell.character.type !== "Egg") {
             cell.character.owned = true;
             this.state.firstAnimalOwned = true;
+            this.state.stats.animalsRecruited++;
             pLog.log(0);
             return true;
         }
@@ -212,6 +229,11 @@ class GameState {
             }
 
             this.inventory.addItem(itemName);
+            if (itemName === "carrot") {
+                this.state.stats.carrotsHarvested++;
+            } else if (itemName === "wood") {
+                this.state.stats.woodGathered++;
+            }
             cell.setItem(null);
 
             if (this.inventory.getQuantity("wood") >= Tuning.HOUSE_WOOD_COST) {
@@ -237,6 +259,7 @@ class GameState {
             }
             cell.setItem("house");
             this.state.housesCount++;
+            this.state.stats.housesBuilt++;
             pLog.log(6);
             return true;
         }
@@ -252,6 +275,7 @@ class GameState {
             this.inventory.removeItem("seed");
             cell.landType = "farm";
             this.state.neverMadeFarm = false;
+            this.state.stats.seedsPlanted++;
             pLog.log(8);
             return true;
         }

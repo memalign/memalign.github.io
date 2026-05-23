@@ -18,6 +18,11 @@ class GameEngine {
     }
 
     update(deltaTime) {
+        if (this.gameState.state.gameEnded || this.gameState.state.worldViewActive) {
+            return;
+        }
+
+        this.gameState.state.playTimeMs += deltaTime;
         this.farmTimer += deltaTime;
         this.treeTimer += deltaTime;
         this.hatchTimer += deltaTime;
@@ -71,6 +76,9 @@ class GameEngine {
                 this.gameState.state.endGameTimer = null;
                 this.gameState.state.gameEnded = true;
                 this.uiManager.showEndGame();
+                if (this.uiManager && this.uiManager.playNamedSound) {
+                    this.uiManager.playNamedSound("gameOver");
+                }
                 this.gameState.save();
                 pLog.log(96);
             }
@@ -191,6 +199,12 @@ class GameEngine {
                     this.uiManager.updateMissions();
                 }
 
+                const deltaX = target.nx - x;
+                if (deltaX !== 0) {
+                    char.facingRight = deltaX > 0;
+                    pLog.log(113);
+                }
+
                 let canEnter = (char.type === "WaterAnimal") ? (target.neighbor.landType === "water") :
                                (char.type === "FireAnimal") ? (target.neighbor.landType !== "water") : true;
 
@@ -206,6 +220,9 @@ class GameEngine {
 
                     if (char.movesMade >= Tuning.CHARACTER_MAX_MOVES) {
                         char.isHungry = true;
+                        if (this.uiManager && this.uiManager.playNamedSound) {
+                            this.uiManager.playNamedSound("animalHungry");
+                        }
                         this.uiManager.updateInventoryUI();
                         pLog.log(63);
                     }

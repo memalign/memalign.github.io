@@ -1,6 +1,6 @@
 
 // Measure code coverage of unit tests by sprinkling probes
-const MA_PROBE_NEXT = 113 // Next unused probe value. `grep pLog . -r | sort -t '(' -k2,2n`
+const MA_PROBE_NEXT = 126 // Next unused probe value. `grep pLog . -r | sort -t '(' -k2,2n`
 class MAProbeLog {
   constructor() {
     this.probeLog = new Set()
@@ -355,4 +355,3 @@ if (typeof module !== 'undefined' && module.exports) {
     pLog,
   }
 }
-

@@ -43,6 +43,7 @@ function getConfiguredRendererMode() {
 }
 
 const rendererMode = getConfiguredRendererMode();
+const debugAccessEnabled = !!(Tuning.DEBUG_MENU_ENABLED || new URLSearchParams(window.location.search).get("debug") === "1");
 
 // INITIALIZE VIA ORCHESTRATOR
 const orchestrator = new AppOrchestrator();
@@ -54,8 +55,18 @@ const {
     globeRenderer,
     threeMapRenderer,
     engine,
-    gridSize: GRID_SIZE
+    gridSize: GRID_SIZE,
+    startupLandingPending,
+    landingSite,
+    introDeferred
 } = orchestrator.start(viewportWidth, viewportHeight, rendererMode, RENDERER_MODES);
+
+if (threeMapRenderer) {
+    const zoomLimitCellSize = threeMapRenderer.getPostFormationZoomCellSizeLimit();
+    camera.minCellSize = Math.max(camera.minCellSize, zoomLimitCellSize);
+    camera.cellSize = Math.max(camera.cellSize, camera.minCellSize);
+    camera.targetCellSize = Math.max(camera.targetCellSize, camera.minCellSize);
+}
 
 if (typeof maStorage === 'undefined') {
     console.error("maStorage is undefined! Persistence will not work.");
@@ -63,6 +74,59 @@ if (typeof maStorage === 'undefined') {
 
 let globeWasActive = false;
 let globeInteractionWasActive = false;
+let threeSurfacePreviousState = null;
+let threeSurfaceEntryCenterGrid = null;
+let threeSurfaceReturnPanStart = null;
+const startupLandingAnimation = new StartupLandingSequence(gameState, uiManager, {
+    active: !!startupLandingPending,
+    durationMs: 5000,
+    shipCell: landingSite ? { x: landingSite.x, y: landingSite.y } : null,
+    introDeferred: !!introDeferred
+});
+const settlerArrivalSequence = new SettlerArrivalSequence(gameState, uiManager, camera, landingSite);
+uiManager.onInviteSettlers = () => settlerArrivalSequence.start();
+settlerArrivalSequence.resumeFromSavedState();
+
+function isWorldViewActive() {
+    return !!(gameState.state.gameEnded && gameState.state.worldViewActive);
+}
+
+function showEndGameOverlay() {
+    uiManager.showEndGame(
+        SettlerArrivalSequence.buildEndGameSummary(gameState),
+        SettlerArrivalSequence.formatPlayTime(gameState.state.playTimeMs || 0)
+    );
+}
+
+function enterWorldView() {
+    if (!gameState.state.gameEnded) {
+        return;
+    }
+
+    gameState.state.worldViewActive = true;
+    uiManager.hideEndGame();
+    uiManager.showWorldViewHud();
+    gameState.save();
+}
+
+function exitWorldView() {
+    if (!gameState.state.gameEnded) {
+        return;
+    }
+
+    gameState.state.worldViewActive = false;
+    uiManager.hideWorldViewHud();
+    showEndGameOverlay();
+    gameState.save();
+}
+
+uiManager.onViewWorld = () => enterWorldView();
+uiManager.onExitWorldView = () => exitWorldView();
+
+if (isWorldViewActive()) {
+    uiManager.hideEndGame();
+    uiManager.showWorldViewHud();
+}
 
 function handleViewportResize() {
     resizeCanvasSurface(window.innerWidth, window.innerHeight);
@@ -71,6 +135,7 @@ function handleViewportResize() {
     if (threeMapRenderer) {
         threeMapRenderer.resize(viewportWidth, viewportHeight);
     }
+    syncCompactActionLabels();
 }
 
 function syncGlobeToCameraCenter() {
@@ -101,6 +166,159 @@ function getThreeSurfaceState(cellSize = camera.cellSize) {
         return null;
     }
     return threeMapRenderer.getRenderState(cellSize);
+}
+
+function getScreenshotButtonRevealCellSize() {
+    if (rendererMode === RENDERER_MODES.THREE_SURFACE && threeMapRenderer) {
+        const thresholds = threeMapRenderer.getStateThresholds();
+        return Tuning.SCREENSHOT_BUTTON_SHOW_CELL_SIZE || thresholds.transitionExit;
+    }
+
+    return Tuning.SCREENSHOT_BUTTON_SHOW_CELL_SIZE || (Tuning.GLOBE_TRANSITION_START_CELL_SIZE + 2);
+}
+
+function shouldShowScreenshotButton() {
+    if (isWorldViewActive()) {
+        return true;
+    }
+
+    return camera.cellSize <= (getScreenshotButtonRevealCellSize() + 0.01);
+}
+
+function clampGridCell(cell) {
+    if (!cell) {
+        return null;
+    }
+
+    return {
+        x: Math.max(0, Math.min(Math.floor(cell.x), gameState.gridSize - 1)),
+        y: Math.max(0, Math.min(Math.floor(cell.y), gameState.gridSize - 1))
+    };
+}
+
+function setCameraTargetToWorldCenter(center, cellSize = camera.targetCellSize) {
+    camera.targetX = (center.x * cellSize) - (camera.canvasWidth / 2);
+    camera.targetY = (center.y * cellSize) - (camera.canvasHeight / 2);
+    camera.clampTarget();
+}
+
+function setCameraTargetToGridCellCenter(cell, cellSize = camera.targetCellSize) {
+    const clampedCell = clampGridCell(cell);
+    if (!clampedCell) {
+        return null;
+    }
+
+    setCameraTargetToWorldCenter({
+        x: clampedCell.x + 0.5,
+        y: clampedCell.y + 0.5
+    }, cellSize);
+    return clampedCell;
+}
+
+function getCameraWorldCenter() {
+    return {
+        x: (camera.x + (camera.canvasWidth / 2)) / Math.max(camera.cellSize, 0.0001),
+        y: (camera.y + (camera.canvasHeight / 2)) / Math.max(camera.cellSize, 0.0001)
+    };
+}
+
+function getThreeSurfaceViewWorldCenter() {
+    if (!threeMapRenderer) {
+        return getCameraWorldCenter();
+    }
+
+    const fullTurn = Math.PI * 2;
+    let wrappedLon = (threeMapRenderer.viewLon + Math.PI) % fullTurn;
+    if (wrappedLon < 0) {
+        wrappedLon += fullTurn;
+    }
+    const u = wrappedLon / fullTurn;
+    const v = Math.max(0, Math.min(((Math.PI / 2) - threeMapRenderer.viewLat) / Math.PI, 1));
+    return {
+        x: u * gameState.gridSize,
+        y: v * gameState.gridSize
+    };
+}
+
+function applyThreeSurfaceReturnZoomPan() {
+    if (rendererMode !== RENDERER_MODES.THREE_SURFACE || !threeMapRenderer || !threeSurfaceEntryCenterGrid) {
+        return;
+    }
+    if (camera.targetCellSize <= camera.cellSize + 0.01) {
+        threeSurfaceReturnPanStart = null;
+        return;
+    }
+
+    const clampedCell = clampGridCell(threeSurfaceEntryCenterGrid);
+    if (!clampedCell) {
+        return;
+    }
+
+    if (!threeSurfaceReturnPanStart) {
+        const center = threeMapRenderer.isInteractive(camera.cellSize)
+            ? getThreeSurfaceViewWorldCenter()
+            : getCameraWorldCenter();
+        threeSurfaceReturnPanStart = {
+            x: center.x,
+            y: center.y,
+            cellSize: camera.cellSize
+        };
+    }
+
+    const thresholds = threeMapRenderer.getStateThresholds();
+    const startCellSize = Math.min(threeSurfaceReturnPanStart.cellSize, thresholds.transitionExit - 0.001);
+    const projectedCellSize = camera.cellSize + ((camera.targetCellSize - camera.cellSize) * (camera.zoomLerpFactor || 1));
+    const progress = Math.max(0, Math.min(
+        (projectedCellSize - startCellSize) / Math.max(thresholds.transitionExit - startCellSize, 0.001),
+        1
+    ));
+    const targetCenter = {
+        x: clampedCell.x + 0.5,
+        y: clampedCell.y + 0.5
+    };
+    const center = {
+        x: threeSurfaceReturnPanStart.x + ((targetCenter.x - threeSurfaceReturnPanStart.x) * progress),
+        y: threeSurfaceReturnPanStart.y + ((targetCenter.y - threeSurfaceReturnPanStart.y) * progress)
+    };
+
+    camera.zoomFocusX = camera.canvasWidth / 2;
+    camera.zoomFocusY = camera.canvasHeight / 2;
+    camera.anchorWorldX = center.x;
+    camera.anchorWorldY = center.y;
+    setCameraTargetToWorldCenter(center);
+    threeMapRenderer.setViewFromGrid(center.x - 0.5, center.y - 0.5, gameState.gridSize, gameState.gridSize);
+}
+
+function updateThreeSurfaceReturnAnchor() {
+    if (rendererMode !== RENDERER_MODES.THREE_SURFACE || !threeMapRenderer) {
+        return;
+    }
+
+    const states = ThreeMapRenderer.RENDER_STATES;
+    const currentState = getThreeSurfaceState(camera.cellSize);
+
+    if (currentState === states.TRANSITION_PATCH
+        && threeSurfacePreviousState !== states.TRANSITION_PATCH
+        && !threeSurfaceEntryCenterGrid) {
+        threeSurfaceEntryCenterGrid = clampGridCell(camera.getCenterGridPosition());
+    }
+
+    if (currentState === states.GRID_2D
+        && threeSurfacePreviousState
+        && threeSurfacePreviousState !== states.GRID_2D
+        && threeSurfaceEntryCenterGrid) {
+        const clampedCell = setCameraTargetToGridCellCenter(threeSurfaceEntryCenterGrid);
+        if (clampedCell) {
+            camera.zoomFocusX = camera.canvasWidth / 2;
+            camera.zoomFocusY = camera.canvasHeight / 2;
+            camera.anchorWorldX = clampedCell.x + 0.5;
+            camera.anchorWorldY = clampedCell.y + 0.5;
+        }
+        threeSurfaceEntryCenterGrid = null;
+        threeSurfaceReturnPanStart = null;
+    }
+
+    threeSurfacePreviousState = currentState;
 }
 
 function isThreeSurfaceGlobeInteractive() {
@@ -472,18 +690,19 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
-function drawMap(targetCtx = ctx, renderOptions = null) {
+function drawMap(targetCtx = ctx, renderOptions = null, renderCamera = camera) {
     const options = renderOptions || {};
     const fogRevealBlend = clamp01(options.fogRevealBlend ?? 0);
     const iconAlpha = clamp01(options.iconAlpha ?? 1);
     const gridAlpha = clamp01(options.gridAlpha ?? 1);
-    const range = camera.getVisibleRange();
+    const spriteNowMs = options.nowMs;
+    const range = renderCamera.getVisibleRange();
 
     for (let y = range.startY; y <= range.endY; y++) {
         for (let x = range.startX; x <= range.endX; x++) {
             const cell = gameState.grid.getCell(x, y);
-            const screenX = (x * camera.cellSize) - camera.x;
-            const screenY = (y * camera.cellSize) - camera.y;
+            const screenX = (x * renderCamera.cellSize) - renderCamera.x;
+            const screenY = (y * renderCamera.cellSize) - renderCamera.y;
 
             const revealedColor = cell.getDisplayColor(true);
             let fillColor = cell.getDisplayColor(gameState.grid.debugRevealAll);
@@ -496,40 +715,49 @@ function drawMap(targetCtx = ctx, renderOptions = null) {
             }
 
             targetCtx.fillStyle = fillColor;
-            targetCtx.fillRect(Math.floor(screenX), Math.floor(screenY), Math.ceil(camera.cellSize), Math.ceil(camera.cellSize));
+            targetCtx.fillRect(Math.floor(screenX), Math.floor(screenY), Math.ceil(renderCamera.cellSize), Math.ceil(renderCamera.cellSize));
 
-            if (camera.cellSize > 15 && gridAlpha > 0.001) {
+            if (renderCamera.cellSize > 15 && gridAlpha > 0.001) {
                 targetCtx.strokeStyle = `rgba(0, 0, 0, ${0.1 * gridAlpha})`;
                 targetCtx.lineWidth = 1 / dpr;
-                targetCtx.strokeRect(Math.floor(screenX), Math.floor(screenY), Math.ceil(camera.cellSize), Math.ceil(camera.cellSize));
+                targetCtx.strokeRect(Math.floor(screenX), Math.floor(screenY), Math.ceil(renderCamera.cellSize), Math.ceil(renderCamera.cellSize));
             }
 
             if ((cell.revealed || gameState.grid.debugRevealAll) && iconAlpha > 0.001) {
-                const fontSize = Math.floor(camera.cellSize * 0.5);
-                if (fontSize > 6) {
+                if (renderCamera.cellSize > 6) {
                     if (iconAlpha < 0.999) {
                         targetCtx.save();
                         targetCtx.globalAlpha *= iconAlpha;
                     }
 
-                    targetCtx.textAlign = "center";
-                    targetCtx.textBaseline = "middle";
-                    targetCtx.font = `${fontSize}px Arial`;
-
-                    if (cell.character) {
-                        targetCtx.fillText(uiManager.getCharacterEmoji(cell.character.type), screenX + camera.cellSize / 2, screenY + camera.cellSize / 2);
-                        if (cell.character.owned) {
-                            targetCtx.strokeStyle = cell.character.isHungry ? "#FF0000" : "#FFD700";
-                            targetCtx.lineWidth = 2;
-                            targetCtx.strokeRect(Math.floor(screenX) + 2, Math.floor(screenY) + 2, Math.ceil(camera.cellSize) - 4, Math.ceil(camera.cellSize) - 4);
-                            if (cell.character.isHungry) {
-                                targetCtx.fillStyle = "red";
-                                targetCtx.font = `bold ${Math.floor(fontSize * 0.8)}px Arial`;
-                                targetCtx.fillText("🍴", screenX + camera.cellSize * 0.8, screenY + camera.cellSize * 0.2);
-                            }
+                    const didDrawSprite = SpriteLibrary.drawCellSprite(
+                        targetCtx,
+                        cell,
+                        screenX,
+                        screenY,
+                        renderCamera.cellSize,
+                        renderCamera.cellSize,
+                        {
+                            nowMs: spriteNowMs
                         }
-                    } else if (cell.item) {
-                        targetCtx.fillText(uiManager.getItemEmoji(cell.item), screenX + camera.cellSize / 2, screenY + camera.cellSize / 2);
+                    );
+
+                    if (!didDrawSprite) {
+                        const fontSize = Math.floor(renderCamera.cellSize * 0.5);
+                        targetCtx.textAlign = "center";
+                        targetCtx.textBaseline = "middle";
+                        targetCtx.font = `${fontSize}px Arial`;
+                        if (cell.character) {
+                            targetCtx.fillText(uiManager.getCharacterEmoji(cell.character.type), screenX + renderCamera.cellSize / 2, screenY + renderCamera.cellSize / 2);
+                        } else if (cell.item) {
+                            targetCtx.fillText(uiManager.getItemEmoji(cell.item), screenX + renderCamera.cellSize / 2, screenY + renderCamera.cellSize / 2);
+                        }
+                    }
+
+                    if (cell.character && cell.character.owned) {
+                        targetCtx.strokeStyle = cell.character.isHungry ? "#FF0000" : "#FFD700";
+                        targetCtx.lineWidth = 2;
+                        targetCtx.strokeRect(Math.floor(screenX) + 2, Math.floor(screenY) + 2, Math.ceil(renderCamera.cellSize) - 4, Math.ceil(renderCamera.cellSize) - 4);
                     }
 
                     if (iconAlpha < 0.999) {
@@ -539,6 +767,26 @@ function drawMap(targetCtx = ctx, renderOptions = null) {
             }
         }
     }
+}
+
+function drawStartupLandingAnimation(targetCtx = ctx, renderCamera = camera) {
+    const renderState = startupLandingAnimation.getRenderState(renderCamera);
+    if (!renderState) {
+        return;
+    }
+
+    SpriteLibrary.drawFrameInRect(targetCtx, renderState.frameName, renderState.x, renderState.y, renderState.width, renderState.height, {
+        paddingRatio: 0
+    });
+}
+
+function drawSettlerArrivalAnimation(targetCtx = ctx) {
+    const renderStates = settlerArrivalSequence.getRocketRenderStates(camera);
+    renderStates.forEach((renderState) => {
+        SpriteLibrary.drawFrameInRect(targetCtx, renderState.frameName, renderState.x, renderState.y, renderState.width, renderState.height, {
+            paddingRatio: 0
+        });
+    });
 }
 
 // --- RENDERING ---
@@ -581,6 +829,8 @@ function draw() {
         if (showRegionDebug) {
             drawThreeSurfaceTuningOverlay();
         }
+        drawStartupLandingAnimation();
+        drawSettlerArrivalAnimation();
         return;
     }
 
@@ -604,6 +854,113 @@ function draw() {
     if (showRegionDebug) {
         drawGlobeTuningOverlay();
     }
+    drawStartupLandingAnimation();
+    drawSettlerArrivalAnimation();
+}
+
+function createFullGridRenderCamera(cellSize) {
+    return {
+        x: 0,
+        y: 0,
+        cellSize,
+        canvasWidth: gameState.gridSize * cellSize,
+        canvasHeight: gameState.gridSize * cellSize,
+        getVisibleRange() {
+            return {
+                startX: 0,
+                startY: 0,
+                endX: gameState.gridSize - 1,
+                endY: gameState.gridSize - 1
+            };
+        }
+    };
+}
+
+function createGridScreenshotCanvas() {
+    const requestedMaxDimension = Math.max(2048, (Tuning.SCREENSHOT_GRID_MAX_DIMENSION || 4096) * 2);
+    const safeCanvasDimensionLimit = Tuning.SCREENSHOT_SAFE_CANVAS_DIMENSION || 8192;
+    const cappedMaxDimension = Math.min(requestedMaxDimension, safeCanvasDimensionLimit);
+    const exportCellSize = Math.max(8, Math.floor(cappedMaxDimension / Math.max(gameState.gridSize, 1)));
+    const exportCamera = createFullGridRenderCamera(exportCellSize);
+    const outputCanvas = document.createElement('canvas');
+    outputCanvas.width = exportCamera.canvasWidth;
+    outputCanvas.height = exportCamera.canvasHeight;
+
+    const outputCtx = outputCanvas.getContext('2d');
+    outputCtx.imageSmoothingEnabled = false;
+    outputCtx.fillStyle = '#000000';
+    outputCtx.fillRect(0, 0, outputCanvas.width, outputCanvas.height);
+    drawMap(outputCtx, null, exportCamera);
+
+    return outputCanvas;
+}
+
+function createActive3DScreenshotCanvas() {
+    draw();
+
+    if (rendererMode === RENDERER_MODES.THREE_SURFACE && threeMapRenderer) {
+        return threeMapRenderer.captureCurrentFrame({ backgroundColor: '#000000' });
+    }
+
+    if (globeRenderer && globeRenderer.isActive(camera.cellSize)) {
+        return globeRenderer.captureCurrentFrame({ backgroundColor: '#000000' });
+    }
+
+    return null;
+}
+
+function getScreenshotExportCanvas() {
+    if (rendererMode === RENDERER_MODES.THREE_SURFACE && threeMapRenderer) {
+        const state = getThreeSurfaceState(camera.cellSize);
+        if (state === ThreeMapRenderer.RENDER_STATES.GRID_2D) {
+            return createGridScreenshotCanvas();
+        }
+        return createActive3DScreenshotCanvas();
+    }
+
+    if (globeRenderer && globeRenderer.isActive(camera.cellSize)) {
+        return createActive3DScreenshotCanvas();
+    }
+
+    return createGridScreenshotCanvas();
+}
+
+function getScreenshotFileName() {
+    const now = new Date();
+    const parts = [
+        now.getFullYear(),
+        String(now.getMonth() + 1).padStart(2, '0'),
+        String(now.getDate()).padStart(2, '0'),
+        String(now.getHours()).padStart(2, '0'),
+        String(now.getMinutes()).padStart(2, '0'),
+        String(now.getSeconds()).padStart(2, '0')
+    ];
+    return `taptoypia-screenshot-${parts.join('')}.png`;
+}
+
+function downloadCanvasAsPng(exportCanvas) {
+    if (!exportCanvas) {
+        return;
+    }
+
+    const downloadLink = document.createElement('a');
+    downloadLink.download = getScreenshotFileName();
+
+    if (exportCanvas.toBlob) {
+        exportCanvas.toBlob((blob) => {
+            if (!blob) {
+                return;
+            }
+            const objectUrl = URL.createObjectURL(blob);
+            downloadLink.href = objectUrl;
+            downloadLink.click();
+            setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
+        }, 'image/png');
+        return;
+    }
+
+    downloadLink.href = exportCanvas.toDataURL('image/png');
+    downloadLink.click();
 }
 
 // --- MAIN LOOP ---
@@ -615,8 +972,15 @@ function gameLoop() {
     lastTime = now;
 
     if (rendererMode === RENDERER_MODES.THREE_SURFACE) {
+        applyThreeSurfaceReturnZoomPan();
         camera.update();
+        updateThreeSurfaceReturnAnchor();
+        startupLandingAnimation.update(deltaTime);
+        settlerArrivalSequence.update(deltaTime);
         engine.update(deltaTime);
+        updateHudOpacity();
+        syncCompactActionLabels();
+        saveScreenshotBtn.classList.toggle('is-visible', shouldShowScreenshotButton());
         draw();
         requestAnimationFrame(gameLoop);
         return;
@@ -639,8 +1003,13 @@ function gameLoop() {
 
     camera.update();
     globeRenderer.update();
+    startupLandingAnimation.update(deltaTime);
+    settlerArrivalSequence.update(deltaTime);
     engine.update(deltaTime);
 
+    updateHudOpacity();
+    syncCompactActionLabels();
+    saveScreenshotBtn.classList.toggle('is-visible', shouldShowScreenshotButton());
     draw();
     globeWasActive = globeRenderer.isActive(camera.cellSize);
     globeInteractionWasActive = globeInteractiveNow;
@@ -652,14 +1021,18 @@ const debugMenu = document.getElementById("debug-menu");
 const settingsMenu = document.getElementById("settings-menu");
 const settingsBtn = document.getElementById("settings-btn");
 const musicToggle = document.getElementById("music-toggle");
+const soundEffectsToggle = document.getElementById("sound-effects-toggle");
 const startOverBtn = document.getElementById("start-over-btn");
 const debugToggleMap = document.getElementById("debug-toggle-map");
 const debugAddWood = document.getElementById("debug-add-wood");
 const debugAddOre = document.getElementById("debug-add-ore");
 const debugAddCarrot = document.getElementById("debug-add-carrot");
+const debugBeatGame = document.getElementById("debug-beat-game");
 const diagnosticsPanel = document.getElementById("click-diagnostics");
 const diagnosticsOutput = document.getElementById("diagnostics-output");
 const copyDiagnosticsBtn = document.getElementById("copy-diagnostics");
+const saveScreenshotBtn = document.getElementById("save-screenshot-btn");
+const uiInfoPanel = document.getElementById("ui-info");
 let latestDiagnosticsText = "Click a cell to capture diagnostics.";
 
 function setDiagnosticsText(text) {
@@ -675,7 +1048,41 @@ function syncDiagnosticsVisibility() {
     }
 }
 
+function syncCompactActionLabels() {
+    const compactLabels = window.innerWidth <= 420;
+    const exitWorldViewBtn = document.getElementById("exit-world-view-btn");
+    if (exitWorldViewBtn) {
+        exitWorldViewBtn.textContent = compactLabels ? "Exit" : "Exit World View";
+    }
+    saveScreenshotBtn.textContent = (compactLabels && isWorldViewActive()) ? "Screenshot" : "Save Screenshot";
+    saveScreenshotBtn.classList.toggle("compact-label", compactLabels);
+}
+
+function updateHudOpacity() {
+    if (!uiInfoPanel) {
+        return;
+    }
+
+    let opacity = 1;
+    if (rendererMode === RENDERER_MODES.THREE_SURFACE && threeMapRenderer) {
+        const state = getThreeSurfaceState(camera.cellSize);
+        if (state === ThreeMapRenderer.RENDER_STATES.GLOBE_3D) {
+            opacity = 0;
+        } else if (state === ThreeMapRenderer.RENDER_STATES.TRANSITION_PATCH) {
+            opacity = 1 - clamp01(threeMapRenderer.getTransitionCurve(camera.cellSize));
+        }
+    } else {
+        opacity = 1 - getGlobeBlend();
+    }
+
+    uiInfoPanel.style.opacity = String(Math.max(0, Math.min(1, opacity)));
+    uiInfoPanel.style.pointerEvents = opacity <= 0.02 ? "none" : "auto";
+}
+
 document.getElementById("debug-btn").addEventListener("click", () => {
+    if (!debugAccessEnabled) {
+        return;
+    }
     soundEffects.requestSong();
     debugMenu.classList.toggle("hidden");
     settingsMenu.classList.add("hidden");
@@ -699,6 +1106,13 @@ musicToggle.addEventListener("change", (e) => {
     }
 });
 
+if (soundEffectsToggle) {
+    soundEffectsToggle.checked = soundEffects.soundEffectsEnabled;
+    soundEffectsToggle.addEventListener("change", (e) => {
+        soundEffects.setSoundEffectsEnabled(e.target.checked);
+    });
+}
+
 startOverBtn.addEventListener("click", () => {
     if (confirm("Are you sure you want to start over? This action cannot be undone and all your progress will be lost.")) {
         gameState.resetGame();
@@ -706,6 +1120,12 @@ startOverBtn.addEventListener("click", () => {
 });
 
 syncDiagnosticsVisibility();
+syncCompactActionLabels();
+updateHudOpacity();
+if (!debugAccessEnabled) {
+    document.getElementById("debug-btn").style.display = "none";
+    debugMenu.classList.add("hidden");
+}
 
 copyDiagnosticsBtn.addEventListener("click", async () => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -725,6 +1145,11 @@ copyDiagnosticsBtn.addEventListener("click", async () => {
     textarea.select();
     document.execCommand("copy");
     textarea.remove();
+});
+
+saveScreenshotBtn.addEventListener("click", () => {
+    soundEffects.requestSong();
+    downloadCanvasAsPng(getScreenshotExportCanvas());
 });
 
 debugToggleMap.addEventListener("click", () => {
@@ -755,11 +1180,23 @@ debugAddCarrot.addEventListener("click", () => {
     uiManager.updateMissions();
 });
 
+debugBeatGame.addEventListener("click", () => {
+    soundEffects.requestSong();
+    DebugCheats.applyBeatGameCheat({
+        gameState,
+        uiManager,
+        startupLandingAnimation
+    });
+});
+
 // --- INPUT HANDLERS ---
 const missionsList = document.getElementById("missions-list");
 const inventoryInfo = document.getElementById("inventory-info");
 
 inventoryInfo.addEventListener("click", (e) => {
+    if (isWorldViewActive()) {
+        return;
+    }
     soundEffects.requestSong();
     const jumpBtn = e.target.closest(".hungry-jump");
     if (jumpBtn) {
@@ -777,6 +1214,9 @@ inventoryInfo.addEventListener("click", (e) => {
 });
 
 missionsList.addEventListener("click", (e) => {
+    if (isWorldViewActive()) {
+        return;
+    }
     soundEffects.requestSong();
     uiManager.handleMissionClick(e.target);
 });
@@ -895,6 +1335,10 @@ canvas.addEventListener("pointercancel", handlePointerUp);
 canvas.addEventListener("click", (e) => {
     soundEffects.requestSong();
     if (movedSinceDown || activePointers.size > 0) return;
+    if (isWorldViewActive()) {
+        setDiagnosticsText(JSON.stringify({ mode: "world_view", action: "click ignored while world view is active" }, null, 2));
+        return;
+    }
     if (isThreeSurfaceGlobeInteractive()) {
         setDiagnosticsText(JSON.stringify({ mode: "three_surface", action: "click ignored while globe interaction is active" }, null, 2));
         return;

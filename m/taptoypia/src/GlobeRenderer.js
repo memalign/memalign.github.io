@@ -497,6 +497,24 @@ class GlobeRenderer {
         ctx.drawImage(this.renderCanvas, 0, 0, this.renderCanvas.width, this.renderCanvas.height, 0, 0, this.canvasWidth, this.canvasHeight);
         ctx.restore();
     }
+
+    captureCurrentFrame(options = {}) {
+        if (!this.renderCanvas || typeof document === 'undefined') {
+            return null;
+        }
+
+        const outputCanvas = document.createElement('canvas');
+        outputCanvas.width = Math.max(1, this.renderCanvas.width || Math.round(this.canvasWidth));
+        outputCanvas.height = Math.max(1, this.renderCanvas.height || Math.round(this.canvasHeight));
+
+        const outputCtx = outputCanvas.getContext('2d');
+        outputCtx.imageSmoothingEnabled = true;
+        outputCtx.fillStyle = options.backgroundColor || '#000000';
+        outputCtx.fillRect(0, 0, outputCanvas.width, outputCanvas.height);
+        outputCtx.drawImage(this.renderCanvas, 0, 0);
+
+        return outputCanvas;
+    }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

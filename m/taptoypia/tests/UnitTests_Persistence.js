@@ -32,7 +32,16 @@ class UnitTests_Persistence {
       cell.setItem("carrot");
       const char = new GameCharacter("GrassAnimal");
       char.owned = true;
+      char.facingRight = true;
       cell.setCharacter(char);
+      gameState.state.playTimeMs = 123456;
+      gameState.state.worldViewActive = true;
+      gameState.state.stats.animalsRecruited = 2;
+      gameState.state.stats.carrotsHarvested = 3;
+      gameState.state.stats.woodGathered = 4;
+      gameState.state.stats.seedsPlanted = 5;
+      gameState.state.stats.housesBuilt = 6;
+      gameState.state.settlerLandingSites = [{ x: 1, y: 2 }, { x: 3, y: 4 }];
 
       assertTrue(gameState.save(), "Save should succeed");
 
@@ -48,6 +57,15 @@ class UnitTests_Persistence {
       assertNotNull(loadedCell.character, "Character should exist");
       assertEqual(loadedCell.character.type, "GrassAnimal", "Character type should match");
       assertTrue(loadedCell.character.owned, "Character should be owned");
+      assertTrue(loadedCell.character.facingRight, "Character facing should persist");
+      assertEqual(newGameState.state.playTimeMs, 123456, "Play time should persist");
+      assertTrue(newGameState.state.worldViewActive, "World view active should persist");
+      assertEqual(newGameState.state.stats.animalsRecruited, 2, "Animal recruit stats should persist");
+      assertEqual(newGameState.state.stats.carrotsHarvested, 3, "Carrot stats should persist");
+      assertEqual(newGameState.state.stats.woodGathered, 4, "Wood stats should persist");
+      assertEqual(newGameState.state.stats.seedsPlanted, 5, "Seed stats should persist");
+      assertEqual(newGameState.state.stats.housesBuilt, 6, "House stats should persist");
+      assertEqual(JSON.stringify(newGameState.state.settlerLandingSites), JSON.stringify([{ x: 1, y: 2 }, { x: 3, y: 4 }]), "Settler landing sites should persist");
     });
   }
 

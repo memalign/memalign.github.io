@@ -2,13 +2,59 @@ if (typeof module !== 'undefined' && module.exports) {
     ({ Tuning } = require('./Tuning.js'));
     ({ maDocument } = require('./MADocument.js'));
     ({ pLog } = require('./Utilities.js'));
+    ({ zzSoundEffects } = require('./SoundEffects.js'));
 }
 
 class UIManager {
     constructor(gameState, soundEffects = null) {
         this.gameState = gameState;
         this.soundEffects = soundEffects;
+        this.uiInfo = maDocument.getElementById("ui-info");
         this.storyLog = maDocument.getElementById("story-log");
+    }
+
+    setGameplayHudHidden(hidden) {
+        const missionsList = maDocument.getElementById("missions-list");
+        const inventoryInfo = maDocument.getElementById("inventory-info");
+        if (missionsList) {
+            if (hidden) missionsList.classList.add("hidden");
+            else missionsList.classList.remove("hidden");
+        }
+        if (inventoryInfo) {
+            if (hidden) inventoryInfo.classList.add("hidden");
+            else inventoryInfo.classList.remove("hidden");
+        }
+        this.refreshHudSeparators();
+    }
+
+    elementHasVisibleContent(el) {
+        if (!el || el.classList.contains("hidden")) {
+            return false;
+        }
+        if (typeof el.innerText === 'string' && el.innerText.trim() !== "") {
+            return true;
+        }
+        return Array.isArray(el.children) ? el.children.length > 0 : (el.children && el.children.length > 0);
+    }
+
+    updateSeparatorVisibility(separatorId, shouldShow) {
+        const separator = maDocument.getElementById(separatorId);
+        if (!separator) {
+            return;
+        }
+        if (shouldShow) separator.classList.remove("hidden");
+        else separator.classList.add("hidden");
+    }
+
+    refreshHudSeparators() {
+        const hasCellDetails = this.elementHasVisibleContent(maDocument.getElementById("cell-details"));
+        const hasDiagnostics = this.elementHasVisibleContent(maDocument.getElementById("click-diagnostics"));
+        const hasMissions = this.elementHasVisibleContent(maDocument.getElementById("missions-list"));
+        const hasInventory = this.elementHasVisibleContent(maDocument.getElementById("inventory-info"));
+
+        this.updateSeparatorVisibility("hud-separator-1", hasCellDetails && (hasDiagnostics || hasMissions || hasInventory));
+        this.updateSeparatorVisibility("hud-separator-2", hasDiagnostics && (hasMissions || hasInventory));
+        this.updateSeparatorVisibility("hud-separator-3", hasMissions && hasInventory);
     }
 
     addStoryMessage(message) {
@@ -18,20 +64,100 @@ class UIManager {
         msgEl.classList.add("story-message");
         msgEl.appendChild(maDocument.createTextNode(message));
         this.storyLog.appendChild(msgEl);
+        if (this.uiInfo) {
+            this.uiInfo.scrollTop = 0;
+        }
+        this.refreshHudSeparators();
     }
 
-    showEndGame() {
+    showEndGame(summaryText = "", playTimeText = "") {
         const overlay = maDocument.getElementById("end-game-overlay");
         if (overlay) {
+            this.setGameplayHudHidden(true);
             overlay.classList.remove("hidden");
+            const engravingSubtitle = maDocument.getElementById("engraving-subtitle");
+            if (engravingSubtitle) {
+                engravingSubtitle.innerHTML = "";
+                engravingSubtitle.textContent = playTimeText;
+            }
+            const endGameStory = maDocument.getElementById("end-game-story");
+            if (endGameStory) {
+                endGameStory.innerHTML = "";
+                endGameStory.textContent = summaryText;
+            }
             const playAgainBtn = maDocument.getElementById("play-again-btn");
             if (playAgainBtn) {
                 playAgainBtn.onclick = () => {
                     this.gameState.resetGame();
                 };
             }
+            const viewWorldBtn = maDocument.getElementById("view-world-btn");
+            if (viewWorldBtn) {
+                viewWorldBtn.onclick = () => {
+                    if (this.onViewWorld) {
+                        this.onViewWorld();
+                    }
+                };
+            }
+            this.hideWorldViewHud();
             pLog.log(97);
         }
+        this.refreshHudSeparators();
+    }
+
+    hideEndGame() {
+        const overlay = maDocument.getElementById("end-game-overlay");
+        if (overlay) {
+            overlay.classList.add("hidden");
+        }
+        this.refreshHudSeparators();
+    }
+
+    showWorldViewHud() {
+        this.setGameplayHudHidden(true);
+        this.addStoryMessage("Though you have perished, your world lives on. Explore and save some memories. Zoom out to view the whole globe.");
+        const exitWorldViewBtn = maDocument.getElementById("exit-world-view-btn");
+        if (exitWorldViewBtn) {
+            exitWorldViewBtn.classList.remove("hidden");
+            exitWorldViewBtn.onclick = () => {
+                if (this.onExitWorldView) {
+                    this.onExitWorldView();
+                }
+            };
+        }
+        this.refreshHudSeparators();
+    }
+
+    hideWorldViewHud() {
+        const exitWorldViewBtn = maDocument.getElementById("exit-world-view-btn");
+        if (exitWorldViewBtn) {
+            exitWorldViewBtn.classList.add("hidden");
+        }
+        this.refreshHudSeparators();
+    }
+
+    playNamedSound(name) {
+        if (this.soundEffects && this.soundEffects.playSound) {
+            this.soundEffects.playSound(name);
+        }
+    }
+
+    beginEndGameMusicMode(onFadeComplete = null) {
+        if (this.soundEffects && this.soundEffects.enterEndGameMusicMode) {
+            this.soundEffects.enterEndGameMusicMode(onFadeComplete);
+            return;
+        }
+
+        if (typeof onFadeComplete === 'function') {
+            onFadeComplete();
+        }
+    }
+
+    playZzFxSound(name) {
+        if (!zzSoundEffects || !zzSoundEffects[name] || !this.soundEffects || !this.soundEffects.playZzFX) {
+            return;
+        }
+        this.soundEffects.playZzFX(zzSoundEffects[name]);
     }
 
     getCharacterEmoji(type) {
@@ -59,6 +185,48 @@ class UIManager {
         }
     }
 
+    createSpriteImageIfAvailable(name, isCharacter = false, scale = 2, displaySizePx = 20) {
+        if (typeof SpriteLibrary === 'undefined' || typeof PCEImageLibrary === 'undefined') {
+            return null;
+        }
+
+        const frameNames = SpriteLibrary.getFrameNamesForName(name);
+        const frameName = SpriteLibrary.getCurrentFrameName(frameNames);
+        if (!frameName) {
+            return null;
+        }
+
+        const pceImage = PCEImageLibrary.pceImageForName(frameName);
+        if (!pceImage || !pceImage.width || !pceImage.height) {
+            return null;
+        }
+
+        const img = maDocument.createElement("img");
+        img.src = pceImage.generatePNG(scale);
+        img.alt = name;
+        img.style.width = `${displaySizePx}px`;
+        img.style.height = `${displaySizePx}px`;
+        img.style.objectFit = "contain";
+        img.style.verticalAlign = "middle";
+        img.style.marginRight = "1px";
+        if (isCharacter) {
+            img.style.imageRendering = "pixelated";
+        }
+        return img;
+    }
+
+    appendInventoryVisual(span, name, fallbackText, isCharacter = false) {
+        const inventoryDisplaySize = (!isCharacter && ["carrot", "wood", "seed"].includes(name)) ? 26 : 20;
+        const spriteImg = this.createSpriteImageIfAvailable(name, isCharacter, 2, inventoryDisplaySize);
+        if (spriteImg) {
+            span.appendChild(spriteImg);
+            return true;
+        }
+
+        span.appendChild(maDocument.createTextNode(fallbackText));
+        return false;
+    }
+
     showStatus(message) {
         const el = maDocument.getElementById("cell-details");
         if (el) {
@@ -72,12 +240,13 @@ class UIManager {
             msgDiv.appendChild(maDocument.createTextNode(message));
             el.appendChild(msgDiv);
         }
+        this.refreshHudSeparators();
     }
 
     updateCellDetails(x, y, cell, actionMessage = "") {
         const el = maDocument.getElementById("cell-details");
         if (!el) return;
-        el.innerHTML = ""; 
+        el.innerHTML = "";
 
         if (actionMessage) {
             const msgDiv = maDocument.createElement("div");
@@ -90,23 +259,20 @@ class UIManager {
             el.appendChild(msgDiv);
         }
 
-        let info = `Cell [${x}, ${y}]: ${cell.landType}`;
-        if (cell.item) info += `, Item: ${cell.item}`;
-        if (cell.character) {
-            info += `, Character: ${cell.character.type}`;
-            if (cell.character.type === "Egg") info += ` (Hatches into ${cell.character.hatchesInto})`;
-            if (cell.character.owned) info += " (Owned)";
-            if (cell.character.isHungry) info += " [Hungry!]";
-        }
-        el.appendChild(maDocument.createTextNode(info));
+        this.refreshHudSeparators();
     }
 
     updateMissions() {
         const el = maDocument.getElementById("missions-list");
         if (!el) return;
-        el.innerHTML = ""; 
+        if (this.gameState.state.gameEnded) {
+            this.setGameplayHudHidden(true);
+            return;
+        }
+        this.setGameplayHudHidden(false);
+        el.innerHTML = "";
         pLog.log(16);
-        
+
         const title = maDocument.createElement("b");
         title.appendChild(maDocument.createTextNode("Current Missions:"));
         el.appendChild(title);
@@ -128,7 +294,7 @@ class UIManager {
         if (hungryCount > 0) {
             const plural = hungryCount > 1 ? "s" : "";
             if (hungryCount > 1) { pLog.log(17); } else { pLog.log(18); }
-            missions.push({ 
+            missions.push({
                 text: `Feed hungry animal${plural}`,
                 cost: `${hungryCount} carrot${hungryCount > 1 ? 's' : ''}`
             });
@@ -143,23 +309,23 @@ class UIManager {
         }
 
         if (this.gameState.state.housesCount === 0 && this.gameState.inventory.getQuantity("wood") >= Tuning.HOUSE_WOOD_COST) {
-            missions.push({ 
+            missions.push({
                 text: "Build house",
                 cost: `${Tuning.HOUSE_WOOD_COST} wood`
             });
         } else if (this.gameState.state.housesCount >= 1 && this.gameState.state.housesCount < 10) {
             const remaining = 10 - this.gameState.state.housesCount;
             if (remaining > 1) { pLog.log(19); } else { pLog.log(20); }
-            missions.push({ 
+            missions.push({
                 text: `Build village (${remaining} more ${remaining === 1 ? 'house' : 'houses'})`,
                 cost: `${Tuning.HOUSE_WOOD_COST} wood each`
             });
         } else if (this.gameState.state.housesCount >= 10 && !this.gameState.state.researchCenterBuilt) {
-            const canAfford = this.gameState.inventory.getQuantity("wood") >= Tuning.RESEARCH_CENTER_WOOD_COST && 
+            const canAfford = this.gameState.inventory.getQuantity("wood") >= Tuning.RESEARCH_CENTER_WOOD_COST &&
                               this.gameState.inventory.getQuantity("carrot") >= Tuning.RESEARCH_CENTER_FOOD_COST;
             const status = this.gameState.state.isBuildingResearchCenter ? " (Select desert or grass cell)" : "";
-            missions.push({ 
-                text: "Build Research Center", 
+            missions.push({
+                text: "Build Research Center",
                 status: status,
                 className: "research-center-mission",
                 style: canAfford ? 'color:#4CAF50; cursor:pointer; text-decoration:underline;' : 'color:#888; cursor:not-allowed;',
@@ -168,28 +334,28 @@ class UIManager {
         } else if (this.gameState.state.researchCenterBuilt) {
             const lvl = this.gameState.state.researchLevel;
             if (lvl === 0) {
-                const canAfford = this.gameState.inventory.getQuantity("wood") >= Tuning.RESEARCH_AUTOHARVEST_WOOD_COST && 
+                const canAfford = this.gameState.inventory.getQuantity("wood") >= Tuning.RESEARCH_AUTOHARVEST_WOOD_COST &&
                                   this.gameState.inventory.getQuantity("carrot") >= Tuning.RESEARCH_AUTOHARVEST_FOOD_COST;
                 pLog.log(27);
-                missions.push({ 
-                    text: "Research auto-harvesting", className: "research-tier-mission", dataLvl: 1, 
+                missions.push({
+                    text: "Research auto-harvesting", className: "research-tier-mission", dataLvl: 1,
                     style: canAfford ? 'color:#4CAF50; cursor:pointer; text-decoration:underline;' : 'color:#888; cursor:not-allowed;',
                     cost: `${Tuning.RESEARCH_AUTOHARVEST_WOOD_COST} wood, ${Tuning.RESEARCH_AUTOHARVEST_FOOD_COST} carrots`
                 });
             } else if (lvl === 1) {
-                const canAfford = this.gameState.inventory.getQuantity("wood") >= Tuning.RESEARCH_AUTOFEED_WOOD_COST && 
+                const canAfford = this.gameState.inventory.getQuantity("wood") >= Tuning.RESEARCH_AUTOFEED_WOOD_COST &&
                                   this.gameState.inventory.getQuantity("carrot") >= Tuning.RESEARCH_AUTOFEED_FOOD_COST;
                 pLog.log(28);
-                missions.push({ 
+                missions.push({
                     text: "Research auto-feeding", className: "research-tier-mission", dataLvl: 2,
                     style: canAfford ? 'color:#4CAF50; cursor:pointer; text-decoration:underline;' : 'color:#888; cursor:not-allowed;',
                     cost: `${Tuning.RESEARCH_AUTOFEED_WOOD_COST} wood, ${Tuning.RESEARCH_AUTOFEED_FOOD_COST} carrots`
                 });
             } else if (lvl === 2) {
-                const canAfford = this.gameState.inventory.getQuantity("wood") >= Tuning.RESEARCH_MINING_WOOD_COST && 
+                const canAfford = this.gameState.inventory.getQuantity("wood") >= Tuning.RESEARCH_MINING_WOOD_COST &&
                                   this.gameState.inventory.getQuantity("carrot") >= Tuning.RESEARCH_MINING_FOOD_COST;
                 pLog.log(29);
-                missions.push({ 
+                missions.push({
                     text: "Research mining", className: "research-tier-mission", dataLvl: 3,
                     style: canAfford ? 'color:#4CAF50; cursor:pointer; text-decoration:underline;' : 'color:#888; cursor:not-allowed;',
                     cost: `${Tuning.RESEARCH_MINING_WOOD_COST} wood, ${Tuning.RESEARCH_MINING_FOOD_COST} carrots`
@@ -201,8 +367,8 @@ class UIManager {
                         missions.push({ text: "Gather ore" });
                     } else {
                         const status = this.gameState.state.isBuildingCommunicationTower ? " (Select desert or grass cell)" : "";
-                        missions.push({ 
-                            text: "Build Communication Tower", 
+                        missions.push({
+                            text: "Build Communication Tower",
                             status: status,
                             className: "comm-tower-mission",
                             style: 'color:#4CAF50; cursor:pointer; text-decoration:underline;',
@@ -212,17 +378,17 @@ class UIManager {
                 } else if (this.gameState.state.housesCount < 30) {
                     const remaining = 30 - this.gameState.state.housesCount;
                     pLog.log(73);
-                    missions.push({ 
+                    missions.push({
                         text: `Build city (${remaining} more ${remaining === 1 ? 'house' : 'houses'})`,
                         cost: `${Tuning.HOUSE_WOOD_COST} wood each`
                     });
         } else if (!this.gameState.state.victoryClaimed) {
                     pLog.log(21);
-                    missions.push({ 
-                        text: "Invite settlers", 
+                    missions.push({
+                        text: "Invite settlers",
                         status: " (claim victory)",
-                        className: "victory-mission", 
-                        style: "color:#FFD700; font-weight:bold; cursor:pointer; text-decoration:underline;" 
+                        className: "victory-mission",
+                        style: "color:#FFD700; font-weight:bold; cursor:pointer; text-decoration:underline;"
                     });
                 } else {
                     pLog.log(94);
@@ -238,7 +404,7 @@ class UIManager {
 
         missions.forEach(m => {
             const item = maDocument.createElement("div");
-            
+
             let itemStyle = "";
             let actionStyle = "";
             if (m.style) {
@@ -285,12 +451,18 @@ class UIManager {
             }
             el.appendChild(item);
         });
+        this.refreshHudSeparators();
     }
 
     updateInventoryUI() {
         const el = maDocument.getElementById("inventory-info");
         if (!el) return;
-        el.innerHTML = ""; 
+        if (this.gameState.state.gameEnded) {
+            this.setGameplayHudHidden(true);
+            return;
+        }
+        this.setGameplayHudHidden(false);
+        el.innerHTML = "";
         el.appendChild(maDocument.createTextNode("Inventory: "));
         const items = this.gameState.inventory.getAllItems();
         const itemKeys = Object.keys(items);
@@ -301,7 +473,8 @@ class UIManager {
         } else {
             for (const item of itemKeys) {
                 const span = maDocument.createElement("span");
-                span.appendChild(maDocument.createTextNode(`${this.getItemEmoji(item)} x${items[item]}`));
+                const usedSprite = this.appendInventoryVisual(span, item, this.getItemEmoji(item));
+                span.appendChild(maDocument.createTextNode(`${usedSprite ? '' : ' '}x${items[item]}`));
                 el.appendChild(span);
             }
         }
@@ -320,10 +493,11 @@ class UIManager {
         const charKeys = Object.keys(ownedChars);
         if (charKeys.length > 0) {
             el.appendChild(maDocument.createElement("br"));
-            el.appendChild(maDocument.createTextNode("Characters: "));
+            el.appendChild(maDocument.createTextNode("Animals: "));
             for (const type of charKeys) {
                 const span = maDocument.createElement("span");
-                span.appendChild(maDocument.createTextNode(`${this.getCharacterEmoji(type)} x${ownedChars[type]}`));
+                const usedSprite = this.appendInventoryVisual(span, type, this.getCharacterEmoji(type), true);
+                span.appendChild(maDocument.createTextNode(`${usedSprite ? '' : ' '}x${ownedChars[type]}`));
                 const hungryCount = hungryChars[type] || 0;
                 if (hungryCount > 0) {
                     const small = maDocument.createElement("small");
@@ -331,7 +505,7 @@ class UIManager {
                     small.style.color = "red";
                     small.style.cursor = "pointer";
                     small.style.textDecoration = "underline";
-                    small._type = type; 
+                    small._type = type;
                     span.appendChild(maDocument.createTextNode(" "));
                     small.appendChild(maDocument.createTextNode(`(Hungry: ${hungryCount})`));
                     span.appendChild(small);
@@ -340,6 +514,7 @@ class UIManager {
             }
         }
         this.updateMissions();
+        this.refreshHudSeparators();
     }
 
     loadGame() {
@@ -354,15 +529,16 @@ class UIManager {
     handleMissionClick(target) {
         if (this.soundEffects) this.soundEffects.requestSong();
         if (target.closest(".victory-mission")) {
-            this.showStatus("Victory! Settlers are arriving.");
             this.gameState.state.victoryClaimed = true;
             this.updateMissions();
-            this.gameState.triggerStory("victory", this);
             this.gameState.save();
+            if (this.onInviteSettlers) {
+                this.onInviteSettlers();
+            }
             pLog.log(93);
             return true;
         }
-        
+
         if (target.closest(".research-center-mission")) {
             const woodCost = Tuning.RESEARCH_CENTER_WOOD_COST;
             const foodCost = Tuning.RESEARCH_CENTER_FOOD_COST;
@@ -391,6 +567,7 @@ class UIManager {
                 for (let i = 0; i < foodCost; i++) this.gameState.inventory.removeItem("carrot");
                 this.gameState.state.researchLevel = targetLvl;
                 this.updateInventoryUI();
+                this.playNamedSound("researchUpgrade");
                 pLog.log(45);
                 this.gameState.save();
             } else {
@@ -426,6 +603,7 @@ class UIManager {
                 if (this.gameState.establishResearchCenter(x, y)) {
                     this.updateInventoryUI();
                     this.updateCellDetails(x, y, cell, "Research Center established!");
+                    this.playZzFxSound("build");
                     this.gameState.save();
                     pLog.log(86);
                 } else {
@@ -437,6 +615,7 @@ class UIManager {
                 if (this.gameState.buildCommunicationTower(x, y)) {
                     this.updateInventoryUI();
                     this.updateCellDetails(x, y, cell, "Communication Tower established!");
+                    this.playZzFxSound("build");
                     this.gameState.triggerStory("tower", this);
                     this.gameState.save();
                     pLog.log(87);
@@ -449,6 +628,7 @@ class UIManager {
                 if (this.gameState.feedAnimal(x, y)) {
                     this.updateInventoryUI();
                     this.updateCellDetails(x, y, cell, "Fed the animal!");
+                    this.playZzFxSound("feedAnimal");
                     this.gameState.save();
                     pLog.log(88);
                 } else {
@@ -460,6 +640,7 @@ class UIManager {
                 if (this.gameState.recruitAnimal(x, y)) {
                     this.updateInventoryUI();
                     this.updateCellDetails(x, y, cell, "Animal recruited!");
+                    this.playNamedSound("recruitAnimal");
                     this.gameState.triggerStory("animal", this);
                     this.gameState.save();
                     pLog.log(89);
@@ -471,6 +652,7 @@ class UIManager {
                 pLog.log(22);
                 this.updateInventoryUI();
                 this.updateCellDetails(x, y, cell, `Gathered ${gathered}!`);
+                this.playNamedSound(gathered === "ore" ? "mineOre" : "harvest");
                 if (gathered === "carrot") this.gameState.triggerStory("carrot", this);
                 else if (gathered === "wood") this.gameState.triggerStory("wood", this);
                 else if (gathered === "ore") this.gameState.triggerStory("ore", this);
@@ -480,10 +662,12 @@ class UIManager {
                 this.gameState.save();
                 this.updateInventoryUI();
                 this.updateCellDetails(x, y, cell, "Planted a farm!");
+                this.playZzFxSound("plantSeed");
             } else if (this.gameState.buildHouse(x, y)) {
                 pLog.log(24);
                 this.updateInventoryUI();
                 this.updateCellDetails(x, y, cell, "Built a house!");
+                this.playZzFxSound("build");
                 this.gameState.triggerStory("house", this);
                 this.gameState.save();
             } else {
@@ -493,9 +677,9 @@ class UIManager {
         } else {
             const revealed = this.gameState.revealCell(x, y);
             if (revealed) {
-                this.updateCellDetails(x, y, revealed, "Revealed!");
                 this.updateMissions();
                 this.gameState.save();
+                this.playZzFxSound("reveal");
                 pLog.log(90);
                 return true;
             }

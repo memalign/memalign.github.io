@@ -63,6 +63,7 @@ class ThreeMapRenderer {
         this.transitionRotationY = 0;
         this.targetTransitionRotationX = 0;
         this.targetTransitionRotationY = 0;
+        this.transitionGeometryFrozen = false;
         this.hasInitialViewSync = false;
 
         this.renderState = ThreeMapRenderer.RENDER_STATES.GRID_2D;
@@ -197,6 +198,40 @@ class ThreeMapRenderer {
             return cellSize <= minCellSize ? 1 : 0;
         }
         return this.smoothstep((thresholds.globeEnter - cellSize) / span);
+    }
+
+    getCellSizeForPostFormationZoomProgress(progress) {
+        const thresholds = this.getStateThresholds();
+        const minCellSize = Tuning.CAMERA_MIN_CELL_SIZE || 1.25;
+        const span = thresholds.globeEnter - minCellSize;
+        if (span <= 0) {
+            return minCellSize;
+        }
+
+        const target = MapProjection.clamp(progress, 0, 1);
+        let low = 0;
+        let high = 1;
+        for (let i = 0; i < 18; i++) {
+            const mid = (low + high) * 0.5;
+            if (this.smoothstep(mid) < target) {
+                low = mid;
+            } else {
+                high = mid;
+            }
+        }
+
+        return thresholds.globeEnter - (((low + high) * 0.5) * span);
+    }
+
+    getPostFormationZoomCellSizeLimit() {
+        const maxProgress = Tuning.THREE_SURFACE_MAX_POST_FORMATION_ZOOM ?? 0.8085;
+        return this.getCellSizeForPostFormationZoomProgress(maxProgress);
+    }
+
+    shouldFreezeTransitionGeometry(cellSize) {
+        const minCellSize = Tuning.CAMERA_MIN_CELL_SIZE || 1.25;
+        const freezeHeadroom = Tuning.THREE_SURFACE_GEOMETRY_FREEZE_HEADROOM ?? 1.57;
+        return (cellSize - minCellSize) <= freezeHeadroom;
     }
 
     applyLatLonDelta(lonDelta, latDelta) {
@@ -471,17 +506,17 @@ class ThreeMapRenderer {
         const pitchDelta = deltaY * rotationSensitivity;
         this.applySurfaceRotation(yawDelta, pitchDelta);
 
-        const momentumBoost = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_BOOST ?? 0.03, 0, 0.25);
-        const momentumBlend = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_BLEND ?? 0.12, 0, 0.85);
-        const maxVelocity = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_MAX_SPEED ?? 0.005, 0.001, 0.03);
+        const momentumBoost = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_BOOST ?? 0.75, 0, 1.5);
+        const momentumBlend = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_BLEND ?? 0.55, 0, 0.95);
+        const maxVelocity = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_MAX_SPEED ?? 0.06, 0.001, 0.12);
         this.spinVelocityLon = MapProjection.clamp((this.spinVelocityLon * momentumBlend) + (yawDelta * momentumBoost), -maxVelocity, maxVelocity);
         this.spinVelocityLat = MapProjection.clamp((this.spinVelocityLat * momentumBlend) + (pitchDelta * momentumBoost), -maxVelocity, maxVelocity);
     }
 
     updateInteractiveView() {
-        const damping = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_DAMPING ?? 0.78, 0.55, 0.95);
-        const minSpeed = Math.max(0.000001, Tuning.THREE_SURFACE_MOMENTUM_MIN_SPEED ?? 0.00008);
-        const maxVelocity = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_MAX_SPEED ?? 0.005, 0.001, 0.03);
+        const damping = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_DAMPING ?? 0.965, 0.55, 0.985);
+        const minSpeed = Math.max(0.000001, Tuning.THREE_SURFACE_MOMENTUM_MIN_SPEED ?? 0.000015);
+        const maxVelocity = MapProjection.clamp(Tuning.THREE_SURFACE_MOMENTUM_MAX_SPEED ?? 0.06, 0.001, 0.12);
 
         if (Math.abs(this.spinVelocityLon) > minSpeed || Math.abs(this.spinVelocityLat) > minSpeed) {
             const yawDelta = MapProjection.clamp(this.spinVelocityLon, -maxVelocity, maxVelocity);
@@ -552,31 +587,6 @@ class ThreeMapRenderer {
             g: parseInt(normalized.slice(2, 4), 16),
             b: parseInt(normalized.slice(4, 6), 16)
         };
-    }
-
-    getCharacterEmoji(type) {
-        switch (type) {
-            case 'WaterAnimal': return '🐬';
-            case 'FireAnimal': return '🔥';
-            case 'GrassAnimal': return '🐘';
-            case 'Egg': return '🥚';
-            default: return '🦁';
-        }
-    }
-
-    getItemEmoji(item) {
-        switch (item) {
-            case 'Space Ship': return '🚀';
-            case 'seed': return '🌱';
-            case 'carrot': return '🥕';
-            case 'tree': return '🌳';
-            case 'wood': return '🪵';
-            case 'house': return '🏠';
-            case 'Research Center': return '🔬';
-            case 'ore': return '🪨';
-            case 'Communication Tower': return '📡';
-            default: return '📦';
-        }
     }
 
     blendColors(colorA, colorB, amount) {
@@ -702,11 +712,9 @@ class ThreeMapRenderer {
 
         const ctx = this.textureContext;
         const iconsVisible = !terrainOnly && effectiveCurveProgress < 0.72;
+        const spriteNowMs = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
         ctx.imageSmoothingEnabled = false;
         ctx.clearRect(0, 0, width, height);
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = `${Math.max(10, Math.floor(cellPixels * 0.9))}px Arial`;
 
         for (let y = 0; y < grid.height; y++) {
             for (let x = 0; x < grid.width; x++) {
@@ -737,10 +745,25 @@ class ThreeMapRenderer {
 
                     const shouldAlwaysShowIcon = cell.item === 'Space Ship' || cell.item === 'Research Center' || cell.item === 'Communication Tower' || cell.item === 'house';
                     if (iconsVisible && (cell.revealed || grid.debugRevealAll || shouldAlwaysShowIcon)) {
-                        const icon = cell.character
-                            ? this.getCharacterEmoji(cell.character.type)
-                            : (cell.item ? this.getItemEmoji(cell.item) : '');
-                        if (icon) {
+                        const didDrawSprite = SpriteLibrary.drawCellSprite(
+                            ctx,
+                            cell,
+                            drawX,
+                            drawY,
+                            cellPixels,
+                            cellPixels,
+                            {
+                                paddingRatio: 0.02,
+                                nowMs: spriteNowMs
+                            }
+                        );
+                        if (!didDrawSprite) {
+                            const icon = cell.character
+                                ? '🦁'
+                                : '📦';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.font = `${Math.max(10, Math.floor(cellPixels * 0.9))}px Arial`;
                             ctx.fillStyle = '#ffffff';
                             ctx.fillText(icon, drawX + (cellPixels / 2), drawY + (cellPixels / 2) + 0.5);
                         }
@@ -997,8 +1020,14 @@ class ThreeMapRenderer {
 
         const imageAspect = this.textureWidth / Math.max(this.textureHeight, 1);
         const transitionCurveRaw = this.getTransitionCurve(camera.cellSize);
-        const transitionCurve = transitionCurveRaw >= 0.96 ? 1 : transitionCurveRaw;
-        this.updateTransitionGeometry(transitionCurve, imageAspect);
+        const shouldFreezeGeometry = this.shouldFreezeTransitionGeometry(camera.cellSize);
+        const transitionCurve = shouldFreezeGeometry ? 1 : (transitionCurveRaw >= 0.96 ? 1 : transitionCurveRaw);
+        if (shouldFreezeGeometry) {
+            this.transitionGeometryFrozen = true;
+        } else {
+            this.transitionGeometryFrozen = false;
+            this.updateTransitionGeometry(transitionCurve, imageAspect);
+        }
         this.syncTransitionCamera(transitionCurve, imageAspect, camera.cellSize);
         this.logTransitionDiagnostics(camera, transitionCurveRaw, transitionCurve, imageAspect);
         this.renderer.render(this.scene, this.camera3d);
@@ -1142,6 +1171,24 @@ class ThreeMapRenderer {
 
     shouldUseFlatFallback(cellSize) {
         return this.getRenderState(cellSize) === ThreeMapRenderer.RENDER_STATES.GRID_2D;
+    }
+
+    captureCurrentFrame(options = {}) {
+        if (!this.renderCanvas || typeof document === 'undefined') {
+            return null;
+        }
+
+        const outputCanvas = document.createElement('canvas');
+        outputCanvas.width = Math.max(1, this.renderCanvas.width || Math.round(this.canvasWidth));
+        outputCanvas.height = Math.max(1, this.renderCanvas.height || Math.round(this.canvasHeight));
+
+        const outputCtx = outputCanvas.getContext('2d');
+        outputCtx.imageSmoothingEnabled = true;
+        outputCtx.fillStyle = options.backgroundColor || '#000000';
+        outputCtx.fillRect(0, 0, outputCanvas.width, outputCanvas.height);
+        outputCtx.drawImage(this.renderCanvas, 0, 0);
+
+        return outputCanvas;
     }
 
     render(ctx, grid, camera, showRegionDebugOrOptions = false) {

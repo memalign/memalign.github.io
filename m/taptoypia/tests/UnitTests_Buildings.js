@@ -67,7 +67,7 @@ class UnitTests_Buildings {
         destination: {}
     };
     soundEffects.setAudioContext(mockAudioContext);
-    soundEffects.soundEffects["../song.mp3"] = "dummy-buffer";
+    soundEffects.soundEffects["song.mp3"] = "dummy-buffer";
 
     const uiManager = new UIManager(gameState, soundEffects);
     
