@@ -1,6 +1,6 @@
 Title: Slice Tap Toy
 Date: 5/13/2024
-Tags: Programming, Games
+Tags: Programming, Games, Tap Toy
 [Image:/m/slice/slice.jpg]
 
 Introducing my latest project, playable right in your web browser: [Link:/m/slice/index.html]Slice Tap Toy[/Link]

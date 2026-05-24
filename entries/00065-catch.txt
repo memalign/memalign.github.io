@@ -1,6 +1,6 @@
 Title: Catch Tap Toy
 Date: 3/13/2026
-Tags: Programming, Games
+Tags: Programming, Games, Tap Toy
 
 [Image:/m/catch/catch.png]
 

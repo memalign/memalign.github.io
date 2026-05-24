@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/json" href="/feed.json" />
+<link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+<title>TapToyPia</title>
+<meta property="og:title" content="TapToyPia" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://memalign.github.io/p/taptoypia.html" />
+<meta property="og:image" content="https://memalign.github.io/m/taptoypia/taptoypia.png" />
+<meta property="og:description" content="Introducing TapToyPia, the latest addition to the Tap Toy series. (See also: Catch Tap Toy, Counting Tap Toy, Slice Tap Toy, Fireworks Tap Toy, Tap Toy) In TapToyPia, you are…" />
+<link rel="stylesheet" href="/style.css">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes'>
+</head>
+<body>
+<div id="body">
+<a href='/index.html'>Home</a><div id='post'>
+<div id='header'>
+<h1>
+TapToyPia
+</h1>
+</div>
+<img src="/m/taptoypia/taptoypia.png">
+<div id='postdate'>Posted on 5/24/2026<br />
+Tags: <a href='/tags.html'>Programming</a>, <a href='/tags.html'>Games</a>, <a href='/tags.html'>Tap Toy</a></div>
+Introducing <a href="/m/taptoypia/index.html">TapToyPia</a>, the latest addition to the Tap Toy series.<br />
+<br />
+(See also: <a href="/m/catch/index.html">Catch Tap Toy</a>, <a href="/m/counting/index.html">Counting Tap Toy</a>, <a href="/m/slice/index.html">Slice Tap Toy</a>, <a href="/m/fireworks/index.html">Fireworks Tap Toy</a>, <a href="/m/taptoy/index.html">Tap Toy</a>)<br />
+<br />
+In TapToyPia, you are an explorer sent on a one-way mission to a new planet. Your mission: build a settlement that can serve as a new home for humanity. While you explore, you discover flora and fauna to help you.<br />
+<br />
+You can play it in the browser or add it to your home screen as a progressive web app.<br />
+<br />
+<br />
+The inspiration and development details:<br />
+<br />
+My wife started playing Pokopia and told me it's the best game she's ever played. I watched her play for 10 minutes and thought that a simple demake inspired by Pokopia could be satisfying to play.<br />
+<br />
+I fired up Gemini CLI or OpenAI's Codex (I can't remember which I started with, though I ended up using Codex for most of the project due to Gemini's free tier losing pro models... and then being killed by Google permanently). I got a quick prototype working right away.<br />
+<br />
+The game mechanic is inspired by clicker games and maybe also Minesweeper though that wasn't a conscious influence.<br />
+<br />
+I tried to build a game that captures the zen of Pokopia's world rehabilitation and the building-up-to-greater-complexity of clicker games (such as my favorite, <a href="/p/universal-paperclips.html">Universal Paperclips</a>).<br />
+<br />
+On top of the simple game mechanic I layered on some story and my own sense of humor.<br />
+<br />
+The game should be beatable in ~30 minutes. My 4-year-old played through twice, on separate international flights, and it held his attention well for about that long each time.<br />
+<br />
+As usual for projects aided by generative AI, I found myself building something more ambitious. The biggest example in this project is that you can zoom out from the 2D map to seamlessly transition to an interactive view of the 3D planet. Without genAI, I wouldn't have the time to figure out how to build this myself for a side project like this.<br />
+<br />
+Like my projects without generative AI assistance, I found unit test coverage to be key to moving quickly and trusting that changes were safe. I made sure tests could be run both in the browser and with node at the command-line. The AI tools can run tests with node, which makes for very effective and fast iteration.<br />
+<br />
+<br />
+Credits and tools:<br />
+<br />
+I used royalty free <a href="https://www.free-stock-music.com/fsm-team-alien-forest-loop.html">music</a>. Credit:<br />
+<div id='code'>Alien Forest (Loop)<br />
+Music by https://www.free-stock-music.com</div>
+As usual, I used my <a href="/m/pceimage/index.html">PCEImage Editor</a> to create graphics. I hand-made every image you see in the game.<br />
+<br />
+I used <a href="https://frankforce.com">Frank Force</a>'s tiny <a href="https://killedbyapixel.github.io/ZzFX/">ZzFX</a> library for sound effects. (<a href="/m/zzfx/index.html">backup</a>)<br />
+<br />
+I also used some sound effects from Chequered Ink's <a href="https://ci.itch.io/400-sounds-pack">400 Sounds Pack</a>, which is very permissively licensed to not even require attribution for commercial use.<br />
+
+</div>
+
+</div>
+<div id="footer"></div>
+</body>
+</html>

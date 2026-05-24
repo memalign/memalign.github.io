@@ -1,6 +1,6 @@
 Title: Fireworks Tap Toy
 Date: 9/17/2023
-Tags: Programming, Art, Games
+Tags: Programming, Art, Games, Tap Toy
 [Image:/m/fireworks/fireworks.png]
 
 Introducing my latest project: [Link:/m/fireworks/index.html]Fireworks Tap Toy[/Link]

@@ -1,0 +1,47 @@
+Title: TapToyPia
+Date: 5/24/2026
+Tags: Programming, Games, Tap Toy
+
+[Image:/m/taptoypia/taptoypia.png]
+
+Introducing [Link:/m/taptoypia/index.html]TapToyPia[/Link], the latest addition to the Tap Toy series.
+
+(See also: [Link:/m/catch/index.html]Catch Tap Toy[/Link], [Link:/m/counting/index.html]Counting Tap Toy[/Link], [Link:/m/slice/index.html]Slice Tap Toy[/Link], [Link:/m/fireworks/index.html]Fireworks Tap Toy[/Link], [Link:/m/taptoy/index.html]Tap Toy[/Link])
+
+In TapToyPia, you are an explorer sent on a one-way mission to a new planet. Your mission: build a settlement that can serve as a new home for humanity. While you explore, you discover flora and fauna to help you.
+
+You can play it in the browser or add it to your home screen as a progressive web app.
+
+
+The inspiration and development details:
+
+My wife started playing Pokopia and told me it's the best game she's ever played. I watched her play for 10 minutes and thought that a simple demake inspired by Pokopia could be satisfying to play.
+
+I fired up Gemini CLI or OpenAI's Codex (I can't remember which I started with, though I ended up using Codex for most of the project due to Gemini's free tier losing pro models... and then being killed by Google permanently). I got a quick prototype working right away.
+
+The game mechanic is inspired by clicker games and maybe also Minesweeper though that wasn't a conscious influence.
+
+I tried to build a game that captures the zen of Pokopia's world rehabilitation and the building-up-to-greater-complexity of clicker games (such as my favorite, [Link:/p/universal-paperclips.html]Universal Paperclips[/Link]).
+
+On top of the simple game mechanic I layered on some story and my own sense of humor.
+
+The game should be beatable in ~30 minutes. My 4-year-old played through twice, on separate international flights, and it held his attention well for about that long each time.
+
+As usual for projects aided by generative AI, I found myself building something more ambitious. The biggest example in this project is that you can zoom out from the 2D map to seamlessly transition to an interactive view of the 3D planet. Without genAI, I wouldn't have the time to figure out how to build this myself for a side project like this.
+
+Like my projects without generative AI assistance, I found unit test coverage to be key to moving quickly and trusting that changes were safe. I made sure tests could be run both in the browser and with node at the command-line. The AI tools can run tests with node, which makes for very effective and fast iteration.
+
+
+Credits and tools:
+
+I used royalty free [Link:https://www.free-stock-music.com/fsm-team-alien-forest-loop.html]music[/Link]. Credit:
+[Code]
+Alien Forest (Loop)
+Music by https://www.free-stock-music.com
+[/Code]
+
+As usual, I used my [Link:/m/pceimage/index.html]PCEImage Editor[/Link] to create graphics. I hand-made every image you see in the game.
+
+I used [Link:https://frankforce.com]Frank Force[/Link]'s tiny [Link:https://killedbyapixel.github.io/ZzFX/]ZzFX[/Link] library for sound effects. ([Link:/m/zzfx/index.html]backup[/Link])
+
+I also used some sound effects from Chequered Ink's [Link:https://ci.itch.io/400-sounds-pack]400 Sounds Pack[/Link], which is very permissively licensed to not even require attribution for commercial use.

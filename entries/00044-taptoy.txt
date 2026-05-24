@@ -1,6 +1,6 @@
 Title: Tap Toy
 Date: 5/30/2022
-Tags: Programming, Art, Games
+Tags: Programming, Art, Games, Tap Toy
 [Image:/m/taptoy/taptoy.jpg]
 
 Introducing my latest project: [Link:/m/taptoy/index.html]Tap Toy[/Link]
