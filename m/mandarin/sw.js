@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-db2055d3654263ee2244485a252a2603';
+const cacheName = 'mandarin-c6001f979a5eecfb3ec2d2c3441a7cb0';
 const appShellFiles = [
   './cards/card-style.css',
   './cards/cards-4000.png',
@@ -29,6 +29,7 @@ const appShellFiles = [
   './img/animals.png',
   './img/annoy.png',
   './img/areyouhungry.png',
+  './img/argue.png',
   './img/badsmell.png',
   './img/ballcourt.png',
   './img/bambooshoots.png',
@@ -44,6 +45,7 @@ const appShellFiles = [
   './img/bite.png',
   './img/blanket.png',
   './img/blowyournose.png',
+  './img/body.png',
   './img/bokchoy.jpg',
   './img/book.png',
   './img/bored.png',
@@ -210,6 +212,7 @@ const appShellFiles = [
   './img/peanutbutter.png',
   './img/peas.png',
   './img/pee.png',
+  './img/physicalfight.png',
   './img/pickle.png',
   './img/pillow.png',
   './img/pink.png',
@@ -219,6 +222,7 @@ const appShellFiles = [
   './img/playground.png',
   './img/please.png',
   './img/poke.png',
+  './img/poor.png',
   './img/popsicle.png',
   './img/pot.png',
   './img/princess.png',
