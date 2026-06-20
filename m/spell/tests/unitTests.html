@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../src/Utilities.js"></script>
+<script src="../src/MADocument.js"></script>
+<script src="../src/MAStorage.js"></script>
+<script src="../src/GameRand.js"></script>
+<script src="../src/SpellGameRules.js"></script>
+<script src="../src/LetterReplenisher.js"></script>
+<script src="../src/SpellGame.js"></script>
+
+<script src="UnitTests.js"></script>
+
+<script>
+  maDocument = new MADocument(); // fake DOM will be used in tests
+  maStorage.forceMock();
+  let ut = new UnitTests()
+</script>
+
+<script src="UnitTests_SpellGameRules.js"></script>
+<script src="UnitTests_SpellGame.js"></script>
+<script src="UnitTests_QuoteQuest.js"></script>
+<script src="UnitTests_RPG.js"></script>
+<script src="UnitTests_LetterReplenisher.js"></script>
+
+<script>
+
+let actionLog = null
+let gameRand = null
+let stLocalStorage = null
+
+function _runUTBlock(runBlock) {
+  try {
+    MALog.clear()
+    assertionCount = 0
+    runBlock()
+  } catch(err) {
+    console.log("unitTests.html caught exception " + err + " with stack:\n" + err.stack)
+    throw err
+  } finally {
+    let outputDiv = document.getElementById("testOutput")
+    let content = document.createTextNode(MALog.logs.join("\n") + "\n\n")
+    outputDiv.appendChild(content)
+    let gameDiv = document.getElementById("game")
+    gameDiv.innerHTML = ''
+  }
+}
+
+function runUTTests() {
+  _runUTBlock(() => {
+    ut.run()
+  })
+}
+
+function runUTStress() {
+  document.getElementById("stressButton").disabled = true
+
+  setTimeout(() => {
+    _runUTBlock(() => {
+      ut.runStress()
+    })
+  }, 100);
+}
+
+
+let caughtError = null
+window.onerror = function (message, source, lineno, colno, error) {
+  console.log(`on error called. ${message} ${source} ${lineno} ${colno} ${error}`)
+  MALog.log(`on error called. ${message} ${source} ${lineno} ${colno} ${error.toString().replace(/\n/g, "<br>")}`)
+  caughtError = error
+  window.onerror = null
+  return false
+}
+
+window.onload = function () {
+  runUTTests()
+}
+
+</script>
+
+</head>
+
+<body>
+<pre>
+<div id="testOutput"></div>
+</pre>
+
+<button id="stressButton" onclick="runUTStress()">Run Stress Tests</button>
+<div id="game"></div>
+<div id="cheats" class="hidden"></div>
+
+<br />
+<br />
+</body>
+
+</html>
