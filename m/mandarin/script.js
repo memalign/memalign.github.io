@@ -65,11 +65,14 @@ function adjustWordTileTextToFit() {
 		const pinyin = t.querySelector('.pinyin')
 		const english = t.querySelector('.english-translation')
 		const chinese = t.querySelector('.chinese')
+    const emoji = t.querySelector('.emojiImage')
 
 		let amtWrapping = 0
 		amtWrapping += isWordWrapping(pinyin) ? 1 : 0
 		amtWrapping += englishVisible && isWordWrapping(english) ? 1 : 0
 		amtWrapping += !englishVisible && isWordWrapping(chinese) ? 1 : 0
+    // This is a quick but imperfect way to estimate whether there is more than one emoji and force a smaller emoji size
+    amtWrapping += emoji && (emoji.innerText.length > 2) ? 2 : 0
 
 		if (amtWrapping >= 2) {
 			const emojiImage = t.querySelector('.emojiImage')
