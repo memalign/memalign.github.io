@@ -110,7 +110,7 @@ function createStartupImage(imgURL, bgColor) {
 }
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('../sw.js?v=e3f63f540939680df0676f05f887acff')
+  navigator.serviceWorker.register('../sw.js?v=989bc59860f100016bb48d8d16816320')
   .then((reg) => {
     // registration worked
   }).catch((error) => {

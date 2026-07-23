@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-e3f63f540939680df0676f05f887acff';
+const cacheName = 'mandarin-989bc59860f100016bb48d8d16816320';
 const appShellFiles = [
   './cards/card-style.css',
   './cards/cards-4000.png',
