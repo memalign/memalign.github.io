@@ -266,10 +266,15 @@ let cardReviewCount = parseInt(localStorage.getItem('reviewCount') || '0', 10);
 
 // Function to get the next due word
 // Pass in wordToSkip (value of wordData.word) when we need the second next word
+let reviewSessionStart = Date.now(); // When the user began this review session
 function getNextWord(wordToSkip /* optional */) {
   const now = Date.now();
+  
+  if (now - reviewSessionStart > 20*60*1000) {
+    reviewSessionStart = now
+  }
 
-  const eligibleWords = wordToSkip ? wordList.filter(w => w.word !== wordToSkip) : wordList
+  let eligibleWords = wordToSkip ? wordList.filter(w => w.word !== wordToSkip) : wordList
 
   // Find the next word due for review
   let dueWords = eligibleWords.filter(word => {
@@ -279,6 +284,27 @@ function getNextWord(wordToSkip /* optional */) {
 
   // If all words are scheduled for the future, pick the earliest due with the lowest easeFactor
   if (dueWords.length === 0) {
+    // In the first few minutes, the user is drilling the least well known and newest cards.
+    // That becomes too repetitive so, after 3 minutes, filter out the words that we just reviewed (unless they are still "don't know").
+    const threeMinsInMillis = 3*60*1000
+    if (now - reviewSessionStart > threeMinsInMillis) {
+      eligibleWords = eligibleWords.filter(word => {
+        const recallValue = (reviewData[word.word]?.lastReview || 0)
+        if (recallValue === 0) {
+          return true
+        }
+        
+        const severalMinutesAgo = now - 2*60*1000
+        const oneDayInMillis = 24 * 60 * 60 * 1000
+        
+        const aTimestamp = (reviewData[word.word]?.nextReview || 0)
+        const aLastReviewTimestamp = aTimestamp - ((reviewData[word.word]?.interval || 0) * oneDayInMillis)
+        
+        const aWasReviewedInPastSeveralMinutes = aLastReviewTimestamp > severalMinutesAgo
+        return !aWasReviewedInPastSeveralMinutes
+      });
+    }
+  
     dueWords = eligibleWords.sort((a, b) => {
       const fiveMinsInMillis = 5*60*1000
       const aTimestamp = (reviewData[a.word]?.nextReview || 0)
