@@ -202,7 +202,7 @@ function importData(event) {
       if (data.flashcardSettings) localStorage.setItem("flashcardSettings", JSON.stringify(data.flashcardSettings));
       if (data.reviewData) localStorage.setItem("reviewData", JSON.stringify(data.reviewData));
       if (data.reviewCount !== undefined && data.reviewCount !== null) localStorage.setItem("reviewCount", data.reviewCount);
-      
+
       alert("Data imported successfully. The page will now reload.");
       location.reload();
     } catch (err) {
@@ -269,7 +269,7 @@ let cardReviewCount = parseInt(localStorage.getItem('reviewCount') || '0', 10);
 let reviewSessionStart = Date.now(); // When the user began this review session
 function getNextWord(wordToSkip /* optional */) {
   const now = Date.now();
-  
+
   if (now - reviewSessionStart > 20*60*1000) {
     reviewSessionStart = now
   }
@@ -293,18 +293,18 @@ function getNextWord(wordToSkip /* optional */) {
         if (recallValue === 0) {
           return true
         }
-        
+
         const severalMinutesAgo = now - 2*60*1000
         const oneDayInMillis = 24 * 60 * 60 * 1000
-        
+
         const aTimestamp = (reviewData[word.word]?.nextReview || 0)
         const aLastReviewTimestamp = aTimestamp - ((reviewData[word.word]?.interval || 0) * oneDayInMillis)
-        
+
         const aWasReviewedInPastSeveralMinutes = aLastReviewTimestamp > severalMinutesAgo
         return !aWasReviewedInPastSeveralMinutes
       });
     }
-  
+
     dueWords = eligibleWords.sort((a, b) => {
       const fiveMinsInMillis = 5*60*1000
       const aTimestamp = (reviewData[a.word]?.nextReview || 0)
@@ -350,7 +350,9 @@ function updateReview(chinese, quality) {
     } else if (wordData.repetition === 2) {
       wordData.interval = 3; // 3 days
     } else {
-      wordData.interval = Math.round(wordData.interval * wordData.easeFactor);
+      // With daily card review, I found that many cards became "over-learned" and stopped coming up in rotation entirely which caused me to forget them.
+      // Cap how long we will go before a card comes up again
+      wordData.interval = Math.min(30, Math.round(wordData.interval * wordData.easeFactor));
     }
   }
 
