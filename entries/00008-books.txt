@@ -62,6 +62,8 @@ Non-Fiction:
 
 Fiction:
 
+- Agency by William Gibson
+
 - The Alchemist by Paulo Coelho
 
 - '--All You Zombies--' by Robert A. Heinlein
