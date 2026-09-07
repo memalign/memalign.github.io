@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-79e628e9df128d9d86ce66ed5994b2cb';
+const cacheName = 'mandarin-b4dc9fea5c59b49bc7ebde04623330af';
 const appShellFiles = [
   './cards/card-style.css',
   './cards/cards-4000.png',
@@ -156,6 +156,7 @@ const appShellFiles = [
   './img/globe.png',
   './img/go.png',
   './img/goodsmell.png',
+  './img/goonline.png',
   './img/gotowork.png',
   './img/goup.png',
   './img/goupstairs.png',
@@ -196,6 +197,7 @@ const appShellFiles = [
   './img/infront.png',
   './img/inside.png',
   './img/interest.png',
+  './img/internet.png',
   './img/iwantmore.png',
   './img/joke.png',
   './img/jump.png',
@@ -262,6 +264,7 @@ const appShellFiles = [
   './img/pajamas.png',
   './img/pan.png',
   './img/park.png',
+  './img/part.png',
   './img/pathway.png',
   './img/peanutbutter.png',
   './img/peas.png',

@@ -230,6 +230,8 @@ const data = {
       { word: "生活", pinyin: "Shēnghuó", imageURL: "img/life.png", english: "Life; live", immersiveChineseLevel: "59", immersiveChineseVocabId: 282 },
       { word: "出生", pinyin: "Chūshēng", imageURL: "img/birth.png", english: "To be born", immersiveChineseLevel: "82", immersiveChineseVocabId: 399 },
       { word: "作业", pinyin: "Zuòyè", imageURL: "img/homework.png", english: "Homework", immersiveChineseLevel: "88", immersiveChineseVocabId: 544 },
+      { word: "网上", pinyin: "Wǎng shàng", imageURL: "img/internet.png", english: "Online, on the internet", immersiveChineseLevel: "97", immersiveChineseVocabId: 459 },
+      { word: "上网", pinyin: "Shàngwǎng", imageURL: "img/goonline.png", english: "Go online", immersiveChineseLevel: "97", immersiveChineseVocabId: 460 },
 		]
 	},
   emotions: {
@@ -938,6 +940,9 @@ const data = {
       { word: "一点点", pinyin: "Yìdiǎn diǎn", image: "NONE", english: "A little bit" },
       { word: "很多", pinyin: "Hěn duō", image: "NONE", english: "A lot" },
       { word: "有点", pinyin: "Yǒu diǎn", image: "NONE", english: "A bit too, a bit (something bad)", immersiveChineseLevel: "44", immersiveChineseVocabId: 482 },
+      { word: "部分", pinyin: "Bùfen", imageURL: "img/part.png", english: "Part", immersiveChineseLevel: "97", immersiveChineseVocabId: 463 },
+      { word: "哪个部分最难?", pinyin: "Nǎge bùfen zuì nán?", image: "NONE", english: "Which part is hardest?", immersiveChineseLevel: "97", immersiveChineseVocabId: 463 },
+      { word: "大部分", pinyin: "Dà bùfen", image: "NONE", english: "Main part, majority, most", immersiveChineseLevel: "97", immersiveChineseVocabId: 573 },
       { word: "全部", pinyin: "Quánbù", image: "NONE", english: "All" },
       { word: "每", pinyin: "Měi", image: "∀", english: "Every, each", immersiveChineseLevel: "34", immersiveChineseVocabId: 172 },
       { word: "我每年都去中国", pinyin: "Wǒ měinián dōu qù Zhōngguó", image: "NONE", english: "I go to China every year", immersiveChineseLevel: "34", immersiveChineseVocabId: 172 },
@@ -1168,6 +1173,12 @@ const data = {
       { word: "必须", pinyin: "Bìxū", image: "NONE", english: "Must", immersiveChineseLevel: "95", immersiveChineseVocabId: 451 },
       { word: "不过", pinyin: "Búguò", image: "NONE", english: "Although, but", immersiveChineseLevel: "96", immersiveChineseVocabId: 454 },
       { word: "大家好", pinyin: "Dàjiāhǎo", image: "NONE", english: "Hello everyone", immersiveChineseLevel: "96", immersiveChineseVocabId: 985 },
+      { word: "在网吧里，大部分人是年轻人", pinyin: "Zài wǎngbā lǐ, dà bùfen rén shì niánqīngrén", image: "NONE", english: "In the internet café the majority of people are young people", immersiveChineseLevel: "97", immersiveChineseVocabId: 573 },
+      { word: "离", pinyin: "Lí", image: "NONE", english: "(To be located) From, away from", immersiveChineseLevel: "56", immersiveChineseVocabId: 263 },
+      { word: "俄罗斯离日本很近", pinyin: "Éluósī lí Rìběn hěn jìn", image: "NONE", english: "Russia is close to Japan", immersiveChineseLevel: "56", immersiveChineseVocabId: 263 },
+      { word: "比如", pinyin: "Bǐrú", image: "NONE", english: "For example", immersiveChineseLevel: "98", immersiveChineseVocabId: 467 },
+      { word: "基本", pinyin: "Jīběn", image: "NONE", english: "Basically", immersiveChineseLevel: "98", immersiveChineseVocabId: 468 },
+      { word: "我基本上不会说俄语", pinyin: "Wǒ jīběn shang bú huì shuō Éyǔ", image: "NONE", english: "I basically can't speak Russian", immersiveChineseLevel: "98", immersiveChineseVocabId: 468 },
     ]
   },
   pronouns: {
