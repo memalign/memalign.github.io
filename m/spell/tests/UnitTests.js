@@ -154,7 +154,7 @@ class UnitTests {
     const proto = Object.getPrototypeOf(testInstance);
 
     for (const key of Object.getOwnPropertyNames(proto)) {
-      if (key.startsWith('test') || key.startsWith('only') || key.startsWith('_')) {
+      if (key.startsWith('test') || key.startsWith('stress') || key.startsWith('only') || key.startsWith('_')) {
         if (this[key]) {
           throw new Error(`Duplicate test name: ${key}`);
         }

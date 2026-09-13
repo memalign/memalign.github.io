@@ -129,9 +129,15 @@ class UnitTests_SpellGame {
     game.window = { confirm: () => false };
     assertTrue(!game.resetProgressWithConfirmation());
     assertTrue(pLog.probeLog.has(32));
-    game.window = { confirm: () => true };
+    let reloaded = false;
+    game.window = { confirm: () => true, location: { reload: () => { reloaded = true; } } };
     assertTrue(game.resetProgressWithConfirmation());
     assertEqual(game.storage.getItem("spell-unique-words"), null);
+    assertTrue(reloaded);
+    assertTrue(pLog.probeLog.has(94));
+
+    game.window = { confirm: () => true, location: {} };
+    assertTrue(game.resetProgressWithConfirmation());
     assertTrue(pLog.probeLog.has(31));
   }
 
@@ -266,6 +272,7 @@ class UnitTests_SpellGame {
     };
     game.state.trayTiles[0] = null;
     game.commitDraggedTile();
+    game.state.drag = null;
     assertEqual(game.state.trayTiles[0].letter, "B");
     assertEqual(game.state.trayTiles[1].letter, "A");
     game.render();
@@ -409,6 +416,80 @@ class UnitTests_SpellGame {
     assertTrue(game.handleTileClick(c.id, "word"));
     assertTrue(game.state.score > 0);
     assertTrue(pLog.probeLog.has(49));
+  }
+
+  test_game_playLayoutTransitions_adds_transform_for_dropped_tile() {
+    const game = this._makeGame();
+    const a = game.createTile("A");
+    game.state.trayTiles = [a];
+    const prevRects = new Map([
+      ["1", { rect: { left: 0, top: 0, right: 40, bottom: 40 }, isDrop: true }]
+    ]);
+    const node = game.renderTile(a, "tray", 0);
+    game.elements.letterTray.appendChild(node);
+
+    // MADocument mock getBoundingClientRect returns top:10, left:10
+    game.playLayoutTransitions(prevRects);
+    assertTrue(node.style.transform.includes("translate"));
+  }
+
+  test_game_scoreCurrentWord_without_setTimeout_hits_probe_88() {
+    const game = this._makeGame();
+    game.setLexiconText("CAT");
+    game.startGame(123);
+    game.timerApi = {
+      setInterval() { return 1; },
+      clearInterval() {},
+      clearTimeout() {}
+      // setTimeout explicitly omitted
+    };
+    game.state.wordTiles = [game.createTile("C"), game.createTile("A"), game.createTile("T")];
+    game.state.trayTiles = [];
+    game.scoreCurrentWord();
+    assertTrue(pLog.probeLog.has(88));
+  }
+
+  test_game_placeTileInTray_occupied_slot_hits_probe_89() {
+    const game = this._makeGame();
+    const t1 = game.createTile("A");
+    const t2 = game.createTile("B");
+    const t3 = game.createTile("C");
+    // Place t1 at index 0, leaving 1 empty, placing t2 at index 2
+    game.state.trayTiles = [t1, null, t2, null, null, null, null];
+    t1.trayIndex = 0;
+    t2.trayIndex = 2;
+    // Ask to place t3 at index 0 (which is occupied by t1)
+    game.placeTileInTray(t3, 0);
+    assertTrue(pLog.probeLog.has(89));
+    // t1 should have moved to empty index 1
+    assertEqual(game.state.trayTiles[1].letter, "A");
+    assertEqual(game.state.trayTiles[0].letter, "C");
+  }
+
+  test_game_endRound_flushes_pending_damage_hits_probe_90() {
+    const game = this._makeGame();
+    game.setLexiconText("CAT");
+    game.startGame(123);
+    let capturedTimeoutId = null;
+    let timeoutCallback = null;
+    game.timerApi = {
+      setInterval() { return 1; },
+      clearInterval() {},
+      clearTimeout() {},
+      setTimeout(fn, ms) {
+        timeoutCallback = fn;
+        capturedTimeoutId = 999;
+        return 999;
+      }
+    };
+    game.state.wordTiles = [game.createTile("C"), game.createTile("A"), game.createTile("T")];
+    game.state.trayTiles = [];
+    game.scoreCurrentWord(); // schedules damage
+    // Now end the round before the timeout fires
+    const hpBefore = game.state.enemyHp;
+    game.endRound();
+    assertTrue(pLog.probeLog.has(90));
+    assertTrue(game.state.enemyHp < hpBefore); // Damage was flushed
   }
 
   test_game_endRound_restores_active_dragged_tile() {
@@ -714,7 +795,7 @@ class UnitTests_SpellGame {
     game.state.wordTiles = [game.createTile("A")];
     game.render();
     if (game._deferredFrame) game._deferredFrame();
-    
+
     game.state.dropAnimation = {
       tileId: game.state.wordTiles[0].id,
       rect: { left: 50, top: 50, right: 90, bottom: 90, width: 40, height: 40 }
@@ -724,6 +805,164 @@ class UnitTests_SpellGame {
     assertTrue((tileNode.style.transform || "").includes("rotate(-4deg)"));
     assertTrue((tileNode.style.transform || "").includes("scale(1.06)"));
     assertTrue(pLog.probeLog.has(54));
+  }
+
+  test_styling2_elements_and_classes() {
+    const game = this._makeGame();
+    // 1. Stats panel container classes
+    const statsCompletedQuotes = game.elements.statsCompletedQuotes;
+    const statsDefeatedEnemies = game.elements.statsDefeatedEnemies;
+    assertTrue(statsCompletedQuotes.classList.contains("completed-quotes"));
+    assertTrue(statsDefeatedEnemies.classList.contains("completed-quotes"));
+
+    // 2. Round Over highlighted text classes
+    game.writeJSON("spell-defeated-enemies", ["Buzzing Bee"]);
+    game.state.score = 500;
+    game.storage.setItem("spell-high-score", "100");
+    game.state.unlockedQuoteQuestThisRound = true;
+    game.endRound();
+
+    assertTrue(game.elements.highScoreMessage.classList.contains("new-high-score"));
+    assertTrue(game.elements.roundOverUnlockMessage.classList.contains("new-high-score"));
+
+    // Quote quest pending word highlighted class on round over overlay
+    const pendingWordsOverlay = game.collectNodes(game.elements.roundOverQuoteQuest, node => node.classList && node.classList.contains("pending-quote-word"));
+    assertTrue(pendingWordsOverlay.length > 0);
+
+    // 3. Landing page quote quest pending word highlighted class
+    game.showLandingPage();
+    const pendingWordsLanding = game.collectNodes(game.elements.landingQuoteQuest, node => node.classList && node.classList.contains("pending-quote-word"));
+    assertTrue(pendingWordsLanding.length > 0);
+
+    // 4. Time card compact container structure
+    const giveUpButton = game.elements.giveUp;
+    assertTrue(giveUpButton !== null);
+    assertTrue(giveUpButton.classList.contains("give-up-button"));
+  }
+
+  test_styling3_elements_and_classes() {
+    const game = this._makeGame();
+    // Verify Stats Title and subheaders
+    const statsTitle = game.document.getElementById("stats-title");
+    assertTrue(statsTitle !== null);
+    assertEqual(statsTitle.textContent, "Lifetime Progress");
+
+    game.renderStatsPanel();
+    const h3Completed = game.collectNodes(game.elements.statsCompletedQuotes, n => n.nodeName === "h3" || (n.innerText === "Completed Quotes"));
+    const h3Defeated = game.collectNodes(game.elements.statsDefeatedEnemies, n => n.nodeName === "h3" || (n.innerText === "Defeated Enemies"));
+    assertTrue(h3Completed.length > 0);
+    assertTrue(h3Defeated.length > 0);
+
+    // Verify time card elements structure
+    const timerCard = game.elements.timer.parentEl;
+    assertTrue(timerCard.classList.contains("time-card"));
+    assertTrue(timerCard.classList.contains("hud-card"));
+  }
+
+  test_debug_testEndgame() {
+    const game = this._makeGame();
+    game.testEndgame();
+    assertTrue(pLog.probeLog.has(95));
+    const completedQuotes = game.readCompletedQuotes();
+    assertEqual(String(completedQuotes.length), String(QUOTE_QUEST_QUOTES.length - 1));
+    const defeatedEnemies = game.readJSON("spell-defeated-enemies", []);
+    assertEqual(String(defeatedEnemies.length), String(RPG_ENEMIES.length));
+  }
+
+  test_game_debugButton_hidden_when_debugMode_false() {
+    const doc = new MADocument();
+    const storage = new MAStorage();
+    storage.forceMock();
+    const game = new SpellGame({
+      document: doc,
+      storage,
+      debugMode: false,
+      window: { location: { search: "" } },
+      requestFrame: (fn) => fn()
+    });
+    game.init({ skipLexiconLoad: true });
+    assertTrue(game.elements.debugButton.classList.contains("hidden"));
+  }
+
+  test_game_debugButton_visible_with_debug_url_param_search() {
+    const doc = new MADocument();
+    const storage = new MAStorage();
+    storage.forceMock();
+    const game = new SpellGame({
+      document: doc,
+      storage,
+      debugMode: false,
+      window: { location: { search: "?debug=1" } },
+      requestFrame: (fn) => fn()
+    });
+    game.init({ skipLexiconLoad: true });
+    assertTrue(!game.elements.debugButton.classList.contains("hidden"));
+  }
+
+  test_game_debugButton_visible_with_debug_url_param_href() {
+    const doc = new MADocument();
+    const storage = new MAStorage();
+    storage.forceMock();
+    const game = new SpellGame({
+      document: doc,
+      storage,
+      debugMode: false,
+      window: { location: { href: "https://example.com/spell?other=true&debug=1" } },
+      requestFrame: (fn) => fn()
+    });
+    game.init({ skipLexiconLoad: true });
+    assertTrue(!game.elements.debugButton.classList.contains("hidden"));
+  }
+
+  test_game_debugButton_hidden_with_other_url_params() {
+    const doc = new MADocument();
+    const storage = new MAStorage();
+    storage.forceMock();
+    const game = new SpellGame({
+      document: doc,
+      storage,
+      debugMode: false,
+      window: { location: { search: "?debug=0&mode=normal" } },
+      requestFrame: (fn) => fn()
+    });
+    game.init({ skipLexiconLoad: true });
+    assertTrue(game.elements.debugButton.classList.contains("hidden"));
+  }
+
+  test_game_kidMode_persists_across_reloads() {
+    const storage = new MAStorage();
+    storage.forceMock();
+
+    const doc1 = new MADocument();
+    const game1 = new SpellGame({ document: doc1, storage, requestFrame: (fn) => fn() });
+    game1.init({ skipLexiconLoad: true });
+    assertTrue(game1.state.debug.kidMode === false);
+
+    game1.showDebugPanel();
+    assertTrue(game1.elements.debugKidMode.checked === false);
+    game1.elements.debugKidMode.checked = true;
+    game1.elements.debugKidMode.eventHandlers.change();
+    assertTrue(game1.state.debug.kidMode === true);
+    assertEqual(storage.getItem("spell-kid-mode"), "true");
+
+    const doc2 = new MADocument();
+    const game2 = new SpellGame({ document: doc2, storage, requestFrame: (fn) => fn() });
+    game2.init({ skipLexiconLoad: true });
+    assertTrue(game2.state.debug.kidMode === true);
+    game2.showDebugPanel();
+    assertTrue(game2.elements.debugKidMode.checked === true);
+
+    game2.elements.debugKidMode.checked = false;
+    game2.elements.debugKidMode.eventHandlers.change();
+    assertTrue(game2.state.debug.kidMode === false);
+    assertEqual(storage.getItem("spell-kid-mode"), "false");
+
+    const doc3 = new MADocument();
+    const game3 = new SpellGame({ document: doc3, storage, requestFrame: (fn) => fn() });
+    game3.init({ skipLexiconLoad: true });
+    assertTrue(game3.state.debug.kidMode === false);
+    game3.showDebugPanel();
+    assertTrue(game3.elements.debugKidMode.checked === false);
   }
 }
 

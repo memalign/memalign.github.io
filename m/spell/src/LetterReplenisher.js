@@ -131,6 +131,24 @@ class WordBagReplenisher {
       }
       this._bag = this._buildBag(rand, lexiconWords, quoteWord);
     }
+
+    if (state && state.trayTiles) {
+      const hasVowel = state.trayTiles.some(t => t && /[AEIOU]/.test(t.letter));
+      if (!hasVowel) {
+        const vowelIdx = this._bag.findIndex(ch => /[AEIOU]/.test(ch));
+        if (vowelIdx !== -1) {
+          const ch = this._bag[vowelIdx];
+          this._bag.splice(vowelIdx, 1);
+          pLog.log(92);
+          return ch;
+        } else {
+          const vowels = ["A", "E", "I", "O", "U"];
+          pLog.log(93);
+          return vowels[rand.randomIntBelow(vowels.length)];
+        }
+      }
+    }
+
     if (this._bag.length === 0) {
       pLog.log(72);
       // Fallback: random from full pool

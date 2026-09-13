@@ -2,6 +2,7 @@ if (typeof module !== "undefined" && module.exports) {
   ({ MAGameRand } = require("./GameRand.js"));
   ({ pLog } = require("./Utilities.js"));
   ({
+    DEBUG_MODE,
     LETTER_VALUES,
     LETTER_POOL,
     ROUND_SECONDS,
@@ -36,7 +37,8 @@ const STORAGE_KEYS = {
   completedQuotes: "spell-completed-quotes",
   enemyIndex: "spell-enemy-index",
   enemyHp: "spell-enemy-hp",
-  defeatedEnemies: "spell-defeated-enemies"
+  defeatedEnemies: "spell-defeated-enemies",
+  kidMode: "spell-kid-mode"
 };
 
 function maybeRandomSeed() {
@@ -69,6 +71,7 @@ class SpellGame {
       || (typeof performance !== "undefined" && performance.now
         ? () => performance.now()
         : () => Date.now());
+    this.debugMode = options.debugMode;
 
     this.elements = {};
     this.uiBuilt = false;
@@ -117,7 +120,7 @@ class SpellGame {
       debug: {
         replenishQuoteWord: false,
         capEnemyHp: false,
-        kidMode: false
+        kidMode: !!this.readJSON(STORAGE_KEYS.kidMode, false)
       },
       view: "landing"
     };
@@ -191,12 +194,16 @@ class SpellGame {
       text: "Stats",
       attrs: { type: "button", "aria-label": "Show stats" }
     }));
-    landingActions.appendChild(this.createElement("button", {
+    const debugButton = this.createElement("button", {
       id: "debug-button",
       className: "icon-button",
       text: "Debug",
       attrs: { type: "button", "aria-label": "Show debug settings" }
-    }));
+    });
+    if (!this.isDebugMode()) {
+      this.addClass(debugButton, "hidden");
+    }
+    landingActions.appendChild(debugButton);
     landingActions.appendChild(this.createElement("a", {
       id: "about-link",
       className: "about-link",
@@ -219,10 +226,7 @@ class SpellGame {
     }));
     header.appendChild(timeCard);
 
-    const titleBlock = this.createElement("div", { className: "title-block" });
-    titleBlock.appendChild(this.createElement("h1", { text: "ScrivenSpell" }));
-    titleBlock.appendChild(this.createElement("p", { text: "Build fast. Score bigger." }));
-    header.appendChild(titleBlock);
+
     header.appendChild(this.buildHudCard("Score", "score", "0", true));
 
     const enemyPanel = this.createElement("div", { className: "enemy-panel" });
@@ -321,8 +325,7 @@ class SpellGame {
     body.appendChild(statsOverlay);
     const statsCard = this.createElement("div", { className: "overlay-card stats-card" });
     statsOverlay.appendChild(statsCard);
-    statsCard.appendChild(this.createElement("h2", { id: "stats-title", text: "Stats" }));
-    statsCard.appendChild(this.createElement("h3", { text: "Lifetime Progress" }));
+    statsCard.appendChild(this.createElement("h2", { id: "stats-title", text: "Lifetime Progress" }));
     statsCard.appendChild(this.createElement("div", { id: "stats-unique-words", className: "overlay-detail" }));
     statsCard.appendChild(this.createElement("div", { id: "stats-lifetime-letters", className: "overlay-detail" }));
     statsCard.appendChild(this.createElement("div", { id: "stats-game-progress", className: "overlay-detail" }));
@@ -374,6 +377,15 @@ class SpellGame {
     debugKidLabel.appendChild(debugKidInput);
     debugKidLabel.appendChild(this.createElement("span", { text: "Kid Mode (simple words, 5-min rounds)" }));
     debugCard.appendChild(debugKidLabel);
+    const debugTestEndgameLabel = this.createElement("div", { className: "debug-setting" });
+    const debugTestEndgameBtn = this.createElement("button", {
+      id: "debug-test-endgame",
+      className: "secondary-button",
+      text: "Test endgame",
+      attrs: { type: "button" }
+    });
+    debugTestEndgameLabel.appendChild(debugTestEndgameBtn);
+    debugCard.appendChild(debugTestEndgameLabel);
     debugCard.appendChild(this.createElement("p", {
       className: "overlay-detail",
       text: "Debug settings reset when the page reloads."
@@ -442,6 +454,7 @@ class SpellGame {
       debugReplenishQuoteWord: this.document.getElementById("debug-replenish-quote-word"),
       debugCapEnemyHp: this.document.getElementById("debug-cap-enemy-hp"),
       debugKidMode: this.document.getElementById("debug-kid-mode"),
+      debugTestEndgame: this.document.getElementById("debug-test-endgame"),
       closeDebug: this.document.getElementById("close-debug"),
       roundOverUnlockMessage: this.document.getElementById("round-over-unlock-message"),
       roundOverQuoteQuest: this.document.getElementById("round-over-quote-quest"),
@@ -491,8 +504,12 @@ class SpellGame {
     });
     this.elements.debugKidMode.addEventListener("change", () => {
       this.state.debug.kidMode = !!this.elements.debugKidMode.checked;
+      this.writeJSON(STORAGE_KEYS.kidMode, this.state.debug.kidMode);
       pLog.log(83);
     });
+    if (this.elements.debugTestEndgame) {
+      this.elements.debugTestEndgame.addEventListener("click", () => this.testEndgame());
+    }
     this.elements.resetProgress.addEventListener("click", () => this.resetProgressWithConfirmation());
     this.elements.playAgain.addEventListener("click", () => {
       this.addClass(this.elements.overlay, "hidden");
@@ -635,7 +652,9 @@ class SpellGame {
     return {
       lexicon: this.state.lexicon,
       quoteQuestActive,
-      currentQuoteWord
+      currentQuoteWord,
+      trayTiles: this.state.trayTiles,
+      wordTiles: this.state.wordTiles
     };
   }
 
@@ -738,7 +757,7 @@ class SpellGame {
         this.state.pendingDamage = this.state.pendingDamage.filter((p) => p.id !== timeoutId);
         this.damageEnemy(wordScore);
         pLog.log(87);
-      }, flyDuration);
+      }, flyDuration - 100);
       this.state.pendingDamage.push({ id: timeoutId, damage: wordScore });
     } else {
       this.damageEnemy(wordScore);
@@ -1074,10 +1093,40 @@ class SpellGame {
     }
   }
 
+  isDebugMode() {
+    if (this.debugMode !== undefined) {
+      if (this.debugMode) {
+        return true;
+      }
+    } else if (typeof DEBUG_MODE !== "undefined" && DEBUG_MODE) {
+      return true;
+    }
+    const search = (this.window && this.window.location && (this.window.location.search || this.window.location.href)) || "";
+    if (typeof URLSearchParams !== "undefined" && this.window && this.window.location && this.window.location.search) {
+      try {
+        const params = new URLSearchParams(this.window.location.search);
+        if (params.get("debug") === "1") {
+          return true;
+        }
+      } catch (e) {}
+    }
+    if (/(?:[?&])debug=1(?:&|$)/.test(search)) {
+      return true;
+    }
+    return false;
+  }
+
   renderLandingPage() {
     this.elements.landingHighScore.textContent = `High score: ${this.readHighScore()}`;
     this.renderEnemy();
     this.renderQuoteQuest(this.elements.landingQuoteQuest);
+    if (this.elements.debugButton) {
+      if (this.isDebugMode()) {
+        this.removeClass(this.elements.debugButton, "hidden");
+      } else {
+        this.addClass(this.elements.debugButton, "hidden");
+      }
+    }
   }
 
   showStatsPanel() {
@@ -1100,6 +1149,37 @@ class SpellGame {
 
   hideDebugPanel() {
     this.addClass(this.elements.debugOverlay, "hidden");
+  }
+
+  testEndgame() {
+    pLog.log(95);
+    const allEnemyIds = RPG_ENEMIES.map(e => e.id);
+    this.writeJSON(STORAGE_KEYS.defeatedEnemies, allEnemyIds);
+    this.writeNumber(STORAGE_KEYS.enemyIndex, RPG_ENEMIES.length);
+    const nextEnemy = getEnemyByIndex(RPG_ENEMIES.length);
+    this.writeNumber(STORAGE_KEYS.enemyHp, nextEnemy.hp);
+    this.state.enemy = nextEnemy;
+    this.state.enemyIndex = RPG_ENEMIES.length;
+    this.state.enemyHp = nextEnemy.hp;
+
+    const allQuotesExceptLast = QUOTE_QUEST_QUOTES.slice(0, QUOTE_QUEST_QUOTES.length - 1);
+    this.writeJSON(STORAGE_KEYS.completedQuotes, allQuotesExceptLast);
+
+    const lastQuoteIndex = QUOTE_QUEST_QUOTES.length - 1;
+    const lastQuote = QUOTE_QUEST_QUOTES[lastQuoteIndex];
+    const words = quoteWords(lastQuote);
+    const lastWordIndex = Math.max(0, words.length - 1);
+
+    this.writeNumber(STORAGE_KEYS.quoteIndex, lastQuoteIndex);
+    this.writeNumber(STORAGE_KEYS.quoteWordIndex, lastWordIndex);
+
+    this.renderStatsPanel();
+    if (this.elements.quoteQuestContainer) {
+      this.renderQuoteQuest(this.elements.quoteQuestContainer);
+    }
+    this.renderEnemy();
+    this.hideDebugPanel();
+    this.showToast("Test endgame state loaded!");
   }
 
   renderStatsPanel() {
@@ -1160,6 +1240,13 @@ class SpellGame {
     this.removeStorageItem(STORAGE_KEYS.enemyIndex);
     this.removeStorageItem(STORAGE_KEYS.enemyHp);
     this.removeStorageItem("spell-high-score");
+
+    if (this.window && this.window.location && this.window.location.reload) {
+      pLog.log(94);
+      this.window.location.reload();
+      return true;
+    }
+
     this.state.enemyIndex = 0;
     this.state.enemyHp = getEnemyByIndex(0).hp;
     this.hideStatsPanel();
@@ -1252,7 +1339,7 @@ class SpellGame {
     const progress = this.readQuoteProgress();
     const quote = QUOTE_QUEST_QUOTES[progress.quoteIndex];
     if (!quote) {
-      container.appendChild(this.createElement("p", { className: "quote-word pending-quote-word", text: "Quest complete" }));
+      container.appendChild(this.createElement("p", { className: "quote-word pending-quote-word", text: "Quest complete!! 🎉" }));
       return;
     }
     const rawTokens = quote.split(/\s+/);
@@ -1412,7 +1499,13 @@ class SpellGame {
         nodes.push(this.renderPlaceholder());
       }
     }
-    if (zoneName !== "tray" && this.state.drag && this.state.drag.dragging && this.state.drag.hoverZone === zoneName && this.state.drag.hoverIndex >= 0) {
+    if (this.state.drag && this.state.drag.dragging && this.state.drag.hoverZone === zoneName && this.state.drag.hoverIndex >= 0) {
+      if (zoneName === "tray") {
+        const nullIdx = tiles.indexOf(null);
+        if (nullIdx !== -1) {
+          nodes.splice(nullIdx, 1);
+        }
+      }
       const placeholder = this.renderPlaceholder();
       const insertIndex = Math.max(0, Math.min(this.state.drag.hoverIndex, nodes.length));
       nodes.splice(insertIndex, 0, placeholder);
@@ -1616,7 +1709,7 @@ class SpellGame {
         continue;
       }
       const tileNodes = this.getRenderedTiles(zone.element);
-      let index = zone.tiles.length;
+      let index = tileNodes.length;
       for (let i = 0; i < tileNodes.length; i += 1) {
         const tileRect = tileNodes[i].getBoundingClientRect();
         if (clientX < tileRect.left + tileRect.width * 0.5) {
@@ -1716,7 +1809,12 @@ class SpellGame {
     const targetTiles = drag.hoverZone === "tray" ? this.state.trayTiles : this.state.wordTiles;
     const insertIndex = Math.max(0, Math.min(drag.hoverIndex, targetTiles.length));
     if (drag.hoverZone === "tray") {
-      this.placeTileInTray(drag.tile, insertIndex);
+      const nullIdx = targetTiles.indexOf(null);
+      if (nullIdx !== -1) {
+        targetTiles.splice(nullIdx, 1);
+      }
+      targetTiles.splice(insertIndex, 0, drag.tile);
+      targetTiles.forEach((t, i) => { if (t) t.trayIndex = i; });
       return;
     }
     targetTiles.splice(insertIndex, 0, drag.tile);

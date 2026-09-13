@@ -13,6 +13,7 @@ const ROUND_SECONDS = 120;
 const KID_MODE_SECONDS = 300;
 const TILE_TARGET = 7;
 const MULTIPLIER_INTERVAL = 25;
+const DEBUG_MODE = false;
 const QUOTE_QUEST_DESCRIPTION = "Spell the quote word-by-word";
 
 const RPG_ENEMIES = [
@@ -119,6 +120,7 @@ const LETTER_POOL = buildLetterPool(LETTER_WEIGHTS);
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
+    DEBUG_MODE,
     LETTER_VALUES,
     LETTER_WEIGHTS,
     LENGTH_BONUSES,

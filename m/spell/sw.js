@@ -1,4 +1,4 @@
-const cacheName = 'spell-fbf779c87342e280c8c02dba7ea679dc';
+const cacheName = 'spell-cc6fa9d56baca3c2f13b85ad38d34a17';
 const appShellFiles = [
   './app.js',
   './index.html',

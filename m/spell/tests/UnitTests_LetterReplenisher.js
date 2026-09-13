@@ -263,19 +263,18 @@ class UnitTests_LetterReplenisher {
   }
 
   test_wordBag_startGame_uses_word_bag_replenisher_when_active() {
-    // This test exercises createReplenisher via startGame with algorithm overriding
-    // We check the default algorithm creates a WeightedRandomReplenisher
     const game = this._makeReplenisherGame();
     game.state.debug.kidMode = false;
     game.startGame(42);
-    // Default ACTIVE_REPLENISH_ALGORITHM is "weighted_random"
-    assertTrue(game.state.replenisher instanceof WeightedRandomReplenisher);
+    const expected = createReplenisher(ACTIVE_REPLENISH_ALGORITHM);
+    assertTrue(game.state.replenisher instanceof expected.constructor);
   }
 
   test_replenisher_reset_called_on_startGame() {
     const game = this._makeReplenisherGame();
     game.startGame(1);
-    assertTrue(pLog.probeLog.has(66)); // WeightedRandom reset probe
+    const hasResetProbe = pLog.probeLog.has(66) || pLog.probeLog.has(67) || pLog.probeLog.has(74) || pLog.probeLog.has(84);
+    assertTrue(hasResetProbe);
   }
 
   test_game_scoreCurrentWord_delays_damage_by_fly_duration() {
@@ -292,8 +291,8 @@ class UnitTests_LetterReplenisher {
     game.state.wordTiles = [game.createTile("C"), game.createTile("A"), game.createTile("T")];
     game.state.trayTiles = [];
     game.scoreCurrentWord();
-    // 3-tile word: 420 + 2*20 = 460ms
-    assertEqual(capturedMs, 460);
+    // 3-tile word: 420 + 2*20 - 100 = 360ms
+    assertEqual(capturedMs, 360);
   }
 }
 

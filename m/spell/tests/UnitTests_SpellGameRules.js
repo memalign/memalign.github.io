@@ -1,6 +1,7 @@
 if (typeof module !== 'undefined' && module.exports) {
   ({ assertEqual, assertEqualArrays, assertTrue } = require('./UnitTests'));
   ({
+    DEBUG_MODE,
     LETTER_POOL,
     createLexiconSet,
     computeWord,
