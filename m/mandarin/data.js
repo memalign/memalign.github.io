@@ -640,6 +640,7 @@ const data = {
       { word: "堵车", pinyin: "Dǔchē", image: "🚦🚗🚙", english: "Traffic" },
       { word: "客车", pinyin: "Kèchē", image: "🚌", english: "Coach / Long-distance bus" },
       { word: "公交车", pinyin: "Gōngjiāochē", image: "🚎", english: "City bus" },
+      { word: "路车", pinyin: "Lù chē", image: "NONE", english: "Bus route", immersiveChineseLevel: "106", immersiveChineseVocabId: 523 },
       { word: "船", pinyin: "Chuán", image: "⛵", english: "Boat" },
       { word: "超市", pinyin: "Chāoshì", imageURL: "img/supermarket.png", english: "Supermarket" },
       { word: "电影院", pinyin: "Diànyǐngyuàn", imageURL: "img/cinema.png", english: "Cinema" },
@@ -848,6 +849,8 @@ const data = {
       { word: "打电话", pinyin: "Dǎ diànhuà", imageURL: "img/phonecall.png", english: "Make a phone call", immersiveChineseLevel: "83", immersiveChineseVocabId: 402 },
       { word: "下载", pinyin: "Xiàzài", image: "☁️➡️💻", english: "Download", immersiveChineseLevel: "93", immersiveChineseVocabId: 443 },
       { word: "换", pinyin: "Huàn", imageURL: "img/exchange.png", english: "Change, exchange, swap, switch", immersiveChineseLevel: "102", immersiveChineseVocabId: 502 },
+      { word: "通过", pinyin: "Tōngguò", imageURL: "img/pass.png", english: "Pass, pass through; through, via, by", immersiveChineseLevel: "106", immersiveChineseVocabId: 522 },
+      { word: "出事", pinyin: "Chū shì", image: "NONE", english: "Have an incident, meet with/cause trouble", immersiveChineseLevel: "107", immersiveChineseVocabId: 530 },
     ]
   },
   nature: {
@@ -892,7 +895,7 @@ const data = {
       { word: "牙齿", pinyin: "Yáchǐ", image: "🦷", english: "Teeth" },
       { word: "血", pinyin: "Xuè", image: "🩸", english: "Blood" },
       { word: "屁股", pinyin: "Pìgu", imageURL: "img/butt.png", english: "Butt" },
-      { word: "身体", pinyin: "Shēntǐ", imageURL: "img/body.png", english: "Body" },
+      { word: "身体", pinyin: "Shēntǐ", imageURL: "img/body.png", english: "Body, health" },
     ]
   },
   commonPhrases: {
@@ -1213,6 +1216,12 @@ const data = {
       { word: "他对我说，“我喜欢你”", pinyin: "Tā duì wǒ shuō, \"wǒ xǐhuān nǐ\"", image: "NONE", english: "He said to me, \"I like you\"", immersiveChineseLevel: "105", immersiveChineseVocabId: 515 },
       { word: "这条路很长", pinyin: "Zhè tiáo lù hěn cháng", image: "NONE", english: "This road is very long", immersiveChineseLevel: "105", immersiveChineseVocabId: 516 },
       { word: "一个小时对我来说太长", pinyin: "Yí gè xiǎoshí duì wǒ lái shuō tài cháng", image: "NONE", english: "One hour is too long for me", immersiveChineseLevel: "105", immersiveChineseVocabId: 518 },
+      { word: "那个人太没有礼貌了", pinyin: "Nàge rén tài méiyǒu lǐmào le", image: "NONE", english: "That person is too rude", immersiveChineseLevel: "106", immersiveChineseVocabId: 523 },
+      { word: "之一", pinyin: "Zhī yī", image: "NONE", english: "One of", immersiveChineseLevel: "106", immersiveChineseVocabId: 527 },
+      { word: "这是我最喜欢的菜之一", pinyin: "Zhè shì wǒ zuì xǐhuan de cài zhī yī", image: "NONE", english: "This is one of my favorite dishes", immersiveChineseLevel: "106", immersiveChineseVocabId: 527 },
+      { word: "尤其", pinyin: "Yóuqí", image: "NONE", english: "Especially, particularly", immersiveChineseLevel: "107", immersiveChineseVocabId: 528 },
+      { word: "我喜欢这家饭店，尤其是他们的面", pinyin: "Wǒ xǐhuan zhè jiā fàndiàn, yóuqí shì tāmen de miàn", image: "NONE", english: "I like this restaurant, especially their noodles", immersiveChineseLevel: "107", immersiveChineseVocabId: 528 },
+      { word: "电脑出问题了", pinyin: "Diànnǎo chū wèntí le", image: "NONE", english: "The computer is having a problem", immersiveChineseLevel: "107", immersiveChineseVocabId: 530 },
     ]
   },
   pronouns: {
