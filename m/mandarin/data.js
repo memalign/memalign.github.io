@@ -87,6 +87,7 @@ const data = {
       { word: "吃素", pinyin: "Chī sù", imageURL: "img/vegetarian.png", english: "Eat vegetarian" },
       { word: "川菜", pinyin: "Chuāncài", image: "NONE", english: "Sichuan cuisine", immersiveChineseLevel: "68", immersiveChineseVocabId: 905 },
       { word: "外卖", pinyin: "Wàimài", imageURL: "img/takeout.png", english: "Takeout", immersiveChineseLevel: "69", immersiveChineseVocabId: 332 },
+      { word: "方便面", pinyin: "Fāngbiànmiàn", imageURL: "img/ramen.jpeg", english: "Instant noodles", immersiveChineseLevel: "118", immersiveChineseVocabId: 621 },
     ]
   },
   utensils: {
@@ -137,7 +138,9 @@ const data = {
       { word: "垃圾", pinyin: "Lājī", image: "🗑️", english: "Trash" },
       { word: "眼镜", pinyin: "Yǎnjìng", image: "👓", english: "Glasses" },
       { word: "电脑", pinyin: "Diànnǎo", image: "💻", english: "Computer" },
+      { word: "邮件", pinyin: "Yóujiàn", image: "📧", english: "Email, mail", immersiveChineseLevel: "119", immersiveChineseVocabId: 622 },
       { word: "手机", pinyin: "Shǒujī", image: "📱", english: "Phone" },
+      { word: "信息", pinyin: "Xìnxī", image: "💬", english: "Message, text message, information", immersiveChineseLevel: "119", immersiveChineseVocabId: 624 },
       { word: "电话", pinyin: "Diànhuà", image: "☎️", english: "Telephone; phone call", immersiveChineseLevel: "83", immersiveChineseVocabId: 401 },
       { word: "号", pinyin: "Hào", image: "#", english: "Number", immersiveChineseLevel: "83", immersiveChineseVocabId: 550 },
       { word: "号码", pinyin: "Hàomǎ", image: "📞#", english: "Number (telephone, code of some kind)", immersiveChineseLevel: "83", immersiveChineseVocabId: 403 },
@@ -204,6 +207,7 @@ const data = {
       { word: "上课", pinyin: "Shàngkè", imageURL: "img/class.png", english: "Attend class" },
       { word: "上学", pinyin: "Shàngxué", image: "NONE", english: "Go to school", immersiveChineseLevel: "28", immersiveChineseVocabId: 142 },
       { word: "下课", pinyin: "Xiàkè", image: "NONE", english: "Finish class", immersiveChineseLevel: "28", immersiveChineseVocabId: 567 },
+      { word: "毕业", pinyin: "Bìyè", image: "NONE", english: "Graduate (verb)", immersiveChineseLevel: "118", immersiveChineseVocabId: 617 },
       { word: "压力", pinyin: "Yālì", imageURL: "img/stress.png", english: "Pressure, stress", immersiveChineseLevel: "59", immersiveChineseVocabId: 283 },
 			{ word: "午睡时间", pinyin: "Wǔshuì shíjiān", imageURL: "img/naptime.png", english: "Nap time" },
 			{ word: "睡觉时间", pinyin: "Shuìjiào shíjiān", imageURL: "img/bedtime.png", english: "Bedtime" },
@@ -236,6 +240,7 @@ const data = {
       { word: "网上", pinyin: "Wǎng shàng", imageURL: "img/internet.png", english: "Online, on the internet", immersiveChineseLevel: "97", immersiveChineseVocabId: 459 },
       { word: "上网", pinyin: "Shàngwǎng", imageURL: "img/goonline.png", english: "Go online", immersiveChineseLevel: "97", immersiveChineseVocabId: 460 },
       { word: "礼貌", pinyin: "Lǐmào", image: "NONE", english: "Polite; manners", immersiveChineseLevel: "102", immersiveChineseVocabId: 503 },
+      { word: "简历", pinyin: "Jiǎnlì", imageURL: "img/resumeexample.jpeg", english: "CV, resumé", immersiveChineseLevel: "119", immersiveChineseVocabId: 626 },
 		]
 	},
   emotions: {
@@ -254,6 +259,7 @@ const data = {
       { word: "紧张", pinyin: "Jǐnzhāng", imageURL: "img/nervous.png", english: "Nervous, tense", immersiveChineseLevel: "102", immersiveChineseVocabId: 500 },
       { word: "轻松", pinyin: "Qīngsōng", imageURL: "img/relaxed.png", english: "Relaxed" },
       { word: "无聊", pinyin: "Wúliáo", imageURL: "img/bored.png", english: "Bored" },
+      { word: "耐心", pinyin: "Nàixīn", image: "NONE", english: "Patient; patience", immersiveChineseLevel: "108", immersiveChineseVocabId: 534 },
       { word: "困", pinyin: "Kùn", imageURL: "img/sleepy.png", english: "Sleepy" },
       { word: "醒了", pinyin: "Xǐng le", imageURL: "img/awake.png", english: "Awake" },
       { word: "高兴", pinyin: "Gāoxìng", image: "NONE", english: "Happy, pleased", immersiveChineseLevel: "53", immersiveChineseVocabId: 249 },
@@ -350,8 +356,9 @@ const data = {
       { word: "十一月", pinyin: "Shíyīyuè", imageURL: "img/November.png", english: "November" },
       { word: "十二月", pinyin: "Shí'èryuè", imageURL: "img/December.png", english: "December" },
 
-      // Holidays
+      // Holidays/Special days
       { word: "圣诞节", pinyin: "Shèngdàn jié", imageURL: "img/christmas.png", english: "Christmas" },
+      { word: "生日", pinyin: "Shēngrì", imageURL: "img/birthday.png", english: "Birthday", immersiveChineseLevel: "111", immersiveChineseVocabId: 587 },
     ],
   },
   animals: {
@@ -499,6 +506,7 @@ const data = {
       { word: "厚", pinyin: "Hòu", imageURL: "img/thick.png", english: "Thick" },
       { word: "麻烦", pinyin: "Máfan", image: "NONE", english: "Cumbersome / Troublesome" },
       { word: "很挤", pinyin: "Hěn jǐ", imageURL: "img/crowded.png", english: "Crowded" },
+      { word: "拥挤", pinyin: "Yōngjǐ", image: "NONE", english: "Crowded (alt), busy", immersiveChineseLevel: "108", immersiveChineseVocabId: 533 },
       { word: "安全", pinyin: "Ānquán", imageURL: "img/safe.png", english: "Safe" },
       { word: "滑", pinyin: "Huá", imageURL: "img/slippery.png", english: "Slippery" },
       { word: "重", pinyin: "Zhòng", imageURL: "img/heavy.png", english: "Heavy" },
@@ -593,11 +601,14 @@ const data = {
       { word: "男人", pinyin: "Nánrén", imageURL: "img/man.png", english: "Man", immersiveChineseLevel: "77", immersiveChineseVocabId: 377 },
       { word: "男生", pinyin: "Nánshēng", imageURL: "img/malestudent.png", english: "Male student, boy, guy", immersiveChineseLevel: "77", immersiveChineseVocabId: 479 },
       { word: "女生", pinyin: "Nǚshēng", imageURL: "img/femalestudent.png", english: "Female student, girl", immersiveChineseLevel: "77", immersiveChineseVocabId: 480 },
+      { word: "毕业生", pinyin: "Bìyèshēng", imageURL: "img/graduate.png", english: "Graduate (one who has recently graduated)", immersiveChineseLevel: "118", immersiveChineseVocabId: 619 },
       { word: "年轻人", pinyin: "Niánqīngrén", image: "[👱]🧓", english: "Young person", immersiveChineseLevel: "78", immersiveChineseVocabId: 381 },
+      { word: "老太太", pinyin: "Lǎo tàitai", image: "👵", english: "Old lady", immersiveChineseLevel: "108", immersiveChineseVocabId: 535 },
       { word: "乘客", pinyin: "Chéngkè", imageURL: "img/passenger.png", english: "Passenger", immersiveChineseLevel: "106", immersiveChineseVocabId: 524 },
       { word: "司机", pinyin: "Sījī", imageURL: "img/driver.png", english: "Driver", immersiveChineseLevel: "106", immersiveChineseVocabId: 526 },
       { word: "名字", pinyin: "Míngzi", imageURL: "img/name.png", english: "Name" },
       { word: "鬼", pinyin: "Guǐ", image: "👻", english: "Ghost" },
+      { word: "先生", pinyin: "Xiānsheng", image: "NONE", english: "Sir, Mr.", immersiveChineseLevel: "114", immersiveChineseVocabId: 602 },
     ]
   },
   places: {
@@ -615,6 +626,7 @@ const data = {
       { word: "水库", pinyin: "Shuǐkù", imageURL: "img/dam.png", english: "Dam / Reservoir" },
       { word: "医院", pinyin: "Yīyuàn", image: "🏥", english: "Hospital" },
       { word: "学校", pinyin: "Xuéxiào", imageURL: "img/school.png", english: "School" },
+      { word: "教室", pinyin: "Jiàoshì", imageURL: "img/classroom.png", english: "Classroom", immersiveChineseLevel: "123", immersiveChineseVocabId: 643 },
       { word: "小学", pinyin: "Xiǎoxué", image: "NONE", english: "Primary school, elementary school", immersiveChineseLevel: "26", immersiveChineseVocabId: 128 },
       { word: "高中", pinyin: "Gāozhōng", imageURL: "img/highschool.png", english: "High school" },
       { word: "大学", pinyin: "Dàxué", image: "NONE", english: "University", immersiveChineseLevel: "26", immersiveChineseVocabId: 126 },
@@ -851,6 +863,7 @@ const data = {
       { word: "换", pinyin: "Huàn", imageURL: "img/exchange.png", english: "Change, exchange, swap, switch", immersiveChineseLevel: "102", immersiveChineseVocabId: 502 },
       { word: "通过", pinyin: "Tōngguò", imageURL: "img/pass.png", english: "Pass, pass through; through, via, by", immersiveChineseLevel: "106", immersiveChineseVocabId: 522 },
       { word: "出事", pinyin: "Chū shì", image: "NONE", english: "Have an incident, meet with/cause trouble", immersiveChineseLevel: "107", immersiveChineseVocabId: 530 },
+      { word: "介绍", pinyin: "Jièshào", image: "NONE", english: "Introduce; introduction", immersiveChineseLevel: "117", immersiveChineseVocabId: 616 },
     ]
   },
   nature: {
@@ -865,6 +878,7 @@ const data = {
       { word: "在下雨", pinyin: "Zài xiàyǔ", image: "NONE", english: "It's raining" },
       { word: "彩虹", pinyin: "Cǎihóng", image: "🌈", english: "Rainbow" },
       { word: "雪", pinyin: "Xuě", image: "❄️", english: "Snow" },
+      { word: "下雪", pinyin: "Xiàxuě", imageURL: "img/snow.png", english: "Snow (verb)", immersiveChineseLevel: "123", immersiveChineseVocabId: 640 },
       { word: "风", pinyin: "Fēng", image: "💨", english: "Wind" },
       { word: "山", pinyin: "Shān", image: "⛰️", english: "Mountain" },
       { word: "海", pinyin: "Hǎi", image: "🌊", english: "Sea" },
@@ -1137,6 +1151,7 @@ const data = {
       { word: "这样", pinyin: "Zhèyàng", image: "NONE", english: "This way, this kind, like this", immersiveChineseLevel: "39", immersiveChineseVocabId: 194 },
       { word: "那样", pinyin: "Nàyàng", image: "NONE", english: "That way, that kind, like that", immersiveChineseLevel: "39", immersiveChineseVocabId: 572 },
       { word: "非常", pinyin: "Fēicháng", image: "NONE", english: "Very, really, extremely", immersiveChineseLevel: "42", immersiveChineseVocabId: 205 },
+      { word: "特别", pinyin: "Tèbié", image: "NONE", english: "Especially, particularly, very; special", immersiveChineseLevel: "123", immersiveChineseVocabId: 642 },
       { word: "挺", pinyin: "Tǐng", image: "NONE", english: "Quite, pretty, rather", immersiveChineseLevel: "57", immersiveChineseVocabId: 273 },
       { word: "从", pinyin: "Cóng", image: "NONE", english: "From", immersiveChineseLevel: "43", immersiveChineseVocabId: 209 },
       { word: "从中国到美国坐飞机需要几个小时？", pinyin: "Cóng Zhōngguó dào Měiguó zuò fēijī xūyào jǐ ge xiǎoshí?", image: "NONE", english: "How many hours does it take to fly from China to the US?", immersiveChineseLevel: "43", immersiveChineseVocabId: 209 },
@@ -1222,6 +1237,7 @@ const data = {
       { word: "尤其", pinyin: "Yóuqí", image: "NONE", english: "Especially, particularly", immersiveChineseLevel: "107", immersiveChineseVocabId: 528 },
       { word: "我喜欢这家饭店，尤其是他们的面", pinyin: "Wǒ xǐhuan zhè jiā fàndiàn, yóuqí shì tāmen de miàn", image: "NONE", english: "I like this restaurant, especially their noodles", immersiveChineseLevel: "107", immersiveChineseVocabId: 528 },
       { word: "电脑出问题了", pinyin: "Diànnǎo chū wèntí le", image: "NONE", english: "The computer is having a problem", immersiveChineseLevel: "107", immersiveChineseVocabId: 530 },
+      { word: "没事", pinyin: "Méi shì", image: "NONE", english: "No problem, no big deal", immersiveChineseLevel: "112", immersiveChineseVocabId: 592 },
     ]
   },
   pronouns: {

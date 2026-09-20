@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-4246cc47eb780c9041c58162ba43baee';
+const cacheName = 'mandarin-4a8b24797e84b38ecf6ace33cae57ea2';
 const appShellFiles = [
   './cards/card-style.css',
   './cards/cards-4000.png',
@@ -48,6 +48,7 @@ const appShellFiles = [
   './img/bench.png',
   './img/big.jpg',
   './img/birth.png',
+  './img/birthday.png',
   './img/bite.png',
   './img/blanket.png',
   './img/blowyournose.png',
@@ -78,6 +79,7 @@ const appShellFiles = [
   './img/cinema.png',
   './img/city.png',
   './img/class.png',
+  './img/classroom.png',
   './img/clean.png',
   './img/cleaning.png',
   './img/closethedoor.png',
@@ -166,6 +168,7 @@ const appShellFiles = [
   './img/goupstairs.png',
   './img/grab.png',
   './img/grabbook.png',
+  './img/graduate.png',
   './img/grass.png',
   './img/greatwall.png',
   './img/greenbean.jpg',
@@ -301,6 +304,7 @@ const appShellFiles = [
   './img/putcupontable.png',
   './img/puton.png',
   './img/question.png',
+  './img/ramen.jpeg',
   './img/read.png',
   './img/recently.png',
   './img/rectangle.png',
@@ -308,6 +312,7 @@ const appShellFiles = [
   './img/remember.png',
   './img/rest.png',
   './img/restaurant.png',
+  './img/resumeexample.jpeg',
   './img/river.png',
   './img/safe.png',
   './img/salary.png',
@@ -337,6 +342,7 @@ const appShellFiles = [
   './img/snack.png',
   './img/sneakily.png',
   './img/snot.png',
+  './img/snow.png',
   './img/soft.png',
   './img/son.png',
   './img/sophomore.png',
