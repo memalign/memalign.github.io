@@ -186,6 +186,7 @@ const data = {
       { word: "尿布", pinyin: "Niàobù", imageURL: "img/diaper.png", english: "Diaper" },
       { word: "地球", pinyin: "Dìqiú", imageURL: "img/globe.png", english: "Globe" },
       { word: "葫芦", pinyin: "Húlu", imageURL: "img/hulu.jpeg", english: "Bottle Gourd" },
+      { word: "狗叫", pinyin: "Gǒujiào", image: "🗯️🐕", english: "Dog bark" },
     ]
   },
 	routines: {
@@ -232,6 +233,7 @@ const data = {
       { word: "KTV", pinyin: "KTV", image: "🎤🎶📺", english: "Karaoke", immersiveChineseLevel: "63", immersiveChineseVocabId: 301 },
       { word: "微信", pinyin: "Wēixìn", imageURL: "img/wechat.jpeg", english: "WeChat" },
       { word: "生活", pinyin: "Shēnghuó", imageURL: "img/life.png", english: "Life; live", immersiveChineseLevel: "59", immersiveChineseVocabId: 282 },
+      { word: "生", pinyin: "Shēng", imageURL: "img/givebirth.png", english: "Give birth", immersiveChineseLevel: "111", immersiveChineseVocabId: 586 },
       { word: "出生", pinyin: "Chūshēng", imageURL: "img/birth.png", english: "To be born", immersiveChineseLevel: "82", immersiveChineseVocabId: 399 },
       { word: "作业", pinyin: "Zuòyè", imageURL: "img/homework.png", english: "Homework", immersiveChineseLevel: "88", immersiveChineseVocabId: 544 },
       { word: "考试", pinyin: "Kǎoshì", imageURL: "img/exam.png", english: "Exam, test; to take a test", immersiveChineseLevel: "101", immersiveChineseVocabId: 493 },
@@ -289,6 +291,7 @@ const data = {
       { word: "一万", pinyin: "Yíwàn", image: "NONE", english: "10000" },
       { word: "半", pinyin: "Bàn", imageURL: "img/half.png", english: "Half", immersiveChineseLevel: "38", immersiveChineseVocabId: 188 },
       { word: "幺", pinyin: "Yāo", image: "NONE", english: "One (in phone numbers)", immersiveChineseLevel: "83", immersiveChineseVocabId: 404 },
+      { word: "度", pinyin: "Dù", image: "NONE", english: "Degree, degrees (measurement scale)", immersiveChineseLevel: "113", immersiveChineseVocabId: 595 },
     ]
   },
   time: {
@@ -311,6 +314,7 @@ const data = {
       { word: "白天", pinyin: "Báitiān", image: "[🏙️]🌃", english: "Daytime", immersiveChineseLevel: "91", immersiveChineseVocabId: 436 },
       { word: "昨晚", pinyin: "Zuówǎn", imageURL: "img/lastnight.png", english: "Last night, yesterday evening", immersiveChineseLevel: "94", immersiveChineseVocabId: 492 },
       { word: "今天晚上", pinyin: "Jīntiān wǎnshang", image: "NONE", english: "Tonight" },
+      { word: "今晚", pinyin: "Jīnwǎn", image: "NONE", english: "Tonight (alt)" },
       { word: "昨天", pinyin: "Zuótiān", imageURL: "img/yesterday.png", english: "Yesterday" },
       { word: "明天", pinyin: "Míngtiān", imageURL: "img/tomorrow.png", english: "Tomorrow" },
       { word: "上个礼拜", pinyin: "Shàng gè lǐbài", imageURL: "img/lastweek.png", english: "Last week" },
@@ -834,6 +838,7 @@ const data = {
       { word: "打喷嚏", pinyin: "Dǎ pēntì", image: "🤧", english: "Sneeze" },
       { word: "打架", pinyin: "Dǎjià", imageURL: "img/physicalfight.png", english: "Physical fight" },
       { word: "吵架", pinyin: "Chǎojià", imageURL: "img/argue.png", english: "Argue" },
+      { word: "骂", pinyin: "Mà", imageURL: "img/scold.png", english: "Curse, scold strongly, verbally abuse", immersiveChineseLevel: "109", immersiveChineseVocabId: 540 },
       { word: "掉了", pinyin: "Diào le", imageURL: "img/dropped.png", english: "Dropped" },
       { word: "坐", pinyin: "Zuò", imageURL: "img/sit.png", english: "To sit" },
       { word: "躺下去", pinyin: "Tǎng xiàqu", imageURL: "img/liedown.png", english: "Lie down" },
@@ -1238,6 +1243,10 @@ const data = {
       { word: "我喜欢这家饭店，尤其是他们的面", pinyin: "Wǒ xǐhuan zhè jiā fàndiàn, yóuqí shì tāmen de miàn", image: "NONE", english: "I like this restaurant, especially their noodles", immersiveChineseLevel: "107", immersiveChineseVocabId: 528 },
       { word: "电脑出问题了", pinyin: "Diànnǎo chū wèntí le", image: "NONE", english: "The computer is having a problem", immersiveChineseLevel: "107", immersiveChineseVocabId: 530 },
       { word: "没事", pinyin: "Méi shì", image: "NONE", english: "No problem, no big deal", immersiveChineseLevel: "112", immersiveChineseVocabId: 592 },
+      { word: "太好了！", pinyin: "Tài hǎo le!", image: "NONE", english: "That's great!", immersiveChineseLevel: "109", immersiveChineseVocabId: 540 },
+      { word: "你能不能帮我一个忙？", pinyin: "Nǐ néng bù néng bāng wǒ yí gè máng?", image: "NONE", english: "Can you do me a favor?", immersiveChineseLevel: "114", immersiveChineseVocabId: 595 },
+      { word: "喂", pinyin: "Wéi", image: "NONE", english: "Hello? (on telephone)", immersiveChineseLevel: "114", immersiveChineseVocabId: 595 },
+      { word: "打错电话", pinyin: "Dǎ cuò diànhuà", image: "📞❌", english: "Call a wrong number" },
     ]
   },
   pronouns: {

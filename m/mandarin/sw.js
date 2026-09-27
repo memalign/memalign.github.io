@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-4a8b24797e84b38ecf6ace33cae57ea2';
+const cacheName = 'mandarin-5d0ad5a58fbd8a6340cee10404c7acdd';
 const appShellFiles = [
   './cards/card-style.css',
   './cards/cards-4000.png',
@@ -156,6 +156,7 @@ const appShellFiles = [
   './img/fun.png',
   './img/garage.png',
   './img/girlfriend.png',
+  './img/givebirth.png',
   './img/givebook.png',
   './img/givegift.png',
   './img/glass.png',
@@ -320,6 +321,7 @@ const appShellFiles = [
   './img/same.png',
   './img/sandbox.png',
   './img/school.png',
+  './img/scold.png',
   './img/seafood.png',
   './img/seaweed.png',
   './img/seconddog.png',
