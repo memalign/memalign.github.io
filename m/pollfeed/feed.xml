@@ -3,10 +3,44 @@
 <title>Diff Feed</title>
 <link rel="self" type="application/atom+xml" href="https://memalign.github.io/m/pollfeed/feed.xml" />
 <id>https://memalign.github.io/pollfeed/feed.xml</id>
-<updated>2026-04-12T15:00:01Z</updated>
+<updated>2026-10-07T15:00:01Z</updated>
 <rights>Copyright © 2024, memalign</rights>
 <icon>https://memalign.github.io/apple-touch-icon.png</icon>
 <logo>https://memalign.github.io/apple-touch-icon.png</logo>
+<entry>
+<title>asahi-net.or.jp at 10/07/26 08:00</title>
+<published>2026-10-07T15:00:01Z</published>
+<updated>2026-10-07T15:00:01Z</updated>
+<author>
+<name>memalign</name>
+<uri>https://memalign.github.io/index.html</uri>
+</author>
+<id>urn:md5:3353bb11c61e8cfbcdb1732cf5072846</id>
+<link href="https://www.asahi-net.or.jp/~cs8k-cyu/index.html"/>
+<content type="html" xml:base="https://www.asahi-net.or.jp/~cs8k-cyu/" xml:lang="en"><![CDATA[
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/zig-saber/screenshot.gif"><br />
+<a href="https://abagames.github.io/agentic-gamedev-games/zig-saber/">https://abagames.github.io/agentic-gamedev-games/zig-saber/</a><br />
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/blink-scope/screenshot.gif"><br />
+<a href="https://abagames.github.io/agentic-gamedev-games/blink-scope/">https://abagames.github.io/agentic-gamedev-games/blink-scope/</a><br />
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/overturn/screenshot.gif"><br />
+<a href="https://abagames.github.io/agentic-gamedev-games/overturn/">https://abagames.github.io/agentic-gamedev-games/overturn/</a><br />
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/head-rush/screenshot.gif"><br />
+<a href="https://abagames.github.io/agentic-gamedev-games/head-rush/">https://abagames.github.io/agentic-gamedev-games/head-rush/</a><br />
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/twin-vector/screenshot.gif"><br />
+<a href="https://abagames.github.io/agentic-gamedev-games/twin-vector/">https://abagames.github.io/agentic-gamedev-games/twin-vector/</a><br />
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/undertow/screenshot.gif"><br />
+<a href="https://abagames.github.io/agentic-gamedev-games/undertow/">https://abagames.github.io/agentic-gamedev-games/undertow/</a><br />
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/wreckfall/screenshot.gif"><br />
+<a href="https://abagames.itch.io/wreckfall">https://abagames.itch.io/wreckfall</a><br />
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/skyhaul/screenshot.gif"><br />
+<a href="https://abagames.github.io/agentic-gamedev-games/skyhaul/">https://abagames.github.io/agentic-gamedev-games/skyhaul/</a><br />
+<img src="https://github.com/abagames/agentic-gamedev-games/raw/main/docs/draft-line/screenshot.gif"><br />
+<a href="https://abagames.itch.io/draft-line">https://abagames.itch.io/draft-line</a><br />
+
+]]>
+</content>
+</entry>
+
 <entry>
 <title>asahi-net.or.jp at 04/12/26 08:00</title>
 <published>2026-04-12T15:00:01Z</published>
