@@ -901,6 +901,8 @@ const data = {
       { word: "长", pinyin: "Zhǎng", imageURL: "img/grow.png", english: "Grow", immersiveChineseLevel: "134", immersiveChineseVocabId: 690 },
       { word: "长得", pinyin: "Zhǎng de", image: "NONE", english: "Look like", immersiveChineseLevel: "134", immersiveChineseVocabId: 690 },
       { word: "长大", pinyin: "Zhǎngdà", imageURL: "img/growup.png", english: "Grow up", immersiveChineseLevel: "134", immersiveChineseVocabId: 691 },
+      { word: "搬家", pinyin: "Bānjiā", imageURL: "img/moveout.png", english: "Move house", immersiveChineseLevel: "136", immersiveChineseVocabId: 701 },
+      { word: "搬", pinyin: "Bān", imageURL: "img/relocate.png", english: "Move (heavy objects), relocate", immersiveChineseLevel: "136", immersiveChineseVocabId: 702 },
     ]
   },
   nature: {
@@ -1305,6 +1307,13 @@ const data = {
       { word: "怎么可能?", pinyin: "Zěnme kěnéng?", image: "NONE", english: "How is that possible? / No way!", immersiveChineseLevel: "131", immersiveChineseVocabId: 674 },
       { word: "不可能!", pinyin: "Bù kěnéng!", image: "NONE", english: "Impossible! / No way!", immersiveChineseLevel: "131", immersiveChineseVocabId: 674 },
       { word: "他长高了很多", pinyin: "Tā zhǎnggāole hěn duō", image: "NONE", english: "He has grown a lot taller", immersiveChineseLevel: "134", immersiveChineseVocabId: 690 },
+      { word: "肯定", pinyin: "Kěndìng", image: "NONE", english: "Definitely", immersiveChineseLevel: "135", immersiveChineseVocabId: 693 },
+      { word: "办法", pinyin: "Bànfǎ", imageURL: "img/method.png", english: "Method, way (of doing something)", immersiveChineseLevel: "135", immersiveChineseVocabId: 696 },
+      { word: "没办法", pinyin: "Méi bànfǎ", image: "NONE", english: "Nothing can be done, there's no way", immersiveChineseLevel: "135", immersiveChineseVocabId: 697 },
+      { word: "怎么办", pinyin: "Zěnmebàn", image: "NONE", english: "What to do, what can be done", immersiveChineseLevel: "136", immersiveChineseVocabId: 698 },
+      { word: "没想到", pinyin: "Méi xiǎngdào", image: "NONE", english: "Didn't expect", immersiveChineseLevel: "136", immersiveChineseVocabId: 699 },
+      { word: "音乐的声音太大", pinyin: "Yīnyuè de shēngyīn tài dà", image: "NONE", english: "The music is too loud", immersiveChineseLevel: "136", immersiveChineseVocabId: 699 },
+      { word: "早知道我就...", pinyin: "Zǎo zhīdào wǒ jiù...", image: "NONE", english: "Had I known earlier...", immersiveChineseLevel: "136", immersiveChineseVocabId: 702 },
     ]
   },
   pronouns: {
