@@ -215,7 +215,7 @@ class SpellGame {
       id: "about-link",
       className: "about-link",
       text: "About",
-      attrs: { href: "https://memalign.github.io/p/spell.html" }
+      attrs: { href: "https://memalign.github.io/p/scrivenspell.html" }
     }));
 
     const gameShell = this.createElement("main", { id: "game-shell", className: "game-shell" });
