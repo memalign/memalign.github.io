@@ -14,6 +14,7 @@ generate-sw.sh
 .git
 .gitignore
 notes.txt
+lexicon_LICENSE.txt
 Resources
 tests
 GEMINI.md

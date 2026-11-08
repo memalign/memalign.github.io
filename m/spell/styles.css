@@ -226,6 +226,8 @@ body {
 }
 
 .hud {
+  width: min(920px, 100%);
+  justify-self: center;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: stretch;
@@ -511,6 +513,13 @@ body {
   padding: 20px;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
+}
+
+#round-over {
+  display: grid;
+  place-items: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .overlay.hidden {
@@ -803,6 +812,14 @@ body {
     padding-bottom: clamp(16px, 5vh, 40px);
   }
 
+  #round-over {
+    align-items: center;
+    justify-content: center;
+    place-items: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
   .overlay-card {
     max-height: calc(100svh - clamp(32px, 10vh, 80px));
     overflow-y: auto;
@@ -823,5 +840,17 @@ body {
     max-height: calc(100svh - 32px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Tiny screen adjustments (iPhone 11 Pro, small mobile screens) */
+@media (max-width: 480px) {
+  .landing-panel {
+    gap: 10px;
+    padding: 16px 14px;
+  }
+
+  .landing-panel h1 {
+    font-size: 2.1rem;
   }
 }

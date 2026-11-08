@@ -1,0 +1,4 @@
+This file is based on https://upgames.dev/up-spell-en-lexicon.txt
+
+Like that file, the license for lexicon.txt is Creative Commons Attribution-ShareAlike 4.0 International license:
+https://creativecommons.org/licenses/by-sa/4.0/

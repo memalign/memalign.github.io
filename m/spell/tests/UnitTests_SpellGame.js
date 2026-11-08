@@ -859,6 +859,24 @@ class UnitTests_SpellGame {
     assertTrue(timerCard.classList.contains("hud-card"));
   }
 
+  test_styling4_layout_and_responsive_rules() {
+    const game = this._makeGame();
+    // 1. Verify HUD structure
+    const header = game.elements.timer.parentEl.parentEl;
+    assertTrue(header.classList.contains("hud"));
+
+    // 2. Verify Round Over structure
+    assertTrue(game.elements.overlay.id === "round-over");
+    assertTrue(game.elements.overlay.classList.contains("overlay"));
+
+    // 3. Verify Landing Page structure
+    const landingPanel = game.elements.landingPage.children[0];
+    assertTrue(landingPanel.classList.contains("landing-panel"));
+    const landingActions = landingPanel.children[1];
+    assertTrue(landingActions.classList.contains("landing-actions"));
+    assertTrue(game.document.getElementById("start-game") !== null);
+  }
+
   test_debug_testEndgame() {
     const game = this._makeGame();
     game.testEndgame();
@@ -963,6 +981,192 @@ class UnitTests_SpellGame {
     assertTrue(game3.state.debug.kidMode === false);
     game3.showDebugPanel();
     assertTrue(game3.elements.debugKidMode.checked === false);
+  }
+
+  test_game_beginPointerInteraction_recovers_when_drag_already_active() {
+    const game = this._makeGame();
+    const a = game.createTile("A");
+    const b = game.createTile("B");
+    game.state.trayTiles = [];
+    game.state.wordTiles = [a, b];
+    game.render();
+
+    const nodeA = game.elements.scoreWord.children[0];
+    game.beginPointerInteraction({
+      currentTarget: nodeA,
+      pointerId: 1,
+      clientX: 10,
+      clientY: 10,
+      preventDefault() {}
+    });
+    game.onDragMove({
+      pointerId: 1,
+      clientX: 25,
+      clientY: 10,
+      preventDefault() {}
+    });
+    assertTrue(game.state.drag.dragging === true);
+    assertTrue(game.state.drag.ghost !== null);
+
+    const nodeB = game.elements.scoreWord.children[0];
+    game.beginPointerInteraction({
+      currentTarget: nodeB,
+      pointerId: 2,
+      clientX: 50,
+      clientY: 10,
+      preventDefault() {}
+    });
+    assertTrue(pLog.probeLog.has(96));
+    assertEqual(String(game.state.drag.pointerId), "2");
+    const ghosts = game.document.body.children.filter((c) => c && c.classList && c.classList.contains("dragging"));
+    assertEqual(String(ghosts.length), "0");
+
+    game.endDrag({ pointerId: 2 });
+    assertTrue(!game.state.drag);
+  }
+
+  test_game_endDrag_recovers_on_mismatched_pointerId() {
+    const game = this._makeGame();
+    const a = game.createTile("A");
+    game.state.trayTiles = [a];
+    game.render();
+    const node = game.elements.letterTray.children[0];
+    game.beginPointerInteraction({
+      currentTarget: node,
+      pointerId: 10,
+      clientX: 0,
+      clientY: 0,
+      preventDefault() {}
+    });
+    game.endDrag({ pointerId: 99 });
+    assertTrue(pLog.probeLog.has(97));
+    assertTrue(!game.state.drag);
+  }
+
+  test_game_onWindowPointerDown_cleans_up_stale_drag_when_new_pointer_starts() {
+    const game = this._makeGame();
+    const a = game.createTile("A");
+    game.state.trayTiles = [a];
+    game.render();
+    const node = game.elements.letterTray.children[0];
+    game.beginPointerInteraction({
+      currentTarget: node,
+      pointerId: 10,
+      clientX: 0,
+      clientY: 0,
+      preventDefault() {}
+    });
+    assertTrue(!!game.state.drag);
+    game.onWindowPointerDown({ pointerId: 11 });
+    assertTrue(pLog.probeLog.has(99));
+    assertTrue(!game.state.drag);
+  }
+
+  test_game_shouldFlickToTray_handles_missing_client_coords() {
+    const game = this._makeGame();
+    const a = game.createTile("A");
+    game.state.wordTiles = [a];
+    const snap = { sourceZone: "word", startX: 0, startY: 0, startedAt: game.now() };
+    const result = game.shouldFlickToTray(snap, {});
+    assertTrue(result === false);
+    assertTrue(pLog.probeLog.has(98));
+  }
+
+  test_game_microDrag_and_tap_sequence_on_invalid_word_does_not_get_stuck() {
+    const game = this._makeGame();
+    game.setLexiconText("CAT");
+    const q1 = game.createTile("Q");
+    const q2 = game.createTile("Q");
+    game.state.trayTiles = [];
+    game.state.wordTiles = [q1, q2];
+    game.render();
+
+    for (let i = 0; i < 5; i++) {
+      const firstTileNode = game.elements.scoreWord.children[0];
+      game.beginPointerInteraction({
+        currentTarget: firstTileNode,
+        pointerId: i + 1,
+        clientX: 10,
+        clientY: 10,
+        preventDefault() {}
+      });
+      game.onDragMove({
+        pointerId: i + 1,
+        clientX: 18,
+        clientY: 12,
+        preventDefault() {}
+      });
+      game.endDrag({ pointerId: i + 1, clientX: 18, clientY: 12 });
+      assertTrue(!game.state.drag);
+      const ghosts = game.document.body.children.filter((c) => c && c.classList && c.classList.contains("dragging"));
+      assertEqual(String(ghosts.length), "0");
+      assertEqual(String(game.state.wordTiles.length), "2");
+    }
+  }
+
+  test_game_debugDragLogging_flag_controls_drag_logging() {
+    const originalLog = console.log;
+    const originalWarn = console.warn;
+    const loggedMessages = [];
+    const warnedMessages = [];
+    console.log = (msg) => loggedMessages.push(msg);
+    console.warn = (msg) => warnedMessages.push(msg);
+
+    try {
+      const game = this._makeGame();
+      assertTrue(game.isDebugDragLoggingEnabled() === false);
+
+      game.logDrag("hello log");
+      game.warnDrag("hello warn");
+      assertEqual(String(loggedMessages.length), "0");
+      assertEqual(String(warnedMessages.length), "0");
+
+      // Enable via instance property
+      game.debugDragLogging = true;
+      assertTrue(game.isDebugDragLoggingEnabled() === true);
+      game.logDrag("enabled log");
+      game.warnDrag("enabled warn");
+      assertEqual(String(loggedMessages.length), "1");
+      assertEqual(String(warnedMessages.length), "1");
+      assertEqual(loggedMessages[0], "enabled log");
+      assertEqual(warnedMessages[0], "enabled warn");
+
+      // Reset
+      game.debugDragLogging = false;
+      assertTrue(game.isDebugDragLoggingEnabled() === false);
+
+      // Enable via debug checkbox
+      assertTrue(!!game.elements.debugDragLogging);
+      game.elements.debugDragLogging.checked = true;
+      game.elements.debugDragLogging.eventHandlers.change();
+      assertTrue(game.isDebugDragLoggingEnabled() === true);
+      assertTrue(game.state.debug.dragLogging === true);
+
+      // Verify showDebugPanel updates checkbox
+      game.state.debug.dragLogging = false;
+      game.debugDragLogging = false;
+      game.showDebugPanel();
+      assertTrue(game.elements.debugDragLogging.checked === false);
+      game.state.debug.dragLogging = true;
+      game.showDebugPanel();
+      assertTrue(game.elements.debugDragLogging.checked === true);
+
+      // Enable via constructor option
+      const loggingGame = new SpellGame({ document: new MADocument(), debugDragLogging: true });
+      assertTrue(loggingGame.isDebugDragLoggingEnabled() === true);
+
+      // Enable via global flag
+      const defaultGame = new SpellGame({ document: new MADocument() });
+      assertTrue(defaultGame.isDebugDragLoggingEnabled() === false);
+      globalThis.DEBUG_DRAG_LOGGING = true;
+      assertTrue(defaultGame.isDebugDragLoggingEnabled() === true);
+      delete globalThis.DEBUG_DRAG_LOGGING;
+      assertTrue(defaultGame.isDebugDragLoggingEnabled() === false);
+    } finally {
+      delete globalThis.DEBUG_DRAG_LOGGING;
+      console.log = originalLog;
+      console.warn = originalWarn;
+    }
   }
 }
 

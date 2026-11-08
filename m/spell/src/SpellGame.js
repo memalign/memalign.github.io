@@ -72,6 +72,11 @@ class SpellGame {
         ? () => performance.now()
         : () => Date.now());
     this.debugMode = options.debugMode;
+    this.debugDragLogging = Boolean(
+      options.debugDragLogging ||
+      (typeof window !== "undefined" && (window.DEBUG_DRAG_LOGGING || window.__DEBUG_DRAG_LOGGING__)) ||
+      (typeof globalThis !== "undefined" && (globalThis.DEBUG_DRAG_LOGGING || globalThis.__DEBUG_DRAG_LOGGING__))
+    );
 
     this.elements = {};
     this.uiBuilt = false;
@@ -80,6 +85,7 @@ class SpellGame {
     this.boundHandleKeyDown = (event) => this.handleKeyDown(event);
     this.boundOnDragMove = (event) => this.onDragMove(event);
     this.boundEndDrag = (event) => this.endDrag(event);
+    this.boundOnWindowPointerDown = (event) => this.onWindowPointerDown(event);
     this.state = this.createEmptyState();
   }
 
@@ -120,7 +126,8 @@ class SpellGame {
       debug: {
         replenishQuoteWord: false,
         capEnemyHp: false,
-        kidMode: !!this.readJSON(STORAGE_KEYS.kidMode, false)
+        kidMode: !!this.readJSON(STORAGE_KEYS.kidMode, false),
+        dragLogging: false
       },
       view: "landing"
     };
@@ -377,6 +384,14 @@ class SpellGame {
     debugKidLabel.appendChild(debugKidInput);
     debugKidLabel.appendChild(this.createElement("span", { text: "Kid Mode (simple words, 5-min rounds)" }));
     debugCard.appendChild(debugKidLabel);
+    const debugDragLabel = this.createElement("label", { className: "debug-setting" });
+    const debugDragInput = this.createElement("input", {
+      id: "debug-drag-logging",
+      attrs: { type: "checkbox" }
+    });
+    debugDragLabel.appendChild(debugDragInput);
+    debugDragLabel.appendChild(this.createElement("span", { text: "Log drag events to console" }));
+    debugCard.appendChild(debugDragLabel);
     const debugTestEndgameLabel = this.createElement("div", { className: "debug-setting" });
     const debugTestEndgameBtn = this.createElement("button", {
       id: "debug-test-endgame",
@@ -454,6 +469,7 @@ class SpellGame {
       debugReplenishQuoteWord: this.document.getElementById("debug-replenish-quote-word"),
       debugCapEnemyHp: this.document.getElementById("debug-cap-enemy-hp"),
       debugKidMode: this.document.getElementById("debug-kid-mode"),
+      debugDragLogging: this.document.getElementById("debug-drag-logging"),
       debugTestEndgame: this.document.getElementById("debug-test-endgame"),
       closeDebug: this.document.getElementById("close-debug"),
       roundOverUnlockMessage: this.document.getElementById("round-over-unlock-message"),
@@ -507,6 +523,13 @@ class SpellGame {
       this.writeJSON(STORAGE_KEYS.kidMode, this.state.debug.kidMode);
       pLog.log(83);
     });
+    if (this.elements.debugDragLogging) {
+      this.elements.debugDragLogging.addEventListener("change", () => {
+        const enabled = !!this.elements.debugDragLogging.checked;
+        this.state.debug.dragLogging = enabled;
+        this.debugDragLogging = enabled;
+      });
+    }
     if (this.elements.debugTestEndgame) {
       this.elements.debugTestEndgame.addEventListener("click", () => this.testEndgame());
     }
@@ -1143,6 +1166,9 @@ class SpellGame {
     this.elements.debugReplenishQuoteWord.checked = !!this.state.debug.replenishQuoteWord;
     this.elements.debugCapEnemyHp.checked = !!this.state.debug.capEnemyHp;
     this.elements.debugKidMode.checked = !!this.state.debug.kidMode;
+    if (this.elements.debugDragLogging) {
+      this.elements.debugDragLogging.checked = !!(this.state.debug.dragLogging || this.debugDragLogging);
+    }
     this.removeClass(this.elements.debugOverlay, "hidden");
     pLog.log(45);
   }
@@ -1572,24 +1598,70 @@ class SpellGame {
     return false;
   }
 
+  isDebugDragLoggingEnabled() {
+    return Boolean(
+      this.debugDragLogging ||
+      (this.state && this.state.debug && this.state.debug.dragLogging) ||
+      (this.window && (this.window.DEBUG_DRAG_LOGGING || this.window.__DEBUG_DRAG_LOGGING__)) ||
+      (typeof window !== "undefined" && (window.DEBUG_DRAG_LOGGING || window.__DEBUG_DRAG_LOGGING__)) ||
+      (typeof globalThis !== "undefined" && (globalThis.DEBUG_DRAG_LOGGING || globalThis.__DEBUG_DRAG_LOGGING__))
+    );
+  }
+
+  logDrag(...args) {
+    if (this.isDebugDragLoggingEnabled()) {
+      console.log(...args);
+    }
+  }
+
+  warnDrag(...args) {
+    if (this.isDebugDragLoggingEnabled()) {
+      console.warn(...args);
+    }
+  }
+
+  onWindowPointerDown(event) {
+    if (!this.state.drag) {
+      return;
+    }
+    if (event && event.pointerId !== undefined && event.pointerId !== this.state.drag.pointerId) {
+      this.warnDrag(`[SpellGame drag] Window pointerdown with new pointerId ${event.pointerId} while drag ${this.state.drag.pointerId} active; cleaning up previous drag`);
+      if (this.state.drag.dragging) {
+        this.restoreDraggedTile();
+      }
+      this.cleanupDrag();
+      pLog.log(99);
+    }
+  }
+
   beginPointerInteraction(event) {
     if (!this.state.roundActive) {
       return;
     }
+    if (this.state.drag) {
+      this.warnDrag(`[SpellGame drag] beginPointerInteraction called while drag already active (tileId: ${this.state.drag.tileId}, pointerId: ${this.state.drag.pointerId}); cleaning up previous drag`);
+      if (this.state.drag.dragging) {
+        this.restoreDraggedTile();
+      }
+      this.cleanupDrag();
+      pLog.log(96);
+    }
     if (event.preventDefault) {
       event.preventDefault();
     }
-    const tileNode = event.currentTarget;
+    const tileNode = (event && (event.currentTarget || event.target)) || null;
+    if (!tileNode || !tileNode.dataset || tileNode.dataset.id === undefined) {
+      return;
+    }
     const tileId = Number(tileNode.dataset.id);
     const zoneName = tileNode.dataset.zone;
     const sourceTiles = zoneName === "tray" ? this.state.trayTiles : this.state.wordTiles;
     const sourceIndex = sourceTiles.findIndex((tile) => tile && tile.id === tileId);
     if (sourceIndex === -1) {
+      this.warnDrag(`[SpellGame drag] beginPointerInteraction: tile ${tileId} not found in ${zoneName}`);
       return;
     }
-    if (tileNode.setPointerCapture && event.pointerId !== undefined) {
-      tileNode.setPointerCapture(event.pointerId);
-    }
+    this.logDrag(`[SpellGame drag] beginPointerInteraction: tileId=${tileId}, zone=${zoneName}, index=${sourceIndex}, pointerId=${event.pointerId}`);
 
     const rect = tileNode.getBoundingClientRect();
     const pageX = event.pageX !== undefined ? event.pageX : event.clientX;
@@ -1621,6 +1693,7 @@ class SpellGame {
       this.window.addEventListener("pointermove", this.boundOnDragMove);
       this.window.addEventListener("pointerup", this.boundEndDrag);
       this.window.addEventListener("pointercancel", this.boundEndDrag);
+      this.window.addEventListener("pointerdown", this.boundOnWindowPointerDown);
     }
   }
 
@@ -1665,11 +1738,18 @@ class SpellGame {
 
   startDragVisual() {
     const drag = this.state.drag;
+    if (!drag) {
+      return;
+    }
+    this.logDrag(`[SpellGame drag] startDragVisual: tileId=${drag.tileId}, zone=${drag.sourceZone}, index=${drag.sourceIndex}`);
     drag.dragging = true;
     const ghost = this.cloneTileNode(drag.sourceNode);
     this.removeClass(ghost, "drag-source");
     this.removeClass(ghost, "tile-entering");
     this.addClass(ghost, "dragging");
+    ghost.style.transform = "";
+    ghost.style.transition = "none";
+    ghost.style.zIndex = "";
     ghost.style.width = `${drag.sourceNode.offsetWidth}px`;
     ghost.style.height = `${drag.sourceNode.offsetHeight}px`;
     this.document.body.appendChild(ghost);
@@ -1724,31 +1804,41 @@ class SpellGame {
   }
 
   endDrag(event) {
-    if (!this.state.drag || event.pointerId !== this.state.drag.pointerId) {
+    if (!this.state.drag) {
       return;
+    }
+    if (event && event.pointerId !== undefined && this.state.drag.pointerId !== undefined && event.pointerId !== this.state.drag.pointerId) {
+      this.warnDrag(`[SpellGame drag] Ending drag on mismatched pointerId ${event.pointerId} (active drag: ${this.state.drag.pointerId})`);
+      pLog.log(97);
     }
     const dragSnapshot = { ...this.state.drag };
-    if (!this.state.drag.dragging) {
-      this.cleanupDrag();
-      if (this.shouldFlickToTray(dragSnapshot, event)) {
-        this.returnTileToTray(dragSnapshot.tileId);
-      } else {
-        this.handleTileTap(dragSnapshot.tileId, dragSnapshot.sourceZone);
+    this.logDrag(`[SpellGame drag] endDrag: tileId=${dragSnapshot.tileId}, dragging=${dragSnapshot.dragging}, hoverZone=${dragSnapshot.hoverZone}, hoverIndex=${dragSnapshot.hoverIndex}`);
+    try {
+      if (!this.state.drag.dragging) {
+        this.cleanupDrag();
+        if (this.shouldFlickToTray(dragSnapshot, event)) {
+          this.returnTileToTray(dragSnapshot.tileId);
+        } else {
+          this.handleTileTap(dragSnapshot.tileId, dragSnapshot.sourceZone);
+        }
+        return;
       }
-      return;
-    }
 
-    if (this.shouldFlickToTray(dragSnapshot, event)) {
-      this.setDropAnimationFromGhost();
-      this.moveDraggedTileToTray();
-    } else if (this.state.drag.hoverZone) {
-      this.setDropAnimationFromGhost();
-      this.commitDraggedTile();
-    } else {
-      this.setDropAnimationFromGhost();
-      this.restoreDraggedTile();
+      if (this.shouldFlickToTray(dragSnapshot, event)) {
+        this.setDropAnimationFromGhost();
+        this.moveDraggedTileToTray();
+      } else if (this.state.drag.hoverZone) {
+        this.setDropAnimationFromGhost();
+        this.commitDraggedTile();
+      } else {
+        this.setDropAnimationFromGhost();
+        this.restoreDraggedTile();
+      }
+    } finally {
+      if (this.state.drag) {
+        this.cleanupDrag();
+      }
     }
-    this.cleanupDrag();
   }
 
   setDropAnimationFromGhost() {
@@ -1776,12 +1866,15 @@ class SpellGame {
     if (!this.state.drag) {
       return;
     }
-    if (this.state.drag.sourceNode) {
-      this.removeClass(this.state.drag.sourceNode, "drag-source");
+    const drag = this.state.drag;
+    this.logDrag(`[SpellGame drag] cleanupDrag: tileId=${drag.tileId}`);
+    if (drag.sourceNode) {
+      this.removeClass(drag.sourceNode, "drag-source");
     }
-    if (this.state.drag.ghost) {
-      this.state.drag.ghost.remove();
+    if (drag.ghost) {
+      drag.ghost.remove();
     }
+    this.cleanupOrphans();
     this.state.suppressClickUntil = this.now() + 250;
     this.state.drag = null;
     this.highlightZones(null);
@@ -1789,6 +1882,7 @@ class SpellGame {
       this.window.removeEventListener("pointermove", this.boundOnDragMove);
       this.window.removeEventListener("pointerup", this.boundEndDrag);
       this.window.removeEventListener("pointercancel", this.boundEndDrag);
+      this.window.removeEventListener("pointerdown", this.boundOnWindowPointerDown);
     }
     this.render();
   }
@@ -1835,6 +1929,10 @@ class SpellGame {
 
   shouldFlickToTray(dragSnapshot, event) {
     if (dragSnapshot.sourceZone !== "word") {
+      return false;
+    }
+    if (!event || event.clientX === undefined || event.clientY === undefined) {
+      pLog.log(98);
       return false;
     }
     const dx = event.clientX - dragSnapshot.startX;
