@@ -1,3 +1,7 @@
+ScrivenSpell
+- Image: /m/spell/spell.png
+- /m/spell/index.html
+
 Wolfers
 - Image: /m/wolfer/wolfer.png
 - /m/wolfer/index.html

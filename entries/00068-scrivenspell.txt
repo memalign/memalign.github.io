@@ -1,0 +1,16 @@
+Title: ScrivenSpell
+Date: 11/7/2026
+Tags: Programming, Games
+
+[Image:/m/spell/spell.png]
+
+Introducing [Link:/m/spell/index.html]ScrivenSpell[/Link], a word game with RPG elements.
+
+In ScrivenSpell, make words as quickly as possible to fight monsters. Longer words get additional points. When you defeat a monster, a stronger one takes its place.
+
+Unlock Quote Quest for an extra challenge and try to achieve 100% completion!
+
+
+This game is inspired by [Link:https://upgames.dev]Up Spell[/Link]. That game was a lot of fun but unfortunately no longer fits the screen shapes of recent devices.
+
+It also lacked staying power, at least for me, which is why I experimented with RPG elements in ScrivenSpell. The monsters and Quote Quest give the player a goal and something to complete.
