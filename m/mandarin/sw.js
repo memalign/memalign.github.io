@@ -1,4 +1,4 @@
-const cacheName = 'mandarin-322d3d3e241c242ee59e8cb73a4847f8';
+const cacheName = 'mandarin-6ed1bea4d9e9dc865b9d1fe0f1d351ee';
 const appShellFiles = [
   './cards/card-style.css',
   './cards/cards-4000.png',
@@ -59,6 +59,7 @@ const appShellFiles = [
   './img/bokchoy.jpg',
   './img/book.png',
   './img/bored.png',
+  './img/boss.png',
   './img/bottledwater.png',
   './img/bowl.png',
   './img/boyfriend.png',
@@ -111,6 +112,7 @@ const appShellFiles = [
   './img/diet.png',
   './img/different.png',
   './img/difficult.png',
+  './img/direct.png',
   './img/dirty.png',
   './img/dirtylaundry.png',
   './img/discover.png',
@@ -442,6 +444,7 @@ const appShellFiles = [
   './img/towel.png',
   './img/toy.png',
   './img/translate.png',
+  './img/trust.png',
   './img/tunnel.png',
   './img/turnleft.png',
   './img/turnoffthelight.png',
@@ -473,6 +476,7 @@ const appShellFiles = [
   './img/white.png',
   './img/who.png',
   './img/whole.png',
+  './img/willing.png',
   './img/wipe.png',
   './img/word.png',
   './img/workathome.png',
