@@ -198,6 +198,7 @@ Fiction:
     - This Book is Full of Spiders
     - What the Hell Did I Just Read
     - If This Book Exists, You're in the Wrong Universe
+    - There Are No Giant Crabs in This Novel
 
     - Fun comedy horror from Jason Pargin (aka David Wong), another author with several books on my list.
 
@@ -230,6 +231,8 @@ Fiction:
 - The Nine Billion Names of God by Arthur C. Clarke
 
 - Nineteen Eighty-Four by George Orwell
+
+- [Link:https://www.gregegan.net/OCEANIC/Complete/Oceanic.html]Oceanic[/Link] by Greg Egan
 
 - The Peripheral by William Gibson
 
