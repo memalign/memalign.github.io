@@ -54,6 +54,10 @@ Pac-Man Dungeon
 - Image: /m/pacman.jpg
 - /m/pacmandungeon/index.html
 
+MemFiddle
+- Image: /m/memfiddle/memfiddle.png
+- /m/memfiddle/index.html
+
 PCEImage Editor
 - Image: /m/pceimage/koffing-code.png
 - /m/pceimage/index.html
