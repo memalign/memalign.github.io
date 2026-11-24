@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="oceanBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9ceaf0"/>
+      <stop offset="100%" stop-color="#168bb2"/>
+    </linearGradient>
+    <filter id="fishShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#075b78" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="40" fill="url(#oceanBg)"/>
+
+  <!-- Bubbles -->
+  <circle cx="100" cy="140" r="16" fill="#ffffff" opacity="0.35"/>
+  <circle cx="120" cy="100" r="9" fill="#ffffff" opacity="0.4"/>
+  <circle cx="430" cy="220" r="22" fill="#ffffff" opacity="0.3"/>
+  <circle cx="450" cy="165" r="12" fill="#ffffff" opacity="0.35"/>
+  <circle cx="380" cy="410" r="18" fill="#ffffff" opacity="0.25"/>
+
+  <!-- Star top right -->
+  <g transform="translate(390, 110)">
+    <polygon points="0,-28 8,-8 28,-7 13,8 18,27 0,15 -18,27 -13,8 -28,-7 -8,-8" fill="#ffcb57"/>
+  </g>
+
+  <!-- Big Swimming Fish (from game artwork) -->
+  <g transform="translate(256, 270) scale(3.2)" filter="url(#fishShadow)">
+    <g transform="translate(-60, -40)">
+      <!-- Tail fin -->
+      <path d="M29 40 C8 13 4 13 5 40 C4 67 10 67 29 40Z"
+        fill="#ff8a55" stroke="#d65c3c" stroke-width="3"/>
+
+      <!-- Body -->
+      <ellipse cx="62" cy="40" rx="38" ry="25"
+        fill="#ffb347" stroke="#d65c3c" stroke-width="3"/>
+
+      <!-- Top & bottom fins -->
+      <path d="M53 17 Q65 -2 78 18 M53 63 Q66 81 79 62"
+        fill="#ff965e" stroke="#d65c3c" stroke-width="3"/>
+
+      <!-- Stripes -->
+      <path d="M45 22 Q58 39 45 58 M63 17 Q77 40 63 63"
+        fill="none" stroke="#ffe0a2" stroke-width="4"/>
+
+      <!-- Eye -->
+      <circle cx="87" cy="33" r="5" fill="#183e50"/>
+      <circle cx="88" cy="31" r="2" fill="white"/>
+    </g>
+  </g>
+</svg>

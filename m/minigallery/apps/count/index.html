@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Count the Fun!</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  background: #fff8e8;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  max-width: 1100px;
+  margin: auto;
+  padding: clamp(6px, 1.5vh, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5px, 1vh, 12px);
+}
+
+header {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+h1 {
+  color: #ff7043;
+  font-size: clamp(23px, 5vh, 42px);
+  margin: 0;
+  font-weight: 900;
+}
+
+.subtitle {
+  color: #687080;
+  font-size: clamp(11px, 2vh, 17px);
+  margin: 3px 0 0;
+}
+
+/* Counting area */
+.game-area {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 850px;
+  max-height: 560px;
+  margin: auto;
+  background: white;
+  border: 4px solid #ffe0a3;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 0 #f2d49b;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.question {
+  text-align: center;
+  font-weight: bold;
+  font-size: clamp(17px, 3vh, 25px);
+  color: #45546a;
+  flex-shrink: 0;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(5px, 1vw, 12px);
+  flex-shrink: 0;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.answer {
+  border: none;
+  border-radius: 15px;
+  background: #64c9e8;
+  color: white;
+  font-size: clamp(20px, 3.5vh, 32px);
+  font-weight: 900;
+  cursor: pointer;
+  aspect-ratio: 1;
+  max-height: 65px;
+  min-width: 0;
+  padding: 0;
+  box-shadow: 0 4px 0 #3b9fbe;
+}
+
+.answer:nth-child(2n) {
+  background: #ffad60;
+  box-shadow: 0 4px 0 #e88b3d;
+}
+
+.answer:nth-child(3n) {
+  background: #a58be9;
+  box-shadow: 0 4px 0 #8067c5;
+}
+
+.answer:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.answer:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
+.feedback {
+  min-height: clamp(30px, 6vh, 52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  font-weight: 900;
+  font-size: clamp(18px, 3.5vh, 30px);
+  flex-shrink: 0;
+}
+
+.wrong {
+  color: #ef4444;
+}
+
+.correct {
+  color: #20ad68;
+  animation: happy .45s ease-in-out infinite alternate;
+}
+
+.feedback-icon {
+  font-size: 1.3em;
+}
+
+@keyframes happy {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+
+/* iPad / tablet: constrain the counting stage further */
+@media (min-width: 600px) and (max-width: 1100px) {
+  .game-area {
+    max-width: 650px;
+    max-height: 460px;
+  }
+
+  .app {
+    gap: 8px;
+  }
+}
+
+/* iPhone and smaller devices */
+@media (max-width: 599px) {
+  .app {
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .game-area {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 16px;
+    border-width: 3px;
+  }
+
+  .answer {
+    border-radius: 9px;
+  }
+}
+
+/* Short landscape screens */
+@media (max-height: 500px) {
+  .app {
+    padding: 4px;
+    gap: 3px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .subtitle {
+    display: none;
+  }
+
+  .question {
+    font-size: 15px;
+  }
+
+  .answer {
+    max-height: 36px;
+    font-size: 18px;
+  }
+
+  .feedback {
+    min-height: 22px;
+    font-size: 17px;
+  }
+}
+</style>
+
+<style>
+.gallery-back-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  color: #ff7043;
+  text-decoration: none;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.15s ease, background 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gallery-back-link:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+</style>
+</head>
+
+<body>
+  <a href="../../index.html" class="gallery-back-link" title="Return to Gallery">← Gallery</a>
+
+<div class="app">
+
+  <header>
+    <h1>🌈 Count the Fun! 🌈</h1>
+    <p class="subtitle">
+      Look carefully! How many can you see?
+    </p>
+  </header>
+
+  <div class="game-area">
+    <canvas id="gameCanvas"></canvas>
+  </div>
+
+  <div class="question">
+    How many do you see?
+  </div>
+
+  <div class="answers" id="answers"></div>
+
+  <div class="feedback" id="feedback" aria-live="polite">
+    👀 Pick your answer!
+  </div>
+
+</div>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+const answers = document.getElementById("answers");
+const feedback = document.getElementById("feedback");
+
+const emojis = [
+  "🍎", "🐍", "🦖", "🌽",
+  "⭐", "🐸", "🍓", "🦋",
+  "🐢", "🍌", "🐙", "🚀",
+  "🐠", "🍕", "🐝", "🌻",
+  "🦄", "🍉", "🐼", "🎈",
+  "🍪", "🐳", "🦀", "🍒"
+];
+
+const MAX_NUMBER = 6;
+const AUTO_ADVANCE_DELAY = 1500;
+
+let correctAnswer = 0;
+let currentEmoji = "";
+let roundComplete = false;
+let objects = [];
+let confetti = [];
+let advanceTimer = null;
+
+function shuffle(array) {
+  const result = [...array];
+
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+
+  return result;
+}
+
+function createAnswerButtons() {
+  answers.innerHTML = "";
+
+  for (let i = 1; i <= MAX_NUMBER; i++) {
+    const button = document.createElement("button");
+
+    button.className = "answer";
+    button.textContent = i;
+    button.setAttribute("aria-label", `Answer ${i}`);
+
+    button.addEventListener("click", () => checkAnswer(i));
+
+    answers.appendChild(button);
+  }
+}
+
+// Canvas dimensions always match the actual visible game area.
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = Math.round(rect.width * dpr);
+  canvas.height = Math.round(rect.height * dpr);
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  if (correctAnswer > 0) {
+    layoutItems();
+  }
+}
+
+function measureEmoji(size) {
+  ctx.font =
+    `${size}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+
+  const metrics = ctx.measureText(currentEmoji);
+
+  return {
+    width: Math.max(
+      metrics.width,
+      metrics.actualBoundingBoxLeft +
+      metrics.actualBoundingBoxRight,
+      size * 0.75
+    ),
+    height: Math.max(
+      metrics.actualBoundingBoxAscent +
+      metrics.actualBoundingBoxDescent,
+      size
+    ),
+    font: ctx.font
+  };
+}
+
+function overlaps(a, b) {
+  const gap = 7;
+
+  return !(
+    a.right + gap <= b.left ||
+    a.left >= b.right + gap ||
+    a.bottom + gap <= b.top ||
+    a.top >= b.bottom + gap
+  );
+}
+
+// Guaranteed compact grid fallback.
+function createGridLayout(count, width, height) {
+  const padding = 12;
+  const gap = 8;
+
+  let best = null;
+
+  for (let cols = 1; cols <= count; cols++) {
+    const rows = Math.ceil(count / cols);
+
+    const cellWidth =
+      (width - padding * 2 - gap * (cols - 1)) / cols;
+
+    const cellHeight =
+      (height - padding * 2 - gap * (rows - 1)) / rows;
+
+    const size = Math.min(
+      cellWidth * 0.78,
+      cellHeight * 0.78,
+      100
+    );
+
+    if (size <= 0) continue;
+
+    if (!best || size > best.size) {
+      best = {
+        cols, rows, cellWidth, cellHeight,
+        size, padding, gap
+      };
+    }
+  }
+
+  if (!best) {
+    throw new Error("Game area is too small.");
+  }
+
+  const cells = [];
+
+  for (let row = 0; row < best.rows; row++) {
+    for (let col = 0; col < best.cols; col++) {
+      cells.push({
+        x: best.padding +
+          col * (best.cellWidth + best.gap) +
+          best.cellWidth / 2,
+
+        y: best.padding +
+          row * (best.cellHeight + best.gap) +
+          best.cellHeight / 2
+      });
+    }
+  }
+
+  const metrics = measureEmoji(best.size);
+
+  return shuffle(cells).slice(0, count).map(cell => ({
+    x: cell.x,
+    y: cell.y,
+    size: best.size,
+    font: metrics.font
+  }));
+}
+
+// Random placement inside the constrained counting area.
+function createRandomLayout(count, width, height) {
+  const padding = 12;
+  const gap = 8;
+
+  const size = Math.min(
+    72,
+    (width - padding * 2 - gap * (count - 1)) / count * 0.78,
+    (height - padding * 2) * 0.78
+  );
+
+  if (size < 1) {
+    return createGridLayout(count, width, height);
+  }
+
+  const metrics = measureEmoji(size);
+
+  if (
+    metrics.width > width - padding * 2 ||
+    metrics.height > height - padding * 2
+  ) {
+    return createGridLayout(count, width, height);
+  }
+
+  const placed = [];
+
+  for (let i = 0; i < count; i++) {
+    let found = false;
+
+    for (let attempt = 0; attempt < 3000; attempt++) {
+      const x = padding + metrics.width / 2 +
+        Math.random() *
+        (width - padding * 2 - metrics.width);
+
+      const y = padding + metrics.height / 2 +
+        Math.random() *
+        (height - padding * 2 - metrics.height);
+
+      const candidate = {
+        x,
+        y,
+        size,
+        font: metrics.font,
+        left: x - metrics.width / 2,
+        right: x + metrics.width / 2,
+        top: y - metrics.height / 2,
+        bottom: y + metrics.height / 2
+      };
+
+      if (!placed.some(item => overlaps(candidate, item))) {
+        placed.push(candidate);
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      return createGridLayout(count, width, height);
+    }
+  }
+
+  return placed;
+}
+
+function layoutItems() {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  if (!width || !height) return;
+
+  objects = createRandomLayout(
+    correctAnswer,
+    width,
+    height
+  );
+
+  drawObjects();
+}
+
+function drawObjects() {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  if (!width || !height) return;
+
+  ctx.clearRect(0, 0, width, height);
+
+  // Decorative background.
+  ctx.fillStyle = "#fff7e9";
+
+  for (let i = 0; i < 35; i++) {
+    const x = (i * 97) % width;
+    const y = (i * 61) % height;
+
+    ctx.beginPath();
+    ctx.arc(x, y, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Draw every item.
+  objects.forEach(item => {
+    ctx.font = item.font;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(currentEmoji, item.x, item.y);
+  });
+
+  drawConfetti();
+}
+
+function newRound() {
+  clearTimeout(advanceTimer);
+
+  roundComplete = false;
+  confetti = [];
+
+  correctAnswer =
+    Math.floor(Math.random() * MAX_NUMBER) + 1;
+
+  currentEmoji =
+    emojis[Math.floor(Math.random() * emojis.length)];
+
+  layoutItems();
+
+  feedback.className = "feedback";
+  feedback.innerHTML = "👀 Pick your answer!";
+
+  [...answers.children].forEach(button => {
+    button.disabled = false;
+  });
+}
+
+function checkAnswer(selected) {
+  if (roundComplete) return;
+
+  if (selected === correctAnswer) {
+    roundComplete = true;
+
+    feedback.className = "feedback correct";
+    feedback.innerHTML =
+      '<span class="feedback-icon">🎉</span>' +
+      ' Amazing! You got it! 🎉';
+
+    [...answers.children].forEach(button => {
+      button.disabled = true;
+    });
+
+    celebrate();
+
+    advanceTimer = setTimeout(() => {
+      newRound();
+    }, AUTO_ADVANCE_DELAY);
+
+  } else {
+    feedback.className = "feedback wrong";
+    feedback.innerHTML =
+      '<span class="feedback-icon">❌</span>' +
+      ' Oops! Try again! 💪';
+  }
+}
+
+function celebrate() {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  const colors = [
+    "#ff6b6b",
+    "#ffd166",
+    "#06d6a0",
+    "#4dabf7",
+    "#b197fc",
+    "#ff922b"
+  ];
+
+  confetti = [];
+
+  for (let i = 0; i < 70; i++) {
+    confetti.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: 4 + Math.random() * 7,
+      color: colors[
+        Math.floor(Math.random() * colors.length)
+      ]
+    });
+  }
+
+  drawObjects();
+}
+
+function drawConfetti() {
+  confetti.forEach(piece => {
+    ctx.fillStyle = piece.color;
+
+    ctx.beginPath();
+    ctx.arc(
+      piece.x,
+      piece.y,
+      piece.size,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+  });
+}
+
+// Initialize.
+createAnswerButtons();
+
+requestAnimationFrame(() => {
+  resizeCanvas();
+  newRound();
+});
+
+// Recalculate layout when screen dimensions change.
+let resizeTimeout;
+
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+
+  resizeTimeout = setTimeout(() => {
+    resizeCanvas();
+  }, 100);
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="mathBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="targetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <filter id="tileShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="40" fill="url(#mathBg)"/>
+
+  <!-- TARGET Section -->
+  <g transform="translate(256, 155)">
+    <circle cx="0" cy="0" r="82" fill="url(#targetGrad)" filter="url(#tileShadow)"/>
+    <text x="0" y="-88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="22" letter-spacing="4" fill="#64748b" text-anchor="middle">TARGET</text>
+    <text x="0" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="900" font-size="92" fill="#ffffff" text-anchor="middle">8</text>
+  </g>
+
+  <!-- Selection Equation: 3 + 5 -->
+  <!-- Block 1: 3 -->
+  <g transform="translate(100, 315)" filter="url(#tileShadow)">
+    <rect width="115" height="115" rx="26" fill="#ffffff"/>
+    <text x="57" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="64" fill="#0f172a" text-anchor="middle">3</text>
+  </g>
+
+  <!-- Plus Sign -->
+  <g transform="translate(256, 372)">
+    <text x="0" y="14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700" font-size="52" fill="#64748b" text-anchor="middle">+</text>
+  </g>
+
+  <!-- Block 2: 5 -->
+  <g transform="translate(297, 315)" filter="url(#tileShadow)">
+    <rect width="115" height="115" rx="26" fill="#ffffff"/>
+    <text x="57" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="64" fill="#0f172a" text-anchor="middle">5</text>
+  </g>
+</svg>

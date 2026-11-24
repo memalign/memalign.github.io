@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dice Detective!</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  background: linear-gradient(135deg, #a1eafb, #d9c4ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(6px, 2vh, 16px);
+  color: #28304e;
+}
+
+.game {
+  width: 100%;
+  max-width: 550px;
+  max-height: 100%;
+  background: white;
+  border-radius: 24px;
+  padding: clamp(10px, 2.5vh, 22px);
+  text-align: center;
+  box-shadow: 0 12px 35px #52618a35;
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  color: #7454d6;
+  font-size: clamp(1.5rem, 5vh, 2.3rem);
+  margin: 0 0 2px;
+}
+
+.subtitle {
+  font-size: clamp(.8rem, 2.2vh, 1rem);
+  color: #777;
+  margin-bottom: clamp(8px, 2vh, 16px);
+}
+
+.score {
+  display: inline-block;
+  background: #fff0a8;
+  border-radius: 20px;
+  padding: 7px 20px;
+  font-size: clamp(.95rem, 2.8vh, 1.2rem);
+  font-weight: bold;
+  margin-bottom: clamp(8px, 2vh, 16px);
+}
+
+.dice-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(12px, 4vw, 25px);
+  margin: clamp(5px, 1.5vh, 12px) 0 clamp(10px, 2vh, 18px);
+}
+
+.die {
+  width: clamp(65px, 16vh, 105px);
+  aspect-ratio: 1;
+  height: auto;
+  background: white;
+  border: 4px solid #7454d6;
+  border-radius: 16px;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  padding: 9px;
+  box-shadow: 0 5px 0 #5439aa;
+  transition: transform .2s;
+}
+
+.dot {
+  width: clamp(10px, 2.5vh, 16px);
+  aspect-ratio: 1;
+  height: auto;
+  background: #7454d6;
+  border-radius: 50%;
+  align-self: center;
+  justify-self: center;
+}
+
+.dot.hidden {
+  visibility: hidden;
+}
+
+.rolling {
+  animation: shake .12s infinite;
+}
+
+@keyframes shake {
+  0% { transform: rotate(-8deg) scale(1.05); }
+  50% { transform: rotate(8deg) scale(.95); }
+  100% { transform: rotate(-8deg) scale(1.05); }
+}
+
+.plus {
+  font-size: clamp(1.3rem, 4vh, 2rem);
+  font-weight: bold;
+  color: #aaa;
+}
+
+.question {
+  font-size: clamp(1rem, 3vh, 1.3rem);
+  font-weight: bold;
+  margin-bottom: clamp(8px, 1.5vh, 15px);
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(6px, 1.5vh, 10px);
+}
+
+.answer {
+  border: none;
+  border-radius: 12px;
+  padding: clamp(7px, 1.8vh, 13px) 4px;
+  background: #e8e1ff;
+  color: #6243bc;
+  font-size: clamp(1.15rem, 4vh, 1.6rem);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #c2b2f4;
+  transition: transform .1s, background .1s, box-shadow .1s;
+
+  /* Prevent unwanted mobile browser effects */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Mouse hover only */
+@media (hover: hover) and (pointer: fine) {
+  .answer:not(:disabled):hover {
+    background: #d4c7ff;
+    transform: translateY(-2px);
+  }
+}
+
+/* Press effect while finger or mouse is down */
+.answer.pressed,
+.answer:not(:disabled):active {
+  background: #c2b2f4;
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+/* Keyboard accessibility */
+.answer:focus {
+  outline: none;
+}
+
+.answer:focus-visible {
+  outline: 3px solid #7454d6;
+  outline-offset: 3px;
+}
+
+/* Disabled buttons */
+.answer:disabled {
+  cursor: default;
+  background: #e8e1ff;
+  color: #6243bc;
+  transform: none;
+  box-shadow: 0 3px 0 #c2b2f4;
+  opacity: 1;
+}
+
+.message {
+  min-height: clamp(38px, 7vh, 55px);
+  margin-top: clamp(8px, 2vh, 15px);
+  font-size: clamp(1rem, 3.5vh, 1.4rem);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrong {
+  color: #ef4444;
+  font-size: clamp(2rem, 7vh, 3.5rem);
+  animation: pop .25s;
+}
+
+.correct {
+  color: #16b96a;
+  animation: pop .4s;
+}
+
+@keyframes pop {
+  0% { transform: scale(.3); }
+  70% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.celebrate {
+  animation: bounce .5s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(1.06) rotate(2deg); }
+  70% { transform: scale(.97) rotate(-2deg); }
+}
+
+.reset {
+  margin-top: 5px;
+  padding: 8px 22px;
+  border: none;
+  border-radius: 20px;
+  background: #7454d6;
+  color: white;
+  font-size: clamp(.8rem, 2.2vh, 1rem);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Compact layout for short landscape screens */
+@media (max-height: 500px) {
+  .game {
+    padding: 7px 15px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .subtitle {
+    margin-bottom: 4px;
+  }
+
+  .score {
+    margin-bottom: 4px;
+    padding: 4px 14px;
+  }
+
+  .dice-area {
+    margin: 4px 0 7px;
+  }
+
+  .die {
+    width: 65px;
+    padding: 6px;
+  }
+
+  .question {
+    margin-bottom: 5px;
+  }
+
+  .answers {
+    gap: 5px;
+  }
+
+  .answer {
+    padding: 5px;
+  }
+
+  .message {
+    min-height: 30px;
+    margin-top: 4px;
+  }
+
+  .reset {
+    margin-top: 2px;
+    padding: 5px 16px;
+  }
+}
+</style>
+
+<style>
+.gallery-back-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  color: #7454d6;
+  text-decoration: none;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.15s ease, background 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gallery-back-link:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+</style>
+</head>
+
+<body>
+  <a href="../../index.html" class="gallery-back-link" title="Return to Gallery">← Gallery</a>
+
+<div class="game" id="game">
+
+  <h1>🎲 Dice Detective!</h1>
+  <div class="subtitle">Add up the dots on both dice!</div>
+
+  <div class="score">
+    ⭐ Score: <span id="score">0</span>
+  </div>
+
+  <div class="dice-area">
+    <div class="die" id="die1"></div>
+    <div class="plus">+</div>
+    <div class="die" id="die2"></div>
+  </div>
+
+  <div class="question">How many dots altogether?</div>
+
+  <div class="answers" id="answers"></div>
+
+  <div class="message" id="message">
+    Pick your answer! 👆
+  </div>
+
+  <button class="reset" id="reset">
+    Start Over ↻
+  </button>
+
+</div>
+
+<script>
+const die1 = document.getElementById("die1");
+const die2 = document.getElementById("die2");
+const answers = document.getElementById("answers");
+const message = document.getElementById("message");
+const scoreDisplay = document.getElementById("score");
+const game = document.getElementById("game");
+const resetButton = document.getElementById("reset");
+
+let value1 = 1;
+let value2 = 1;
+let score = 0;
+let rolling = false;
+let answered = false;
+let rollTimer = null;
+let nextRollTimer = null;
+let feedbackTimer = null;
+
+const patterns = {
+  1: [5],
+  2: [1, 9],
+  3: [1, 5, 9],
+  4: [1, 3, 7, 9],
+  5: [1, 3, 5, 7, 9],
+  6: [1, 3, 4, 6, 7, 9]
+};
+
+function drawDie(element, value) {
+  element.innerHTML = "";
+
+  for (let i = 1; i <= 9; i++) {
+    const dot = document.createElement("div");
+    dot.className = "dot";
+
+    if (!patterns[value].includes(i)) {
+      dot.classList.add("hidden");
+    }
+
+    element.appendChild(dot);
+  }
+}
+
+function createAnswers() {
+  answers.innerHTML = "";
+
+  for (let i = 1; i <= 12; i++) {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent = i;
+    button.type = "button";
+
+    // Touch begins: show press effect
+    button.addEventListener("touchstart", () => {
+      if (!button.disabled) {
+        button.classList.add("pressed");
+      }
+    }, { passive: true });
+
+    // Finger lifts: remove press effect
+    button.addEventListener("touchend", () => {
+      button.classList.remove("pressed");
+    });
+
+    // Touch is interrupted or cancelled
+    button.addEventListener("touchcancel", () => {
+      button.classList.remove("pressed");
+    });
+
+    // Mouse click and answer checking
+    button.addEventListener("click", () => {
+      button.classList.remove("pressed");
+      checkAnswer(i);
+      button.blur();
+    });
+
+    answers.appendChild(button);
+  }
+}
+
+function rollDice() {
+  if (rolling) return;
+
+  clearTimeout(feedbackTimer);
+
+  rolling = true;
+  answered = false;
+  message.className = "message";
+  message.textContent = "Rolling... 🎲";
+
+  die1.classList.add("rolling");
+  die2.classList.add("rolling");
+
+  const buttons = answers.querySelectorAll("button");
+
+  buttons.forEach(button => {
+    button.disabled = true;
+    button.classList.remove("pressed");
+  });
+
+  let count = 0;
+
+  rollTimer = setInterval(() => {
+    value1 = Math.ceil(Math.random() * 6);
+    value2 = Math.ceil(Math.random() * 6);
+
+    drawDie(die1, value1);
+    drawDie(die2, value2);
+
+    count++;
+
+    if (count >= 12) {
+      clearInterval(rollTimer);
+      rollTimer = null;
+
+      die1.classList.remove("rolling");
+      die2.classList.remove("rolling");
+
+      rolling = false;
+
+      buttons.forEach(button => {
+        button.disabled = false;
+      });
+
+      message.textContent = "Pick your answer! 👆";
+    }
+  }, 100);
+}
+
+function checkAnswer(answer) {
+  if (rolling || answered) return;
+
+  const total = value1 + value2;
+
+  if (answer === total) {
+    answered = true;
+    score++;
+    scoreDisplay.textContent = score;
+
+    message.innerHTML = "⭐ AWESOME! ⭐";
+    message.className = "message correct";
+
+    game.classList.remove("celebrate");
+    void game.offsetWidth;
+    game.classList.add("celebrate");
+
+    // Prevent additional answers during celebration
+    answers.querySelectorAll("button").forEach(button => {
+      button.disabled = true;
+      button.classList.remove("pressed");
+    });
+
+    nextRollTimer = setTimeout(() => {
+      game.classList.remove("celebrate");
+      rollDice();
+    }, 1300);
+
+  } else {
+    message.innerHTML = "❌";
+    message.className = "message wrong";
+
+    feedbackTimer = setTimeout(() => {
+      message.className = "message";
+      message.textContent = "Try again! You can do it! 💪";
+    }, 800);
+  }
+}
+
+function resetGame() {
+  clearInterval(rollTimer);
+  clearTimeout(nextRollTimer);
+  clearTimeout(feedbackTimer);
+
+  rolling = false;
+  answered = false;
+  score = 0;
+
+  scoreDisplay.textContent = score;
+
+  die1.classList.remove("rolling");
+  die2.classList.remove("rolling");
+  game.classList.remove("celebrate");
+
+  answers.querySelectorAll("button").forEach(button => {
+    button.classList.remove("pressed");
+    button.disabled = false;
+  });
+
+  rollDice();
+}
+
+resetButton.addEventListener("click", resetGame);
+
+createAnswers();
+drawDie(die1, 1);
+drawDie(die2, 1);
+rollDice();
+</script>
+
+</body>
+</html>

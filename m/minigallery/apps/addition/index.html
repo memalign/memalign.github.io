@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Math Match</title>
+  <link rel="stylesheet" href="style.css">
+
+<style>
+.gallery-back-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  color: #333333;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.15s ease, background 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gallery-back-link:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+</style>
+</head>
+<body>
+  <a href="../../index.html" class="gallery-back-link" title="Return to Gallery">← Gallery</a>
+  <main id="game">
+    <div id="targetSection">
+      <div class="label">TARGET</div>
+      <div id="target">2</div>
+    </div>
+
+    <div id="selectionSection">
+      <button class="selection" id="selection1">
+        <span class="placeholder">?</span>
+        <span class="selectedValue"></span>
+        <span class="remove">×</span>
+      </button>
+
+      <div class="plus">+</div>
+
+      <button class="selection" id="selection2">
+        <span class="placeholder">?</span>
+        <span class="selectedValue"></span>
+        <span class="remove">×</span>
+      </button>
+    </div>
+
+    <div id="choices"></div>
+
+    <div id="message"></div>
+    <div id="fireworks"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

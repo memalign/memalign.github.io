@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="countBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffef9"/>
+      <stop offset="100%" stop-color="#fff2d4"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#a86000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="40" fill="url(#countBg)"/>
+
+  <!-- Fun counting elements (High-Res) -->
+  <!-- Apple -->
+  <g transform="translate(145, 160)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="58" fill="#ef4444"/>
+    <path d="M 0 -58 Q -10 -84 16 -94" fill="none" stroke="#78350f" stroke-width="8" stroke-linecap="round"/>
+    <ellipse cx="16" cy="-74" rx="18" ry="11" fill="#22c55e" transform="rotate(-22 16 -74)"/>
+    <!-- Highlight -->
+    <ellipse cx="-20" cy="-20" rx="14" ry="24" fill="#ffffff" opacity="0.3" transform="rotate(-25 -20 -20)"/>
+  </g>
+
+  <!-- Star -->
+  <g transform="translate(365, 165)" filter="url(#shadow)">
+    <polygon points="0,-58 16,-18 58,-15 26,16 36,55 0,31 -36,55 -26,16 -58,-15 -16,-18" fill="#fbbf24"/>
+  </g>
+
+  <!-- Number 1 2 3 in fun bubble banner -->
+  <g transform="translate(256, 360)" filter="url(#shadow)">
+    <rect x="-170" y="-60" width="340" height="120" rx="36" fill="#64c9e8"/>
+    <!-- 3D Bevel edge -->
+    <rect x="-170" y="-52" width="340" height="120" rx="36" fill="none" stroke="#3b9fbe" stroke-width="8"/>
+    <text x="0" y="4" font-family="'Trebuchet MS', Arial, sans-serif" font-weight="900" font-size="64" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">1  2  3</text>
+  </g>
+</svg>

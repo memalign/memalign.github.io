@@ -1,0 +1,19 @@
+{
+  "name": "Memalign Mini App Gallery",
+  "short_name": "MiniGallery",
+  "description": "A collection of offline-capable web mini apps",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

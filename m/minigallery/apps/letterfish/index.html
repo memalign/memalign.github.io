@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Count The Fish</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Comic Sans MS", "Chalkboard SE", cursive;
+}
+
+body {
+  background: linear-gradient(#9ceaf0, #168bb2);
+}
+
+#game {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+header {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  color: #075b78;
+  font-weight: bold;
+  font-size: 22px;
+  pointer-events: none;
+}
+
+#hint {
+  position: absolute;
+  top: 80px;
+  width: 100%;
+  text-align: center;
+  color: #075b78;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+#fishZone {
+  position: absolute;
+  inset: 15% 0 8%;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+/* Moving container */
+#fishMover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 105px;
+  height: 70px;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+/* Fish artwork has its own independent flip transform */
+#fish {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform-origin: center;
+  filter: drop-shadow(0 5px 4px #075b7844);
+  pointer-events: none;
+}
+
+.ripple {
+  position: absolute;
+  z-index: 1;
+  border: 3px solid white;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: ripple .7s ease-out forwards;
+}
+
+@keyframes ripple {
+  to {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+  }
+}
+
+#startScreen, #modal {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+#startScreen {
+  background: #168bb255;
+}
+
+.startCard, .panel {
+  background: white;
+  border: 5px solid white;
+  border-radius: 25px;
+  padding: 25px;
+  text-align: center;
+  width: min(92vw, 550px);
+  box-shadow: 0 10px 30px #075b7833;
+}
+
+.startCard h2 {
+  font-size: 36px;
+  color: #075b78;
+  margin: 10px;
+}
+
+.startCard p {
+  color: #527787;
+  margin: 15px 0;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 12px 25px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #ffcb57;
+  color: #654400;
+  touch-action: manipulation;
+}
+
+#modal {
+  display: none;
+  background: #063e58aa;
+}
+
+#modal.open {
+  display: flex;
+}
+
+.panel {
+  height: min(88dvh, 700px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.panel h2 {
+  color: #075b78;
+}
+
+.panel p {
+  color: #527787;
+  margin: 8px;
+}
+
+#letterStage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#guideCanvas,
+#canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#guideCanvas {
+  pointer-events: none;
+}
+
+#canvas {
+  touch-action: none;
+}
+
+#feedback {
+  min-height: 30px;
+  font-weight: bold;
+  color: #e46b53;
+}
+
+#celebration {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: #fff8dfee;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 35px;
+  color: #168d77;
+  z-index: 3;
+  pointer-events: none;
+}
+
+#celebration.show {
+  display: flex;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.secondary {
+  background: #dff3f5;
+  color: #15566d;
+}
+
+@media(max-height: 500px) {
+  .panel {
+    height: 95dvh;
+    padding: 8px;
+  }
+
+  .panel p {
+    margin: 3px;
+  }
+}
+</style>
+
+<style>
+.gallery-back-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  color: #333333;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.15s ease, background 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gallery-back-link:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+</style>
+</head>
+
+<body>
+  <a href="../../index.html" class="gallery-back-link" title="Return to Gallery">← Gallery</a>
+<div id="game">
+
+<header>
+  <div>🐠 Count The Fish</div>
+  <div>⭐ Score: <span id="score">0</span></div>
+</header>
+
+<div id="hint">Tap the fish when you spot it!</div>
+
+<div id="fishZone">
+
+  <div id="fishMover">
+    <svg id="fish" viewBox="0 0 120 80">
+      <path d="M29 40 C8 13 4 13 5 40 C4 67 10 67 29 40Z"
+        fill="#ff8a55" stroke="#d65c3c" stroke-width="3"/>
+
+      <ellipse cx="62" cy="40" rx="38" ry="25"
+        fill="#ffb347" stroke="#d65c3c" stroke-width="3"/>
+
+      <path d="M53 17 Q65 -2 78 18 M53 63 Q66 81 79 62"
+        fill="#ff965e" stroke="#d65c3c" stroke-width="3"/>
+
+      <path d="M45 22 Q58 39 45 58 M63 17 Q77 40 63 63"
+        fill="none" stroke="#ffe0a2" stroke-width="4"/>
+
+      <circle cx="87" cy="33" r="5" fill="#183e50"/>
+      <circle cx="88" cy="31" r="2" fill="white"/>
+    </svg>
+  </div>
+
+</div>
+
+<div id="startScreen">
+  <div class="startCard">
+    <div style="font-size:75px">🐠🌊</div>
+    <h2>Count The Fish!</h2>
+    <p>Find the speedy fish, then trace the letter you see!</p>
+    <button id="startBtn" type="button">Let's play!</button>
+  </div>
+</div>
+
+<div id="modal">
+  <div class="panel">
+    <h2>Trace this letter!</h2>
+    <p>Follow the letter with your finger.</p>
+
+    <div id="letterStage">
+      <canvas id="guideCanvas"></canvas>
+      <canvas id="canvas"></canvas>
+
+      <div id="celebration">
+        🌟 Great job! 🌟
+        <div style="font-size:18px">Letter complete!</div>
+      </div>
+    </div>
+
+    <div id="feedback"></div>
+
+    <div class="actions">
+      <button class="secondary" id="clearBtn">Clear</button>
+      <button id="checkBtn">Check letter ✓</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+(() => {
+  const fishMover = document.getElementById("fishMover");
+  const fishArtwork = document.getElementById("fish");
+  const zone = document.getElementById("fishZone");
+
+  const modal = document.getElementById("modal");
+  const startScreen = document.getElementById("startScreen");
+
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  const guideCanvas = document.getElementById("guideCanvas");
+  const guideCtx = guideCanvas.getContext("2d");
+
+  const feedback = document.getElementById("feedback");
+  const scoreDisplay = document.getElementById("score");
+  const celebration = document.getElementById("celebration");
+
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+  const FONT_FAMILY =
+    '"Comic Sans MS", "Chalkboard SE", cursive';
+
+  // ==================================================
+  // FISH MOVEMENT - NEW INDEPENDENT SYSTEM
+  // ==================================================
+
+  const FISH_WIDTH = 105;
+  const FISH_HEIGHT = 70;
+
+  // Position is stored in CSS pixels.
+  let fishX = 0;
+  let fishY = 0;
+
+  // Velocity is measured in pixels per second.
+  let fishVX = 390;
+  let fishVY = 270;
+
+  let animationFrame = null;
+  let previousFrameTime = null;
+  let gameStarted = false;
+
+  // Reflect a moving position off both boundaries.
+  // This handles even large time steps without allowing
+  // the fish to get stuck outside the swimming area.
+  function moveAxis(position, velocity, maximum, deltaTime) {
+    if (maximum <= 0) {
+      return {
+        position: 0,
+        velocity: velocity
+      };
+    }
+
+    const period = maximum * 2;
+
+    let phase = velocity >= 0
+      ? position
+      : period - position;
+
+    phase += Math.abs(velocity) * deltaTime;
+
+    phase = ((phase % period) + period) % period;
+
+    if (phase < maximum) {
+      return {
+        position: phase,
+        velocity: Math.abs(velocity)
+      };
+    }
+
+    return {
+      position: period - phase,
+      velocity: -Math.abs(velocity)
+    };
+  }
+
+  // Apply the position using a GPU-friendly transform.
+  // This does not change the fish's layout dimensions.
+  function renderFish() {
+    fishMover.style.transform =
+      `translate3d(${fishX}px, ${fishY}px, 0)`;
+
+    // Flip only the artwork, never the moving container.
+    fishArtwork.style.transform =
+      fishVX < 0 ? "scaleX(-1)" : "scaleX(1)";
+  }
+
+  function animateFish(timestamp) {
+    // If the game hasn't started, stop the loop.
+    if (!gameStarted) {
+      animationFrame = null;
+      return;
+    }
+
+    if (previousFrameTime === null) {
+      previousFrameTime = timestamp;
+    }
+
+    // Seconds elapsed since the previous frame.
+    // Capping the value prevents a large jump after
+    // the browser temporarily pauses rendering.
+    const deltaTime = Math.min(
+      (timestamp - previousFrameTime) / 1000,
+      0.035
+    );
+
+    previousFrameTime = timestamp;
+
+    // Keep the animation loop alive while the letter
+    // modal is open, but pause fish movement.
+    if (!modal.classList.contains("open")) {
+      const maxX = Math.max(
+        0,
+        zone.clientWidth - FISH_WIDTH
+      );
+
+      const maxY = Math.max(
+        0,
+        zone.clientHeight - FISH_HEIGHT
+      );
+
+      const horizontal = moveAxis(
+        fishX,
+        fishVX,
+        maxX,
+        deltaTime
+      );
+
+      const vertical = moveAxis(
+        fishY,
+        fishVY,
+        maxY,
+        deltaTime
+      );
+
+      fishX = horizontal.position;
+      fishVX = horizontal.velocity;
+
+      fishY = vertical.position;
+      fishVY = vertical.velocity;
+
+      renderFish();
+    }
+
+    // Exactly one animation callback is scheduled
+    // for each completed frame.
+    animationFrame = requestAnimationFrame(animateFish);
+  }
+
+  function startFishAnimation() {
+    if (animationFrame !== null) return;
+
+    previousFrameTime = null;
+
+    animationFrame = requestAnimationFrame(animateFish);
+  }
+
+  function initializeFishPosition() {
+    const maxX = Math.max(
+      0,
+      zone.clientWidth - FISH_WIDTH
+    );
+
+    const maxY = Math.max(
+      0,
+      zone.clientHeight - FISH_HEIGHT
+    );
+
+    fishX = maxX * 0.35;
+    fishY = maxY * 0.4;
+
+    // Initial direction and speed.
+    fishVX = 390;
+    fishVY = 270;
+
+    renderFish();
+  }
+
+  function startGame() {
+    if (gameStarted) return;
+
+    gameStarted = true;
+    startScreen.style.display = "none";
+
+    // Initialize only after the start screen is hidden
+    // and the swimming area has its real dimensions.
+    initializeFishPosition();
+
+    startFishAnimation();
+  }
+
+  document.getElementById("startBtn").addEventListener(
+    "click",
+    startGame
+  );
+
+  // Reset the animation clock when the page becomes
+  // visible again, avoiding a large time jump.
+  document.addEventListener("visibilitychange", () => {
+    previousFrameTime = null;
+  });
+
+  // ==================================================
+  // FISH CAUGHT
+  // ==================================================
+
+  fishMover.addEventListener("pointerdown", e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!modal.classList.contains("open")) {
+      openLetter();
+    }
+  });
+
+  // ==================================================
+  // MISSED FISH
+  // ==================================================
+
+  zone.addEventListener("pointerdown", e => {
+    if (
+      fishMover.contains(e.target) ||
+      modal.classList.contains("open")
+    ) {
+      return;
+    }
+
+    makeRipple(e.clientX, e.clientY);
+  });
+
+  function makeRipple(x, y) {
+    const ripple = document.createElement("div");
+
+    const rect = document
+      .getElementById("game")
+      .getBoundingClientRect();
+
+    ripple.className = "ripple";
+
+    ripple.style.left = (x - rect.left) + "px";
+    ripple.style.top = (y - rect.top) + "px";
+
+    document.getElementById("game").appendChild(ripple);
+
+    setTimeout(() => ripple.remove(), 750);
+  }
+
+  // ==================================================
+  // LETTER GAME
+  // ==================================================
+
+  let score = 0;
+  let round = 0;
+  let target = "A";
+
+  function openLetter() {
+    modal.classList.add("open");
+
+    document.getElementById("hint").textContent =
+      "Trace the letter to earn a star!";
+
+    requestAnimationFrame(() => {
+      nextLetter();
+    });
+  }
+
+  function closeLetter() {
+    modal.classList.remove("open");
+
+    document.getElementById("hint").textContent =
+      "Tap the fish when you spot it!";
+
+    // Restart the timing baseline when fish movement
+    // resumes, so it doesn't jump after the modal.
+    previousFrameTime = null;
+  }
+
+  function nextLetter() {
+    target = letters[round % letters.length];
+    round++;
+
+    feedback.textContent = "";
+    celebration.classList.remove("show");
+
+    strokes = [];
+
+    resizeCanvas();
+  }
+
+  // ==================================================
+  // CANVAS AND LETTER SIZING
+  // ==================================================
+
+  let drawing = false;
+  let strokes = [];
+
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let dpr = 1;
+
+  let targetCanvas;
+  let targetCtx;
+
+  let fittedFontSize = 0;
+  let fittedBaseline = 0;
+  let fittedX = 0;
+
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) return;
+
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvasWidth = Math.round(rect.width * dpr);
+    canvasHeight = Math.round(rect.height * dpr);
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+
+    guideCanvas.width = canvasWidth;
+    guideCanvas.height = canvasHeight;
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    guideCtx.setTransform(1, 0, 0, 1, 0, 0);
+
+    targetCanvas = document.createElement("canvas");
+    targetCanvas.width = canvasWidth;
+    targetCanvas.height = canvasHeight;
+
+    targetCtx = targetCanvas.getContext("2d");
+
+    drawTarget();
+    redraw();
+  }
+
+  function measureGlyph(fontSize) {
+    targetCtx.font = `bold ${fontSize}px ${FONT_FAMILY}`;
+
+    const metrics = targetCtx.measureText(target);
+
+    const left = Number.isFinite(metrics.actualBoundingBoxLeft)
+      ? metrics.actualBoundingBoxLeft
+      : fontSize * 0.1;
+
+    const right = Number.isFinite(metrics.actualBoundingBoxRight)
+      ? metrics.actualBoundingBoxRight
+      : fontSize * 0.7;
+
+    const ascent = Number.isFinite(metrics.actualBoundingBoxAscent)
+      ? metrics.actualBoundingBoxAscent
+      : fontSize * 0.75;
+
+    const descent = Number.isFinite(metrics.actualBoundingBoxDescent)
+      ? metrics.actualBoundingBoxDescent
+      : fontSize * 0.25;
+
+    return {
+      left,
+      right,
+      ascent,
+      descent
+    };
+  }
+
+  function findFittingFontSize() {
+    const padding = 20 * dpr;
+
+    const availableWidth = Math.max(
+      1,
+      canvasWidth - padding * 2
+    );
+
+    const availableHeight = Math.max(
+      1,
+      canvasHeight - padding * 2
+    );
+
+    let low = 1;
+    let high = Math.max(
+      1,
+      Math.min(canvasWidth, canvasHeight)
+    );
+
+    let best = 1;
+
+    for (let i = 0; i < 24; i++) {
+      const middle = (low + high) / 2;
+      const m = measureGlyph(middle);
+
+      const glyphWidth = m.left + m.right;
+      const glyphHeight = m.ascent + m.descent;
+
+      if (
+        glyphWidth <= availableWidth &&
+        glyphHeight <= availableHeight
+      ) {
+        best = middle;
+        low = middle;
+      } else {
+        high = middle;
+      }
+    }
+
+    return best;
+  }
+
+  function drawTarget() {
+    targetCtx.clearRect(
+      0, 0, canvasWidth, canvasHeight
+    );
+
+    guideCtx.clearRect(
+      0, 0, canvasWidth, canvasHeight
+    );
+
+    fittedFontSize = findFittingFontSize();
+
+    const metrics = measureGlyph(fittedFontSize);
+
+    fittedX =
+      (canvasWidth + metrics.left - metrics.right) / 2;
+
+    fittedBaseline =
+      (canvasHeight + metrics.ascent - metrics.descent) / 2;
+
+    const font = `bold ${fittedFontSize}px ${FONT_FAMILY}`;
+
+    targetCtx.font = font;
+    targetCtx.textAlign = "left";
+    targetCtx.textBaseline = "alphabetic";
+    targetCtx.fillStyle = "#000";
+
+    targetCtx.fillText(
+      target,
+      fittedX,
+      fittedBaseline
+    );
+
+    guideCtx.font = font;
+    guideCtx.textAlign = "left";
+    guideCtx.textBaseline = "alphabetic";
+    guideCtx.fillStyle = "#d6edf0";
+
+    guideCtx.fillText(
+      target,
+      fittedX,
+      fittedBaseline
+    );
+  }
+
+  // ==================================================
+  // TOUCH COORDINATES
+  // ==================================================
+
+  function getPoint(e) {
+    const rect = canvas.getBoundingClientRect();
+
+    return {
+      x: (e.clientX - rect.left) *
+        (canvas.width / rect.width),
+
+      y: (e.clientY - rect.top) *
+        (canvas.height / rect.height)
+    };
+  }
+
+  // ==================================================
+  // DRAWING EVENTS
+  // ==================================================
+
+  canvas.addEventListener("pointerdown", e => {
+    e.preventDefault();
+
+    drawing = true;
+
+    canvas.setPointerCapture(e.pointerId);
+
+    strokes.push([getPoint(e)]);
+
+    feedback.textContent = "";
+    redraw();
+  });
+
+  canvas.addEventListener("pointermove", e => {
+    if (!drawing) return;
+
+    e.preventDefault();
+
+    strokes[strokes.length - 1].push(getPoint(e));
+
+    redraw();
+  });
+
+  function stopDrawing() {
+    drawing = false;
+  }
+
+  canvas.addEventListener("pointerup", stopDrawing);
+  canvas.addEventListener("pointercancel", stopDrawing);
+  canvas.addEventListener("lostpointercapture", stopDrawing);
+
+  // ==================================================
+  // REDRAW CHILD'S STROKES
+  // ==================================================
+
+  function redraw() {
+    ctx.clearRect(
+      0, 0, canvasWidth, canvasHeight
+    );
+
+    ctx.lineWidth = 12 * dpr;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = "#087da0";
+    ctx.fillStyle = "#087da0";
+
+    strokes.forEach(path => {
+      if (!path.length) return;
+
+      if (path.length === 1) {
+        ctx.beginPath();
+
+        ctx.arc(
+          path[0].x,
+          path[0].y,
+          6 * dpr,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fill();
+        return;
+      }
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        path[0].x,
+        path[0].y
+      );
+
+      for (let i = 1; i < path.length; i++) {
+        ctx.lineTo(
+          path[i].x,
+          path[i].y
+        );
+      }
+
+      ctx.stroke();
+    });
+  }
+
+  // ==================================================
+  // CLEAR
+  // ==================================================
+
+  function clearDrawing() {
+    strokes = [];
+    redraw();
+    feedback.textContent = "";
+  }
+
+  document.getElementById("clearBtn").addEventListener(
+    "click",
+    clearDrawing
+  );
+
+  // ==================================================
+  // CHECK LETTER
+  // ==================================================
+
+  function checkLetter() {
+    if (!strokes.some(path => path.length >= 1)) {
+      feedback.textContent = "Trace the letter first!";
+      return;
+    }
+
+    const targetPixels = targetCtx.getImageData(
+      0, 0, canvasWidth, canvasHeight
+    ).data;
+
+    const drawingPixels = ctx.getImageData(
+      0, 0, canvasWidth, canvasHeight
+    ).data;
+
+    let targetCount = 0;
+    let coveredCount = 0;
+    let inkCount = 0;
+
+    const step = 2;
+
+    const radius = Math.max(
+      5,
+      Math.round(canvasWidth * 0.018)
+    );
+
+    for (let y = 0; y < canvasHeight; y += step) {
+      for (let x = 0; x < canvasWidth; x += step) {
+        const i = (y * canvasWidth + x) * 4;
+
+        if (targetPixels[i + 3] > 30) {
+          targetCount++;
+
+          let found = false;
+
+          for (
+            let dy = -radius;
+            dy <= radius && !found;
+            dy += step
+          ) {
+            for (
+              let dx = -radius;
+              dx <= radius;
+              dx += step
+            ) {
+              const xx = x + dx;
+              const yy = y + dy;
+
+              if (
+                xx < 0 || yy < 0 ||
+                xx >= canvasWidth || yy >= canvasHeight
+              ) {
+                continue;
+              }
+
+              const j = (yy * canvasWidth + xx) * 4;
+
+              if (drawingPixels[j + 3] > 20) {
+                found = true;
+                break;
+              }
+            }
+          }
+
+          if (found) coveredCount++;
+        }
+
+        if (drawingPixels[i + 3] > 20) {
+          inkCount++;
+        }
+      }
+    }
+
+    const recall =
+      coveredCount / Math.max(1, targetCount);
+
+    const precision = Math.min(
+      1,
+      (targetCount * 0.95) / Math.max(1, inkCount)
+    );
+
+    if (recall > 0.34 && precision > 0.25) {
+      score++;
+
+      scoreDisplay.textContent = score;
+
+      celebration.classList.add("show");
+
+      setTimeout(() => {
+        closeLetter();
+        nextLetter();
+      }, 1150);
+
+    } else {
+      feedback.textContent = "Try again!";
+      clearDrawing();
+    }
+  }
+
+  document.getElementById("checkBtn").addEventListener(
+    "click",
+    checkLetter
+  );
+
+  // ==================================================
+  // RESIZE
+  // ==================================================
+
+  window.addEventListener("resize", () => {
+    if (modal.classList.contains("open")) {
+      resizeCanvas();
+    }
+
+    // Preserve the fish's current position when the
+    // available swimming area changes size.
+    const maxX = Math.max(
+      0,
+      zone.clientWidth - FISH_WIDTH
+    );
+
+    const maxY = Math.max(
+      0,
+      zone.clientHeight - FISH_HEIGHT
+    );
+
+    fishX = Math.min(fishX, maxX);
+    fishY = Math.min(fishY, maxY);
+
+    renderFish();
+
+    // Discard elapsed time during the resize.
+    previousFrameTime = null;
+  });
+
+})();
+</script>
+</body>
+</html>

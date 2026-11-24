@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Wildwing</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #dce8d4;
+  font-family: system-ui, sans-serif;
+  touch-action: none;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.menu {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  top: 16px;
+  right: 16px;
+  width: min(250px, calc(100vw - 32px));
+  padding: 17px;
+  border-radius: 16px;
+  background: rgba(250,252,240,.82);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: 0 8px 30px rgba(48,70,46,.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #304536;
+  touch-action: pan-y;
+}
+
+.menu.visible {
+  display: block;
+}
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.count {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  opacity: .6;
+}
+
+.slider-row {
+  margin: 14px 0;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 9px;
+}
+
+.slider-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  display: block;
+  width: 100%;
+  height: 5px;
+  accent-color: #668568;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+button {
+  flex: 1;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 5px;
+  background: #45634b;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button.secondary {
+  background: #e7ecdf;
+  color: #405644;
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+@media (max-width: 600px) {
+  .menu {
+    top: 12px;
+    right: 12px;
+    width: 215px;
+    padding: 13px;
+  }
+
+  .slider-row {
+    margin: 12px 0;
+  }
+}
+</style>
+
+<style>
+.gallery-back-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  color: #304536;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.15s ease, background 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gallery-back-link:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+</style>
+</head>
+
+<body>
+  <a href="../../index.html" class="gallery-back-link" title="Return to Gallery">← Gallery</a>
+
+<canvas id="world"></canvas>
+
+<div class="menu" id="menu">
+  <div class="menu-header">
+    <span>Configuration</span>
+    <span class="count" id="count">350</span>
+  </div>
+
+  <div class="slider-row">
+    <div class="slider-label">
+      <label for="flock">Flock size</label>
+      <span class="slider-value" id="flockValue">350</span>
+    </div>
+    <input id="flock" type="range"
+      min="10" max="2000" step="10" value="350">
+  </div>
+
+  <div class="slider-row">
+    <div class="slider-label">
+      <label for="speed">Speed</label>
+      <span class="slider-value" id="speedValue">1</span>
+    </div>
+    <input id="speed" type="range"
+      min="1" max="1000" value="1">
+  </div>
+
+  <div class="slider-row">
+    <div class="slider-label">
+      <label for="attraction">Attraction</label>
+      <span class="slider-value" id="attractionValue">4%</span>
+    </div>
+    <input id="attraction" type="range"
+      min="0" max="100" value="4">
+  </div>
+
+  <div class="buttons">
+    <button id="pause">Ⅱ Pause</button>
+    <button class="secondary" id="reset">↻ Reset</button>
+  </div>
+</div>
+
+<script>
+// ========================================
+// CONFIGURATION
+// ========================================
+
+// Change to true to reveal the configuration menu.
+const SHOW_MENU = false;
+
+// Hardcoded simulation settings.
+const config = {
+  count: 350,
+  speed: 1,
+  attraction: 4,
+
+  perception: 65,
+  separation: 24,
+
+  cohesion: 0.006,
+  alignment: 0.055,
+  separationForce: 0.12
+};
+
+// ========================================
+// SIMULATION
+// ========================================
+
+const canvas = document.getElementById("world");
+const ctx = canvas.getContext("2d", { alpha: false });
+
+let width, height, dpr;
+let birds = [];
+let grid = new Map();
+let paused = false;
+
+const pointer = {
+  x: 0,
+  y: 0,
+  active: false
+};
+
+// Show menu if enabled.
+if (SHOW_MENU) {
+  document.getElementById("menu").classList.add("visible");
+}
+
+// Canvas sizing.
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  width = window.innerWidth;
+  height = window.innerHeight;
+
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+window.addEventListener("resize", resize);
+resize();
+
+// Speed range.
+function getMaxSpeed() {
+  return 3 + config.speed * 0.05;
+}
+
+// Attraction range.
+function getAttractionForce() {
+  return config.attraction / 100 * 2.5;
+}
+
+// ========================================
+// BIRD CLASS
+// ========================================
+
+class Bird {
+  constructor() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = 1 + Math.random();
+
+    this.vx = Math.cos(angle) * velocity;
+    this.vy = Math.sin(angle) * velocity;
+
+    this.size = 2 + Math.random() * 1.2;
+    this.phase = Math.random() * Math.PI * 2;
+  }
+
+  update() {
+    let alignX = 0;
+    let alignY = 0;
+
+    let cohesionX = 0;
+    let cohesionY = 0;
+
+    let separateX = 0;
+    let separateY = 0;
+
+    let neighbors = 0;
+
+    const cellSize = config.perception;
+    const cellX = Math.floor(this.x / cellSize);
+    const cellY = Math.floor(this.y / cellSize);
+
+    // Spatial grid neighbor lookup.
+    for (let gx = -1; gx <= 1; gx++) {
+      for (let gy = -1; gy <= 1; gy++) {
+        const key = `${cellX + gx},${cellY + gy}`;
+        const nearby = grid.get(key);
+
+        if (!nearby) continue;
+
+        for (const other of nearby) {
+          if (other === this) continue;
+
+          const dx = other.x - this.x;
+          const dy = other.y - this.y;
+
+          const distSq = dx * dx + dy * dy;
+
+          if (
+            distSq < config.perception ** 2 &&
+            distSq > 0
+          ) {
+            neighbors++;
+
+            alignX += other.vx;
+            alignY += other.vy;
+
+            cohesionX += other.x;
+            cohesionY += other.y;
+
+            if (distSq < config.separation ** 2) {
+              const dist = Math.sqrt(distSq);
+
+              separateX -= dx / dist;
+              separateY -= dy / dist;
+            }
+          }
+        }
+      }
+    }
+
+    // Flocking behavior.
+    if (neighbors > 0) {
+      alignX /= neighbors;
+      alignY /= neighbors;
+
+      cohesionX /= neighbors;
+      cohesionY /= neighbors;
+
+      this.vx +=
+        (alignX - this.vx) * config.alignment;
+
+      this.vy +=
+        (alignY - this.vy) * config.alignment;
+
+      this.vx +=
+        (cohesionX - this.x) * config.cohesion;
+
+      this.vy +=
+        (cohesionY - this.y) * config.cohesion;
+
+      this.vx +=
+        separateX * config.separationForce;
+
+      this.vy +=
+        separateY * config.separationForce;
+    }
+
+    // Touch attraction.
+    if (pointer.active && config.attraction > 0) {
+      const dx = pointer.x - this.x;
+      const dy = pointer.y - this.y;
+
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist > 1) {
+        const force = getAttractionForce();
+
+        const distanceFactor = Math.min(
+          1,
+          350 / (dist + 30)
+        );
+
+        const pull = force * distanceFactor;
+
+        this.vx += (dx / dist) * pull;
+        this.vy += (dy / dist) * pull;
+      }
+    }
+
+    // Boundary steering.
+    const margin = 55;
+    const turn = 0.08;
+
+    if (this.x < margin) this.vx += turn;
+    if (this.x > width - margin) this.vx -= turn;
+
+    if (this.y < margin) this.vy += turn;
+    if (this.y > height - margin) this.vy -= turn;
+
+    // Speed limiting.
+    const speed = Math.sqrt(
+      this.vx * this.vx + this.vy * this.vy
+    );
+
+    const maxSpeed = getMaxSpeed();
+
+    if (speed > maxSpeed) {
+      this.vx = this.vx / speed * maxSpeed;
+      this.vy = this.vy / speed * maxSpeed;
+    }
+
+    // Prevent stationary birds.
+    if (speed < 0.4) {
+      this.vx += (Math.random() - 0.5) * 0.15;
+      this.vy += (Math.random() - 0.5) * 0.15;
+    }
+
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Wrap edges.
+    if (this.x < -10) this.x = width + 10;
+    if (this.x > width + 10) this.x = -10;
+
+    if (this.y < -10) this.y = height + 10;
+    if (this.y > height + 10) this.y = -10;
+
+    this.phase += 0.12;
+  }
+
+  draw() {
+    const angle = Math.atan2(this.vy, this.vx);
+
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(angle);
+
+    const flap = Math.sin(this.phase) * 0.35;
+
+    ctx.fillStyle = "rgba(47, 77, 54, 0.78)";
+
+    ctx.beginPath();
+
+    ctx.moveTo(this.size * 2.4, 0);
+
+    ctx.quadraticCurveTo(
+      0,
+      -this.size * (1.8 + flap),
+      -this.size * 1.8,
+      0
+    );
+
+    ctx.quadraticCurveTo(
+      0,
+      this.size * (1.8 + flap),
+      this.size * 2.4,
+      0
+    );
+
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// ========================================
+// FLOCK INITIALIZATION
+// ========================================
+
+function createFlock() {
+  birds = Array.from(
+    { length: config.count },
+    () => new Bird()
+  );
+}
+
+createFlock();
+
+// ========================================
+// SPATIAL GRID
+// ========================================
+
+function buildGrid() {
+  grid.clear();
+
+  const cellSize = config.perception;
+
+  for (const bird of birds) {
+    const x = Math.floor(bird.x / cellSize);
+    const y = Math.floor(bird.y / cellSize);
+
+    const key = `${x},${y}`;
+
+    if (!grid.has(key)) {
+      grid.set(key, []);
+    }
+
+    grid.get(key).push(bird);
+  }
+}
+
+// ========================================
+// BACKGROUND
+// ========================================
+
+function drawBackground() {
+  const gradient = ctx.createLinearGradient(
+    0, 0, 0, height
+  );
+
+  gradient.addColorStop(0, "#e4edda");
+  gradient.addColorStop(0.55, "#d4e3ce");
+  gradient.addColorStop(1, "#c0d5bd");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, width, height);
+
+  // Sunlight.
+  const sun = ctx.createRadialGradient(
+    width * 0.78,
+    height * 0.18,
+    5,
+    width * 0.78,
+    height * 0.18,
+    Math.max(width, height) * 0.5
+  );
+
+  sun.addColorStop(0, "rgba(255,248,207,0.55)");
+  sun.addColorStop(1, "rgba(255,248,207,0)");
+
+  ctx.fillStyle = sun;
+  ctx.fillRect(0, 0, width, height);
+
+  // Soft landscape.
+  ctx.fillStyle = "rgba(100,135,101,0.08)";
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    width * 0.15,
+    height * 1.05,
+    width * 0.65,
+    height * 0.25,
+    0,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(80,120,88,0.06)";
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    width * 0.9,
+    height * 1.08,
+    width * 0.7,
+    height * 0.3,
+    0,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fill();
+}
+
+// ========================================
+// ANIMATION
+// ========================================
+
+function animate() {
+  if (!paused) {
+    drawBackground();
+
+    buildGrid();
+
+    // Touch indicator.
+    if (pointer.active) {
+      ctx.beginPath();
+      ctx.arc(pointer.x, pointer.y, 18, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(75,112,77,0.35)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(pointer.x, pointer.y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(75,112,77,0.35)";
+      ctx.fill();
+    }
+
+    for (const bird of birds) {
+      bird.update();
+    }
+
+    for (const bird of birds) {
+      bird.draw();
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// ========================================
+// POINTER INTERACTION
+// ========================================
+
+canvas.addEventListener("pointerdown", e => {
+  pointer.x = e.clientX;
+  pointer.y = e.clientY;
+  pointer.active = true;
+});
+
+canvas.addEventListener("pointermove", e => {
+  if (e.pointerType === "mouse" && e.buttons === 0) {
+    return;
+  }
+
+  pointer.x = e.clientX;
+  pointer.y = e.clientY;
+  pointer.active = true;
+});
+
+canvas.addEventListener("pointerup", () => {
+  pointer.active = false;
+});
+
+canvas.addEventListener("pointercancel", () => {
+  pointer.active = false;
+});
+
+canvas.addEventListener("pointerleave", e => {
+  if (e.pointerType === "mouse") {
+    pointer.active = false;
+  }
+});
+
+// ========================================
+// OPTIONAL MENU CONTROLS
+// ========================================
+
+if (SHOW_MENU) {
+  document.getElementById("flock").addEventListener(
+    "input", e => {
+      config.count = Number(e.target.value);
+
+      document.getElementById("flockValue").textContent =
+        config.count.toLocaleString();
+
+      createFlock();
+    }
+  );
+
+  document.getElementById("speed").addEventListener(
+    "input", e => {
+      config.speed = Number(e.target.value);
+
+      document.getElementById("speedValue").textContent =
+        config.speed.toLocaleString();
+    }
+  );
+
+  document.getElementById("attraction").addEventListener(
+    "input", e => {
+      config.attraction = Number(e.target.value);
+
+      document.getElementById("attractionValue").textContent =
+        config.attraction + "%";
+    }
+  );
+
+  document.getElementById("pause").addEventListener(
+    "click", e => {
+      paused = !paused;
+
+      e.target.textContent = paused
+        ? "▶ Resume"
+        : "Ⅱ Pause";
+    }
+  );
+
+  document.getElementById("reset").addEventListener(
+    "click", () => {
+      createFlock();
+      paused = false;
+
+      document.getElementById("pause").textContent =
+        "Ⅱ Pause";
+    }
+  );
+}
+</script>
+
+</body>
+</html>

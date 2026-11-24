@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A gallery of lightweight, offline-capable web mini apps.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Memalign Mini App Gallery</title>
+
+  <!-- PWA & Mobile Icons -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Memalign Mini App Gallery">
+
+  <!-- Gallery Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="body">
+
+    <div id="top-header">
+      <a href="https://memalign.github.io">memalign.github.io</a>
+      <a href="https://memalign.github.io/p/miniappgallery.html">about</a>
+    </div>
+
+    <div id="header">
+      <h1>Memalign Mini App Gallery</h1>
+    </div>
+
+    <div id="projects-grid">
+      <!-- BEGIN_APPS -->
+      <div class="projects-grid-entry">
+        <a href="apps/addition/index.html">
+          <div class="rect-img-container">
+            <img src="apps/addition/icon.svg" alt="Math Match" loading="lazy">
+          </div>
+          <div class="projects-grid-title">Math Match</div>
+        </a>
+      </div>
+      <div class="projects-grid-entry">
+        <a href="apps/boids/index.html">
+          <div class="rect-img-container">
+            <img src="apps/boids/icon.svg" alt="Wildwing" loading="lazy">
+          </div>
+          <div class="projects-grid-title">Wildwing</div>
+        </a>
+      </div>
+      <div class="projects-grid-entry">
+        <a href="apps/count/index.html">
+          <div class="rect-img-container">
+            <img src="apps/count/icon.svg" alt="Count the Fun!" loading="lazy">
+          </div>
+          <div class="projects-grid-title">Count the Fun!</div>
+        </a>
+      </div>
+      <div class="projects-grid-entry">
+        <a href="apps/dice/index.html">
+          <div class="rect-img-container">
+            <img src="apps/dice/icon.svg" alt="Dice Detective!" loading="lazy">
+          </div>
+          <div class="projects-grid-title">Dice Detective!</div>
+        <div class="projects-grid-desc">Add up the dots on both dice!</div>
+        </a>
+      </div>
+      <div class="projects-grid-entry">
+        <a href="apps/letterfish/index.html">
+          <div class="rect-img-container">
+            <img src="apps/letterfish/icon.svg" alt="Count The Fish" loading="lazy">
+          </div>
+          <div class="projects-grid-title">Count The Fish</div>
+        </a>
+      </div>
+      <!-- END_APPS -->
+    </div>
+
+    <div id="footer"></div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

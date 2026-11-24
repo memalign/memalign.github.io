@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e4edda"/>
+      <stop offset="55%" stop-color="#d4e3ce"/>
+      <stop offset="100%" stop-color="#c0d5bd"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="78%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="rgba(255,248,207,0.7)"/>
+      <stop offset="100%" stop-color="rgba(255,248,207,0)"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="40" fill="url(#sky)"/>
+  <rect width="512" height="512" rx="40" fill="url(#sun)"/>
+
+  <!-- Soft landscape in background -->
+  <ellipse cx="80" cy="512" rx="310" ry="100" fill="rgba(100,135,101,0.2)"/>
+  <ellipse cx="460" cy="520" rx="280" ry="110" fill="rgba(80,120,88,0.15)"/>
+
+  <!-- Flocking boids -->
+  <!-- Main bird -->
+  <g transform="translate(268, 218) rotate(-25)">
+    <path d="M 72 0 Q 0 -46 -52 0 Q 0 46 72 0 Z" fill="rgba(47, 77, 54, 0.92)"/>
+  </g>
+
+  <!-- Follower birds -->
+  <g transform="translate(165, 155) rotate(-18) scale(0.72)">
+    <path d="M 72 0 Q 0 -46 -52 0 Q 0 46 72 0 Z" fill="rgba(47, 77, 54, 0.78)"/>
+  </g>
+  <g transform="translate(150, 295) rotate(-30) scale(0.66)">
+    <path d="M 72 0 Q 0 -46 -52 0 Q 0 46 72 0 Z" fill="rgba(47, 77, 54, 0.72)"/>
+  </g>
+  <g transform="translate(370, 165) rotate(-15) scale(0.62)">
+    <path d="M 72 0 Q 0 -46 -52 0 Q 0 46 72 0 Z" fill="rgba(47, 77, 54, 0.68)"/>
+  </g>
+  <g transform="translate(385, 308) rotate(-22) scale(0.75)">
+    <path d="M 72 0 Q 0 -46 -52 0 Q 0 46 72 0 Z" fill="rgba(47, 77, 54, 0.82)"/>
+  </g>
+  <g transform="translate(282, 370) rotate(-28) scale(0.55)">
+    <path d="M 72 0 Q 0 -46 -52 0 Q 0 46 72 0 Z" fill="rgba(47, 77, 54, 0.62)"/>
+  </g>
+</svg>
