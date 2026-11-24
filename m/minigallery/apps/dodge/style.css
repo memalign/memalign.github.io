@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #101a2c;
+    font-family: Arial, sans-serif;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#game {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    color: white;
+}
+
+.score-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px 18px;
+    border-radius: 12px;
+    min-width: 90px;
+    text-align: center;
+}
+
+.hud-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+#score, #highScore {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    background: rgba(5, 12, 25, 0.65);
+    padding: 25px;
+}
+
+#overlay.hidden {
+    display: none;
+}
+
+#title {
+    font-size: clamp(30px, 8vw, 48px);
+    margin-bottom: 15px;
+}
+
+#message {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.instructions {
+    opacity: 0.7;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+#startButton {
+    border: none;
+    border-radius: 30px;
+    padding: 16px 38px;
+    background: #ffb52e;
+    color: #172033;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+#startButton:active {
+    transform: scale(0.95);
+}
+
+#controlsHint {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    opacity: 0.35;
+    font-size: 11px;
+    letter-spacing: 3px;
+    pointer-events: none;
+}

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="skyBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a1024"/>
+      <stop offset="60%" stop-color="#181438"/>
+      <stop offset="100%" stop-color="#2d174d"/>
+    </linearGradient>
+
+    <radialGradient id="horizonGlow" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="rgba(255, 200, 120, 0.35)"/>
+      <stop offset="100%" stop-color="rgba(255, 200, 120, 0)"/>
+    </radialGradient>
+
+    <!-- Obstacle Gradient -->
+    <linearGradient id="obsGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b94a30"/>
+      <stop offset="50%" stop-color="#ff7a45"/>
+      <stop offset="100%" stop-color="#b94a30"/>
+    </linearGradient>
+
+    <filter id="planeShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+
+    <filter id="glowObs" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#ff6030" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Sky Background -->
+  <rect width="512" height="512" rx="40" fill="url(#skyBg)"/>
+  <rect width="512" height="512" rx="40" fill="url(#horizonGlow)"/>
+
+  <!-- Background Stars -->
+  <circle cx="80" cy="90" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="140" cy="180" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="200" cy="80" r="3.5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="340" cy="110" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="420" cy="70" r="3" fill="#ffffff" opacity="0.85"/>
+  <circle cx="450" cy="200" r="2.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="70" cy="320" r="2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="440" cy="340" r="2" fill="#ffffff" opacity="0.5"/>
+
+  <!-- Perspective grid horizon lines -->
+  <line x1="40" y1="210" x2="472" y2="210" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <line x1="20" y1="260" x2="492" y2="260" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <line x1="0" y1="330" x2="512" y2="330" stroke="rgba(255,255,255,0.18)" stroke-width="2.5"/>
+
+  <!-- Incoming Obstacles being dodged -->
+  <!-- Obstacle 1 (Distant Left) -->
+  <g transform="translate(140, 160)" filter="url(#glowObs)">
+    <rect x="-35" y="-18" width="70" height="36" rx="6" fill="url(#obsGrad)" stroke="#ffc09b" stroke-width="2"/>
+  </g>
+
+  <!-- Obstacle 2 (Mid Right) -->
+  <g transform="translate(380, 240)" filter="url(#glowObs)">
+    <rect x="-55" y="-28" width="110" height="56" rx="8" fill="url(#obsGrad)" stroke="#ffc09b" stroke-width="3"/>
+  </g>
+
+  <!-- Jet Afterburner Exhaust Trails -->
+  <ellipse cx="236" cy="425" rx="8" ry="24" fill="#ffb52e" opacity="0.85"/>
+  <ellipse cx="276" cy="425" rx="8" ry="24" fill="#ffb52e" opacity="0.85"/>
+  <ellipse cx="236" cy="435" rx="4" ry="16" fill="#ffffff" opacity="0.95"/>
+  <ellipse cx="276" cy="435" rx="4" ry="16" fill="#ffffff" opacity="0.95"/>
+
+  <!-- Supersonic Airplane (Centered, banking slightly right to dodge) -->
+  <g transform="translate(256, 310) rotate(8)" filter="url(#planeShadow)">
+    <!-- Main Plane Body (Polygon matched to game) -->
+    <!-- Size ~ 110 -->
+    <path d="
+      M 0 -110
+      L 25 -38
+      L 88 -5
+      L 82 25
+      L 19 8
+      L 0 75
+      L -19 8
+      L -82 25
+      L -88 -5
+      L -25 -38
+      Z"
+      fill="#ffffff"
+    />
+
+    <!-- Wing Flap Details / Shading -->
+    <path d="M 0 -110 L 0 75" stroke="#e2e8f0" stroke-width="3"/>
+    <path d="M 19 8 L 82 25" stroke="#cbd5e1" stroke-width="2.5"/>
+    <path d="M -19 8 L -82 25" stroke="#cbd5e1" stroke-width="2.5"/>
+
+    <!-- Jet Engines -->
+    <rect x="-26" y="55" width="14" height="20" rx="3" fill="#ffb52e"/>
+    <rect x="12" y="55" width="14" height="20" rx="3" fill="#ffb52e"/>
+
+    <!-- Cockpit Canopy -->
+    <ellipse cx="0" cy="-35" rx="14" ry="26" fill="#42bfff"/>
+    <ellipse cx="-4" cy="-40" rx="4" ry="12" fill="#ffffff" opacity="0.65"/>
+  </g>
+</svg>

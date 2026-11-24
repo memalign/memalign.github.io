@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Airplane Dodge</title>
+    <link rel="stylesheet" href="style.css">
+
+<style>
+.gallery-back-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  color: #333333;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.15s ease, background 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gallery-back-link:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+</style>
+</head>
+<body>
+  <a href="../../index.html" class="gallery-back-link" title="Return to Gallery">← Gallery</a>
+    <div id="game">
+        <canvas id="canvas"></canvas>
+
+        <div id="hud">
+            <div class="score-box">
+                <div class="hud-label">SCORE</div>
+                <div id="score">0</div>
+            </div>
+            <div class="score-box right">
+                <div class="hud-label">BEST</div>
+                <div id="highScore">0</div>
+            </div>
+        </div>
+
+        <div id="overlay">
+            <h1 id="title">✈️ Airplane Dodge</h1>
+            <p id="message">Dodge the incoming obstacles!</p>
+            <p class="instructions">Slide your finger to fly</p>
+            <button id="startButton">START GAME</button>
+        </div>
+
+        <div id="controlsHint">DRAG TO FLY</div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
